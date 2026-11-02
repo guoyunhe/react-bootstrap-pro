@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 
 import { Button, type ButtonTheme, type ButtonVariant } from '../../../../src';
@@ -20,9 +21,10 @@ export function ButtonPlaygroundDemo() {
   const [rounding, setRounding] = useState<(typeof roundingOptions)[number]>('default');
   const [styled, setStyled] = useState(false);
 
-  const className = [rounding === 'pill' && 'rounded-pill', rounding === 'square' && 'rounded-0']
-    .filter(Boolean)
-    .join(' ');
+  const className = clsx(
+    rounding === 'pill' && 'rounded-pill',
+    rounding === 'square' && 'rounded-0',
+  );
 
   return (
     <div className='d-flex flex-column gap-3'>

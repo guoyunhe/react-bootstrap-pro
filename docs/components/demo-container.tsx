@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
 
 export type DemoContainerProps = HTMLAttributes<HTMLDivElement>;
 
 export function DemoContainer({ className, ...props }: DemoContainerProps) {
-  const classes = ['border', 'rounded', 'p-3', 'my-3', className].filter(Boolean).join(' ');
+  const classes = clsx('border', 'rounded', 'p-3', 'my-3', className);
 
   return <div {...props} className={classes} />;
 }

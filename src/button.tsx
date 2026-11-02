@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import type { ComponentPropsWithoutRef, ElementType, MouseEvent } from 'react';
 
 export type ButtonTheme =
@@ -41,7 +42,7 @@ export function Button<C extends ElementType = 'button'>({
 }: ButtonProps<C>) {
   const Component = component ?? 'button';
   const isDisabledAnchor = Component === 'a' && disabled;
-  const classes = [
+  const classes = clsx(
     'btn',
     variant ? `btn-${variant}` : undefined,
     theme ? `theme-${theme}` : undefined,
@@ -51,9 +52,7 @@ export function Button<C extends ElementType = 'button'>({
     check && 'btn-check',
     isDisabledAnchor && 'disabled',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  );
 
   const componentProps = {
     ...(Component === 'button' ? { type: 'button' as const } : {}),
