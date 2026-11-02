@@ -1,7 +1,20 @@
+import type { AnchorHTMLAttributes } from 'react';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 
 import { Button } from '../src';
+
+function AppLink({
+  to,
+  children,
+  ...props
+}: { to: string } & AnchorHTMLAttributes<HTMLAnchorElement>) {
+  return (
+    <a href={to} {...props}>
+      {children}
+    </a>
+  );
+}
 
 test('renders only the Bootstrap base class by default', async () => {
   const screen = await render(<Button>Save</Button>);
@@ -75,4 +88,39 @@ test('forwards click handlers', async () => {
   await screen.getByRole('button', { name: 'Click me' }).click();
 
   expect(clickCount).toBe(1);
+});
+
+test('renders the selected component and forwards its props', async () => {
+  const screen = await render(
+    <>
+      <Button component='a' variant='solid' theme='primary' href='/settings'>
+        Settings
+      </Button>
+      <Button component='button' type='submit'>
+        Submit
+      </Button>
+      <Button
+        component='input'
+        type='button'
+        value='Input action'
+        variant='solid'
+        theme='secondary'
+      />
+      <Button component={AppLink} to='/profile' aria-label='Profile'>
+        Profile
+      </Button>
+    </>,
+  );
+  const link = screen.getByRole('link', { name: 'Settings' });
+  const button = screen.getByRole('button', { name: 'Submit' });
+  const input = screen.getByRole('button', { name: 'Input action' });
+  const customLink = screen.getByRole('link', { name: 'Profile' });
+
+  expect(link).toHaveAttribute('href', '/settings');
+  expect(link).not.toHaveAttribute('type');
+  expect(button).toHaveAttribute('type', 'submit');
+  expect(input).toHaveAttribute('value', 'Input action');
+  expect(input).toHaveClass('btn', 'btn-solid', 'theme-secondary');
+  expect(customLink).toHaveAttribute('href', '/profile');
+  expect(customLink).toHaveClass('btn');
 });

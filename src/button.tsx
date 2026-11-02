@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes } from 'react';
+import type { ComponentPropsWithoutRef, ElementType } from 'react';
 
 export type ButtonTheme =
   | 'primary'
@@ -12,20 +12,26 @@ export type ButtonTheme =
 
 export type ButtonVariant = 'solid' | 'outline' | 'subtle' | 'text' | 'link';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonOwnProps = {
   variant?: ButtonVariant;
   theme?: ButtonTheme;
   size?: 'xs' | 'sm' | 'lg';
-}
+};
 
-export function Button({
+export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps & {
+  component?: C;
+  className?: string;
+} & Omit<ComponentPropsWithoutRef<C>, keyof ButtonOwnProps | 'className' | 'component'>;
+
+export function Button<C extends ElementType = 'button'>({
+  component,
   variant,
   theme,
   size,
   className,
-  type = 'button',
   ...props
-}: ButtonProps) {
+}: ButtonProps<C>) {
+  const Component = component ?? 'button';
   const classes = [
     'btn',
     variant ? `btn-${variant}` : undefined,
@@ -36,5 +42,11 @@ export function Button({
     .filter(Boolean)
     .join(' ');
 
-  return <button {...props} className={classes} type={type} />;
+  const componentProps = {
+    ...(Component === 'button' ? { type: 'button' as const } : {}),
+    ...props,
+    className: classes,
+  };
+
+  return <Component {...componentProps} />;
 }
