@@ -17,6 +17,7 @@ type ButtonOwnProps = {
   theme?: ButtonTheme;
   size?: 'xs' | 'sm' | 'lg';
   active?: boolean;
+  styled?: boolean;
 };
 
 export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps & {
@@ -30,6 +31,7 @@ export function Button<C extends ElementType = 'button'>({
   theme,
   size,
   active,
+  styled,
   className,
   ...props
 }: ButtonProps<C>) {
@@ -40,6 +42,7 @@ export function Button<C extends ElementType = 'button'>({
     theme ? `theme-${theme}` : undefined,
     size && `btn-${size}`,
     active && 'active',
+    styled && 'btn-styled',
     className,
   ]
     .filter(Boolean)

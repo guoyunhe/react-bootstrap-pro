@@ -20,11 +20,7 @@ export function ButtonPlaygroundDemo() {
   const [rounding, setRounding] = useState<(typeof roundingOptions)[number]>('default');
   const [styled, setStyled] = useState(false);
 
-  const className = [
-    styled && 'btn-styled',
-    rounding === 'pill' && 'rounded-pill',
-    rounding === 'square' && 'rounded-0',
-  ]
+  const className = [rounding === 'pill' && 'rounded-pill', rounding === 'square' && 'rounded-0']
     .filter(Boolean)
     .join(' ');
 
@@ -130,6 +126,7 @@ export function ButtonPlaygroundDemo() {
           variant={variant}
           theme={theme}
           size={size === 'default' ? undefined : size}
+          styled={styled}
           className={className}
           aria-label={buttonType === 'icon-only' ? 'Add item' : undefined}
         >

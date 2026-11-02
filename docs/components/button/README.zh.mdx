@@ -40,8 +40,8 @@ React `Button` 组件始终添加 `.btn`；只有显式传入 `variant` 和 `the
 
 ## Playground
 
-使用下方控件即时预览主题颜色、样式、尺寸、内容和圆角。选择 Styled 会为按钮
-添加 Bootstrap 的 `.btn-styled` 类。
+使用下方控件即时预览主题颜色、样式、尺寸、内容和圆角。选择 Styled 会通过
+`styled` 属性添加 Bootstrap 的 `.btn-styled` 类。
 
 <DemoContainer>
   <ButtonPlaygroundDemo />
@@ -93,15 +93,15 @@ Bootstrap 默认链接颜色。
 
 ## 立体按钮
 
-在实心按钮上添加 `className='btn-styled'`，即可使用渐变和阴影效果。
-`className` 会与组件生成的类名合并。
+在实心按钮上设置 `styled` 属性，即可添加渐变和阴影效果。
+`className` 仍可用于添加其他自定义类名。
 
 <DemoContainer>
   <ButtonStyledDemo />
 </DemoContainer>
 
 ```tsx
-<Button variant='solid' theme='primary' className='btn-styled'>
+<Button variant='solid' theme='primary' styled>
   立体主要按钮
 </Button>
 ```
@@ -330,6 +330,7 @@ Sass maps 和循环属于 Bootstrap 源码构建阶段的定制能力，本 Reac
 | `theme`      | `ButtonTheme`                 | —                     | 主题颜色。`variant='link'` 时省略可使用 Bootstrap 默认链接颜色。     |
 | `size`       | `'xs' \| 'sm' \| 'lg'`        | —                     | Bootstrap 按钮尺寸。不设置时使用默认尺寸。                           |
 | `active`     | `boolean`                     | `false`               | 添加 `.active` 类；不会自动设置 `aria-pressed`。                     |
+| `styled`     | `boolean`                     | `false`               | 添加 `.btn-styled` 修饰类。                                          |
 | `className`  | `string`                      | —                     | 附加类名，会与组件生成的类名合并。                                   |
 | `type`       | `C` 的原生属性                | 仅 button：`'button'` | 渲染按钮元素时默认为 `'button'`。                                    |
 | `disabled`   | `C` 的原生属性                | —                     | 支持时禁用渲染后的元素。                                             |

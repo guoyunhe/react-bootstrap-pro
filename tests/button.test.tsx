@@ -44,6 +44,12 @@ test('applies the active class when active is true', async () => {
   expect(screen.getByRole('button', { name: 'Active' })).toHaveClass('active');
 });
 
+test('applies the styled class when styled is true', async () => {
+  const screen = await render(<Button styled>Styled</Button>);
+
+  expect(screen.getByRole('button', { name: 'Styled' })).toHaveClass('btn-styled');
+});
+
 test('supports variants, sizes, native props, and custom classes', async () => {
   const screen = await render(
     <Button
