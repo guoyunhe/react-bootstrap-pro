@@ -267,8 +267,8 @@ Bootstrap 默认链接颜色。
 ## Button 插件
 
 Bootstrap JavaScript 插件会切换按钮的 `.active` 类和 `aria-pressed`。本 React
-组件只负责样式并转发原生属性，不会初始化 Bootstrap JavaScript。建议使用 React
-状态管理切换，保证状态和渲染结果同步。
+组件不会初始化 Bootstrap JavaScript，应改用 React 状态管理。`active` 属性会添加或
+移除 `.active` 类；还应单独设置 `aria-pressed` 来表达按下状态。
 
 <DemoContainer>
   <ButtonToggleDemo />
@@ -284,8 +284,8 @@ function ToggleButton() {
     <Button
       variant='solid'
       theme='primary'
+      active={pressed}
       aria-pressed={pressed}
-      className={pressed ? 'active' : undefined}
       onClick={() => setPressed((value) => !value)}
     >
       {pressed ? '已按下' : '切换状态'}
@@ -329,6 +329,7 @@ Sass maps 和循环属于 Bootstrap 源码构建阶段的定制能力，本 Reac
 | `variant`    | `ButtonVariant`               | —                     | 按钮样式：`'solid'`、`'outline'`、`'subtle'`、`'text'` 或 `'link'`。 |
 | `theme`      | `ButtonTheme`                 | —                     | 主题颜色。`variant='link'` 时省略可使用 Bootstrap 默认链接颜色。     |
 | `size`       | `'xs' \| 'sm' \| 'lg'`        | —                     | Bootstrap 按钮尺寸。不设置时使用默认尺寸。                           |
+| `active`     | `boolean`                     | `false`               | 添加 `.active` 类；不会自动设置 `aria-pressed`。                     |
 | `className`  | `string`                      | —                     | 附加类名，会与组件生成的类名合并。                                   |
 | `type`       | `C` 的原生属性                | 仅 button：`'button'` | 渲染按钮元素时默认为 `'button'`。                                    |
 | `disabled`   | `C` 的原生属性                | —                     | 支持时禁用渲染后的元素。                                             |

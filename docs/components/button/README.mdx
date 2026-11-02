@@ -276,9 +276,9 @@ input with a label as shown in the live demo above.
 ## Button plugin
 
 Bootstrap's JavaScript button plugin toggles the `.active` class and
-`aria-pressed`. This React component provides button styling and native props;
-it does not initialize Bootstrap JavaScript. Prefer React state to keep the
-rendered active state in sync.
+`aria-pressed`. This React component does not initialize Bootstrap JavaScript;
+use React state instead. The `active` prop applies the `.active` class, while
+`aria-pressed` should be set separately to communicate the pressed state.
 
 <DemoContainer>
   <ButtonToggleDemo />
@@ -294,8 +294,8 @@ function ToggleButton() {
     <Button
       variant='solid'
       theme='primary'
+      active={pressed}
       aria-pressed={pressed}
-      className={pressed ? 'active' : undefined}
       onClick={() => setPressed((value) => !value)}
     >
       {pressed ? 'Pressed' : 'Toggle me'}
@@ -343,6 +343,7 @@ package exposes no Sass API.
 | `variant`             | `ButtonVariant`               | —                       | Button style: `'solid'`, `'outline'`, `'subtle'`, `'text'`, or `'link'`.       |
 | `theme`               | `ButtonTheme`                 | —                       | Theme color. Omit with `variant='link'` to use Bootstrap's default link color. |
 | `size`                | `'xs' \| 'sm' \| 'lg'`        | —                       | Bootstrap button size. Omit for the default size.                              |
+| `active`              | `boolean`                     | `false`                 | Applies the `.active` class; it does not set `aria-pressed`.                   |
 | `className`           | `string`                      | —                       | Additional CSS classes, appended to the generated classes.                     |
 | `type`                | `C`'s native prop             | button only: `'button'` | Defaults to `'button'` when rendering a button element.                        |
 | `disabled`            | `C`'s native prop             | —                       | Disables the rendered element when supported.                                  |

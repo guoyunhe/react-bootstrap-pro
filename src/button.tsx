@@ -16,6 +16,7 @@ type ButtonOwnProps = {
   variant?: ButtonVariant;
   theme?: ButtonTheme;
   size?: 'xs' | 'sm' | 'lg';
+  active?: boolean;
 };
 
 export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps & {
@@ -28,6 +29,7 @@ export function Button<C extends ElementType = 'button'>({
   variant,
   theme,
   size,
+  active,
   className,
   ...props
 }: ButtonProps<C>) {
@@ -37,6 +39,7 @@ export function Button<C extends ElementType = 'button'>({
     variant ? `btn-${variant}` : undefined,
     theme ? `theme-${theme}` : undefined,
     size && `btn-${size}`,
+    active && 'active',
     className,
   ]
     .filter(Boolean)

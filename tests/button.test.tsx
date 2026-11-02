@@ -38,6 +38,12 @@ test('does not infer a variant or theme when only one is provided', async () => 
   expect(screen.getByRole('button', { name: 'Secondary' })).not.toHaveClass('btn-solid');
 });
 
+test('applies the active class when active is true', async () => {
+  const screen = await render(<Button active>Active</Button>);
+
+  expect(screen.getByRole('button', { name: 'Active' })).toHaveClass('active');
+});
+
 test('supports variants, sizes, native props, and custom classes', async () => {
   const screen = await render(
     <Button

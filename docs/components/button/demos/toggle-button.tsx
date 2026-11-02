@@ -9,8 +9,8 @@ export function ButtonToggleDemo() {
     <Button
       variant='solid'
       theme='primary'
+      active={pressed}
       aria-pressed={pressed}
-      className={pressed ? 'active' : undefined}
       onClick={() => setPressed((value) => !value)}
     >
       {pressed ? 'Pressed' : 'Toggle me'}
