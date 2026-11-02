@@ -3,7 +3,11 @@
   "type": "module",
   "version": "0.0.0",
   "description": "A starter for creating a React component library.",
-  "author": "Author Name <author.name@mail.com>",
+  "author": {
+    "name": "Guo Yunhe",
+    "email": "i@guoyunhe.me",
+    "url": "https://guoyunhe.me/"
+  },
   "license": "MIT",
   "homepage": "https://github.com/author/library#readme",
   "repository": {
@@ -30,13 +34,18 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "release": "bumpp",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint && stylelint \"**/*.css\"",
+    "prepare": "husky"
   },
   "peerDependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
+    "@guoyunhe/oxfmt-config": "^1.1.0",
     "@tsconfig/strictest": "^2.0.8",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
@@ -44,10 +53,39 @@
     "@vitejs/plugin-react": "^6.1.2",
     "@vitest/browser-playwright": "^5.0.5",
     "bumpp": "^12.3.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
+    "oxlint-config-recommended": "^1.2.1",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard": "^40.0.0",
     "tsdown": "^0.23.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.4",
     "vitest": "^5.0.5",
     "vitest-browser-react": "^2.3.0"
+  },
+  "funding": "https://ko-fi.com/guoyunhe",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": ">=12.16.1",
+      "onFail": "error"
+    }
+  },
+  "engines": {
+    "node": "^22.0.0 || ^24.0.0 || ^26.0.0 || >=27.0.0"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,vue}": [
+      "oxfmt --write",
+      "oxlint --fix"
+    ],
+    "*.css": [
+      "oxfmt --write",
+      "stylelint --fix"
+    ],
+    "*.{json,jsonc,scss,less,htm,html,md,mdx,yaml,yml}": "oxfmt --write"
   }
 }
