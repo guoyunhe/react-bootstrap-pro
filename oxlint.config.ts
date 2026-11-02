@@ -6,4 +6,5 @@ import recommendedUnicorn from 'oxlint-config-recommended/unicorn';
 
 export default defineConfig({
   extends: [recommended, recommendedUnicorn, recommendedReact, recommendedJsxA11y],
+  env: { browser: true, node: true, vitest: true },
 });
