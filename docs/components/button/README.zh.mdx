@@ -1,0 +1,336 @@
+---
+title: Button 按钮
+order: 1
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Button } from '../../../src';
+import { DemoContainer } from '../demo-container';
+import { ButtonBlockDemo } from './demos/block-buttons';
+import { ButtonTagsDemo } from './demos/button-tags';
+import { ButtonCSSVariablesDemo } from './demos/css-variables';
+import { ButtonDisabledDemo } from './demos/disabled-state';
+import { ButtonIconDemo } from './demos/icon-buttons';
+import { ButtonInputToggleDemo } from './demos/input-toggles';
+import { ButtonLinkDemo } from './demos/link-buttons';
+import { ButtonPlaygroundDemo } from './demos/playground';
+import { ButtonSizesDemo } from './demos/sizes';
+import { ButtonStyledDemo } from './demos/styled-buttons';
+import { ButtonToggleDemo } from './demos/toggle-button';
+import { ButtonVariantsDemo } from './demos/variants';
+
+# Button 按钮
+
+`Button` 渲染原生 React `<button>`，并组合 Bootstrap 6 的按钮样式。应用使用
+组件前，需要引入 Bootstrap CSS。
+
+## 基础类
+
+原生 `<button>` 是语义上的基础元素。Bootstrap 的 `.btn` 类提供共用基础样式；
+React `Button` 组件始终添加 `.btn`；只有显式传入 `variant` 和 `theme` 时，
+才会添加对应的样式类。
+
+<DemoContainer>
+  <Button>按钮</Button>
+</DemoContainer>
+
+```tsx
+<Button>按钮</Button>
+```
+
+## Playground
+
+使用下方控件即时预览主题颜色、样式、尺寸、内容和圆角。选择 Styled 会为按钮
+添加 Bootstrap 的 `.btn-styled` 类。
+
+<DemoContainer>
+  <ButtonPlaygroundDemo />
+</DemoContainer>
+
+## 变体
+
+Bootstrap 6 将样式与主题颜色分开组合。支持的 `variant` 有 `solid`、
+`outline`、`subtle`、`text` 和 `link`；支持的主题有 `primary`、`accent`、
+`secondary`、`success`、`danger`、`warning`、`info` 和 `inverse`。
+`variant` 和 `theme` 均无默认值；两者都省略时只生成基础 `.btn` 类。
+
+<DemoContainer>
+  <ButtonVariantsDemo />
+</DemoContainer>
+
+```tsx
+<Button variant='solid' theme='primary'>
+  主要操作
+</Button>
+<Button variant='outline' theme='primary'>
+  主要描边
+</Button>
+<Button variant='subtle' theme='success'>
+  成功提示
+</Button>
+<Button variant='text' theme='secondary'>
+  次要文本操作
+</Button>
+```
+
+颜色只提供视觉提示，按钮文字也应明确表达其操作和含义。
+
+## 链接按钮
+
+`variant='link'` 会显示为链接风格按钮。设置 `theme` 可指定颜色；省略时沿用
+Bootstrap 默认链接颜色。
+
+<DemoContainer>
+  <ButtonLinkDemo />
+</DemoContainer>
+
+```tsx
+<Button variant='link'>默认链接颜色</Button>
+<Button variant='link' theme='primary'>
+  主要链接颜色
+</Button>
+```
+
+## 立体按钮
+
+在实心按钮上添加 `className='btn-styled'`，即可使用渐变和阴影效果。
+`className` 会与组件生成的类名合并。
+
+<DemoContainer>
+  <ButtonStyledDemo />
+</DemoContainer>
+
+```tsx
+<Button variant='solid' theme='primary' className='btn-styled'>
+  立体主要按钮
+</Button>
+```
+
+## 按钮标签
+
+按钮样式通常用于 `<button>`，也可以应用到链接和输入框。`Button` 组件固定
+渲染为 `<button>`；页面跳转应使用原生 `<a>`，保留链接语义。
+
+<DemoContainer>
+  <ButtonTagsDemo />
+</DemoContainer>
+
+```tsx
+<a className='btn-solid theme-primary' href='/settings'>
+  打开设置
+</a>
+<a href='#details' className='btn-solid theme-primary' role='button'>
+  显示详情
+</a>
+<Button variant='solid' theme='primary' type='button'>
+  执行操作
+</Button>
+<input className='btn-solid theme-primary' type='button' value='输入按钮' />
+<input className='btn-solid theme-secondary' type='submit' value='提交' />
+```
+
+如果链接用于页面内操作而非导航，可添加 `role='button'`。禁用链接还需设置
+`aria-disabled='true'` 并阻止导航；`disabled` 属性不会禁用 `<a>`。
+
+## 尺寸
+
+`size` 支持 `xs`、`sm` 和 `lg`。省略该属性时使用默认尺寸。
+
+<DemoContainer>
+  <ButtonSizesDemo />
+</DemoContainer>
+
+```tsx
+<Button variant='solid' theme='primary' size='xs'>超小</Button>
+<Button variant='solid' theme='primary' size='sm'>小</Button>
+<Button variant='solid' theme='primary'>默认</Button>
+<Button variant='solid' theme='primary' size='lg'>大</Button>
+```
+
+也可以通过 CSS 自定义属性调整尺寸：
+
+```tsx
+<Button
+  variant='solid'
+  theme='primary'
+  style={{
+    '--bs-btn-padding-y': '.25rem',
+    '--bs-btn-padding-x': '.5rem',
+    '--bs-btn-font-size': '.75rem',
+  }}
+>
+  自定义尺寸
+</Button>
+```
+
+## 图标按钮
+
+使用 `className='btn-icon'` 将按钮设置为方形图标按钮。纯图标按钮必须用
+`aria-label` 提供可访问名称，也可以组合尺寸属性调整大小。
+
+<DemoContainer>
+  <ButtonIconDemo />
+</DemoContainer>
+
+```tsx
+<Button variant='solid' theme='primary' className='btn-icon' aria-label='添加项目'>
+  <svg
+    width='16'
+    height='16'
+    viewBox='0 0 16 16'
+    fill='none'
+    stroke='currentColor'
+    aria-hidden='true'
+  >
+    <path d='M8 3v10M3 8h10' />
+  </svg>
+</Button>
+```
+
+图标与文字并用时，优先保留可见文字，并将纯装饰图标标记为
+`aria-hidden='true'`。
+
+## 禁用状态
+
+通过原生 `disabled` 属性禁用按钮。禁用后不能触发操作，并使用 Bootstrap
+对应的禁用样式。
+
+<DemoContainer>
+  <ButtonDisabledDemo />
+</DemoContainer>
+
+```tsx
+<Button variant='solid' theme='primary' disabled>保存中</Button>
+<Button variant='outline' theme='secondary' disabled>
+  取消
+</Button>
+<a className='btn-solid theme-primary disabled' aria-disabled='true' tabIndex={-1}>
+  禁用链接
+</a>
+```
+
+链接可添加 `.disabled` 和 `aria-disabled='true'`。如果链接带有 `href`，还应
+移除键盘焦点并按需阻止导航。
+
+## 块级按钮
+
+使用 Bootstrap 网格和间距工具类，可将按钮堆叠并扩展到容器宽度；也可以配合
+响应式显示工具类，在不同断点切换布局。
+
+<DemoContainer>
+  <ButtonBlockDemo />
+</DemoContainer>
+
+```tsx
+<div className='d-grid gap-2'>
+  <Button variant='solid' theme='primary'>主要操作</Button>
+  <Button variant='outline' theme='secondary'>
+    次要操作
+  </Button>
+</div>
+<div className='d-grid gap-2 md:d-flex md:justify-content-end'>
+  <Button variant='solid' theme='primary' className='md:me-2'>
+    响应式主要操作
+  </Button>
+  <Button variant='outline' theme='secondary'>
+    响应式次要操作
+  </Button>
+</div>
+```
+
+## 切换按钮
+
+复选框和单选框保留原生表单语义。Bootstrap 的 `.btn-check` 可让标签显示为
+按钮，同时由输入框记录选择状态。
+
+### 复选框
+
+复选框彼此独立，可同时选中多个选项：
+
+<DemoContainer>
+  <ButtonInputToggleDemo />
+</DemoContainer>
+
+```tsx
+<label className='btn-check btn-solid theme-primary'>
+  <input type='checkbox' />
+  关注
+</label>
+```
+
+### 单选框
+
+同名的 radio 输入组成单选组。每个输入框都应关联到对应的标签；上方示例展示了
+选中、未选中和禁用状态。
+
+## Button 插件
+
+Bootstrap JavaScript 插件会切换按钮的 `.active` 类和 `aria-pressed`。本 React
+组件只负责样式并转发原生属性，不会初始化 Bootstrap JavaScript。建议使用 React
+状态管理切换，保证状态和渲染结果同步。
+
+<DemoContainer>
+  <ButtonToggleDemo />
+</DemoContainer>
+
+```tsx
+import { useState } from 'react';
+
+function ToggleButton() {
+  const [pressed, setPressed] = useState(false);
+
+  return (
+    <Button
+      variant='solid'
+      theme='primary'
+      aria-pressed={pressed}
+      className={pressed ? 'active' : undefined}
+      onClick={() => setPressed((value) => !value)}
+    >
+      {pressed ? '已按下' : '切换状态'}
+    </Button>
+  );
+}
+```
+
+### 数据属性与插件方法
+
+`Button` 会转发原生 `data-*` 属性，但 `data-bs-toggle='button'` 只有在 Bootstrap
+JavaScript 已加载并初始化时才会生效。React 组件不提供 `toggle()` 等 Bootstrap
+插件实例方法，应将状态保存在 React 中。不要让两套机制同时管理同一个按钮状态。
+
+## CSS
+
+按钮变体使用 Bootstrap CSS 自定义属性，可通过原生 `style` 属性逐个调整：
+
+<DemoContainer>
+  <ButtonCSSVariablesDemo />
+</DemoContainer>
+
+| 变量                                                | 说明                   |
+| --------------------------------------------------- | ---------------------- |
+| `--bs-btn-min-height`                               | 按钮最小高度           |
+| `--bs-btn-padding-x` / `--bs-btn-padding-y`         | 水平和垂直内边距       |
+| `--bs-btn-font-size` / `--bs-btn-line-height`       | 字号和行高             |
+| `--bs-btn-border-radius`                            | 按钮圆角               |
+| `--bs-btn-gradient-start` / `--bs-btn-gradient-end` | `.btn-styled` 渐变颜色 |
+| `--bs-btn-shadow` / `--bs-btn-active-shadow`        | 默认和按下状态的阴影   |
+
+Bootstrap 工具类可通过 `className` 添加；单个按钮的 CSS 自定义属性可通过
+`style` 设置。
+Sass maps 和循环属于 Bootstrap 源码构建阶段的定制能力，本 React 包不提供 Sass API。
+
+## API
+
+| 属性         | 类型                                      | 默认值     | 说明                                                                 |
+| ------------ | ----------------------------------------- | ---------- | -------------------------------------------------------------------- |
+| `variant`    | `ButtonVariant`                           | —          | 按钮样式：`'solid'`、`'outline'`、`'subtle'`、`'text'` 或 `'link'`。 |
+| `theme`      | `ButtonTheme`                             | —          | 主题颜色。`variant='link'` 时省略可使用 Bootstrap 默认链接颜色。     |
+| `size`       | `'xs' \| 'sm' \| 'lg'`                    | —          | Bootstrap 按钮尺寸。不设置时使用默认尺寸。                           |
+| `className`  | `string`                                  | —          | 附加类名，会与组件生成的类名合并。                                   |
+| `type`       | `'button' \| 'submit' \| 'reset'`         | `'button'` | 原生按钮类型。                                                       |
+| `disabled`   | `boolean`                                 | `false`    | 禁用原生按钮。                                                       |
+| `children`   | `ReactNode`                               | —          | 按钮内容。                                                           |
+| 其他按钮属性 | `ButtonHTMLAttributes<HTMLButtonElement>` | —          | 原生按钮属性和事件处理函数会转发到底层元素。                         |
+
+包入口导出 `Button`、`ButtonProps`、`ButtonTheme` 和 `ButtonVariant`。

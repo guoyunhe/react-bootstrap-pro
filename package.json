@@ -1,10 +1,10 @@
 {
-  "name": "react-components-starter",
+  "name": "react-bootstrap-pro",
   "version": "0.0.0",
   "description": "A starter for creating a React component library.",
-  "homepage": "https://github.com/author/library#readme",
+  "homepage": "https://github.com/guoyunhe/react-bootstrap-pro#readme",
   "bugs": {
-    "url": "https://github.com/author/library/issues"
+    "url": "https://github.com/guoyunhe/react-bootstrap-pro/issues"
   },
   "license": "MIT",
   "author": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/author/library.git"
+    "url": "git+https://github.com/guoyunhe/react-bootstrap-pro.git"
   },
   "funding": "https://ko-fi.com/guoyunhe",
   "files": [

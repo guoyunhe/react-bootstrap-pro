@@ -10,14 +10,15 @@ Import Bootstrap's stylesheet in your application and use the component:
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-components-starter';
 
-<Button variant='primary' size='lg'>
+<Button variant='solid' theme='primary' size='lg'>
   Save
 </Button>;
 ```
 
-`Button` accepts native button props, Bootstrap variants (including outline
-variants), and the `sm` or `lg` sizes. It defaults to the `primary` variant and
-`type='button'`.
+`Button` accepts native button props, Bootstrap variants, themes, and the `xs`,
+`sm`, or `lg` sizes. `variant` and `theme` have no defaults, so a plain
+`<Button>` only receives the base `btn` class. The native button type defaults
+to `type='button'`.
 
 ## Development
 

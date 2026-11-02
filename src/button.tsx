@@ -1,37 +1,38 @@
 import type { ButtonHTMLAttributes } from 'react';
 
-export type ButtonVariant =
+export type ButtonTheme =
   | 'primary'
+  | 'accent'
   | 'secondary'
   | 'success'
   | 'danger'
   | 'warning'
   | 'info'
-  | 'light'
-  | 'dark'
-  | 'link'
-  | 'outline-primary'
-  | 'outline-secondary'
-  | 'outline-success'
-  | 'outline-danger'
-  | 'outline-warning'
-  | 'outline-info'
-  | 'outline-light'
-  | 'outline-dark';
+  | 'inverse';
+
+export type ButtonVariant = 'solid' | 'outline' | 'subtle' | 'text' | 'link';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
-  size?: 'sm' | 'lg';
+  theme?: ButtonTheme;
+  size?: 'xs' | 'sm' | 'lg';
 }
 
 export function Button({
-  variant = 'primary',
+  variant,
+  theme,
   size,
   className,
   type = 'button',
   ...props
 }: ButtonProps) {
-  const classes = ['btn', `btn-${variant}`, size && `btn-${size}`, className]
+  const classes = [
+    'btn',
+    variant ? `btn-${variant}` : undefined,
+    theme ? `theme-${theme}` : undefined,
+    size && `btn-${size}`,
+    className,
+  ]
     .filter(Boolean)
     .join(' ');
 
