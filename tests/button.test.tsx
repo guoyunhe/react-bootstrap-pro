@@ -23,3 +23,12 @@ test('supports variants, sizes, native props, and custom classes', async () => {
   expect(button).toBeDisabled();
   expect(button).toHaveAttribute('type', 'submit');
 });
+
+test('forwards click handlers', async () => {
+  let clickCount = 0;
+  const screen = await render(<Button onClick={() => clickCount++}>Click me</Button>);
+
+  await screen.getByRole('button', { name: 'Click me' }).click();
+
+  expect(clickCount).toBe(1);
+});
