@@ -201,8 +201,9 @@ icons with `aria-hidden='true'`.
 
 ## Disabled state
 
-Use the native `disabled` prop to disable a button. It prevents activation and
-applies Bootstrap's disabled styling.
+Use the native `disabled` prop to disable a button. For `component='a'`,
+`disabled` adds Bootstrap's `.disabled` class, sets `aria-disabled`, removes the
+link from the tab order, and prevents navigation.
 
 <DemoContainer>
   <ButtonDisabledDemo />
@@ -213,14 +214,13 @@ applies Bootstrap's disabled styling.
 <Button variant='outline' theme='secondary' disabled>
   Cancel
 </Button>
-<a className='btn-solid theme-primary disabled' aria-disabled='true' tabIndex={-1}>
+<Button component='a' variant='solid' theme='primary' href='#disabled' disabled>
   Disabled link
-</a>
+</Button>
 ```
 
-For anchors, use the `.disabled` class and `aria-disabled='true'`. If the
-anchor has an `href`, also remove it from keyboard navigation and prevent
-navigation as needed.
+Disabled anchors retain their `href` but cannot be activated through the
+button's click handler.
 
 ## Block buttons
 

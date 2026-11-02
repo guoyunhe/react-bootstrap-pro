@@ -50,6 +50,21 @@ test('applies the styled class when styled is true', async () => {
   expect(screen.getByRole('button', { name: 'Styled' })).toHaveClass('btn-styled');
 });
 
+test('supports disabled anchors', async () => {
+  const screen = await render(
+    <Button component='a' href='/disabled' variant='solid' theme='primary' disabled>
+      Disabled link
+    </Button>,
+  );
+  const link = screen.getByRole('link', { name: 'Disabled link' });
+
+  expect(link).toHaveClass('btn', 'btn-solid', 'theme-primary', 'disabled');
+  expect(link).toHaveAttribute('aria-disabled', 'true');
+  expect(link).toHaveAttribute('tabindex', '-1');
+  expect(link).toHaveAttribute('href', '/disabled');
+  expect(link).not.toHaveAttribute('disabled');
+});
+
 test('supports variants, sizes, native props, and custom classes', async () => {
   const screen = await render(
     <Button

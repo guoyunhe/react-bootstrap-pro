@@ -9,14 +9,9 @@ export function ButtonDisabledDemo() {
       <Button variant='outline' theme='secondary' disabled>
         Disabled outline
       </Button>
-      <a
-        href='#disabled'
-        className='btn-solid theme-primary disabled'
-        aria-disabled='true'
-        tabIndex={-1}
-      >
+      <Button component='a' variant='solid' theme='primary' href='#disabled' disabled>
         Disabled link
-      </a>
+      </Button>
     </div>
   );
 }

@@ -193,8 +193,8 @@ Bootstrap 默认链接颜色。
 
 ## 禁用状态
 
-通过原生 `disabled` 属性禁用按钮。禁用后不能触发操作，并使用 Bootstrap
-对应的禁用样式。
+通过原生 `disabled` 属性禁用按钮。对于 `component='a'`，`disabled` 会添加
+Bootstrap 的 `.disabled` 类、设置 `aria-disabled`、移出键盘焦点顺序并阻止导航。
 
 <DemoContainer>
   <ButtonDisabledDemo />
@@ -205,13 +205,12 @@ Bootstrap 默认链接颜色。
 <Button variant='outline' theme='secondary' disabled>
   取消
 </Button>
-<a className='btn-solid theme-primary disabled' aria-disabled='true' tabIndex={-1}>
+<Button component='a' variant='solid' theme='primary' href='#disabled' disabled>
   禁用链接
-</a>
+</Button>
 ```
 
-链接可添加 `.disabled` 和 `aria-disabled='true'`。如果链接带有 `href`，还应
-移除键盘焦点并按需阻止导航。
+禁用链接会保留 `href`，但组件会阻止其点击导航。
 
 ## 块级按钮
 

@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef, ElementType } from 'react';
+import type { ComponentPropsWithoutRef, ElementType, MouseEvent } from 'react';
 
 export type ButtonTheme =
   | 'primary'
@@ -18,6 +18,7 @@ type ButtonOwnProps = {
   size?: 'xs' | 'sm' | 'lg';
   active?: boolean;
   styled?: boolean;
+  disabled?: boolean;
 };
 
 export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps & {
@@ -32,10 +33,12 @@ export function Button<C extends ElementType = 'button'>({
   size,
   active,
   styled,
+  disabled,
   className,
   ...props
 }: ButtonProps<C>) {
   const Component = component ?? 'button';
+  const isDisabledAnchor = Component === 'a' && disabled;
   const classes = [
     'btn',
     variant ? `btn-${variant}` : undefined,
@@ -43,6 +46,7 @@ export function Button<C extends ElementType = 'button'>({
     size && `btn-${size}`,
     active && 'active',
     styled && 'btn-styled',
+    isDisabledAnchor && 'disabled',
     className,
   ]
     .filter(Boolean)
@@ -51,6 +55,14 @@ export function Button<C extends ElementType = 'button'>({
   const componentProps = {
     ...(Component === 'button' ? { type: 'button' as const } : {}),
     ...props,
+    ...(Component === 'a' ? {} : { disabled }),
+    ...(isDisabledAnchor
+      ? {
+          'aria-disabled': true,
+          tabIndex: -1,
+          onClick: (event: MouseEvent<HTMLElement>) => event.preventDefault(),
+        }
+      : {}),
     className: classes,
   };
 
