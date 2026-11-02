@@ -19,6 +19,7 @@ type ButtonOwnProps = {
   active?: boolean;
   styled?: boolean;
   disabled?: boolean;
+  check?: boolean;
 };
 
 export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps & {
@@ -34,6 +35,7 @@ export function Button<C extends ElementType = 'button'>({
   active,
   styled,
   disabled,
+  check,
   className,
   ...props
 }: ButtonProps<C>) {
@@ -46,6 +48,7 @@ export function Button<C extends ElementType = 'button'>({
     size && `btn-${size}`,
     active && 'active',
     styled && 'btn-styled',
+    check && 'btn-check',
     isDisabledAnchor && 'disabled',
     className,
   ]

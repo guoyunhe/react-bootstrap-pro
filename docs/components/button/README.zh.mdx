@@ -240,8 +240,8 @@ Bootstrap 的 `.disabled` 类、设置 `aria-disabled`、移出键盘焦点顺�
 
 ## 切换按钮
 
-复选框和单选框保留原生表单语义。Bootstrap 的 `.btn-check` 可让标签显示为
-按钮，同时由输入框记录选择状态。
+复选框和单选框保留原生表单语义。使用 `Button component='label' check` 添加
+Bootstrap 的 `.btn-check` 样式，同时继续由输入框记录选择状态。
 
 ### 复选框
 
@@ -252,10 +252,10 @@ Bootstrap 的 `.disabled` 类、设置 `aria-disabled`、移出键盘焦点顺�
 </DemoContainer>
 
 ```tsx
-<label className='btn-check btn-solid theme-primary'>
+<Button component='label' variant='solid' theme='primary' check>
   <input type='checkbox' />
   关注
-</label>
+</Button>
 ```
 
 ### 单选框
@@ -330,6 +330,7 @@ Sass maps 和循环属于 Bootstrap 源码构建阶段的定制能力，本 Reac
 | `size`       | `'xs' \| 'sm' \| 'lg'`        | —                     | Bootstrap 按钮尺寸。不设置时使用默认尺寸。                           |
 | `active`     | `boolean`                     | `false`               | 添加 `.active` 类；不会自动设置 `aria-pressed`。                     |
 | `styled`     | `boolean`                     | `false`               | 添加 `.btn-styled` 修饰类。                                          |
+| `check`      | `boolean`                     | `false`               | 添加 `.btn-check` 修饰类。                                           |
 | `className`  | `string`                      | —                     | 附加类名，会与组件生成的类名合并。                                   |
 | `type`       | `C` 的原生属性                | 仅 button：`'button'` | 渲染按钮元素时默认为 `'button'`。                                    |
 | `disabled`   | `C` 的原生属性                | —                     | 支持时禁用渲染后的元素。                                             |

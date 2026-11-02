@@ -50,6 +50,12 @@ test('applies the styled class when styled is true', async () => {
   expect(screen.getByRole('button', { name: 'Styled' })).toHaveClass('btn-styled');
 });
 
+test('applies the check class when check is true', async () => {
+  const screen = await render(<Button check>Check</Button>);
+
+  expect(screen.getByRole('button', { name: 'Check' })).toHaveClass('btn-check');
+});
+
 test('supports disabled anchors', async () => {
   const screen = await render(
     <Button component='a' href='/disabled' variant='solid' theme='primary' disabled>

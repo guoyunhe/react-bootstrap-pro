@@ -250,9 +250,9 @@ vertically. Responsive display utilities can change the layout at a breakpoint.
 
 ## Toggle buttons
 
-Checkbox and radio inputs provide native checked-state semantics. Bootstrap's
-`.btn-check` styles a label like a button while retaining the input's form and
-accessibility behavior.
+Checkbox and radio inputs provide native checked-state semantics. Use
+`Button component='label' check` to apply Bootstrap's `.btn-check` styling while
+retaining the inputs' form and accessibility behavior.
 
 ### Checkboxes
 
@@ -263,10 +263,10 @@ Checkbox buttons toggle independently:
 </DemoContainer>
 
 ```tsx
-<label className='btn-check btn-solid theme-primary'>
+<Button component='label' variant='solid' theme='primary' check>
   <input type='checkbox' />
   Follow
-</label>
+</Button>
 ```
 
 ### Radios
@@ -346,6 +346,7 @@ package exposes no Sass API.
 | `size`                | `'xs' \| 'sm' \| 'lg'`        | —                       | Bootstrap button size. Omit for the default size.                              |
 | `active`              | `boolean`                     | `false`                 | Applies the `.active` class; it does not set `aria-pressed`.                   |
 | `styled`              | `boolean`                     | `false`                 | Applies the `.btn-styled` modifier.                                            |
+| `check`               | `boolean`                     | `false`                 | Applies the `.btn-check` modifier.                                             |
 | `className`           | `string`                      | —                       | Additional CSS classes, appended to the generated classes.                     |
 | `type`                | `C`'s native prop             | button only: `'button'` | Defaults to `'button'` when rendering a button element.                        |
 | `disabled`            | `C`'s native prop             | —                       | Disables the rendered element when supported.                                  |
