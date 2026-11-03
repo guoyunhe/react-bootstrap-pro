@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import type { ComponentType, ElementType } from 'react';
-import { BiChevronDown, type IconProps } from 'react-bootstrap-icons-pro';
+import type { ElementType, ReactNode } from 'react';
+import { BiChevronDown } from 'react-bootstrap-icons-pro';
 
 import type { BoxProps } from './box';
 import { ClassedBox, type BoxComponentProps } from './shared';
@@ -54,13 +54,13 @@ export function AccordionItem<C extends ElementType = 'details'>({
 
 export type AccordionHeaderProps<C extends ElementType = 'summary'> = BoxComponentProps<
   C,
-  { icon?: ComponentType<IconProps> | undefined }
+  { icon?: ReactNode | undefined }
 >;
 
 export function AccordionHeader<C extends ElementType = 'summary'>({
   component,
   className,
-  icon: Icon = BiChevronDown,
+  icon = <BiChevronDown />,
   children,
   ...props
 }: AccordionHeaderProps<C>) {
@@ -73,7 +73,11 @@ export function AccordionHeader<C extends ElementType = 'summary'>({
       className={className}
     >
       {children}
-      <Icon className='accordion-icon' aria-hidden='true' />
+      {icon != null && (
+        <span className='accordion-icon' aria-hidden='true'>
+          {icon}
+        </span>
+      )}
     </ClassedBox>
   );
 }

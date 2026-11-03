@@ -41,7 +41,7 @@ test('composes native accordion markup with Box utility props', async () => {
         <AccordionBody>Answer</AccordionBody>
       </AccordionItem>
       <AccordionItem name='faq'>
-        <AccordionHeader icon={BiPlus}>Custom icon</AccordionHeader>
+        <AccordionHeader icon={<BiPlus />}>Custom icon</AccordionHeader>
         <AccordionBody>Custom icon content</AccordionBody>
       </AccordionItem>
     </Accordion>,
@@ -55,9 +55,9 @@ test('composes native accordion markup with Box utility props', async () => {
   expect(screen.getByText('Question')).toHaveClass('accordion-header');
   expect(screen.getByText('Answer')).toHaveClass('accordion-body');
   const icons = accordion.element().querySelectorAll('.accordion-icon');
-  expect(icons[0]).toHaveClass('bi-chevron-down');
+  expect(icons[0].querySelector('svg')).toHaveClass('bi-chevron-down');
   expect(icons[0]).toHaveAttribute('aria-hidden', 'true');
-  expect(icons[1]).toHaveClass('bi-plus');
+  expect(icons[1].querySelector('svg')).toHaveClass('bi-plus');
 });
 
 test('provides component modifiers and preserves custom tags', async () => {

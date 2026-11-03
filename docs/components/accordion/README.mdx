@@ -36,8 +36,8 @@ animation.
 
 ## Custom icon
 
-`AccordionHeader` renders a chevron by default. Pass an icon component through
-`icon` to replace it.
+`AccordionHeader` renders a chevron by default. Pass a React node through `icon`
+to replace it.
 
 <DemoContainer>
   <AccordionCustomIconDemo />
@@ -154,9 +154,9 @@ Inherits native `<details>` props, including `open` and `name`, and Box utility 
 
 The default icon is `BiChevronDown`.
 
-| Prop   | Type                       | Description                          |
-| ------ | -------------------------- | ------------------------------------ |
-| `icon` | `ComponentType<IconProps>` | Replaces the default icon component. |
+| Prop   | Type        | Description                     |
+| ------ | ----------- | ------------------------------- |
+| `icon` | `ReactNode` | Replaces the default icon node. |
 
 Inherits native props and Box utility props.
 

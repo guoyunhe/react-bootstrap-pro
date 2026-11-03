@@ -43,16 +43,14 @@ import { AccordionVariantsDemo } from './demos/variants';
 
 ## 自定义图标
 
-`AccordionHeader` 默认内置 chevron 图标。通过 `icon` 属性传入图标组件即可替换。
+`AccordionHeader` 默认内置 chevron 图标。通过 `icon` 属性传入 React 节点即可替换。
 
 <DemoContainer>
   <AccordionCustomIconDemo />
 </DemoContainer>
 
-```tsx
-import { BiPlus } from 'react-bootstrap-icons-pro';
+```tsx src='./demos/custom-icon.tsx'
 
-<AccordionHeader icon={BiPlus}>自定义图标</AccordionHeader>;
 ```
 
 ## 主题变体
@@ -189,9 +187,9 @@ function toggleAll(accordion: HTMLElement, expand: boolean) {
 
 默认图标为 `BiChevronDown`。
 
-| 属性   | 类型                       | 说明               |
-| ------ | -------------------------- | ------------------ |
-| `icon` | `ComponentType<IconProps>` | 替换默认图标组件。 |
+| 属性   | 类型        | 说明               |
+| ------ | ----------- | ------------------ |
+| `icon` | `ReactNode` | 替换默认图标节点。 |
 
 继承原生属性及 Box 工具类属性。
 

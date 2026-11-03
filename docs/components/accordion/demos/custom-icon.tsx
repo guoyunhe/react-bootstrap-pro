@@ -5,11 +5,11 @@ export function AccordionCustomIconDemo() {
   return (
     <Accordion>
       <AccordionItem name='custom-icon' open>
-        <AccordionHeader icon={BiPlus}>Custom plus icon</AccordionHeader>
-        <AccordionBody>Pass an icon component to replace the default chevron.</AccordionBody>
+        <AccordionHeader icon={<BiPlus />}>Custom plus icon</AccordionHeader>
+        <AccordionBody>Pass an icon node to replace the default chevron.</AccordionBody>
       </AccordionItem>
       <AccordionItem name='custom-icon'>
-        <AccordionHeader icon={BiPlus}>Another custom icon</AccordionHeader>
+        <AccordionHeader icon={<BiPlus />}>Another custom icon</AccordionHeader>
         <AccordionBody>The icon is rendered inside the accordion header.</AccordionBody>
       </AccordionItem>
     </Accordion>
