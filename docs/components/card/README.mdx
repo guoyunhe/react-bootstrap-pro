@@ -5,6 +5,7 @@ title: Card
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, Card, CardBody, CardHeader, CardTitle } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { CardBasicDemo } from './demos/basic';
 
 # Card
 
@@ -14,44 +15,16 @@ body, footer, or image while keeping semantic element choice in your control.
 ## Example
 
 <DemoContainer>
-  <Card style={{ maxWidth: 320 }}>
-    <CardHeader>Featured</CardHeader>
-    <CardBody>
-      <CardTitle>Card title</CardTitle>
-      <p>Card content goes here.</p>
-      <Button variant='solid' theme='primary'>
-        Continue
-      </Button>
-    </CardBody>
-  </Card>
+  <CardBasicDemo />
 </DemoContainer>
 
-```tsx
-<Card style={{ maxWidth: 320 }}>
-  <CardHeader>Featured</CardHeader>
-  <CardBody>
-    <CardTitle>Card title</CardTitle>
-    <p>Card content goes here.</p>
-    <Button variant='solid' theme='primary'>
-      Continue
-    </Button>
-  </CardBody>
-</Card>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Images
 
 Use `CardImage` for a card image and provide appropriate alternative text.
-
-```tsx
-<Card>
-  <CardImage src='/images/feature.png' alt='Product feature' />
-  <CardBody>
-    <CardTitle>Feature</CardTitle>
-    <p>Supporting content.</p>
-  </CardBody>
-</Card>
-```
 
 ## API
 

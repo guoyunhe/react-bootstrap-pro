@@ -5,6 +5,7 @@ title: Toasts
 import 'bootstrap/dist/css/bootstrap.css';
 import { CloseButton, Toast, ToastBody, ToastContainer, ToastHeader } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ToastsBasicDemo } from './demos/basic';
 
 # Toasts
 
@@ -14,38 +15,16 @@ Bootstrap JavaScript plugin or control the `show` prop from React.
 ## Example
 
 <DemoContainer>
-  <ToastContainer>
-    <Toast show role='alert' aria-live='assertive' aria-atomic='true'>
-      <ToastHeader>
-        <strong>Saved</strong>
-        <CloseButton data-bs-dismiss='toast' />
-      </ToastHeader>
-      <ToastBody>Your changes are ready.</ToastBody>
-    </Toast>
-  </ToastContainer>
+  <ToastsBasicDemo />
 </DemoContainer>
 
-```tsx
-<ToastContainer>
-  <Toast show role='status' aria-live='polite' aria-atomic='true'>
-    <ToastHeader>
-      <strong>Saved</strong>
-      <CloseButton data-bs-dismiss='toast' />
-    </ToastHeader>
-    <ToastBody>Your changes are ready.</ToastBody>
-  </Toast>
-</ToastContainer>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Translucent
 
 Set `translucent` to apply the translucent surface treatment.
-
-```tsx
-<Toast show translucent>
-  <ToastBody>Background work is complete.</ToastBody>
-</Toast>
-```
 
 ## API
 

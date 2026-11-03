@@ -5,6 +5,7 @@ title: Dialog
 import 'bootstrap/dist/css/bootstrap.css';
 import { CloseButton, Dialog, DialogBody, DialogHeader, DialogTitle } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { DialogBasicDemo } from './demos/basic';
 
 # Dialog
 
@@ -15,23 +16,11 @@ attribute alone is non-modal.
 ## Example
 
 <DemoContainer>
-  <Dialog open size='sm'>
-    <DialogHeader>
-      <DialogTitle>Dialog title</DialogTitle>
-      <CloseButton />
-    </DialogHeader>
-    <DialogBody>Dialog content</DialogBody>
-  </Dialog>
+  <DialogBasicDemo />
 </DemoContainer>
 
-```tsx
-<Dialog open size='sm' aria-labelledby='dialog-title'>
-  <DialogHeader>
-    <DialogTitle id='dialog-title'>Dialog title</DialogTitle>
-    <CloseButton />
-  </DialogHeader>
-  <DialogBody>Dialog content</DialogBody>
-</Dialog>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Modal behavior

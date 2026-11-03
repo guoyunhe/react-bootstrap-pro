@@ -5,6 +5,7 @@ title: Collapse
 import 'bootstrap/dist/css/bootstrap.css';
 import { Collapse } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { CollapseBasicDemo } from './demos/basic';
 
 # Collapse
 
@@ -14,31 +15,16 @@ React, or use Bootstrap's JavaScript plugin and matching `data-bs-*` attributes.
 ## Example
 
 <DemoContainer>
-  <Collapse show>Collapsible content</Collapse>
+  <CollapseBasicDemo />
 </DemoContainer>
 
-```tsx
-<Collapse horizontal show={expanded}>
-  Content
-</Collapse>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Trigger
 
 Connect a button to the panel with matching IDs when using Bootstrap's plugin.
-
-```tsx
-<button
-  type='button'
-  data-bs-toggle='collapse'
-  data-bs-target='#details'
-  aria-expanded='false'
-  aria-controls='details'
->
-  Toggle details
-</button>
-<Collapse id='details'>Details</Collapse>
-```
 
 ## API
 

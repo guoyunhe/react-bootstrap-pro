@@ -5,6 +5,7 @@ title: Button group
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ButtonGroupBasicDemo } from './demos/basic';
 
 # Button group
 
@@ -14,47 +15,19 @@ Give each group an accessible name with `aria-label` or `aria-labelledby`.
 ## Example
 
 <DemoContainer>
-  <ButtonGroup aria-label='Text alignment'>
-    <Button variant='outline' theme='secondary'>
-      Left
-    </Button>
-    <Button variant='outline' theme='secondary'>
-      Center
-    </Button>
-    <Button variant='outline' theme='secondary'>
-      Right
-    </Button>
-  </ButtonGroup>
+  <ButtonGroupBasicDemo />
 </DemoContainer>
 
-## Toolbar
+```tsx src='./demos/basic.tsx'
 
-```tsx
-<ButtonToolbar aria-label='Editor actions'>
-  <ButtonGroup aria-label='History' size='sm'>
-    ...
-  </ButtonGroup>
-  <ButtonGroup aria-label='Formatting' divider>
-    ...
-  </ButtonGroup>
-</ButtonToolbar>
 ```
+
+## Toolbar
 
 ## Vertical groups and links
 
 Use `orientation='vertical'` for stacked controls. Groups can also contain
 links when the items navigate rather than perform actions.
-
-```tsx
-<ButtonGroup orientation='vertical' aria-label='View options'>
-  <Button component='a' href='/list' variant='outline' theme='secondary'>
-    List
-  </Button>
-  <Button component='a' href='/grid' variant='outline' theme='secondary'>
-    Grid
-  </Button>
-</ButtonGroup>
-```
 
 ## API
 

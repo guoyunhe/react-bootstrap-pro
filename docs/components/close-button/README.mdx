@@ -5,6 +5,7 @@ title: Close button
 import 'bootstrap/dist/css/bootstrap.css';
 import { CloseButton } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { CloseButtonBasicDemo } from './demos/basic';
 
 # Close button
 
@@ -14,30 +15,20 @@ name defaults to “Close”; change it with `label` or `aria-label`.
 ## Example
 
 <DemoContainer>
-  <CloseButton />
+  <CloseButtonBasicDemo />
 </DemoContainer>
 
-```tsx
-<CloseButton label='Dismiss notification' onClick={dismiss} />
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Disabled state
 
 Use the native `disabled` prop when dismissing is unavailable.
 
-```tsx
-<CloseButton disabled label='Close unavailable notification' />
-```
-
 ## Dark variant
 
 Place the button inside a dark color-scheme region to use the inverted icon.
-
-```tsx
-<div data-bs-theme='dark'>
-  <CloseButton />
-</div>
-```
 
 ## API
 

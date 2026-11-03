@@ -5,6 +5,7 @@ title: Popover
 import 'bootstrap/dist/css/bootstrap.css';
 import { Popover, PopoverBody, PopoverHeader } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { PopoverBasicDemo } from './demos/basic';
 
 # Popover
 
@@ -15,28 +16,16 @@ popovers from trigger elements.
 ## Example
 
 <DemoContainer>
-  <Popover show placement='top'>
-    <PopoverHeader>Popover title</PopoverHeader>
-    <PopoverBody>Popover content</PopoverBody>
-  </Popover>
+  <PopoverBasicDemo />
 </DemoContainer>
 
-```tsx
-<Popover show placement='top'>
-  <PopoverHeader>Popover title</PopoverHeader>
-  <PopoverBody>Popover content</PopoverBody>
-</Popover>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Placement
 
 Set `placement` to `top`, `end`, `bottom`, or `start`.
-
-```tsx
-<Popover show placement='end'>
-  <PopoverBody>More details</PopoverBody>
-</Popover>
-```
 
 ## API
 

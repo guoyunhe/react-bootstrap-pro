@@ -5,6 +5,7 @@ title: Tab
 import 'bootstrap/dist/css/bootstrap.css';
 import { Tab, TabContent, TabItem, TabList, TabPane } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { TabBasicDemo } from './demos/basic';
 
 # Tab
 
@@ -15,27 +16,12 @@ their active state.
 ## Example
 
 <DemoContainer>
-  <TabList aria-label='Example tabs'>
-    <TabItem>
-      <Tab id='home-tab' active targetId='home-pane'>
-        Home
-      </Tab>
-    </TabItem>
-    <TabItem>
-      <Tab id='profile-tab' targetId='profile-pane'>
-        Profile
-      </Tab>
-    </TabItem>
-  </TabList>
-  <TabContent>
-    <TabPane active id='home-pane' aria-labelledby='home-tab'>
-      Home content
-    </TabPane>
-    <TabPane id='profile-pane' aria-labelledby='profile-tab'>
-      Profile content
-    </TabPane>
-  </TabContent>
+  <TabBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
 
 ## Connect triggers and panels
 

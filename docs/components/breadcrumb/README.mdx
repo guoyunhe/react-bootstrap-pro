@@ -5,6 +5,7 @@ title: Breadcrumb
 import 'bootstrap/dist/css/bootstrap.css';
 import { Breadcrumb, BreadcrumbDivider, BreadcrumbItem, BreadcrumbLink } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { BreadcrumbBasicDemo } from './demos/basic';
 
 # Breadcrumb
 
@@ -14,44 +15,16 @@ divider components render the expected list semantics.
 ## Example
 
 <DemoContainer>
-  <nav aria-label='Breadcrumb'>
-    <Breadcrumb>
-      <BreadcrumbItem>
-        <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbDivider />
-      <BreadcrumbItem aria-current='page'>
-        <BreadcrumbLink href='/docs' active>
-          Docs
-        </BreadcrumbLink>
-      </BreadcrumbItem>
-    </Breadcrumb>
-  </nav>
+  <BreadcrumbBasicDemo />
 </DemoContainer>
 
-```tsx
-<nav aria-label='Breadcrumb'>
-  <Breadcrumb>
-    <BreadcrumbItem>
-      <BreadcrumbLink href='/'>Home</BreadcrumbLink>
-    </BreadcrumbItem>
-    <BreadcrumbDivider />
-    <BreadcrumbItem aria-current='page'>
-      <BreadcrumbLink href='/docs' active>
-        Docs
-      </BreadcrumbLink>
-    </BreadcrumbItem>
-  </Breadcrumb>
-</nav>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Custom divider
 
 `BreadcrumbDivider` can contain custom content instead of the default chevron.
-
-```tsx
-<BreadcrumbDivider aria-hidden='true'>/</BreadcrumbDivider>
-```
 
 ## API
 

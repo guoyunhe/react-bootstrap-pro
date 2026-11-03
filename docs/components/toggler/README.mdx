@@ -5,6 +5,7 @@ title: Toggler
 import 'bootstrap/dist/css/bootstrap.css';
 import { Toggler } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { TogglerBasicDemo } from './demos/basic';
 
 # Toggler
 
@@ -14,36 +15,21 @@ toggle a class or attribute on the trigger itself or on a selected target.
 ## Example
 
 <DemoContainer>
-  <Toggler target='#theme-surface' attribute='class' value='bg-primary'>
-    Toggle theme
-  </Toggler>
-  <div id='theme-surface' className='border p-3'>
-    Target
-  </div>
+  <TogglerBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
 
 ## Target elements
 
 Set a selector in `target` to modify another element. Without a target, the
 plugin changes the trigger element.
 
-```tsx
-<Toggler target='#panel' attribute='class' value='bg-subtle-info'>
-  Toggle panel style
-</Toggler>
-<div id='panel'>Panel</div>
-```
-
 ## Toggle attributes
 
 Set `attribute='aria-expanded'` to toggle an attribute on the target.
-
-```tsx
-<Toggler target='#details' attribute='aria-expanded' value='true'>
-  Toggle details
-</Toggler>
-<div id='details'>Details</div>
-```
 
 ## API
 

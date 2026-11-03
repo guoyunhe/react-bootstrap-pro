@@ -5,6 +5,7 @@ title: Badge
 import 'bootstrap/dist/css/bootstrap.css';
 import { Badge } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { BadgeBasicDemo } from './demos/basic';
 
 # Badge
 
@@ -13,45 +14,22 @@ import { DemoContainer } from '../demo-container';
 ## Example
 
 <DemoContainer>
-  <Badge theme='primary'>New</Badge>{' '}
-  <Badge theme='success' variant='subtle'>
-    Ready
-  </Badge>{' '}
-  <Badge theme='danger' variant='outline'>
-    4
-  </Badge>
+  <BadgeBasicDemo />
 </DemoContainer>
 
-## Variants
+```tsx src='./demos/basic.tsx'
 
-```tsx
-<Badge theme='primary' variant='outline' size='lg'>
-  New
-</Badge>
 ```
+
+## Variants
 
 ## In buttons
 
 Use nearby text to make a badge's meaning clear to assistive technology.
 
-```tsx
-<Button variant='solid' theme='primary'>
-  Notifications <Badge theme='danger'>4</Badge>
-</Button>
-```
-
 ## Positioned indicators
 
 Combine positioning utilities with a badge to place a count on a button.
-
-```tsx
-<Button variant='solid' theme='primary' className='position-relative'>
-  Inbox
-  <Badge theme='danger' className='position-absolute top-0 start-100 translate-middle'>
-    4
-  </Badge>
-</Button>
-```
 
 ## API
 

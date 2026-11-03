@@ -5,6 +5,7 @@ title: Menu
 import 'bootstrap/dist/css/bootstrap.css';
 import { Menu, MenuDivider, MenuHeader, MenuItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { MenuBasicDemo } from './demos/basic';
 
 # Menu
 
@@ -14,46 +15,20 @@ position, toggle, and manage keyboard interaction.
 ## Example
 
 <DemoContainer>
-  <Menu show>
-    <MenuHeader>Actions</MenuHeader>
-    <MenuItem href='/edit'>Edit</MenuItem>
-    <MenuDivider />
-    <MenuItem href='/archive'>Archive</MenuItem>
-  </Menu>
+  <MenuBasicDemo />
 </DemoContainer>
 
-```tsx
-<button type='button' data-bs-toggle='menu' aria-expanded='false'>
-  Actions
-</button>
-<Menu>
-  <MenuHeader>Actions</MenuHeader>
-  <MenuItem href='/edit'>Edit</MenuItem>
-  <MenuDivider />
-  <MenuItem href='/archive'>Archive</MenuItem>
-</Menu>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Translucent
 
 Set `translucent` to apply the translucent surface treatment.
 
-```tsx
-<Menu show translucent>
-  <MenuItem href='/settings'>Settings</MenuItem>
-</Menu>
-```
-
 ## Scrollable
 
 Use `scrollable` when a menu may exceed the available height.
-
-```tsx
-<Menu show scrollable>
-  <MenuItem href='/first'>First action</MenuItem>
-  <MenuItem href='/second'>Second action</MenuItem>
-</Menu>
-```
 
 ## API
 

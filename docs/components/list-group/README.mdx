@@ -5,6 +5,7 @@ title: List group
 import 'bootstrap/dist/css/bootstrap.css';
 import { ListGroup, ListGroupItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ListGroupBasicDemo } from './demos/basic';
 
 # List group
 
@@ -14,21 +15,11 @@ buttons, and use `active` to identify the current selection.
 ## Example
 
 <DemoContainer>
-  <ListGroup>
-    <ListGroupItem active>Current item</ListGroupItem>
-    <ListGroupItem action component='a' href='/next'>
-      Next item
-    </ListGroupItem>
-  </ListGroup>
+  <ListGroupBasicDemo />
 </DemoContainer>
 
-```tsx
-<ListGroup>
-  <ListGroupItem active>Current item</ListGroupItem>
-  <ListGroupItem action component='a' href='/next'>
-    Next item
-  </ListGroupItem>
-</ListGroup>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Flush and numbered
@@ -36,24 +27,10 @@ buttons, and use `active` to identify the current selection.
 Use `flush` to remove the outer border and rounding, or `numbered` to show CSS
 counters.
 
-```tsx
-<ListGroup flush numbered>
-  <ListGroupItem>First step</ListGroupItem>
-  <ListGroupItem>Second step</ListGroupItem>
-</ListGroup>
-```
-
 ## Horizontal
 
 Set `horizontal` to display items in a row, or provide a breakpoint to switch
 the layout responsively.
-
-```tsx
-<ListGroup horizontal='md'>
-  <ListGroupItem>Overview</ListGroupItem>
-  <ListGroupItem>Details</ListGroupItem>
-</ListGroup>
-```
 
 ## API
 

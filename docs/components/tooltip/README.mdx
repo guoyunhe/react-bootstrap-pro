@@ -5,6 +5,7 @@ title: Tooltip
 import 'bootstrap/dist/css/bootstrap.css';
 import { Tooltip, TooltipInner } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { TooltipBasicDemo } from './demos/basic';
 
 # Tooltip
 
@@ -16,37 +17,21 @@ information.
 ## Example
 
 <DemoContainer>
-  <Tooltip show>
-    <TooltipInner>Helpful context</TooltipInner>
-  </Tooltip>
+  <TooltipBasicDemo />
 </DemoContainer>
 
-```tsx
-<Tooltip show placement='top'>
-  <TooltipInner>Helpful context</TooltipInner>
-</Tooltip>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Placement
 
 Set `placement` to `top`, `end`, `bottom`, or `start`.
 
-```tsx
-<Tooltip show placement='end'>
-  <TooltipInner>More information</TooltipInner>
-</Tooltip>
-```
-
 ## Plugin trigger
 
 For Bootstrap-managed tooltips, initialize a native trigger with a title. The
 plugin creates and positions its own tooltip surface.
-
-```tsx
-<button type='button' data-bs-toggle='tooltip' data-bs-title='Helpful context'>
-  More information
-</button>
-```
 
 ## API
 

@@ -17,6 +17,7 @@ import {
   NavbarToggler,
 } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { NavbarBasicDemo } from './demos/basic';
 
 # Navbar
 
@@ -27,55 +28,11 @@ off-canvas navigation.
 ## Example
 
 <DemoContainer>
-  <Navbar expand='md'>
-    <NavbarBrand href='/'>Acme</NavbarBrand>
-    <NavbarToggler
-      aria-controls='primary-nav'
-      data-bs-toggle='drawer'
-      data-bs-target='#primary-nav'
-    />
-    <Drawer id='primary-nav' placement='end' aria-labelledby='primary-nav-title'>
-      <DrawerHeader>
-        <DrawerTitle id='primary-nav-title'>Navigation</DrawerTitle>
-        <CloseButton data-bs-dismiss='drawer' />
-      </DrawerHeader>
-      <DrawerBody>
-        <NavbarNav>
-          <NavItem>
-            <NavLink href='/' active aria-current='page'>
-              Home
-            </NavLink>
-          </NavItem>
-        </NavbarNav>
-      </DrawerBody>
-    </Drawer>
-  </Navbar>
+  <NavbarBasicDemo />
 </DemoContainer>
 
-```tsx
-<Navbar expand='md'>
-  <NavbarBrand href='/'>Acme</NavbarBrand>
-  <NavbarToggler
-    aria-controls='primary-nav'
-    data-bs-toggle='drawer'
-    data-bs-target='#primary-nav'
-  />
-  <Drawer id='primary-nav' placement='end' aria-labelledby='primary-nav-title'>
-    <DrawerHeader>
-      <DrawerTitle id='primary-nav-title'>Navigation</DrawerTitle>
-      <CloseButton data-bs-dismiss='drawer' />
-    </DrawerHeader>
-    <DrawerBody>
-      <NavbarNav>
-        <NavItem>
-          <NavLink href='/' active aria-current='page'>
-            Home
-          </NavLink>
-        </NavItem>
-      </NavbarNav>
-    </DrawerBody>
-  </Drawer>
-</Navbar>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Responsive behavior

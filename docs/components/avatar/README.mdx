@@ -5,6 +5,7 @@ title: Avatar
 import 'bootstrap/dist/css/bootstrap.css';
 import { Avatar, AvatarImage, AvatarStatus } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { AvatarBasicDemo } from './demos/basic';
 
 # Avatar
 
@@ -14,32 +15,14 @@ for displaying initials or grouping an image and optional status indicator.
 ## Example
 
 <DemoContainer>
-  <Avatar size='lg' theme='primary'>
-    AB
-    <AvatarStatus status='online' />
-  </Avatar>
-  <Avatar size='lg'>
-    <AvatarImage src='https://example.com/avatar.png' alt='Alex Brown' />
-  </Avatar>
+  <AvatarBasicDemo />
 </DemoContainer>
 
-```tsx
-<Avatar size='lg' theme='primary'>
-  AB
-  <AvatarStatus status='online' />
-</Avatar>
-<Avatar size='lg'>
-  <AvatarImage src='/images/alex-brown.png' alt='Alex Brown' />
-</Avatar>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Variants
-
-```tsx
-<Avatar size='sm' subtle theme='accent'>
-  AB
-</Avatar>
-```
 
 ## API
 

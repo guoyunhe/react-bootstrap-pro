@@ -5,6 +5,7 @@ title: Stepper
 import 'bootstrap/dist/css/bootstrap.css';
 import { Stepper, StepperItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { StepperBasicDemo } from './demos/basic';
 
 # Stepper
 
@@ -14,23 +15,14 @@ current steps, and use the responsive `horizontal` option when space allows.
 ## Example
 
 <DemoContainer>
-  <Stepper>
-    <StepperItem active>Create account</StepperItem>
-    <StepperItem active aria-current='step'>
-      Confirm email
-    </StepperItem>
-    <StepperItem>Finish</StepperItem>
-  </Stepper>
+  <StepperBasicDemo />
 </DemoContainer>
 
-## Responsive layout
+```tsx src='./demos/basic.tsx'
 
-```tsx
-<Stepper horizontal='md'>
-  <StepperItem active>Step one</StepperItem>
-  <StepperItem>Step two</StepperItem>
-</Stepper>
 ```
+
+## Responsive layout
 
 ## API
 

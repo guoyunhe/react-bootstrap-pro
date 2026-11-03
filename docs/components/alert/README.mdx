@@ -5,6 +5,7 @@ title: Alert
 import 'bootstrap/dist/css/bootstrap.css';
 import { Alert } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { AlertBasicDemo } from './demos/basic';
 
 # Alert
 
@@ -15,52 +16,24 @@ import { DemoContainer } from '../demo-container';
 ## Example
 
 <DemoContainer>
-  <Alert theme='success'>Your changes have been saved.</Alert>
+  <AlertBasicDemo />
 </DemoContainer>
 
-```tsx
-<Alert theme='success' role='status'>
-  Your changes have been saved.
-</Alert>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Variants
-
-```tsx
-<Alert theme='warning' instant>
-  Check the information before continuing.
-</Alert>
-```
 
 ## Links and additional content
 
 Alerts can include links and structured content; keep related content grouped
 inside the alert.
 
-```tsx
-<Alert theme='info'>
-  <h2 className='alert-heading'>Heads up</h2>
-  <p>
-    Read the{' '}
-    <a href='/guide' className='alert-link'>
-      updated guide
-    </a>{' '}
-    before continuing.
-  </p>
-</Alert>
-```
-
 ## Dismiss
 
 Pass Bootstrap's dismiss data attribute to a close button to enable plugin
 dismissal.
-
-```tsx
-<Alert theme='warning'>
-  <span>Check the information before continuing.</span>
-  <CloseButton data-bs-dismiss='alert' />
-</Alert>
-```
 
 ## API
 

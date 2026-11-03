@@ -5,6 +5,7 @@ title: Spinner
 import 'bootstrap/dist/css/bootstrap.css';
 import { Spinner } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { SpinnerBasicDemo } from './demos/basic';
 
 # Spinner
 
@@ -14,15 +15,14 @@ import { DemoContainer } from '../demo-container';
 ## Example
 
 <DemoContainer>
-  <Spinner label='Loading results' />
-  <Spinner variant='grow' size='sm' label='Saving' />
+  <SpinnerBasicDemo />
 </DemoContainer>
 
-## Variants and sizes
+```tsx src='./demos/basic.tsx'
 
-```tsx
-<Spinner variant='border' size='sm' label='Loading' />
 ```
+
+## Variants and sizes
 
 ## API
 

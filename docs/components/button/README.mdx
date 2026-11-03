@@ -5,6 +5,7 @@ title: Button
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ButtonBasicDemo } from './demos/basic';
 import { ButtonBlockDemo } from './demos/block-buttons';
 import { ButtonTagsDemo } from './demos/button-tags';
 import { ButtonCSSVariablesDemo } from './demos/css-variables';
@@ -33,11 +34,11 @@ adds its shared base styles. The React `Button` component always adds `.btn`;
 it only adds variant and theme classes when those props are provided.
 
 <DemoContainer>
-  <Button>{'Base Button'}</Button>
+  <ButtonBasicDemo />
 </DemoContainer>
 
-```tsx
-<Button>Base Button</Button>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Playground
@@ -49,6 +50,10 @@ modifier.
 <DemoContainer>
   <ButtonPlaygroundDemo />
 </DemoContainer>
+
+```tsx src='./demos/playground.tsx'
+
+```
 
 ## Variants
 
@@ -62,19 +67,8 @@ the `.btn` base class.
   <ButtonVariantsDemo />
 </DemoContainer>
 
-```tsx
-<Button variant='solid' theme='primary'>
-  Primary
-</Button>
-<Button variant='outline' theme='primary'>
-  Primary outline
-</Button>
-<Button variant='subtle' theme='success'>
-  Success subtle
-</Button>
-<Button variant='text' theme='secondary'>
-  Secondary text
-</Button>
+```tsx src='./demos/variants.tsx'
+
 ```
 
 Color is only a visual cue. Include visible text that communicates the action
@@ -89,11 +83,8 @@ it, or omit `theme` to use Bootstrap's default link color.
   <ButtonLinkDemo />
 </DemoContainer>
 
-```tsx
-<Button variant='link'>Default link color</Button>
-<Button variant='link' theme='primary'>
-  Primary link color
-</Button>
+```tsx src='./demos/link-buttons.tsx'
+
 ```
 
 ## Styled buttons
@@ -105,10 +96,8 @@ Set `styled` on a solid button to add the gradient and shadow modifier.
   <ButtonStyledDemo />
 </DemoContainer>
 
-```tsx
-<Button variant='solid' theme='primary' styled>
-  Styled primary
-</Button>
+```tsx src='./demos/styled-buttons.tsx'
+
 ```
 
 ## Button tags
@@ -122,18 +111,8 @@ native link semantics.
   <ButtonTagsDemo />
 </DemoContainer>
 
-```tsx
-<Button component='a' variant='solid' theme='primary' href='/settings'>
-  Open settings
-</Button>
-<Button component='a' variant='solid' theme='primary' href='#details' role='button'>
-  Reveal details
-</Button>
-<Button variant='solid' theme='primary' type='button'>
-  Run action
-</Button>
-<input className='btn-solid theme-primary' type='button' value='Input button' />
-<input className='btn-solid theme-secondary' type='submit' value='Submit' />
+```tsx src='./demos/button-tags.tsx'
+
 ```
 
 If an anchor performs an in-page action instead of navigation, add
@@ -149,28 +128,11 @@ Use `size='xs'`, `size='sm'`, or `size='lg'`. Omit `size` for the default.
   <ButtonSizesDemo />
 </DemoContainer>
 
-```tsx
-<Button variant='solid' theme='primary' size='xs'>Extra small</Button>
-<Button variant='solid' theme='primary' size='sm'>Small</Button>
-<Button variant='solid' theme='primary'>Default</Button>
-<Button variant='solid' theme='primary' size='lg'>Large</Button>
+```tsx src='./demos/sizes.tsx'
+
 ```
 
 Use CSS variables for a custom size:
-
-```tsx
-<Button
-  variant='solid'
-  theme='primary'
-  style={{
-    '--bs-btn-padding-y': '.25rem',
-    '--bs-btn-padding-x': '.5rem',
-    '--bs-btn-font-size': '.75rem',
-  }}
->
-  Custom size
-</Button>
-```
 
 ## Icon buttons
 
@@ -182,19 +144,8 @@ button dimensions.
   <ButtonIconDemo />
 </DemoContainer>
 
-```tsx
-<Button variant='solid' theme='primary' className='btn-icon' aria-label='Add item'>
-  <svg
-    width='16'
-    height='16'
-    viewBox='0 0 16 16'
-    fill='none'
-    stroke='currentColor'
-    aria-hidden='true'
-  >
-    <path d='M8 3v10M3 8h10' />
-  </svg>
-</Button>
+```tsx src='./demos/icon-buttons.tsx'
+
 ```
 
 For buttons with text and an icon, keep the text visible and mark decorative
@@ -210,14 +161,8 @@ link from the tab order, and prevents navigation.
   <ButtonDisabledDemo />
 </DemoContainer>
 
-```tsx
-<Button variant='solid' theme='primary' disabled>Saving</Button>
-<Button variant='outline' theme='secondary' disabled>
-  Cancel
-</Button>
-<Button component='a' variant='solid' theme='primary' href='#disabled' disabled>
-  Disabled link
-</Button>
+```tsx src='./demos/disabled-state.tsx'
+
 ```
 
 Disabled anchors retain their `href` but cannot be activated through the
@@ -232,21 +177,8 @@ vertically. Responsive display utilities can change the layout at a breakpoint.
   <ButtonBlockDemo />
 </DemoContainer>
 
-```tsx
-<div className='d-grid gap-2'>
-  <Button variant='solid' theme='primary'>Primary action</Button>
-  <Button variant='outline' theme='secondary'>
-    Secondary action
-  </Button>
-</div>
-<div className='d-grid gap-2 md:d-flex md:justify-content-end'>
-  <Button variant='solid' theme='primary' className='md:me-2'>
-    Responsive primary action
-  </Button>
-  <Button variant='outline' theme='secondary'>
-    Responsive secondary action
-  </Button>
-</div>
+```tsx src='./demos/block-buttons.tsx'
+
 ```
 
 ## Toggle buttons
@@ -263,11 +195,8 @@ Checkbox buttons toggle independently:
   <ButtonInputToggleDemo />
 </DemoContainer>
 
-```tsx
-<Button component='label' variant='solid' theme='primary' check>
-  <input type='checkbox' />
-  Follow
-</Button>
+```tsx src='./demos/input-toggles.tsx'
+
 ```
 
 ### Radios
@@ -286,24 +215,8 @@ use React state instead. The `active` prop applies the `.active` class, while
   <ButtonToggleDemo />
 </DemoContainer>
 
-```tsx
-import { useState } from 'react';
+```tsx src='./demos/toggle-button.tsx'
 
-function ToggleButton() {
-  const [pressed, setPressed] = useState(false);
-
-  return (
-    <Button
-      variant='solid'
-      theme='primary'
-      active={pressed}
-      aria-pressed={pressed}
-      onClick={() => setPressed((value) => !value)}
-    >
-      {pressed ? 'Pressed' : 'Toggle me'}
-    </Button>
-  );
-}
 ```
 
 ### Data attributes and plugin methods
@@ -322,6 +235,10 @@ native `style` prop:
 <DemoContainer>
   <ButtonCSSVariablesDemo />
 </DemoContainer>
+
+```tsx src='./demos/css-variables.tsx'
+
+```
 
 | Variable                                            | Description                     |
 | --------------------------------------------------- | ------------------------------- |

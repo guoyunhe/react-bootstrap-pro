@@ -5,6 +5,7 @@ title: Nav
 import 'bootstrap/dist/css/bootstrap.css';
 import { Nav, NavItem, NavLink } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { NavBasicDemo } from './demos/basic';
 
 # Nav
 
@@ -14,29 +15,11 @@ styles. Use `aria-current="page"` for the current page link.
 ## Example
 
 <DemoContainer>
-  <Nav variant='pills'>
-    <NavItem>
-      <NavLink href='/home' active>
-        Home
-      </NavLink>
-    </NavItem>
-    <NavItem>
-      <NavLink href='/profile'>Profile</NavLink>
-    </NavItem>
-  </Nav>
+  <NavBasicDemo />
 </DemoContainer>
 
-```tsx
-<Nav variant='tabs'>
-  <NavItem>
-    <NavLink href='/home' active aria-current='page'>
-      Home
-    </NavLink>
-  </NavItem>
-  <NavItem>
-    <NavLink href='/profile'>Profile</NavLink>
-  </NavItem>
-</Nav>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Styles and layout
@@ -44,19 +27,6 @@ styles. Use `aria-current="page"` for the current page link.
 `variant` accepts `tabs`, `pills`, or `underline`. Use `orientation='vertical'`
 for a vertical pill navigation; `fill` and `justified` distribute links across
 the available width.
-
-```tsx
-<Nav variant='pills' orientation='vertical'>
-  <NavItem>
-    <NavLink href='/overview' active>
-      Overview
-    </NavLink>
-  </NavItem>
-  <NavItem>
-    <NavLink href='/settings'>Settings</NavLink>
-  </NavItem>
-</Nav>
-```
 
 ## API
 

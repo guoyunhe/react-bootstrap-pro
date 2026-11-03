@@ -5,6 +5,7 @@ title: Nav overflow
 import 'bootstrap/dist/css/bootstrap.css';
 import { Nav, NavItem, NavLink, NavOverflow } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { NavOverflowBasicDemo } from './demos/basic';
 
 # Nav overflow
 
@@ -15,32 +16,11 @@ JavaScript bundle measures the wrapper and moves items that do not fit into a
 ## Example
 
 <DemoContainer>
-  <NavOverflow>
-    <Nav>
-      <NavItem>
-        <NavLink href='/one'>One</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink href='/two'>Two</NavLink>
-      </NavItem>
-    </Nav>
-  </NavOverflow>
+  <NavOverflowBasicDemo />
 </DemoContainer>
 
-```tsx
-<NavOverflow>
-  <Nav variant='pills'>
-    <NavItem>
-      <NavLink href='/one'>One</NavLink>
-    </NavItem>
-    <NavItem>
-      <NavLink href='/two'>Two</NavLink>
-    </NavItem>
-    <NavItem>
-      <NavLink href='/three'>Three</NavLink>
-    </NavItem>
-  </Nav>
-</NavOverflow>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## API

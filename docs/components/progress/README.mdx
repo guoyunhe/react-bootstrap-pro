@@ -5,6 +5,7 @@ title: Progress
 import 'bootstrap/dist/css/bootstrap.css';
 import { Progress, ProgressBar } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ProgressBasicDemo } from './demos/basic';
 
 # Progress
 
@@ -14,18 +15,14 @@ import { DemoContainer } from '../demo-container';
 ## Example
 
 <DemoContainer>
-  <Progress label='Upload' value={65}>
-    <ProgressBar value={65}>65%</ProgressBar>
-  </Progress>
+  <ProgressBasicDemo />
 </DemoContainer>
 
-## Striped and animated
+```tsx src='./demos/basic.tsx'
 
-```tsx
-<Progress label='Upload' value={current} max={total}>
-  <ProgressBar value={current} max={total} striped animated />
-</Progress>
 ```
+
+## Striped and animated
 
 ## API
 

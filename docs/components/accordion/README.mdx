@@ -26,17 +26,8 @@ needed for the core interaction.
   <AccordionBasicDemo />
 </DemoContainer>
 
-```tsx
-<Accordion>
-  <AccordionItem name='faq' open>
-    <AccordionHeader>Accordion Item #1</AccordionHeader>
-    <AccordionBody>First item content</AccordionBody>
-  </AccordionItem>
-  <AccordionItem name='faq'>
-    <AccordionHeader>Accordion Item #2</AccordionHeader>
-    <AccordionBody>Second item content</AccordionBody>
-  </AccordionItem>
-</Accordion>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 The panel transition progressively uses CSS `interpolate-size`. Browsers without
@@ -52,10 +43,8 @@ animation.
   <AccordionCustomIconDemo />
 </DemoContainer>
 
-```tsx
-import { BiPlus } from 'react-bootstrap-icons-pro';
+```tsx src='./demos/custom-icon.tsx'
 
-<AccordionHeader icon={BiPlus}>Custom icon</AccordionHeader>;
 ```
 
 ## Variants
@@ -66,8 +55,8 @@ Set a semantic theme to change the colors of the open item.
   <AccordionVariantsDemo />
 </DemoContainer>
 
-```tsx
-<Accordion theme='primary'>...</Accordion>
+```tsx src='./demos/variants.tsx'
+
 ```
 
 ## Small
@@ -78,8 +67,8 @@ Use the compact size for tighter padding, smaller corners, and smaller text.
   <AccordionSmallDemo />
 </DemoContainer>
 
-```tsx
-<Accordion size='sm'>...</Accordion>
+```tsx src='./demos/small.tsx'
+
 ```
 
 ## Flush
@@ -90,8 +79,8 @@ Remove the outer borders and rounded corners for an edge-to-edge accordion.
   <AccordionFlushDemo />
 </DemoContainer>
 
-```tsx
-<Accordion flush>...</Accordion>
+```tsx src='./demos/flush.tsx'
+
 ```
 
 ## Gap
@@ -102,13 +91,8 @@ Add space between items; each item keeps its own rounded card shape.
   <AccordionGapDemo />
 </DemoContainer>
 
-```tsx
-<Accordion gap>
-  <AccordionItem name='faq' open>
-    <AccordionHeader>Question</AccordionHeader>
-    <AccordionBody>Answer</AccordionBody>
-  </AccordionItem>
-</Accordion>
+```tsx src='./demos/gap.tsx'
+
 ```
 
 ## Always open
@@ -119,11 +103,8 @@ Omit `name` to allow multiple items to stay open at the same time.
   <AccordionAlwaysOpenDemo />
 </DemoContainer>
 
-```tsx
-<Accordion>
-  <AccordionItem open>...</AccordionItem>
-  <AccordionItem open>...</AccordionItem>
-</Accordion>
+```tsx src='./demos/always-open.tsx'
+
 ```
 
 ## Expand and collapse all
@@ -136,20 +117,8 @@ collapsing them.
   <AccordionExpandCollapseDemo />
 </DemoContainer>
 
-```tsx
-function toggleAll(accordion: HTMLElement, expand: boolean) {
-  const items = accordion.querySelectorAll<HTMLDetailsElement>('.accordion-item');
+```tsx src='./demos/expand-collapse.tsx'
 
-  for (const item of items) {
-    if (expand) {
-      item.removeAttribute('name');
-      item.open = true;
-    } else {
-      item.open = false;
-      item.setAttribute('name', 'faq');
-    }
-  }
-}
 ```
 
 ## Nested
@@ -161,17 +130,8 @@ level.
   <AccordionNestedDemo />
 </DemoContainer>
 
-```tsx
-<Accordion>
-  <AccordionItem name='outer'>
-    <AccordionHeader>Parent item</AccordionHeader>
-    <AccordionBody>
-      <Accordion>
-        <AccordionItem name='inner'>...</AccordionItem>
-      </Accordion>
-    </AccordionBody>
-  </AccordionItem>
-</Accordion>
+```tsx src='./demos/nested.tsx'
+
 ```
 
 ## API

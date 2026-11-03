@@ -5,6 +5,7 @@ title: Placeholder
 import 'bootstrap/dist/css/bootstrap.css';
 import { Placeholder, PlaceholderGroup } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { PlaceholderBasicDemo } from './demos/basic';
 
 # Placeholder
 
@@ -14,27 +15,17 @@ import { DemoContainer } from '../demo-container';
 ## Example
 
 <DemoContainer>
-  <PlaceholderGroup animation='wave'>
-    <Placeholder className='w-50' />
-    <Placeholder className='w-75' />
-  </PlaceholderGroup>
+  <PlaceholderBasicDemo />
 </DemoContainer>
 
-```tsx
-<PlaceholderGroup animation='wave' aria-hidden='true'>
-  <Placeholder className='w-50' />
-  <Placeholder className='w-75' />
-</PlaceholderGroup>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Sizing
 
 Use the width utilities to match placeholder proportions to the content they
 replace; `size` changes their height.
-
-```tsx
-<Placeholder size='lg' className='w-50' />
-```
 
 ## API
 

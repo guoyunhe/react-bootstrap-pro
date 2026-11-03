@@ -5,6 +5,7 @@ title: Pagination
 import 'bootstrap/dist/css/bootstrap.css';
 import { PageLink, Pagination, PaginationItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { PaginationBasicDemo } from './demos/basic';
 
 # Pagination
 
@@ -14,39 +15,11 @@ current page with `active` and provide an accessible name for the navigation.
 ## Example
 
 <DemoContainer>
-  <nav aria-label='Search results pages'>
-    <Pagination>
-      <PaginationItem>
-        <PageLink href='/page/1'>1</PageLink>
-      </PaginationItem>
-      <PaginationItem active>
-        <PageLink href='/page/2' active>
-          2
-        </PageLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PageLink href='/page/3'>3</PageLink>
-      </PaginationItem>
-    </Pagination>
-  </nav>
+  <PaginationBasicDemo />
 </DemoContainer>
 
-```tsx
-<nav aria-label='Search results pages'>
-  <Pagination>
-    <PaginationItem>
-      <PageLink href='/page/1'>1</PageLink>
-    </PaginationItem>
-    <PaginationItem active>
-      <PageLink href='/page/2' active aria-current='page'>
-        2
-      </PageLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PageLink href='/page/3'>3</PageLink>
-    </PaginationItem>
-  </Pagination>
-</nav>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Sizes
@@ -56,21 +29,6 @@ Use `size='sm'` or `size='lg'` to change the pagination control size.
 ## Previous and next links
 
 Use descriptive labels when replacing text with symbols or icons.
-
-```tsx
-<Pagination>
-  <PaginationItem>
-    <PageLink href='/page/1' aria-label='Previous page'>
-      ‹
-    </PageLink>
-  </PaginationItem>
-  <PaginationItem>
-    <PageLink href='/page/3' aria-label='Next page'>
-      ›
-    </PageLink>
-  </PaginationItem>
-</Pagination>
-```
 
 ## API
 

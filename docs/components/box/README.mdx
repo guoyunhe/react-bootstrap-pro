@@ -23,12 +23,6 @@ component.
 
 ## Example
 
-```tsx
-<Box bg='primary' fgContrast='primary' p={3}>
-  Content
-</Box>
-```
-
 ## Component
 
 Use `component` to choose the element or React component to render. It defaults
@@ -38,16 +32,8 @@ to `div`, and all native props are inferred from it.
   <BoxComponentDemo />
 </DemoContainer>
 
-```tsx
-<Box component='a' href='/settings' bgSubtle='primary' fgEmphasis='primary'>
-  Settings
-</Box>
-<Box component='blockquote' theme='accent' themeStyle='subtle'>
-  Quoted text
-</Box>
-<Box component={Panel} bg='1' themeBorder>
-  Custom component
-</Box>
+```tsx src='./demos/box-component.tsx'
+
 ```
 
 ## Foreground colors
@@ -61,11 +47,8 @@ color with the page background.
   <BoxForegroundDemo />
 </DemoContainer>
 
-```tsx
-<Box fg='primary'>Primary text</Box>
-<Box fg='2'>Muted text</Box>
-<Box fg='secondary' fgOpacity={50}>50% text</Box>
-<Box bg='success'><Box fgContrast='success'>Readable on success</Box></Box>
+```tsx src='./demos/box-foreground.tsx'
+
 ```
 
 | Prop         | Class            | Values                                                         |
@@ -88,12 +71,8 @@ the page background, and `gradient` adds `.bg-gradient`.
   <BoxBackgroundDemo />
 </DemoContainer>
 
-```tsx
-<Box bg='primary'>Solid background</Box>
-<Box bgSubtle='danger' fgEmphasis='danger'>Subtle background</Box>
-<Box bgMuted='info' fgEmphasis='info'>Muted background</Box>
-<Box bg='inverse' bgOpacity={50}>Half transparent</Box>
-<Box bg='primary' gradient>Gradient background</Box>
+```tsx src='./demos/box-background.tsx'
+
 ```
 
 | Prop        | Class          | Values                                                               |
@@ -114,11 +93,8 @@ than the rest of the page, including the browser's own native controls.
   <BoxColorSchemeDemo />
 </DemoContainer>
 
-```tsx
-<Box colorScheme='dark' bg='body' fg='body'>
-  Dark subtree
-</Box>
-<Box colorScheme='auto'>Follows the system preference</Box>
+```tsx src='./demos/box-color-scheme.tsx'
+
 ```
 
 Use `data-bs-theme` for whole subtrees: it also switches `--shadow-strength`,
@@ -143,13 +119,8 @@ Set `themeBorder` to add `.theme-border` for a border in the theme color, and
   <BoxThemeDemo />
 </DemoContainer>
 
-```tsx
-<Box theme='primary' themeStyle='contrast'>High emphasis</Box>
-<Box theme='primary' themeStyle='subtle' themeBorder>Subtle with border</Box>
-<Box theme='primary'>
-  Inherits primary tokens
-  <Box themeReset>Back to the page theme</Box>
-</Box>
+```tsx src='./demos/box-theme.tsx'
+
 ```
 
 ## Layout and positioning
@@ -164,15 +135,8 @@ no prefix and the later breakpoints use classes such as `.md:d-none`.
   <BoxLayoutDemo />
 </DemoContainer>
 
-```tsx
-<Box aspectRatio='16x9'>16:9 content</Box>
-<Box containerQuery='inline'>Query container</Box>
-<Box display={{ xs: 'none', md: 'block' }}>Hidden below md</Box>
-<Box display='flex' flexWrap='wrap' alignContent={{ xs: 'start', md: 'between' }}>
-  Wrapped flex content
-</Box>
-<Box float={{ sm: 'start', lg: 'end' }}>Responsive float</Box>
-<Box component='img' objectFit='cover' alt='Cover crop' src='/image.jpg' />
+```tsx src='./demos/box-layout.tsx'
+
 ```
 
 | Prop             | Class                    | Values                                                                                                                                                           |
@@ -197,12 +161,6 @@ or `.translate-middle-y`.
 Custom utility classes can still be passed through `className`. They are
 appended after the generated classes, and because Bootstrap utilities share the
 same specificity, the class that appears later in the stylesheet wins.
-
-```tsx
-<Box bg='body' className='p-3 rounded shadow-sm'>
-  Padding, radius, and shadow
-</Box>
-```
 
 ## API
 

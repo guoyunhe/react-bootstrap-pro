@@ -5,6 +5,7 @@ title: Drawer
 import 'bootstrap/dist/css/bootstrap.css';
 import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerTitle } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { DrawerBasicDemo } from './demos/basic';
 
 # Drawer
 
@@ -14,24 +15,11 @@ backdrop, focus management, and placement-aware dismissal.
 ## Example
 
 <DemoContainer>
-  <Drawer open placement='end'>
-    <DrawerHeader>
-      <DrawerTitle>Navigation</DrawerTitle>
-    </DrawerHeader>
-    <DrawerBody>Drawer content</DrawerBody>
-    <DrawerFooter>Footer</DrawerFooter>
-  </Drawer>
+  <DrawerBasicDemo />
 </DemoContainer>
 
-```tsx
-<Drawer open placement='end' aria-labelledby='navigation-title'>
-  <DrawerHeader>
-    <DrawerTitle id='navigation-title'>Navigation</DrawerTitle>
-    <CloseButton data-bs-dismiss='drawer' />
-  </DrawerHeader>
-  <DrawerBody>Drawer content</DrawerBody>
-  <DrawerFooter>Footer</DrawerFooter>
-</Drawer>
+```tsx src='./demos/basic.tsx'
+
 ```
 
 ## Placement
