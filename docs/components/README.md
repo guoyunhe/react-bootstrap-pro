@@ -20,6 +20,7 @@ order: 1
 - [Container](./container/)
 - [Dialog](./dialog/)
 - [Drawer](./drawer/)
+- [Form](./form/)
 - [Grid](./grid/)
 - [List group](./list-group/)
 - [Menu](./menu/)

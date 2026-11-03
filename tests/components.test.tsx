@@ -19,6 +19,11 @@ import {
   CloseButton,
   Dialog,
   Drawer,
+  FormCheck,
+  FormControl,
+  FormField,
+  FormLabel,
+  FormText,
   Nav,
   NavLink,
   PageLink,
@@ -99,6 +104,41 @@ test('renders alert headings through the AlertHeading subcomponent', async () =>
   const heading = screen.getByTestId('alert-heading');
   expect(heading.element().tagName).toBe('H2');
   expect(heading).toHaveClass('alert-heading', 'mb-0');
+});
+
+test('renders form fields, labels, controls, help text and checks', async () => {
+  const screen = await render(
+    <FormField data-testid='field'>
+      <FormLabel htmlFor='form-email' data-testid='label'>
+        Email address
+      </FormLabel>
+      <FormControl
+        id='form-email'
+        type='email'
+        size='lg'
+        aria-describedby='form-email-help'
+        data-testid='control'
+      />
+      <FormText id='form-email-help' data-testid='text'>
+        We’ll never share your email with anyone else.
+      </FormText>
+      <FormCheck id='form-remember' size='sm' data-testid='check' />
+      <FormControl component='select' data-testid='select'>
+        <option>One</option>
+      </FormControl>
+    </FormField>,
+  );
+
+  expect(screen.getByTestId('field')).toHaveClass('form-field');
+  expect(screen.getByTestId('label')).toHaveClass('form-label');
+  expect(screen.getByTestId('label').element()).toHaveAttribute('for', 'form-email');
+  expect(screen.getByTestId('control')).toHaveClass('form-control', 'form-control-lg');
+  expect(screen.getByTestId('control').element()).toHaveAttribute('type', 'email');
+  expect(screen.getByTestId('text')).toHaveClass('form-text');
+  expect(screen.getByTestId('check')).toHaveClass('check', 'check-sm');
+  expect(screen.getByTestId('check').element()).toHaveAttribute('type', 'checkbox');
+  expect(screen.getByTestId('select').element().tagName).toBe('SELECT');
+  expect(screen.getByTestId('select')).toHaveClass('form-control');
 });
 
 test('composes card and carousel structure', async () => {

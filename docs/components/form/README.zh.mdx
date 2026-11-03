@@ -1,0 +1,87 @@
+---
+title: Form 表单
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { FormBasicDemo } from './demos/basic';
+import { FormDisabledDemo } from './demos/disabled';
+
+# Form 表单
+
+Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`、`FormLabel`、
+`FormText` 和 `FormControl` 组合出带标签与帮助文本的控件，`FormCheck` 渲染
+`.check` 复选框。请始终为输入框设置合适的 `type`，以便浏览器提供对应的键盘、
+校验与自动填充行为。
+
+## 基础示例
+
+<DemoContainer>
+  <FormBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+通过修改 `component`，`FormControl` 可用于 `input`、`textarea` 和 `select`。
+`FormText` 渲染 `.form-text` 帮助文本，可配合 `aria-describedby` 关联到控件。
+
+## 禁用表单
+
+为单个控件添加原生 `disabled` 属性，或使用 `fieldset disabled` 禁用一组控件。
+浏览器会忽略禁用 fieldset 内所有原生表单控件的键盘与鼠标交互。
+
+<DemoContainer>
+  <FormDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+禁用的 fieldset 仍需要 `<legend>`，以便辅助技术说明该控件组。
+
+## 无障碍
+
+每个控件都需要可访问名称。最简单的方式是用 `htmlFor` 绑定可见的 `FormLabel`；
+没有可见标签时可用 `aria-label`。帮助文本通过 `aria-describedby` 关联。
+
+## API
+
+### FormControl
+
+| 属性        | 类型           | 说明                                                |
+| ----------- | -------------- | --------------------------------------------------- |
+| `size`      | `'sm' \| 'lg'` | 调整高度、内边距、字号和圆角。                      |
+| `component` | `ElementType`  | 默认渲染 `input`，也可渲染 `textarea` 或 `select`。 |
+| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。                     |
+
+### FormField
+
+| 属性        | 类型          | 说明                            |
+| ----------- | ------------- | ------------------------------- |
+| `component` | `ElementType` | 默认渲染 `div`。                |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+
+### FormLabel
+
+| 属性        | 类型          | 说明                            |
+| ----------- | ------------- | ------------------------------- |
+| `component` | `ElementType` | 默认渲染 `label`。              |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+
+### FormText
+
+| 属性        | 类型          | 说明                                      |
+| ----------- | ------------- | ----------------------------------------- |
+| `component` | `ElementType` | 默认渲染 `div`；行内帮助文本可用 `span`。 |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。           |
+
+### FormCheck
+
+| 属性        | 类型           | 说明                               |
+| ----------- | -------------- | ---------------------------------- |
+| `size`      | `'sm' \| 'lg'` | 调整复选框及其标签的尺寸。         |
+| `component` | `ElementType`  | 默认渲染 `input type='checkbox'`。 |
+| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。    |
