@@ -1,3 +1,6 @@
 allowBuilds:
   '@swc/core': true
   esbuild: true
+minimumReleaseAgeExclude:
+  - '@vited/core@0.4.4'
+  - '@vited/theme-bootstrap@0.1.3'
