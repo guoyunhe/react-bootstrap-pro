@@ -101,3 +101,9 @@ test('respects duplicates, maxChips and disabled state', async () => {
   expect(disabled.querySelector('input')).toHaveProperty('disabled', true);
   expect(disabled.querySelectorAll('.chip-dismiss')[0]).toHaveProperty('disabled', true);
 });
+
+test('applies a validation state to the ghost input', async () => {
+  const screen = await render(<ChipInput id='tags' aria-label='Tags' validation='invalid' />);
+
+  expect(screen.container.querySelector('input')).toHaveClass('form-ghost', 'is-invalid');
+});

@@ -1,0 +1,137 @@
+---
+title: Validation 表单校验
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { ValidationBrowserDefaultsDemo } from './demos/browser-defaults';
+import { ValidationCustomDemo } from './demos/custom';
+import { ValidationServerSideDemo } from './demos/server-side';
+import { ValidationSupportedDemo } from './demos/supported';
+import { ValidationTooltipsDemo } from './demos/tooltips';
+
+# Validation 表单校验
+
+使用 Bootstrap 的表单校验样式为用户提供清晰、可操作的反馈。`Form` 封装了
+`data-bs-validate` 开关与 `aria-invalid` 状态维护，`FormFeedback` 负责渲染反馈文本，
+表单控件则通过 `validation` 属性支持服务端校验状态。
+
+## 工作原理
+
+- **客户端校验**基于 `data-bs-validate` 作用域内的 CSS 伪类。为 `Form` 设置
+  `validation` 即可启用 `:user-invalid` 样式——只有用户与控件交互后才会显示样式，因此
+  必填字段不会在页面加载时就显示为无效。
+- 默认**只显示无效样式**。设置 `validation='valid'` 可同时显示有效样式。
+- **服务端校验**通过控件的 `validation` 属性实现，直接渲染 `.is-valid` 或
+  `.is-invalid`，无需用户交互。
+- 反馈文本使用 `FormFeedback` 渲染 `.invalid-feedback`、`.valid-feedback` 或它们的
+  tooltip 变体。
+- 设置 `validation` 时，`Form` 会自动添加 `novalidate`，用自定义反馈样式替代浏览器
+  提示，并在用户输入时同步更新每个控件的 `aria-invalid`。
+
+## 自定义样式
+
+在 `Form` 上设置 `validation`，并为每个 `FormFeedback` 添加 `id`，让控件通过
+`aria-describedby` 关联反馈文本。为每个字段添加 `required` 并提供针对性的提示。
+
+`Form` 在提交时调用 `checkValidity()`、为每个控件设置 `aria-invalid`，并在存在无效
+字段时阻止提交。
+
+<DemoContainer>
+  <ValidationCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom.tsx'
+
+```
+
+## 浏览器默认行为
+
+如果不需要自定义反馈文本，可以不设置 `validation` 并保持 `noValidate={false}`，交由
+浏览器使用自带的提示气泡进行校验。这些提示的样式随浏览器与操作系统不同，且无法通过
+CSS 定制。
+
+<DemoContainer>
+  <ValidationBrowserDefaultsDemo />
+</DemoContainer>
+
+```tsx src='./demos/browser-defaults.tsx'
+
+```
+
+## 服务端校验
+
+通过 `validation` 属性标记服务端返回的有效与无效字段。`.invalid-feedback` 的用法相同，
+可以同时渲染两种提示，由状态决定显示哪一个。
+
+<DemoContainer>
+  <ValidationServerSideDemo />
+</DemoContainer>
+
+```tsx src='./demos/server-side.tsx'
+
+```
+
+反馈元素必须是控件（或其 `.form-field` 分组）的兄弟节点，CSS 才会显示它。使用浮动标签
+时请传入 `display='block'`，因为反馈位于 `.form-floating` 包装之外。
+
+## 支持的控件
+
+`validation` 覆盖 `FormControl`（包含 textarea 与 select）、`Checkbox`、`Radio`、
+`SwitchInput`、`Range`、`ChipInput`、`Combobox` 与 `OtpInput`。装饰输入框、输入组与
+浮动标签会从内部控件继承状态。
+
+<DemoContainer>
+  <ValidationSupportedDemo />
+</DemoContainer>
+
+```tsx src='./demos/supported.tsx'
+
+```
+
+## Tooltip 提示
+
+在 `FormFeedback` 上设置 `tooltip` 可将提示渲染为 `.tooltip` 而非行内文本。tooltip 基于
+基础 `.tooltip` 样式，适合简单的纵向表单；不建议用于复选框、单选按钮与开关，因为它们
+的定位在多数情况下并不可靠。
+
+<DemoContainer>
+  <ValidationTooltipsDemo />
+</DemoContainer>
+
+```tsx src='./demos/tooltips.tsx'
+
+```
+
+## API
+
+### Form
+
+| 属性         | 类型                 | 说明                                                        |
+| ------------ | -------------------- | ----------------------------------------------------------- |
+| `validation` | `boolean \| 'valid'` | 添加 `data-bs-validate`；`'valid'` 同时显示有效样式。       |
+| `noValidate` | `boolean`            | 禁用浏览器校验，设置 `validation` 时默认为 `true`。         |
+| `onSubmit`   | `FormEventHandler`   | 校验完成后调用；无效时 `event.defaultPrevented` 为 `true`。 |
+| `onInput`    | `FormEventHandler`   | 与内部 `aria-invalid` 更新一同调用。                        |
+| `...props`   | `BoxProps<'form'>`   | 原生表单属性与全部 Box 工具属性。                           |
+
+### FormFeedback
+
+| 属性       | 类型                   | 说明                                                              |
+| ---------- | ---------------------- | ----------------------------------------------------------------- |
+| `type`     | `'valid' \| 'invalid'` | 渲染 `.valid-feedback` 或 `.invalid-feedback`，默认 `'invalid'`。 |
+| `tooltip`  | `boolean`              | 渲染 `.tooltip.valid-tooltip` 或 `.tooltip.invalid-tooltip`。     |
+| `...props` | `BoxProps<'div'>`      | 原生属性（含用于 `aria-describedby` 的 `id`）与 Box 工具属性。    |
+
+### 校验状态
+
+`FormControl`、`Checkbox`、`Radio`、`SwitchInput`、`Range`、`ChipInput`、
+`Combobox` 与 `OtpInput` 都支持 `validation='valid' | 'invalid'`，会在呈现可见边框的
+元素上渲染 `.is-valid` 或 `.is-invalid`。
+
+## 无障碍
+
+通过 `aria-describedby` 将每条反馈文本与对应控件关联，屏幕阅读器会在用户聚焦该字段时
+朗读错误信息。`Form` 在提交时设置 `aria-invalid`，并在用户修正内容时持续同步。对于不
+依赖焦点变化出现的提示，可使用 `aria-live` 或状态元素；同时确保可见标签与反馈文本针对
+具体字段。

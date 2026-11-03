@@ -12,7 +12,7 @@ import type { BoxProps } from './box';
 import { Box } from './box';
 import { Chip, type ChipProps } from './chip';
 import { FormControl } from './form-control';
-import { ClassedBox } from './shared';
+import { ClassedBox, type ValidationState } from './shared';
 
 export type ChipInputChipProps = Omit<
   ChipProps<'span'>,
@@ -28,6 +28,7 @@ type ChipInputOwnProps = {
   maxChips?: number | undefined;
   createOnBlur?: boolean | undefined;
   dismissible?: boolean | undefined;
+  validation?: ValidationState | undefined;
   label?: ReactNode;
   chipProps?: ((value: string, index: number) => ChipInputChipProps) | undefined;
   id?: string | undefined;
@@ -53,6 +54,7 @@ export function ChipInput<C extends ElementType = 'div'>({
   maxChips,
   createOnBlur = true,
   dismissible = true,
+  validation,
   label,
   chipProps,
   id,
@@ -345,6 +347,7 @@ export function ChipInput<C extends ElementType = 'div'>({
         name={name}
         placeholder={placeholder}
         disabled={isDisabled}
+        validation={validation}
         value={draft}
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}

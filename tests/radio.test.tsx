@@ -30,3 +30,9 @@ test('renders radios with sizes, themes and field content', async () => {
   expect(screen.getByTestId('content')).toHaveClass('form-field-content');
   expect(screen.getByTestId('content').element().querySelector('small')).toHaveClass('form-text');
 });
+
+test('applies a validation state', async () => {
+  const screen = await render(<Radio aria-label='Choice' validation='valid' />);
+
+  expect(screen.container.querySelector('input')).toHaveClass('radio', 'is-valid');
+});

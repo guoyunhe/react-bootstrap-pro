@@ -36,3 +36,9 @@ test('renders range tracks with fill, bubble and ticks', async () => {
   expect(wrapper.querySelectorAll('.form-range-tick')).toHaveLength(2);
   expect(wrapper.querySelector('.form-range-tick-label')?.textContent).toBe('Low');
 });
+
+test('applies a validation state to the range input', async () => {
+  const screen = await render(<Range aria-label='Volume' validation='invalid' />);
+
+  expect(screen.container.querySelector('input')).toHaveClass('form-range-input', 'is-invalid');
+});

@@ -168,3 +168,13 @@ test('renders groups, check icons and disabled options', async () => {
   expect(css).toHaveProperty('disabled', true);
   expect(css).toHaveAttribute('aria-disabled', 'true');
 });
+
+test('applies a validation state', async () => {
+  const screen = await render(
+    <Combobox aria-label='Country' options={countries} validation='invalid' />,
+  );
+  const toggle = screen.container.querySelector('.combobox-toggle');
+
+  expect(toggle).toHaveClass('is-invalid');
+  expect(screen.container.firstElementChild).toHaveClass('is-invalid');
+});

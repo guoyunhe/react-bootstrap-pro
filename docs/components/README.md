@@ -49,3 +49,4 @@ order: 1
 - [Toasts](./toasts/)
 - [Toggler](./toggler/)
 - [Tooltip](./tooltip/)
+- [Validation](./validation/)

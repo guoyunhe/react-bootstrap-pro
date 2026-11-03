@@ -21,3 +21,13 @@ test('renders switches with a hidden checkbox control', async () => {
   expect(input.hasAttribute('switch')).toBe(true);
   expect(screen.container.querySelector('label')?.control).toBe(input);
 });
+
+test('applies a validation state to the input', async () => {
+  const screen = await render(
+    <Switch>
+      <SwitchInput aria-label='Subscribe' validation='invalid' />
+    </Switch>,
+  );
+
+  expect(screen.container.querySelector('input')).toHaveClass('is-invalid');
+});

@@ -10,6 +10,7 @@ import { BiCheck, BiChevronDown } from 'react-bootstrap-icons-pro';
 import { Box, type BoxProps } from './box';
 import { FormControl } from './form-control';
 import { Menu, MenuHeader } from './menu';
+import type { ValidationState } from './shared';
 
 export type ComboboxOption = {
   value: string;
@@ -42,6 +43,7 @@ type ComboboxOwnProps = {
   searchPlaceholder?: string | undefined;
   noResults?: ReactNode;
   check?: boolean | undefined;
+  validation?: ValidationState | undefined;
   id?: string | undefined;
   'aria-label'?: string | undefined;
   'aria-labelledby'?: string | undefined;
@@ -74,6 +76,7 @@ export function Combobox({
   searchPlaceholder = 'Search…',
   noResults = 'No results found',
   check = false,
+  validation,
   id,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
@@ -330,7 +333,12 @@ export function Combobox({
   };
 
   return (
-    <Box {...props} ref={rootRef} className={className ?? ''} position='relative'>
+    <Box
+      {...props}
+      ref={rootRef}
+      className={clsx(className, validation && `is-${validation}`)}
+      position='relative'
+    >
       {name && <Box component='input' type='hidden' name={name} value={hiddenValue} readOnly />}
       <Box
         ref={toggleRef}
@@ -342,6 +350,7 @@ export function Combobox({
           'form-control',
           size && `form-control-${size}`,
           'combobox-toggle',
+          validation && `is-${validation}`,
           open && 'show',
         )}
         aria-haspopup='listbox'

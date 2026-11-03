@@ -59,3 +59,20 @@ test('renders plaintext controls without the form-control class', async () => {
   expect(screen.getByTestId('plaintext')).toHaveClass('form-control-plaintext');
   expect(screen.getByTestId('plaintext')).not.toHaveClass('form-control');
 });
+
+test('applies a validation state', async () => {
+  const screen = await render(<FormControl aria-label='Name' validation='invalid' />);
+
+  expect(screen.container.querySelector('input')).toHaveClass('form-control', 'is-invalid');
+});
+
+test('applies a validation state to an adorned control', async () => {
+  const screen = await render(
+    <FormControl component='label' adorn validation='invalid' aria-label='Search'>
+      <FormControl ghost placeholder='Search' aria-label='Search input' />
+    </FormControl>,
+  );
+  const wrapper = screen.container.querySelector('.form-adorn');
+
+  expect(wrapper).toHaveClass('form-control', 'form-adorn', 'is-invalid');
+});

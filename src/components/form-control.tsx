@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type BoxComponentProps, type ValidationState } from './shared';
 
 export type FormControlSize = 'sm' | 'lg';
 
@@ -13,6 +13,8 @@ export type FormControlProps<C extends ElementType = 'input'> = BoxComponentProp
     ghost?: boolean | undefined;
     adorn?: boolean | undefined;
     adornEnd?: boolean | undefined;
+    /** Applies server-side `.is-valid` or `.is-invalid` styling. */
+    validation?: ValidationState | undefined;
   }
 >;
 
@@ -24,6 +26,7 @@ export function FormControl<C extends ElementType = 'input'>({
   ghost,
   adorn,
   adornEnd,
+  validation,
   ...props
 }: FormControlProps<C>) {
   const isAdorn = Boolean(adorn || adornEnd);
@@ -45,6 +48,7 @@ export function FormControl<C extends ElementType = 'input'>({
         size && `form-control-${size}`,
         isAdorn && 'form-adorn',
         adornEnd && 'form-adorn-end',
+        validation && `is-${validation}`,
       )}
       component={component}
       defaultComponent={'input' as C}

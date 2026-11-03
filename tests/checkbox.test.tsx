@@ -26,3 +26,9 @@ test('forwards refs to the underlying control', async () => {
   }
   expect(ref.current?.indeterminate).toBe(true);
 });
+
+test('applies a validation state', async () => {
+  const screen = await render(<Checkbox aria-label='Agree' validation='invalid' />);
+
+  expect(screen.container.querySelector('input')).toHaveClass('check', 'is-invalid');
+});

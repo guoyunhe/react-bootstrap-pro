@@ -3,6 +3,9 @@ import type { ComponentPropsWithRef, ElementType } from 'react';
 
 import { Box, type BoxProps } from './box';
 
+/** Server-side validation state applied as `.is-valid` or `.is-invalid`. */
+export type ValidationState = 'valid' | 'invalid';
+
 export type BoxComponentProps<C extends ElementType, OwnProps extends object = object> = OwnProps &
   Omit<BoxProps<C>, keyof OwnProps>;
 

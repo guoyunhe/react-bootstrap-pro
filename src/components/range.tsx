@@ -1,8 +1,9 @@
+import clsx from 'clsx';
 import type { ChangeEventHandler, CSSProperties, ElementType, FormEventHandler } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import type { BoxProps } from './box';
-import { ClassedBox } from './shared';
+import { ClassedBox, type ValidationState } from './shared';
 
 export type RangeTick = {
   value: number;
@@ -25,6 +26,7 @@ type RangeOwnProps = {
   bubble?: boolean | undefined;
   format?: RangeFormatter | undefined;
   ticks?: readonly RangeTick[] | undefined;
+  validation?: ValidationState | undefined;
   onChange?: ChangeEventHandler<HTMLInputElement> | undefined;
   onInput?: FormEventHandler<HTMLInputElement> | undefined;
   'aria-label'?: string | undefined;
@@ -52,6 +54,7 @@ export function Range<C extends ElementType = 'div'>({
   bubble = false,
   format,
   ticks,
+  validation,
   onChange,
   onInput,
   'aria-label': ariaLabel,
@@ -130,7 +133,7 @@ export function Range<C extends ElementType = 'div'>({
       <input
         ref={inputRef}
         type='range'
-        className='form-range-input'
+        className={clsx('form-range-input', validation && `is-${validation}`)}
         id={id}
         name={name}
         min={min}
