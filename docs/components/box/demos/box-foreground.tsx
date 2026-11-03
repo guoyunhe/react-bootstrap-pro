@@ -1,4 +1,4 @@
-import { Box } from '../../../../src';
+import { Box } from 'react-bootstrap-pro';
 
 const themes = [
   'primary',

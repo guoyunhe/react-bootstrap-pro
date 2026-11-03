@@ -1,4 +1,5 @@
-import { Button } from '../../../../src';
+import { Button } from 'react-bootstrap-pro';
+
 import { AddIcon } from './shared';
 
 export function ButtonIconDemo() {

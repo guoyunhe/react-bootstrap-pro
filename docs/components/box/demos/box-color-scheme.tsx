@@ -1,4 +1,4 @@
-import { Box } from '../../../../src';
+import { Box } from 'react-bootstrap-pro';
 
 const schemes = ['light', 'dark', 'auto'] as const;
 

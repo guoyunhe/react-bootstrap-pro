@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
-
-import { Col, Row } from '../../../../src';
+import { Col, Row } from 'react-bootstrap-pro';
 
 const cards = ['One', 'Two', 'Three', 'Four'];
 

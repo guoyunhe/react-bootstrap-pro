@@ -1,4 +1,4 @@
-import { Container } from '../../../../src';
+import { Container } from 'react-bootstrap-pro';
 
 const breakpoints = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
 

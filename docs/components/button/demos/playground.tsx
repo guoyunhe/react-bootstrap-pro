@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import { Button, type ButtonTheme, type ButtonVariant } from 'react-bootstrap-pro';
 
-import { Button, type ButtonTheme, type ButtonVariant } from '../../../../src';
 import {
   AddIcon,
   ArrowRightIcon,

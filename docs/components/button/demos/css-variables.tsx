@@ -1,6 +1,5 @@
 import type { CSSProperties } from 'react';
-
-import { Button } from '../../../../src';
+import { Button } from 'react-bootstrap-pro';
 
 const compactButtonStyle: CSSProperties & Record<`--${string}`, string> = {
   '--bs-btn-padding-y': '.25rem',

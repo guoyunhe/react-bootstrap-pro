@@ -1,4 +1,4 @@
-import type { ButtonTheme, ButtonVariant } from '../../../../src';
+import type { ButtonTheme, ButtonVariant } from 'react-bootstrap-pro';
 
 export const themeOptions = [
   'primary',

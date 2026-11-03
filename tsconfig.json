@@ -7,6 +7,9 @@
     "moduleDetection": "force",
     "module": "preserve",
     "moduleResolution": "bundler",
+    "paths": {
+      "react-bootstrap-pro": ["./src/index.ts"]
+    },
     "resolveJsonModule": true,
     "types": [],
     "declaration": true,

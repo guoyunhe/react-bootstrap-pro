@@ -1,4 +1,4 @@
-import { Box } from '../../../../src';
+import { Box } from 'react-bootstrap-pro';
 
 const aspectRatios = ['auto', '1x1', '4x3', '16x9', '21x9'] as const;
 

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-import { Button } from '../../../../src';
+import { Button } from 'react-bootstrap-pro';
 
 export function ButtonToggleDemo() {
   const [pressed, setPressed] = useState(false);

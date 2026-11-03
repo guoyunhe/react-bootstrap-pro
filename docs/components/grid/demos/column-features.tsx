@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
-
-import { Col, Row } from '../../../../src';
+import { Col, Row } from 'react-bootstrap-pro';
 
 function GridCell({ children }: { children: ReactNode }) {
   return <div className='h-100 rounded border bg-body-tertiary p-3 text-center'>{children}</div>;

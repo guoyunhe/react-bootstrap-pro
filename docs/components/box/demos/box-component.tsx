@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from 'react';
-
-import { Box } from '../../../../src';
+import { Box } from 'react-bootstrap-pro';
 
 function Panel({ className, ...props }: HTMLAttributes<HTMLElement>) {
   return <section {...props} className={['shadow-sm', className].filter(Boolean).join(' ')} />;

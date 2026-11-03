@@ -1,4 +1,4 @@
-import { Button } from '../../../../src';
+import { Button } from 'react-bootstrap-pro';
 
 export function ButtonSizesDemo() {
   return (
