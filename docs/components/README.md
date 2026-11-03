@@ -33,6 +33,7 @@ order: 1
 - [Nav](./nav/)
 - [Nav overflow](./nav-overflow/)
 - [Navbar](./navbar/)
+- [OTP input](./otp-input/)
 - [Pagination](./pagination/)
 - [Placeholder](./placeholder/)
 - [Popover](./popover/)

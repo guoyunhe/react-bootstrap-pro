@@ -32,6 +32,7 @@ export * from './menu';
 export * from './nav-overflow';
 export * from './navbar';
 export * from './nav';
+export * from './otp-input';
 export * from './pagination';
 export * from './placeholder';
 export * from './popover';

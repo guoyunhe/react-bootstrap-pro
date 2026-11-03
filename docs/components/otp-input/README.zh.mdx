@@ -1,0 +1,186 @@
+---
+title: OTP input 一次性密码输入
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { OtpInputBasicDemo } from './demos/basic';
+import { OtpInputConnectedDemo } from './demos/connected';
+import { OtpInputControlledDemo } from './demos/controlled';
+import { OtpInputDisabledDemo } from './demos/disabled';
+import { OtpInputFieldDemo } from './demos/field';
+import { OtpInputPinDemo } from './demos/pin';
+import { OtpInputSeparatorDemo } from './demos/separator';
+import { OtpInputSizesDemo } from './demos/sizes';
+import { OtpInputTypesDemo } from './demos/types';
+import { OtpInputValidationDemo } from './demos/validation';
+
+# OTP input 一次性密码输入
+
+`OtpInput` 用一个真实的文本输入框承载验证码，并在其上绘制独立的数字格。屏幕阅读器、
+密码管理器与短信自动填充都把它当作一个普通文本框，而用户看到的是熟悉的多格样式。
+字符过滤、覆盖输入、分组、掩码与光标处理全部由 React 实现，无需加载 Bootstrap
+JavaScript 插件。
+
+## 示例
+
+<DemoContainer>
+  <OtpInputBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+值保存在输入框上，因此请用 `aria-label` 或关联的 `<label>` 提供可访问名称。`length`
+设置格子数量与验证码最大长度（默认 6）。
+
+## 连接的输入框
+
+设置 `connected` 可将各格子合并为一个共享边框的整体。
+
+<DemoContainer>
+  <OtpInputConnectedDemo />
+</DemoContainer>
+
+```tsx src='./demos/connected.tsx'
+
+```
+
+## 四位 PIN
+
+较短的验证码可使用更小的 `length`。
+
+<DemoContainer>
+  <OtpInputPinDemo />
+</DemoContainer>
+
+```tsx src='./demos/pin.tsx'
+
+```
+
+## 分组分隔符
+
+传入 `groups` 可按组拆分格子并插入装饰性分隔符，适用于 `123-456` 这类验证码。分隔符
+不属于值的一部分，可用 `separator` 修改分隔字符（默认为 `·`）。
+
+<DemoContainer>
+  <OtpInputSeparatorDemo />
+</DemoContainer>
+
+```tsx src='./demos/separator.tsx'
+
+```
+
+## 尺寸
+
+设置 `size='sm'` 或 `size='lg'` 可改变格子大小。
+
+<DemoContainer>
+  <OtpInputSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## 字母数字与掩码
+
+`type` 支持 `'numeric'`（默认）、`'alphanumeric'` 与 `'alpha'`，并会同时设置对应的
+`inputmode` 与 `pattern`。设置 `mask` 可在格子中显示圆点而仍保留普通文本框，从而不影响
+数字键盘与自动填充。
+
+<DemoContainer>
+  <OtpInputTypesDemo />
+</DemoContainer>
+
+```tsx src='./demos/types.tsx'
+
+```
+
+## 禁用
+
+设置 `disabled` 可禁止交互。
+
+<DemoContainer>
+  <OtpInputDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## 校验状态
+
+设置 `validation='valid'` 或 `validation='invalid'` 可为格子添加校验样式；无效状态还会
+在输入框上暴露 `aria-invalid`。
+
+<DemoContainer>
+  <OtpInputValidationDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation.tsx'
+
+```
+
+## 配合表单标签
+
+用 `FormLabel` 关联输入框，并通过 `aria-describedby` 添加说明文本。
+
+<DemoContainer>
+  <OtpInputFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/field.tsx'
+
+```
+
+## 受控值
+
+使用 `value` 与 `onChange` 实现受控用法，用 `onComplete` 在全部填满时做出响应。
+
+<DemoContainer>
+  <OtpInputControlledDemo />
+</DemoContainer>
+
+```tsx src='./demos/controlled.tsx'
+
+```
+
+## 行为说明
+
+- **支持粘贴**：粘贴 `123-456` 这类带格式的验证码时，会先去除多余字符再应用长度限制。
+- **点击编辑**：点击某个格子会把光标移到该格，但不会越过第一个空格子。
+- **原地覆盖**：在已填写的格子上输入会替换该字符，而不会把后续字符向后推。
+- **自动填充**：短信或密码管理器触发的多字符 `input` 事件会被过滤，光标移动到第一个
+  空格子。
+- **键盘**：方向键、Home、End、Backspace、Delete 与选区行为与普通文本框一致。
+
+## API
+
+| 属性                                            | 类型                                     | 说明                                            |
+| ----------------------------------------------- | ---------------------------------------- | ----------------------------------------------- |
+| `length`                                        | `number`                                 | 格子数量与最大长度，默认 `6`。                  |
+| `type`                                          | `'numeric' \| 'alphanumeric' \| 'alpha'` | 允许的字符，同时设置 `inputmode` 与 `pattern`。 |
+| `mask`                                          | `boolean`                                | 在填入的格子中显示圆点。                        |
+| `groups`                                        | `readonly number[]`                      | 分组大小，用于插入分隔符，如 `[3, 3]`。         |
+| `separator`                                     | `string`                                 | 分组之间的分隔字符，默认 `·`。                  |
+| `connected`                                     | `boolean`                                | 合并格子为共享边框的整体。                      |
+| `size`                                          | `'sm' \| 'lg'`                           | 改变格子大小。                                  |
+| `validation`                                    | `'valid' \| 'invalid'`                   | 为格子添加 `.is-valid` 或 `.is-invalid`。       |
+| `value`                                         | `string`                                 | 受控验证码。                                    |
+| `defaultValue`                                  | `string`                                 | 非受控用法的初始验证码。                        |
+| `onChange`                                      | `(value: string) => void`                | 每次变化时以过滤后的验证码调用。                |
+| `onComplete`                                    | `(value: string) => void`                | 全部格子填满时调用。                            |
+| `name`                                          | `string`                                 | 随表单提交的字段名。                            |
+| `autoComplete`                                  | `string`                                 | 默认为 `one-time-code`。                        |
+| `disabled`、`readOnly`、`required`、`autoFocus` |                                          | 传递给输入框。                                  |
+| `id`、`aria-*`                                  |                                          | 传递给输入框。                                  |
+| `...props`                                      | `BoxProps<'div'>`                        | 容器的 Box 工具属性。                           |
+
+## 无障碍
+
+该控件是单个文本输入框，因此辅助技术只会朗读一个可访问名称、角色与值；可见的格子是
+装饰性的并标记为 `aria-hidden`。输入框会设置 `autocomplete='one-time-code'`、合适的
+`inputmode` 与 `pattern`，从而支持短信自动填充与正确的移动端键盘。复制、粘贴与自动
+填充从不会被阻止，密码管理器可以直接填入验证码。

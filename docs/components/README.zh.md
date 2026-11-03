@@ -27,6 +27,7 @@ order: 1
 - [Nav 导航](./nav/)
 - [Nav overflow 导航溢出](./nav-overflow/)
 - [Navbar 导航栏](./navbar/)
+- [OTP input 一次性密码输入](./otp-input/)
 - [Pagination 分页](./pagination/)
 - [Placeholder 占位符](./placeholder/)
 - [Popover 弹出框](./popover/)
