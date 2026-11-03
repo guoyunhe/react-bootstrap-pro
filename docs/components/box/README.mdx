@@ -9,6 +9,7 @@ import { BoxBackgroundDemo } from './demos/box-background';
 import { BoxColorSchemeDemo } from './demos/box-color-scheme';
 import { BoxComponentDemo } from './demos/box-component';
 import { BoxForegroundDemo } from './demos/box-foreground';
+import { BoxLayoutDemo } from './demos/box-layout';
 import { BoxThemeDemo } from './demos/box-theme';
 
 # Box
@@ -144,11 +145,47 @@ Set `themeBorder` to add `.theme-border` for a border in the theme color, and
 </Box>
 ```
 
-## Other utilities
+## Layout and positioning
 
-Utilities that are not exposed as props can be passed through `className`. They
-are appended after the generated classes, and because Bootstrap utilities share
-the same specificity, the class that appears later in the stylesheet wins.
+`aspectRatio` sets a standard `.ratio-*` ratio, while `containerQuery` makes the
+element an inline-size or size query container. `display`, `float`, and
+`objectFit` also accept responsive values keyed by `xs`, `sm`, `md`, `lg`, `xl`,
+or `2xl`. As in Bootstrap, `xs` has no prefix and the later breakpoints use
+classes such as `.md:d-none`.
+
+<DemoContainer>
+  <BoxLayoutDemo />
+</DemoContainer>
+
+```tsx
+<Box aspectRatio='16x9'>16:9 content</Box>
+<Box containerQuery='inline'>Query container</Box>
+<Box display={{ xs: 'none', md: 'block' }}>Hidden below md</Box>
+<Box float={{ sm: 'start', lg: 'end' }}>Responsive float</Box>
+<Box component='img' objectFit='cover' alt='Cover crop' src='/image.jpg' />
+```
+
+| Prop             | Class                    | Values                                                                                                                                                           |
+| ---------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `aspectRatio`    | `.ratio-*`               | `auto`, `1x1`, `4x3`, `16x9`, `21x9`                                                                                                                             |
+| `containerQuery` | `.contains-*`            | `inline`, `size`                                                                                                                                                 |
+| `display`        | `.d-*`                   | `inline`, `inline-block`, `block`, `grid`, `inline-grid`, `table`, `table-row`, `table-cell`, `flex`, `inline-flex`, `contents`, `flow-root`, `none`; responsive |
+| `float`          | `.float-*`               | `start`, `end`, `none`; responsive                                                                                                                               |
+| `objectFit`      | `.object-fit-*`          | `contain`, `cover`, `fill`, `scale`, `none`; responsive                                                                                                          |
+| `overflow`       | `.overflow-*`            | `auto`, `hidden`, `visible`, `scroll`                                                                                                                            |
+| `overflowX`      | `.overflow-x-*`          | `auto`, `hidden`, `visible`, `scroll`                                                                                                                            |
+| `overflowY`      | `.overflow-y-*`          | `auto`, `hidden`, `visible`, `scroll`                                                                                                                            |
+| `visibility`     | `.visible`, `.invisible` | `visible`, `invisible`                                                                                                                                           |
+| `zIndex`         | `.z-*`                   | `-1`, `0`–`3`, `menu`, `sticky`, `fixed`, `drawer`, `dialog`, `popover`, `tooltip`, `toast`                                                                      |
+
+`position` accepts `static`, `relative`, `absolute`, `fixed`, or `sticky`.
+`top`, `bottom`, `start`, and `end` accept `0`, `50`, or `100`; `translateMiddle`
+accepts `true`, `'x'`, or `'y'` for `.translate-middle`, `.translate-middle-x`,
+or `.translate-middle-y`.
+
+Utilities not exposed as props can be passed through `className`. They are
+appended after the generated classes, and because Bootstrap utilities share the
+same specificity, the class that appears later in the stylesheet wins.
 
 ```tsx
 <Box bg='body' className='p-3 rounded shadow-sm'>
@@ -158,30 +195,55 @@ the same specificity, the class that appears later in the stylesheet wins.
 
 ## API
 
-| Prop          | Type                                | Default | Description                                                               |
-| ------------- | ----------------------------------- | ------- | ------------------------------------------------------------------------- |
-| `component`   | `C extends ElementType`             | `'div'` | Native element or React component to render.                              |
-| `theme`       | `BoxTheme`                          | —       | Applies `.theme-{color}` and cascades that color's tokens to descendants. |
-| `themeStyle`  | `'contrast' \| 'subtle' \| 'muted'` | —       | Applies `.theme-contrast`, `.theme-subtle`, or `.theme-muted`.            |
-| `themeBorder` | `boolean`                           | `false` | Applies `.theme-border`.                                                  |
-| `themeReset`  | `boolean`                           | `false` | Applies `.theme-reset`.                                                   |
-| `colorScheme` | `'light' \| 'dark' \| 'auto'`       | —       | Applies `.color-scheme-{value}`.                                          |
-| `fg`          | `BoxFg`                             | —       | Applies `.fg-{value}`.                                                    |
-| `fgEmphasis`  | `BoxTheme`                          | —       | Applies `.fg-emphasis-{color}`.                                           |
-| `fgContrast`  | `BoxTheme`                          | —       | Applies `.fg-contrast-{color}`.                                           |
-| `fgOpacity`   | `BoxOpacity`                        | —       | Applies `.fg-{opacity}`.                                                  |
-| `bg`          | `BoxBg`                             | —       | Applies `.bg-{value}`.                                                    |
-| `bgSubtle`    | `BoxTheme`                          | —       | Applies `.bg-subtle-{color}`.                                             |
-| `bgMuted`     | `BoxTheme`                          | —       | Applies `.bg-muted-{color}`.                                              |
-| `bgOpacity`   | `BoxOpacity`                        | —       | Applies `.bg-{opacity}`.                                                  |
-| `gradient`    | `boolean`                           | `false` | Applies `.bg-gradient`.                                                   |
-| `className`   | `string`                            | —       | Additional class names appended after the generated classes.              |
-| `...props`    | `ComponentPropsWithoutRef<C>`       | —       | Native props of the selected component, forwarded to it.                  |
+| Prop              | Type                                | Default | Description                                                                   |
+| ----------------- | ----------------------------------- | ------- | ----------------------------------------------------------------------------- |
+| `component`       | `C extends ElementType`             | `'div'` | Native element or React component to render.                                  |
+| `theme`           | `BoxTheme`                          | —       | Applies `.theme-{color}` and cascades that color's tokens to descendants.     |
+| `themeStyle`      | `'contrast' \| 'subtle' \| 'muted'` | —       | Applies `.theme-contrast`, `.theme-subtle`, or `.theme-muted`.                |
+| `themeBorder`     | `boolean`                           | `false` | Applies `.theme-border`.                                                      |
+| `themeReset`      | `boolean`                           | `false` | Applies `.theme-reset`.                                                       |
+| `colorScheme`     | `'light' \| 'dark' \| 'auto'`       | —       | Applies `.color-scheme-{value}`.                                              |
+| `fg`              | `BoxFg`                             | —       | Applies `.fg-{value}`.                                                        |
+| `fgEmphasis`      | `BoxTheme`                          | —       | Applies `.fg-emphasis-{color}`.                                               |
+| `fgContrast`      | `BoxTheme`                          | —       | Applies `.fg-contrast-{color}`.                                               |
+| `fgOpacity`       | `BoxOpacity`                        | —       | Applies `.fg-{opacity}`.                                                      |
+| `bg`              | `BoxBg`                             | —       | Applies `.bg-{value}`.                                                        |
+| `bgSubtle`        | `BoxTheme`                          | —       | Applies `.bg-subtle-{color}`.                                                 |
+| `bgMuted`         | `BoxTheme`                          | —       | Applies `.bg-muted-{color}`.                                                  |
+| `bgOpacity`       | `BoxOpacity`                        | —       | Applies `.bg-{opacity}`.                                                      |
+| `gradient`        | `boolean`                           | `false` | Applies `.bg-gradient`.                                                       |
+| `aspectRatio`     | `BoxAspectRatio`                    | —       | Applies `.ratio-{value}`.                                                     |
+| `containerQuery`  | `BoxContainerQuery`                 | —       | Applies `.contains-{value}`.                                                  |
+| `display`         | `BoxResponsive<BoxDisplay>`         | —       | Applies responsive `.d-{value}` classes.                                      |
+| `float`           | `BoxResponsive<BoxFloat>`           | —       | Applies responsive `.float-{value}` classes.                                  |
+| `objectFit`       | `BoxResponsive<BoxObjectFit>`       | —       | Applies responsive `.object-fit-{value}` classes.                             |
+| `overflow`        | `BoxOverflow`                       | —       | Applies `.overflow-{value}`.                                                  |
+| `overflowX`       | `BoxOverflow`                       | —       | Applies `.overflow-x-{value}`.                                                |
+| `overflowY`       | `BoxOverflow`                       | —       | Applies `.overflow-y-{value}`.                                                |
+| `position`        | `BoxPosition`                       | —       | Applies `.position-{value}`.                                                  |
+| `top`             | `BoxPositionOffset`                 | —       | Applies `.top-{value}`.                                                       |
+| `bottom`          | `BoxPositionOffset`                 | —       | Applies `.bottom-{value}`.                                                    |
+| `start`           | `BoxPositionOffset`                 | —       | Applies `.start-{value}`.                                                     |
+| `end`             | `BoxPositionOffset`                 | —       | Applies `.end-{value}`.                                                       |
+| `translateMiddle` | `boolean \| 'x' \| 'y'`             | `false` | Applies `.translate-middle`, `.translate-middle-x`, or `.translate-middle-y`. |
+| `visibility`      | `BoxVisibility`                     | —       | Applies `.visible` or `.invisible`.                                           |
+| `zIndex`          | `BoxZIndex`                         | —       | Applies `.z-{value}` (`-1` maps to `.z-n1`).                                  |
+| `className`       | `string`                            | —       | Additional class names appended after the generated classes.                  |
+| `...props`        | `ComponentPropsWithoutRef<C>`       | —       | Native props of the selected component, forwarded to it.                      |
 
-`Box`, `BoxProps`, `BoxTheme`, `BoxFg`, `BoxBg`, `BoxOpacity`, `BoxColorScheme`,
-and `BoxThemeStyle` are exported from the package entry point. See the Bootstrap
+`BoxResponsive<T>` accepts one value or a partial map keyed by `xs`, `sm`, `md`,
+`lg`, `xl`, and `2xl`. `Box`, `BoxProps`, and all Box utility types are exported
+from the package entry point. See the Bootstrap
 [colors](https://getbootstrap.com/docs/6.0/utilities/colors/),
 [background](https://getbootstrap.com/docs/6.0/utilities/background/),
 [color scheme](https://getbootstrap.com/docs/6.0/utilities/color-scheme/), and
-[theme](https://getbootstrap.com/docs/6.0/utilities/theme/) documentation for
-the underlying utilities.
+[theme](https://getbootstrap.com/docs/6.0/utilities/theme/),
+[aspect ratio](https://getbootstrap.com/docs/6.0/utilities/aspect-ratio/),
+[container queries](https://getbootstrap.com/docs/6.0/utilities/container-queries/),
+[display](https://getbootstrap.com/docs/6.0/utilities/display/),
+[float](https://getbootstrap.com/docs/6.0/utilities/float/),
+[object fit](https://getbootstrap.com/docs/6.0/utilities/object-fit/),
+[overflow](https://getbootstrap.com/docs/6.0/utilities/overflow/),
+[position](https://getbootstrap.com/docs/6.0/utilities/position/),
+[visibility](https://getbootstrap.com/docs/6.0/utilities/visibility/), and
+[z-index](https://getbootstrap.com/docs/6.0/utilities/z-index/) documentation.

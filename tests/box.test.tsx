@@ -94,6 +94,82 @@ test('applies color scheme utilities', async () => {
   expect(screen.getByTestId('auto')).toHaveClass('color-scheme-auto');
 });
 
+test('applies aspect ratio, container query, and display utilities', async () => {
+  const screen = await render(
+    <>
+      <Box data-testid='ratio' aspectRatio='16x9' />
+      <Box data-testid='container-query' containerQuery='inline' />
+      <Box data-testid='display' display={{ xs: 'none', md: 'block', xl: 'grid' }} />
+      <Box data-testid='display-single' display='inline-flex' />
+    </>,
+  );
+
+  expect(screen.getByTestId('ratio')).toHaveClass('ratio-16x9');
+  expect(screen.getByTestId('container-query')).toHaveClass('contains-inline');
+  expect(screen.getByTestId('display')).toHaveClass('d-none', 'md:d-block', 'xl:d-grid');
+  expect(screen.getByTestId('display-single')).toHaveClass('d-inline-flex');
+});
+
+test('applies responsive float and object-fit utilities', async () => {
+  const screen = await render(
+    <>
+      <Box data-testid='float' float={{ sm: 'start', lg: 'end' }} />
+      <Box data-testid='object-fit' objectFit={{ xs: 'cover', md: 'contain' }} />
+    </>,
+  );
+
+  expect(screen.getByTestId('float')).toHaveClass('sm:float-start', 'lg:float-end');
+  expect(screen.getByTestId('object-fit')).toHaveClass('object-fit-cover', 'md:object-fit-contain');
+});
+
+test('applies overflow and positioning utilities', async () => {
+  const screen = await render(
+    <>
+      <Box data-testid='overflow' overflow='hidden' overflowX='auto' overflowY='scroll' />
+      <Box data-testid='position' position='absolute' top={0} end={100} translateMiddle='x' />
+      <Box
+        data-testid='position-offsets'
+        position='relative'
+        bottom={50}
+        start={0}
+        translateMiddle
+      />
+    </>,
+  );
+
+  expect(screen.getByTestId('overflow')).toHaveClass(
+    'overflow-hidden',
+    'overflow-x-auto',
+    'overflow-y-scroll',
+  );
+  expect(screen.getByTestId('position')).toHaveClass(
+    'position-absolute',
+    'top-0',
+    'end-100',
+    'translate-middle-x',
+  );
+  expect(screen.getByTestId('position-offsets')).toHaveClass(
+    'position-relative',
+    'bottom-50',
+    'start-0',
+    'translate-middle',
+  );
+});
+
+test('applies visibility and z-index utilities', async () => {
+  const screen = await render(
+    <>
+      <Box data-testid='visible' visibility='visible' zIndex='tooltip' />
+      <Box data-testid='invisible' visibility='invisible' zIndex={-1} />
+      <Box data-testid='z-index-number' zIndex={3} />
+    </>,
+  );
+
+  expect(screen.getByTestId('visible')).toHaveClass('visible', 'z-tooltip');
+  expect(screen.getByTestId('invisible')).toHaveClass('invisible', 'z-n1');
+  expect(screen.getByTestId('z-index-number')).toHaveClass('z-3');
+});
+
 test('merges custom classes after utility classes', async () => {
   const screen = await render(<Box data-testid='box' bg='body' className='p-3 rounded' />);
 

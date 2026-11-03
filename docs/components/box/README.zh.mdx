@@ -9,6 +9,7 @@ import { BoxBackgroundDemo } from './demos/box-background';
 import { BoxColorSchemeDemo } from './demos/box-color-scheme';
 import { BoxComponentDemo } from './demos/box-component';
 import { BoxForegroundDemo } from './demos/box-foreground';
+import { BoxLayoutDemo } from './demos/box-layout';
 import { BoxThemeDemo } from './demos/box-theme';
 
 # Box 盒子
@@ -142,9 +143,44 @@ import { BoxThemeDemo } from './demos/box-theme';
 </Box>
 ```
 
-## 其他工具类
+## 布局与定位
 
-没有提供对应属性的工具类可以通过 `className` 传入。它们会被追加在生成的类名之后；
+`aspectRatio` 设置标准 `.ratio-*` 比例；`containerQuery` 将元素设为内联尺寸或双向
+尺寸查询容器。`display`、`float` 和 `objectFit` 还支持以 `xs`、`sm`、`md`、`lg`、
+`xl` 或 `2xl` 为键的响应式值。与 Bootstrap 一致，`xs` 不带断点前缀，其余断点生成
+`.md:d-none` 这样的类名。
+
+<DemoContainer>
+  <BoxLayoutDemo />
+</DemoContainer>
+
+```tsx
+<Box aspectRatio='16x9'>16:9 内容</Box>
+<Box containerQuery='inline'>查询容器</Box>
+<Box display={{ xs: 'none', md: 'block' }}>小于 md 时隐藏</Box>
+<Box float={{ sm: 'start', lg: 'end' }}>响应式浮动</Box>
+<Box component='img' objectFit='cover' alt='裁剪填充' src='/image.jpg' />
+```
+
+| 属性             | 类名                     | 取值                                                                                                                                                             |
+| ---------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `aspectRatio`    | `.ratio-*`               | `auto`、`1x1`、`4x3`、`16x9`、`21x9`                                                                                                                             |
+| `containerQuery` | `.contains-*`            | `inline`、`size`                                                                                                                                                 |
+| `display`        | `.d-*`                   | `inline`、`inline-block`、`block`、`grid`、`inline-grid`、`table`、`table-row`、`table-cell`、`flex`、`inline-flex`、`contents`、`flow-root`、`none`；支持响应式 |
+| `float`          | `.float-*`               | `start`、`end`、`none`；支持响应式                                                                                                                               |
+| `objectFit`      | `.object-fit-*`          | `contain`、`cover`、`fill`、`scale`、`none`；支持响应式                                                                                                          |
+| `overflow`       | `.overflow-*`            | `auto`、`hidden`、`visible`、`scroll`                                                                                                                            |
+| `overflowX`      | `.overflow-x-*`          | `auto`、`hidden`、`visible`、`scroll`                                                                                                                            |
+| `overflowY`      | `.overflow-y-*`          | `auto`、`hidden`、`visible`、`scroll`                                                                                                                            |
+| `visibility`     | `.visible`、`.invisible` | `visible`、`invisible`                                                                                                                                           |
+| `zIndex`         | `.z-*`                   | `-1`、`0`–`3`、`menu`、`sticky`、`fixed`、`drawer`、`dialog`、`popover`、`tooltip`、`toast`                                                                      |
+
+`position` 接受 `static`、`relative`、`absolute`、`fixed` 或 `sticky`。`top`、
+`bottom`、`start` 和 `end` 接受 `0`、`50` 或 `100`；`translateMiddle` 接受 `true`、
+`'x'` 或 `'y'`，分别生成 `.translate-middle`、`.translate-middle-x` 或
+`.translate-middle-y`。
+
+未提供对应属性的工具类仍可通过 `className` 传入。它们会被追加在生成的类名之后；
 Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效。
 
 ```tsx
@@ -155,29 +191,54 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 
 ## API
 
-| 属性          | 类型                                | 默认值  | 说明                                                        |
-| ------------- | ----------------------------------- | ------- | ----------------------------------------------------------- |
-| `component`   | `C extends ElementType`             | `'div'` | 渲染的原生元素或 React 组件。                               |
-| `theme`       | `BoxTheme`                          | —       | 添加 `.theme-{color}`，并向其后代传递该颜色的变量。         |
-| `themeStyle`  | `'contrast' \| 'subtle' \| 'muted'` | —       | 添加 `.theme-contrast`、`.theme-subtle` 或 `.theme-muted`。 |
-| `themeBorder` | `boolean`                           | `false` | 添加 `.theme-border`。                                      |
-| `themeReset`  | `boolean`                           | `false` | 添加 `.theme-reset`。                                       |
-| `colorScheme` | `'light' \| 'dark' \| 'auto'`       | —       | 添加 `.color-scheme-{value}`。                              |
-| `fg`          | `BoxFg`                             | —       | 添加 `.fg-{value}`。                                        |
-| `fgEmphasis`  | `BoxTheme`                          | —       | 添加 `.fg-emphasis-{color}`。                               |
-| `fgContrast`  | `BoxTheme`                          | —       | 添加 `.fg-contrast-{color}`。                               |
-| `fgOpacity`   | `BoxOpacity`                        | —       | 添加 `.fg-{opacity}`。                                      |
-| `bg`          | `BoxBg`                             | —       | 添加 `.bg-{value}`。                                        |
-| `bgSubtle`    | `BoxTheme`                          | —       | 添加 `.bg-subtle-{color}`。                                 |
-| `bgMuted`     | `BoxTheme`                          | —       | 添加 `.bg-muted-{color}`。                                  |
-| `bgOpacity`   | `BoxOpacity`                        | —       | 添加 `.bg-{opacity}`。                                      |
-| `gradient`    | `boolean`                           | `false` | 添加 `.bg-gradient`。                                       |
-| `className`   | `string`                            | —       | 追加在生成类名之后的额外类名。                              |
-| `...props`    | `ComponentPropsWithoutRef<C>`       | —       | 所选组件的原生属性，会透传给它。                            |
+| 属性              | 类型                                | 默认值  | 说明                                                                       |
+| ----------------- | ----------------------------------- | ------- | -------------------------------------------------------------------------- |
+| `component`       | `C extends ElementType`             | `'div'` | 渲染的原生元素或 React 组件。                                              |
+| `theme`           | `BoxTheme`                          | —       | 添加 `.theme-{color}`，并向其后代传递该颜色的变量。                        |
+| `themeStyle`      | `'contrast' \| 'subtle' \| 'muted'` | —       | 添加 `.theme-contrast`、`.theme-subtle` 或 `.theme-muted`。                |
+| `themeBorder`     | `boolean`                           | `false` | 添加 `.theme-border`。                                                     |
+| `themeReset`      | `boolean`                           | `false` | 添加 `.theme-reset`。                                                      |
+| `colorScheme`     | `'light' \| 'dark' \| 'auto'`       | —       | 添加 `.color-scheme-{value}`。                                             |
+| `fg`              | `BoxFg`                             | —       | 添加 `.fg-{value}`。                                                       |
+| `fgEmphasis`      | `BoxTheme`                          | —       | 添加 `.fg-emphasis-{color}`。                                              |
+| `fgContrast`      | `BoxTheme`                          | —       | 添加 `.fg-contrast-{color}`。                                              |
+| `fgOpacity`       | `BoxOpacity`                        | —       | 添加 `.fg-{opacity}`。                                                     |
+| `bg`              | `BoxBg`                             | —       | 添加 `.bg-{value}`。                                                       |
+| `bgSubtle`        | `BoxTheme`                          | —       | 添加 `.bg-subtle-{color}`。                                                |
+| `bgMuted`         | `BoxTheme`                          | —       | 添加 `.bg-muted-{color}`。                                                 |
+| `bgOpacity`       | `BoxOpacity`                        | —       | 添加 `.bg-{opacity}`。                                                     |
+| `gradient`        | `boolean`                           | `false` | 添加 `.bg-gradient`。                                                      |
+| `aspectRatio`     | `BoxAspectRatio`                    | —       | 添加 `.ratio-{value}`。                                                    |
+| `containerQuery`  | `BoxContainerQuery`                 | —       | 添加 `.contains-{value}`。                                                 |
+| `display`         | `BoxResponsive<BoxDisplay>`         | —       | 添加响应式 `.d-{value}` 类。                                               |
+| `float`           | `BoxResponsive<BoxFloat>`           | —       | 添加响应式 `.float-{value}` 类。                                           |
+| `objectFit`       | `BoxResponsive<BoxObjectFit>`       | —       | 添加响应式 `.object-fit-{value}` 类。                                      |
+| `overflow`        | `BoxOverflow`                       | —       | 添加 `.overflow-{value}`。                                                 |
+| `overflowX`       | `BoxOverflow`                       | —       | 添加 `.overflow-x-{value}`。                                               |
+| `overflowY`       | `BoxOverflow`                       | —       | 添加 `.overflow-y-{value}`。                                               |
+| `position`        | `BoxPosition`                       | —       | 添加 `.position-{value}`。                                                 |
+| `top`             | `BoxPositionOffset`                 | —       | 添加 `.top-{value}`。                                                      |
+| `bottom`          | `BoxPositionOffset`                 | —       | 添加 `.bottom-{value}`。                                                   |
+| `start`           | `BoxPositionOffset`                 | —       | 添加 `.start-{value}`。                                                    |
+| `end`             | `BoxPositionOffset`                 | —       | 添加 `.end-{value}`。                                                      |
+| `translateMiddle` | `boolean \| 'x' \| 'y'`             | `false` | 添加 `.translate-middle`、`.translate-middle-x` 或 `.translate-middle-y`。 |
+| `visibility`      | `BoxVisibility`                     | —       | 添加 `.visible` 或 `.invisible`。                                          |
+| `zIndex`          | `BoxZIndex`                         | —       | 添加 `.z-{value}`（`-1` 对应 `.z-n1`）。                                   |
+| `className`       | `string`                            | —       | 追加在生成类名之后的额外类名。                                             |
+| `...props`        | `ComponentPropsWithoutRef<C>`       | —       | 所选组件的原生属性，会透传给它。                                           |
 
-`Box`、`BoxProps`、`BoxTheme`、`BoxFg`、`BoxBg`、`BoxOpacity`、
-`BoxColorScheme` 和 `BoxThemeStyle` 都从包的入口导出。底层工具类请参阅 Bootstrap
+`BoxResponsive<T>` 接受单个值，或以 `xs`、`sm`、`md`、`lg`、`xl`、`2xl` 为键的部分
+映射。`Box`、`BoxProps` 和全部 Box 工具类类型都从包的入口导出。底层工具类请参阅 Bootstrap
 的[颜色](https://getbootstrap.com/docs/6.0/utilities/colors/)、
 [背景](https://getbootstrap.com/docs/6.0/utilities/background/)、
-[色彩方案](https://getbootstrap.com/docs/6.0/utilities/color-scheme/)和
-[主题](https://getbootstrap.com/docs/6.0/utilities/theme/)文档。
+[色彩方案](https://getbootstrap.com/docs/6.0/utilities/color-scheme/)、
+[主题](https://getbootstrap.com/docs/6.0/utilities/theme/)、
+[纵横比](https://getbootstrap.com/docs/6.0/utilities/aspect-ratio/)、
+[容器查询](https://getbootstrap.com/docs/6.0/utilities/container-queries/)、
+[显示](https://getbootstrap.com/docs/6.0/utilities/display/)、
+[浮动](https://getbootstrap.com/docs/6.0/utilities/float/)、
+[对象适配](https://getbootstrap.com/docs/6.0/utilities/object-fit/)、
+[溢出](https://getbootstrap.com/docs/6.0/utilities/overflow/)、
+[定位](https://getbootstrap.com/docs/6.0/utilities/position/)、
+[可见性](https://getbootstrap.com/docs/6.0/utilities/visibility/)和
+[z-index](https://getbootstrap.com/docs/6.0/utilities/z-index/)文档。

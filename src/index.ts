@@ -1,12 +1,24 @@
 export { Box } from './box';
 export type {
+  BoxAspectRatio,
   BoxBg,
+  BoxBreakpoint,
   BoxColorScheme,
+  BoxContainerQuery,
+  BoxDisplay,
   BoxFg,
+  BoxFloat,
+  BoxObjectFit,
+  BoxOverflow,
   BoxOpacity,
+  BoxPosition,
+  BoxPositionOffset,
   BoxProps,
+  BoxResponsive,
   BoxTheme,
   BoxThemeStyle,
+  BoxVisibility,
+  BoxZIndex,
 } from './box';
 export { Button } from './button';
 export type { ButtonProps, ButtonTheme, ButtonVariant } from './button';
