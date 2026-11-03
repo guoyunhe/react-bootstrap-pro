@@ -8,6 +8,7 @@ import {
   AccordionHeader,
   AccordionItem,
   Alert,
+  AlertHeading,
   Avatar,
   AvatarStatus,
   Badge,
@@ -84,6 +85,20 @@ test('provides component modifiers and preserves custom tags', async () => {
     'status-online',
   );
   expect(screen.getByTestId('badge')).toHaveClass('badge', 'badge-outline', 'theme-primary');
+});
+
+test('renders alert headings through the AlertHeading subcomponent', async () => {
+  const screen = await render(
+    <Alert theme='success'>
+      <AlertHeading component='h2' marginBottom={0} data-testid='alert-heading'>
+        Well done!
+      </AlertHeading>
+    </Alert>,
+  );
+
+  const heading = screen.getByTestId('alert-heading');
+  expect(heading.element().tagName).toBe('H2');
+  expect(heading).toHaveClass('alert-heading', 'mb-0');
 });
 
 test('composes card and carousel structure', async () => {

@@ -67,7 +67,9 @@ Use `.alert-link` to style a link in contextually themed alerts.
 
 ## Additional content
 
-Alerts can contain headings, paragraphs, and dividers.
+Alerts can also contain additional HTML elements like headings, paragraphs and
+dividers. `AlertHeading` renders the `.alert-heading` heading and defaults to an
+`h4` element. Alerts are flex containers, so stack the content in a flex column.
 
 <DemoContainer>
   <AlertAdditionalContentDemo />
@@ -111,6 +113,9 @@ dismissal.
 | `theme`     | Bootstrap theme literal | Sets contextual theme colors.           |
 | `component` | `ElementType`           | Changes the root element.               |
 | `...props`  | `BoxProps<C>`           | Native props and all Box utility props. |
+
+`AlertHeading` provides the `.alert-heading` class; use its `component` prop to
+change the heading level.
 
 ## Accessibility
 

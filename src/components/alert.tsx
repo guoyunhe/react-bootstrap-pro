@@ -26,3 +26,21 @@ export function Alert<C extends ElementType = 'div'>({
     />
   );
 }
+
+export type AlertHeadingProps<C extends ElementType = 'h4'> = BoxComponentProps<C>;
+
+export function AlertHeading<C extends ElementType = 'h4'>({
+  component,
+  className,
+  ...props
+}: AlertHeadingProps<C>) {
+  return (
+    <ClassedBox<C>
+      {...props}
+      baseClass='alert-heading'
+      component={component}
+      defaultComponent={'h4' as C}
+      className={className}
+    />
+  );
+}
