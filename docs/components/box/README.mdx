@@ -1,0 +1,187 @@
+---
+title: Box
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Box } from '../../../src';
+import { DemoContainer } from '../demo-container';
+import { BoxBackgroundDemo } from './demos/box-background';
+import { BoxColorSchemeDemo } from './demos/box-color-scheme';
+import { BoxComponentDemo } from './demos/box-component';
+import { BoxForegroundDemo } from './demos/box-foreground';
+import { BoxThemeDemo } from './demos/box-theme';
+
+# Box
+
+`Box` renders a single element and turns Bootstrap 6's color utilities into
+typed props. Every other component in this library is built on top of `Box` and
+accepts the same props, so colors, backgrounds, color schemes, and theme tokens
+work the same way everywhere.
+
+Import Bootstrap's stylesheet once in your application before using the
+component.
+
+## Component
+
+Use `component` to choose the element or React component to render. It defaults
+to `div`, and all native props are inferred from it.
+
+<DemoContainer>
+  <BoxComponentDemo />
+</DemoContainer>
+
+```tsx
+<Box component='a' href='/settings' bgSubtle='primary' fgEmphasis='primary'>
+  Settings
+</Box>
+<Box component='blockquote' theme='accent' themeStyle='subtle'>
+  Quoted text
+</Box>
+<Box component={Panel} bg='1' themeBorder>
+  Custom component
+</Box>
+```
+
+## Foreground colors
+
+`fg` sets `.fg-{color}` for theme and neutral token colors, `fgEmphasis` sets
+`.fg-emphasis-{color}`, and `fgContrast` sets `.fg-contrast-{color}` for text
+placed on a solid theme background. `fgOpacity` mixes the current foreground
+color with the page background.
+
+<DemoContainer>
+  <BoxForegroundDemo />
+</DemoContainer>
+
+```tsx
+<Box fg='primary'>Primary text</Box>
+<Box fg='2'>Muted text</Box>
+<Box fg='secondary' fgOpacity={50}>50% text</Box>
+<Box bg='success'><Box fgContrast='success'>Readable on success</Box></Box>
+```
+
+| Prop         | Class            | Values                                                         |
+| ------------ | ---------------- | -------------------------------------------------------------- |
+| `fg`         | `.fg-*`          | theme colors, `body`, `1`–`4`, `bg`, `white`, `black`, `reset` |
+| `fgEmphasis` | `.fg-emphasis-*` | theme colors                                                   |
+| `fgContrast` | `.fg-contrast-*` | theme colors                                                   |
+| `fgOpacity`  | `.fg-*`          | `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`    |
+
+The theme colors are `primary`, `accent`, `secondary`, `success`, `danger`,
+`warning`, `info`, and `inverse`.
+
+## Backgrounds
+
+`bg` sets `.bg-{color}`, `bgSubtle` sets `.bg-subtle-{color}`, and `bgMuted`
+sets `.bg-muted-{color}`. `bgOpacity` mixes the current background color with
+the page background, and `gradient` adds `.bg-gradient`.
+
+<DemoContainer>
+  <BoxBackgroundDemo />
+</DemoContainer>
+
+```tsx
+<Box bg='primary'>Solid background</Box>
+<Box bgSubtle='danger' fgEmphasis='danger'>Subtle background</Box>
+<Box bgMuted='info' fgEmphasis='info'>Muted background</Box>
+<Box bg='inverse' bgOpacity={50}>Half transparent</Box>
+<Box bg='primary' gradient>Gradient background</Box>
+```
+
+| Prop        | Class          | Values                                                               |
+| ----------- | -------------- | -------------------------------------------------------------------- |
+| `bg`        | `.bg-*`        | theme colors, `body`, `1`–`4`, `fg`, `white`, `black`, `transparent` |
+| `bgSubtle`  | `.bg-subtle-*` | theme colors                                                         |
+| `bgMuted`   | `.bg-muted-*`  | theme colors                                                         |
+| `bgOpacity` | `.bg-*`        | `10`, `20`, `30`, `40`, `50`, `60`, `70`, `80`, `90`, `100`          |
+| `gradient`  | `.bg-gradient` | `boolean`                                                            |
+
+## Color scheme
+
+`colorScheme` sets `.color-scheme-{light|dark|auto}`. Bootstrap resolves its
+color tokens with `light-dark()`, so a single element can use a different scheme
+than the rest of the page, including the browser's own native controls.
+
+<DemoContainer>
+  <BoxColorSchemeDemo />
+</DemoContainer>
+
+```tsx
+<Box colorScheme='dark' bg='body' fg='body'>
+  Dark subtree
+</Box>
+<Box colorScheme='auto'>Follows the system preference</Box>
+```
+
+Use `data-bs-theme` for whole subtrees: it also switches `--shadow-strength`,
+while `colorScheme` leaves the shadow strength of the parent untouched.
+
+## Theme
+
+`theme` sets `.theme-{color}` and exposes that color's tokens as CSS variables
+to the element and its descendants. Pair it with `themeStyle` to apply a
+predefined combination of background and foreground colors:
+
+| `themeStyle` | Class             | Result                                                       |
+| ------------ | ----------------- | ------------------------------------------------------------ |
+| `contrast`   | `.theme-contrast` | Solid theme background with the matching contrast text.      |
+| `subtle`     | `.theme-subtle`   | Subtle theme background with the theme foreground color.     |
+| `muted`      | `.theme-muted`    | Muted theme background with the emphasized foreground color. |
+
+Set `themeBorder` to add `.theme-border` for a border in the theme color, and
+`themeReset` to add `.theme-reset` so a subtree drops the inherited theme.
+
+<DemoContainer>
+  <BoxThemeDemo />
+</DemoContainer>
+
+```tsx
+<Box theme='primary' themeStyle='contrast'>High emphasis</Box>
+<Box theme='primary' themeStyle='subtle' themeBorder>Subtle with border</Box>
+<Box theme='primary'>
+  Inherits primary tokens
+  <Box themeReset>Back to the page theme</Box>
+</Box>
+```
+
+## Other utilities
+
+Utilities that are not exposed as props can be passed through `className`. They
+are appended after the generated classes, and because Bootstrap utilities share
+the same specificity, the class that appears later in the stylesheet wins.
+
+```tsx
+<Box bg='body' className='p-3 rounded shadow-sm'>
+  Padding, radius, and shadow
+</Box>
+```
+
+## API
+
+| Prop          | Type                                | Default | Description                                                               |
+| ------------- | ----------------------------------- | ------- | ------------------------------------------------------------------------- |
+| `component`   | `C extends ElementType`             | `'div'` | Native element or React component to render.                              |
+| `theme`       | `BoxTheme`                          | —       | Applies `.theme-{color}` and cascades that color's tokens to descendants. |
+| `themeStyle`  | `'contrast' \| 'subtle' \| 'muted'` | —       | Applies `.theme-contrast`, `.theme-subtle`, or `.theme-muted`.            |
+| `themeBorder` | `boolean`                           | `false` | Applies `.theme-border`.                                                  |
+| `themeReset`  | `boolean`                           | `false` | Applies `.theme-reset`.                                                   |
+| `colorScheme` | `'light' \| 'dark' \| 'auto'`       | —       | Applies `.color-scheme-{value}`.                                          |
+| `fg`          | `BoxFg`                             | —       | Applies `.fg-{value}`.                                                    |
+| `fgEmphasis`  | `BoxTheme`                          | —       | Applies `.fg-emphasis-{color}`.                                           |
+| `fgContrast`  | `BoxTheme`                          | —       | Applies `.fg-contrast-{color}`.                                           |
+| `fgOpacity`   | `BoxOpacity`                        | —       | Applies `.fg-{opacity}`.                                                  |
+| `bg`          | `BoxBg`                             | —       | Applies `.bg-{value}`.                                                    |
+| `bgSubtle`    | `BoxTheme`                          | —       | Applies `.bg-subtle-{color}`.                                             |
+| `bgMuted`     | `BoxTheme`                          | —       | Applies `.bg-muted-{color}`.                                              |
+| `bgOpacity`   | `BoxOpacity`                        | —       | Applies `.bg-{opacity}`.                                                  |
+| `gradient`    | `boolean`                           | `false` | Applies `.bg-gradient`.                                                   |
+| `className`   | `string`                            | —       | Additional class names appended after the generated classes.              |
+| `...props`    | `ComponentPropsWithoutRef<C>`       | —       | Native props of the selected component, forwarded to it.                  |
+
+`Box`, `BoxProps`, `BoxTheme`, `BoxFg`, `BoxBg`, `BoxOpacity`, `BoxColorScheme`,
+and `BoxThemeStyle` are exported from the package entry point. See the Bootstrap
+[colors](https://getbootstrap.com/docs/6.0/utilities/colors/),
+[background](https://getbootstrap.com/docs/6.0/utilities/background/),
+[color scheme](https://getbootstrap.com/docs/6.0/utilities/color-scheme/), and
+[theme](https://getbootstrap.com/docs/6.0/utilities/theme/) documentation for
+the underlying utilities.

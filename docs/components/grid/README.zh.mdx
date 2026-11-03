@@ -1,6 +1,5 @@
 ---
 title: Grid 网格
-order: 3
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -157,27 +156,32 @@ gutter 内边距。
 
 ### Row
 
-| 属性             | 类型                                 | 默认值 | 说明                                                                       |
-| ---------------- | ------------------------------------ | ------ | -------------------------------------------------------------------------- |
-| `alignItems`     | `GridResponsive<GridAlignItems>`     | —      | 设置行内列的响应式垂直对齐方式。                                           |
-| `cols`           | `GridResponsive<number \| 'auto'>`   | —      | 设置 `.row-cols-*`；数字应用于所有尺寸，也可以使用断点对象设置响应式列数。 |
-| `gutter`         | `GridResponsive<number>`             | —      | 使用 `.g-*` 类同时设置水平和垂直间距。                                     |
-| `gutterX`        | `GridResponsive<number>`             | —      | 使用 `.gx-*` 类设置水平间距。                                              |
-| `gutterY`        | `GridResponsive<number>`             | —      | 使用 `.gy-*` 类设置垂直间距。                                              |
-| `justifyContent` | `GridResponsive<GridJustifyContent>` | —      | 设置列的响应式水平分布方式。                                               |
-| `className`      | `string`                             | —      | 额外的类名。                                                               |
-| `...props`       | `HTMLAttributes<HTMLDivElement>`     | —      | 原生 `<div>` 属性。                                                        |
+| 属性             | 类型                                 | 默认值  | 说明                                                                       |
+| ---------------- | ------------------------------------ | ------- | -------------------------------------------------------------------------- |
+| `alignItems`     | `GridResponsive<GridAlignItems>`     | —       | 设置行内列的响应式垂直对齐方式。                                           |
+| `cols`           | `GridResponsive<number \| 'auto'>`   | —       | 设置 `.row-cols-*`；数字应用于所有尺寸，也可以使用断点对象设置响应式列数。 |
+| `gutter`         | `GridResponsive<number>`             | —       | 使用 `.g-*` 类同时设置水平和垂直间距。                                     |
+| `gutterX`        | `GridResponsive<number>`             | —       | 使用 `.gx-*` 类设置水平间距。                                              |
+| `gutterY`        | `GridResponsive<number>`             | —       | 使用 `.gy-*` 类设置垂直间距。                                              |
+| `justifyContent` | `GridResponsive<GridJustifyContent>` | —       | 设置列的响应式水平分布方式。                                               |
+| `component`      | `C extends ElementType`              | `'div'` | 渲染的原生元素或 React 组件。                                              |
+| `className`      | `string`                             | —       | 额外的类名。                                                               |
+| `...props`       | `BoxProps<C>`                        | —       | 所选组件的原生属性，以及全部 [`Box`](../box/) 工具类属性。                 |
 
 ### Col
 
-| 属性        | 类型                                          | 默认值 | 说明                                                |
-| ----------- | --------------------------------------------- | ------ | --------------------------------------------------- |
-| `alignSelf` | `GridResponsive<GridAlignSelf>`               | —      | 覆盖行对该列设置的垂直对齐方式。                    |
-| `span`      | `GridResponsive<number \| 'auto'>`            | `.col` | 使用 `.col-*` 设置列宽；`auto` 会根据内容调整宽度。 |
-| `offset`    | `GridResponsive<number>`                      | —      | 添加 `.offset-*`，将列向右偏移。                    |
-| `order`     | `GridResponsive<number \| 'first' \| 'last'>` | —      | 使用 `.order-*` 类设置视觉顺序。                    |
-| `className` | `string`                                      | —      | 额外的类名。                                        |
-| `...props`  | `HTMLAttributes<HTMLDivElement>`              | —      | 原生 `<div>` 属性。                                 |
+| 属性        | 类型                                          | 默认值  | 说明                                                       |
+| ----------- | --------------------------------------------- | ------- | ---------------------------------------------------------- |
+| `alignSelf` | `GridResponsive<GridAlignSelf>`               | —       | 覆盖行对该列设置的垂直对齐方式。                           |
+| `span`      | `GridResponsive<number \| 'auto'>`            | `.col`  | 使用 `.col-*` 设置列宽；`auto` 会根据内容调整宽度。        |
+| `offset`    | `GridResponsive<number>`                      | —       | 添加 `.offset-*`，将列向右偏移。                           |
+| `order`     | `GridResponsive<number \| 'first' \| 'last'>` | —       | 使用 `.order-*` 类设置视觉顺序。                           |
+| `component` | `C extends ElementType`                       | `'div'` | 渲染的原生元素或 React 组件。                              |
+| `className` | `string`                                      | —       | 额外的类名。                                               |
+| `...props`  | `BoxProps<C>`                                 | —       | 所选组件的原生属性，以及全部 [`Box`](../box/) 工具类属性。 |
+
+`Row` 和 `Col` 都继承 `BoxProps`，因此可以直接使用 `bg`、`fg`、`theme`、
+`colorScheme` 等 [`Box`](../box/) 工具类属性。
 
 `GridResponsive<T>` 接受应用于所有断点的单个值，或包含 `xs`、`sm`、`md`、`lg`、
 `xl` 和 `2xl` 键的对象。更多布局说明请参阅 Bootstrap

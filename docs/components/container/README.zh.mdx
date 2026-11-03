@@ -1,6 +1,5 @@
 ---
 title: Container 容器
-order: 2
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -50,6 +49,10 @@ Bootstrap 6 容器在指定断点以下为 100% 宽度，到达断点后应用�
 
 | 属性        | 类型                                               | 默认值  | 说明                                                               |
 | ----------- | -------------------------------------------------- | ------- | ------------------------------------------------------------------ |
+| `component` | `C extends ElementType`                            | `'div'` | 渲染的原生元素或 React 组件。                                      |
 | `fluid`     | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `false` | `true` 使用 `.container-fluid`；传入断点则使用对应的响应式容器类。 |
 | `className` | `string`                                           | —       | 额外的类名。                                                       |
-| `...props`  | `HTMLAttributes<HTMLDivElement>`                   | —       | 原生 `<div>` 属性。                                                |
+| `...props`  | `BoxProps<C>`                                      | —       | 所选组件的原生属性，以及全部 [`Box`](../box/) 工具类属性。         |
+
+`Container` 继承 `BoxProps`，因此可以直接在容器上设置 `bg`、`fg`、`theme`、
+`colorScheme` 等 [`Box`](../box/) 工具类属性。

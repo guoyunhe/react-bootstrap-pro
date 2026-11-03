@@ -1,6 +1,5 @@
 ---
 title: Button
-order: 1
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -352,6 +351,10 @@ package exposes no Sass API.
 | `disabled`            | `C`'s native prop             | —                       | Disables the rendered element when supported.                                  |
 | `children`            | `C`'s native prop             | —                       | Content accepted by the selected component.                                    |
 | Other component props | `ComponentPropsWithoutRef<C>` | —                       | Props are inferred from the selected component and forwarded to it.            |
+
+`Button` extends [`BoxProps`](../box/), so it also accepts `bg`, `fg`,
+`colorScheme`, `themeStyle`, and the other [`Box`](../box/) utility props in
+addition to the button-specific props above.
 
 `Button`, `ButtonProps`, `ButtonTheme`, and `ButtonVariant` are exported from the
 package entry point.

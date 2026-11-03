@@ -1,6 +1,5 @@
 ---
 title: Grid
-order: 3
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -177,8 +176,9 @@ responsive values can use the same breakpoint object as column sizes.
 | `gutterX`        | `GridResponsive<number>`             | —       | Sets horizontal gutters using `.gx-*` classes.                                                    |
 | `gutterY`        | `GridResponsive<number>`             | —       | Sets vertical gutters using `.gy-*` classes.                                                      |
 | `justifyContent` | `GridResponsive<GridJustifyContent>` | —       | Sets responsive horizontal distribution of columns.                                               |
+| `component`      | `C extends ElementType`              | `'div'` | Native element or React component to render.                                                      |
 | `className`      | `string`                             | —       | Additional class names.                                                                           |
-| `...props`       | `HTMLAttributes<HTMLDivElement>`     | —       | Native `<div>` attributes.                                                                        |
+| `...props`       | `BoxProps<C>`                        | —       | Native props of the selected component, plus every [`Box`](../box/) utility prop.                 |
 
 ### Col
 
@@ -188,8 +188,12 @@ responsive values can use the same breakpoint object as column sizes.
 | `span`      | `GridResponsive<number \| 'auto'>`            | `.col`  | Sets the column width with `.col-*`; `auto` sizes to content. |
 | `offset`    | `GridResponsive<number>`                      | —       | Adds `.offset-*` to move the column to the right.             |
 | `order`     | `GridResponsive<number \| 'first' \| 'last'>` | —       | Sets the visual order with `.order-*` classes.                |
+| `component` | `C extends ElementType`                       | `'div'` | Native element or React component to render.                  |
 | `className` | `string`                                      | —       | Additional class names.                                       |
-| `...props`  | `HTMLAttributes<HTMLDivElement>`              | —       | Native `<div>` attributes.                                    |
+| `...props`  | `BoxProps<C>`                                 | —       | Native props plus every [`Box`](../box/) utility prop.        |
+
+`Row` and `Col` extend `BoxProps`, so [`Box`](../box/) utility props such as
+`bg`, `fg`, `theme`, and `colorScheme` are available on both components.
 
 `GridResponsive<T>` accepts either a value applied at every breakpoint or an
 object with `xs`, `sm`, `md`, `lg`, `xl`, and `2xl` keys. See Bootstrap's

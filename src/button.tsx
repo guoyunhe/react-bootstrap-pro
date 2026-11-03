@@ -1,32 +1,24 @@
 import clsx from 'clsx';
-import type { ComponentPropsWithoutRef, ElementType, MouseEvent } from 'react';
+import type { ElementType, MouseEvent } from 'react';
 
-export type ButtonTheme =
-  | 'primary'
-  | 'accent'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'warning'
-  | 'info'
-  | 'inverse';
+import { Box, type BoxProps, type BoxTheme } from './box';
+
+export type ButtonTheme = BoxTheme;
 
 export type ButtonVariant = 'solid' | 'outline' | 'subtle' | 'text' | 'link';
 
 type ButtonOwnProps = {
-  variant?: ButtonVariant;
-  theme?: ButtonTheme;
-  size?: 'xs' | 'sm' | 'lg';
-  active?: boolean;
-  styled?: boolean;
-  disabled?: boolean;
-  check?: boolean;
+  variant?: ButtonVariant | undefined;
+  theme?: ButtonTheme | undefined;
+  size?: 'xs' | 'sm' | 'lg' | undefined;
+  active?: boolean | undefined;
+  styled?: boolean | undefined;
+  disabled?: boolean | undefined;
+  check?: boolean | undefined;
 };
 
-export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps & {
-  component?: C;
-  className?: string;
-} & Omit<ComponentPropsWithoutRef<C>, keyof ButtonOwnProps | 'className' | 'component'>;
+export type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps &
+  Omit<BoxProps<C>, keyof ButtonOwnProps>;
 
 export function Button<C extends ElementType = 'button'>({
   component,
@@ -45,7 +37,6 @@ export function Button<C extends ElementType = 'button'>({
   const classes = clsx(
     'btn',
     variant ? `btn-${variant}` : undefined,
-    theme ? `theme-${theme}` : undefined,
     size && `btn-${size}`,
     active && 'active',
     styled && 'btn-styled',
@@ -54,7 +45,7 @@ export function Button<C extends ElementType = 'button'>({
     className,
   );
 
-  const componentProps = {
+  const boxProps = {
     ...(Component === 'button' ? { type: 'button' as const } : {}),
     ...props,
     ...(Component === 'a' ? {} : { disabled }),
@@ -65,8 +56,10 @@ export function Button<C extends ElementType = 'button'>({
           onClick: (event: MouseEvent<HTMLElement>) => event.preventDefault(),
         }
       : {}),
+    component: Component,
+    theme,
     className: classes,
-  };
+  } as BoxProps<C>;
 
-  return <Component {...componentProps} />;
+  return <Box {...boxProps} />;
 }

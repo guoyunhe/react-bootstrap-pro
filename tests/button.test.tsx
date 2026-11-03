@@ -157,3 +157,20 @@ test('renders the selected component and forwards its props', async () => {
   expect(customLink).toHaveAttribute('href', '/profile');
   expect(customLink).toHaveClass('btn');
 });
+
+test('accepts box utility props', async () => {
+  const screen = await render(
+    <Button theme='primary' bgSubtle='primary' fgEmphasis='primary' colorScheme='dark'>
+      Themed
+    </Button>,
+  );
+  const button = screen.getByRole('button', { name: 'Themed' });
+
+  expect(button).toHaveClass(
+    'btn',
+    'theme-primary',
+    'bg-subtle-primary',
+    'fg-emphasis-primary',
+    'color-scheme-dark',
+  );
+});

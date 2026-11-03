@@ -1,6 +1,5 @@
 ---
 title: Container
-order: 2
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -53,6 +52,10 @@ for Sass customization details.
 
 | Prop        | Type                                               | Default | Description                                                                                           |
 | ----------- | -------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| `component` | `C extends ElementType`                            | `'div'` | Native element or React component to render.                                                          |
 | `fluid`     | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `false` | `true` applies `.container-fluid`; a breakpoint applies the corresponding responsive container class. |
 | `className` | `string`                                           | —       | Additional class names.                                                                               |
-| `...props`  | `HTMLAttributes<HTMLDivElement>`                   | —       | Native `<div>` attributes.                                                                            |
+| `...props`  | `BoxProps<C>`                                      | —       | Native props of the selected component, plus every [`Box`](../box/) utility prop.                     |
+
+`Container` extends `BoxProps`, so `bg`, `fg`, `theme`, `colorScheme`, and the
+other [`Box`](../box/) utility props can be set directly on the container.

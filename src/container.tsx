@@ -1,13 +1,22 @@
 import clsx from 'clsx';
-import type { HTMLAttributes } from 'react';
+import type { ElementType } from 'react';
+
+import { Box, type BoxProps } from './box';
 
 export type ContainerBreakpoint = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-export type ContainerProps = HTMLAttributes<HTMLDivElement> & {
-  fluid?: boolean | ContainerBreakpoint;
+type ContainerOwnProps = {
+  fluid?: boolean | ContainerBreakpoint | undefined;
 };
 
-export function Container({ fluid, className, ...props }: ContainerProps) {
+export type ContainerProps<C extends ElementType = 'div'> = ContainerOwnProps &
+  Omit<BoxProps<C>, keyof ContainerOwnProps>;
+
+export function Container<C extends ElementType = 'div'>({
+  fluid,
+  className,
+  ...props
+}: ContainerProps<C>) {
   let containerClass = 'container';
   if (fluid === true) {
     containerClass = 'container-fluid';
@@ -15,7 +24,7 @@ export function Container({ fluid, className, ...props }: ContainerProps) {
     containerClass = `${fluid}:container`;
   }
 
-  const classes = clsx(containerClass, className);
+  const boxProps = { ...props, className: clsx(containerClass, className) } as BoxProps<C>;
 
-  return <div {...props} className={classes} />;
+  return <Box {...boxProps} />;
 }

@@ -1,0 +1,183 @@
+---
+title: Box 盒子
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Box } from '../../../src';
+import { DemoContainer } from '../demo-container';
+import { BoxBackgroundDemo } from './demos/box-background';
+import { BoxColorSchemeDemo } from './demos/box-color-scheme';
+import { BoxComponentDemo } from './demos/box-component';
+import { BoxForegroundDemo } from './demos/box-foreground';
+import { BoxThemeDemo } from './demos/box-theme';
+
+# Box 盒子
+
+`Box` 渲染单个元素，并把 Bootstrap 6 的颜色工具类转换成带类型的属性。本库的
+其他组件都基于 `Box` 实现，并接受相同的属性，因此前景色、背景色、色彩方案和主题
+在各组件中的用法完全一致。
+
+使用组件前，需要在应用中引入一次 Bootstrap 样式表。
+
+## 渲染元素
+
+`component` 用于指定渲染的原生元素或 React 组件，默认渲染为 `div`，原生属性也会
+根据它自动推断。
+
+<DemoContainer>
+  <BoxComponentDemo />
+</DemoContainer>
+
+```tsx
+<Box component='a' href='/settings' bgSubtle='primary' fgEmphasis='primary'>
+  设置
+</Box>
+<Box component='blockquote' theme='accent' themeStyle='subtle'>
+  引用文字
+</Box>
+<Box component={Panel} bg='1' themeBorder>
+  自定义组件
+</Box>
+```
+
+## 前景色
+
+`fg` 设置 `.fg-{color}`，可用于主题色和中性色；`fgEmphasis` 设置
+`.fg-emphasis-{color}`；`fgContrast` 设置 `.fg-contrast-{color}`，用于放在实色主题
+背景上的文字；`fgOpacity` 将当前前景色与页面背景混合。
+
+<DemoContainer>
+  <BoxForegroundDemo />
+</DemoContainer>
+
+```tsx
+<Box fg='primary'>主要文字</Box>
+<Box fg='2'>次要文字</Box>
+<Box fg='secondary' fgOpacity={50}>半透明文字</Box>
+<Box bg='success'>
+  <Box fgContrast='success'>在成功色上清晰可读</Box>
+</Box>
+```
+
+| 属性         | 类名             | 取值                                                        |
+| ------------ | ---------------- | ----------------------------------------------------------- |
+| `fg`         | `.fg-*`          | 主题色、`body`、`1`–`4`、`bg`、`white`、`black`、`reset`    |
+| `fgEmphasis` | `.fg-emphasis-*` | 主题色                                                      |
+| `fgContrast` | `.fg-contrast-*` | 主题色                                                      |
+| `fgOpacity`  | `.fg-*`          | `10`、`20`、`30`、`40`、`50`、`60`、`70`、`80`、`90`、`100` |
+
+主题色包括 `primary`、`accent`、`secondary`、`success`、`danger`、`warning`、
+`info` 和 `inverse`。
+
+## 背景色
+
+`bg` 设置 `.bg-{color}`，`bgSubtle` 设置 `.bg-subtle-{color}`，`bgMuted` 设置
+`.bg-muted-{color}`。`bgOpacity` 将当前背景色与页面背景混合，`gradient` 添加
+`.bg-gradient`。
+
+<DemoContainer>
+  <BoxBackgroundDemo />
+</DemoContainer>
+
+```tsx
+<Box bg='primary'>实色背景</Box>
+<Box bgSubtle='danger' fgEmphasis='danger'>淡背景</Box>
+<Box bgMuted='info' fgEmphasis='info'>中等背景</Box>
+<Box bg='inverse' bgOpacity={50}>半透明背景</Box>
+<Box bg='primary' gradient>渐变背景</Box>
+```
+
+| 属性        | 类名           | 取值                                                           |
+| ----------- | -------------- | -------------------------------------------------------------- |
+| `bg`        | `.bg-*`        | 主题色、`body`、`1`–`4`、`fg`、`white`、`black`、`transparent` |
+| `bgSubtle`  | `.bg-subtle-*` | 主题色                                                         |
+| `bgMuted`   | `.bg-muted-*`  | 主题色                                                         |
+| `bgOpacity` | `.bg-*`        | `10`、`20`、`30`、`40`、`50`、`60`、`70`、`80`、`90`、`100`    |
+| `gradient`  | `.bg-gradient` | `boolean`                                                      |
+
+## 色彩方案
+
+`colorScheme` 设置 `.color-scheme-{light|dark|auto}`。Bootstrap 使用
+`light-dark()` 解析颜色变量，因此单个元素可以使用与页面其余部分不同的色彩方案，
+浏览器的原生控件也会跟随改变。
+
+<DemoContainer>
+  <BoxColorSchemeDemo />
+</DemoContainer>
+
+```tsx
+<Box colorScheme='dark' bg='body' fg='body'>
+  深色子树
+</Box>
+<Box colorScheme='auto'>跟随系统偏好</Box>
+```
+
+如需切换整个子树，请使用 `data-bs-theme`：它同时切换 `--shadow-strength`，而
+`colorScheme` 会保留父级的阴影强度。
+
+## 主题
+
+`theme` 设置 `.theme-{color}`，并把该颜色的变量暴露给元素及其后代。与 `themeStyle`
+配合可以使用预定义的背景色与前景色组合：
+
+| `themeStyle` | 类名              | 效果                                 |
+| ------------ | ----------------- | ------------------------------------ |
+| `contrast`   | `.theme-contrast` | 实色主题背景，搭配对应的对比色文字。 |
+| `subtle`     | `.theme-subtle`   | 淡色主题背景，搭配主题前景色。       |
+| `muted`      | `.theme-muted`    | 中等主题背景，搭配强调前景色。       |
+
+设置 `themeBorder` 可添加 `.theme-border`，使用主题色绘制边框；设置 `themeReset`
+可添加 `.theme-reset`，让子树不再继承主题。
+
+<DemoContainer>
+  <BoxThemeDemo />
+</DemoContainer>
+
+```tsx
+<Box theme='primary' themeStyle='contrast'>强调内容</Box>
+<Box theme='primary' themeStyle='subtle' themeBorder>带边框的淡色内容</Box>
+<Box theme='primary'>
+  继承 primary 变量
+  <Box themeReset>恢复页面主题</Box>
+</Box>
+```
+
+## 其他工具类
+
+没有提供对应属性的工具类可以通过 `className` 传入。它们会被追加在生成的类名之后；
+Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效。
+
+```tsx
+<Box bg='body' className='p-3 rounded shadow-sm'>
+  内边距、圆角和阴影
+</Box>
+```
+
+## API
+
+| 属性          | 类型                                | 默认值  | 说明                                                        |
+| ------------- | ----------------------------------- | ------- | ----------------------------------------------------------- |
+| `component`   | `C extends ElementType`             | `'div'` | 渲染的原生元素或 React 组件。                               |
+| `theme`       | `BoxTheme`                          | —       | 添加 `.theme-{color}`，并向其后代传递该颜色的变量。         |
+| `themeStyle`  | `'contrast' \| 'subtle' \| 'muted'` | —       | 添加 `.theme-contrast`、`.theme-subtle` 或 `.theme-muted`。 |
+| `themeBorder` | `boolean`                           | `false` | 添加 `.theme-border`。                                      |
+| `themeReset`  | `boolean`                           | `false` | 添加 `.theme-reset`。                                       |
+| `colorScheme` | `'light' \| 'dark' \| 'auto'`       | —       | 添加 `.color-scheme-{value}`。                              |
+| `fg`          | `BoxFg`                             | —       | 添加 `.fg-{value}`。                                        |
+| `fgEmphasis`  | `BoxTheme`                          | —       | 添加 `.fg-emphasis-{color}`。                               |
+| `fgContrast`  | `BoxTheme`                          | —       | 添加 `.fg-contrast-{color}`。                               |
+| `fgOpacity`   | `BoxOpacity`                        | —       | 添加 `.fg-{opacity}`。                                      |
+| `bg`          | `BoxBg`                             | —       | 添加 `.bg-{value}`。                                        |
+| `bgSubtle`    | `BoxTheme`                          | —       | 添加 `.bg-subtle-{color}`。                                 |
+| `bgMuted`     | `BoxTheme`                          | —       | 添加 `.bg-muted-{color}`。                                  |
+| `bgOpacity`   | `BoxOpacity`                        | —       | 添加 `.bg-{opacity}`。                                      |
+| `gradient`    | `boolean`                           | `false` | 添加 `.bg-gradient`。                                       |
+| `className`   | `string`                            | —       | 追加在生成类名之后的额外类名。                              |
+| `...props`    | `ComponentPropsWithoutRef<C>`       | —       | 所选组件的原生属性，会透传给它。                            |
+
+`Box`、`BoxProps`、`BoxTheme`、`BoxFg`、`BoxBg`、`BoxOpacity`、
+`BoxColorScheme` 和 `BoxThemeStyle` 都从包的入口导出。底层工具类请参阅 Bootstrap
+的[颜色](https://getbootstrap.com/docs/6.0/utilities/colors/)、
+[背景](https://getbootstrap.com/docs/6.0/utilities/background/)、
+[色彩方案](https://getbootstrap.com/docs/6.0/utilities/color-scheme/)和
+[主题](https://getbootstrap.com/docs/6.0/utilities/theme/)文档。

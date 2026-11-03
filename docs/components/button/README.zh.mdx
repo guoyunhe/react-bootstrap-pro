@@ -1,6 +1,5 @@
 ---
 title: Button 按钮
-order: 1
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
@@ -336,5 +335,8 @@ Sass maps 和循环属于 Bootstrap 源码构建阶段的定制能力，本 Reac
 | `disabled`   | `C` 的原生属性                | —                     | 支持时禁用渲染后的元素。                                             |
 | `children`   | `C` 的原生属性                | —                     | 当前渲染组件接受的内容。                                             |
 | 其他组件属性 | `ComponentPropsWithoutRef<C>` | —                     | 属性会根据渲染目标推断，并转发给该组件。                             |
+
+`Button` 继承 [`BoxProps`](../box/)，因此除了上述按钮专属属性外，还支持
+`bg`、`fg`、`colorScheme`、`themeStyle` 等 [`Box`](../box/) 工具类属性。
 
 包入口导出 `Button`、`ButtonProps`、`ButtonTheme` 和 `ButtonVariant`。

@@ -1,5 +1,7 @@
 import clsx from 'clsx';
-import type { HTMLAttributes } from 'react';
+import type { ElementType } from 'react';
+
+import { Box, type BoxProps } from './box';
 
 export type GridBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
@@ -36,16 +38,19 @@ function getResponsiveClasses<T extends number | string>(
   });
 }
 
-export type RowProps = HTMLAttributes<HTMLDivElement> & {
-  alignItems?: GridResponsive<GridAlignItems>;
-  cols?: GridResponsive<number | 'auto'>;
-  gutter?: GridResponsive<number>;
-  gutterX?: GridResponsive<number>;
-  gutterY?: GridResponsive<number>;
-  justifyContent?: GridResponsive<GridJustifyContent>;
+type RowOwnProps = {
+  alignItems?: GridResponsive<GridAlignItems> | undefined;
+  cols?: GridResponsive<number | 'auto'> | undefined;
+  gutter?: GridResponsive<number> | undefined;
+  gutterX?: GridResponsive<number> | undefined;
+  gutterY?: GridResponsive<number> | undefined;
+  justifyContent?: GridResponsive<GridJustifyContent> | undefined;
 };
 
-export function Row({
+export type RowProps<C extends ElementType = 'div'> = RowOwnProps &
+  Omit<BoxProps<C>, keyof RowOwnProps>;
+
+export function Row<C extends ElementType = 'div'>({
   alignItems,
   cols,
   gutter,
@@ -54,7 +59,7 @@ export function Row({
   justifyContent,
   className,
   ...props
-}: RowProps) {
+}: RowProps<C>) {
   const classes = clsx(
     'row',
     getResponsiveClasses('align-items', alignItems),
@@ -66,17 +71,29 @@ export function Row({
     className,
   );
 
-  return <div {...props} className={classes} />;
+  const boxProps = { ...props, className: classes } as BoxProps<C>;
+
+  return <Box {...boxProps} />;
 }
 
-export type ColProps = HTMLAttributes<HTMLDivElement> & {
-  alignSelf?: GridResponsive<GridAlignSelf>;
-  span?: GridResponsive<GridSpan>;
-  offset?: GridResponsive<number>;
-  order?: GridResponsive<GridOrder>;
+type ColOwnProps = {
+  alignSelf?: GridResponsive<GridAlignSelf> | undefined;
+  span?: GridResponsive<GridSpan> | undefined;
+  offset?: GridResponsive<number> | undefined;
+  order?: GridResponsive<GridOrder> | undefined;
 };
 
-export function Col({ alignSelf, span, offset, order, className, ...props }: ColProps) {
+export type ColProps<C extends ElementType = 'div'> = ColOwnProps &
+  Omit<BoxProps<C>, keyof ColOwnProps>;
+
+export function Col<C extends ElementType = 'div'>({
+  alignSelf,
+  span,
+  offset,
+  order,
+  className,
+  ...props
+}: ColProps<C>) {
   const spanClasses = span === undefined ? ['col'] : getResponsiveClasses('col', span);
   const classes = clsx(
     spanClasses,
@@ -86,5 +103,7 @@ export function Col({ alignSelf, span, offset, order, className, ...props }: Col
     className,
   );
 
-  return <div {...props} className={classes} />;
+  const boxProps = { ...props, className: classes } as BoxProps<C>;
+
+  return <Box {...boxProps} />;
 }
