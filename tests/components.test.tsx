@@ -24,6 +24,7 @@ import {
   FormControl,
   FormField,
   FormFieldContent,
+  FormFloating,
   FormLabel,
   FormText,
   InputGroup,
@@ -268,6 +269,34 @@ test('composes input groups with text addons and sizes', async () => {
   expect(screen.getByTestId('addon-label').element()).toHaveAttribute('for', 'input-group-select');
   expect(group.querySelector('input')).toHaveClass('form-control');
   expect(group.querySelector('select')).toHaveClass('form-control');
+});
+
+test('renders floating labels, the always variant and plaintext controls', async () => {
+  const screen = await render(
+    <>
+      <FormFloating data-testid='floating'>
+        <label htmlFor='floating-test'>Email address</label>
+        <FormControl type='email' id='floating-test' placeholder='name@example.com' />
+      </FormFloating>
+      <FormFloating always data-testid='floating-always'>
+        <label htmlFor='floating-always'>Password</label>
+        <FormControl type='password' id='floating-always' placeholder='Password' />
+      </FormFloating>
+      <FormControl plaintext readOnly data-testid='plaintext' defaultValue='name@example.com' />,
+    </>,
+  );
+
+  const floating = screen.getByTestId('floating').element();
+  expect(screen.getByTestId('floating')).toHaveClass('form-floating');
+  expect(screen.getByTestId('floating-always')).toHaveClass(
+    'form-floating',
+    'form-floating-always',
+  );
+  expect(floating.firstElementChild?.tagName).toBe('LABEL');
+  expect(floating.querySelector('label')).toHaveAttribute('for', 'floating-test');
+  expect(floating.querySelector('input')).toHaveClass('form-control');
+  expect(screen.getByTestId('plaintext')).toHaveClass('form-control-plaintext');
+  expect(screen.getByTestId('plaintext')).not.toHaveClass('form-control');
 });
 
 test('composes card and carousel structure', async () => {

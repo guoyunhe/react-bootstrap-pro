@@ -12,8 +12,9 @@ import { FormDisabledDemo } from './demos/disabled';
 Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`、`FormLabel`、
 `FormText` 和 `FormControl` 组合出带标签与帮助文本的控件，`Checkbox`、`Radio`、
 `Switch` 和 `Range` 分别渲染 `.check` 复选框、`.radio` 单选按钮、`.switch` 开关与
-`.form-range` 滑块；`InputGroup` 为控件挂载附加内容。请始终为输入框设置合适的
-`type`，以便浏览器提供对应的键盘、校验与自动填充行为。
+`.form-range` 滑块；`InputGroup` 为控件挂载附加内容，`FormFloating` 将控件与标签
+包装为浮动标签字段。请始终为输入框设置合适的 `type`，以便浏览器提供对应的键盘、
+校验与自动填充行为。
 
 ## 基础示例
 
@@ -52,11 +53,12 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 
 ### FormControl
 
-| 属性        | 类型           | 说明                                                |
-| ----------- | -------------- | --------------------------------------------------- |
-| `size`      | `'sm' \| 'lg'` | 调整高度、内边距、字号和圆角。                      |
-| `component` | `ElementType`  | 默认渲染 `input`，也可渲染 `textarea` 或 `select`。 |
-| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。                     |
+| 属性        | 类型           | 说明                                                  |
+| ----------- | -------------- | ----------------------------------------------------- |
+| `size`      | `'sm' \| 'lg'` | 调整高度、内边距、字号和圆角。                        |
+| `plaintext` | `boolean`      | 渲染 `.form-control-plaintext` 而非 `.form-control`。 |
+| `component` | `ElementType`  | 默认渲染 `input`，也可渲染 `textarea` 或 `select`。   |
+| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。                       |
 
 ### FormField
 

@@ -17,6 +17,7 @@ export * from './drawer';
 export * from './form-control';
 export * from './form-field';
 export * from './form-field-content';
+export * from './form-floating';
 export * from './form-label';
 export * from './form-text';
 export * from './grid';

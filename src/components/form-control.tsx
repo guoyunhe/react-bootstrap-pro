@@ -7,19 +7,23 @@ export type FormControlSize = 'sm' | 'lg';
 
 export type FormControlProps<C extends ElementType = 'input'> = BoxComponentProps<
   C,
-  { size?: FormControlSize | undefined }
+  { size?: FormControlSize | undefined; plaintext?: boolean | undefined }
 >;
 
 export function FormControl<C extends ElementType = 'input'>({
   component,
   className,
   size,
+  plaintext,
   ...props
 }: FormControlProps<C>) {
   return (
     <ClassedBox<C>
       {...props}
-      baseClass={clsx('form-control', size && `form-control-${size}`)}
+      baseClass={clsx(
+        plaintext ? 'form-control-plaintext' : 'form-control',
+        size && `form-control-${size}`,
+      )}
       component={component}
       defaultComponent={'input' as C}
       className={className}

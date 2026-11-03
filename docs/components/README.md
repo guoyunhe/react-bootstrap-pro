@@ -21,6 +21,7 @@ order: 1
 - [Container](./container/)
 - [Dialog](./dialog/)
 - [Drawer](./drawer/)
+- [Floating labels](./floating-labels/)
 - [Form](./form/)
 - [Grid](./grid/)
 - [Input group](./input-group/)

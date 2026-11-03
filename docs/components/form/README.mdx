@@ -13,9 +13,9 @@ Bootstrap's form controls extend the rebooted form styles with component
 classes. `FormField`, `FormLabel`, `FormText`, and `FormControl` build a control
 with its label and help text, while `Checkbox`, `Radio`, `Switch`, and `Range`
 render the `.check` checkbox, `.radio` radio, `.switch` track, and `.form-range`
-slider. `InputGroup` attaches add-ons to a control. Always set an appropriate
-`type` on inputs so browsers provide the matching keyboard, validation, and
-autofill behavior.
+slider. `InputGroup` attaches add-ons to a control, and `FormFloating` wraps a control
+and label into a floating-label field. Always set an appropriate `type` on inputs
+so browsers provide the matching keyboard, validation, and autofill behavior.
 
 ## Basic example
 
@@ -58,11 +58,12 @@ possible. Associate help text with `aria-describedby`.
 
 ### FormControl
 
-| Prop        | Type           | Description                                                 |
-| ----------- | -------------- | ----------------------------------------------------------- |
-| `size`      | `'sm' \| 'lg'` | Scales height, padding, font size, and radius.              |
-| `component` | `ElementType`  | Renders an `input` by default; also `textarea` or `select`. |
-| `...props`  | `BoxProps<C>`  | Native props and all Box utility props.                     |
+| Prop        | Type           | Description                                                   |
+| ----------- | -------------- | ------------------------------------------------------------- |
+| `size`      | `'sm' \| 'lg'` | Scales height, padding, font size, and radius.                |
+| `plaintext` | `boolean`      | Renders `.form-control-plaintext` instead of `.form-control`. |
+| `component` | `ElementType`  | Renders an `input` by default; also `textarea` or `select`.   |
+| `...props`  | `BoxProps<C>`  | Native props and all Box utility props.                       |
 
 ### FormField
 

@@ -1,0 +1,154 @@
+---
+title: Floating labels
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { FloatingLabelsAlwaysDemo } from './demos/always';
+import { FloatingLabelsBasicDemo } from './demos/basic';
+import { FloatingLabelsDateTimeDemo } from './demos/date-time';
+import { FloatingLabelsDisabledDemo } from './demos/disabled';
+import { FloatingLabelsInputGroupDemo } from './demos/input-group';
+import { FloatingLabelsLayoutDemo } from './demos/layout';
+import { FloatingLabelsPlaintextDemo } from './demos/plaintext';
+import { FloatingLabelsSelectDemo } from './demos/select';
+import { FloatingLabelsTextareaDemo } from './demos/textarea';
+
+# Floating labels
+
+`FormFloating` wraps a `<label>` and a `.form-control` element to build a
+floating label. Put the label first so screen readers announce it before the
+value, and give textual controls a non-empty `placeholder`: the CSS-only
+implementation uses `:placeholder-shown` to detect an empty field. The
+placeholder stays transparent until the control is focused.
+
+## Example
+
+<DemoContainer>
+  <FloatingLabelsBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+When a control already has a value, the label starts in its floated position.
+
+## Textareas
+
+Textareas match the height of inputs by default. To change the height, override
+the `--bs-form-floating-height` custom property on the wrapper instead of using
+`rows`, so the label floats correctly at any height.
+
+<DemoContainer>
+  <FloatingLabelsTextareaDemo />
+</DemoContainer>
+
+```tsx src='./demos/textarea.tsx'
+
+```
+
+## Selects
+
+Selects work the same way, but the label always stays floated. Selects with
+`size` or `multiple` are not supported.
+
+<DemoContainer>
+  <FloatingLabelsSelectDemo />
+</DemoContainer>
+
+```tsx src='./demos/select.tsx'
+
+```
+
+## Date and time
+
+Date, time, datetime-local, month, and week inputs always show the floated label
+and do not need a placeholder.
+
+<DemoContainer>
+  <FloatingLabelsDateTimeDemo />
+</DemoContainer>
+
+```tsx src='./demos/date-time.tsx'
+
+```
+
+## Disabled
+
+Add `disabled` to the control; the label is styled to match.
+
+<DemoContainer>
+  <FloatingLabelsDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## Readonly plaintext
+
+Set `plaintext` on `FormControl` to render `.form-control-plaintext`, which
+keeps the floating label layout while showing the value as plain text.
+
+<DemoContainer>
+  <FloatingLabelsPlaintextDemo />
+</DemoContainer>
+
+```tsx src='./demos/plaintext.tsx'
+
+```
+
+## Input groups
+
+Floating labels also work inside an `InputGroup`.
+
+<DemoContainer>
+  <FloatingLabelsInputGroupDemo />
+</DemoContainer>
+
+```tsx src='./demos/input-group.tsx'
+
+```
+
+## Always floating
+
+Set `always` to add `.form-floating-always`, which keeps the label floated and
+shows the placeholder in every state.
+
+<DemoContainer>
+  <FloatingLabelsAlwaysDemo />
+</DemoContainer>
+
+```tsx src='./demos/always.tsx'
+
+```
+
+## Layout
+
+When using the grid, place each floating label inside a column.
+
+<DemoContainer>
+  <FloatingLabelsLayoutDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout.tsx'
+
+```
+
+## API
+
+| Prop        | Type          | Description                                        |
+| ----------- | ------------- | -------------------------------------------------- |
+| `always`    | `boolean`     | Keeps the label floated and shows the placeholder. |
+| `component` | `ElementType` | Renders a `div` by default.                        |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props.            |
+
+Validation classes can be passed through `className`: add `is-invalid` to the
+wrapper and the control, then render feedback below the field.
+
+## Accessibility
+
+Render the `<label>` before the control and bind it with `htmlFor`. A non-empty
+`placeholder` is required for textual controls, but it is not an accessible
+name, so keep a visible label.
