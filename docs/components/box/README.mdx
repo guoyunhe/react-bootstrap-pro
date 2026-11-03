@@ -14,10 +14,9 @@ import { BoxThemeDemo } from './demos/box-theme';
 
 # Box
 
-`Box` renders a single element and turns Bootstrap 6's color utilities into
-typed props. Every other component in this library is built on top of `Box` and
-accepts the same props, so colors, backgrounds, color schemes, and theme tokens
-work the same way everywhere.
+`Box` renders a single element and exposes Bootstrap 6 utility classes as typed
+props. Every other component in this library is built on top of `Box` and accepts
+the same props, so utilities work the same way everywhere.
 
 Import Bootstrap's stylesheet once in your application before using the
 component.
@@ -148,10 +147,10 @@ Set `themeBorder` to add `.theme-border` for a border in the theme color, and
 ## Layout and positioning
 
 `aspectRatio` sets a standard `.ratio-*` ratio, while `containerQuery` makes the
-element an inline-size or size query container. `display`, `float`, and
-`objectFit` also accept responsive values keyed by `xs`, `sm`, `md`, `lg`, `xl`,
-or `2xl`. As in Bootstrap, `xs` has no prefix and the later breakpoints use
-classes such as `.md:d-none`.
+element an inline-size or size query container. Alignment, display, flex, grid,
+float, object-fit, order, spacing, and text-alignment props accept responsive
+values keyed by `xs`, `sm`, `md`, `lg`, `xl`, or `2xl`. As in Bootstrap, `xs` has
+no prefix and the later breakpoints use classes such as `.md:d-none`.
 
 <DemoContainer>
   <BoxLayoutDemo />
@@ -161,6 +160,9 @@ classes such as `.md:d-none`.
 <Box aspectRatio='16x9'>16:9 content</Box>
 <Box containerQuery='inline'>Query container</Box>
 <Box display={{ xs: 'none', md: 'block' }}>Hidden below md</Box>
+<Box display='flex' flexWrap='wrap' alignContent={{ xs: 'start', md: 'between' }}>
+  Wrapped flex content
+</Box>
 <Box float={{ sm: 'start', lg: 'end' }}>Responsive float</Box>
 <Box component='img' objectFit='cover' alt='Cover crop' src='/image.jpg' />
 ```
@@ -170,6 +172,7 @@ classes such as `.md:d-none`.
 | `aspectRatio`    | `.ratio-*`               | `auto`, `1x1`, `4x3`, `16x9`, `21x9`                                                                                                                             |
 | `containerQuery` | `.contains-*`            | `inline`, `size`                                                                                                                                                 |
 | `display`        | `.d-*`                   | `inline`, `inline-block`, `block`, `grid`, `inline-grid`, `table`, `table-row`, `table-cell`, `flex`, `inline-flex`, `contents`, `flow-root`, `none`; responsive |
+| `alignContent`   | `.align-content-*`       | `start`, `end`, `center`, `between`, `around`, `stretch`; responsive                                                                                             |
 | `float`          | `.float-*`               | `start`, `end`, `none`; responsive                                                                                                                               |
 | `objectFit`      | `.object-fit-*`          | `contain`, `cover`, `fill`, `scale`, `none`; responsive                                                                                                          |
 | `overflow`       | `.overflow-*`            | `auto`, `hidden`, `visible`, `scroll`                                                                                                                            |
@@ -183,7 +186,7 @@ classes such as `.md:d-none`.
 accepts `true`, `'x'`, or `'y'` for `.translate-middle`, `.translate-middle-x`,
 or `.translate-middle-y`.
 
-Utilities not exposed as props can be passed through `className`. They are
+Custom utility classes can still be passed through `className`. They are
 appended after the generated classes, and because Bootstrap utilities share the
 same specificity, the class that appears later in the stylesheet wins.
 
@@ -195,55 +198,143 @@ same specificity, the class that appears later in the stylesheet wins.
 
 ## API
 
-| Prop              | Type                                | Default | Description                                                                   |
-| ----------------- | ----------------------------------- | ------- | ----------------------------------------------------------------------------- |
-| `component`       | `C extends ElementType`             | `'div'` | Native element or React component to render.                                  |
-| `theme`           | `BoxTheme`                          | —       | Applies `.theme-{color}` and cascades that color's tokens to descendants.     |
-| `themeStyle`      | `'contrast' \| 'subtle' \| 'muted'` | —       | Applies `.theme-contrast`, `.theme-subtle`, or `.theme-muted`.                |
-| `themeBorder`     | `boolean`                           | `false` | Applies `.theme-border`.                                                      |
-| `themeReset`      | `boolean`                           | `false` | Applies `.theme-reset`.                                                       |
-| `colorScheme`     | `'light' \| 'dark' \| 'auto'`       | —       | Applies `.color-scheme-{value}`.                                              |
-| `fg`              | `BoxFg`                             | —       | Applies `.fg-{value}`.                                                        |
-| `fgEmphasis`      | `BoxTheme`                          | —       | Applies `.fg-emphasis-{color}`.                                               |
-| `fgContrast`      | `BoxTheme`                          | —       | Applies `.fg-contrast-{color}`.                                               |
-| `fgOpacity`       | `BoxOpacity`                        | —       | Applies `.fg-{opacity}`.                                                      |
-| `bg`              | `BoxBg`                             | —       | Applies `.bg-{value}`.                                                        |
-| `bgSubtle`        | `BoxTheme`                          | —       | Applies `.bg-subtle-{color}`.                                                 |
-| `bgMuted`         | `BoxTheme`                          | —       | Applies `.bg-muted-{color}`.                                                  |
-| `bgOpacity`       | `BoxOpacity`                        | —       | Applies `.bg-{opacity}`.                                                      |
-| `gradient`        | `boolean`                           | `false` | Applies `.bg-gradient`.                                                       |
-| `aspectRatio`     | `BoxAspectRatio`                    | —       | Applies `.ratio-{value}`.                                                     |
-| `containerQuery`  | `BoxContainerQuery`                 | —       | Applies `.contains-{value}`.                                                  |
-| `display`         | `BoxResponsive<BoxDisplay>`         | —       | Applies responsive `.d-{value}` classes.                                      |
-| `float`           | `BoxResponsive<BoxFloat>`           | —       | Applies responsive `.float-{value}` classes.                                  |
-| `objectFit`       | `BoxResponsive<BoxObjectFit>`       | —       | Applies responsive `.object-fit-{value}` classes.                             |
-| `overflow`        | `BoxOverflow`                       | —       | Applies `.overflow-{value}`.                                                  |
-| `overflowX`       | `BoxOverflow`                       | —       | Applies `.overflow-x-{value}`.                                                |
-| `overflowY`       | `BoxOverflow`                       | —       | Applies `.overflow-y-{value}`.                                                |
-| `position`        | `BoxPosition`                       | —       | Applies `.position-{value}`.                                                  |
-| `top`             | `BoxPositionOffset`                 | —       | Applies `.top-{value}`.                                                       |
-| `bottom`          | `BoxPositionOffset`                 | —       | Applies `.bottom-{value}`.                                                    |
-| `start`           | `BoxPositionOffset`                 | —       | Applies `.start-{value}`.                                                     |
-| `end`             | `BoxPositionOffset`                 | —       | Applies `.end-{value}`.                                                       |
-| `translateMiddle` | `boolean \| 'x' \| 'y'`             | `false` | Applies `.translate-middle`, `.translate-middle-x`, or `.translate-middle-y`. |
-| `visibility`      | `BoxVisibility`                     | —       | Applies `.visible` or `.invisible`.                                           |
-| `zIndex`          | `BoxZIndex`                         | —       | Applies `.z-{value}` (`-1` maps to `.z-n1`).                                  |
-| `className`       | `string`                            | —       | Additional class names appended after the generated classes.                  |
-| `...props`        | `ComponentPropsWithoutRef<C>`       | —       | Native props of the selected component, forwarded to it.                      |
+| Prop                       | Type                                | Default | Description                                                                   |
+| -------------------------- | ----------------------------------- | ------- | ----------------------------------------------------------------------------- |
+| `alignContent`             | `BoxResponsive<BoxAlignContent>`    | —       | Applies responsive `.align-content-*` classes.                                |
+| `alignItems`               | `BoxResponsive<BoxAlignItems>`      | —       | Applies responsive `.align-items-*` classes.                                  |
+| `alignSelf`                | `BoxResponsive<BoxAlignSelf>`       | —       | Applies responsive `.align-self-*` classes.                                   |
+| `animation`                | `BoxAnimation`                      | —       | Applies `.animation-*`.                                                       |
+| `aspectRatio`              | `BoxAspectRatio`                    | —       | Applies `.ratio-{value}`.                                                     |
+| `bg`                       | `BoxBg`                             | —       | Applies `.bg-{value}`.                                                        |
+| `bgMuted`                  | `BoxTheme`                          | —       | Applies `.bg-muted-{color}`.                                                  |
+| `bgOpacity`                | `BoxOpacity`                        | —       | Applies `.bg-{opacity}`.                                                      |
+| `bgSubtle`                 | `BoxTheme`                          | —       | Applies `.bg-subtle-{color}`.                                                 |
+| `border`                   | `BoxBorderToggle`                   | —       | Applies `.border` or `.border-0`.                                             |
+| `borderBottom`             | `BoxBorderToggle`                   | —       | Applies `.border-bottom` or `.border-bottom-0`.                               |
+| `borderColor`              | `BoxBorderColor`                    | —       | Applies `.border-{color}`.                                                    |
+| `borderEnd`                | `BoxBorderToggle`                   | —       | Applies `.border-end` or `.border-end-0`.                                     |
+| `borderOpacity`            | `BoxOpacity`                        | —       | Applies `.border-{opacity}`.                                                  |
+| `borderStart`              | `BoxBorderToggle`                   | —       | Applies `.border-start` or `.border-start-0`.                                 |
+| `borderSubtle`             | `BoxTheme`                          | —       | Applies `.border-subtle-{color}`.                                             |
+| `borderTop`                | `BoxBorderToggle`                   | —       | Applies `.border-top` or `.border-top-0`.                                     |
+| `borderWidth`              | `BoxBorderWidth`                    | —       | Applies `.border-{width}`.                                                    |
+| `borderX`                  | `BoxBorderToggle`                   | —       | Applies `.border-x` or `.border-x-0`.                                         |
+| `borderY`                  | `BoxBorderToggle`                   | —       | Applies `.border-y` or `.border-y-0`.                                         |
+| `bottom`                   | `BoxPositionOffset`                 | —       | Applies `.bottom-{value}`.                                                    |
+| `className`                | `string`                            | —       | Additional class names appended after the generated classes.                  |
+| `colorScheme`              | `'light' \| 'dark' \| 'auto'`       | —       | Applies `.color-scheme-{value}`.                                              |
+| `columnGap`                | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.column-gap-*` classes.                                   |
+| `component`                | `C extends ElementType`             | `'div'` | Native element or React component to render.                                  |
+| `containerQuery`           | `BoxContainerQuery`                 | —       | Applies `.contains-{value}`.                                                  |
+| `display`                  | `BoxResponsive<BoxDisplay>`         | —       | Applies responsive `.d-{value}` classes.                                      |
+| `divideX`                  | `BoxResponsive<BoxDivide>`          | —       | Applies responsive `.divide-x` or `.divide-x-0`.                              |
+| `divideY`                  | `BoxResponsive<BoxDivide>`          | —       | Applies responsive `.divide-y` or `.divide-y-0`.                              |
+| `dynamicViewportHeight`    | `100`                               | —       | Applies `.dvh-100`.                                                           |
+| `dynamicViewportWidth`     | `100`                               | —       | Applies `.dvw-100`.                                                           |
+| `end`                      | `BoxPositionOffset`                 | —       | Applies `.end-{value}`.                                                       |
+| `fg`                       | `BoxFg`                             | —       | Applies `.fg-{value}`.                                                        |
+| `fgContrast`               | `BoxTheme`                          | —       | Applies `.fg-contrast-{color}`.                                               |
+| `fgEmphasis`               | `BoxTheme`                          | —       | Applies `.fg-emphasis-{color}`.                                               |
+| `fgOpacity`                | `BoxOpacity`                        | —       | Applies `.fg-{opacity}`.                                                      |
+| `flex`                     | `BoxResponsive<BoxFlex>`            | —       | Applies responsive `.flex-fill`.                                              |
+| `flexDirection`            | `BoxResponsive<BoxFlexDirection>`   | —       | Applies responsive `.flex-*` direction classes.                               |
+| `flexGrow`                 | `BoxResponsive<BoxFlexGrowShrink>`  | —       | Applies responsive `.flex-grow-*`.                                            |
+| `flexShrink`               | `BoxResponsive<BoxFlexGrowShrink>`  | —       | Applies responsive `.flex-shrink-*`.                                          |
+| `flexWrap`                 | `BoxResponsive<BoxFlexWrap>`        | —       | Applies responsive `.flex-*` wrap classes.                                    |
+| `float`                    | `BoxResponsive<BoxFloat>`           | —       | Applies responsive `.float-{value}` classes.                                  |
+| `fontFamily`               | `BoxFontFamily`                     | —       | Applies `.font-*`.                                                            |
+| `fontSize`                 | `BoxFontSize`                       | —       | Applies `.fs-*`.                                                              |
+| `fontStyle`                | `BoxFontStyle`                      | —       | Applies `.fst-*`.                                                             |
+| `fontWeight`               | `BoxFontWeight`                     | —       | Applies `.fw-*`.                                                              |
+| `gap`                      | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.gap-*` classes.                                          |
+| `gradient`                 | `boolean`                           | `false` | Applies `.bg-gradient`.                                                       |
+| `gridAutoFlow`             | `BoxResponsive<BoxGridAutoFlow>`    | —       | Applies responsive `.grid-auto-flow-*` classes.                               |
+| `gridColumn`               | `BoxResponsive<BoxGridColumn>`      | —       | Applies responsive `.grid-cols-fill`.                                         |
+| `gridColumns`              | `BoxResponsive<BoxGridColumns>`     | —       | Applies responsive `.grid-cols-*` column-count classes.                       |
+| `height`                   | `BoxHeight`                         | —       | Applies `.h-*`; non-utility native dimension values are forwarded.            |
+| `hoverLinkOpacity`         | `BoxOpacity`                        | —       | Applies `.hover:link-*`.                                                      |
+| `hoverUnderlineOffset`     | `BoxUnderlineOffset`                | —       | Applies `.hover:underline-offset-*`.                                          |
+| `hoverUnderlineOpacity`    | `BoxOpacity`                        | —       | Applies `.hover:underline-*`.                                                 |
+| `hoverUnderlineThickness`  | `BoxUnderlineThickness`             | —       | Applies `.hover:underline-thickness-*`.                                       |
+| `justifyContent`           | `BoxResponsive<BoxJustifyContent>`  | —       | Applies responsive `.justify-content-*` classes.                              |
+| `justifyItems`             | `BoxResponsive<BoxJustifyItems>`    | —       | Applies responsive `.justify-items-*` classes.                                |
+| `justifySelf`              | `BoxResponsive<BoxJustifySelf>`     | —       | Applies responsive `.justify-self-*` classes.                                 |
+| `lineHeight`               | `BoxLineHeight`                     | —       | Applies `.lh-*`.                                                              |
+| `linkOpacity`              | `BoxOpacity`                        | —       | Applies `.link-*`.                                                            |
+| `margin`                   | `BoxResponsive<BoxMargin>`          | —       | Applies responsive `.m-*` classes.                                            |
+| `marginBottom`             | `BoxResponsive<BoxMargin>`          | —       | Applies responsive `.mb-*` classes.                                           |
+| `marginEnd`                | `BoxResponsive<BoxNegativeMargin>`  | —       | Applies responsive `.me-*` classes, including negative values.                |
+| `marginStart`              | `BoxResponsive<BoxNegativeMargin>`  | —       | Applies responsive `.ms-*` classes, including negative values.                |
+| `marginTop`                | `BoxResponsive<BoxMargin>`          | —       | Applies responsive `.mt-*` classes.                                           |
+| `marginX`                  | `BoxResponsive<BoxMargin>`          | —       | Applies responsive `.mx-*` classes.                                           |
+| `marginY`                  | `BoxResponsive<BoxMargin>`          | —       | Applies responsive `.my-*` classes.                                           |
+| `maxHeight`                | `100`                               | —       | Applies `.max-h-100`.                                                         |
+| `maxWidth`                 | `100`                               | —       | Applies `.max-w-100`.                                                         |
+| `minDynamicViewportHeight` | `100`                               | —       | Applies `.min-dvh-100`.                                                       |
+| `minDynamicViewportWidth`  | `100`                               | —       | Applies `.min-dvw-100`.                                                       |
+| `minHeight`                | `0 \| 100`                          | —       | Applies `.min-h-*`.                                                           |
+| `minViewportHeight`        | `100`                               | —       | Applies `.min-vh-100`.                                                        |
+| `minViewportWidth`         | `100`                               | —       | Applies `.min-vw-100`.                                                        |
+| `minWidth`                 | `0 \| 100`                          | —       | Applies `.min-w-*`.                                                           |
+| `objectFit`                | `BoxResponsive<BoxObjectFit>`       | —       | Applies responsive `.object-fit-{value}` classes.                             |
+| `opacity`                  | `BoxOpacityStep`                    | —       | Applies `.opacity-*`.                                                         |
+| `order`                    | `BoxResponsive<BoxOrder>`           | —       | Applies responsive `.order-*` classes.                                        |
+| `overflow`                 | `BoxOverflow`                       | —       | Applies `.overflow-{value}`.                                                  |
+| `overflowX`                | `BoxOverflow`                       | —       | Applies `.overflow-x-{value}`.                                                |
+| `overflowY`                | `BoxOverflow`                       | —       | Applies `.overflow-y-{value}`.                                                |
+| `padding`                  | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.p-*` classes.                                            |
+| `paddingBottom`            | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.pb-*` classes.                                           |
+| `paddingEnd`               | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.pe-*` classes.                                           |
+| `paddingStart`             | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.ps-*` classes.                                           |
+| `paddingTop`               | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.pt-*` classes.                                           |
+| `paddingX`                 | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.px-*` classes.                                           |
+| `paddingY`                 | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.py-*` classes.                                           |
+| `placeItems`               | `BoxResponsive<BoxJustifyItems>`    | —       | Applies responsive `.place-items-*` classes.                                  |
+| `pointerEvents`            | `BoxPointerEvents`                  | —       | Applies `.pe-*`.                                                              |
+| `position`                 | `BoxPosition`                       | —       | Applies `.position-{value}`.                                                  |
+| `rounded`                  | `boolean \| BoxRadius`              | —       | Applies `.rounded` or `.rounded-{value}`.                                     |
+| `roundedBottom`            | `boolean \| BoxRadius`              | —       | Applies `.rounded-bottom[-{value}]`.                                          |
+| `roundedEnd`               | `boolean \| BoxRadius`              | —       | Applies `.rounded-end[-{value}]`.                                             |
+| `roundedSize`              | `BoxRadius`                         | —       | Applies `.rounded-size-{value}`.                                              |
+| `roundedStart`             | `boolean \| BoxRadius`              | —       | Applies `.rounded-start[-{value}]`.                                           |
+| `roundedTop`               | `boolean \| BoxRadius`              | —       | Applies `.rounded-top[-{value}]`.                                             |
+| `rowGap`                   | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.row-gap-*` classes.                                      |
+| `shadow`                   | `boolean \| BoxShadow`              | —       | Applies `.shadow` or `.shadow-*`.                                             |
+| `shadowColor`              | `BoxShadowColor`                    | —       | Applies `.shadow-{color}`.                                                    |
+| `shadowOpacity`            | `BoxOpacity`                        | —       | Applies `.shadow-opacity-*`.                                                  |
+| `spaceX`                   | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.space-x-*` child spacing.                                |
+| `spaceY`                   | `BoxResponsive<BoxSpacing>`         | —       | Applies responsive `.space-y-*` child spacing.                                |
+| `start`                    | `BoxPositionOffset`                 | —       | Applies `.start-{value}`.                                                     |
+| `textAlign`                | `BoxResponsive<BoxTextAlign>`       | —       | Applies responsive `.text-*` alignment classes.                               |
+| `textBreak`                | `boolean`                           | `false` | Applies `.text-break`.                                                        |
+| `textDecoration`           | `BoxTextDecoration`                 | —       | Applies `.text-decoration-*`.                                                 |
+| `textSize`                 | `BoxFontSize`                       | —       | Applies `.text-*` font-size and line-height classes.                          |
+| `textTransform`            | `BoxTextTransform`                  | —       | Applies `.text-*` transformation classes.                                     |
+| `textWrap`                 | `BoxTextWrap`                       | —       | Applies `.text-*` wrapping classes.                                           |
+| `theme`                    | `BoxTheme`                          | —       | Applies `.theme-{color}` and cascades that color's tokens to descendants.     |
+| `themeBorder`              | `boolean`                           | `false` | Applies `.theme-border`.                                                      |
+| `themeReset`               | `boolean`                           | `false` | Applies `.theme-reset`.                                                       |
+| `themeStyle`               | `'contrast' \| 'subtle' \| 'muted'` | —       | Applies `.theme-contrast`, `.theme-subtle`, or `.theme-muted`.                |
+| `top`                      | `BoxPositionOffset`                 | —       | Applies `.top-{value}`.                                                       |
+| `transition`               | `'none'`                            | —       | Applies `.transition-none`.                                                   |
+| `translateMiddle`          | `boolean \| 'x' \| 'y'`             | `false` | Applies `.translate-middle`, `.translate-middle-x`, or `.translate-middle-y`. |
+| `underlineColor`           | `BoxUnderlineColor`                 | —       | Applies `.underline-{color}`.                                                 |
+| `underlineOffset`          | `BoxUnderlineOffset`                | —       | Applies `.underline-offset-*`.                                                |
+| `underlineOpacity`         | `BoxOpacity`                        | —       | Applies `.underline-*`.                                                       |
+| `underlineThickness`       | `BoxUnderlineThickness`             | —       | Applies `.underline-thickness-*`.                                             |
+| `userSelect`               | `BoxUserSelect`                     | —       | Applies `.user-select-*`.                                                     |
+| `verticalAlign`            | `BoxVerticalAlign`                  | —       | Applies `.align-*` vertical-alignment classes.                                |
+| `viewportHeight`           | `100`                               | —       | Applies `.vh-100`.                                                            |
+| `viewportWidth`            | `100`                               | —       | Applies `.vw-100`.                                                            |
+| `visibility`               | `BoxVisibility`                     | —       | Applies `.visible` or `.invisible`.                                           |
+| `width`                    | `BoxWidth`                          | —       | Applies `.w-*`; non-utility native dimension values are forwarded.            |
+| `zIndex`                   | `BoxZIndex`                         | —       | Applies `.z-{value}` (`-1` maps to `.z-n1`).                                  |
+| `...props`                 | `ComponentPropsWithoutRef<C>`       | —       | Native props of the selected component, forwarded to it.                      |
 
 `BoxResponsive<T>` accepts one value or a partial map keyed by `xs`, `sm`, `md`,
 `lg`, `xl`, and `2xl`. `Box`, `BoxProps`, and all Box utility types are exported
-from the package entry point. See the Bootstrap
-[colors](https://getbootstrap.com/docs/6.0/utilities/colors/),
-[background](https://getbootstrap.com/docs/6.0/utilities/background/),
-[color scheme](https://getbootstrap.com/docs/6.0/utilities/color-scheme/), and
-[theme](https://getbootstrap.com/docs/6.0/utilities/theme/),
-[aspect ratio](https://getbootstrap.com/docs/6.0/utilities/aspect-ratio/),
-[container queries](https://getbootstrap.com/docs/6.0/utilities/container-queries/),
-[display](https://getbootstrap.com/docs/6.0/utilities/display/),
-[float](https://getbootstrap.com/docs/6.0/utilities/float/),
-[object fit](https://getbootstrap.com/docs/6.0/utilities/object-fit/),
-[overflow](https://getbootstrap.com/docs/6.0/utilities/overflow/),
-[position](https://getbootstrap.com/docs/6.0/utilities/position/),
-[visibility](https://getbootstrap.com/docs/6.0/utilities/visibility/), and
-[z-index](https://getbootstrap.com/docs/6.0/utilities/z-index/) documentation.
+from the package entry point. The props cover every class-producing utility page
+in Bootstrap's Utilities sidebar; `api` is documentation about Sass rather than
+a class utility. See the Bootstrap
+[Utilities documentation](https://getbootstrap.com/docs/6.0/utilities/) for
+details and examples.
