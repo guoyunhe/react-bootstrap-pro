@@ -5,7 +5,10 @@ export type { ContainerBreakpoint, ContainerProps } from './container';
 export { Col, Row } from './grid';
 export type {
   ColProps,
+  GridAlignItems,
+  GridAlignSelf,
   GridBreakpoint,
+  GridJustifyContent,
   GridOrder,
   GridResponsive,
   GridSpan,

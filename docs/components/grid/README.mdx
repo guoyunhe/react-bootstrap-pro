@@ -6,6 +6,7 @@ order: 3
 import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Container, Row } from '../../../src';
 import { DemoContainer } from '../demo-container';
+import { ColumnFeaturesDemo } from './demos/column-features';
 import { GridLayoutsDemo } from './demos/grid-layouts';
 
 # Grid
@@ -49,7 +50,13 @@ the unprefixed class, while later breakpoints use Bootstrap 6's `sm:`, `md:`,
 
 `Col` renders `.col` by default. Use `span='auto'` for content-sized columns,
 and set `offset` or `order` to position or reorder a column at selected
-breakpoints.
+breakpoints. Columns wrap when their combined widths exceed 12 grid columns.
+
+<DemoContainer>
+  <Container fluid>
+    <ColumnFeaturesDemo />
+  </Container>
+</DemoContainer>
 
 ```tsx
 <Row>
@@ -59,6 +66,89 @@ breakpoints.
   </Col>
   <Col order={{ xs: 'last', md: 'first' }}>Responsive order</Col>
 </Row>
+```
+
+## Alignment
+
+Set `alignItems` on a row to vertically align all its columns, and
+`justifyContent` to distribute columns horizontally. Set `alignSelf` on an
+individual column to override the row's vertical alignment. All three props
+accept responsive values. `alignItems` and `alignSelf` support `start`,
+`center`, `end`, `baseline`, and `stretch`; `alignSelf` also supports `auto`.
+`justifyContent` supports `start`, `center`, `end`, `around`, `between`, and
+`evenly`.
+
+```tsx
+<Row
+  alignItems={{ xs: 'start', md: 'center' }}
+  justifyContent='between'
+  style={{ minHeight: '8rem' }}
+>
+  <Col>Aligned with the row</Col>
+  <Col alignSelf='end'>Aligned individually</Col>
+</Row>
+```
+
+## Column wrapping and breaks
+
+Columns wrap naturally when their widths exceed the 12-column row. To start a
+new line at a specific point, add a full-width element. Use responsive display
+utilities to make the break conditional:
+
+```tsx
+<Row>
+  <Col span={{ xs: 6, sm: 3 }}>First</Col>
+  <Col span={{ xs: 6, sm: 3 }}>Second</Col>
+  <div className='w-100 d-none md:d-block' aria-hidden='true' />
+  <Col span={{ xs: 6, sm: 3 }}>Third</Col>
+  <Col span={{ xs: 6, sm: 3 }}>Fourth</Col>
+</Row>
+```
+
+## Reordering
+
+Use `order` to change the visual order at selected breakpoints. Available
+utilities include numbers `1` through `5`, `first`, and `last`. Visual order
+does not change DOM order, so keep the source order meaningful for keyboard and
+screen-reader users.
+
+```tsx
+<Row>
+  <Col order={{ xs: 'last', md: 'first' }}>First in the DOM</Col>
+  <Col>Second in the DOM</Col>
+  <Col order={{ xs: 1, md: 5 }}>Third in the DOM</Col>
+</Row>
+```
+
+## Offsetting
+
+Use `offset` to move a column to the right by a number of grid columns. Set a
+responsive offset to `0` to reset it at a later breakpoint. For flexible
+spacing, Bootstrap margin utilities such as `ms-auto` can be passed through
+`className`.
+
+```tsx
+<Row>
+  <Col span={{ sm: 5, md: 6 }}>First column</Col>
+  <Col span={{ sm: 5, md: 6 }} offset={{ sm: 2, md: 0 }}>
+    Responsive offset
+  </Col>
+</Row>
+<Row>
+  <Col span='auto'>Natural width</Col>
+  <Col span='auto' className='ms-auto'>Pushed to the end</Col>
+</Row>
+```
+
+## Standalone columns
+
+`Col` can also be used outside a `Row` to apply a responsive width. In that
+case, Bootstrap does not apply the row's gutter padding.
+
+```tsx
+<Col span={{ xs: 6, md: 3 }} className='border p-3'>
+  Standalone column
+</Col>
 ```
 
 ## Gutters
@@ -79,19 +169,22 @@ responsive values can use the same breakpoint object as column sizes.
 
 ### Row
 
-| Prop        | Type                               | Default | Description                                                                                       |
-| ----------- | ---------------------------------- | ------- | ------------------------------------------------------------------------------------------------- |
-| `cols`      | `GridResponsive<number \| 'auto'>` | —       | Sets `.row-cols-*`; a number applies at all sizes, or a breakpoint object sets responsive counts. |
-| `gutter`    | `GridResponsive<number>`           | —       | Sets horizontal and vertical gutters using `.g-*` classes.                                        |
-| `gutterX`   | `GridResponsive<number>`           | —       | Sets horizontal gutters using `.gx-*` classes.                                                    |
-| `gutterY`   | `GridResponsive<number>`           | —       | Sets vertical gutters using `.gy-*` classes.                                                      |
-| `className` | `string`                           | —       | Additional class names.                                                                           |
-| `...props`  | `HTMLAttributes<HTMLDivElement>`   | —       | Native `<div>` attributes.                                                                        |
+| Prop             | Type                                 | Default | Description                                                                                       |
+| ---------------- | ------------------------------------ | ------- | ------------------------------------------------------------------------------------------------- |
+| `alignItems`     | `GridResponsive<GridAlignItems>`     | —       | Sets responsive vertical alignment for the row's columns.                                         |
+| `cols`           | `GridResponsive<number \| 'auto'>`   | —       | Sets `.row-cols-*`; a number applies at all sizes, or a breakpoint object sets responsive counts. |
+| `gutter`         | `GridResponsive<number>`             | —       | Sets horizontal and vertical gutters using `.g-*` classes.                                        |
+| `gutterX`        | `GridResponsive<number>`             | —       | Sets horizontal gutters using `.gx-*` classes.                                                    |
+| `gutterY`        | `GridResponsive<number>`             | —       | Sets vertical gutters using `.gy-*` classes.                                                      |
+| `justifyContent` | `GridResponsive<GridJustifyContent>` | —       | Sets responsive horizontal distribution of columns.                                               |
+| `className`      | `string`                             | —       | Additional class names.                                                                           |
+| `...props`       | `HTMLAttributes<HTMLDivElement>`     | —       | Native `<div>` attributes.                                                                        |
 
 ### Col
 
 | Prop        | Type                                          | Default | Description                                                   |
 | ----------- | --------------------------------------------- | ------- | ------------------------------------------------------------- |
+| `alignSelf` | `GridResponsive<GridAlignSelf>`               | —       | Overrides the row's vertical alignment for this column.       |
 | `span`      | `GridResponsive<number \| 'auto'>`            | `.col`  | Sets the column width with `.col-*`; `auto` sizes to content. |
 | `offset`    | `GridResponsive<number>`                      | —       | Adds `.offset-*` to move the column to the right.             |
 | `order`     | `GridResponsive<number \| 'first' \| 'last'>` | —       | Sets the visual order with `.order-*` classes.                |
@@ -100,5 +193,6 @@ responsive values can use the same breakpoint object as column sizes.
 
 `GridResponsive<T>` accepts either a value applied at every breakpoint or an
 object with `xs`, `sm`, `md`, `lg`, `xl`, and `2xl` keys. See Bootstrap's
-[grid documentation](https://getbootstrap.com/docs/6.0/layout/grid/) for
+[grid documentation](https://getbootstrap.com/docs/6.0/layout/grid/) and
+[columns documentation](https://getbootstrap.com/docs/6.0/layout/columns/) for
 additional layout guidance.
