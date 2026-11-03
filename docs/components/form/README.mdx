@@ -10,6 +10,14 @@ import { FormAdornSizingDemo } from './demos/adorn-sizing';
 import { FormAdornTextDemo } from './demos/adorn-text';
 import { FormBasicDemo } from './demos/basic';
 import { FormDisabledDemo } from './demos/disabled';
+import { FormLayoutAutoSizingDemo } from './demos/layout-auto-sizing';
+import { FormLayoutColumnSizingDemo } from './demos/layout-column-sizing';
+import { FormLayoutGridDemo } from './demos/layout-form-grid';
+import { FormLayoutGuttersDemo } from './demos/layout-gutters';
+import { FormLayoutHorizontalDemo } from './demos/layout-horizontal';
+import { FormLayoutHorizontalSizingDemo } from './demos/layout-horizontal-sizing';
+import { FormLayoutInlineDemo } from './demos/layout-inline';
+import { FormLayoutUtilitiesDemo } from './demos/layout-utilities';
 
 # Form
 
@@ -104,6 +112,130 @@ Do not put buttons or other interactive controls inside the wrapper, because a
 `label` must not contain interactive content. Name the field with a separate
 `FormLabel` pointing at the ghost input through `htmlFor`.
 
+## Layout
+
+Forms stack vertically by default, because Bootstrap applies `display: block`
+and `width: 100%` to almost every form control. Spacing utilities, the grid, and
+flex utilities change that per form. Wrap each group of fields in a `<form>`,
+and set `type` on every button, because a `<button>` inside a form defaults to
+`type="submit"`.
+
+### Utilities
+
+Margin utilities are the easiest way to add structure: group each label,
+control, and help text in a `FormField` and give the group a bottom margin. Stick
+to one direction throughout the form for consistency.
+
+<DemoContainer>
+  <FormLayoutUtilitiesDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-utilities.tsx'
+
+```
+
+### Form grid
+
+Use `Row` and `Col` for forms that need multiple columns, varied widths, or
+additional alignment options. Columns inside a row split the available width
+equally unless a span says otherwise.
+
+<DemoContainer>
+  <FormLayoutGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-form-grid.tsx'
+
+```
+
+### Gutters
+
+Set `gutter`, `gutterX`, or `gutterY` on `Row` to control the spacing between
+columns in both directions. Combined with responsive `Col` spans, that covers
+more complex layouts.
+
+<DemoContainer>
+  <FormLayoutGuttersDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-gutters.tsx'
+
+```
+
+### Horizontal form
+
+Create horizontal forms by putting each group in a `Row` and giving labels and
+controls their own `Col` spans. Set `col` on `FormLabel` to render
+`.col-form-label`, so labels line up with their controls.
+
+<DemoContainer>
+  <FormLayoutHorizontalDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-horizontal.tsx'
+
+```
+
+Wrap a group of checkboxes or radios in a `fieldset` with a `legend` rendered as
+`FormLabel component='legend' col`, and render stacked options with
+`FormField marginBottom={1}` inside a single `Col`.
+
+#### Horizontal form label sizing
+
+Use `col='sm'` or `col='lg'` on `FormLabel` to follow the size of
+`FormControl size='sm'` and `size='lg'`.
+
+<DemoContainer>
+  <FormLayoutHorizontalSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-horizontal-sizing.tsx'
+
+```
+
+### Column sizing
+
+Give a subset of the columns a numeric `span` and leave the rest without one;
+the remaining columns split the leftover space equally. Use
+`span={{ sm: true }}` to render a bare `sm:col` class.
+
+<DemoContainer>
+  <FormLayoutColumnSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-column-sizing.tsx'
+
+```
+
+### Auto-sizing
+
+`Col span='auto'` sizes a column to its content. Combine it with
+`alignItems='center'` on `Row` to vertically center inputs, checkboxes, and
+buttons, and swap the auto columns for size-specific spans when you need a fixed
+width.
+
+<DemoContainer>
+  <FormLayoutAutoSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-auto-sizing.tsx'
+
+```
+
+### Inline forms
+
+Use `Row cols={{ lg: 'auto' }}` for a responsive inline layout. Keeping
+`Col span={12}` on each field stacks the controls on narrow viewports, while
+`gutter` adds spacing in both directions.
+
+<DemoContainer>
+  <FormLayoutInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-inline.tsx'
+
+```
+
 ## Accessibility
 
 Give every control an accessible name. The simplest approach is a visible
@@ -133,10 +265,11 @@ possible. Associate help text with `aria-describedby`.
 
 ### FormLabel
 
-| Prop        | Type          | Description                             |
-| ----------- | ------------- | --------------------------------------- |
-| `component` | `ElementType` | Renders a `label` by default.           |
-| `...props`  | `BoxProps<C>` | Native props and all Box utility props. |
+| Prop        | Type                      | Description                                                                               |
+| ----------- | ------------------------- | ----------------------------------------------------------------------------------------- |
+| `col`       | `boolean \| 'sm' \| 'lg'` | Renders `.col-form-label` for horizontal forms; `'sm'` and `'lg'` match the control size. |
+| `component` | `ElementType`             | Renders a `label` by default.                                                             |
+| `...props`  | `BoxProps<C>`             | Native props and all Box utility props.                                                   |
 
 ### FormText
 

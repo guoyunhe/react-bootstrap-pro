@@ -7,7 +7,7 @@ export type GridBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export type GridResponsive<T> = T | Partial<Record<GridBreakpoint, T>>;
 
-export type GridSpan = number | 'auto';
+export type GridSpan = number | 'auto' | true;
 export type GridOrder = number | 'first' | 'last';
 export type GridAlignItems = 'start' | 'center' | 'end' | 'baseline' | 'stretch';
 export type GridAlignSelf = 'auto' | GridAlignItems;
@@ -15,7 +15,7 @@ export type GridJustifyContent = 'start' | 'center' | 'end' | 'around' | 'betwee
 
 const breakpoints: readonly GridBreakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 
-function getResponsiveClasses<T extends number | string>(
+function getResponsiveClasses<T extends number | string | boolean>(
   utility: string,
   value: GridResponsive<T> | undefined,
 ) {
@@ -24,7 +24,7 @@ function getResponsiveClasses<T extends number | string>(
   }
 
   if (typeof value !== 'object') {
-    return [`${utility}-${value}`];
+    return [value === true ? utility : `${utility}-${value}`];
   }
 
   return breakpoints.flatMap((breakpoint) => {
@@ -34,7 +34,9 @@ function getResponsiveClasses<T extends number | string>(
     }
 
     const prefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
-    return [`${prefix}${utility}-${breakpointValue}`];
+    return [
+      breakpointValue === true ? `${prefix}${utility}` : `${prefix}${utility}-${breakpointValue}`,
+    ];
   });
 }
 

@@ -10,6 +10,14 @@ import { FormAdornSizingDemo } from './demos/adorn-sizing';
 import { FormAdornTextDemo } from './demos/adorn-text';
 import { FormBasicDemo } from './demos/basic';
 import { FormDisabledDemo } from './demos/disabled';
+import { FormLayoutAutoSizingDemo } from './demos/layout-auto-sizing';
+import { FormLayoutColumnSizingDemo } from './demos/layout-column-sizing';
+import { FormLayoutGridDemo } from './demos/layout-form-grid';
+import { FormLayoutGuttersDemo } from './demos/layout-gutters';
+import { FormLayoutHorizontalDemo } from './demos/layout-horizontal';
+import { FormLayoutHorizontalSizingDemo } from './demos/layout-horizontal-sizing';
+import { FormLayoutInlineDemo } from './demos/layout-inline';
+import { FormLayoutUtilitiesDemo } from './demos/layout-utilities';
 
 # Form 表单
 
@@ -97,6 +105,121 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 不要在容器内放置按钮等交互控件，因为 `label` 不能包含交互内容。请使用独立的
 `FormLabel` 通过 `htmlFor` 指向 ghost 输入框来命名该字段。
 
+## 布局
+
+表单默认纵向堆叠，因为 Bootstrap 为几乎所有表单控件设置了 `display: block` 与
+`width: 100%`。可以按表单使用间距工具类、栅格与弹性布局工具类来改变这种排列。请将每
+组字段放在 `<form>` 中，并为每个按钮显式设置 `type`，因为表单内的 `<button>` 默认是
+`type="submit"`。
+
+### 工具类
+
+间距工具类是添加结构最简单的方式：把标签、控件与帮助文本放进 `FormField`，再给分组
+添加下外边距。为了保持一致，整个表单建议只使用一个方向的外边距。
+
+<DemoContainer>
+  <FormLayoutUtilitiesDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-utilities.tsx'
+
+```
+
+### 表单栅格
+
+需要多列、不同宽度或更多对齐方式时，使用 `Row` 与 `Col`。除非指定跨度，同一行中的
+列会均分可用宽度。
+
+<DemoContainer>
+  <FormLayoutGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-form-grid.tsx'
+
+```
+
+### 间隔
+
+在 `Row` 上设置 `gutter`、`gutterX` 或 `gutterY` 可同时控制横向与纵向的列间隔。配合
+响应式的 `Col` 跨度，可构建更复杂的布局。
+
+<DemoContainer>
+  <FormLayoutGuttersDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-gutters.tsx'
+
+```
+
+### 水平表单
+
+将每组字段放进 `Row`，并分别为标签与控件设置 `Col` 跨度，即可创建水平表单。在
+`FormLabel` 上设置 `col` 会渲染 `.col-form-label`，让标签与控件对齐。
+
+<DemoContainer>
+  <FormLayoutHorizontalDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-horizontal.tsx'
+
+```
+
+将一组复选框或单选按钮放进 `fieldset`，并用
+`FormLabel component='legend' col` 渲染 `legend`，在同一个 `Col` 内用
+`FormField marginBottom={1}` 逐项堆叠选项。
+
+#### 水平表单标签尺寸
+
+用 `FormLabel` 的 `col='sm'` 或 `col='lg'` 匹配 `FormControl size='sm'` 与
+`size='lg'` 的尺寸。
+
+<DemoContainer>
+  <FormLayoutHorizontalSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-horizontal-sizing.tsx'
+
+```
+
+### 列宽
+
+为部分列指定数字 `span`，其余列不设置跨度，它们会均分剩余空间。使用
+`span={{ sm: true }}` 可渲染不带数字的 `sm:col` 类。
+
+<DemoContainer>
+  <FormLayoutColumnSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-column-sizing.tsx'
+
+```
+
+### 自动宽度
+
+`Col span='auto'` 让列宽由内容决定。配合 `Row` 的 `alignItems='center'` 可让输入框、
+复选框与按钮垂直居中；需要固定宽度时，把自动列换成指定跨度的列。
+
+<DemoContainer>
+  <FormLayoutAutoSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-auto-sizing.tsx'
+
+```
+
+### 内联表单
+
+使用 `Row cols={{ lg: 'auto' }}` 构建响应式内联布局。为每个字段保留 `Col span={12}`，
+在窄屏幕上会纵向堆叠；`gutter` 会同时增加两个方向的间距。
+
+<DemoContainer>
+  <FormLayoutInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/layout-inline.tsx'
+
+```
+
 ## 无障碍
 
 每个控件都需要可访问名称。最简单的方式是用 `htmlFor` 绑定可见的 `FormLabel`；
@@ -125,10 +248,11 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 
 ### FormLabel
 
-| 属性        | 类型          | 说明                            |
-| ----------- | ------------- | ------------------------------- |
-| `component` | `ElementType` | 默认渲染 `label`。              |
-| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+| 属性        | 类型                      | 说明                                                              |
+| ----------- | ------------------------- | ----------------------------------------------------------------- |
+| `col`       | `boolean \| 'sm' \| 'lg'` | 水平表单中渲染 `.col-form-label`；`'sm'` 与 `'lg'` 匹配控件尺寸。 |
+| `component` | `ElementType`             | 默认渲染 `label`。                                                |
+| `...props`  | `BoxProps<C>`             | 原生属性及所有 Box 工具类属性。                                   |
 
 ### FormText
 
