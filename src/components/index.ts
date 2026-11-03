@@ -20,6 +20,8 @@ export * from './form-field-content';
 export * from './form-label';
 export * from './form-text';
 export * from './grid';
+export * from './input-group';
+export * from './input-group-text';
 export * from './list-group';
 export * from './menu';
 export * from './nav-overflow';

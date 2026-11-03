@@ -1,0 +1,143 @@
+---
+title: Input group
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { InputGroupBasicDemo } from './demos/basic';
+import { InputGroupButtonsDemo } from './demos/buttons';
+import { InputGroupCheckRadioDemo } from './demos/check-radio';
+import { InputGroupElementsDemo } from './demos/elements';
+import { InputGroupFieldDemo } from './demos/field';
+import { InputGroupMultipleDemo } from './demos/multiple';
+import { InputGroupSizingDemo } from './demos/sizing';
+
+# Input group
+
+`InputGroup` attaches add-ons to a textual control, and `InputGroupText` renders
+the matching `.input-group-text` addon. Add-ons can be text, icons, checkboxes,
+radios, or buttons. Keep labels outside the group and pair it with `FormField`
+for labels, help text, and validation styles.
+
+## Basic example
+
+Place one add-on on either side of the control, or one on each side.
+
+<DemoContainer>
+  <InputGroupBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+Describe the control with `aria-describedby` pointing at the addon's `id` when
+the addon carries meaning, such as an `@` prefix.
+
+## With form field
+
+Wrap the input group in a `FormField` to pair it with a label and description.
+
+<DemoContainer>
+  <InputGroupFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/field.tsx'
+
+```
+
+## Buttons
+
+Add `className='input-group-btn'` to `Button` so the button stacks above the
+control border and raises its `z-index` on focus.
+
+<DemoContainer>
+  <InputGroupButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/buttons.tsx'
+
+```
+
+## Textareas, selects, and file inputs
+
+Input groups adapt to the height of textareas, and they work with selects and
+file inputs as well. Render a `label` addon with
+`InputGroupText component='label'` and bind it with `htmlFor`.
+
+<DemoContainer>
+  <InputGroupElementsDemo />
+</DemoContainer>
+
+```tsx src='./demos/elements.tsx'
+
+```
+
+## Checkboxes and radios
+
+Place a `Checkbox` or `Radio` inside an `InputGroupText` rendered as a `div`.
+
+<DemoContainer>
+  <InputGroupCheckRadioDemo />
+</DemoContainer>
+
+```tsx src='./demos/check-radio.tsx'
+
+```
+
+## Multiple inputs and addons
+
+Multiple controls and add-ons are supported, including controls separated by
+add-ons.
+
+<DemoContainer>
+  <InputGroupMultipleDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple.tsx'
+
+```
+
+Validation styles are only available for groups with a single control.
+
+## Border radius
+
+The group removes inner border radii automatically. When you insert an extra
+element that should not take part in that logic, add `className='input-group-ignore'`
+to it.
+
+## Sizing
+
+Set `size='sm'` or `size='lg'` on `InputGroup` to resize the whole group. Do not
+set sizes on the individual add-ons or controls.
+
+<DemoContainer>
+  <InputGroupSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizing.tsx'
+
+```
+
+## API
+
+### InputGroup
+
+| Prop        | Type           | Description                              |
+| ----------- | -------------- | ---------------------------------------- |
+| `size`      | `'sm' \| 'lg'` | Scales the add-ons and control together. |
+| `component` | `ElementType`  | Renders a `div` by default.              |
+| `...props`  | `BoxProps<C>`  | Native props and all Box utility props.  |
+
+### InputGroupText
+
+| Prop        | Type          | Description                                                  |
+| ----------- | ------------- | ------------------------------------------------------------ |
+| `component` | `ElementType` | Renders a `span` by default; use `div` or `label` as needed. |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props.                      |
+
+## Accessibility
+
+Give the group's control an accessible name: keep the label outside the group,
+or use `aria-label` when no visible label fits. Reference text add-ons with
+`aria-describedby`.

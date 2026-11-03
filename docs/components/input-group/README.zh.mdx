@@ -1,0 +1,137 @@
+---
+title: Input group 输入框组
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { InputGroupBasicDemo } from './demos/basic';
+import { InputGroupButtonsDemo } from './demos/buttons';
+import { InputGroupCheckRadioDemo } from './demos/check-radio';
+import { InputGroupElementsDemo } from './demos/elements';
+import { InputGroupFieldDemo } from './demos/field';
+import { InputGroupMultipleDemo } from './demos/multiple';
+import { InputGroupSizingDemo } from './demos/sizing';
+
+# Input group 输入框组
+
+`InputGroup` 为文本控件挂载附加内容，`InputGroupText` 渲染对应的
+`.input-group-text` 附加块。附加块可以是文本、图标、复选框、单选按钮或按钮。
+标签应放在输入框组之外，并配合 `FormField` 获得标签、帮助文本与校验样式。
+
+## 基础示例
+
+可在控件一侧放置一个附加块，或两侧各放一个。
+
+<DemoContainer>
+  <InputGroupBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+当附加块带有语义（例如 `@` 前缀）时，用 `aria-describedby` 指向附加块的 `id`。
+
+## 配合 FormField
+
+将输入框组放入 `FormField`，即可与标签和描述文本组合。
+
+<DemoContainer>
+  <InputGroupFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/field.tsx'
+
+```
+
+## 按钮
+
+为 `Button` 添加 `className='input-group-btn'`，按钮才能正确叠放在控件边框之上，
+并在聚焦时提升 `z-index`。
+
+<DemoContainer>
+  <InputGroupButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/buttons.tsx'
+
+```
+
+## 文本域、下拉框与文件输入
+
+输入框组会自适应文本域的高度，同样适用于下拉框和文件输入。用
+`InputGroupText component='label'` 渲染 `label` 附加块，并通过 `htmlFor` 绑定。
+
+<DemoContainer>
+  <InputGroupElementsDemo />
+</DemoContainer>
+
+```tsx src='./demos/elements.tsx'
+
+```
+
+## 复选框与单选按钮
+
+将 `Checkbox` 或 `Radio` 放入渲染为 `div` 的 `InputGroupText` 中。
+
+<DemoContainer>
+  <InputGroupCheckRadioDemo />
+</DemoContainer>
+
+```tsx src='./demos/check-radio.tsx'
+
+```
+
+## 多个输入框与附加块
+
+支持多个控件与附加块，也支持用附加块分隔多个控件。
+
+<DemoContainer>
+  <InputGroupMultipleDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple.tsx'
+
+```
+
+校验样式仅适用于只包含单个控件的输入框组。
+
+## 圆角
+
+输入框组会自动移除内部圆角。若插入的多余元素不应参与该逻辑，为其添加
+`className='input-group-ignore'`。
+
+## 尺寸
+
+在 `InputGroup` 上设置 `size='sm'` 或 `size='lg'`，整个输入框组会一起缩放。
+不要在单个附加块或控件上设置尺寸。
+
+<DemoContainer>
+  <InputGroupSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizing.tsx'
+
+```
+
+## API
+
+### InputGroup
+
+| 属性        | 类型           | 说明                            |
+| ----------- | -------------- | ------------------------------- |
+| `size`      | `'sm' \| 'lg'` | 同时缩放附加块与控件。          |
+| `component` | `ElementType`  | 默认渲染 `div`。                |
+| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。 |
+
+### InputGroupText
+
+| 属性        | 类型          | 说明                                           |
+| ----------- | ------------- | ---------------------------------------------- |
+| `component` | `ElementType` | 默认渲染 `span`；可按需使用 `div` 或 `label`。 |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。                |
+
+## 无障碍
+
+为输入框组中的控件提供可访问名称：标签放在组外，或使用 `aria-label`。文本附加块
+通过 `aria-describedby` 关联到控件。

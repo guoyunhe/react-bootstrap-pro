@@ -23,6 +23,7 @@ order: 1
 - [Drawer](./drawer/)
 - [Form](./form/)
 - [Grid](./grid/)
+- [Input group](./input-group/)
 - [List group](./list-group/)
 - [Menu](./menu/)
 - [Nav](./nav/)
