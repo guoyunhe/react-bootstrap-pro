@@ -1,0 +1,146 @@
+---
+title: Chips
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { ChipInputDemo } from './demos/chip-input';
+import { ChipInputDisabledDemo } from './demos/chip-input-disabled';
+import { ChipInputThemesDemo } from './demos/chip-input-themes';
+import { ChipsDemo } from './demos/chips';
+import { ChipsThemedDemo } from './demos/themed';
+
+# Chips
+
+Chips are small interactive elements that represent entities. Unlike badges,
+chips are interactive, keep a single size, and can include icons, avatars, and
+dismiss buttons. `Chip` renders a standalone chip, and `ChipInput` renders a tag
+field that manages a list of chip values in React.
+
+## Chips
+
+Use `icon` for a leading icon, `image` for a leading avatar, and `onDismiss` to
+render a remove button. `dismissLabel` sets the remove button's accessible name.
+
+<DemoContainer>
+  <ChipsDemo />
+</DemoContainer>
+
+```tsx src='./demos/chips.tsx'
+
+```
+
+## Themed chips
+
+Set `theme` to color a chip. Chips are subtle by default, and `active` switches
+them to the solid appearance for toggle-style selections.
+
+<DemoContainer>
+  <ChipsThemedDemo />
+</DemoContainer>
+
+```tsx src='./demos/themed.tsx'
+
+```
+
+## Chip input
+
+`ChipInput` renders the `.chip-input` container with a ghost input. It manages
+the chip values: typing and pressing Enter or the separator adds a chip, clicking
+the dismiss button removes one, and pressing Backspace in an empty input selects
+and then deletes the last chip. Use `value` and `onChange` for controlled usage,
+or `defaultValue` for uncontrolled usage.
+
+<DemoContainer>
+  <ChipInputDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input.tsx'
+
+```
+
+`FormLabel` and `FormText` pair the field with a label and a description. Set
+`label` instead to render a `.chip-input-label` inside the container.
+
+## Theme variants
+
+Set `theme` on the container to color every chip inside it. Use `chipProps` to
+theme individual chips by value or index.
+
+<DemoContainer>
+  <ChipInputThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-themes.tsx'
+
+```
+
+## Disabled
+
+Set `disabled` to prevent adding chips. Existing chips become non-interactive and
+their dismiss buttons are disabled.
+
+<DemoContainer>
+  <ChipInputDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-disabled.tsx'
+
+```
+
+## API
+
+### Chip
+
+| Prop           | Type            | Description                                            |
+| -------------- | --------------- | ------------------------------------------------------ |
+| `active`       | `boolean`       | Uses the selected (solid) appearance.                  |
+| `disabled`     | `boolean`       | Dims the chip and disables its dismiss button.         |
+| `icon`         | `ReactNode`     | Renders a `.chip-icon` before the label.               |
+| `image`        | `{ src, alt? }` | Renders a `.chip-img` avatar before the label.         |
+| `onDismiss`    | `() => void`    | Renders a `.chip-dismiss` button.                      |
+| `dismissLabel` | `string`        | Accessible name of the dismiss button.                 |
+| `component`    | `ElementType`   | Renders a `span` by default.                           |
+| `...props`     | `BoxProps<C>`   | Native props and all Box utility props, incl. `theme`. |
+
+### ChipInput
+
+| Prop                                              | Type                          | Description                                                 |
+| ------------------------------------------------- | ----------------------------- | ----------------------------------------------------------- |
+| `value`                                           | `readonly string[]`           | Controlled chip values.                                     |
+| `defaultValue`                                    | `readonly string[]`           | Initial values for uncontrolled usage.                      |
+| `onChange`                                        | `(values: string[]) => void`  | Called when chips are added or removed.                     |
+| `separator`                                       | `string \| null`              | Character that adds a chip; defaults to `,`.                |
+| `allowDuplicates`                                 | `boolean`                     | Allows duplicate values; defaults to `false`.               |
+| `maxChips`                                        | `number`                      | Maximum number of chips; unlimited by default.              |
+| `createOnBlur`                                    | `boolean`                     | Adds the draft value when focus leaves; defaults to `true`. |
+| `dismissible`                                     | `boolean`                     | Renders dismiss buttons on generated chips.                 |
+| `label`                                           | `ReactNode`                   | Renders a `.chip-input-label` inside the container.         |
+| `chipProps`                                       | `(value, index) => ChipProps` | Per-chip configuration, such as `theme`.                    |
+| `id`, `name`, `placeholder`, `disabled`, `aria-*` |                               | Forwarded to the ghost input.                               |
+| `component`                                       | `ElementType`                 | Renders a `div` by default.                                 |
+| `...props`                                        | `BoxProps<C>`                 | Native props and all Box utility props, incl. `theme`.      |
+
+## Keyboard behavior
+
+| Context | Keys                   | Action                                                     |
+| ------- | ---------------------- | ---------------------------------------------------------- |
+| Input   | Enter, separator       | Adds a chip from the current value.                        |
+| Input   | Backspace / Delete     | With an empty input, selects and focuses the last chip.    |
+| Input   | ArrowLeft              | With the caret at the start, moves focus to the last chip. |
+| Input   | Escape                 | Clears the value and selection, then blurs the input.      |
+| Chip    | Backspace / Delete     | Removes the selected chips.                                |
+| Chip    | ArrowLeft / ArrowRight | Moves to the previous or next chip, or back to the input.  |
+| Chip    | Shift + arrow          | Extends the selection.                                     |
+| Chip    | Home / End             | Moves to the first chip or the input.                      |
+| Chip    | Ctrl/Cmd + A           | Selects all chips.                                         |
+| Chip    | Escape                 | Clears the selection and focuses the input.                |
+
+Click a chip to select it, Cmd/Ctrl+click to toggle it, and Shift+click to select
+a range.
+
+## Accessibility
+
+Name the field with a `<label>` bound through `htmlFor`, or use `aria-label` when
+no visible label fits. Each generated dismiss button has an `aria-label`, chips
+are focusable, and selected chips receive the `.active` class.

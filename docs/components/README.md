@@ -16,6 +16,7 @@ order: 1
 - [Card](./card/)
 - [Carousel](./carousel/)
 - [Checkbox](./checkbox/)
+- [Chips](./chips/)
 - [Close button](./close-button/)
 - [Collapse](./collapse/)
 - [Container](./container/)

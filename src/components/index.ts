@@ -9,6 +9,8 @@ export * from './button-group';
 export * from './card';
 export * from './carousel';
 export * from './checkbox';
+export * from './chip';
+export * from './chip-input';
 export * from './close-button';
 export * from './collapse';
 export * from './container';
