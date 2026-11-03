@@ -1,0 +1,276 @@
+---
+title: Table
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { TableAlignmentDemo } from './demos/alignment';
+import { TableBasicDemo } from './demos/basic';
+import { TableBordersDemo } from './demos/borders';
+import { TableCaptionDemo } from './demos/caption';
+import { TableCardDemo } from './demos/card';
+import { TableDividersDemo } from './demos/dividers';
+import { TableHoverDemo } from './demos/hover';
+import { TableNestingDemo } from './demos/nesting';
+import { TableResponsiveDemo } from './demos/responsive';
+import { TableSmallDemo } from './demos/small';
+import { TableStackedDemo } from './demos/stacked';
+import { TableStripedDemo } from './demos/striped';
+import { TableVariantsDemo } from './demos/variants';
+
+# Table
+
+Bootstrap tables are opt-in: `Table` adds the base `.table` class, and the
+modifier props cover the striped, hover, bordered, card, stacked, and responsive
+variants. `TableHead`, `TableBody`, `TableFoot`, `TableRow`, `TableHeader`,
+`TableCell`, and `TableCaption` map to the matching semantic elements, so nested
+tables stay independent from their parent.
+
+## Overview
+
+<DemoContainer>
+  <TableBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+`Table` renders a `<table>` with `.table`. Use `TableHeader` for `th` cells,
+passing `scope='col'` for column headings and `scope='row'` for row headings.
+
+## Variants
+
+Pass any theme color as `theme` to color an entire table, a `TableRow`, or a
+single `TableHeader` or `TableCell`. The variants adapt to color modes.
+
+<DemoContainer>
+  <TableVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+Using color to add meaning only provides a visual indication. Make the meaning
+obvious from the content itself, or include it through additional text that is
+hidden with `.visually-hidden`.
+
+## Accented tables
+
+### Striped rows and columns
+
+Set `striped` to zebra-stripe the rows in the `<tbody>`, and `stripedColumns` to
+stripe the columns. Both combine with theme variants.
+
+<DemoContainer>
+  <TableStripedDemo />
+</DemoContainer>
+
+```tsx src='./demos/striped.tsx'
+
+```
+
+### Hoverable rows
+
+Set `hover` to enable a hover state on rows in the `<tbody>`, and `active` on a
+`TableRow` or cell to highlight it.
+
+<DemoContainer>
+  <TableHoverDemo />
+</DemoContainer>
+
+```tsx src='./demos/hover.tsx'
+
+```
+
+## Table borders
+
+### Bordered tables
+
+Set `bordered` for borders on all sides of the table and cells. Border color
+utilities such as `borderColor='primary'` change the color.
+
+### Tables without borders
+
+Set `borderless` for a table without borders.
+
+<DemoContainer>
+  <TableBordersDemo />
+</DemoContainer>
+
+```tsx src='./demos/borders.tsx'
+
+```
+
+## Card-like tables
+
+Set `card` to wrap the table in `.table-card`, which rounds the corners, clips
+cell backgrounds, and removes the last row's bottom border. Combine it with
+`responsive` when the table can overflow.
+
+<DemoContainer>
+  <TableCardDemo />
+</DemoContainer>
+
+```tsx src='./demos/card.tsx'
+
+```
+
+## Small tables
+
+Set `small` to make the table more compact by cutting all cell padding in half.
+
+<DemoContainer>
+  <TableSmallDemo />
+</DemoContainer>
+
+```tsx src='./demos/small.tsx'
+
+```
+
+## Table group dividers
+
+Set `divider` on `TableHead`, `TableBody`, or `TableFoot` to add a thicker border
+between table groups.
+
+<DemoContainer>
+  <TableDividersDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers.tsx'
+
+```
+
+## Vertical alignment
+
+Cells in the `<thead>` are always aligned to the bottom, while `<tbody>` cells
+inherit the table's alignment. Use the `verticalAlign` Box prop on `Table`,
+`TableRow`, or a cell to re-align where needed.
+
+<DemoContainer>
+  <TableAlignmentDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment.tsx'
+
+```
+
+## Nesting
+
+Border styles, active styles, and table variants are not inherited by nested
+tables, so a nested `Table` can be styled independently. Drop its bottom margin
+with `marginBottom={0}`.
+
+<DemoContainer>
+  <TableNestingDemo />
+</DemoContainer>
+
+```tsx src='./demos/nesting.tsx'
+
+```
+
+## Caption
+
+`TableCaption` renders a `<caption>`, which functions like a heading for the
+table. Set `captionTop` on `Table` to place it above the table.
+
+<DemoContainer>
+  <TableCaptionDemo />
+</DemoContainer>
+
+```tsx src='./demos/caption.tsx'
+
+```
+
+## Stacked tables
+
+Set `stacked` to convert rows into stacked blocks when space is limited. Each row
+becomes a vertical block with the first cell as its title and the remaining cells
+as label–value pairs; the label comes from the `cell` prop on each `TableCell`.
+
+Stacked tables use container queries, so the responsive wrapper is always
+rendered. Pass a breakpoint to only stack below it, for example `stacked='md'`.
+
+<DemoContainer>
+  <TableStackedDemo />
+</DemoContainer>
+
+```tsx src='./demos/stacked.tsx'
+
+```
+
+## Responsive tables
+
+Set `responsive` to wrap the table in `.table-responsive` for horizontal
+scrolling, or pass a breakpoint to only scroll up to that width, for example
+`responsive='md'`.
+
+<DemoContainer>
+  <TableResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
+```
+
+Responsive tables use `overflow-y: hidden`, which clips content beyond the top
+and bottom edges of the table, including menus and other third-party widgets.
+
+## API
+
+### Table
+
+| Prop             | Type                                               | Description                                                |
+| ---------------- | -------------------------------------------------- | ---------------------------------------------------------- |
+| `striped`        | `boolean`                                          | Zebra-stripes the rows in the `<tbody>`.                   |
+| `stripedColumns` | `boolean`                                          | Zebra-stripes the columns.                                 |
+| `hover`          | `boolean`                                          | Enables a hover state on rows in the `<tbody>`.            |
+| `bordered`       | `boolean`                                          | Adds borders on all sides of the table and cells.          |
+| `borderless`     | `boolean`                                          | Removes borders from the table and cells.                  |
+| `small`          | `boolean`                                          | Cuts cell padding in half.                                 |
+| `card`           | `boolean`                                          | Wraps the table in `.table-card`.                          |
+| `captionTop`     | `boolean`                                          | Places the caption above the table.                        |
+| `stacked`        | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Stacks rows into blocks, optionally below a breakpoint.    |
+| `responsive`     | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Wraps the table for horizontal scrolling.                  |
+| `component`      | `ElementType`                                      | Renders a `table` by default.                              |
+| `...props`       | `BoxProps<C>`                                      | Native props and all Box utility props, including `theme`. |
+
+### TableHead, TableBody, TableFoot
+
+| Prop        | Type          | Description                                      |
+| ----------- | ------------- | ------------------------------------------------ |
+| `divider`   | `boolean`     | Adds `.table-group-divider` above the group.     |
+| `component` | `ElementType` | Renders `thead`, `tbody`, or `tfoot` by default. |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props.          |
+
+### TableRow
+
+| Prop        | Type          | Description                              |
+| ----------- | ------------- | ---------------------------------------- |
+| `active`    | `boolean`     | Highlights the row with `.table-active`. |
+| `component` | `ElementType` | Renders a `tr` by default.               |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props.  |
+
+### TableHeader and TableCell
+
+| Prop        | Type          | Description                                                |
+| ----------- | ------------- | ---------------------------------------------------------- |
+| `active`    | `boolean`     | Highlights the cell with `.table-active`.                  |
+| `cell`      | `string`      | Label used for this cell when the table is stacked.        |
+| `component` | `ElementType` | Renders a `th` or `td` by default.                         |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props, including `theme`. |
+
+### TableCaption
+
+| Prop        | Type          | Description                             |
+| ----------- | ------------- | --------------------------------------- |
+| `component` | `ElementType` | Renders a `caption` by default.         |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props. |
+
+## Accessibility
+
+Use semantic markup: `TableHeader` for header cells with an explicit `scope`,
+and `TableCaption` to name the table so screen readers can find and describe it.
+Keep the first column as a row header when each row describes an entity. Do not
+rely on color alone—pair themed rows or cells with text or hidden labels.

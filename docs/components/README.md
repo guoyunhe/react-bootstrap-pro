@@ -46,6 +46,7 @@ order: 1
 - [Stepper](./stepper/)
 - [Switch](./switch/)
 - [Tab](./tab/)
+- [Table](./table/)
 - [Toasts](./toasts/)
 - [Toggler](./toggler/)
 - [Tooltip](./tooltip/)

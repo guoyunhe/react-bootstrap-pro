@@ -37,6 +37,7 @@ order: 1
 - [Spinner 加载指示器](./spinner/)
 - [Stepper 步骤条](./stepper/)
 - [Tab 标签页](./tab/)
+- [Table 表格](./table/)
 - [Toasts 轻提示](./toasts/)
 - [Toggler 切换器](./toggler/)
 - [Tooltip 工具提示](./tooltip/)
