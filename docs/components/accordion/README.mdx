@@ -3,15 +3,15 @@ title: Accordion
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionIcon,
-  AccordionItem,
-} from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { AccordionAlwaysOpenDemo } from './demos/always-open';
+import { AccordionBasicDemo } from './demos/basic';
 import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
+import { AccordionFlushDemo } from './demos/flush';
+import { AccordionGapDemo } from './demos/gap';
+import { AccordionNestedDemo } from './demos/nested';
+import { AccordionSmallDemo } from './demos/small';
+import { AccordionVariantsDemo } from './demos/variants';
 
 # Accordion
 
@@ -22,36 +22,7 @@ needed for the core interaction.
 ## Example
 
 <DemoContainer>
-  <Accordion>
-    <AccordionItem name='faq' open>
-      <AccordionHeader>
-        Accordion Item #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>
-        <strong>This item is open by default.</strong> The browser handles the disclosure behavior,
-        and the shared name makes the items exclusive.
-      </AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='faq'>
-      <AccordionHeader>
-        Accordion Item #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>
-        Opening this item closes the first item because they share a name.
-      </AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='faq'>
-      <AccordionHeader>
-        Accordion Item #3
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>
-        Place any content inside the body, including text, links, or other components.
-      </AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionBasicDemo />
 </DemoContainer>
 
 ```tsx
@@ -82,22 +53,7 @@ animation.
 Set a semantic theme to change the colors of the open item.
 
 <DemoContainer>
-  <Accordion theme='primary'>
-    <AccordionItem name='variant' open>
-      <AccordionHeader>
-        Primary theme
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>The open item uses the primary theme colors.</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='variant'>
-      <AccordionHeader>
-        Another item
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>Open this item to see the same theme.</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionVariantsDemo />
 </DemoContainer>
 
 ```tsx
@@ -109,22 +65,7 @@ Set a semantic theme to change the colors of the open item.
 Use the compact size for tighter padding, smaller corners, and smaller text.
 
 <DemoContainer>
-  <Accordion size='sm'>
-    <AccordionItem name='small' open>
-      <AccordionHeader>
-        Compact item #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>The small size applies compact spacing and typography.</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='small'>
-      <AccordionHeader>
-        Compact item #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>Combine small with the other variants.</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionSmallDemo />
 </DemoContainer>
 
 ```tsx
@@ -136,29 +77,7 @@ Use the compact size for tighter padding, smaller corners, and smaller text.
 Remove the outer borders and rounded corners for an edge-to-edge accordion.
 
 <DemoContainer>
-  <Accordion flush>
-    <AccordionItem name='flush' open>
-      <AccordionHeader>
-        Flush item #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>Flush removes the outside borders and rounding.</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='flush'>
-      <AccordionHeader>
-        Flush item #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>Items sit flush against their container.</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='flush'>
-      <AccordionHeader>
-        Flush item #3
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>Use this style in dense layouts.</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionFlushDemo />
 </DemoContainer>
 
 ```tsx
@@ -170,29 +89,7 @@ Remove the outer borders and rounded corners for an edge-to-edge accordion.
 Add space between items; each item keeps its own rounded card shape.
 
 <DemoContainer>
-  <Accordion gap>
-    <AccordionItem name='gap' open>
-      <AccordionHeader>
-        Spaced item #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>The gap stays constant while the panel opens and closes.</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='gap'>
-      <AccordionHeader>
-        Spaced item #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>Each item is a separate rounded card.</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='gap'>
-      <AccordionHeader>
-        Spaced item #3
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>Customize the spacing with `--accordion-gap`.</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionGapDemo />
 </DemoContainer>
 
 ```tsx
@@ -212,29 +109,7 @@ Add space between items; each item keeps its own rounded card shape.
 Omit `name` to allow multiple items to stay open at the same time.
 
 <DemoContainer>
-  <Accordion>
-    <AccordionItem open>
-      <AccordionHeader>
-        Independent item #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>This item is not grouped with the others.</AccordionBody>
-    </AccordionItem>
-    <AccordionItem open>
-      <AccordionHeader>
-        Independent item #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>Both items can remain open at once.</AccordionBody>
-    </AccordionItem>
-    <AccordionItem>
-      <AccordionHeader>
-        Independent item #3
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>Toggle each item independently.</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionAlwaysOpenDemo />
 </DemoContainer>
 
 ```tsx
@@ -251,7 +126,7 @@ This example removes `name` while expanding all items and restores it when
 collapsing them.
 
 <DemoContainer>
-  <AccordionExpandCollapseDemo expandLabel='Expand all' collapseLabel='Collapse all' />
+  <AccordionExpandCollapseDemo />
 </DemoContainer>
 
 ```tsx
@@ -276,40 +151,7 @@ Place another accordion in an item body and use a different `name` for each
 level.
 
 <DemoContainer>
-  <Accordion>
-    <AccordionItem name='outer' open>
-      <AccordionHeader>
-        Parent item #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>
-        This item contains a nested accordion.
-        <Accordion className='mt-3'>
-          <AccordionItem name='inner' open>
-            <AccordionHeader>
-              Nested item #1
-              <AccordionIcon />
-            </AccordionHeader>
-            <AccordionBody>First nested item content.</AccordionBody>
-          </AccordionItem>
-          <AccordionItem name='inner'>
-            <AccordionHeader>
-              Nested item #2
-              <AccordionIcon />
-            </AccordionHeader>
-            <AccordionBody>Second nested item content.</AccordionBody>
-          </AccordionItem>
-        </Accordion>
-      </AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='outer'>
-      <AccordionHeader>
-        Parent item #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>This item has no nested accordion.</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionNestedDemo />
 </DemoContainer>
 
 ```tsx

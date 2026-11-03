@@ -3,15 +3,15 @@ title: Accordion 手风琴
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionIcon,
-  AccordionItem,
-} from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { AccordionAlwaysOpenDemo } from './demos/always-open';
+import { AccordionBasicDemo } from './demos/basic';
 import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
+import { AccordionFlushDemo } from './demos/flush';
+import { AccordionGapDemo } from './demos/gap';
+import { AccordionNestedDemo } from './demos/nested';
+import { AccordionSmallDemo } from './demos/small';
+import { AccordionVariantsDemo } from './demos/variants';
 
 # Accordion 手风琴
 
@@ -21,32 +21,7 @@ import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 ## 示例
 
 <DemoContainer>
-  <Accordion>
-    <AccordionItem name='faq' open>
-      <AccordionHeader>
-        Accordion 条目 #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>
-        <strong>此条目默认展开。</strong>
-        浏览器负责原生展开行为，相同的 name 会让条目互斥。
-      </AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='faq'>
-      <AccordionHeader>
-        Accordion 条目 #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>展开此项会关闭第一个条目，因为它们共享 name。</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='faq'>
-      <AccordionHeader>
-        Accordion 条目 #3
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>内容区域可以包含文本、链接或其他组件。</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionBasicDemo />
 </DemoContainer>
 
 ```tsx
@@ -76,22 +51,7 @@ import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 设置语义主题，为当前展开的条目应用对应颜色。
 
 <DemoContainer>
-  <Accordion theme='primary'>
-    <AccordionItem name='variant' open>
-      <AccordionHeader>
-        Primary 主题
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>展开状态使用 primary 主题颜色。</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='variant'>
-      <AccordionHeader>
-        另一个条目
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>展开此条目可查看相同主题效果。</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionVariantsDemo />
 </DemoContainer>
 
 ```tsx
@@ -103,22 +63,7 @@ import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 使用紧凑尺寸可缩小内边距、圆角和字号。
 
 <DemoContainer>
-  <Accordion size='sm'>
-    <AccordionItem name='small' open>
-      <AccordionHeader>
-        紧凑条目 #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>紧凑尺寸会缩小间距和字号。</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='small'>
-      <AccordionHeader>
-        紧凑条目 #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>可以与其他变体组合使用。</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionSmallDemo />
 </DemoContainer>
 
 ```tsx
@@ -130,29 +75,7 @@ import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 移除外侧边框和圆角，让手风琴与父容器边缘对齐。
 
 <DemoContainer>
-  <Accordion flush>
-    <AccordionItem name='flush' open>
-      <AccordionHeader>
-        无边框条目 #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>flush 会移除外侧边框和圆角。</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='flush'>
-      <AccordionHeader>
-        无边框条目 #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>条目会贴合容器边缘。</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='flush'>
-      <AccordionHeader>
-        无边框条目 #3
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>适用于紧凑布局。</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionFlushDemo />
 </DemoContainer>
 
 ```tsx
@@ -164,29 +87,7 @@ import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 在条目之间增加间距，并让每个条目保留独立圆角。
 
 <DemoContainer>
-  <Accordion gap>
-    <AccordionItem name='gap' open>
-      <AccordionHeader>
-        间隔条目 #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>面板展开和收起时，间距保持不变。</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='gap'>
-      <AccordionHeader>
-        间隔条目 #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>每个条目都是独立的圆角卡片。</AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='gap'>
-      <AccordionHeader>
-        间隔条目 #3
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>可通过 `--accordion-gap` 自定义间距。</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionGapDemo />
 </DemoContainer>
 
 ```tsx
@@ -206,29 +107,7 @@ import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 省略 `name` 属性即可让多个条目同时保持展开。
 
 <DemoContainer>
-  <Accordion>
-    <AccordionItem open>
-      <AccordionHeader>
-        独立条目 #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>此条目不会与其他条目分组。</AccordionBody>
-    </AccordionItem>
-    <AccordionItem open>
-      <AccordionHeader>
-        独立条目 #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>多个条目可以同时展开。</AccordionBody>
-    </AccordionItem>
-    <AccordionItem>
-      <AccordionHeader>
-        独立条目 #3
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>每个条目都可以独立切换。</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionAlwaysOpenDemo />
 </DemoContainer>
 
 ```tsx
@@ -244,7 +123,7 @@ import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 展开时会移除 `name`，收起时再恢复。
 
 <DemoContainer>
-  <AccordionExpandCollapseDemo expandLabel='全部展开' collapseLabel='全部收起' />
+  <AccordionExpandCollapseDemo />
 </DemoContainer>
 
 ```tsx
@@ -268,40 +147,7 @@ function toggleAll(accordion: HTMLElement, expand: boolean) {
 可以在条目内容中嵌套另一个 Accordion，并为每一层设置不同的 `name`。
 
 <DemoContainer>
-  <Accordion>
-    <AccordionItem name='outer' open>
-      <AccordionHeader>
-        外层条目 #1
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>
-        此条目包含嵌套的手风琴。
-        <Accordion className='mt-3'>
-          <AccordionItem name='inner' open>
-            <AccordionHeader>
-              内层条目 #1
-              <AccordionIcon />
-            </AccordionHeader>
-            <AccordionBody>第一个内层条目的内容。</AccordionBody>
-          </AccordionItem>
-          <AccordionItem name='inner'>
-            <AccordionHeader>
-              内层条目 #2
-              <AccordionIcon />
-            </AccordionHeader>
-            <AccordionBody>第二个内层条目的内容。</AccordionBody>
-          </AccordionItem>
-        </Accordion>
-      </AccordionBody>
-    </AccordionItem>
-    <AccordionItem name='outer'>
-      <AccordionHeader>
-        外层条目 #2
-        <AccordionIcon />
-      </AccordionHeader>
-      <AccordionBody>此条目不包含嵌套手风琴。</AccordionBody>
-    </AccordionItem>
-  </Accordion>
+  <AccordionNestedDemo />
 </DemoContainer>
 
 ```tsx

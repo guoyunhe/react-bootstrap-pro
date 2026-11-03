@@ -8,15 +8,7 @@ import {
   Button,
 } from 'react-bootstrap-pro';
 
-type AccordionExpandCollapseDemoProps = {
-  expandLabel: string;
-  collapseLabel: string;
-};
-
-export function AccordionExpandCollapseDemo({
-  expandLabel,
-  collapseLabel,
-}: AccordionExpandCollapseDemoProps) {
+export function AccordionExpandCollapseDemo() {
   const [expanded, setExpanded] = useState(false);
 
   function toggleAll() {
@@ -52,7 +44,7 @@ export function AccordionExpandCollapseDemo({
         aria-expanded={expanded}
         onClick={toggleAll}
       >
-        {expanded ? collapseLabel : expandLabel}
+        {expanded ? 'Collapse all' : 'Expand all'}
       </Button>
       <Accordion id='accordion-expand-collapse' size='sm'>
         <AccordionItem name='accordion-expand-collapse' open>
