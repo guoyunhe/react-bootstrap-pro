@@ -1,0 +1,58 @@
+---
+title: Container
+order: 2
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Container } from '../../../src';
+import { DemoContainer } from '../demo-container';
+import { ContainerTypesDemo } from './demos/container-types';
+
+# Container
+
+`Container` provides a responsive, centered layout wrapper using Bootstrap 6
+container classes. Import Bootstrap's stylesheet once in your application
+before using the component.
+
+## Container types
+
+The default container changes its `max-width` at each breakpoint. Set `fluid` to
+make it full width, or pass a breakpoint to keep it full width until that
+breakpoint.
+
+<DemoContainer>
+  <ContainerTypesDemo />
+</DemoContainer>
+
+```tsx
+<Container>Default responsive container</Container>
+<Container fluid>Full-width container</Container>
+<Container fluid='md'>Full width until the medium breakpoint</Container>
+```
+
+## Responsive widths
+
+Bootstrap 6 uses a 100% width below the given breakpoint, then applies the
+container's responsive `max-width`:
+
+| Class              | Extra small<br />&lt;576px | Small<br />≥576px | Medium<br />≥768px | Large<br />≥1024px | X-large<br />≥1280px | 2X-large<br />≥1536px |
+| ------------------ | -------------------------: | ----------------: | -----------------: | -----------------: | -------------------: | --------------------: |
+| `.container`       |                       100% |             540px |              720px |              960px |               1140px |                1440px |
+| `.sm:container`    |                       100% |             540px |              720px |              960px |               1140px |                1440px |
+| `.md:container`    |                       100% |              100% |              720px |              960px |               1140px |                1440px |
+| `.lg:container`    |                       100% |              100% |               100% |              960px |               1140px |                1440px |
+| `.xl:container`    |                       100% |              100% |               100% |               100% |               1140px |                1440px |
+| `.2xl:container`   |                       100% |              100% |               100% |               100% |                 100% |                1440px |
+| `.container-fluid` |                       100% |              100% |               100% |               100% |                 100% |                  100% |
+
+Breakpoint widths follow Bootstrap 6's defaults. Refer to the Bootstrap
+[container documentation](https://getbootstrap.com/docs/6.0/layout/containers/)
+for Sass customization details.
+
+## API
+
+| Prop        | Type                                               | Default | Description                                                                                           |
+| ----------- | -------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| `fluid`     | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `false` | `true` applies `.container-fluid`; a breakpoint applies the corresponding responsive container class. |
+| `className` | `string`                                           | —       | Additional class names.                                                                               |
+| `...props`  | `HTMLAttributes<HTMLDivElement>`                   | —       | Native `<div>` attributes.                                                                            |

@@ -5,4 +5,9 @@ order: 0
 
 # React Bootstrap Pro
 
-Welcome to your Vited documentation site.
+React component library for Bootstrap 6.
+
+## Components
+
+- [Button](./components/button/)
+- [Container](./components/container/)
