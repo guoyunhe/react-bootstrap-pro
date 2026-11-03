@@ -31,6 +31,7 @@ order: 1
 - [Placeholder](./placeholder/)
 - [Popover](./popover/)
 - [Progress](./progress/)
+- [Radio](./radio/)
 - [Scrollspy](./scrollspy/)
 - [Spinner](./spinner/)
 - [Stepper](./stepper/)

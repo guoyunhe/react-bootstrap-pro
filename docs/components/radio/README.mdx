@@ -1,0 +1,99 @@
+---
+title: Radio
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { RadioBasicDemo } from './demos/basic';
+import { RadioDescriptionDemo } from './demos/description';
+import { RadioDisabledDemo } from './demos/disabled';
+import { RadioSizesDemo } from './demos/sizes';
+import { RadioThemesDemo } from './demos/themes';
+
+# Radio
+
+`Radio` renders a `.radio` input. Radios use CSS for the checked state instead of
+a custom SVG, so they scale without losing sharpness. Group radios with a shared
+`name` and place each one in a `FormField` beside its label.
+
+## Basic radio
+
+<DemoContainer>
+  <RadioBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## With form field
+
+The `FormField` grid places the radio and its label side by side. Nested fields
+work the same way, so a group of radios can share one wrapper and label.
+
+## Description
+
+Add a description after the label and wrap both in `FormFieldContent` so the
+label and help text stack in the second column.
+
+<DemoContainer>
+  <RadioDescriptionDemo />
+</DemoContainer>
+
+```tsx src='./demos/description.tsx'
+
+```
+
+## Theme colors
+
+Set `theme` to color the checked radio through `.theme-{color}`.
+
+<DemoContainer>
+  <RadioThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/themes.tsx'
+
+```
+
+## Disabled
+
+Add the native `disabled` attribute; the associated label is styled to match.
+
+<DemoContainer>
+  <RadioDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## Sizes
+
+Use `size='sm'` or `size='lg'` for `.radio-sm` and `.radio-lg`.
+
+<DemoContainer>
+  <RadioSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## API
+
+| Prop        | Type                    | Description                                 |
+| ----------- | ----------------------- | ------------------------------------------- |
+| `size`      | `'sm' \| 'lg'`          | Scales the radio and its label.             |
+| `theme`     | Bootstrap theme literal | Sets the checked color via `.theme-*`.      |
+| `component` | `ElementType`           | Renders an `input type='radio'` by default. |
+| `...props`  | `BoxProps<C>`           | Native props and all Box utility props.     |
+
+`FormFieldContent` wraps a label and its description inside a `FormField`; it
+renders a `div` by default.
+
+## Accessibility
+
+Give every radio an accessible name with a `<label for>` bound through `htmlFor`.
+Radios that belong together must share the same `name` so browsers treat them as
+one group.

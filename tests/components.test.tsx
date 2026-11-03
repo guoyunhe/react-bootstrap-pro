@@ -22,6 +22,7 @@ import {
   FormCheck,
   FormControl,
   FormField,
+  FormFieldContent,
   FormLabel,
   FormText,
   Nav,
@@ -30,6 +31,7 @@ import {
   Pagination,
   PaginationItem,
   Progress,
+  Radio,
   ProgressBar,
   Tab,
   TabContent,
@@ -139,6 +141,34 @@ test('renders form fields, labels, controls, help text and checks', async () => 
   expect(screen.getByTestId('check').element()).toHaveAttribute('type', 'checkbox');
   expect(screen.getByTestId('select').element().tagName).toBe('SELECT');
   expect(screen.getByTestId('select')).toHaveClass('form-control');
+});
+
+test('renders radios with sizes, themes and field content', async () => {
+  const screen = await render(
+    <FormField data-testid='field'>
+      <Radio
+        id='radio-group-1'
+        name='radio-group'
+        size='lg'
+        theme='primary'
+        defaultChecked
+        data-testid='radio'
+      />
+      <FormFieldContent data-testid='content'>
+        <FormLabel htmlFor='radio-group-1'>Example radio</FormLabel>
+        <FormText component='small' id='radio-group-1-help'>
+          Supporting description
+        </FormText>
+      </FormFieldContent>
+    </FormField>,
+  );
+
+  expect(screen.getByTestId('field')).toHaveClass('form-field');
+  expect(screen.getByTestId('radio')).toHaveClass('radio', 'radio-lg', 'theme-primary');
+  expect(screen.getByTestId('radio').element()).toHaveAttribute('type', 'radio');
+  expect(screen.getByTestId('radio').element()).toHaveAttribute('name', 'radio-group');
+  expect(screen.getByTestId('content')).toHaveClass('form-field-content');
+  expect(screen.getByTestId('content').element().querySelector('small')).toHaveClass('form-text');
 });
 
 test('composes card and carousel structure', async () => {
