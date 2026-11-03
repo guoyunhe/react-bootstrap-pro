@@ -1,10 +1,4 @@
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionIcon,
-  AccordionItem,
-} from 'react-bootstrap-pro';
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-bootstrap-pro';
 
 export function AccordionFlushDemo() {
   const items = [
@@ -17,10 +11,7 @@ export function AccordionFlushDemo() {
     <Accordion flush>
       {items.map(({ heading, body }, index) => (
         <AccordionItem key={heading} name='flush' open={index === 0}>
-          <AccordionHeader>
-            {heading}
-            <AccordionIcon />
-          </AccordionHeader>
+          <AccordionHeader>{heading}</AccordionHeader>
           <AccordionBody>{body}</AccordionBody>
         </AccordionItem>
       ))}

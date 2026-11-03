@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import type { ElementType } from 'react';
+import type { ComponentType, ElementType } from 'react';
+import { BiChevronDown, type IconProps } from 'react-bootstrap-icons-pro';
 
 import type { BoxProps } from './box';
 import { ClassedBox, type BoxComponentProps } from './shared';
@@ -51,11 +52,16 @@ export function AccordionItem<C extends ElementType = 'details'>({
   );
 }
 
-export type AccordionHeaderProps<C extends ElementType = 'summary'> = BoxProps<C>;
+export type AccordionHeaderProps<C extends ElementType = 'summary'> = BoxComponentProps<
+  C,
+  { icon?: ComponentType<IconProps> | undefined }
+>;
 
 export function AccordionHeader<C extends ElementType = 'summary'>({
   component,
   className,
+  icon: Icon = BiChevronDown,
+  children,
   ...props
 }: AccordionHeaderProps<C>) {
   return (
@@ -65,7 +71,10 @@ export function AccordionHeader<C extends ElementType = 'summary'>({
       component={component}
       defaultComponent={'summary' as C}
       className={className}
-    />
+    >
+      {children}
+      <Icon className='accordion-icon' aria-hidden='true' />
+    </ClassedBox>
   );
 }
 
@@ -84,31 +93,5 @@ export function AccordionBody<C extends ElementType = 'div'>({
       defaultComponent={'div' as C}
       className={className}
     />
-  );
-}
-
-export type AccordionIconProps<C extends ElementType = 'svg'> = BoxProps<C>;
-
-export function AccordionIcon<C extends ElementType = 'svg'>({
-  component,
-  className,
-  ...props
-}: AccordionIconProps<C>) {
-  return (
-    <ClassedBox<C>
-      {...props}
-      baseClass='accordion-icon'
-      component={component}
-      defaultComponent={'svg' as C}
-      className={className}
-      aria-hidden='true'
-      viewBox='0 0 16 16'
-      fill='none'
-      stroke='currentColor'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    >
-      <path d='m2 5 6 6 6-6' />
-    </ClassedBox>
   );
 }

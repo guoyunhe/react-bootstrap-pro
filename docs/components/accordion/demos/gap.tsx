@@ -1,10 +1,4 @@
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionIcon,
-  AccordionItem,
-} from 'react-bootstrap-pro';
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-bootstrap-pro';
 
 export function AccordionGapDemo() {
   const items = [
@@ -20,10 +14,7 @@ export function AccordionGapDemo() {
     <Accordion gap>
       {items.map(({ heading, body }, index) => (
         <AccordionItem key={heading} name='gap' open={index === 0}>
-          <AccordionHeader>
-            {heading}
-            <AccordionIcon />
-          </AccordionHeader>
+          <AccordionHeader>{heading}</AccordionHeader>
           <AccordionBody>{body}</AccordionBody>
         </AccordionItem>
       ))}

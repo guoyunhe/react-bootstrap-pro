@@ -3,7 +3,6 @@ import {
   Accordion,
   AccordionBody,
   AccordionHeader,
-  AccordionIcon,
   AccordionItem,
   Button,
 } from 'react-bootstrap-pro';
@@ -48,28 +47,19 @@ export function AccordionExpandCollapseDemo() {
       </Button>
       <Accordion id='accordion-expand-collapse' size='sm'>
         <AccordionItem name='accordion-expand-collapse' open>
-          <AccordionHeader>
-            Accordion Item #1
-            <AccordionIcon />
-          </AccordionHeader>
+          <AccordionHeader>Accordion Item #1</AccordionHeader>
           <AccordionBody>
             Use the button to expand all items, even while they share a name.
           </AccordionBody>
         </AccordionItem>
         <AccordionItem name='accordion-expand-collapse'>
-          <AccordionHeader>
-            Accordion Item #2
-            <AccordionIcon />
-          </AccordionHeader>
+          <AccordionHeader>Accordion Item #2</AccordionHeader>
           <AccordionBody>
             Collapsing all items closes them and restores exclusive grouping.
           </AccordionBody>
         </AccordionItem>
         <AccordionItem name='accordion-expand-collapse'>
-          <AccordionHeader>
-            Accordion Item #3
-            <AccordionIcon />
-          </AccordionHeader>
+          <AccordionHeader>Accordion Item #3</AccordionHeader>
           <AccordionBody>Individual items still use native details interactions.</AccordionBody>
         </AccordionItem>
       </Accordion>

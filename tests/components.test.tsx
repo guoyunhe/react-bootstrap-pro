@@ -1,3 +1,4 @@
+import { BiPlus } from 'react-bootstrap-icons-pro';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 
@@ -5,7 +6,6 @@ import {
   Accordion,
   AccordionBody,
   AccordionHeader,
-  AccordionIcon,
   AccordionItem,
   Alert,
   Avatar,
@@ -37,11 +37,12 @@ test('composes native accordion markup with Box utility props', async () => {
   const screen = await render(
     <Accordion gap bg='body' data-testid='faq'>
       <AccordionItem name='faq' open>
-        <AccordionHeader>
-          Question
-          <AccordionIcon />
-        </AccordionHeader>
+        <AccordionHeader>Question</AccordionHeader>
         <AccordionBody>Answer</AccordionBody>
+      </AccordionItem>
+      <AccordionItem name='faq'>
+        <AccordionHeader icon={BiPlus}>Custom icon</AccordionHeader>
+        <AccordionBody>Custom icon content</AccordionBody>
       </AccordionItem>
     </Accordion>,
   );
@@ -53,6 +54,10 @@ test('composes native accordion markup with Box utility props', async () => {
   expect(item).toHaveAttribute('open');
   expect(screen.getByText('Question')).toHaveClass('accordion-header');
   expect(screen.getByText('Answer')).toHaveClass('accordion-body');
+  const icons = accordion.element().querySelectorAll('.accordion-icon');
+  expect(icons[0]).toHaveClass('bi-chevron-down');
+  expect(icons[0]).toHaveAttribute('aria-hidden', 'true');
+  expect(icons[1]).toHaveClass('bi-plus');
 });
 
 test('provides component modifiers and preserves custom tags', async () => {

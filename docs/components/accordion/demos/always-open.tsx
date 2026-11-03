@@ -1,10 +1,4 @@
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionIcon,
-  AccordionItem,
-} from 'react-bootstrap-pro';
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-bootstrap-pro';
 
 export function AccordionAlwaysOpenDemo() {
   const items = [
@@ -23,10 +17,7 @@ export function AccordionAlwaysOpenDemo() {
     <Accordion>
       {items.map(({ heading, body }, index) => (
         <AccordionItem key={heading} open={index < 2}>
-          <AccordionHeader>
-            {heading}
-            <AccordionIcon />
-          </AccordionHeader>
+          <AccordionHeader>{heading}</AccordionHeader>
           <AccordionBody>{body}</AccordionBody>
         </AccordionItem>
       ))}

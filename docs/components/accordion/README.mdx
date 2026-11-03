@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { AccordionAlwaysOpenDemo } from './demos/always-open';
 import { AccordionBasicDemo } from './demos/basic';
+import { AccordionCustomIconDemo } from './demos/custom-icon';
 import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 import { AccordionFlushDemo } from './demos/flush';
 import { AccordionGapDemo } from './demos/gap';
@@ -28,17 +29,11 @@ needed for the core interaction.
 ```tsx
 <Accordion>
   <AccordionItem name='faq' open>
-    <AccordionHeader>
-      Accordion Item #1
-      <AccordionIcon />
-    </AccordionHeader>
+    <AccordionHeader>Accordion Item #1</AccordionHeader>
     <AccordionBody>First item content</AccordionBody>
   </AccordionItem>
   <AccordionItem name='faq'>
-    <AccordionHeader>
-      Accordion Item #2
-      <AccordionIcon />
-    </AccordionHeader>
+    <AccordionHeader>Accordion Item #2</AccordionHeader>
     <AccordionBody>Second item content</AccordionBody>
   </AccordionItem>
 </Accordion>
@@ -47,6 +42,21 @@ needed for the core interaction.
 The panel transition progressively uses CSS `interpolate-size`. Browsers without
 support still open and close the native details panel, but without the height
 animation.
+
+## Custom icon
+
+`AccordionHeader` renders a chevron by default. Pass an icon component through
+`icon` to replace it.
+
+<DemoContainer>
+  <AccordionCustomIconDemo />
+</DemoContainer>
+
+```tsx
+import { BiPlus } from 'react-bootstrap-icons-pro';
+
+<AccordionHeader icon={BiPlus}>Custom icon</AccordionHeader>;
+```
 
 ## Variants
 
@@ -95,10 +105,7 @@ Add space between items; each item keeps its own rounded card shape.
 ```tsx
 <Accordion gap>
   <AccordionItem name='faq' open>
-    <AccordionHeader>
-      Question
-      <AccordionIcon />
-    </AccordionHeader>
+    <AccordionHeader>Question</AccordionHeader>
     <AccordionBody>Answer</AccordionBody>
   </AccordionItem>
 </Accordion>
@@ -169,17 +176,37 @@ level.
 
 ## API
 
-| Prop        | Type          | Description                              |
-| ----------- | ------------- | ---------------------------------------- |
-| `component` | `ElementType` | Changes the root element.                |
-| `flush`     | `boolean`     | Removes outer item borders and rounding. |
-| `gap`       | `boolean`     | Adds spacing between items.              |
-| `size`      | `'sm'`        | Uses compact spacing and type.           |
-| `...props`  | `BoxProps<C>` | Native props and all Box utility props.  |
+Each component accepts Box utility props and native props.
 
-`AccordionItem`, `AccordionHeader`, `AccordionBody`, and `AccordionIcon` provide
-the corresponding Bootstrap classes. `AccordionItem` renders a native
-`<details>` element and accepts its `open` and `name` attributes.
+### Accordion
+
+| Prop       | Type          | Description                              |
+| ---------- | ------------- | ---------------------------------------- |
+| `flush`    | `boolean`     | Removes outer item borders and rounding. |
+| `gap`      | `boolean`     | Adds spacing between items.              |
+| `size`     | `'sm'`        | Uses compact spacing and type.           |
+| `...props` | `BoxProps<C>` | Native props and Box utility props.      |
+
+### AccordionItem
+
+| Prop       | Type          | Description                                                                   |
+| ---------- | ------------- | ----------------------------------------------------------------------------- |
+| `...props` | `BoxProps<C>` | Native `<details>` props, including `open` and `name`, and Box utility props. |
+
+### AccordionHeader
+
+The default icon is `BiChevronDown`.
+
+| Prop       | Type                       | Description                          |
+| ---------- | -------------------------- | ------------------------------------ |
+| `icon`     | `ComponentType<IconProps>` | Replaces the default icon component. |
+| `...props` | `BoxProps<C>`              | Native props and Box utility props.  |
+
+### AccordionBody
+
+| Prop       | Type          | Description                         |
+| ---------- | ------------- | ----------------------------------- |
+| `...props` | `BoxProps<C>` | Native props and Box utility props. |
 
 ## Accessibility
 

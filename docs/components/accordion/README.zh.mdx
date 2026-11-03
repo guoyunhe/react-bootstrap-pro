@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { AccordionAlwaysOpenDemo } from './demos/always-open';
 import { AccordionBasicDemo } from './demos/basic';
+import { AccordionCustomIconDemo } from './demos/custom-icon';
 import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 import { AccordionFlushDemo } from './demos/flush';
 import { AccordionGapDemo } from './demos/gap';
@@ -27,17 +28,11 @@ import { AccordionVariantsDemo } from './demos/variants';
 ```tsx
 <Accordion>
   <AccordionItem name='faq' open>
-    <AccordionHeader>
-      Accordion 条目 #1
-      <AccordionIcon />
-    </AccordionHeader>
+    <AccordionHeader>Accordion 条目 #1</AccordionHeader>
     <AccordionBody>第一个条目的内容</AccordionBody>
   </AccordionItem>
   <AccordionItem name='faq'>
-    <AccordionHeader>
-      Accordion 条目 #2
-      <AccordionIcon />
-    </AccordionHeader>
+    <AccordionHeader>Accordion 条目 #2</AccordionHeader>
     <AccordionBody>第二个条目的内容</AccordionBody>
   </AccordionItem>
 </Accordion>
@@ -45,6 +40,20 @@ import { AccordionVariantsDemo } from './demos/variants';
 
 面板动画会渐进增强地使用 CSS `interpolate-size`。不支持该属性的浏览器仍可
 原生展开和收起，只是不显示高度动画。
+
+## 自定义图标
+
+`AccordionHeader` 默认内置 chevron 图标。通过 `icon` 属性传入图标组件即可替换。
+
+<DemoContainer>
+  <AccordionCustomIconDemo />
+</DemoContainer>
+
+```tsx
+import { BiPlus } from 'react-bootstrap-icons-pro';
+
+<AccordionHeader icon={BiPlus}>自定义图标</AccordionHeader>;
+```
 
 ## 主题变体
 
@@ -93,10 +102,7 @@ import { AccordionVariantsDemo } from './demos/variants';
 ```tsx
 <Accordion gap>
   <AccordionItem name='faq' open>
-    <AccordionHeader>
-      问题
-      <AccordionIcon />
-    </AccordionHeader>
+    <AccordionHeader>问题</AccordionHeader>
     <AccordionBody>答案</AccordionBody>
   </AccordionItem>
 </Accordion>
@@ -165,17 +171,37 @@ function toggleAll(accordion: HTMLElement, expand: boolean) {
 
 ## API
 
-| 属性        | 类型          | 说明                            |
-| ----------- | ------------- | ------------------------------- |
-| `component` | `ElementType` | 更换根元素。                    |
-| `flush`     | `boolean`     | 移除条目外侧边框和圆角。        |
-| `gap`       | `boolean`     | 在条目之间增加间距。            |
-| `size`      | `'sm'`        | 使用紧凑间距和字号。            |
-| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+每个组件都接受 Box 工具类属性和原生属性。
 
-`AccordionItem`、`AccordionHeader`、`AccordionBody` 和 `AccordionIcon` 分别提供
-对应的 Bootstrap 类。`AccordionItem` 默认渲染原生 `<details>`，并支持 `open`
-和 `name` 属性。
+### Accordion
+
+| 属性       | 类型          | 说明                        |
+| ---------- | ------------- | --------------------------- |
+| `flush`    | `boolean`     | 移除条目外侧边框和圆角。    |
+| `gap`      | `boolean`     | 在条目之间增加间距。        |
+| `size`     | `'sm'`        | 使用紧凑间距和字号。        |
+| `...props` | `BoxProps<C>` | 原生属性及 Box 工具类属性。 |
+
+### AccordionItem
+
+| 属性       | 类型          | 说明                                                              |
+| ---------- | ------------- | ----------------------------------------------------------------- |
+| `...props` | `BoxProps<C>` | 原生 `<details>` 属性（包括 `open` 和 `name`）及 Box 工具类属性。 |
+
+### AccordionHeader
+
+默认图标为 `BiChevronDown`。
+
+| 属性       | 类型                       | 说明                        |
+| ---------- | -------------------------- | --------------------------- |
+| `icon`     | `ComponentType<IconProps>` | 替换默认图标组件。          |
+| `...props` | `BoxProps<C>`              | 原生属性及 Box 工具类属性。 |
+
+### AccordionBody
+
+| 属性       | 类型          | 说明                        |
+| ---------- | ------------- | --------------------------- |
+| `...props` | `BoxProps<C>` | 原生属性及 Box 工具类属性。 |
 
 ## 无障碍访问
 

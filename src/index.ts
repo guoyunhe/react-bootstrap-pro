@@ -83,7 +83,6 @@ export {
   Accordion,
   AccordionBody,
   AccordionHeader,
-  AccordionIcon,
   AccordionItem,
   Alert,
   Avatar,
@@ -174,7 +173,6 @@ export {
 export type {
   AccordionBodyProps,
   AccordionHeaderProps,
-  AccordionIconProps,
   AccordionItemProps,
   AccordionProps,
   AlertProps,

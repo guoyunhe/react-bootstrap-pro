@@ -1,10 +1,4 @@
-import {
-  Accordion,
-  AccordionBody,
-  AccordionHeader,
-  AccordionIcon,
-  AccordionItem,
-} from 'react-bootstrap-pro';
+import { Accordion, AccordionBody, AccordionHeader, AccordionItem } from 'react-bootstrap-pro';
 
 export function AccordionNestedDemo() {
   const nestedItems = [
@@ -15,19 +9,13 @@ export function AccordionNestedDemo() {
   return (
     <Accordion>
       <AccordionItem name='outer' open>
-        <AccordionHeader>
-          Parent item #1
-          <AccordionIcon />
-        </AccordionHeader>
+        <AccordionHeader>Parent item #1</AccordionHeader>
         <AccordionBody>
           This item contains a nested accordion.
           <Accordion className='mt-3'>
             {nestedItems.map(({ heading, body }, index) => (
               <AccordionItem key={heading} name='inner' open={index === 0}>
-                <AccordionHeader>
-                  {heading}
-                  <AccordionIcon />
-                </AccordionHeader>
+                <AccordionHeader>{heading}</AccordionHeader>
                 <AccordionBody>{body}</AccordionBody>
               </AccordionItem>
             ))}
@@ -35,10 +23,7 @@ export function AccordionNestedDemo() {
         </AccordionBody>
       </AccordionItem>
       <AccordionItem name='outer'>
-        <AccordionHeader>
-          Parent item #2
-          <AccordionIcon />
-        </AccordionHeader>
+        <AccordionHeader>Parent item #2</AccordionHeader>
         <AccordionBody>This item has no nested accordion.</AccordionBody>
       </AccordionItem>
     </Accordion>
