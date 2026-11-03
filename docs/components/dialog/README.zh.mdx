@@ -1,0 +1,36 @@
+---
+title: Dialog 对话框
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { CloseButton, Dialog, DialogBody, DialogHeader, DialogTitle } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Dialog 对话框
+
+`Dialog` 默认渲染原生 `<dialog>`。要打开模态对话框，请使用 Bootstrap JavaScript
+插件或原生 `showModal()` API；单独设置 `open` 属性会以非模态方式打开。
+
+<DemoContainer>
+  <Dialog open size='sm'>
+    <DialogHeader>
+      <DialogTitle>对话框标题</DialogTitle>
+      <CloseButton />
+    </DialogHeader>
+    <DialogBody>对话框内容</DialogBody>
+  </Dialog>
+</DemoContainer>
+
+## API
+
+| 属性         | 类型                   | 说明                                    |
+| ------------ | ---------------------- | --------------------------------------- |
+| `size`       | `'sm' \| 'lg' \| 'xl'` | 设置对话框宽度。                        |
+| `fullscreen` | `boolean`              | 填满视口。                              |
+| `scrollable` | `boolean`              | 仅滚动主体，固定页眉和页脚。            |
+| `nonmodal`   | `boolean`              | 添加非模态定位类。                      |
+| `instant`    | `boolean`              | 禁用过渡动画。                          |
+| `slide`      | `'up' \| 'down'`       | 设置进入/退出方向。                     |
+| `...props`   | `BoxProps<C>`          | 原生 dialog 属性及所有 Box 工具类属性。 |
+
+`DialogHeader`、`DialogTitle`、`DialogBody` 和 `DialogFooter` 提供对应的结构类名。

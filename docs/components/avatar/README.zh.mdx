@@ -1,0 +1,38 @@
+---
+title: Avatar 头像
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Avatar, AvatarImage, AvatarStatus } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Avatar 头像
+
+`Avatar` 可显示姓名首字母，也可包裹头像图片和可选的状态标记。
+
+<DemoContainer>
+  <Avatar size='lg' theme='primary'>
+    AB
+    <AvatarStatus status='online' />
+  </Avatar>
+  <Avatar size='lg'>
+    <AvatarImage src='https://example.com/avatar.png' alt='Alex Brown' />
+  </Avatar>
+</DemoContainer>
+
+```tsx
+<Avatar size='sm' subtle theme='accent'>
+  AB
+</Avatar>
+```
+
+## API
+
+| 属性        | 类型                           | 说明                            |
+| ----------- | ------------------------------ | ------------------------------- |
+| `size`      | `'xs' \| 'sm' \| 'lg' \| 'xl'` | 设置头像尺寸。                  |
+| `subtle`    | `boolean`                      | 使用柔和主题样式。              |
+| `component` | `ElementType`                  | 更换头像根元素。                |
+| `...props`  | `BoxProps<C>`                  | 原生属性及所有 Box 工具类属性。 |
+
+`AvatarImage`、`AvatarStatus` 和 `AvatarStack` 分别提供图片、状态标记和重叠头像组样式。

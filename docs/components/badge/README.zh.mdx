@@ -1,0 +1,37 @@
+---
+title: Badge 徽标
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Badge } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Badge 徽标
+
+`Badge` 渲染紧凑标签，字号会随周围文本缩放。
+
+<DemoContainer>
+  <Badge theme='primary'>新建</Badge>{' '}
+  <Badge theme='success' variant='subtle'>
+    就绪
+  </Badge>{' '}
+  <Badge theme='danger' variant='outline'>
+    4
+  </Badge>
+</DemoContainer>
+
+```tsx
+<Badge theme='primary' variant='outline' size='lg'>
+  新建
+</Badge>
+```
+
+## API
+
+| 属性        | 类型                               | 说明                            |
+| ----------- | ---------------------------------- | ------------------------------- |
+| `variant`   | `'solid' \| 'subtle' \| 'outline'` | 徽标样式，默认实心。            |
+| `size`      | `'lg'`                             | 放大徽标。                      |
+| `theme`     | Bootstrap 主题字面量               | 设置主题颜色。                  |
+| `component` | `ElementType`                      | 更换根元素。                    |
+| `...props`  | `BoxProps<C>`                      | 原生属性及所有 Box 工具类属性。 |

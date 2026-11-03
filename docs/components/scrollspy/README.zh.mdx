@@ -1,0 +1,30 @@
+---
+title: Scrollspy 滚动监听
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Scrollspy } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Scrollspy 滚动监听
+
+`Scrollspy` 为滚动容器添加 Bootstrap data 属性和键盘焦点能力。Bootstrap
+JavaScript bundle 会在目标进入视口时更新导航链接。
+
+<DemoContainer>
+  <Scrollspy target='#section-nav' style={{ height: 160, overflowY: 'auto' }}>
+    <h4 id='section-one'>章节一</h4>
+    <p>可滚动内容</p>
+    <h4 id='section-two'>章节二</h4>
+  </Scrollspy>
+</DemoContainer>
+
+## API
+
+| 属性        | 类型          | 说明                            |
+| ----------- | ------------- | ------------------------------- |
+| `target`    | `string`      | 关联导航的选择器。              |
+| `component` | `ElementType` | 更换滚动容器元素。              |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+
+请确保滚动区域可通过键盘访问，并且导航 hash 对应页面中存在相同 `id` 的元素。

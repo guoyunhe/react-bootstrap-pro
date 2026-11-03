@@ -1,0 +1,53 @@
+---
+title: Carousel 轮播
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import {
+  Carousel,
+  CarouselControl,
+  CarouselIndicator,
+  CarouselIndicators,
+  CarouselInner,
+  CarouselItem,
+  CarouselOverlayControls,
+} from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Carousel 轮播
+
+`Carousel` 使用原生横向滚动容器和 CSS 滚动捕捉。前后控制按钮、指示器和自动播放
+需要 Bootstrap JavaScript bundle。
+
+<DemoContainer>
+  <Carousel id='features' overlay>
+    <CarouselInner>
+      <CarouselItem active>第一张</CarouselItem>
+      <CarouselItem>第二张</CarouselItem>
+    </CarouselInner>
+    <CarouselOverlayControls>
+      <CarouselControl target='#features' direction='previous' />
+      <CarouselIndicators>
+        <CarouselIndicator target='#features' index={0} active />
+        <CarouselIndicator target='#features' index={1} />
+      </CarouselIndicators>
+      <CarouselControl target='#features' direction='next' />
+    </CarouselOverlayControls>
+  </Carousel>
+</DemoContainer>
+
+## API
+
+| 属性        | 类型          | 说明                            |
+| ----------- | ------------- | ------------------------------- |
+| `auto`      | `boolean`     | 允许每个轮播项使用自身宽度。    |
+| `center`    | `boolean`     | 将滚动捕捉位置置于视口中央。    |
+| `fade`      | `boolean`     | 使用堆叠淡入淡出模式。          |
+| `overlay`   | `boolean`     | 将控件放置在幻灯片上方。        |
+| `component` | `ElementType` | 更换根元素。                    |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+
+使用 `CarouselInner` 和 `CarouselItem` 定义滚动视口和幻灯片。
+`CarouselControl` 和 `CarouselIndicator` 的 `target` 必须匹配轮播的 `id`。
+控制按钮还支持 `direction`、`size` 和 `variant`；指示器支持 `index` 和 `active`。
+`CarouselOverlayControls` 可将控件放置在幻灯片上方。

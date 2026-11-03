@@ -1,0 +1,32 @@
+---
+title: Menu 菜单
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Menu, MenuDivider, MenuHeader, MenuItem } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Menu 菜单
+
+`Menu` 提供弹出菜单样式。定位、切换和键盘交互需要 Bootstrap JavaScript bundle。
+
+<DemoContainer>
+  <Menu show>
+    <MenuHeader>操作</MenuHeader>
+    <MenuItem href='/edit'>编辑</MenuItem>
+    <MenuDivider />
+    <MenuItem href='/archive'>归档</MenuItem>
+  </Menu>
+</DemoContainer>
+
+## API
+
+| 属性          | 类型          | 说明                            |
+| ------------- | ------------- | ------------------------------- |
+| `show`        | `boolean`     | 添加 `.show` 以显示菜单。       |
+| `scrollable`  | `boolean`     | 限制菜单高度并启用纵向滚动。    |
+| `translucent` | `boolean`     | 使用半透明菜单表面。            |
+| `component`   | `ElementType` | 更换根元素。                    |
+| `...props`    | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+
+`MenuItem`、`MenuHeader`、`MenuDivider` 和 `MenuText` 提供菜单结构。

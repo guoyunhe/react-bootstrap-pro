@@ -1,0 +1,32 @@
+---
+title: Spinner 加载指示器
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Spinner } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Spinner 加载指示器
+
+`Spinner` 渲染纯 CSS 加载指示器，默认设置 `role="status"` 和无障碍名称。
+
+<DemoContainer>
+  <Spinner label='正在加载结果' />
+  <Spinner variant='grow' size='sm' label='正在保存' />
+</DemoContainer>
+
+```tsx
+<Spinner variant='border' size='sm' label='正在加载' />
+```
+
+## API
+
+| 属性        | 类型                             | 说明                             |
+| ----------- | -------------------------------- | -------------------------------- |
+| `variant`   | `'border' \| 'grow' \| 'rotate'` | 选择指示器样式。                 |
+| `size`      | `'sm'`                           | 使用紧凑尺寸。                   |
+| `label`     | `string`                         | 无障碍名称，默认为 `'Loading'`。 |
+| `component` | `ElementType`                    | 更换渲染元素。                   |
+| `...props`  | `BoxProps<C>`                    | 原生属性及所有 Box 工具类属性。  |
+
+Spinner 使用 `currentColor`；可通过 Box 前景色工具属性设置颜色。

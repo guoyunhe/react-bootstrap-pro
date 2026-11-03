@@ -1,0 +1,28 @@
+---
+title: Close button 关闭按钮
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { CloseButton } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Close button 关闭按钮
+
+`CloseButton` 使用 CSS 遮罩图标渲染原生按钮。默认无障碍名称为“Close”，可通过
+`label` 或 `aria-label` 自定义。
+
+<DemoContainer>
+  <CloseButton />
+</DemoContainer>
+
+```tsx
+<CloseButton label='关闭通知' onClick={dismiss} />
+```
+
+## API
+
+| 属性        | 类型          | 说明                            |
+| ----------- | ------------- | ------------------------------- |
+| `label`     | `string`      | 无障碍名称，默认为 `'Close'`。  |
+| `component` | `ElementType` | 更换元素，默认为 `button`。     |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |

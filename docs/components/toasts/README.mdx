@@ -1,0 +1,37 @@
+---
+title: Toasts
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { CloseButton, Toast, ToastBody, ToastContainer, ToastHeader } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Toasts
+
+`Toast` composes a notification surface and accessible live region. Use the
+Bootstrap JavaScript plugin or control the `show` prop from React.
+
+<DemoContainer>
+  <ToastContainer>
+    <Toast show>
+      <ToastHeader>
+        <strong>Saved</strong>
+        <CloseButton />
+      </ToastHeader>
+      <ToastBody>Your changes are ready.</ToastBody>
+    </Toast>
+  </ToastContainer>
+</DemoContainer>
+
+## API
+
+| Prop          | Type          | Description                              |
+| ------------- | ------------- | ---------------------------------------- |
+| `show`        | `boolean`     | Adds `.show` to display the toast.       |
+| `instant`     | `boolean`     | Disables the fade transition.            |
+| `translucent` | `boolean`     | Adds a translucent background treatment. |
+| `component`   | `ElementType` | Changes the rendered element.            |
+| `...props`    | `BoxProps<C>` | Native props and all Box utility props.  |
+
+`ToastHeader`, `ToastBody`, and `ToastContainer` provide the corresponding
+layout classes. Dismissal and autohide require JavaScript.

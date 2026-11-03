@@ -1,0 +1,47 @@
+---
+title: Button group
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Button, ButtonGroup, ButtonToolbar } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Button group
+
+`ButtonGroup` groups related actions and defaults to `role="group"`.
+Give each group an accessible name with `aria-label` or `aria-labelledby`.
+
+<DemoContainer>
+  <ButtonGroup aria-label='Text alignment'>
+    <Button variant='outline' theme='secondary'>
+      Left
+    </Button>
+    <Button variant='outline' theme='secondary'>
+      Center
+    </Button>
+    <Button variant='outline' theme='secondary'>
+      Right
+    </Button>
+  </ButtonGroup>
+</DemoContainer>
+
+```tsx
+<ButtonToolbar aria-label='Editor actions'>
+  <ButtonGroup aria-label='History' size='sm'>
+    ...
+  </ButtonGroup>
+  <ButtonGroup aria-label='Formatting' divider>
+    ...
+  </ButtonGroup>
+</ButtonToolbar>
+```
+
+## API
+
+| Prop          | Type                         | Description                             |
+| ------------- | ---------------------------- | --------------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'` | Selects the group layout.               |
+| `divider`     | `boolean`                    | Adds dividers between controls.         |
+| `size`        | `'sm' \| 'lg'`               | Applies button-group sizing.            |
+| `component`   | `ElementType`                | Changes the root element.               |
+| `...props`    | `BoxProps<C>`                | Native props and all Box utility props. |

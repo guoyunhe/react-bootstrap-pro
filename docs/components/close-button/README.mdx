@@ -1,0 +1,28 @@
+---
+title: Close button
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { CloseButton } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Close button
+
+`CloseButton` renders the CSS-mask close icon as a native button. Its accessible
+name defaults to “Close”; change it with `label` or `aria-label`.
+
+<DemoContainer>
+  <CloseButton />
+</DemoContainer>
+
+```tsx
+<CloseButton label='Dismiss notification' onClick={dismiss} />
+```
+
+## API
+
+| Prop        | Type          | Description                                |
+| ----------- | ------------- | ------------------------------------------ |
+| `label`     | `string`      | Accessible name, defaulting to `'Close'`.  |
+| `component` | `ElementType` | Changes the element; defaults to `button`. |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props.    |

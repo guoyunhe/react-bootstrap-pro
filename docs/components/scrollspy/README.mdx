@@ -1,0 +1,32 @@
+---
+title: Scrollspy
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Scrollspy } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Scrollspy
+
+`Scrollspy` adds Bootstrap's scrollspy data attributes and keyboard focusability
+to a scroll container. The Bootstrap JavaScript bundle updates links as targets
+enter the viewport.
+
+<DemoContainer>
+  <Scrollspy target='#section-nav' style={{ height: 160, overflowY: 'auto' }}>
+    <h4 id='section-one'>Section one</h4>
+    <p>Scrollable content</p>
+    <h4 id='section-two'>Section two</h4>
+  </Scrollspy>
+</DemoContainer>
+
+## API
+
+| Prop        | Type          | Description                             |
+| ----------- | ------------- | --------------------------------------- |
+| `target`    | `string`      | Selector for the associated navigation. |
+| `component` | `ElementType` | Changes the scroll container element.   |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props. |
+
+Make the scroll area keyboard-accessible and ensure each navigation hash points
+to an element with a matching `id`.

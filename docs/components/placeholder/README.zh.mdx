@@ -1,0 +1,30 @@
+---
+title: Placeholder 占位符
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Placeholder, PlaceholderGroup } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Placeholder 占位符
+
+`Placeholder` 渲染加载骨架。将占位符放入 `PlaceholderGroup`，即可应用脉冲、发光
+或波浪动画。
+
+<DemoContainer>
+  <PlaceholderGroup animation='wave'>
+    <Placeholder className='w-50' />
+    <Placeholder className='w-75' />
+  </PlaceholderGroup>
+</DemoContainer>
+
+## API
+
+| 属性        | 类型                          | 说明                            |
+| ----------- | ----------------------------- | ------------------------------- |
+| `size`      | `'xs' \| 'sm' \| 'lg'`        | 调整占位符高度。                |
+| `animation` | `'glow' \| 'pulse' \| 'wave'` | 选择占位符组动画。              |
+| `component` | `ElementType`                 | 更换渲染元素。                  |
+| `...props`  | `BoxProps<C>`                 | 原生属性及所有 Box 工具类属性。 |
+
+占位符只负责展示。请在应用中切换实际内容和骨架的可见状态，并按需设置 `aria-hidden`。

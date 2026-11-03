@@ -1,0 +1,38 @@
+---
+title: Nav
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Nav, NavItem, NavLink } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Nav
+
+`Nav` provides shared navigation markup and supports tabs, pills, and underline
+styles. Use `aria-current="page"` for the current page link.
+
+<DemoContainer>
+  <Nav variant='pills'>
+    <NavItem>
+      <NavLink href='/home' active>
+        Home
+      </NavLink>
+    </NavItem>
+    <NavItem>
+      <NavLink href='/profile'>Profile</NavLink>
+    </NavItem>
+  </Nav>
+</DemoContainer>
+
+## API
+
+| Prop          | Type                               | Description                               |
+| ------------- | ---------------------------------- | ----------------------------------------- |
+| `variant`     | `'tabs' \| 'pills' \| 'underline'` | Selects the navigation style.             |
+| `orientation` | `'horizontal' \| 'vertical'`       | Vertical layout is available for pills.   |
+| `fill`        | `boolean`                          | Distributes links across available width. |
+| `justified`   | `boolean`                          | Gives links equal widths.                 |
+| `component`   | `ElementType`                      | Changes the root element.                 |
+| `...props`    | `BoxProps<C>`                      | Native props and all Box utility props.   |
+
+`NavItem` and `NavLink` render the corresponding item and link classes.

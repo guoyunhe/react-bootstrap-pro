@@ -1,0 +1,33 @@
+---
+title: Spinner
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Spinner } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Spinner
+
+`Spinner` renders a CSS-only loading indicator and defaults to
+`role="status"` with an accessible label.
+
+<DemoContainer>
+  <Spinner label='Loading results' />
+  <Spinner variant='grow' size='sm' label='Saving' />
+</DemoContainer>
+
+```tsx
+<Spinner variant='border' size='sm' label='Loading' />
+```
+
+## API
+
+| Prop        | Type                             | Description                                 |
+| ----------- | -------------------------------- | ------------------------------------------- |
+| `variant`   | `'border' \| 'grow' \| 'rotate'` | Selects the spinner appearance.             |
+| `size`      | `'sm'`                           | Uses the compact size.                      |
+| `label`     | `string`                         | Accessible name, defaulting to `'Loading'`. |
+| `component` | `ElementType`                    | Changes the rendered element.               |
+| `...props`  | `BoxProps<C>`                    | Native props and all Box utility props.     |
+
+Spinners use `currentColor`; use Box foreground utilities to change their color.

@@ -1,0 +1,41 @@
+---
+title: Pagination 分页
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { PageLink, Pagination, PaginationItem } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Pagination 分页
+
+`Pagination` 在带有名称的导航区域中使用列表结构。用 `active` 标识当前页，并为
+导航区域提供无障碍名称。
+
+<DemoContainer>
+  <nav aria-label='搜索结果页'>
+    <Pagination>
+      <PaginationItem>
+        <PageLink href='/page/1'>1</PageLink>
+      </PaginationItem>
+      <PaginationItem active>
+        <PageLink href='/page/2' active>
+          2
+        </PageLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PageLink href='/page/3'>3</PageLink>
+      </PaginationItem>
+    </Pagination>
+  </nav>
+</DemoContainer>
+
+## API
+
+| 属性        | 类型           | 说明                            |
+| ----------- | -------------- | ------------------------------- |
+| `size`      | `'sm' \| 'lg'` | 设置分页尺寸。                  |
+| `component` | `ElementType`  | 更换列表根元素。                |
+| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。 |
+
+`PaginationItem` 支持 `active` 和 `disabled`；使用 `PageLink` 渲染交互链接，并可设置
+`active` 状态。

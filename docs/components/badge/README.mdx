@@ -1,0 +1,37 @@
+---
+title: Badge
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Badge } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Badge
+
+`Badge` renders a compact label that scales with its surrounding text.
+
+<DemoContainer>
+  <Badge theme='primary'>New</Badge>{' '}
+  <Badge theme='success' variant='subtle'>
+    Ready
+  </Badge>{' '}
+  <Badge theme='danger' variant='outline'>
+    4
+  </Badge>
+</DemoContainer>
+
+```tsx
+<Badge theme='primary' variant='outline' size='lg'>
+  New
+</Badge>
+```
+
+## API
+
+| Prop        | Type                               | Description                                    |
+| ----------- | ---------------------------------- | ---------------------------------------------- |
+| `variant`   | `'solid' \| 'subtle' \| 'outline'` | Selects badge treatment; solid is the default. |
+| `size`      | `'lg'`                             | Enlarges the badge.                            |
+| `theme`     | Bootstrap theme literal            | Sets contextual colors.                        |
+| `component` | `ElementType`                      | Changes the root element.                      |
+| `...props`  | `BoxProps<C>`                      | Native props and all Box utility props.        |

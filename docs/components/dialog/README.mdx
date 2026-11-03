@@ -1,0 +1,38 @@
+---
+title: Dialog
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { CloseButton, Dialog, DialogBody, DialogHeader, DialogTitle } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Dialog
+
+`Dialog` defaults to the native `<dialog>` element. Use Bootstrap's JavaScript
+plugin or the native `showModal()` API to open a modal dialog; an `open`
+attribute alone is non-modal.
+
+<DemoContainer>
+  <Dialog open size='sm'>
+    <DialogHeader>
+      <DialogTitle>Dialog title</DialogTitle>
+      <CloseButton />
+    </DialogHeader>
+    <DialogBody>Dialog content</DialogBody>
+  </Dialog>
+</DemoContainer>
+
+## API
+
+| Prop         | Type                   | Description                                                 |
+| ------------ | ---------------------- | ----------------------------------------------------------- |
+| `size`       | `'sm' \| 'lg' \| 'xl'` | Sets the dialog width.                                      |
+| `fullscreen` | `boolean`              | Fills the viewport.                                         |
+| `scrollable` | `boolean`              | Makes the body scroll while header and footer remain fixed. |
+| `nonmodal`   | `boolean`              | Adds the non-modal positioning class.                       |
+| `instant`    | `boolean`              | Disables transitions.                                       |
+| `slide`      | `'up' \| 'down'`       | Selects the entry/exit direction.                           |
+| `...props`   | `BoxProps<C>`          | Native dialog props and all Box utility props.              |
+
+`DialogHeader`, `DialogTitle`, `DialogBody`, and `DialogFooter` provide the
+corresponding structural classes.

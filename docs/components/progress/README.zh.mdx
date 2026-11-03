@@ -1,0 +1,35 @@
+---
+title: Progress 进度条
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Progress, ProgressBar } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Progress 进度条
+
+`Progress` 提供无障碍进度条容器，必须提供可访问的 `label`；
+`ProgressBar` 会将当前值换算为百分比宽度。
+
+<DemoContainer>
+  <Progress label='上传' value={65}>
+    <ProgressBar value={65}>65%</ProgressBar>
+  </Progress>
+</DemoContainer>
+
+```tsx
+<Progress label='上传' value={current} max={total}>
+  <ProgressBar value={current} max={total} striped animated />
+</Progress>
+```
+
+## API
+
+| 组件属性                           | 类型          | 说明                             |
+| ---------------------------------- | ------------- | -------------------------------- |
+| `Progress.label`                   | `string`      | 进度条的无障碍名称。             |
+| `Progress.value`                   | `number`      | 当前值，映射到 `aria-valuenow`。 |
+| `Progress.min` / `max`             | `number`      | 无障碍数值范围。                 |
+| `ProgressBar.value` / `max`        | `number`      | 将进度条宽度设置为百分比。       |
+| `ProgressBar.striped` / `animated` | `boolean`     | 启用条纹或动画。                 |
+| `...props`                         | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。  |

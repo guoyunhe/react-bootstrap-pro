@@ -1,0 +1,56 @@
+---
+title: Accordion
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionIcon,
+  AccordionItem,
+} from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Accordion
+
+`Accordion` groups native `<details>` elements. Each item can share a `name` for
+exclusive opening; no JavaScript is needed for the core interaction.
+
+<DemoContainer>
+  <Accordion>
+    <AccordionItem name='faq' open>
+      <AccordionHeader>
+        First question
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>First answer</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='faq'>
+      <AccordionHeader>Second question</AccordionHeader>
+      <AccordionBody>Second answer</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion gap>
+  <AccordionItem name='faq' open>
+    <AccordionHeader>Question</AccordionHeader>
+    <AccordionBody>Answer</AccordionBody>
+  </AccordionItem>
+</Accordion>
+```
+
+## API
+
+| Prop        | Type          | Description                              |
+| ----------- | ------------- | ---------------------------------------- |
+| `flush`     | `boolean`     | Removes outer item borders and rounding. |
+| `gap`       | `boolean`     | Adds spacing between items.              |
+| `size`      | `'sm'`        | Uses compact spacing and type.           |
+| `component` | `ElementType` | Changes the root element.                |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props.  |
+
+`AccordionItem`, `AccordionHeader`, `AccordionBody`, and `AccordionIcon` provide
+the corresponding Bootstrap classes. Set `open` and `name` on `AccordionItem`.

@@ -1,0 +1,31 @@
+---
+title: Popover
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Popover, PopoverBody, PopoverHeader } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Popover
+
+`Popover` provides the styled popup surface. Use the Bootstrap JavaScript
+bundle for trigger behavior and Floating UI positioning.
+
+<DemoContainer>
+  <Popover show placement='top'>
+    <PopoverHeader>Popover title</PopoverHeader>
+    <PopoverBody>Popover content</PopoverBody>
+  </Popover>
+</DemoContainer>
+
+## API
+
+| Prop        | Type                                    | Description                             |
+| ----------- | --------------------------------------- | --------------------------------------- |
+| `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | Selects the placement style.            |
+| `show`      | `boolean`                               | Adds `.show`; false by default.         |
+| `instant`   | `boolean`                               | Disables the fade transition.           |
+| `component` | `ElementType`                           | Changes the root element.               |
+| `...props`  | `BoxProps<C>`                           | Native props and all Box utility props. |
+
+`PopoverHeader` and `PopoverBody` style the title and content regions.

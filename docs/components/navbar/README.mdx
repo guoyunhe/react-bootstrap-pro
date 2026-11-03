@@ -1,0 +1,39 @@
+---
+title: Navbar
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Navbar, NavbarBrand, NavbarNav, NavItem, NavLink, NavbarToggler } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Navbar
+
+`Navbar` provides a responsive site-navigation shell. Compose the brand, nav,
+and toggler subcomponents; use the Bootstrap drawer plugin for responsive
+off-canvas navigation.
+
+<DemoContainer>
+  <Navbar expand='md'>
+    <NavbarBrand href='/'>Acme</NavbarBrand>
+    <NavbarToggler aria-controls='primary-nav' />
+    <NavbarNav id='primary-nav'>
+      <NavItem>
+        <NavLink href='/' active>
+          Home
+        </NavLink>
+      </NavItem>
+    </NavbarNav>
+  </Navbar>
+</DemoContainer>
+
+## API
+
+| Prop        | Type                                               | Description                               |
+| ----------- | -------------------------------------------------- | ----------------------------------------- |
+| `expand`    | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Selects the responsive expand breakpoint. |
+| `component` | `ElementType`                                      | Changes the navbar root element.          |
+| `...props`  | `BoxProps<C>`                                      | Native props and all Box utility props.   |
+
+`NavbarBrand`, `NavbarToggler`, `NavbarNav`, and `NavbarText` cover common
+navbar sections. Connect the toggler to its controlled element with plugin
+attributes.

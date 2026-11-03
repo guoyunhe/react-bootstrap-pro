@@ -1,0 +1,55 @@
+---
+title: Carousel
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import {
+  Carousel,
+  CarouselControl,
+  CarouselIndicator,
+  CarouselIndicators,
+  CarouselInner,
+  CarouselItem,
+  CarouselOverlayControls,
+} from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Carousel
+
+`Carousel` uses a native horizontal scroll container with CSS scroll snapping.
+The Bootstrap JavaScript bundle is required for previous/next controls,
+indicators, and autoplay.
+
+<DemoContainer>
+  <Carousel id='features' overlay>
+    <CarouselInner>
+      <CarouselItem active>First slide</CarouselItem>
+      <CarouselItem>Second slide</CarouselItem>
+    </CarouselInner>
+    <CarouselOverlayControls>
+      <CarouselControl target='#features' direction='previous' />
+      <CarouselIndicators>
+        <CarouselIndicator target='#features' index={0} active />
+        <CarouselIndicator target='#features' index={1} />
+      </CarouselIndicators>
+      <CarouselControl target='#features' direction='next' />
+    </CarouselOverlayControls>
+  </Carousel>
+</DemoContainer>
+
+## API
+
+| Prop        | Type          | Description                             |
+| ----------- | ------------- | --------------------------------------- |
+| `auto`      | `boolean`     | Lets each item use its own width.       |
+| `center`    | `boolean`     | Centers snap positions in the viewport. |
+| `fade`      | `boolean`     | Uses the stacked fade transition mode.  |
+| `overlay`   | `boolean`     | Positions controls over the slides.     |
+| `component` | `ElementType` | Changes the root element.               |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props. |
+
+Use `CarouselInner` and `CarouselItem` for the scroll viewport and slides.
+`CarouselControl` and `CarouselIndicator` require a selector `target` matching
+the carousel `id`; controls also accept `direction`, `size`, and `variant`, while
+indicators accept `index` and `active`. `CarouselOverlayControls` positions
+controls over the slides.

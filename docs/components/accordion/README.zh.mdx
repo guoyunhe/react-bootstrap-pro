@@ -1,0 +1,56 @@
+---
+title: Accordion 手风琴
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  AccordionIcon,
+  AccordionItem,
+} from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Accordion 手风琴
+
+`Accordion` 使用原生 `<details>` 元素组合面板。多个条目设置相同的 `name`
+即可互斥展开；核心交互不需要 JavaScript。
+
+<DemoContainer>
+  <Accordion>
+    <AccordionItem name='faq' open>
+      <AccordionHeader>
+        第一个问题
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>第一个答案</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='faq'>
+      <AccordionHeader>第二个问题</AccordionHeader>
+      <AccordionBody>第二个答案</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion gap>
+  <AccordionItem name='faq' open>
+    <AccordionHeader>问题</AccordionHeader>
+    <AccordionBody>答案</AccordionBody>
+  </AccordionItem>
+</Accordion>
+```
+
+## API
+
+| 属性        | 类型          | 说明                            |
+| ----------- | ------------- | ------------------------------- |
+| `flush`     | `boolean`     | 移除外侧边框和圆角。            |
+| `gap`       | `boolean`     | 在条目之间增加间距。            |
+| `size`      | `'sm'`        | 使用紧凑间距和字号。            |
+| `component` | `ElementType` | 更换根元素。                    |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+
+`AccordionItem`、`AccordionHeader`、`AccordionBody` 和 `AccordionIcon` 分别提供
+对应的 Bootstrap 类。通过 `AccordionItem` 的 `open` 和 `name` 控制原生 details。

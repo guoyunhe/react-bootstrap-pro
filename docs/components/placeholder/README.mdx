@@ -1,0 +1,31 @@
+---
+title: Placeholder
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Placeholder, PlaceholderGroup } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Placeholder
+
+`Placeholder` renders a loading skeleton. Put placeholders inside a
+`PlaceholderGroup` to apply the pulse, glow, or wave animation.
+
+<DemoContainer>
+  <PlaceholderGroup animation='wave'>
+    <Placeholder className='w-50' />
+    <Placeholder className='w-75' />
+  </PlaceholderGroup>
+</DemoContainer>
+
+## API
+
+| Prop        | Type                          | Description                             |
+| ----------- | ----------------------------- | --------------------------------------- |
+| `size`      | `'xs' \| 'sm' \| 'lg'`        | Adjusts the placeholder height.         |
+| `animation` | `'glow' \| 'pulse' \| 'wave'` | Selects a group animation.              |
+| `component` | `ElementType`                 | Changes the rendered element.           |
+| `...props`  | `BoxProps<C>`                 | Native props and all Box utility props. |
+
+Placeholders are presentational. Toggle the real content and skeleton visibility
+in your application, and use `aria-hidden` where appropriate.

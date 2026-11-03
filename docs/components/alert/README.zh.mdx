@@ -1,0 +1,33 @@
+---
+title: Alert 提示
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Alert } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Alert 提示
+
+`Alert` 渲染 Bootstrap `.alert` 容器，默认设置 `role="alert"`。关闭交互需要
+Bootstrap JavaScript 插件和 `CloseButton`。
+
+<DemoContainer>
+  <Alert theme='success'>更改已保存。</Alert>
+</DemoContainer>
+
+```tsx
+<Alert theme='warning' instant>
+  继续之前请检查信息。
+</Alert>
+```
+
+## API
+
+| 属性        | 类型                 | 说明                            |
+| ----------- | -------------------- | ------------------------------- |
+| `instant`   | `boolean`            | 禁用退出过渡动画。              |
+| `theme`     | Bootstrap 主题字面量 | 设置提示主题颜色。              |
+| `component` | `ElementType`        | 更换根元素。                    |
+| `...props`  | `BoxProps<C>`        | 原生属性及所有 Box 工具类属性。 |
+
+颜色仅作辅助提示，请通过文本说明提示含义。

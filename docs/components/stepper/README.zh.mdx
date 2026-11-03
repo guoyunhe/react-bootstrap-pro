@@ -1,0 +1,40 @@
+---
+title: Stepper 步骤条
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Stepper, StepperItem } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Stepper 步骤条
+
+`Stepper` 使用有序列表渲染步骤。已完成和当前步骤设置 `active`；空间足够时可使用
+响应式 `horizontal` 属性。
+
+<DemoContainer>
+  <Stepper>
+    <StepperItem active>创建账户</StepperItem>
+    <StepperItem active aria-current='step'>
+      确认邮箱
+    </StepperItem>
+    <StepperItem>完成</StepperItem>
+  </Stepper>
+</DemoContainer>
+
+```tsx
+<Stepper horizontal='md'>
+  <StepperItem active>第一步</StepperItem>
+  <StepperItem>第二步</StepperItem>
+</Stepper>
+```
+
+## API
+
+| 属性         | 类型                                               | 说明                            |
+| ------------ | -------------------------------------------------- | ------------------------------- |
+| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 切换为横向布局。                |
+| `overflow`   | `boolean`                                          | 为较长步骤序列启用横向滚动。    |
+| `component`  | `ElementType`                                      | 更换有序列表元素。              |
+| `...props`   | `BoxProps<C>`                                      | 原生属性及所有 Box 工具类属性。 |
+
+`StepperItem` 渲染带序号的步骤，并支持 `active` 属性。

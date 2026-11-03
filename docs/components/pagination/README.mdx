@@ -1,0 +1,41 @@
+---
+title: Pagination
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { PageLink, Pagination, PaginationItem } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Pagination
+
+`Pagination` uses list markup inside a labeled navigation landmark. Mark the
+current page with `active` and provide an accessible name for the navigation.
+
+<DemoContainer>
+  <nav aria-label='Search results pages'>
+    <Pagination>
+      <PaginationItem>
+        <PageLink href='/page/1'>1</PageLink>
+      </PaginationItem>
+      <PaginationItem active>
+        <PageLink href='/page/2' active>
+          2
+        </PageLink>
+      </PaginationItem>
+      <PaginationItem>
+        <PageLink href='/page/3'>3</PageLink>
+      </PaginationItem>
+    </Pagination>
+  </nav>
+</DemoContainer>
+
+## API
+
+| Prop        | Type           | Description                             |
+| ----------- | -------------- | --------------------------------------- |
+| `size`      | `'sm' \| 'lg'` | Selects pagination sizing.              |
+| `component` | `ElementType`  | Changes the list root element.          |
+| `...props`  | `BoxProps<C>`  | Native props and all Box utility props. |
+
+`PaginationItem` supports `active` and `disabled`; use `PageLink` for the
+interactive link and its optional `active` state.

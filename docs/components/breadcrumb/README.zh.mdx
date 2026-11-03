@@ -1,0 +1,38 @@
+---
+title: Breadcrumb 面包屑
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Breadcrumb, BreadcrumbDivider, BreadcrumbItem, BreadcrumbLink } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Breadcrumb 面包屑
+
+请在具备无障碍名称的导航区域中使用 `Breadcrumb`。其条目、链接和分隔符组件会
+渲染对应的列表语义。
+
+<DemoContainer>
+  <nav aria-label='面包屑'>
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbLink href='/'>首页</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbDivider />
+      <BreadcrumbItem aria-current='page'>
+        <BreadcrumbLink href='/docs' active>
+          文档
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  </nav>
+</DemoContainer>
+
+## API
+
+| 组件                | 用途                                                |
+| ------------------- | --------------------------------------------------- |
+| `Breadcrumb`        | 带 `.breadcrumb` 的有序列表根元素。                 |
+| `BreadcrumbItem`    | 带 `.breadcrumb-item` 的列表项。                    |
+| `BreadcrumbLink`    | 支持 `active` 状态的链接。                          |
+| `BreadcrumbDivider` | 空列表项，由 CSS 绘制箭头分隔符。                   |
+| `...props`          | 所有组件均支持 `component`、原生属性和 `BoxProps`。 |

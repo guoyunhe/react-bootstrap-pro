@@ -1,0 +1,33 @@
+---
+title: Menu
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Menu, MenuDivider, MenuHeader, MenuItem } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Menu
+
+`Menu` provides the popup menu classes. Use the Bootstrap JavaScript bundle to
+position, toggle, and manage keyboard interaction.
+
+<DemoContainer>
+  <Menu show>
+    <MenuHeader>Actions</MenuHeader>
+    <MenuItem href='/edit'>Edit</MenuItem>
+    <MenuDivider />
+    <MenuItem href='/archive'>Archive</MenuItem>
+  </Menu>
+</DemoContainer>
+
+## API
+
+| Prop          | Type          | Description                                        |
+| ------------- | ------------- | -------------------------------------------------- |
+| `show`        | `boolean`     | Adds `.show` to display the menu.                  |
+| `scrollable`  | `boolean`     | Limits menu height and enables vertical scrolling. |
+| `translucent` | `boolean`     | Uses a translucent menu surface.                   |
+| `component`   | `ElementType` | Changes the root element.                          |
+| `...props`    | `BoxProps<C>` | Native props and all Box utility props.            |
+
+`MenuItem`, `MenuHeader`, `MenuDivider`, and `MenuText` provide menu structure.

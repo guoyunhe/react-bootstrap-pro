@@ -1,0 +1,33 @@
+---
+title: List group
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { ListGroup, ListGroupItem } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# List group
+
+`ListGroup` renders a semantic list by default. Use action items for links or
+buttons, and use `active` to identify the current selection.
+
+<DemoContainer>
+  <ListGroup>
+    <ListGroupItem active>Current item</ListGroupItem>
+    <ListGroupItem action component='a' href='/next'>
+      Next item
+    </ListGroupItem>
+  </ListGroup>
+</DemoContainer>
+
+## API
+
+| Prop         | Type                                               | Description                             |
+| ------------ | -------------------------------------------------- | --------------------------------------- |
+| `flush`      | `boolean`                                          | Removes the outer border and rounding.  |
+| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Lays items out horizontally.            |
+| `numbered`   | `boolean`                                          | Adds nested counters to list items.     |
+| `component`  | `ElementType`                                      | Changes the root element.               |
+| `...props`   | `BoxProps<C>`                                      | Native props and all Box utility props. |
+
+`ListGroupItem` accepts `action` and `active` modifiers.

@@ -1,0 +1,33 @@
+---
+title: Toggler 切换器
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Toggler } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Toggler 切换器
+
+`Toggler` 渲染 Bootstrap toggler 插件触发器。插件可切换触发器自身或目标元素上的
+类名或属性。
+
+<DemoContainer>
+  <Toggler target='#theme-surface' attribute='class' value='bg-primary'>
+    切换主题
+  </Toggler>
+  <div id='theme-surface' className='border p-3'>
+    目标
+  </div>
+</DemoContainer>
+
+## API
+
+| 属性        | 类型          | 说明                              |
+| ----------- | ------------- | --------------------------------- |
+| `target`    | `string`      | 要更新的元素选择器，可选。        |
+| `attribute` | `string`      | 要切换的属性名称。                |
+| `value`     | `string`      | 插件切换的类名或属性值。          |
+| `component` | `ElementType` | 更换触发器元素，默认为 `button`。 |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。   |
+
+切换行为需要 Bootstrap JavaScript bundle。

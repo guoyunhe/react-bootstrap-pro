@@ -1,0 +1,38 @@
+---
+title: Breadcrumb
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Breadcrumb, BreadcrumbDivider, BreadcrumbItem, BreadcrumbLink } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Breadcrumb
+
+Use an accessible navigation landmark around `Breadcrumb`. Its item, link, and
+divider components render the expected list semantics.
+
+<DemoContainer>
+  <nav aria-label='Breadcrumb'>
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbDivider />
+      <BreadcrumbItem aria-current='page'>
+        <BreadcrumbLink href='/docs' active>
+          Docs
+        </BreadcrumbLink>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  </nav>
+</DemoContainer>
+
+## API
+
+| Component           | Purpose                                                             |
+| ------------------- | ------------------------------------------------------------------- |
+| `Breadcrumb`        | Ordered-list root with `.breadcrumb`.                               |
+| `BreadcrumbItem`    | List item with `.breadcrumb-item`.                                  |
+| `BreadcrumbLink`    | Link with optional `active` state.                                  |
+| `BreadcrumbDivider` | Empty list item that displays the CSS chevron.                      |
+| `...props`          | Every component supports `component`, native props, and `BoxProps`. |

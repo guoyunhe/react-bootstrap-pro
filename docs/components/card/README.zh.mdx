@@ -1,0 +1,36 @@
+---
+title: Card 卡片
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Button, Card, CardBody, CardHeader, CardTitle } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Card 卡片
+
+`Card` 是灵活的内容容器。可组合子组件添加页眉、主体、页脚或图片，并根据内容
+选择合适的语义元素。
+
+<DemoContainer>
+  <Card style={{ maxWidth: 320 }}>
+    <CardHeader>精选</CardHeader>
+    <CardBody>
+      <CardTitle>卡片标题</CardTitle>
+      <p>卡片内容。</p>
+      <Button variant='solid' theme='primary'>
+        继续
+      </Button>
+    </CardBody>
+  </Card>
+</DemoContainer>
+
+## API
+
+| 属性        | 类型                        | 说明                            |
+| ----------- | --------------------------- | ------------------------------- |
+| `variant`   | `'subtle' \| 'translucent'` | 选择卡片表面样式。              |
+| `component` | `ElementType`               | 更换卡片根元素。                |
+| `...props`  | `BoxProps<C>`               | 原生属性及所有 Box 工具类属性。 |
+
+`CardHeader`、`CardBody`、`CardFooter`、`CardTitle`、`CardSubtitle`、`CardText`、
+`CardImage` 和 `CardImageOverlay` 提供对应的结构类名。

@@ -1,0 +1,37 @@
+---
+title: Navbar 导航栏
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Navbar, NavbarBrand, NavbarNav, NavItem, NavLink, NavbarToggler } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Navbar 导航栏
+
+`Navbar` 提供响应式站点导航外壳。可组合品牌、导航和切换按钮；响应式画布外导航
+需要 Bootstrap drawer 插件。
+
+<DemoContainer>
+  <Navbar expand='md'>
+    <NavbarBrand href='/'>Acme</NavbarBrand>
+    <NavbarToggler aria-controls='primary-nav' />
+    <NavbarNav id='primary-nav'>
+      <NavItem>
+        <NavLink href='/' active>
+          首页
+        </NavLink>
+      </NavItem>
+    </NavbarNav>
+  </Navbar>
+</DemoContainer>
+
+## API
+
+| 属性        | 类型                                               | 说明                            |
+| ----------- | -------------------------------------------------- | ------------------------------- |
+| `expand`    | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 设置响应式展开断点。            |
+| `component` | `ElementType`                                      | 更换导航栏根元素。              |
+| `...props`  | `BoxProps<C>`                                      | 原生属性及所有 Box 工具类属性。 |
+
+`NavbarBrand`、`NavbarToggler`、`NavbarNav` 和 `NavbarText` 覆盖常见导航栏区域。
+请通过插件属性将切换按钮关联到受控元素。

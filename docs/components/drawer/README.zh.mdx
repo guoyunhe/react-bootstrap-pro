@@ -1,0 +1,36 @@
+---
+title: Drawer 抽屉
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerTitle } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Drawer 抽屉
+
+`Drawer` 基于原生 `<dialog>`，并通过 Bootstrap JavaScript 插件实现遮罩、焦点管理
+和按方向关闭。
+
+<DemoContainer>
+  <Drawer open placement='end'>
+    <DrawerHeader>
+      <DrawerTitle>导航</DrawerTitle>
+    </DrawerHeader>
+    <DrawerBody>抽屉内容</DrawerBody>
+    <DrawerFooter>页脚</DrawerFooter>
+  </Drawer>
+</DemoContainer>
+
+## API
+
+| 属性          | 类型                                    | 说明                                    |
+| ------------- | --------------------------------------- | --------------------------------------- |
+| `placement`   | `'start' \| 'end' \| 'top' \| 'bottom'` | 选择抽屉位置。                          |
+| `fullscreen`  | `boolean`                               | 填满可用视口。                          |
+| `sheet`       | `boolean`                               | 使用底部面板样式。                      |
+| `translucent` | `boolean`                               | 添加半透明表面效果。                    |
+| `instant`     | `boolean`                               | 禁用过渡动画。                          |
+| `...props`    | `BoxProps<C>`                           | 原生 dialog 属性及所有 Box 工具类属性。 |
+
+`DrawerHeader`、`DrawerTitle`、`DrawerBody` 和 `DrawerFooter` 提供对应的结构类名。
+插件控制的模态行为需要 Bootstrap JavaScript bundle。

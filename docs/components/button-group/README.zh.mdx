@@ -1,0 +1,47 @@
+---
+title: Button group 按钮组
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Button, ButtonGroup, ButtonToolbar } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Button group 按钮组
+
+`ButtonGroup` 用于组合相关操作，默认设置 `role="group"`。请用 `aria-label` 或
+`aria-labelledby` 为每个按钮组提供无障碍名称。
+
+<DemoContainer>
+  <ButtonGroup aria-label='文本对齐'>
+    <Button variant='outline' theme='secondary'>
+      左对齐
+    </Button>
+    <Button variant='outline' theme='secondary'>
+      居中
+    </Button>
+    <Button variant='outline' theme='secondary'>
+      右对齐
+    </Button>
+  </ButtonGroup>
+</DemoContainer>
+
+```tsx
+<ButtonToolbar aria-label='编辑器操作'>
+  <ButtonGroup aria-label='历史记录' size='sm'>
+    ...
+  </ButtonGroup>
+  <ButtonGroup aria-label='格式' divider>
+    ...
+  </ButtonGroup>
+</ButtonToolbar>
+```
+
+## API
+
+| 属性          | 类型                         | 说明                            |
+| ------------- | ---------------------------- | ------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'` | 设置按钮组方向。                |
+| `divider`     | `boolean`                    | 在控件之间添加分隔线。          |
+| `size`        | `'sm' \| 'lg'`               | 设置按钮组尺寸。                |
+| `component`   | `ElementType`                | 更换根元素。                    |
+| `...props`    | `BoxProps<C>`                | 原生属性及所有 Box 工具类属性。 |

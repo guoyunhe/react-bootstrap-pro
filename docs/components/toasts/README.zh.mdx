@@ -1,0 +1,37 @@
+---
+title: Toasts 轻提示
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { CloseButton, Toast, ToastBody, ToastContainer, ToastHeader } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Toasts 轻提示
+
+`Toast` 组合通知表面和无障碍实时区域。可使用 Bootstrap JavaScript 插件，也可在
+React 中控制 `show` 属性。
+
+<DemoContainer>
+  <ToastContainer>
+    <Toast show>
+      <ToastHeader>
+        <strong>已保存</strong>
+        <CloseButton />
+      </ToastHeader>
+      <ToastBody>更改已生效。</ToastBody>
+    </Toast>
+  </ToastContainer>
+</DemoContainer>
+
+## API
+
+| 属性          | 类型          | 说明                            |
+| ------------- | ------------- | ------------------------------- |
+| `show`        | `boolean`     | 添加 `.show` 以显示轻提示。     |
+| `instant`     | `boolean`     | 禁用淡入淡出动画。              |
+| `translucent` | `boolean`     | 添加半透明背景效果。            |
+| `component`   | `ElementType` | 更换渲染元素。                  |
+| `...props`    | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+
+`ToastHeader`、`ToastBody` 和 `ToastContainer` 提供对应布局类名。关闭和自动隐藏需要
+JavaScript。

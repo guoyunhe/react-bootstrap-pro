@@ -1,0 +1,37 @@
+---
+title: Nav overflow
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Nav, NavItem, NavLink, NavOverflow } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Nav overflow
+
+`NavOverflow` wraps a navigation list for Bootstrap's Priority+ plugin. The
+JavaScript bundle measures the wrapper and moves items that do not fit into a
+“More” menu.
+
+<DemoContainer>
+  <NavOverflow>
+    <Nav>
+      <NavItem>
+        <NavLink href='/one'>One</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink href='/two'>Two</NavLink>
+      </NavItem>
+    </Nav>
+  </NavOverflow>
+</DemoContainer>
+
+## API
+
+| Prop        | Type          | Description                             |
+| ----------- | ------------- | --------------------------------------- |
+| `component` | `ElementType` | Changes the wrapper element.            |
+| `className` | `string`      | Adds wrapper classes.                   |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props. |
+
+The component adds `data-bs-toggle="nav-overflow"` automatically. Use
+`NavOverflowItem` and `NavOverflowIcon` for custom overflow-menu markup.

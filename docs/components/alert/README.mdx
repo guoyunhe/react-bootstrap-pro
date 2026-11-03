@@ -1,0 +1,34 @@
+---
+title: Alert
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Alert } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Alert
+
+`Alert` renders Bootstrap's contextual `.alert` container and defaults to
+`role="alert"`. Dismissal requires the Bootstrap JavaScript plugin and a
+`CloseButton`.
+
+<DemoContainer>
+  <Alert theme='success'>Your changes have been saved.</Alert>
+</DemoContainer>
+
+```tsx
+<Alert theme='warning' instant>
+  Check the information before continuing.
+</Alert>
+```
+
+## API
+
+| Prop        | Type                    | Description                             |
+| ----------- | ----------------------- | --------------------------------------- |
+| `instant`   | `boolean`               | Disables the exit transition.           |
+| `theme`     | Bootstrap theme literal | Sets contextual theme colors.           |
+| `component` | `ElementType`           | Changes the root element.               |
+| `...props`  | `BoxProps<C>`           | Native props and all Box utility props. |
+
+Color is supplementary; keep the alert's meaning in its text.

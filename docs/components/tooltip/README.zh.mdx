@@ -1,0 +1,30 @@
+---
+title: Tooltip 工具提示
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Tooltip, TooltipInner } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Tooltip 工具提示
+
+`Tooltip` 提供工具提示表面样式。Bootstrap JavaScript bundle 负责创建和定位提示；
+不要仅依赖悬停内容传达关键信息。
+
+<DemoContainer>
+  <Tooltip show>
+    <TooltipInner>辅助说明</TooltipInner>
+  </Tooltip>
+</DemoContainer>
+
+## API
+
+| 属性        | 类型                                    | 说明                            |
+| ----------- | --------------------------------------- | ------------------------------- |
+| `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | 选择放置方向样式。              |
+| `show`      | `boolean`                               | 添加 `.show`；默认关闭。        |
+| `instant`   | `boolean`                               | 禁用淡入淡出动画。              |
+| `component` | `ElementType`                           | 更换根元素。                    |
+| `...props`  | `BoxProps<C>`                           | 原生属性及所有 Box 工具类属性。 |
+
+`TooltipInner` 设置内部文本样式。使用插件时，可通过 Bootstrap 支持的 title 属性提供触发文本。

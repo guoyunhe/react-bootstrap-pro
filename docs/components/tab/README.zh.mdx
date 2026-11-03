@@ -1,0 +1,46 @@
+---
+title: Tab 标签页
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Tab, TabContent, TabItem, TabList, TabPane } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Tab 标签页
+
+`TabList`、`TabItem`、`Tab` 和 `TabPane` 提供 Bootstrap 标签页结构及 ARIA 关联。
+切换标签和更新激活状态需要 Bootstrap JavaScript bundle。
+
+<DemoContainer>
+  <TabList aria-label='示例标签页'>
+    <TabItem>
+      <Tab id='home-tab' active targetId='home-pane'>
+        首页
+      </Tab>
+    </TabItem>
+    <TabItem>
+      <Tab id='profile-tab' targetId='profile-pane'>
+        个人资料
+      </Tab>
+    </TabItem>
+  </TabList>
+  <TabContent>
+    <TabPane active id='home-pane' aria-labelledby='home-tab'>
+      首页内容
+    </TabPane>
+    <TabPane id='profile-pane' aria-labelledby='profile-tab'>
+      个人资料内容
+    </TabPane>
+  </TabContent>
+</DemoContainer>
+
+## API
+
+| 组件属性         | 类型          | 说明                                     |
+| ---------------- | ------------- | ---------------------------------------- |
+| `TabItem`        | —             | 将每个标签包装在 presentation 列表项中。 |
+| `Tab.active`     | `boolean`     | 应用激活状态和 `aria-selected`。         |
+| `Tab.targetId`   | `string`      | 将触发器关联到面板 ID。                  |
+| `TabPane.active` | `boolean`     | 显示面板并移除隐藏状态。                 |
+| `component`      | `ElementType` | 更换渲染元素。                           |
+| `...props`       | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。          |

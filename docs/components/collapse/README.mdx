@@ -1,0 +1,31 @@
+---
+title: Collapse
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Collapse } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Collapse
+
+`Collapse` provides the `.collapse` panel classes. Control the `show` prop from
+React, or use Bootstrap's JavaScript plugin and matching `data-bs-*` attributes.
+
+<DemoContainer>
+  <Collapse show>Collapsible content</Collapse>
+</DemoContainer>
+
+```tsx
+<Collapse horizontal show={expanded}>
+  Content
+</Collapse>
+```
+
+## API
+
+| Prop         | Type          | Description                             |
+| ------------ | ------------- | --------------------------------------- |
+| `show`       | `boolean`     | Adds `.show` to display the panel.      |
+| `horizontal` | `boolean`     | Uses the horizontal collapse modifier.  |
+| `component`  | `ElementType` | Changes the root element.               |
+| `...props`   | `BoxProps<C>` | Native props and all Box utility props. |

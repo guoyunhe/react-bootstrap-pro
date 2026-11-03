@@ -1,0 +1,36 @@
+---
+title: Card
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Button, Card, CardBody, CardHeader, CardTitle } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Card
+
+`Card` is a flexible content container. Use its subcomponents to add a header,
+body, footer, or image while keeping semantic element choice in your control.
+
+<DemoContainer>
+  <Card style={{ maxWidth: 320 }}>
+    <CardHeader>Featured</CardHeader>
+    <CardBody>
+      <CardTitle>Card title</CardTitle>
+      <p>Card content goes here.</p>
+      <Button variant='solid' theme='primary'>
+        Continue
+      </Button>
+    </CardBody>
+  </Card>
+</DemoContainer>
+
+## API
+
+| Prop        | Type                        | Description                             |
+| ----------- | --------------------------- | --------------------------------------- |
+| `variant`   | `'subtle' \| 'translucent'` | Selects a card surface treatment.       |
+| `component` | `ElementType`               | Changes the card root element.          |
+| `...props`  | `BoxProps<C>`               | Native props and all Box utility props. |
+
+`CardHeader`, `CardBody`, `CardFooter`, `CardTitle`, `CardSubtitle`, `CardText`,
+`CardImage`, and `CardImageOverlay` provide the corresponding structural classes.

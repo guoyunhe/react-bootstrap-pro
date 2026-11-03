@@ -1,0 +1,39 @@
+---
+title: Avatar
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Avatar, AvatarImage, AvatarStatus } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Avatar
+
+`Avatar` displays initials or groups an image and optional status indicator.
+
+<DemoContainer>
+  <Avatar size='lg' theme='primary'>
+    AB
+    <AvatarStatus status='online' />
+  </Avatar>
+  <Avatar size='lg'>
+    <AvatarImage src='https://example.com/avatar.png' alt='Alex Brown' />
+  </Avatar>
+</DemoContainer>
+
+```tsx
+<Avatar size='sm' subtle theme='accent'>
+  AB
+</Avatar>
+```
+
+## API
+
+| Prop        | Type                           | Description                             |
+| ----------- | ------------------------------ | --------------------------------------- |
+| `size`      | `'xs' \| 'sm' \| 'lg' \| 'xl'` | Sets avatar dimensions.                 |
+| `subtle`    | `boolean`                      | Uses the subtle theme treatment.        |
+| `component` | `ElementType`                  | Changes the avatar root element.        |
+| `...props`  | `BoxProps<C>`                  | Native props and all Box utility props. |
+
+`AvatarImage`, `AvatarStatus`, and `AvatarStack` provide image, status, and
+overlapping-stack classes.

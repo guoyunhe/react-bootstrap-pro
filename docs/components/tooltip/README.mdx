@@ -1,0 +1,32 @@
+---
+title: Tooltip
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Tooltip, TooltipInner } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Tooltip
+
+`Tooltip` provides the styled tooltip surface. The Bootstrap JavaScript bundle
+creates and positions tooltips; do not rely on hover-only content to convey
+essential information.
+
+<DemoContainer>
+  <Tooltip show>
+    <TooltipInner>Helpful context</TooltipInner>
+  </Tooltip>
+</DemoContainer>
+
+## API
+
+| Prop        | Type                                    | Description                             |
+| ----------- | --------------------------------------- | --------------------------------------- |
+| `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | Selects the placement style.            |
+| `show`      | `boolean`                               | Adds `.show`; false by default.         |
+| `instant`   | `boolean`                               | Disables the fade transition.           |
+| `component` | `ElementType`                           | Changes the root element.               |
+| `...props`  | `BoxProps<C>`                           | Native props and all Box utility props. |
+
+`TooltipInner` applies the inner text styling. Provide trigger text through
+Bootstrap's supported title attributes when using the plugin.

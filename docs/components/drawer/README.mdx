@@ -1,0 +1,37 @@
+---
+title: Drawer
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerTitle } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Drawer
+
+`Drawer` builds on native `<dialog>` and Bootstrap's JavaScript plugin for
+backdrop, focus management, and placement-aware dismissal.
+
+<DemoContainer>
+  <Drawer open placement='end'>
+    <DrawerHeader>
+      <DrawerTitle>Navigation</DrawerTitle>
+    </DrawerHeader>
+    <DrawerBody>Drawer content</DrawerBody>
+    <DrawerFooter>Footer</DrawerFooter>
+  </Drawer>
+</DemoContainer>
+
+## API
+
+| Prop          | Type                                    | Description                                    |
+| ------------- | --------------------------------------- | ---------------------------------------------- |
+| `placement`   | `'start' \| 'end' \| 'top' \| 'bottom'` | Selects the drawer edge.                       |
+| `fullscreen`  | `boolean`                               | Fills the available viewport.                  |
+| `sheet`       | `boolean`                               | Uses the sheet presentation.                   |
+| `translucent` | `boolean`                               | Adds the translucent surface treatment.        |
+| `instant`     | `boolean`                               | Disables transitions.                          |
+| `...props`    | `BoxProps<C>`                           | Native dialog props and all Box utility props. |
+
+`DrawerHeader`, `DrawerTitle`, `DrawerBody`, and `DrawerFooter` provide the
+corresponding structural classes. The Bootstrap JavaScript bundle is required
+for plugin-controlled modal behavior.

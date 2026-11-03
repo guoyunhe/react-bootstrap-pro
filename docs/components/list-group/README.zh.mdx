@@ -1,0 +1,33 @@
+---
+title: List group 列表组
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { ListGroup, ListGroupItem } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# List group 列表组
+
+`ListGroup` 默认渲染语义化列表。链接或按钮应使用操作项，并通过 `active`
+标识当前选择。
+
+<DemoContainer>
+  <ListGroup>
+    <ListGroupItem active>当前条目</ListGroupItem>
+    <ListGroupItem action component='a' href='/next'>
+      下一条
+    </ListGroupItem>
+  </ListGroup>
+</DemoContainer>
+
+## API
+
+| 属性         | 类型                                               | 说明                            |
+| ------------ | -------------------------------------------------- | ------------------------------- |
+| `flush`      | `boolean`                                          | 移除外侧边框和圆角。            |
+| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 设置横向排列。                  |
+| `numbered`   | `boolean`                                          | 为列表项添加嵌套计数器。        |
+| `component`  | `ElementType`                                      | 更换根元素。                    |
+| `...props`   | `BoxProps<C>`                                      | 原生属性及所有 Box 工具类属性。 |
+
+`ListGroupItem` 支持 `action` 和 `active` 修饰属性。

@@ -1,0 +1,35 @@
+---
+title: Progress
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Progress, ProgressBar } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Progress
+
+`Progress` provides the accessible progressbar wrapper. Supply an accessible
+`label`; `ProgressBar` maps its value to a percentage width.
+
+<DemoContainer>
+  <Progress label='Upload' value={65}>
+    <ProgressBar value={65}>65%</ProgressBar>
+  </Progress>
+</DemoContainer>
+
+```tsx
+<Progress label='Upload' value={current} max={total}>
+  <ProgressBar value={current} max={total} striped animated />
+</Progress>
+```
+
+## API
+
+| Component prop                     | Type          | Description                               |
+| ---------------------------------- | ------------- | ----------------------------------------- |
+| `Progress.label`                   | `string`      | Accessible name for the progressbar.      |
+| `Progress.value`                   | `number`      | Current value exposed as `aria-valuenow`. |
+| `Progress.min` / `max`             | `number`      | Accessible value range.                   |
+| `ProgressBar.value` / `max`        | `number`      | Sets the bar width as a percentage.       |
+| `ProgressBar.striped` / `animated` | `boolean`     | Enables stripes or animation.             |
+| `...props`                         | `BoxProps<C>` | Native props and all Box utility props.   |

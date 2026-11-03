@@ -1,0 +1,33 @@
+---
+title: Toggler
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Toggler } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Toggler
+
+`Toggler` renders a trigger for Bootstrap's toggler plugin. The plugin can
+toggle a class or attribute on the trigger itself or on a selected target.
+
+<DemoContainer>
+  <Toggler target='#theme-surface' attribute='class' value='bg-primary'>
+    Toggle theme
+  </Toggler>
+  <div id='theme-surface' className='border p-3'>
+    Target
+  </div>
+</DemoContainer>
+
+## API
+
+| Prop        | Type          | Description                                        |
+| ----------- | ------------- | -------------------------------------------------- |
+| `target`    | `string`      | Optional selector for the element to update.       |
+| `attribute` | `string`      | Attribute to toggle.                               |
+| `value`     | `string`      | Class or attribute value toggled by the plugin.    |
+| `component` | `ElementType` | Changes the trigger element; defaults to `button`. |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props.            |
+
+The Bootstrap JavaScript bundle is required for toggling behavior.

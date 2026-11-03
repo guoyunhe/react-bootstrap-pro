@@ -1,0 +1,40 @@
+---
+title: Stepper
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Stepper, StepperItem } from '../../../src';
+import { DemoContainer } from '../demo-container';
+
+# Stepper
+
+`Stepper` renders an ordered list of steps. Set `active` on completed and
+current steps, and use the responsive `horizontal` option when space allows.
+
+<DemoContainer>
+  <Stepper>
+    <StepperItem active>Create account</StepperItem>
+    <StepperItem active aria-current='step'>
+      Confirm email
+    </StepperItem>
+    <StepperItem>Finish</StepperItem>
+  </Stepper>
+</DemoContainer>
+
+```tsx
+<Stepper horizontal='md'>
+  <StepperItem active>Step one</StepperItem>
+  <StepperItem>Step two</StepperItem>
+</Stepper>
+```
+
+## API
+
+| Prop         | Type                                               | Description                                           |
+| ------------ | -------------------------------------------------- | ----------------------------------------------------- |
+| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Switches to horizontal layout.                        |
+| `overflow`   | `boolean`                                          | Enables horizontal scrolling for long step sequences. |
+| `component`  | `ElementType`                                      | Changes the ordered-list element.                     |
+| `...props`   | `BoxProps<C>`                                      | Native props and all Box utility props.               |
+
+`StepperItem` renders a numbered step and supports `active`.
