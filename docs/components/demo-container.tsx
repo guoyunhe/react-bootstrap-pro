@@ -1,10 +1,7 @@
-import clsx from 'clsx';
-import type { HTMLAttributes } from 'react';
+import { Box, type BoxProps } from 'react-bootstrap-pro';
 
-export type DemoContainerProps = HTMLAttributes<HTMLDivElement>;
+export type DemoContainerProps = BoxProps<'div'>;
 
 export function DemoContainer({ className, ...props }: DemoContainerProps) {
-  const classes = clsx('border', 'rounded', 'p-5', 'my-5', className);
-
-  return <div {...props} className={classes} />;
+  return <Box border rounded padding={5} marginY={5} {...props} className={className} />;
 }
