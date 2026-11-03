@@ -1,0 +1,104 @@
+---
+title: Grid
+order: 3
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Col, Container, Row } from '../../../src';
+import { DemoContainer } from '../demo-container';
+import { GridLayoutsDemo } from './demos/grid-layouts';
+
+# Grid
+
+`Row` and `Col` compose Bootstrap 6's responsive, flexbox-based grid. The grid
+uses 12 columns per row; place columns inside a row and rows inside a
+[`Container`](../container/). Import Bootstrap's stylesheet once in your
+application before using these components.
+
+## Responsive layout
+
+Use `Row`'s `cols` prop to set the number of equal-width columns, or set each
+`Col`'s `span` to control how many of the 12 grid columns it occupies. Values
+can be a single number for all viewports or an object keyed by breakpoint.
+
+<DemoContainer>
+  <Container fluid>
+    <GridLayoutsDemo />
+  </Container>
+</DemoContainer>
+
+```tsx
+<Row cols={{ xs: 1, sm: 2, md: 4 }} gutter={3}>
+  <Col>One</Col>
+  <Col>Two</Col>
+  <Col>Three</Col>
+  <Col>Four</Col>
+</Row>
+
+<Row gutter={3}>
+  <Col span={{ xs: 12, md: 8 }}>Main content</Col>
+  <Col span={{ xs: 12, md: 4 }}>Sidebar</Col>
+</Row>
+```
+
+The breakpoint keys are `xs`, `sm`, `md`, `lg`, `xl`, and `2xl`. `xs` maps to
+the unprefixed class, while later breakpoints use Bootstrap 6's `sm:`, `md:`,
+`lg:`, `xl:`, or `2xl:` prefix.
+
+## Columns
+
+`Col` renders `.col` by default. Use `span='auto'` for content-sized columns,
+and set `offset` or `order` to position or reorder a column at selected
+breakpoints.
+
+```tsx
+<Row>
+  <Col span='auto'>Natural width</Col>
+  <Col span={{ xs: 12, md: 6 }} offset={{ md: 3 }}>
+    Centered from medium breakpoint up
+  </Col>
+  <Col order={{ xs: 'last', md: 'first' }}>Responsive order</Col>
+</Row>
+```
+
+## Gutters
+
+Rows use Bootstrap's gutter utilities for horizontal and vertical spacing.
+`gutter` sets both directions, while `gutterX` and `gutterY` control them
+independently. Values from `0` to `5` use Bootstrap's predefined spacing scale;
+responsive values can use the same breakpoint object as column sizes.
+
+```tsx
+<Row gutter={{ xs: 2, md: 4 }} gutterY={3}>
+  <Col>First</Col>
+  <Col>Second</Col>
+</Row>
+```
+
+## API
+
+### Row
+
+| Prop        | Type                               | Default | Description                                                                                       |
+| ----------- | ---------------------------------- | ------- | ------------------------------------------------------------------------------------------------- |
+| `cols`      | `GridResponsive<number \| 'auto'>` | —       | Sets `.row-cols-*`; a number applies at all sizes, or a breakpoint object sets responsive counts. |
+| `gutter`    | `GridResponsive<number>`           | —       | Sets horizontal and vertical gutters using `.g-*` classes.                                        |
+| `gutterX`   | `GridResponsive<number>`           | —       | Sets horizontal gutters using `.gx-*` classes.                                                    |
+| `gutterY`   | `GridResponsive<number>`           | —       | Sets vertical gutters using `.gy-*` classes.                                                      |
+| `className` | `string`                           | —       | Additional class names.                                                                           |
+| `...props`  | `HTMLAttributes<HTMLDivElement>`   | —       | Native `<div>` attributes.                                                                        |
+
+### Col
+
+| Prop        | Type                                          | Default | Description                                                   |
+| ----------- | --------------------------------------------- | ------- | ------------------------------------------------------------- |
+| `span`      | `GridResponsive<number \| 'auto'>`            | `.col`  | Sets the column width with `.col-*`; `auto` sizes to content. |
+| `offset`    | `GridResponsive<number>`                      | —       | Adds `.offset-*` to move the column to the right.             |
+| `order`     | `GridResponsive<number \| 'first' \| 'last'>` | —       | Sets the visual order with `.order-*` classes.                |
+| `className` | `string`                                      | —       | Additional class names.                                       |
+| `...props`  | `HTMLAttributes<HTMLDivElement>`              | —       | Native `<div>` attributes.                                    |
+
+`GridResponsive<T>` accepts either a value applied at every breakpoint or an
+object with `xs`, `sm`, `md`, `lg`, `xl`, and `2xl` keys. See Bootstrap's
+[grid documentation](https://getbootstrap.com/docs/6.0/layout/grid/) for
+additional layout guidance.

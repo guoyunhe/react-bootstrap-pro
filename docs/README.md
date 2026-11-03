@@ -11,3 +11,4 @@ React component library for Bootstrap 6.
 
 - [Button](./components/button/)
 - [Container](./components/container/)
+- [Grid](./components/grid/)

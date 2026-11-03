@@ -1,0 +1,98 @@
+---
+title: Grid 网格
+order: 3
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Col, Container, Row } from '../../../src';
+import { DemoContainer } from '../demo-container';
+import { GridLayoutsDemo } from './demos/grid-layouts';
+
+# Grid 网格
+
+`Row` 和 `Col` 组合使用 Bootstrap 6 的响应式 Flexbox 网格。每行包含 12 个网格
+列；将列放入行中，并将行放入 [`Container`](../container/) 中。使用组件前，需要在
+应用中引入一次 Bootstrap 样式表。
+
+## 响应式布局
+
+使用 `Row` 的 `cols` 属性设置等宽列的数量，或通过 `Col` 的 `span` 属性设置其
+占据的网格列数。属性值可以是应用于所有视口的单个数字，也可以是按断点设置的对象。
+
+<DemoContainer>
+  <Container fluid>
+    <GridLayoutsDemo />
+  </Container>
+</DemoContainer>
+
+```tsx
+<Row cols={{ xs: 1, sm: 2, md: 4 }} gutter={3}>
+  <Col>第一列</Col>
+  <Col>第二列</Col>
+  <Col>第三列</Col>
+  <Col>第四列</Col>
+</Row>
+
+<Row gutter={3}>
+  <Col span={{ xs: 12, md: 8 }}>主要内容</Col>
+  <Col span={{ xs: 12, md: 4 }}>侧边栏</Col>
+</Row>
+```
+
+断点键包括 `xs`、`sm`、`md`、`lg`、`xl` 和 `2xl`。`xs` 对应无前缀的类名，其他断点
+则使用 Bootstrap 6 的 `sm:`、`md:`、`lg:`、`xl:` 或 `2xl:` 前缀。
+
+## 列
+
+`Col` 默认渲染为 `.col`。使用 `span='auto'` 可让列宽度适应内容；设置 `offset` 或
+`order` 可在指定断点调整列的位置或顺序。
+
+```tsx
+<Row>
+  <Col span='auto'>自然宽度</Col>
+  <Col span={{ xs: 12, md: 6 }} offset={{ md: 3 }}>
+    从中等断点开始居中
+  </Col>
+  <Col order={{ xs: 'last', md: 'first' }}>响应式顺序</Col>
+</Row>
+```
+
+## 间距
+
+行使用 Bootstrap gutter 工具类控制列之间的水平和垂直间距。`gutter` 同时设置两个
+方向，`gutterX` 和 `gutterY` 则分别控制。`0` 到 `5` 使用 Bootstrap 预设间距；
+也可以像列宽一样按断点设置响应式间距。
+
+```tsx
+<Row gutter={{ xs: 2, md: 4 }} gutterY={3}>
+  <Col>第一列</Col>
+  <Col>第二列</Col>
+</Row>
+```
+
+## API
+
+### Row
+
+| 属性        | 类型                               | 默认值 | 说明                                                                       |
+| ----------- | ---------------------------------- | ------ | -------------------------------------------------------------------------- |
+| `cols`      | `GridResponsive<number \| 'auto'>` | —      | 设置 `.row-cols-*`；数字应用于所有尺寸，也可以使用断点对象设置响应式列数。 |
+| `gutter`    | `GridResponsive<number>`           | —      | 使用 `.g-*` 类同时设置水平和垂直间距。                                     |
+| `gutterX`   | `GridResponsive<number>`           | —      | 使用 `.gx-*` 类设置水平间距。                                              |
+| `gutterY`   | `GridResponsive<number>`           | —      | 使用 `.gy-*` 类设置垂直间距。                                              |
+| `className` | `string`                           | —      | 额外的类名。                                                               |
+| `...props`  | `HTMLAttributes<HTMLDivElement>`   | —      | 原生 `<div>` 属性。                                                        |
+
+### Col
+
+| 属性        | 类型                                          | 默认值 | 说明                                                |
+| ----------- | --------------------------------------------- | ------ | --------------------------------------------------- |
+| `span`      | `GridResponsive<number \| 'auto'>`            | `.col` | 使用 `.col-*` 设置列宽；`auto` 会根据内容调整宽度。 |
+| `offset`    | `GridResponsive<number>`                      | —      | 添加 `.offset-*`，将列向右偏移。                    |
+| `order`     | `GridResponsive<number \| 'first' \| 'last'>` | —      | 使用 `.order-*` 类设置视觉顺序。                    |
+| `className` | `string`                                      | —      | 额外的类名。                                        |
+| `...props`  | `HTMLAttributes<HTMLDivElement>`              | —      | 原生 `<div>` 属性。                                 |
+
+`GridResponsive<T>` 接受应用于所有断点的单个值，或包含 `xs`、`sm`、`md`、`lg`、
+`xl` 和 `2xl` 键的对象。更多布局说明请参阅 Bootstrap
+[网格文档](https://getbootstrap.com/docs/6.0/layout/grid/)。
