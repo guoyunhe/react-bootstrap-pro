@@ -32,6 +32,7 @@ order: 1
 - [Password strength 密码强度](./password-strength/)
 - [Placeholder 占位符](./placeholder/)
 - [Popover 弹出框](./popover/)
+- [Prose 长文本排版](./prose/)
 - [Progress 进度条](./progress/)
 - [Scrollspy 滚动监听](./scrollspy/)
 - [Spinner 加载指示器](./spinner/)

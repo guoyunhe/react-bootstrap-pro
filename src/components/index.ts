@@ -39,6 +39,7 @@ export * from './pagination';
 export * from './password-strength';
 export * from './placeholder';
 export * from './popover';
+export * from './prose';
 export * from './progress';
 export * from './radio';
 export * from './range';

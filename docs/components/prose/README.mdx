@@ -1,0 +1,45 @@
+---
+title: Prose
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { ProseBasicDemo } from './demos/basic';
+import { ProseNotProseDemo } from './demos/not-prose';
+
+# Prose
+
+`Prose` applies Bootstrap's `.prose` typography styles to long-form content,
+such as Markdown or content from a WYSIWYG editor. It adjusts font size, line
+height, heading and list spacing, and styles elements such as blockquotes and
+inline code.
+
+## Example
+
+<DemoContainer>
+  <ProseBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## Opt out of prose styles
+
+Use `NotProse` for a component or region that should keep its own styles, such as
+an embedded widget. A `.prose` region inside `.not-prose` does not re-enable
+prose typography.
+
+<DemoContainer>
+  <ProseNotProseDemo />
+</DemoContainer>
+
+```tsx src='./demos/not-prose.tsx'
+
+```
+
+## API
+
+`Prose` and `NotProse` render a `<div>` by default. Both accept the Box props,
+including `component` to use a different element, and pass their children
+through unchanged.

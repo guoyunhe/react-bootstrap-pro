@@ -38,6 +38,7 @@ order: 1
 - [Password strength](./password-strength/)
 - [Placeholder](./placeholder/)
 - [Popover](./popover/)
+- [Prose](./prose/)
 - [Progress](./progress/)
 - [Radio](./radio/)
 - [Range](./range/)

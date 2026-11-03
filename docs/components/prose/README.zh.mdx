@@ -1,0 +1,41 @@
+---
+title: Prose 长文本排版
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { ProseBasicDemo } from './demos/basic';
+import { ProseNotProseDemo } from './demos/not-prose';
+
+# Prose 长文本排版
+
+`Prose` 为长文本内容（例如 Markdown 或 WYSIWYG 编辑器生成的内容）应用 Bootstrap 的
+`.prose` 排版样式。它会调整字号、行高、标题与列表间距，并为引用、行内代码等元素设置样式。
+
+## 示例
+
+<DemoContainer>
+  <ProseBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 排除 Prose 样式
+
+对于需要保留自身样式的组件或区域（例如嵌入式控件），可使用 `NotProse`。在
+`.not-prose` 内部添加 `.prose` 无法重新启用 Prose 排版样式。
+
+<DemoContainer>
+  <ProseNotProseDemo />
+</DemoContainer>
+
+```tsx src='./demos/not-prose.tsx'
+
+```
+
+## API
+
+`Prose` 和 `NotProse` 默认渲染 `<div>`。两者都接受 Box 属性，包括用于更换 HTML 标签的
+`component`，并会原样传递子元素。
