@@ -29,38 +29,3 @@ export function isOption<const T extends readonly string[]>(
 ): value is T[number] {
   return options.some((option) => option === value);
 }
-
-export function AddIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      aria-hidden='true'
-      width={size}
-      height={size}
-      viewBox='0 0 16 16'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-    >
-      <path d='M8 3v10M3 8h10' />
-    </svg>
-  );
-}
-
-export function ArrowRightIcon() {
-  return (
-    <svg
-      aria-hidden='true'
-      width='16'
-      height='16'
-      viewBox='0 0 16 16'
-      fill='none'
-      stroke='currentColor'
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-    >
-      <path d='M3 8h10M8 3l5 5-5 5' />
-    </svg>
-  );
-}

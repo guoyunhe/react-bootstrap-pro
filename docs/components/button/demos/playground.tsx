@@ -1,10 +1,9 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import { BiArrowRight, BiPlus } from 'react-bootstrap-icons-pro';
 import { Button, type ButtonTheme, type ButtonVariant } from 'react-bootstrap-pro';
 
 import {
-  AddIcon,
-  ArrowRightIcon,
   contentOptions,
   isOption,
   roundingOptions,
@@ -132,13 +131,13 @@ export function ButtonPlaygroundDemo() {
           className={className}
           aria-label={buttonType === 'icon-only' ? 'Add item' : undefined}
         >
-          {buttonType === 'left-icon' && <AddIcon />}
+          {buttonType === 'left-icon' && <BiPlus size={16} aria-hidden='true' />}
           {buttonType === 'icon-only' ? (
-            <AddIcon />
+            <BiPlus size={16} aria-hidden='true' />
           ) : (
             <>
               {buttonType === 'text' ? 'Button' : 'Add item'}
-              {buttonType === 'right-icon' && <ArrowRightIcon />}
+              {buttonType === 'right-icon' && <BiArrowRight size={16} aria-hidden='true' />}
             </>
           )}
         </Button>
