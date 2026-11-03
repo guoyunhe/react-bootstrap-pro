@@ -11,24 +11,180 @@ import {
   AccordionItem,
 } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 
 # Accordion 手风琴
 
 `Accordion` 使用原生 `<details>` 元素组合面板。多个条目设置相同的 `name`
-即可互斥展开；核心交互不需要 JavaScript。
+即可互斥展开；省略 `name` 时，各条目可以独立展开。核心交互不需要 JavaScript。
+
+## 示例
 
 <DemoContainer>
   <Accordion>
     <AccordionItem name='faq' open>
       <AccordionHeader>
-        第一个问题
+        Accordion 条目 #1
         <AccordionIcon />
       </AccordionHeader>
-      <AccordionBody>第一个答案</AccordionBody>
+      <AccordionBody>
+        <strong>此条目默认展开。</strong>
+        浏览器负责原生展开行为，相同的 name 会让条目互斥。
+      </AccordionBody>
     </AccordionItem>
     <AccordionItem name='faq'>
-      <AccordionHeader>第二个问题</AccordionHeader>
-      <AccordionBody>第二个答案</AccordionBody>
+      <AccordionHeader>
+        Accordion 条目 #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>展开此项会关闭第一个条目，因为它们共享 name。</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='faq'>
+      <AccordionHeader>
+        Accordion 条目 #3
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>内容区域可以包含文本、链接或其他组件。</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion>
+  <AccordionItem name='faq' open>
+    <AccordionHeader>
+      Accordion 条目 #1
+      <AccordionIcon />
+    </AccordionHeader>
+    <AccordionBody>第一个条目的内容</AccordionBody>
+  </AccordionItem>
+  <AccordionItem name='faq'>
+    <AccordionHeader>
+      Accordion 条目 #2
+      <AccordionIcon />
+    </AccordionHeader>
+    <AccordionBody>第二个条目的内容</AccordionBody>
+  </AccordionItem>
+</Accordion>
+```
+
+面板动画会渐进增强地使用 CSS `interpolate-size`。不支持该属性的浏览器仍可
+原生展开和收起，只是不显示高度动画。
+
+## 主题变体
+
+设置语义主题，为当前展开的条目应用对应颜色。
+
+<DemoContainer>
+  <Accordion theme='primary'>
+    <AccordionItem name='variant' open>
+      <AccordionHeader>
+        Primary 主题
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>展开状态使用 primary 主题颜色。</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='variant'>
+      <AccordionHeader>
+        另一个条目
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>展开此条目可查看相同主题效果。</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion theme='primary'>...</Accordion>
+```
+
+## 紧凑尺寸
+
+使用紧凑尺寸可缩小内边距、圆角和字号。
+
+<DemoContainer>
+  <Accordion size='sm'>
+    <AccordionItem name='small' open>
+      <AccordionHeader>
+        紧凑条目 #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>紧凑尺寸会缩小间距和字号。</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='small'>
+      <AccordionHeader>
+        紧凑条目 #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>可以与其他变体组合使用。</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion size='sm'>...</Accordion>
+```
+
+## 无边框
+
+移除外侧边框和圆角，让手风琴与父容器边缘对齐。
+
+<DemoContainer>
+  <Accordion flush>
+    <AccordionItem name='flush' open>
+      <AccordionHeader>
+        无边框条目 #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>flush 会移除外侧边框和圆角。</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='flush'>
+      <AccordionHeader>
+        无边框条目 #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>条目会贴合容器边缘。</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='flush'>
+      <AccordionHeader>
+        无边框条目 #3
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>适用于紧凑布局。</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion flush>...</Accordion>
+```
+
+## 间距
+
+在条目之间增加间距，并让每个条目保留独立圆角。
+
+<DemoContainer>
+  <Accordion gap>
+    <AccordionItem name='gap' open>
+      <AccordionHeader>
+        间隔条目 #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>面板展开和收起时，间距保持不变。</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='gap'>
+      <AccordionHeader>
+        间隔条目 #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>每个条目都是独立的圆角卡片。</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='gap'>
+      <AccordionHeader>
+        间隔条目 #3
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>可通过 `--accordion-gap` 自定义间距。</AccordionBody>
     </AccordionItem>
   </Accordion>
 </DemoContainer>
@@ -36,8 +192,127 @@ import { DemoContainer } from '../demo-container';
 ```tsx
 <Accordion gap>
   <AccordionItem name='faq' open>
-    <AccordionHeader>问题</AccordionHeader>
+    <AccordionHeader>
+      问题
+      <AccordionIcon />
+    </AccordionHeader>
     <AccordionBody>答案</AccordionBody>
+  </AccordionItem>
+</Accordion>
+```
+
+## 同时展开多个条目
+
+省略 `name` 属性即可让多个条目同时保持展开。
+
+<DemoContainer>
+  <Accordion>
+    <AccordionItem open>
+      <AccordionHeader>
+        独立条目 #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>此条目不会与其他条目分组。</AccordionBody>
+    </AccordionItem>
+    <AccordionItem open>
+      <AccordionHeader>
+        独立条目 #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>多个条目可以同时展开。</AccordionBody>
+    </AccordionItem>
+    <AccordionItem>
+      <AccordionHeader>
+        独立条目 #3
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>每个条目都可以独立切换。</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion>
+  <AccordionItem open>...</AccordionItem>
+  <AccordionItem open>...</AccordionItem>
+</Accordion>
+```
+
+## 全部展开与收起
+
+原生条目不需要 JavaScript；若要一次切换所有条目，可通过按钮批量操作。
+展开时会移除 `name`，收起时再恢复。
+
+<DemoContainer>
+  <AccordionExpandCollapseDemo expandLabel='全部展开' collapseLabel='全部收起' />
+</DemoContainer>
+
+```tsx
+function toggleAll(accordion: HTMLElement, expand: boolean) {
+  const items = accordion.querySelectorAll<HTMLDetailsElement>('.accordion-item');
+
+  for (const item of items) {
+    if (expand) {
+      item.removeAttribute('name');
+      item.open = true;
+    } else {
+      item.open = false;
+      item.setAttribute('name', 'faq');
+    }
+  }
+}
+```
+
+## 嵌套
+
+可以在条目内容中嵌套另一个 Accordion，并为每一层设置不同的 `name`。
+
+<DemoContainer>
+  <Accordion>
+    <AccordionItem name='outer' open>
+      <AccordionHeader>
+        外层条目 #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>
+        此条目包含嵌套的手风琴。
+        <Accordion className='mt-3'>
+          <AccordionItem name='inner' open>
+            <AccordionHeader>
+              内层条目 #1
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionBody>第一个内层条目的内容。</AccordionBody>
+          </AccordionItem>
+          <AccordionItem name='inner'>
+            <AccordionHeader>
+              内层条目 #2
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionBody>第二个内层条目的内容。</AccordionBody>
+          </AccordionItem>
+        </Accordion>
+      </AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='outer'>
+      <AccordionHeader>
+        外层条目 #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>此条目不包含嵌套手风琴。</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion>
+  <AccordionItem name='outer'>
+    <AccordionHeader>外层条目</AccordionHeader>
+    <AccordionBody>
+      <Accordion>
+        <AccordionItem name='inner'>...</AccordionItem>
+      </Accordion>
+    </AccordionBody>
   </AccordionItem>
 </Accordion>
 ```
@@ -46,11 +321,17 @@ import { DemoContainer } from '../demo-container';
 
 | 属性        | 类型          | 说明                            |
 | ----------- | ------------- | ------------------------------- |
-| `flush`     | `boolean`     | 移除外侧边框和圆角。            |
+| `component` | `ElementType` | 更换根元素。                    |
+| `flush`     | `boolean`     | 移除条目外侧边框和圆角。        |
 | `gap`       | `boolean`     | 在条目之间增加间距。            |
 | `size`      | `'sm'`        | 使用紧凑间距和字号。            |
-| `component` | `ElementType` | 更换根元素。                    |
 | `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
 
 `AccordionItem`、`AccordionHeader`、`AccordionBody` 和 `AccordionIcon` 分别提供
-对应的 Bootstrap 类。通过 `AccordionItem` 的 `open` 和 `name` 控制原生 details。
+对应的 Bootstrap 类。`AccordionItem` 默认渲染原生 `<details>`，并支持 `open`
+和 `name` 属性。
+
+## 无障碍访问
+
+原生 `<details>` 和 `<summary>` 会向辅助技术提供展开状态，并支持使用 Enter
+或 Space 键切换。

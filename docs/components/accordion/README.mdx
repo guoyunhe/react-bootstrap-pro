@@ -11,24 +11,186 @@ import {
   AccordionItem,
 } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { AccordionExpandCollapseDemo } from './demos/expand-collapse';
 
 # Accordion
 
-`Accordion` groups native `<details>` elements. Each item can share a `name` for
-exclusive opening; no JavaScript is needed for the core interaction.
+`Accordion` groups native `<details>` elements. Matching `name` values make the
+items exclusive; without `name`, each item opens independently. No JavaScript is
+needed for the core interaction.
+
+## Example
 
 <DemoContainer>
   <Accordion>
     <AccordionItem name='faq' open>
       <AccordionHeader>
-        First question
+        Accordion Item #1
         <AccordionIcon />
       </AccordionHeader>
-      <AccordionBody>First answer</AccordionBody>
+      <AccordionBody>
+        <strong>This item is open by default.</strong> The browser handles the disclosure behavior,
+        and the shared name makes the items exclusive.
+      </AccordionBody>
     </AccordionItem>
     <AccordionItem name='faq'>
-      <AccordionHeader>Second question</AccordionHeader>
-      <AccordionBody>Second answer</AccordionBody>
+      <AccordionHeader>
+        Accordion Item #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>
+        Opening this item closes the first item because they share a name.
+      </AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='faq'>
+      <AccordionHeader>
+        Accordion Item #3
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>
+        Place any content inside the body, including text, links, or other components.
+      </AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion>
+  <AccordionItem name='faq' open>
+    <AccordionHeader>
+      Accordion Item #1
+      <AccordionIcon />
+    </AccordionHeader>
+    <AccordionBody>First item content</AccordionBody>
+  </AccordionItem>
+  <AccordionItem name='faq'>
+    <AccordionHeader>
+      Accordion Item #2
+      <AccordionIcon />
+    </AccordionHeader>
+    <AccordionBody>Second item content</AccordionBody>
+  </AccordionItem>
+</Accordion>
+```
+
+The panel transition progressively uses CSS `interpolate-size`. Browsers without
+support still open and close the native details panel, but without the height
+animation.
+
+## Variants
+
+Set a semantic theme to change the colors of the open item.
+
+<DemoContainer>
+  <Accordion theme='primary'>
+    <AccordionItem name='variant' open>
+      <AccordionHeader>
+        Primary theme
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>The open item uses the primary theme colors.</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='variant'>
+      <AccordionHeader>
+        Another item
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>Open this item to see the same theme.</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion theme='primary'>...</Accordion>
+```
+
+## Small
+
+Use the compact size for tighter padding, smaller corners, and smaller text.
+
+<DemoContainer>
+  <Accordion size='sm'>
+    <AccordionItem name='small' open>
+      <AccordionHeader>
+        Compact item #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>The small size applies compact spacing and typography.</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='small'>
+      <AccordionHeader>
+        Compact item #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>Combine small with the other variants.</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion size='sm'>...</Accordion>
+```
+
+## Flush
+
+Remove the outer borders and rounded corners for an edge-to-edge accordion.
+
+<DemoContainer>
+  <Accordion flush>
+    <AccordionItem name='flush' open>
+      <AccordionHeader>
+        Flush item #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>Flush removes the outside borders and rounding.</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='flush'>
+      <AccordionHeader>
+        Flush item #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>Items sit flush against their container.</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='flush'>
+      <AccordionHeader>
+        Flush item #3
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>Use this style in dense layouts.</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion flush>...</Accordion>
+```
+
+## Gap
+
+Add space between items; each item keeps its own rounded card shape.
+
+<DemoContainer>
+  <Accordion gap>
+    <AccordionItem name='gap' open>
+      <AccordionHeader>
+        Spaced item #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>The gap stays constant while the panel opens and closes.</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='gap'>
+      <AccordionHeader>
+        Spaced item #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>Each item is a separate rounded card.</AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='gap'>
+      <AccordionHeader>
+        Spaced item #3
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>Customize the spacing with `--accordion-gap`.</AccordionBody>
     </AccordionItem>
   </Accordion>
 </DemoContainer>
@@ -36,8 +198,129 @@ exclusive opening; no JavaScript is needed for the core interaction.
 ```tsx
 <Accordion gap>
   <AccordionItem name='faq' open>
-    <AccordionHeader>Question</AccordionHeader>
+    <AccordionHeader>
+      Question
+      <AccordionIcon />
+    </AccordionHeader>
     <AccordionBody>Answer</AccordionBody>
+  </AccordionItem>
+</Accordion>
+```
+
+## Always open
+
+Omit `name` to allow multiple items to stay open at the same time.
+
+<DemoContainer>
+  <Accordion>
+    <AccordionItem open>
+      <AccordionHeader>
+        Independent item #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>This item is not grouped with the others.</AccordionBody>
+    </AccordionItem>
+    <AccordionItem open>
+      <AccordionHeader>
+        Independent item #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>Both items can remain open at once.</AccordionBody>
+    </AccordionItem>
+    <AccordionItem>
+      <AccordionHeader>
+        Independent item #3
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>Toggle each item independently.</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion>
+  <AccordionItem open>...</AccordionItem>
+  <AccordionItem open>...</AccordionItem>
+</Accordion>
+```
+
+## Expand and collapse all
+
+The native items need no JavaScript, but a button can change them as a group.
+This example removes `name` while expanding all items and restores it when
+collapsing them.
+
+<DemoContainer>
+  <AccordionExpandCollapseDemo expandLabel='Expand all' collapseLabel='Collapse all' />
+</DemoContainer>
+
+```tsx
+function toggleAll(accordion: HTMLElement, expand: boolean) {
+  const items = accordion.querySelectorAll<HTMLDetailsElement>('.accordion-item');
+
+  for (const item of items) {
+    if (expand) {
+      item.removeAttribute('name');
+      item.open = true;
+    } else {
+      item.open = false;
+      item.setAttribute('name', 'faq');
+    }
+  }
+}
+```
+
+## Nested
+
+Place another accordion in an item body and use a different `name` for each
+level.
+
+<DemoContainer>
+  <Accordion>
+    <AccordionItem name='outer' open>
+      <AccordionHeader>
+        Parent item #1
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>
+        This item contains a nested accordion.
+        <Accordion className='mt-3'>
+          <AccordionItem name='inner' open>
+            <AccordionHeader>
+              Nested item #1
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionBody>First nested item content.</AccordionBody>
+          </AccordionItem>
+          <AccordionItem name='inner'>
+            <AccordionHeader>
+              Nested item #2
+              <AccordionIcon />
+            </AccordionHeader>
+            <AccordionBody>Second nested item content.</AccordionBody>
+          </AccordionItem>
+        </Accordion>
+      </AccordionBody>
+    </AccordionItem>
+    <AccordionItem name='outer'>
+      <AccordionHeader>
+        Parent item #2
+        <AccordionIcon />
+      </AccordionHeader>
+      <AccordionBody>This item has no nested accordion.</AccordionBody>
+    </AccordionItem>
+  </Accordion>
+</DemoContainer>
+
+```tsx
+<Accordion>
+  <AccordionItem name='outer'>
+    <AccordionHeader>Parent item</AccordionHeader>
+    <AccordionBody>
+      <Accordion>
+        <AccordionItem name='inner'>...</AccordionItem>
+      </Accordion>
+    </AccordionBody>
   </AccordionItem>
 </Accordion>
 ```
@@ -46,11 +329,17 @@ exclusive opening; no JavaScript is needed for the core interaction.
 
 | Prop        | Type          | Description                              |
 | ----------- | ------------- | ---------------------------------------- |
+| `component` | `ElementType` | Changes the root element.                |
 | `flush`     | `boolean`     | Removes outer item borders and rounding. |
 | `gap`       | `boolean`     | Adds spacing between items.              |
 | `size`      | `'sm'`        | Uses compact spacing and type.           |
-| `component` | `ElementType` | Changes the root element.                |
 | `...props`  | `BoxProps<C>` | Native props and all Box utility props.  |
 
 `AccordionItem`, `AccordionHeader`, `AccordionBody`, and `AccordionIcon` provide
-the corresponding Bootstrap classes. Set `open` and `name` on `AccordionItem`.
+the corresponding Bootstrap classes. `AccordionItem` renders a native
+`<details>` element and accepts its `open` and `name` attributes.
+
+## Accessibility
+
+The native `<details>` and `<summary>` elements expose the expanded state to
+assistive technology and support keyboard activation with Enter or Space.
