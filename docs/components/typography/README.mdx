@@ -1,0 +1,83 @@
+---
+title: Typography
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { TypographyBlockquoteDemo } from './demos/blockquote';
+import { TypographyHeadingsDemo } from './demos/headings';
+import { TypographyInlineDemo } from './demos/inline';
+import { TypographyListsDemo } from './demos/lists';
+
+# Typography
+
+Bootstrap typography styles work with semantic HTML and utility classes. The
+components here add the common reusable classes while keeping the underlying
+elements semantic and customizable with Box props.
+
+## Headings
+
+Use native `<h1>`–`<h6>` elements for document structure. `Heading` renders the
+requested semantic `level`; `size` can independently set its visual `.h1`–`.h6`
+class. `DisplayHeading` applies a `.display-1`–`.display-6` class, and `Lead`
+renders an introductory paragraph with `.lead`.
+
+<DemoContainer>
+  <TypographyHeadingsDemo />
+</DemoContainer>
+
+```tsx src='./demos/headings.tsx'
+
+```
+
+Bootstrap's responsive font scale is available through the Box `fontSize` and
+`textSize` props. Other existing Box props cover font family, weight, style,
+line height, alignment, decoration, transform, wrapping, and vertical alignment.
+
+## Inline text
+
+Use semantic elements such as `<mark>`, `<del>`, `<s>`, `<ins>`, `<u>`, `<small>`,
+`<strong>`, and `<em>` for their intended meanings. `Abbr` renders `<abbr>` and
+supports Bootstrap's smaller `.initialism` style. For visual styling without
+semantic meaning, use Box text utilities instead.
+
+<DemoContainer>
+  <TypographyInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/inline.tsx'
+
+```
+
+## Blockquotes
+
+`Blockquote` applies `.blockquote` to a `<blockquote>` by default. Keep source
+attribution outside the quote itself, for example in a `<figcaption>` with
+`BlockquoteFooter`. Use Box alignment and flex props to position the quote and
+its attribution.
+
+<DemoContainer>
+  <TypographyBlockquoteDemo />
+</DemoContainer>
+
+```tsx src='./demos/blockquote.tsx'
+
+```
+
+## Lists
+
+`UnstyledList` applies `.list-unstyled` to the immediate list items;
+nested lists retain their markers unless they also use `UnstyledList`.
+`InlineList` and `InlineListItem` apply `.list-inline` and `.list-inline-item`.
+
+<DemoContainer>
+  <TypographyListsDemo />
+</DemoContainer>
+
+```tsx src='./demos/lists.tsx'
+
+```
+
+For description lists, keep the native `<dl>`, `<dt>`, and `<dd>` elements and
+use `Row` and `Col` for responsive alignment. Bootstrap's global font and link
+defaults are provided by its stylesheet and do not require a React component.

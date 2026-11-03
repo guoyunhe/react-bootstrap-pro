@@ -48,6 +48,7 @@ order: 1
 - [Switch](./switch/)
 - [Tab](./tab/)
 - [Table](./table/)
+- [Typography](./typography/)
 - [Toasts](./toasts/)
 - [Toggler](./toggler/)
 - [Tooltip](./tooltip/)

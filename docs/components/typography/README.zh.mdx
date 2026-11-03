@@ -1,0 +1,77 @@
+---
+title: Typography 排版
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { TypographyBlockquoteDemo } from './demos/blockquote';
+import { TypographyHeadingsDemo } from './demos/headings';
+import { TypographyInlineDemo } from './demos/inline';
+import { TypographyListsDemo } from './demos/lists';
+
+# Typography 排版
+
+Bootstrap 排版基于语义化 HTML 和工具类。这里的组件封装了常用复用类，同时保留语义标签，
+并支持 Box 属性进行自定义。
+
+## 标题
+
+使用原生 `<h1>`–`<h6>` 构建文档层级。`Heading` 使用 `level` 指定语义标题级别；
+`size` 可单独指定视觉上的 `.h1`–`.h6` 类。`DisplayHeading` 添加 `.display-1`–`.display-6`
+类，`Lead` 则渲染带 `.lead` 的引导段落。
+
+<DemoContainer>
+  <TypographyHeadingsDemo />
+</DemoContainer>
+
+```tsx src='./demos/headings.tsx'
+
+```
+
+Box 的 `fontSize` 和 `textSize` 属性可使用 Bootstrap 响应式字号比例。其它 Box 属性还支持
+字体、粗细、样式、行高、对齐、装饰、大小写转换、换行和垂直对齐。
+
+## 行内文本
+
+根据语义使用 `<mark>`、`<del>`、`<s>`、`<ins>`、`<u>`、`<small>`、`<strong>` 和 `<em>`。
+`Abbr` 渲染 `<abbr>`，并支持 Bootstrap 的较小 `.initialism` 样式。没有语义含义的纯视觉样式
+请使用 Box 文本工具属性。
+
+<DemoContainer>
+  <TypographyInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/inline.tsx'
+
+```
+
+## 引用
+
+`Blockquote` 默认将 `.blockquote` 添加到 `<blockquote>`。引用来源应放在引用元素之外，
+例如使用 `BlockquoteFooter` 渲染 `<figcaption>`。可使用 Box 对齐与 flex 属性调整引用和来源
+的位置。
+
+<DemoContainer>
+  <TypographyBlockquoteDemo />
+</DemoContainer>
+
+```tsx src='./demos/blockquote.tsx'
+
+```
+
+## 列表
+
+`UnstyledList` 为直接子列表项添加 `.list-unstyled`；嵌套列表如需去掉标记，也应单独使用
+`UnstyledList`。`InlineList` 和 `InlineListItem` 分别添加 `.list-inline` 与
+`.list-inline-item`。
+
+<DemoContainer>
+  <TypographyListsDemo />
+</DemoContainer>
+
+```tsx src='./demos/lists.tsx'
+
+```
+
+描述列表请保留原生 `<dl>`、`<dt>` 和 `<dd>` 标签，并使用 `Row` / `Col` 实现响应式对齐。
+Bootstrap 的全局字体与链接默认样式由其样式表提供，无需额外 React 组件。

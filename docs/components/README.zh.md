@@ -39,6 +39,7 @@ order: 1
 - [Stepper 步骤条](./stepper/)
 - [Tab 标签页](./tab/)
 - [Table 表格](./table/)
+- [Typography 排版](./typography/)
 - [Toasts 轻提示](./toasts/)
 - [Toggler 切换器](./toggler/)
 - [Tooltip 工具提示](./tooltip/)
