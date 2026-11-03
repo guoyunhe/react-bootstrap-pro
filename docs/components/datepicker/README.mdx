@@ -1,0 +1,240 @@
+---
+title: Datepicker
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { DatepickerBasicDemo } from './demos/basic';
+import { DatepickerButtonDemo } from './demos/button';
+import { DatepickerDarkDemo } from './demos/dark';
+import { DatepickerFieldDemo } from './demos/field';
+import { DatepickerFirstWeekdayDemo } from './demos/first-weekday';
+import { DatepickerFormatDemo } from './demos/format';
+import { DatepickerIconDemo } from './demos/icon';
+import { DatepickerInlineDemo } from './demos/inline';
+import { DatepickerMinMaxDemo } from './demos/min-max';
+import { DatepickerMultipleDemo } from './demos/multiple';
+import { DatepickerMultipleMonthsDemo } from './demos/multiple-months';
+import { DatepickerPlacementDemo } from './demos/placement';
+import { DatepickerRangeDemo } from './demos/range';
+
+# Datepicker
+
+`Datepicker` wraps [Vanilla Calendar Pro](https://vanilla-calendar.pro/) in the
+same way as the Bootstrap datepicker, and relies on Bootstrap's datepicker
+styles. It supports light and dark color modes, input and button triggers,
+inline calendars, single, multiple, and ranged selection, and localized date
+formatting.
+
+## Overview
+
+<DemoContainer>
+  <DatepickerBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+The input uses `.form-control`; add the `.w-12` width utility so the picked date
+is fully visible. The calendar opens on focus, closes after a complete
+selection, and also closes on Escape, on a click outside of it, or when focus
+moves elsewhere.
+
+## With form field
+
+<DemoContainer>
+  <DatepickerFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/field.tsx'
+
+```
+
+## With icon
+
+Set `ghost` to render a `.form-ghost` input, then place it inside a form adorn
+wrapper. The calendar opens from the input, next to the icon.
+
+<DemoContainer>
+  <DatepickerIconDemo />
+</DemoContainer>
+
+```tsx src='./demos/icon.tsx'
+
+```
+
+## Min & max dates
+
+Restrict the selectable range with `dateMin` and `dateMax`. Both accept
+`YYYY-MM-DD` strings as well as `Date` objects and timestamps.
+
+<DemoContainer>
+  <DatepickerMinMaxDemo />
+</DemoContainer>
+
+```tsx src='./demos/min-max.tsx'
+
+```
+
+## Multiple dates
+
+Set `selectionMode='multiple'` to pick any number of dates. The input shows the
+selected dates separated by a comma.
+
+<DemoContainer>
+  <DatepickerMultipleDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple.tsx'
+
+```
+
+## Multiple months
+
+Show more than one month at once with `displayMonthsCount`. This is most useful
+for range selection, where users need more context.
+
+<DemoContainer>
+  <DatepickerMultipleMonthsDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple-months.tsx'
+
+```
+
+## Date range
+
+Set `selectionMode='multiple-ranged'` to select a start and an end date. Pass a
+two-item array as `defaultValue` (or `value`) to preselect a range.
+
+<DemoContainer>
+  <DatepickerRangeDemo />
+</DemoContainer>
+
+```tsx src='./demos/range.tsx'
+
+```
+
+## First day of week
+
+`firstWeekday` sets the first day of the week, where `0` is Sunday and `1`
+(the default) is Monday.
+
+<DemoContainer>
+  <DatepickerFirstWeekdayDemo />
+</DemoContainer>
+
+```tsx src='./demos/first-weekday.tsx'
+
+```
+
+## Placement
+
+Control where the calendar appears relative to the trigger with `placement`:
+`'left'` (default), `'center'`, `'right'`, or `'auto'`.
+
+<DemoContainer>
+  <DatepickerPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+## Button trigger
+
+Set `trigger='button'` to render a button instead of an input, for example for
+dashboard date filters. The button shows the formatted selection, or
+`placeholder` when nothing is selected, and accepts `icon` for a leading icon.
+The component tracks the open state in React and exposes it through
+`aria-expanded`.
+
+<DemoContainer>
+  <DatepickerButtonDemo />
+</DemoContainer>
+
+```tsx src='./demos/button.tsx'
+
+```
+
+## Inline mode
+
+Set `inline` to render the calendar without a popup. Pair it with a `name` to
+render a hidden input that submits the selected dates as `YYYY-MM-DD`, separated
+by commas.
+
+<DemoContainer>
+  <DatepickerInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/inline.tsx'
+
+```
+
+## Custom date formatting
+
+Use `format` to control the text shown in the trigger. It accepts
+`Intl.DateTimeFormat` options or a function that receives the parsed `Date` and
+the locale.
+
+<DemoContainer>
+  <DatepickerFormatDemo />
+</DemoContainer>
+
+```tsx src='./demos/format.tsx'
+
+```
+
+## Dark mode
+
+The datepicker inherits Bootstrap's color mode from the closest
+`[data-bs-theme]` ancestor. Set `theme` to `'light'` or `'dark'` to style the
+calendar independently of its surroundings, or to `'auto'` (the default) to
+follow the surrounding color mode.
+
+<DemoContainer>
+  <DatepickerDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+The calendar popup is appended to `document.body`, so the resolved color mode is
+copied onto it. Theme changes on the ancestor are observed and applied while the
+datepicker is mounted.
+
+## API
+
+| Prop                 | Type                                                     | Description                                                    |
+| -------------------- | -------------------------------------------------------- | -------------------------------------------------------------- |
+| `value`              | `string \| readonly string[]`                            | Controlled selection, as `YYYY-MM-DD` strings.                 |
+| `defaultValue`       | `string \| readonly string[]`                            | Initial selection for uncontrolled usage.                      |
+| `onChange`           | `(dates: string[]) => void`                              | Called with the selected dates whenever the selection changes. |
+| `selectionMode`      | `'single' \| 'multiple' \| 'multiple-ranged'`            | Maximum number of selected dates.                              |
+| `firstWeekday`       | `0`–`6`                                                  | First day of the week, where `0` is Sunday.                    |
+| `displayMonthsCount` | `1`–`12`                                                 | Number of months rendered at once.                             |
+| `dateMin`            | `string \| Date \| number`                               | Earliest selectable date.                                      |
+| `dateMax`            | `string \| Date \| number`                               | Latest selectable date.                                        |
+| `locale`             | `string`                                                 | Locale used for month and weekday names and the input format.  |
+| `format`             | `Intl.DateTimeFormatOptions \| (date, locale) => string` | Text format of the selected dates.                             |
+| `theme`              | `'light' \| 'dark' \| 'auto'`                            | Color mode of the calendar.                                    |
+| `placement`          | `'left' \| 'center' \| 'right' \| 'auto'`                | Popup alignment relative to the trigger.                       |
+| `trigger`            | `'input' \| 'button'`                                    | Renders an input (default) or a button trigger.                |
+| `icon`               | `ReactNode`                                              | Leading icon of the button trigger.                            |
+| `ghost`              | `boolean`                                                | Uses `.form-ghost` instead of `.form-control` for the input.   |
+| `inline`             | `boolean`                                                | Renders the calendar inline instead of in a popup.             |
+| `placeholder`        | `string`                                                 | Text shown when nothing is selected.                           |
+| `name`               | `string`                                                 | Form field name; renders a hidden input in inline mode.        |
+| `disabled`           | `boolean`                                                | Disables the input or button.                                  |
+| `id`, `aria-*`       |                                                          | Forwarded to the input or button.                              |
+
+## Accessibility
+
+The input is a plain text input, so name it with a `FormLabel` bound through
+`htmlFor` or with `aria-label`. The button trigger exposes
+`aria-haspopup='dialog'` and `aria-expanded`, and the calendar itself is a
+`role='dialog'` region with an accessible name. Selected dates are announced
+through the input value, and the calendar can be operated with the arrow keys,
+Home, End, Page Up, Page Down, and Escape.

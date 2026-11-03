@@ -15,6 +15,7 @@ export * from './close-button';
 export * from './collapse';
 export * from './combobox';
 export * from './container';
+export * from './datepicker';
 export * from './dialog';
 export * from './drawer';
 export * from './form-control';

@@ -44,7 +44,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "clsx": "^2.1.1"
+    "clsx": "^2.1.1",
+    "vanilla-calendar-pro": "^3.4.0"
   },
   "devDependencies": {
     "@guoyunhe/oxfmt-config": "^1.1.0",
