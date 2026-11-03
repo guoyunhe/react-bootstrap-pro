@@ -176,37 +176,33 @@ level.
 
 ## API
 
-Each component accepts Box utility props and native props.
-
 ### Accordion
 
-| Prop       | Type          | Description                              |
-| ---------- | ------------- | ---------------------------------------- |
-| `flush`    | `boolean`     | Removes outer item borders and rounding. |
-| `gap`      | `boolean`     | Adds spacing between items.              |
-| `size`     | `'sm'`        | Uses compact spacing and type.           |
-| `...props` | `BoxProps<C>` | Native props and Box utility props.      |
+| Prop    | Type      | Description                              |
+| ------- | --------- | ---------------------------------------- |
+| `flush` | `boolean` | Removes outer item borders and rounding. |
+| `gap`   | `boolean` | Adds spacing between items.              |
+| `size`  | `'sm'`    | Uses compact spacing and type.           |
+
+Inherits native props and Box utility props.
 
 ### AccordionItem
 
-| Prop       | Type          | Description                                                                   |
-| ---------- | ------------- | ----------------------------------------------------------------------------- |
-| `...props` | `BoxProps<C>` | Native `<details>` props, including `open` and `name`, and Box utility props. |
+Inherits native `<details>` props, including `open` and `name`, and Box utility props.
 
 ### AccordionHeader
 
 The default icon is `BiChevronDown`.
 
-| Prop       | Type                       | Description                          |
-| ---------- | -------------------------- | ------------------------------------ |
-| `icon`     | `ComponentType<IconProps>` | Replaces the default icon component. |
-| `...props` | `BoxProps<C>`              | Native props and Box utility props.  |
+| Prop   | Type                       | Description                          |
+| ------ | -------------------------- | ------------------------------------ |
+| `icon` | `ComponentType<IconProps>` | Replaces the default icon component. |
+
+Inherits native props and Box utility props.
 
 ### AccordionBody
 
-| Prop       | Type          | Description                         |
-| ---------- | ------------- | ----------------------------------- |
-| `...props` | `BoxProps<C>` | Native props and Box utility props. |
+Inherits native props and Box utility props.
 
 ## Accessibility
 
