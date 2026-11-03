@@ -7,7 +7,13 @@ export type FormControlSize = 'sm' | 'lg';
 
 export type FormControlProps<C extends ElementType = 'input'> = BoxComponentProps<
   C,
-  { size?: FormControlSize | undefined; plaintext?: boolean | undefined }
+  {
+    size?: FormControlSize | undefined;
+    plaintext?: boolean | undefined;
+    ghost?: boolean | undefined;
+    adorn?: boolean | undefined;
+    adornEnd?: boolean | undefined;
+  }
 >;
 
 export function FormControl<C extends ElementType = 'input'>({
@@ -15,14 +21,30 @@ export function FormControl<C extends ElementType = 'input'>({
   className,
   size,
   plaintext,
+  ghost,
+  adorn,
+  adornEnd,
   ...props
 }: FormControlProps<C>) {
+  const isAdorn = Boolean(adorn || adornEnd);
+  let baseClass = 'form-control';
+
+  if (plaintext) {
+    baseClass = 'form-control-plaintext';
+  }
+
+  if (ghost) {
+    baseClass = 'form-ghost';
+  }
+
   return (
     <ClassedBox<C>
       {...props}
       baseClass={clsx(
-        plaintext ? 'form-control-plaintext' : 'form-control',
+        baseClass,
         size && `form-control-${size}`,
+        isAdorn && 'form-adorn',
+        adornEnd && 'form-adorn-end',
       )}
       component={component}
       defaultComponent={'input' as C}
