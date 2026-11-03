@@ -1,0 +1,111 @@
+---
+title: Checkbox 复选框
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { CheckboxBasicDemo } from './demos/basic';
+import { CheckboxDescriptionDemo } from './demos/description';
+import { CheckboxDisabledDemo } from './demos/disabled';
+import { CheckboxIndeterminateDemo } from './demos/indeterminate';
+import { CheckboxSizesDemo } from './demos/sizes';
+import { CheckboxThemesDemo } from './demos/themes';
+
+# Checkbox 复选框
+
+`Checkbox` 渲染 `.check` 输入框。该类用主题色替换浏览器默认外观，并通过 CSS
+mask 绘制选中与不确定状态的图标，因此图标会继承对比色，无需内联 SVG。标签与布局
+由 `FormField` 负责。
+
+## 基础复选框
+
+<DemoContainer>
+  <CheckboxBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 不确定状态
+
+HTML 没有对应属性，需要通过 `ref` 设置 DOM 的 `indeterminate` 属性。`Checkbox`
+会把 ref 透传给底层输入框。
+
+<DemoContainer>
+  <CheckboxIndeterminateDemo />
+</DemoContainer>
+
+```tsx src='./demos/indeterminate.tsx'
+
+```
+
+如需替换内置图标，可用自定义的 `mask-image` 覆盖
+`--bs-check-icon-checked` 与 `--bs-check-icon-indeterminate` 自定义属性。
+
+## 配合 FormField
+
+`FormField` 的网格布局会把复选框和标签并排摆放。嵌套的 `FormField` 行为相同，
+因此一组复选框可以共用一个外层容器和标签。
+
+## 描述文本
+
+在标签后添加描述，并用 `FormFieldContent` 包裹二者，使标签与说明文本堆叠在第二列。
+
+<DemoContainer>
+  <CheckboxDescriptionDemo />
+</DemoContainer>
+
+```tsx src='./demos/description.tsx'
+
+```
+
+## 主题颜色
+
+通过 `theme` 设置选中态颜色，生成 `.theme-{color}` 类。
+
+<DemoContainer>
+  <CheckboxThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/themes.tsx'
+
+```
+
+## 禁用状态
+
+添加原生 `disabled` 属性，关联的标签会自动变浅以匹配状态。
+
+<DemoContainer>
+  <CheckboxDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## 尺寸
+
+使用 `size='sm'` 或 `size='lg'` 生成 `.check-sm` 和 `.check-lg`。
+
+<DemoContainer>
+  <CheckboxSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## API
+
+| 属性        | 类型                 | 说明                               |
+| ----------- | -------------------- | ---------------------------------- |
+| `size`      | `'sm' \| 'lg'`       | 调整复选框及其标签的尺寸。         |
+| `theme`     | Bootstrap 主题字面量 | 通过 `.theme-*` 设置选中态颜色。   |
+| `component` | `ElementType`        | 默认渲染 `input type='checkbox'`。 |
+| `...props`  | `BoxProps<C>`        | 原生属性及所有 Box 工具类属性。    |
+
+## 无障碍
+
+为每个复选框提供可访问名称：用 `<label for>` 并通过 `htmlFor` 关联。多个复选框属于
+同一问题时，可放在嵌套的 `FormField` 中并共用外层标签。

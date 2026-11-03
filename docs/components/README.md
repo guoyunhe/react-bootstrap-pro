@@ -15,6 +15,7 @@ order: 1
 - [Button group](./button-group/)
 - [Card](./card/)
 - [Carousel](./carousel/)
+- [Checkbox](./checkbox/)
 - [Close button](./close-button/)
 - [Collapse](./collapse/)
 - [Container](./container/)

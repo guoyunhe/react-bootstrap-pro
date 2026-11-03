@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { BiPlus } from 'react-bootstrap-icons-pro';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
@@ -16,10 +17,10 @@ import {
   CardBody,
   Carousel,
   CarouselControl,
+  Checkbox,
   CloseButton,
   Dialog,
   Drawer,
-  FormCheck,
   FormControl,
   FormField,
   FormFieldContent,
@@ -31,8 +32,8 @@ import {
   Pagination,
   PaginationItem,
   Progress,
-  Radio,
   ProgressBar,
+  Radio,
   Tab,
   TabContent,
   TabItem,
@@ -124,7 +125,7 @@ test('renders form fields, labels, controls, help text and checks', async () => 
       <FormText id='form-email-help' data-testid='text'>
         We’ll never share your email with anyone else.
       </FormText>
-      <FormCheck id='form-remember' size='sm' data-testid='check' />
+      <Checkbox id='form-remember' size='sm' data-testid='check' />
       <FormControl component='select' data-testid='select'>
         <option>One</option>
       </FormControl>
@@ -169,6 +170,22 @@ test('renders radios with sizes, themes and field content', async () => {
   expect(screen.getByTestId('radio').element()).toHaveAttribute('name', 'radio-group');
   expect(screen.getByTestId('content')).toHaveClass('form-field-content');
   expect(screen.getByTestId('content').element().querySelector('small')).toHaveClass('form-text');
+});
+
+test('forwards refs to the underlying control', async () => {
+  const ref = createRef<HTMLInputElement>();
+  const screen = await render(<Checkbox ref={ref} data-testid='checkbox' defaultChecked />);
+
+  await expect
+    .poll(() => ref.current)
+    .toBe(screen.getByTestId('checkbox').element() as HTMLInputElement);
+  expect(ref.current?.type).toBe('checkbox');
+  expect(ref.current?.checked).toBe(true);
+
+  if (ref.current) {
+    ref.current.indeterminate = true;
+  }
+  expect(ref.current?.indeterminate).toBe(true);
 });
 
 test('composes card and carousel structure', async () => {

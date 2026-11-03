@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { ElementType } from 'react';
+import type { ComponentPropsWithRef, ElementType } from 'react';
 
 import { Box, type BoxProps } from './box';
 
@@ -11,6 +11,7 @@ export type ClassedBoxProps<C extends ElementType, P extends object> = P & {
   defaultComponent: C;
   component?: C | undefined;
   className?: string | undefined;
+  ref?: ComponentPropsWithRef<C>['ref'] | undefined;
 };
 
 export function ClassedBox<C extends ElementType, P extends object = object>({

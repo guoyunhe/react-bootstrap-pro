@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { ComponentPropsWithoutRef, ElementType } from 'react';
+import type { ComponentPropsWithoutRef, ComponentPropsWithRef, ElementType } from 'react';
 
 export type BoxTheme =
   | 'primary'
@@ -433,7 +433,7 @@ function getRadiusClass(utility: string, value: boolean | BoxRadius | undefined)
 export type BoxProps<C extends ElementType = 'div'> = BoxOwnProps<C> & {
   component?: C;
   className?: string;
-} & Omit<ComponentPropsWithoutRef<C>, keyof BoxOwnProps<C> | 'className' | 'component'>;
+} & Omit<ComponentPropsWithRef<C>, keyof BoxOwnProps<C> | 'className' | 'component'>;
 
 export function Box<C extends ElementType = 'div'>({
   component,

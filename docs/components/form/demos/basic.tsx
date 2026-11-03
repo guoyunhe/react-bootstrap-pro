@@ -1,7 +1,7 @@
 import {
   Box,
   Button,
-  FormCheck,
+  Checkbox,
   FormControl,
   FormField,
   FormLabel,
@@ -28,7 +28,7 @@ export function FormBasicDemo() {
         <FormControl id='form-basic-password' type='password' />
       </FormField>
       <FormField marginBottom={3}>
-        <FormCheck id='form-basic-check' />
+        <Checkbox id='form-basic-check' />
         <label htmlFor='form-basic-check'>Check me out</label>
       </FormField>
       <Button type='submit' variant='solid' theme='primary'>

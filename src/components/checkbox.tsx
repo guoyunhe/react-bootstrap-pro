@@ -3,20 +3,20 @@ import type { ElementType } from 'react';
 
 import { ClassedBox, type BoxComponentProps } from './shared';
 
-export type FormCheckSize = 'sm' | 'lg';
+export type CheckboxSize = 'sm' | 'lg';
 
-export type FormCheckProps<C extends ElementType = 'input'> = BoxComponentProps<
+export type CheckboxProps<C extends ElementType = 'input'> = BoxComponentProps<
   C,
-  { size?: FormCheckSize | undefined }
+  { size?: CheckboxSize | undefined }
 >;
 
-export function FormCheck<C extends ElementType = 'input'>({
+export function Checkbox<C extends ElementType = 'input'>({
   component,
   className,
   size,
   type,
   ...props
-}: FormCheckProps<C>) {
+}: CheckboxProps<C>) {
   return (
     <ClassedBox<C>
       {...props}

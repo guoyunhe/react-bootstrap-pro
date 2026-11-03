@@ -1,4 +1,4 @@
-import { Box, Button, FormCheck, FormControl, FormField, FormLabel } from 'react-bootstrap-pro';
+import { Box, Button, Checkbox, FormControl, FormField, FormLabel } from 'react-bootstrap-pro';
 
 export function FormDisabledDemo() {
   return (
@@ -16,7 +16,7 @@ export function FormDisabledDemo() {
           </FormControl>
         </FormField>
         <FormField marginBottom={3}>
-          <FormCheck id='form-disabled-check' />
+          <Checkbox id='form-disabled-check' />
           <label htmlFor='form-disabled-check'>Can’t check this</label>
         </FormField>
         <Button type='submit' variant='solid' theme='primary'>

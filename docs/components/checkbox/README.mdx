@@ -1,0 +1,115 @@
+---
+title: Checkbox
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { CheckboxBasicDemo } from './demos/basic';
+import { CheckboxDescriptionDemo } from './demos/description';
+import { CheckboxDisabledDemo } from './demos/disabled';
+import { CheckboxIndeterminateDemo } from './demos/indeterminate';
+import { CheckboxSizesDemo } from './demos/sizes';
+import { CheckboxThemesDemo } from './demos/themes';
+
+# Checkbox
+
+`Checkbox` renders a `.check` input. The class replaces the native appearance with
+themed colors and draws the checked and indeterminate marks with a CSS mask, so
+the icons inherit the contrast color without inline SVG. Labels and layout come
+from `FormField`.
+
+## Basic checkbox
+
+<DemoContainer>
+  <CheckboxBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## Indeterminate
+
+There is no HTML attribute for the indeterminate state, so set the DOM property
+through a `ref`. `Checkbox` forwards refs to the underlying input.
+
+<DemoContainer>
+  <CheckboxIndeterminateDemo />
+</DemoContainer>
+
+```tsx src='./demos/indeterminate.tsx'
+
+```
+
+To replace the built-in marks, override the `--bs-check-icon-checked` and
+`--bs-check-icon-indeterminate` custom properties with your own `mask-image`.
+
+## With form field
+
+The `FormField` grid places the checkbox and its label side by side. Nested
+fields work the same way, so a group of checkboxes can share one wrapper and
+label.
+
+## Description
+
+Add a description after the label and wrap both in `FormFieldContent` so the
+label and help text stack in the second column.
+
+<DemoContainer>
+  <CheckboxDescriptionDemo />
+</DemoContainer>
+
+```tsx src='./demos/description.tsx'
+
+```
+
+## Theme colors
+
+Set `theme` to color the checked checkbox through `.theme-{color}`.
+
+<DemoContainer>
+  <CheckboxThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/themes.tsx'
+
+```
+
+## Disabled
+
+Add the native `disabled` attribute; the associated label is styled to match.
+
+<DemoContainer>
+  <CheckboxDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## Sizes
+
+Use `size='sm'` or `size='lg'` for `.check-sm` and `.check-lg`.
+
+<DemoContainer>
+  <CheckboxSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## API
+
+| Prop        | Type                    | Description                                    |
+| ----------- | ----------------------- | ---------------------------------------------- |
+| `size`      | `'sm' \| 'lg'`          | Scales the checkbox and its label.             |
+| `theme`     | Bootstrap theme literal | Sets the checked color via `.theme-*`.         |
+| `component` | `ElementType`           | Renders an `input type='checkbox'` by default. |
+| `...props`  | `BoxProps<C>`           | Native props and all Box utility props.        |
+
+## Accessibility
+
+Give every checkbox an accessible name with a `<label for>` bound through
+`htmlFor`. When several checkboxes belong to one question, group them in a
+nested `FormField` with a shared label.
