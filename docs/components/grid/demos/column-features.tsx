@@ -1,13 +1,17 @@
 import type { ReactNode } from 'react';
-import { Col, Row } from 'react-bootstrap-pro';
+import { Box, Col, Row } from 'react-bootstrap-pro';
 
 function GridCell({ children }: { children: ReactNode }) {
-  return <div className='h-100 rounded border bg-body-tertiary p-3 text-center'>{children}</div>;
+  return (
+    <Box className='h-100 rounded border bg-body-tertiary text-center' padding={3}>
+      {children}
+    </Box>
+  );
 }
 
 export function ColumnFeaturesDemo() {
   return (
-    <div className='d-grid gap-4'>
+    <Box display='grid' gap={4}>
       <Row
         alignItems='center'
         justifyContent={{ xs: 'center', md: 'between' }}
@@ -28,7 +32,7 @@ export function ColumnFeaturesDemo() {
         <Col span={{ xs: 6, sm: 3 }}>
           <GridCell>Second</GridCell>
         </Col>
-        <div className='w-100 d-none md:d-block' aria-hidden='true' />
+        <Box className='w-100' display={{ xs: 'none', md: 'block' }} aria-hidden='true' />
         <Col span={{ xs: 6, sm: 3 }} order={{ md: 1 }}>
           <GridCell>Third, reordered</GridCell>
         </Col>
@@ -44,9 +48,13 @@ export function ColumnFeaturesDemo() {
           <GridCell>4 columns wrap because the total exceeds 12</GridCell>
         </Col>
       </Row>
-      <Col span={{ xs: 6, md: 3 }} className='rounded border bg-body-tertiary p-3 text-center'>
+      <Col
+        span={{ xs: 6, md: 3 }}
+        className='rounded border bg-body-tertiary text-center'
+        padding={3}
+      >
         Standalone column
       </Col>
-    </div>
+    </Box>
   );
 }

@@ -1,8 +1,8 @@
-import { Button } from 'react-bootstrap-pro';
+import { Box, Button } from 'react-bootstrap-pro';
 
 export function ButtonSizesDemo() {
   return (
-    <div className='d-flex flex-wrap align-items-center gap-2'>
+    <Box display='flex' flexWrap='wrap' alignItems='center' gap={2}>
       <Button variant='solid' theme='primary' size='xs'>
         Extra small
       </Button>
@@ -15,6 +15,6 @@ export function ButtonSizesDemo() {
       <Button variant='solid' theme='primary' size='lg'>
         Large
       </Button>
-    </div>
+    </Box>
   );
 }

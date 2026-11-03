@@ -1,4 +1,4 @@
-import { Alert } from 'react-bootstrap-pro';
+import { Alert, Box } from 'react-bootstrap-pro';
 
 const themes = [
   'primary',
@@ -13,12 +13,12 @@ const themes = [
 
 export function AlertVariantsDemo() {
   return (
-    <div className='d-grid gap-2'>
+    <Box display='grid' gap={2}>
       {themes.map((theme) => (
         <Alert key={theme} theme={theme}>
           A simple {theme} alert.
         </Alert>
       ))}
-    </div>
+    </Box>
   );
 }

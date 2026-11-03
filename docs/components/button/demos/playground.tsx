@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import { BiArrowRight, BiPlus } from 'react-bootstrap-icons-pro';
-import { Button, type ButtonTheme, type ButtonVariant } from 'react-bootstrap-pro';
+import { Box, Button, type ButtonTheme, type ButtonVariant } from 'react-bootstrap-pro';
 
 import {
   contentOptions,
@@ -26,9 +26,9 @@ export function ButtonPlaygroundDemo() {
   );
 
   return (
-    <div className='d-flex flex-column gap-3'>
-      <div className='d-flex flex-wrap align-items-end gap-3'>
-        <label className='d-flex flex-column gap-1'>
+    <Box display='flex' flexDirection='column' gap={3}>
+      <Box display='flex' flexWrap='wrap' alignItems='end' gap={3}>
+        <Box component='label' display='flex' flexDirection='column' gap={1}>
           Theme
           <select
             className='form-select'
@@ -44,8 +44,8 @@ export function ButtonPlaygroundDemo() {
               </option>
             ))}
           </select>
-        </label>
-        <label className='d-flex flex-column gap-1'>
+        </Box>
+        <Box component='label' display='flex' flexDirection='column' gap={1}>
           Style
           <select
             className='form-select'
@@ -61,8 +61,8 @@ export function ButtonPlaygroundDemo() {
               </option>
             ))}
           </select>
-        </label>
-        <label className='d-flex flex-column gap-1'>
+        </Box>
+        <Box component='label' display='flex' flexDirection='column' gap={1}>
           Size
           <select
             className='form-select'
@@ -78,8 +78,8 @@ export function ButtonPlaygroundDemo() {
               </option>
             ))}
           </select>
-        </label>
-        <label className='d-flex flex-column gap-1'>
+        </Box>
+        <Box component='label' display='flex' flexDirection='column' gap={1}>
           Content
           <select
             className='form-select'
@@ -95,8 +95,8 @@ export function ButtonPlaygroundDemo() {
               </option>
             ))}
           </select>
-        </label>
-        <label className='d-flex flex-column gap-1'>
+        </Box>
+        <Box component='label' display='flex' flexDirection='column' gap={1}>
           Shape
           <select
             className='form-select'
@@ -112,17 +112,17 @@ export function ButtonPlaygroundDemo() {
               </option>
             ))}
           </select>
-        </label>
-        <label className='d-flex align-items-center gap-2'>
+        </Box>
+        <Box component='label' display='flex' alignItems='center' gap={2}>
           <input
             type='checkbox'
             checked={styled}
             onChange={(event) => setStyled(event.currentTarget.checked)}
           />
           Styled
-        </label>
-      </div>
-      <div className='d-flex align-items-center gap-2'>
+        </Box>
+      </Box>
+      <Box display='flex' alignItems='center' gap={2}>
         <Button
           variant={variant}
           theme={theme}
@@ -141,7 +141,7 @@ export function ButtonPlaygroundDemo() {
             </>
           )}
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

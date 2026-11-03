@@ -1,15 +1,19 @@
 import type { ReactNode } from 'react';
-import { Col, Row } from 'react-bootstrap-pro';
+import { Box, Col, Row } from 'react-bootstrap-pro';
 
 const cards = ['One', 'Two', 'Three', 'Four'];
 
 function GridCell({ children }: { children: ReactNode }) {
-  return <div className='h-100 rounded border bg-body-tertiary p-3 text-center'>{children}</div>;
+  return (
+    <Box className='h-100 rounded border bg-body-tertiary text-center' padding={3}>
+      {children}
+    </Box>
+  );
 }
 
 export function GridLayoutsDemo() {
   return (
-    <div className='d-grid gap-4'>
+    <Box display='grid' gap={4}>
       <Row cols={{ xs: 1, sm: 2, md: 4 }} gutter={3}>
         {cards.map((card) => (
           <Col key={card}>
@@ -25,6 +29,6 @@ export function GridLayoutsDemo() {
           <GridCell>4 of 12 columns at medium and above</GridCell>
         </Col>
       </Row>
-    </div>
+    </Box>
   );
 }

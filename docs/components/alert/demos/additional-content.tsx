@@ -1,4 +1,4 @@
-import { Alert } from 'react-bootstrap-pro';
+import { Alert, Box } from 'react-bootstrap-pro';
 
 export function AlertAdditionalContentDemo() {
   return (
@@ -6,7 +6,9 @@ export function AlertAdditionalContentDemo() {
       <h2 className='alert-heading'>Well done!</h2>
       <p>Your changes have been saved successfully.</p>
       <hr />
-      <p className='mb-0'>You can continue to the next step.</p>
+      <Box component='p' marginBottom={0}>
+        You can continue to the next step.
+      </Box>
     </Alert>
   );
 }

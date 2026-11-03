@@ -1,9 +1,9 @@
-import { Button } from 'react-bootstrap-pro';
+import { Box, Button } from 'react-bootstrap-pro';
 
 export function ButtonInputToggleDemo() {
   return (
-    <div className='d-flex flex-column gap-3'>
-      <div className='d-flex flex-wrap gap-2'>
+    <Box display='flex' flexDirection='column' gap={3}>
+      <Box display='flex' flexWrap='wrap' gap={2}>
         <Button component='label' variant='solid' theme='primary' check>
           <input type='checkbox' defaultChecked />
           {' Checked'}
@@ -16,8 +16,8 @@ export function ButtonInputToggleDemo() {
           <input type='checkbox' disabled />
           {' Disabled'}
         </Button>
-      </div>
-      <div className='d-flex flex-wrap gap-2'>
+      </Box>
+      <Box display='flex' flexWrap='wrap' gap={2}>
         <Button component='label' variant='outline' theme='secondary' check>
           <input type='radio' name='button-demo-options' defaultChecked />
           {' First'}
@@ -30,7 +30,7 @@ export function ButtonInputToggleDemo() {
           <input type='radio' name='button-demo-options' disabled />
           {' Disabled'}
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

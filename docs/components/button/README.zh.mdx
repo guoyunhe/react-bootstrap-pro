@@ -212,20 +212,20 @@ Bootstrap 的 `.disabled` 类、设置 `aria-disabled`、移出键盘焦点顺�
 </DemoContainer>
 
 ```tsx
-<div className='d-grid gap-2'>
+<Box display='grid' gap={2}>
   <Button variant='solid' theme='primary'>主要操作</Button>
   <Button variant='outline' theme='secondary'>
     次要操作
   </Button>
-</div>
-<div className='d-grid gap-2 md:d-flex md:justify-content-end'>
-  <Button variant='solid' theme='primary' className='md:me-2'>
+</Box>
+<Box display={{ xs: 'grid', md: 'flex' }} justifyContent={{ md: 'end' }} gap={2}>
+  <Button variant='solid' theme='primary' marginEnd={{ md: 2 }}>
     响应式主要操作
   </Button>
   <Button variant='outline' theme='secondary'>
     响应式次要操作
   </Button>
-</div>
+</Box>
 ```
 
 ## 切换按钮

@@ -1,11 +1,13 @@
 import { BiExclamationTriangle } from 'react-bootstrap-icons-pro';
-import { Alert } from 'react-bootstrap-pro';
+import { Alert, Box } from 'react-bootstrap-pro';
 
 export function AlertWithIconsDemo() {
   return (
-    <Alert theme='warning' className='d-flex align-items-center gap-3'>
+    <Alert theme='warning' display='flex' alignItems='center' gap={3}>
       <BiExclamationTriangle size={20} aria-hidden='true' />
-      <p className='mb-0'>Check the details before continuing.</p>
+      <Box component='p' marginBottom={0}>
+        Check the details before continuing.
+      </Box>
     </Alert>
   );
 }

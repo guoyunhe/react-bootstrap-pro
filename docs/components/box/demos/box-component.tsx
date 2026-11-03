@@ -7,7 +7,7 @@ function Panel({ className, ...props }: HTMLAttributes<HTMLElement>) {
 
 export function BoxComponentDemo() {
   return (
-    <Box className='d-grid gap-3'>
+    <Box display='grid' gap={3}>
       <Box
         component='a'
         href='https://getbootstrap.com/docs/6.0/utilities/colors/'
@@ -15,14 +15,24 @@ export function BoxComponentDemo() {
         rel='noreferrer'
         bgSubtle='primary'
         fgEmphasis='primary'
-        className='d-inline-block px-3 py-2 rounded text-decoration-none'
+        display='inline-block'
+        paddingX={3}
+        paddingY={2}
+        className='rounded text-decoration-none'
       >
         A link element
       </Box>
-      <Box component='blockquote' theme='accent' themeStyle='subtle' className='p-3 rounded mb-0'>
+      <Box
+        component='blockquote'
+        theme='accent'
+        themeStyle='subtle'
+        className='rounded'
+        padding={3}
+        marginBottom={0}
+      >
         A blockquote element with theme utilities.
       </Box>
-      <Box component={Panel} bg='1' themeBorder className='p-3 rounded'>
+      <Box component={Panel} bg='1' themeBorder className='rounded' padding={3}>
         A custom component receiving the generated class names.
       </Box>
       <Box className='fw-semibold'>Any other utility class can go through className.</Box>
