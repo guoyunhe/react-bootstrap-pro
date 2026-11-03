@@ -34,6 +34,7 @@ export * from './navbar';
 export * from './nav';
 export * from './otp-input';
 export * from './pagination';
+export * from './password-strength';
 export * from './placeholder';
 export * from './popover';
 export * from './progress';

@@ -1,0 +1,184 @@
+---
+title: Password strength
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { PasswordStrengthBarDemo } from './demos/bar';
+import { PasswordStrengthBasicDemo } from './demos/basic';
+import { PasswordStrengthCustomDemo } from './demos/custom';
+import { PasswordStrengthFeedbackDemo } from './demos/feedback';
+import { PasswordStrengthFieldDemo } from './demos/field';
+import { PasswordStrengthStaticBarDemo } from './demos/static-bar';
+import { PasswordStrengthStaticDemo } from './demos/static';
+
+# Password strength
+
+`PasswordStrength` shows real-time feedback on password complexity. It supports
+a segmented meter with four levels, a single progress bar, optional text
+feedback, and fully customizable scoring. The score is computed in React from
+the `value` prop, so no Bootstrap JavaScript plugin is required.
+
+## Overview
+
+- **Segmented meter**: four segments that fill as the password gets stronger
+- **Progress bar variant**: a single bar that grows with the strength level
+- **Text feedback**: optional messages for each level
+- **Customizable scoring**: change the minimum length, weights, thresholds, or
+  pass a completely custom scorer
+
+## Segmented
+
+<DemoContainer>
+  <PasswordStrengthBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+Pass the password through `value`; the meter renders four segments and fills
+them from left to right. An empty password leaves the meter neutral.
+
+## With text feedback
+
+Set `showText` to render the `.strength-text` message for the current level. The
+text is a polite live region, so screen readers announce strength changes.
+
+<DemoContainer>
+  <PasswordStrengthFeedbackDemo />
+</DemoContainer>
+
+```tsx src='./demos/feedback.tsx'
+
+```
+
+## Progress bar
+
+Set `variant='bar'` for a single bar. Its width and color follow the strength
+level: 25%, 50%, 75%, and 100%.
+
+<DemoContainer>
+  <PasswordStrengthBarDemo />
+</DemoContainer>
+
+```tsx src='./demos/bar.tsx'
+
+```
+
+## Static segmented
+
+For server-rendered or otherwise static content, pass `strength` instead of
+`value` to render a fixed level.
+
+<DemoContainer>
+  <PasswordStrengthStaticDemo />
+</DemoContainer>
+
+```tsx src='./demos/static.tsx'
+
+```
+
+## Static progress bar
+
+<DemoContainer>
+  <PasswordStrengthStaticBarDemo />
+</DemoContainer>
+
+```tsx src='./demos/static-bar.tsx'
+
+```
+
+## Strength criteria
+
+The default algorithm scores a password on eight criteria:
+
+| Criteria                            | Points |
+| ----------------------------------- | ------ |
+| Meets minimum length (8 characters) | +1     |
+| 4+ characters over the minimum      | +1     |
+| Contains lowercase letters          | +1     |
+| Contains uppercase letters          | +1     |
+| Contains numbers                    | +1     |
+| Contains special characters         | +1     |
+| Multiple special characters         | +1     |
+| 16+ characters                      | +1     |
+
+| Level  | Score |
+| ------ | ----- |
+| Weak   | 1–2   |
+| Fair   | 3–4   |
+| Good   | 5–6   |
+| Strong | 7+    |
+
+A score of `0` leaves the meter empty.
+
+## Custom scoring
+
+`minLength`, `weights`, `thresholds`, and `messages` adjust the built-in
+algorithm. Set a weight to `0` to drop a criterion, and keep the thresholds in
+sync with the maximum score.
+
+<DemoContainer>
+  <PasswordStrengthCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom.tsx'
+
+```
+
+Pass `scorer` to replace the algorithm entirely. It receives the password and
+returns a score, which is then mapped through `thresholds`.
+
+```tsx
+<PasswordStrength value={password} scorer={(password) => password.length * 2} />
+```
+
+## With form field
+
+Pair the meter with a `FormField`, a `FormLabel`, and requirement text
+associated through `aria-describedby`.
+
+<DemoContainer>
+  <PasswordStrengthFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/field.tsx'
+
+```
+
+## API
+
+| Prop         | Type                                             | Description                                                         |
+| ------------ | ------------------------------------------------ | ------------------------------------------------------------------- |
+| `value`      | `string`                                         | Password to evaluate.                                               |
+| `strength`   | `'weak' \| 'fair' \| 'good' \| 'strong'`         | Fixed level for static displays, ignored when `value` is set.       |
+| `variant`    | `'segments' \| 'bar'`                            | Segmented meter (default) or single progress bar.                   |
+| `minLength`  | `number`                                         | Length needed for the first length point. Defaults to `8`.          |
+| `weights`    | `PasswordStrengthWeights`                        | Points per criterion. Set to `0` to disable a criterion.            |
+| `thresholds` | `readonly [number, number, number]`              | Score boundaries for weak, fair, and good. Defaults to `[2, 4, 6]`. |
+| `scorer`     | `(password: string) => number`                   | Replaces the built-in scoring function.                             |
+| `messages`   | `Partial<Record<PasswordStrengthLevel, string>>` | Text shown for each level when `showText` is set.                   |
+| `showText`   | `boolean`                                        | Renders the `.strength-text` feedback message.                      |
+| `onChange`   | `(strength, score) => void`                      | Called when the strength level changes.                             |
+| `...props`   | `BoxProps<'div'>`                                | Box utility props for the meter element.                            |
+
+### PasswordStrengthWeights
+
+| Field             | Default | Description                                         |
+| ----------------- | ------- | --------------------------------------------------- |
+| `minLength`       | `1`     | Password reaches `minLength`.                       |
+| `extraLength`     | `1`     | Password is at least 4 characters over `minLength`. |
+| `lowercase`       | `1`     | Contains a lowercase letter.                        |
+| `uppercase`       | `1`     | Contains an uppercase letter.                       |
+| `numbers`         | `1`     | Contains a number.                                  |
+| `special`         | `1`     | Contains a special character.                       |
+| `multipleSpecial` | `1`     | Contains more than one special character.           |
+| `longPassword`    | `1`     | Password is at least 16 characters.                 |
+
+## Accessibility
+
+The meter is decorative; pair it with visible password requirements and connect
+them to the input with `aria-describedby`. When `showText` is enabled, the
+message is rendered in a polite live region so strength changes are announced
+without interrupting typing.

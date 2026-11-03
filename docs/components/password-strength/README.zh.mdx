@@ -1,0 +1,178 @@
+---
+title: Password strength 密码强度
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { PasswordStrengthBarDemo } from './demos/bar';
+import { PasswordStrengthBasicDemo } from './demos/basic';
+import { PasswordStrengthCustomDemo } from './demos/custom';
+import { PasswordStrengthFeedbackDemo } from './demos/feedback';
+import { PasswordStrengthFieldDemo } from './demos/field';
+import { PasswordStrengthStaticBarDemo } from './demos/static-bar';
+import { PasswordStrengthStaticDemo } from './demos/static';
+
+# Password strength 密码强度
+
+`PasswordStrength` 实时展示密码复杂度。它支持四段式强度条、单条进度条、可选的文本
+反馈，以及完全可定制的评分规则。强度由 `value` 在 React 中计算，无需加载 Bootstrap
+JavaScript 插件。
+
+## 概览
+
+- **分段强度条**：密码越强，四段依次点亮
+- **进度条变体**：单条进度条随强度增长
+- **文本反馈**：可选地为每个强度等级显示提示文本
+- **可定制评分**：可修改最小长度、权重、阈值，或传入自定义评分函数
+
+## 分段强度条
+
+<DemoContainer>
+  <PasswordStrengthBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+通过 `value` 传入密码；强度条会渲染四段并从左到右点亮。密码为空时强度条保持中性
+状态。
+
+## 文本反馈
+
+设置 `showText` 可渲染当前等级的 `.strength-text` 文本。该文本是礼貌（polite）实
+时区域，屏幕阅读器会朗读强度变化。
+
+<DemoContainer>
+  <PasswordStrengthFeedbackDemo />
+</DemoContainer>
+
+```tsx src='./demos/feedback.tsx'
+
+```
+
+## 进度条
+
+设置 `variant='bar'` 使用单条进度条，其宽度与颜色随强度变化：25%、50%、75% 与
+100%。
+
+<DemoContainer>
+  <PasswordStrengthBarDemo />
+</DemoContainer>
+
+```tsx src='./demos/bar.tsx'
+
+```
+
+## 静态分段强度条
+
+用于服务端渲染或其他静态内容时，传入 `strength` 而非 `value` 可直接展示固定等级。
+
+<DemoContainer>
+  <PasswordStrengthStaticDemo />
+</DemoContainer>
+
+```tsx src='./demos/static.tsx'
+
+```
+
+## 静态进度条
+
+<DemoContainer>
+  <PasswordStrengthStaticBarDemo />
+</DemoContainer>
+
+```tsx src='./demos/static-bar.tsx'
+
+```
+
+## 评分规则
+
+默认算法按八项标准为密码评分：
+
+| 条件                     | 分值 |
+| ------------------------ | ---- |
+| 达到最小长度（8 个字符） | +1   |
+| 超出最小长度 4 个字符    | +1   |
+| 包含小写字母             | +1   |
+| 包含大写字母             | +1   |
+| 包含数字                 | +1   |
+| 包含特殊字符             | +1   |
+| 包含多个特殊字符         | +1   |
+| 长度达到 16 个字符       | +1   |
+
+| 等级 | 分数 |
+| ---- | ---- |
+| 弱   | 1–2  |
+| 一般 | 3–4  |
+| 良好 | 5–6  |
+| 强   | 7+   |
+
+分数为 `0` 时强度条保持空状态。
+
+## 自定义评分
+
+`minLength`、`weights`、`thresholds` 与 `messages` 可调整内置算法。将某项权重设为
+`0` 可停用该条件，并保持阈值与最高分匹配。
+
+<DemoContainer>
+  <PasswordStrengthCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom.tsx'
+
+```
+
+传入 `scorer` 可完全替换算法，它接收密码并返回分数，再通过 `thresholds` 映射为等级。
+
+```tsx
+<PasswordStrength value={password} scorer={(password) => password.length * 2} />
+```
+
+## 配合表单字段
+
+将强度条与 `FormField`、`FormLabel` 以及通过 `aria-describedby` 关联的密码要求文
+本一起使用。
+
+<DemoContainer>
+  <PasswordStrengthFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/field.tsx'
+
+```
+
+## API
+
+| 属性         | 类型                                             | 说明                                         |
+| ------------ | ------------------------------------------------ | -------------------------------------------- |
+| `value`      | `string`                                         | 待评估的密码。                               |
+| `strength`   | `'weak' \| 'fair' \| 'good' \| 'strong'`         | 静态展示的固定等级，设置 `value` 时忽略。    |
+| `variant`    | `'segments' \| 'bar'`                            | 分段强度条（默认）或单条进度条。             |
+| `minLength`  | `number`                                         | 获得第一项长度分所需长度，默认 `8`。         |
+| `weights`    | `PasswordStrengthWeights`                        | 各评分项的分值，设为 `0` 可停用该项。        |
+| `thresholds` | `readonly [number, number, number]`              | 弱、一般、良好的分数边界，默认 `[2, 4, 6]`。 |
+| `scorer`     | `(password: string) => number`                   | 替换内置评分函数。                           |
+| `messages`   | `Partial<Record<PasswordStrengthLevel, string>>` | 设置 `showText` 时各等级显示的文本。         |
+| `showText`   | `boolean`                                        | 渲染 `.strength-text` 反馈文本。             |
+| `onChange`   | `(strength, score) => void`                      | 强度等级变化时调用。                         |
+| `...props`   | `BoxProps<'div'>`                                | 强度条元素的 Box 工具属性。                  |
+
+### PasswordStrengthWeights
+
+| 字段              | 默认值 | 说明                             |
+| ----------------- | ------ | -------------------------------- |
+| `minLength`       | `1`    | 达到 `minLength`。               |
+| `extraLength`     | `1`    | 超出 `minLength` 至少 4 个字符。 |
+| `lowercase`       | `1`    | 包含小写字母。                   |
+| `uppercase`       | `1`    | 包含大写字母。                   |
+| `numbers`         | `1`    | 包含数字。                       |
+| `special`         | `1`    | 包含特殊字符。                   |
+| `multipleSpecial` | `1`    | 包含多个特殊字符。               |
+| `longPassword`    | `1`    | 长度至少 16 个字符。             |
+
+## 无障碍
+
+强度条是装饰性反馈，请配合可见的密码要求文本，并通过 `aria-describedby` 与输入框关
+联。启用 `showText` 时，提示文本位于礼貌实时区域，可在不打断输入的情况下朗读强度变
+化。

@@ -29,6 +29,7 @@ order: 1
 - [Navbar 导航栏](./navbar/)
 - [OTP input 一次性密码输入](./otp-input/)
 - [Pagination 分页](./pagination/)
+- [Password strength 密码强度](./password-strength/)
 - [Placeholder 占位符](./placeholder/)
 - [Popover 弹出框](./popover/)
 - [Progress 进度条](./progress/)

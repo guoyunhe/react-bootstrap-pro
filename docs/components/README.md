@@ -35,6 +35,7 @@ order: 1
 - [Navbar](./navbar/)
 - [OTP input](./otp-input/)
 - [Pagination](./pagination/)
+- [Password strength](./password-strength/)
 - [Placeholder](./placeholder/)
 - [Popover](./popover/)
 - [Progress](./progress/)
