@@ -5,7 +5,13 @@ title: Alert
 import 'bootstrap/dist/css/bootstrap.css';
 import { Alert } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { AlertAdditionalContentDemo } from './demos/additional-content';
 import { AlertBasicDemo } from './demos/basic';
+import { AlertDismissDemo } from './demos/dismiss';
+import { AlertLinkColorDemo } from './demos/link-color';
+import { AlertLiveDemo } from './demos/live-example';
+import { AlertVariantsDemo } from './demos/variants';
+import { AlertWithIconsDemo } from './demos/with-icons';
 
 # Alert
 
@@ -13,7 +19,7 @@ import { AlertBasicDemo } from './demos/basic';
 `role="alert"`. Dismissal requires the Bootstrap JavaScript plugin and a
 `CloseButton`.
 
-## Example
+## Default alert
 
 <DemoContainer>
   <AlertBasicDemo />
@@ -25,15 +31,77 @@ import { AlertBasicDemo } from './demos/basic';
 
 ## Variants
 
-## Links and additional content
+Show each of the contextual themes, including the neutral default.
 
-Alerts can include links and structured content; keep related content grouped
-inside the alert.
+<DemoContainer>
+  <AlertVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## Live example
+
+The button adds an alert; its close control removes it again.
+
+<DemoContainer>
+  <AlertLiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/live-example.tsx'
+
+```
+
+## Link color
+
+Use `.alert-link` to style a link in contextually themed alerts.
+
+<DemoContainer>
+  <AlertLinkColorDemo />
+</DemoContainer>
+
+```tsx src='./demos/link-color.tsx'
+
+```
+
+## Additional content
+
+Alerts can contain headings, paragraphs, and dividers.
+
+<DemoContainer>
+  <AlertAdditionalContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/additional-content.tsx'
+
+```
+
+## With icons
+
+Decorative icons can accompany alert text; the message remains clear without
+the icon.
+
+<DemoContainer>
+  <AlertWithIconsDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-icons.tsx'
+
+```
 
 ## Dismiss
 
-Pass Bootstrap's dismiss data attribute to a close button to enable plugin
+Add a close control with `data-bs-dismiss='alert'` to enable Bootstrap plugin
 dismissal.
+
+<DemoContainer>
+  <AlertDismissDemo />
+</DemoContainer>
+
+```tsx src='./demos/dismiss.tsx'
+
+```
 
 ## API
 
