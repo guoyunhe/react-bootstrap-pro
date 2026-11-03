@@ -34,6 +34,8 @@ import {
   Progress,
   ProgressBar,
   Radio,
+  Switch,
+  SwitchInput,
   Tab,
   TabContent,
   TabItem,
@@ -186,6 +188,25 @@ test('forwards refs to the underlying control', async () => {
     ref.current.indeterminate = true;
   }
   expect(ref.current?.indeterminate).toBe(true);
+});
+
+test('renders switches with a hidden checkbox control', async () => {
+  const screen = await render(
+    <FormField>
+      <Switch theme='primary' size='lg' data-testid='switch'>
+        <SwitchInput id='switch-test' defaultChecked data-testid='switch-input' />
+      </Switch>
+      <label htmlFor='switch-test'>Notifications</label>
+    </FormField>,
+  );
+
+  const input = screen.getByTestId('switch-input').element() as HTMLInputElement;
+  expect(screen.getByTestId('switch')).toHaveClass('switch', 'switch-lg', 'theme-primary');
+  expect(input.type).toBe('checkbox');
+  expect(input.checked).toBe(true);
+  expect(input.getAttribute('role')).toBe('switch');
+  expect(input.hasAttribute('switch')).toBe(true);
+  expect(screen.container.querySelector('label')?.control).toBe(input);
 });
 
 test('composes card and carousel structure', async () => {

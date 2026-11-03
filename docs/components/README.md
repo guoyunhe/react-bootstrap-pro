@@ -36,6 +36,7 @@ order: 1
 - [Scrollspy](./scrollspy/)
 - [Spinner](./spinner/)
 - [Stepper](./stepper/)
+- [Switch](./switch/)
 - [Tab](./tab/)
 - [Toasts](./toasts/)
 - [Toggler](./toggler/)

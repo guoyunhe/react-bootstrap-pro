@@ -1,0 +1,101 @@
+---
+title: Switch 开关
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { SwitchBasicDemo } from './demos/basic';
+import { SwitchDisabledDemo } from './demos/disabled';
+import { SwitchSizesDemo } from './demos/sizes';
+import { SwitchThemesDemo } from './demos/themes';
+import { SwitchWidthDemo } from './demos/width';
+
+# Switch 开关
+
+`Switch` 渲染 `.switch` 轨道与指示器，`SwitchInput` 渲染覆盖在其上的不可见
+复选框。输入框保留原生复选框语义；`SwitchInput` 会自动设置
+`type='checkbox'`、`role='switch'` 以及 `switch` 属性（支持的浏览器可用它提供
+触觉反馈）。将两者放入 `FormField`，标签会显示在控件旁边。
+
+## 基础开关
+
+<DemoContainer>
+  <SwitchBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 主题颜色
+
+在 `Switch` 上设置 `theme`，通过 `.theme-{color}` 控制选中态轨道颜色。
+
+<DemoContainer>
+  <SwitchThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/themes.tsx'
+
+```
+
+## 禁用状态
+
+为 `SwitchInput` 添加 `disabled`，关联的标签会自动变浅以匹配状态。
+
+<DemoContainer>
+  <SwitchDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## 尺寸
+
+在 `Switch` 上使用 `size='sm'` 或 `size='lg'` 生成 `.switch-sm` 与 `.switch-lg`。
+
+<DemoContainer>
+  <SwitchSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## 自定义宽度
+
+覆盖轨道上的 `--bs-switch-width` 与 `--bs-switch-indicator-width` 自定义属性，
+即可得到更宽的开关。
+
+<DemoContainer>
+  <SwitchWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/width.tsx'
+
+```
+
+## API
+
+### Switch
+
+| 属性        | 类型                 | 说明                             |
+| ----------- | -------------------- | -------------------------------- |
+| `size`      | `'sm' \| 'lg'`       | 调整轨道及其标签的尺寸。         |
+| `theme`     | Bootstrap 主题字面量 | 通过 `.theme-*` 设置选中态颜色。 |
+| `component` | `ElementType`        | 默认渲染 `div`。                 |
+| `...props`  | `BoxProps<C>`        | 原生属性及所有 Box 工具类属性。  |
+
+### SwitchInput
+
+| 属性        | 类型          | 说明                               |
+| ----------- | ------------- | ---------------------------------- |
+| `component` | `ElementType` | 默认渲染 `input type='checkbox'`。 |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。    |
+
+## 无障碍
+
+`SwitchInput` 始终渲染 `role='switch'`，辅助技术会把控件朗读为开关而非复选框。
+通过 `htmlFor` 绑定 `<label for>` 提供可访问名称，并将标签与轨道一起放在
+`FormField` 中。

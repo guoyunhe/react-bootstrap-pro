@@ -1,0 +1,103 @@
+---
+title: Switch
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { SwitchBasicDemo } from './demos/basic';
+import { SwitchDisabledDemo } from './demos/disabled';
+import { SwitchSizesDemo } from './demos/sizes';
+import { SwitchThemesDemo } from './demos/themes';
+import { SwitchWidthDemo } from './demos/width';
+
+# Switch
+
+`Switch` renders the `.switch` track and indicator, while `SwitchInput` renders
+the invisible checkbox layered over it. The input keeps the native checkbox
+semantics; `SwitchInput` sets `type='checkbox'`, `role='switch'`, and the
+`switch` attribute, which browsers that support it can use for haptic feedback.
+Wrap the pair in a `FormField` to place the label next to the control.
+
+## Basic switch
+
+<DemoContainer>
+  <SwitchBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## Theme colors
+
+Set `theme` on `Switch` to color the checked track through `.theme-{color}`.
+
+<DemoContainer>
+  <SwitchThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/themes.tsx'
+
+```
+
+## Disabled
+
+Add `disabled` to `SwitchInput`; the associated label is styled to match.
+
+<DemoContainer>
+  <SwitchDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## Sizes
+
+Use `size='sm'` or `size='lg'` on `Switch` for `.switch-sm` and `.switch-lg`.
+
+<DemoContainer>
+  <SwitchSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## Custom width
+
+Override the `--bs-switch-width` and `--bs-switch-indicator-width` custom
+properties on the track to build a wider switch.
+
+<DemoContainer>
+  <SwitchWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/width.tsx'
+
+```
+
+## API
+
+### Switch
+
+| Prop        | Type                    | Description                             |
+| ----------- | ----------------------- | --------------------------------------- |
+| `size`      | `'sm' \| 'lg'`          | Scales the track and its label.         |
+| `theme`     | Bootstrap theme literal | Sets the checked color via `.theme-*`.  |
+| `component` | `ElementType`           | Renders a `div` by default.             |
+| `...props`  | `BoxProps<C>`           | Native props and all Box utility props. |
+
+### SwitchInput
+
+| Prop        | Type          | Description                                    |
+| ----------- | ------------- | ---------------------------------------------- |
+| `component` | `ElementType` | Renders an `input type='checkbox'` by default. |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props.        |
+
+## Accessibility
+
+`SwitchInput` always renders `role='switch'` so assistive technologies announce
+the control as a switch instead of a checkbox. Give it an accessible name with a
+`<label for>` bound through `htmlFor`, and group the label with the track in a
+`FormField`.

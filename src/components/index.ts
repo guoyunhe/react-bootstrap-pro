@@ -33,6 +33,8 @@ export * from './radio';
 export * from './scrollspy';
 export * from './spinner';
 export * from './stepper';
+export * from './switch';
+export * from './switch-input';
 export * from './tab';
 export * from './toast';
 export * from './toggler';
