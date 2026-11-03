@@ -24,7 +24,9 @@ import { ButtonVariantsDemo } from './demos/variants';
 Import Bootstrap's stylesheet once in your application before using the
 component.
 
-## Base class
+## Example
+
+### Base class
 
 The native `<button>` is the semantic starting point. Bootstrap's `.btn` class
 adds its shared base styles. The React `Button` component always adds `.btn`;
@@ -358,3 +360,14 @@ addition to the button-specific props above.
 
 `Button`, `ButtonProps`, `ButtonTheme`, and `ButtonVariant` are exported from the
 package entry point.
+
+## Accessibility
+
+Use the native button element for actions and an anchor for navigation. Give
+icon-only buttons an accessible name, expose toggle state with `aria-pressed`,
+and do not rely on color alone to communicate meaning.
+
+## See
+
+- [Bootstrap 6 Button documentation](https://getbootstrap.com/docs/6.0/components/button/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/button.tsx)

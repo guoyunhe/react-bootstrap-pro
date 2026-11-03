@@ -11,6 +11,8 @@ import { DemoContainer } from '../demo-container';
 `ListGroup` renders a semantic list by default. Use action items for links or
 buttons, and use `active` to identify the current selection.
 
+## Example
+
 <DemoContainer>
   <ListGroup>
     <ListGroupItem active>Current item</ListGroupItem>
@@ -19,6 +21,39 @@ buttons, and use `active` to identify the current selection.
     </ListGroupItem>
   </ListGroup>
 </DemoContainer>
+
+```tsx
+<ListGroup>
+  <ListGroupItem active>Current item</ListGroupItem>
+  <ListGroupItem action component='a' href='/next'>
+    Next item
+  </ListGroupItem>
+</ListGroup>
+```
+
+## Flush and numbered
+
+Use `flush` to remove the outer border and rounding, or `numbered` to show CSS
+counters.
+
+```tsx
+<ListGroup flush numbered>
+  <ListGroupItem>First step</ListGroupItem>
+  <ListGroupItem>Second step</ListGroupItem>
+</ListGroup>
+```
+
+## Horizontal
+
+Set `horizontal` to display items in a row, or provide a breakpoint to switch
+the layout responsively.
+
+```tsx
+<ListGroup horizontal='md'>
+  <ListGroupItem>Overview</ListGroupItem>
+  <ListGroupItem>Details</ListGroupItem>
+</ListGroup>
+```
 
 ## API
 
@@ -31,3 +66,13 @@ buttons, and use `active` to identify the current selection.
 | `...props`   | `BoxProps<C>`                                      | Native props and all Box utility props. |
 
 `ListGroupItem` accepts `action` and `active` modifiers.
+
+## Accessibility
+
+Use native list semantics for static items. For links and buttons, preserve
+their native interaction and use `active` to identify the current selection.
+
+## See
+
+- [Bootstrap 6 List group documentation](https://getbootstrap.com/docs/6.0/components/list-group/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/list-group.tsx)

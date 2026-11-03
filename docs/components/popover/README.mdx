@@ -8,8 +8,11 @@ import { DemoContainer } from '../demo-container';
 
 # Popover
 
-`Popover` provides the styled popup surface. Use the Bootstrap JavaScript
-bundle for trigger behavior and Floating UI positioning.
+`Popover` provides the styled popup surface. `show` controls its rendered
+visibility; Bootstrap's JavaScript plugin can independently create and position
+popovers from trigger elements.
+
+## Example
 
 <DemoContainer>
   <Popover show placement='top'>
@@ -17,6 +20,23 @@ bundle for trigger behavior and Floating UI positioning.
     <PopoverBody>Popover content</PopoverBody>
   </Popover>
 </DemoContainer>
+
+```tsx
+<Popover show placement='top'>
+  <PopoverHeader>Popover title</PopoverHeader>
+  <PopoverBody>Popover content</PopoverBody>
+</Popover>
+```
+
+## Placement
+
+Set `placement` to `top`, `end`, `bottom`, or `start`.
+
+```tsx
+<Popover show placement='end'>
+  <PopoverBody>More details</PopoverBody>
+</Popover>
+```
 
 ## API
 
@@ -29,3 +49,14 @@ bundle for trigger behavior and Floating UI positioning.
 | `...props`  | `BoxProps<C>`                           | Native props and all Box utility props. |
 
 `PopoverHeader` and `PopoverBody` style the title and content regions.
+
+## Accessibility
+
+Keep essential information available outside a transient popover. Ensure
+trigger controls are keyboard-operable and provide an accessible relationship
+between a trigger and its content when managing the popover in React.
+
+## See
+
+- [Bootstrap 6 Popover documentation](https://getbootstrap.com/docs/6.0/components/popover/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/popover.tsx)

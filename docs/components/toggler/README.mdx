@@ -11,6 +11,8 @@ import { DemoContainer } from '../demo-container';
 `Toggler` renders a trigger for Bootstrap's toggler plugin. The plugin can
 toggle a class or attribute on the trigger itself or on a selected target.
 
+## Example
+
 <DemoContainer>
   <Toggler target='#theme-surface' attribute='class' value='bg-primary'>
     Toggle theme
@@ -19,6 +21,29 @@ toggle a class or attribute on the trigger itself or on a selected target.
     Target
   </div>
 </DemoContainer>
+
+## Target elements
+
+Set a selector in `target` to modify another element. Without a target, the
+plugin changes the trigger element.
+
+```tsx
+<Toggler target='#panel' attribute='class' value='bg-subtle-info'>
+  Toggle panel style
+</Toggler>
+<div id='panel'>Panel</div>
+```
+
+## Toggle attributes
+
+Set `attribute='aria-expanded'` to toggle an attribute on the target.
+
+```tsx
+<Toggler target='#details' attribute='aria-expanded' value='true'>
+  Toggle details
+</Toggler>
+<div id='details'>Details</div>
+```
 
 ## API
 
@@ -31,3 +56,13 @@ toggle a class or attribute on the trigger itself or on a selected target.
 | `...props`  | `BoxProps<C>` | Native props and all Box utility props.            |
 
 The Bootstrap JavaScript bundle is required for toggling behavior.
+
+## Accessibility
+
+Use an interactive trigger such as a button and expose expanded state when the
+toggled content is shown or hidden.
+
+## See
+
+- [Bootstrap 6 Toggler documentation](https://getbootstrap.com/docs/6.0/components/toggler/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/toggler.tsx)

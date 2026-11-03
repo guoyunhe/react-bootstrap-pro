@@ -11,6 +11,8 @@ import { DemoContainer } from '../demo-container';
 `Drawer` builds on native `<dialog>` and Bootstrap's JavaScript plugin for
 backdrop, focus management, and placement-aware dismissal.
 
+## Example
+
 <DemoContainer>
   <Drawer open placement='end'>
     <DrawerHeader>
@@ -20,6 +22,21 @@ backdrop, focus management, and placement-aware dismissal.
     <DrawerFooter>Footer</DrawerFooter>
   </Drawer>
 </DemoContainer>
+
+```tsx
+<Drawer open placement='end' aria-labelledby='navigation-title'>
+  <DrawerHeader>
+    <DrawerTitle id='navigation-title'>Navigation</DrawerTitle>
+    <CloseButton data-bs-dismiss='drawer' />
+  </DrawerHeader>
+  <DrawerBody>Drawer content</DrawerBody>
+  <DrawerFooter>Footer</DrawerFooter>
+</Drawer>
+```
+
+## Placement
+
+Set `placement` to `start`, `end`, `top`, or `bottom`. The default is `end`.
 
 ## API
 
@@ -35,3 +52,13 @@ backdrop, focus management, and placement-aware dismissal.
 `DrawerHeader`, `DrawerTitle`, `DrawerBody`, and `DrawerFooter` provide the
 corresponding structural classes. The Bootstrap JavaScript bundle is required
 for plugin-controlled modal behavior.
+
+## Accessibility
+
+Label the drawer with `aria-labelledby`, include a close action, and use the
+Bootstrap plugin or native dialog API for modal focus and backdrop behavior.
+
+## See
+
+- [Bootstrap 6 Drawer documentation](https://getbootstrap.com/docs/6.0/components/drawer/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/drawer.tsx)

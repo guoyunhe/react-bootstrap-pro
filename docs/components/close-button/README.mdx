@@ -11,12 +11,32 @@ import { DemoContainer } from '../demo-container';
 `CloseButton` renders the CSS-mask close icon as a native button. Its accessible
 name defaults to “Close”; change it with `label` or `aria-label`.
 
+## Example
+
 <DemoContainer>
   <CloseButton />
 </DemoContainer>
 
 ```tsx
 <CloseButton label='Dismiss notification' onClick={dismiss} />
+```
+
+## Disabled state
+
+Use the native `disabled` prop when dismissing is unavailable.
+
+```tsx
+<CloseButton disabled label='Close unavailable notification' />
+```
+
+## Dark variant
+
+Place the button inside a dark color-scheme region to use the inverted icon.
+
+```tsx
+<div data-bs-theme='dark'>
+  <CloseButton />
+</div>
 ```
 
 ## API
@@ -26,3 +46,13 @@ name defaults to “Close”; change it with `label` or `aria-label`.
 | `label`     | `string`      | Accessible name, defaulting to `'Close'`.  |
 | `component` | `ElementType` | Changes the element; defaults to `button`. |
 | `...props`  | `BoxProps<C>` | Native props and all Box utility props.    |
+
+## Accessibility
+
+Keep the accessible name meaningful in context, and use the native `disabled`
+prop when the action is unavailable.
+
+## See
+
+- [Bootstrap 6 Close button documentation](https://getbootstrap.com/docs/6.0/components/close-button/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/close-button.tsx)

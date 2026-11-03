@@ -11,17 +11,41 @@ import { DemoContainer } from '../demo-container';
 `Toast` composes a notification surface and accessible live region. Use the
 Bootstrap JavaScript plugin or control the `show` prop from React.
 
+## Example
+
 <DemoContainer>
   <ToastContainer>
-    <Toast show>
+    <Toast show role='alert' aria-live='assertive' aria-atomic='true'>
       <ToastHeader>
         <strong>Saved</strong>
-        <CloseButton />
+        <CloseButton data-bs-dismiss='toast' />
       </ToastHeader>
       <ToastBody>Your changes are ready.</ToastBody>
     </Toast>
   </ToastContainer>
 </DemoContainer>
+
+```tsx
+<ToastContainer>
+  <Toast show role='status' aria-live='polite' aria-atomic='true'>
+    <ToastHeader>
+      <strong>Saved</strong>
+      <CloseButton data-bs-dismiss='toast' />
+    </ToastHeader>
+    <ToastBody>Your changes are ready.</ToastBody>
+  </Toast>
+</ToastContainer>
+```
+
+## Translucent
+
+Set `translucent` to apply the translucent surface treatment.
+
+```tsx
+<Toast show translucent>
+  <ToastBody>Background work is complete.</ToastBody>
+</Toast>
+```
 
 ## API
 
@@ -35,3 +59,14 @@ Bootstrap JavaScript plugin or control the `show` prop from React.
 
 `ToastHeader`, `ToastBody`, and `ToastContainer` provide the corresponding
 layout classes. Dismissal and autohide require JavaScript.
+
+## Accessibility
+
+Choose a live-region role and politeness level appropriate to the message, and
+provide a close control when users need to dismiss the toast. Do not rely on
+autohide for important information.
+
+## See
+
+- [Bootstrap 6 Toasts documentation](https://getbootstrap.com/docs/6.0/components/toasts/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/toast.tsx)

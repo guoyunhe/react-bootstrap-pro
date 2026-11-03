@@ -15,6 +15,20 @@ uses 12 columns per row; place columns inside a row and rows inside a
 [`Container`](../container/). Import Bootstrap's stylesheet once in your
 application before using these components.
 
+## Example
+
+The basic grid uses rows and columns that share the available width.
+
+```tsx
+<Container>
+  <Row>
+    <Col>Column</Col>
+    <Col>Column</Col>
+    <Col>Column</Col>
+  </Row>
+</Container>
+```
+
 ## Responsive layout
 
 Use `Row`'s `cols` prop to set the number of equal-width columns, or set each
@@ -196,7 +210,14 @@ responsive values can use the same breakpoint object as column sizes.
 `bg`, `fg`, `theme`, and `colorScheme` are available on both components.
 
 `GridResponsive<T>` accepts either a value applied at every breakpoint or an
-object with `xs`, `sm`, `md`, `lg`, `xl`, and `2xl` keys. See Bootstrap's
-[grid documentation](https://getbootstrap.com/docs/6.0/layout/grid/) and
-[columns documentation](https://getbootstrap.com/docs/6.0/layout/columns/) for
-additional layout guidance.
+object with `xs`, `sm`, `md`, `lg`, `xl`, and `2xl` keys.
+
+## Accessibility
+
+Use a meaningful DOM order and do not rely on visual column reordering to
+communicate sequence. Prefer semantic elements for content placed in columns.
+
+## See
+
+- [Bootstrap 6 Grid documentation](https://getbootstrap.com/docs/6.0/layout/grid/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/grid.tsx)

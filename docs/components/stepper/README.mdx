@@ -11,6 +11,8 @@ import { DemoContainer } from '../demo-container';
 `Stepper` renders an ordered list of steps. Set `active` on completed and
 current steps, and use the responsive `horizontal` option when space allows.
 
+## Example
+
 <DemoContainer>
   <Stepper>
     <StepperItem active>Create account</StepperItem>
@@ -20,6 +22,8 @@ current steps, and use the responsive `horizontal` option when space allows.
     <StepperItem>Finish</StepperItem>
   </Stepper>
 </DemoContainer>
+
+## Responsive layout
 
 ```tsx
 <Stepper horizontal='md'>
@@ -38,3 +42,13 @@ current steps, and use the responsive `horizontal` option when space allows.
 | `...props`   | `BoxProps<C>`                                      | Native props and all Box utility props.               |
 
 `StepperItem` renders a numbered step and supports `active`.
+
+## Accessibility
+
+Mark the current step with `aria-current='step'`. Keep the source order
+meaningful because the ordered list also conveys the sequence.
+
+## See
+
+- [Bootstrap 6 Stepper documentation](https://getbootstrap.com/docs/6.0/components/stepper/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/stepper.tsx)

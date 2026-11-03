@@ -10,6 +10,8 @@ import { DemoContainer } from '../demo-container';
 
 `Badge` renders a compact label that scales with its surrounding text.
 
+## Example
+
 <DemoContainer>
   <Badge theme='primary'>New</Badge>{' '}
   <Badge theme='success' variant='subtle'>
@@ -20,10 +22,35 @@ import { DemoContainer } from '../demo-container';
   </Badge>
 </DemoContainer>
 
+## Variants
+
 ```tsx
 <Badge theme='primary' variant='outline' size='lg'>
   New
 </Badge>
+```
+
+## In buttons
+
+Use nearby text to make a badge's meaning clear to assistive technology.
+
+```tsx
+<Button variant='solid' theme='primary'>
+  Notifications <Badge theme='danger'>4</Badge>
+</Button>
+```
+
+## Positioned indicators
+
+Combine positioning utilities with a badge to place a count on a button.
+
+```tsx
+<Button variant='solid' theme='primary' className='position-relative'>
+  Inbox
+  <Badge theme='danger' className='position-absolute top-0 start-100 translate-middle'>
+    4
+  </Badge>
+</Button>
 ```
 
 ## API
@@ -35,3 +62,14 @@ import { DemoContainer } from '../demo-container';
 | `theme`     | Bootstrap theme literal            | Sets contextual colors.                        |
 | `component` | `ElementType`                      | Changes the root element.                      |
 | `...props`  | `BoxProps<C>`                      | Native props and all Box utility props.        |
+
+## Accessibility
+
+Badges do not add meaning beyond their text. Include context in the surrounding
+label (for example, “Notifications 4”) and do not communicate status by color
+alone.
+
+## See
+
+- [Bootstrap 6 Badge documentation](https://getbootstrap.com/docs/6.0/components/badge/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/badge.tsx)

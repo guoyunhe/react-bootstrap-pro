@@ -11,6 +11,8 @@ import { DemoContainer } from '../demo-container';
 `Menu` provides the popup menu classes. Use the Bootstrap JavaScript bundle to
 position, toggle, and manage keyboard interaction.
 
+## Example
+
 <DemoContainer>
   <Menu show>
     <MenuHeader>Actions</MenuHeader>
@@ -19,6 +21,39 @@ position, toggle, and manage keyboard interaction.
     <MenuItem href='/archive'>Archive</MenuItem>
   </Menu>
 </DemoContainer>
+
+```tsx
+<button type='button' data-bs-toggle='menu' aria-expanded='false'>
+  Actions
+</button>
+<Menu>
+  <MenuHeader>Actions</MenuHeader>
+  <MenuItem href='/edit'>Edit</MenuItem>
+  <MenuDivider />
+  <MenuItem href='/archive'>Archive</MenuItem>
+</Menu>
+```
+
+## Translucent
+
+Set `translucent` to apply the translucent surface treatment.
+
+```tsx
+<Menu show translucent>
+  <MenuItem href='/settings'>Settings</MenuItem>
+</Menu>
+```
+
+## Scrollable
+
+Use `scrollable` when a menu may exceed the available height.
+
+```tsx
+<Menu show scrollable>
+  <MenuItem href='/first'>First action</MenuItem>
+  <MenuItem href='/second'>Second action</MenuItem>
+</Menu>
+```
 
 ## API
 
@@ -31,3 +66,14 @@ position, toggle, and manage keyboard interaction.
 | `...props`    | `BoxProps<C>` | Native props and all Box utility props.            |
 
 `MenuItem`, `MenuHeader`, `MenuDivider`, and `MenuText` provide menu structure.
+
+## Accessibility
+
+Use a button as the toggle when possible and keep its `aria-expanded` value in
+sync with the menu. Ensure the menu items have meaningful link or button
+semantics.
+
+## See
+
+- [Bootstrap 6 Menu documentation](https://getbootstrap.com/docs/6.0/components/menu/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/menu.tsx)

@@ -8,7 +8,10 @@ import { DemoContainer } from '../demo-container';
 
 # Avatar
 
-`Avatar` displays initials or groups an image and optional status indicator.
+Bootstrap does not include an avatar component; `Avatar` is a library extension
+for displaying initials or grouping an image and optional status indicator.
+
+## Example
 
 <DemoContainer>
   <Avatar size='lg' theme='primary'>
@@ -19,6 +22,18 @@ import { DemoContainer } from '../demo-container';
     <AvatarImage src='https://example.com/avatar.png' alt='Alex Brown' />
   </Avatar>
 </DemoContainer>
+
+```tsx
+<Avatar size='lg' theme='primary'>
+  AB
+  <AvatarStatus status='online' />
+</Avatar>
+<Avatar size='lg'>
+  <AvatarImage src='/images/alex-brown.png' alt='Alex Brown' />
+</Avatar>
+```
+
+## Variants
 
 ```tsx
 <Avatar size='sm' subtle theme='accent'>
@@ -37,3 +52,13 @@ import { DemoContainer } from '../demo-container';
 
 `AvatarImage`, `AvatarStatus`, and `AvatarStack` provide image, status, and
 overlapping-stack classes.
+
+## Accessibility
+
+Give each avatar image meaningful alternative text. If initials or a status
+indicator convey information, provide an accessible name and do not rely on
+color alone.
+
+## See
+
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/avatar.tsx)

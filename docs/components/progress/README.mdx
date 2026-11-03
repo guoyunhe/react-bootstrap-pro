@@ -11,11 +11,15 @@ import { DemoContainer } from '../demo-container';
 `Progress` provides the accessible progressbar wrapper. Supply an accessible
 `label`; `ProgressBar` maps its value to a percentage width.
 
+## Example
+
 <DemoContainer>
   <Progress label='Upload' value={65}>
     <ProgressBar value={65}>65%</ProgressBar>
   </Progress>
 </DemoContainer>
+
+## Striped and animated
 
 ```tsx
 <Progress label='Upload' value={current} max={total}>
@@ -33,3 +37,13 @@ import { DemoContainer } from '../demo-container';
 | `ProgressBar.value` / `max`        | `number`      | Sets the bar width as a percentage.       |
 | `ProgressBar.striped` / `animated` | `boolean`     | Enables stripes or animation.             |
 | `...props`                         | `BoxProps<C>` | Native props and all Box utility props.   |
+
+## Accessibility
+
+Keep the wrapper's accessible name and value range accurate as progress
+changes. Do not rely on animation or color alone to communicate completion.
+
+## See
+
+- [Bootstrap 6 Progress documentation](https://getbootstrap.com/docs/6.0/components/progress/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/progress.tsx)

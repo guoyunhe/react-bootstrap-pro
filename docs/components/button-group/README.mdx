@@ -11,6 +11,8 @@ import { DemoContainer } from '../demo-container';
 `ButtonGroup` groups related actions and defaults to `role="group"`.
 Give each group an accessible name with `aria-label` or `aria-labelledby`.
 
+## Example
+
 <DemoContainer>
   <ButtonGroup aria-label='Text alignment'>
     <Button variant='outline' theme='secondary'>
@@ -25,6 +27,8 @@ Give each group an accessible name with `aria-label` or `aria-labelledby`.
   </ButtonGroup>
 </DemoContainer>
 
+## Toolbar
+
 ```tsx
 <ButtonToolbar aria-label='Editor actions'>
   <ButtonGroup aria-label='History' size='sm'>
@@ -36,6 +40,22 @@ Give each group an accessible name with `aria-label` or `aria-labelledby`.
 </ButtonToolbar>
 ```
 
+## Vertical groups and links
+
+Use `orientation='vertical'` for stacked controls. Groups can also contain
+links when the items navigate rather than perform actions.
+
+```tsx
+<ButtonGroup orientation='vertical' aria-label='View options'>
+  <Button component='a' href='/list' variant='outline' theme='secondary'>
+    List
+  </Button>
+  <Button component='a' href='/grid' variant='outline' theme='secondary'>
+    Grid
+  </Button>
+</ButtonGroup>
+```
+
 ## API
 
 | Prop          | Type                         | Description                             |
@@ -45,3 +65,13 @@ Give each group an accessible name with `aria-label` or `aria-labelledby`.
 | `size`        | `'sm' \| 'lg'`               | Applies button-group sizing.            |
 | `component`   | `ElementType`                | Changes the root element.               |
 | `...props`    | `BoxProps<C>`                | Native props and all Box utility props. |
+
+## Accessibility
+
+Give each group and toolbar an accessible name. Use native buttons for actions
+and links for navigation.
+
+## See
+
+- [Bootstrap 6 Button group documentation](https://getbootstrap.com/docs/6.0/components/button-group/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/button-group.tsx)

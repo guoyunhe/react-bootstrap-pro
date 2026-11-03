@@ -11,12 +11,30 @@ import { DemoContainer } from '../demo-container';
 `Placeholder` renders a loading skeleton. Put placeholders inside a
 `PlaceholderGroup` to apply the pulse, glow, or wave animation.
 
+## Example
+
 <DemoContainer>
   <PlaceholderGroup animation='wave'>
     <Placeholder className='w-50' />
     <Placeholder className='w-75' />
   </PlaceholderGroup>
 </DemoContainer>
+
+```tsx
+<PlaceholderGroup animation='wave' aria-hidden='true'>
+  <Placeholder className='w-50' />
+  <Placeholder className='w-75' />
+</PlaceholderGroup>
+```
+
+## Sizing
+
+Use the width utilities to match placeholder proportions to the content they
+replace; `size` changes their height.
+
+```tsx
+<Placeholder size='lg' className='w-50' />
+```
 
 ## API
 
@@ -29,3 +47,14 @@ import { DemoContainer } from '../demo-container';
 
 Placeholders are presentational. Toggle the real content and skeleton visibility
 in your application, and use `aria-hidden` where appropriate.
+
+## Accessibility
+
+Hide decorative skeletons from assistive technology and announce loading state
+or updated content separately. Replace the placeholder when real content is
+available.
+
+## See
+
+- [Bootstrap 6 Placeholder documentation](https://getbootstrap.com/docs/6.0/components/placeholder/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/placeholder.tsx)

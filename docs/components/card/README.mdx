@@ -11,6 +11,8 @@ import { DemoContainer } from '../demo-container';
 `Card` is a flexible content container. Use its subcomponents to add a header,
 body, footer, or image while keeping semantic element choice in your control.
 
+## Example
+
 <DemoContainer>
   <Card style={{ maxWidth: 320 }}>
     <CardHeader>Featured</CardHeader>
@@ -24,6 +26,33 @@ body, footer, or image while keeping semantic element choice in your control.
   </Card>
 </DemoContainer>
 
+```tsx
+<Card style={{ maxWidth: 320 }}>
+  <CardHeader>Featured</CardHeader>
+  <CardBody>
+    <CardTitle>Card title</CardTitle>
+    <p>Card content goes here.</p>
+    <Button variant='solid' theme='primary'>
+      Continue
+    </Button>
+  </CardBody>
+</Card>
+```
+
+## Images
+
+Use `CardImage` for a card image and provide appropriate alternative text.
+
+```tsx
+<Card>
+  <CardImage src='/images/feature.png' alt='Product feature' />
+  <CardBody>
+    <CardTitle>Feature</CardTitle>
+    <p>Supporting content.</p>
+  </CardBody>
+</Card>
+```
+
 ## API
 
 | Prop        | Type                        | Description                             |
@@ -34,3 +63,14 @@ body, footer, or image while keeping semantic element choice in your control.
 
 `CardHeader`, `CardBody`, `CardFooter`, `CardTitle`, `CardSubtitle`, `CardText`,
 `CardImage`, and `CardImageOverlay` provide the corresponding structural classes.
+
+## Accessibility
+
+Choose a meaningful root element such as `article` or `section` when the card
+represents a standalone piece of content. Images that convey information need
+useful alternative text.
+
+## See
+
+- [Bootstrap 6 Card documentation](https://getbootstrap.com/docs/6.0/components/card/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/card.tsx)

@@ -12,6 +12,8 @@ import { DemoContainer } from '../demo-container';
 plugin or the native `showModal()` API to open a modal dialog; an `open`
 attribute alone is non-modal.
 
+## Example
+
 <DemoContainer>
   <Dialog open size='sm'>
     <DialogHeader>
@@ -21,6 +23,21 @@ attribute alone is non-modal.
     <DialogBody>Dialog content</DialogBody>
   </Dialog>
 </DemoContainer>
+
+```tsx
+<Dialog open size='sm' aria-labelledby='dialog-title'>
+  <DialogHeader>
+    <DialogTitle id='dialog-title'>Dialog title</DialogTitle>
+    <CloseButton />
+  </DialogHeader>
+  <DialogBody>Dialog content</DialogBody>
+</Dialog>
+```
+
+## Modal behavior
+
+Use `showModal()` or Bootstrap's dialog plugin for modal focus and backdrop
+behavior. The `open` attribute alone only opens the native dialog non-modally.
 
 ## API
 
@@ -36,3 +53,14 @@ attribute alone is non-modal.
 
 `DialogHeader`, `DialogTitle`, `DialogBody`, and `DialogFooter` provide the
 corresponding structural classes.
+
+## Accessibility
+
+Associate the dialog with a visible title using `aria-labelledby`, and provide
+a clear way to close it. Native modal dialogs manage focus when opened with
+`showModal()`.
+
+## See
+
+- [Bootstrap 6 Dialog documentation](https://getbootstrap.com/docs/6.0/components/dialog/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/dialog.tsx)

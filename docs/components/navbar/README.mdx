@@ -4,6 +4,11 @@ title: Navbar
 
 import 'bootstrap/dist/css/bootstrap.css';
 import {
+  CloseButton,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerTitle,
   Navbar,
   NavbarBrand,
   NavbarNav,
@@ -19,19 +24,65 @@ import { DemoContainer } from '../demo-container';
 and toggler subcomponents; use the Bootstrap drawer plugin for responsive
 off-canvas navigation.
 
+## Example
+
 <DemoContainer>
   <Navbar expand='md'>
     <NavbarBrand href='/'>Acme</NavbarBrand>
-    <NavbarToggler aria-controls='primary-nav' />
-    <NavbarNav id='primary-nav'>
-      <NavItem>
-        <NavLink href='/' active>
-          Home
-        </NavLink>
-      </NavItem>
-    </NavbarNav>
+    <NavbarToggler
+      aria-controls='primary-nav'
+      data-bs-toggle='drawer'
+      data-bs-target='#primary-nav'
+    />
+    <Drawer id='primary-nav' placement='end' aria-labelledby='primary-nav-title'>
+      <DrawerHeader>
+        <DrawerTitle id='primary-nav-title'>Navigation</DrawerTitle>
+        <CloseButton data-bs-dismiss='drawer' />
+      </DrawerHeader>
+      <DrawerBody>
+        <NavbarNav>
+          <NavItem>
+            <NavLink href='/' active aria-current='page'>
+              Home
+            </NavLink>
+          </NavItem>
+        </NavbarNav>
+      </DrawerBody>
+    </Drawer>
   </Navbar>
 </DemoContainer>
+
+```tsx
+<Navbar expand='md'>
+  <NavbarBrand href='/'>Acme</NavbarBrand>
+  <NavbarToggler
+    aria-controls='primary-nav'
+    data-bs-toggle='drawer'
+    data-bs-target='#primary-nav'
+  />
+  <Drawer id='primary-nav' placement='end' aria-labelledby='primary-nav-title'>
+    <DrawerHeader>
+      <DrawerTitle id='primary-nav-title'>Navigation</DrawerTitle>
+      <CloseButton data-bs-dismiss='drawer' />
+    </DrawerHeader>
+    <DrawerBody>
+      <NavbarNav>
+        <NavItem>
+          <NavLink href='/' active aria-current='page'>
+            Home
+          </NavLink>
+        </NavItem>
+      </NavbarNav>
+    </DrawerBody>
+  </Drawer>
+</Navbar>
+```
+
+## Responsive behavior
+
+Set `expand` to the breakpoint at which the navbar content expands. At smaller
+widths, connect `NavbarToggler` to the navigation drawer with the matching
+target ID and Bootstrap's drawer data attributes.
 
 ## API
 
@@ -43,4 +94,16 @@ off-canvas navigation.
 
 `NavbarBrand`, `NavbarToggler`, `NavbarNav`, and `NavbarText` cover common
 navbar sections. Connect the toggler to its controlled element with plugin
-attributes.
+attributes. The example uses a drawer element as the responsive controlled
+region, matching the Bootstrap 6 navbar pattern.
+
+## Accessibility
+
+Use a `<nav>` landmark, name the toggler with `aria-label`, and connect it to
+the controlled navigation with `aria-controls`. Expose the current link with
+`aria-current`.
+
+## See
+
+- [Bootstrap 6 Navbar documentation](https://getbootstrap.com/docs/6.0/components/navbar/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/navbar.tsx)

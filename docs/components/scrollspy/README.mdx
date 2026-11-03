@@ -12,13 +12,32 @@ import { DemoContainer } from '../demo-container';
 to a scroll container. The Bootstrap JavaScript bundle updates links as targets
 enter the viewport.
 
+## Example
+
 <DemoContainer>
-  <Scrollspy target='#section-nav' style={{ height: 160, overflowY: 'auto' }}>
+  <nav id='section-nav' aria-label='Section navigation'>
+    <a href='#section-one'>Section one</a> <a href='#section-two'>Section two</a>
+  </nav>
+  <Scrollspy target='#section-nav' tabIndex={0} style={{ height: 160, overflowY: 'auto' }}>
     <h4 id='section-one'>Section one</h4>
-    <p>Scrollable content</p>
+    <p>Scrollable content with enough space to demonstrate section tracking.</p>
     <h4 id='section-two'>Section two</h4>
+    <p>More content in the second section.</p>
   </Scrollspy>
 </DemoContainer>
+
+```tsx
+<nav id='section-nav' aria-label='Section navigation'>
+  <a href='#section-one'>Section one</a>
+  <a href='#section-two'>Section two</a>
+</nav>
+<Scrollspy target='#section-nav' tabIndex={0} style={{ height: 160, overflowY: 'auto' }}>
+  <h4 id='section-one'>Section one</h4>
+  <p>First section content.</p>
+  <h4 id='section-two'>Section two</h4>
+  <p>Second section content.</p>
+</Scrollspy>
+```
 
 ## API
 
@@ -30,3 +49,13 @@ enter the viewport.
 
 Make the scroll area keyboard-accessible and ensure each navigation hash points
 to an element with a matching `id`.
+
+## Accessibility
+
+Provide a focusable scroll container when it has no focusable descendants, and
+ensure each navigation link has a matching target ID.
+
+## See
+
+- [Bootstrap 6 Scrollspy documentation](https://getbootstrap.com/docs/6.0/components/scrollspy/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/scrollspy.tsx)

@@ -12,6 +12,8 @@ import { DemoContainer } from '../demo-container';
 JavaScript bundle measures the wrapper and moves items that do not fit into a
 “More” menu.
 
+## Example
+
 <DemoContainer>
   <NavOverflow>
     <Nav>
@@ -25,6 +27,22 @@ JavaScript bundle measures the wrapper and moves items that do not fit into a
   </NavOverflow>
 </DemoContainer>
 
+```tsx
+<NavOverflow>
+  <Nav variant='pills'>
+    <NavItem>
+      <NavLink href='/one'>One</NavLink>
+    </NavItem>
+    <NavItem>
+      <NavLink href='/two'>Two</NavLink>
+    </NavItem>
+    <NavItem>
+      <NavLink href='/three'>Three</NavLink>
+    </NavItem>
+  </Nav>
+</NavOverflow>
+```
+
 ## API
 
 | Prop        | Type          | Description                             |
@@ -35,3 +53,14 @@ JavaScript bundle measures the wrapper and moves items that do not fit into a
 
 The component adds `data-bs-toggle="nav-overflow"` automatically. Use
 `NavOverflowItem` and `NavOverflowIcon` for custom overflow-menu markup.
+
+## Accessibility
+
+Keep the navigation links usable at every container width, and mark the active
+destination with `aria-current`. The overflow menu is managed by Bootstrap's
+JavaScript plugin.
+
+## See
+
+- [Bootstrap 6 Nav overflow documentation](https://getbootstrap.com/docs/6.0/components/nav-overflow/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/nav-overflow.tsx)

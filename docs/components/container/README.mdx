@@ -13,7 +13,9 @@ import { ContainerTypesDemo } from './demos/container-types';
 container classes. Import Bootstrap's stylesheet once in your application
 before using the component.
 
-## Container types
+## Example
+
+### Container types
 
 The default container changes its `max-width` at each breakpoint. Set `fluid` to
 make it full width, or pass a breakpoint to keep it full width until that
@@ -29,7 +31,7 @@ breakpoint.
 <Container fluid='md'>Full width until the medium breakpoint</Container>
 ```
 
-## Responsive widths
+### Responsive widths
 
 Bootstrap 6 uses a 100% width below the given breakpoint, then applies the
 container's responsive `max-width`:
@@ -44,9 +46,7 @@ container's responsive `max-width`:
 | `.2xl:container`   |                       100% |              100% |               100% |               100% |                 100% |                1440px |
 | `.container-fluid` |                       100% |              100% |               100% |               100% |                 100% |                  100% |
 
-Breakpoint widths follow Bootstrap 6's defaults. Refer to the Bootstrap
-[container documentation](https://getbootstrap.com/docs/6.0/layout/containers/)
-for Sass customization details.
+Breakpoint widths follow Bootstrap 6's defaults.
 
 ## API
 
@@ -59,3 +59,13 @@ for Sass customization details.
 
 `Container` extends `BoxProps`, so `bg`, `fg`, `theme`, `colorScheme`, and the
 other [`Box`](../box/) utility props can be set directly on the container.
+
+## Accessibility
+
+Choose a semantic element for the content inside the container; the wrapper
+does not create a landmark by itself.
+
+## See
+
+- [Bootstrap 6 Containers documentation](https://getbootstrap.com/docs/6.0/layout/containers/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/container.tsx)

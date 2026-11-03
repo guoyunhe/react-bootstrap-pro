@@ -20,6 +20,8 @@ import { DemoContainer } from '../demo-container';
 The Bootstrap JavaScript bundle is required for previous/next controls,
 indicators, and autoplay.
 
+## Example
+
 <DemoContainer>
   <Carousel id='features' overlay>
     <CarouselInner>
@@ -37,6 +39,53 @@ indicators, and autoplay.
   </Carousel>
 </DemoContainer>
 
+```tsx
+<Carousel id='features' overlay>
+  <CarouselInner>
+    <CarouselItem active>First slide</CarouselItem>
+    <CarouselItem>Second slide</CarouselItem>
+  </CarouselInner>
+  <CarouselOverlayControls>
+    <CarouselControl target='#features' direction='previous' />
+    <CarouselIndicators>
+      <CarouselIndicator target='#features' index={0} active />
+      <CarouselIndicator target='#features' index={1} />
+    </CarouselIndicators>
+    <CarouselControl target='#features' direction='next' />
+  </CarouselOverlayControls>
+</Carousel>
+```
+
+## Modifiers
+
+`auto` fits slides to their own widths, `center` centers snap positions, and
+`fade` switches to the stacked fade presentation.
+
+```tsx
+<Carousel fade>
+  <CarouselInner>
+    <CarouselItem active>Featured content</CarouselItem>
+    <CarouselItem>More content</CarouselItem>
+  </CarouselInner>
+</Carousel>
+```
+
+## Autoplay
+
+Use Bootstrap's `data-bs-autoplay` option to enable autoplay. Provide controls
+so users can pause or navigate the slides.
+
+```tsx
+<Carousel id='announcements' data-bs-autoplay='true'>
+  <CarouselInner>
+    <CarouselItem active>Announcement one</CarouselItem>
+    <CarouselItem>Announcement two</CarouselItem>
+  </CarouselInner>
+  <CarouselControl target='#announcements' direction='previous' />
+  <CarouselControl target='#announcements' direction='next' />
+</Carousel>
+```
+
 ## API
 
 | Prop        | Type          | Description                             |
@@ -53,3 +102,14 @@ Use `CarouselInner` and `CarouselItem` for the scroll viewport and slides.
 the carousel `id`; controls also accept `direction`, `size`, and `variant`, while
 indicators accept `index` and `active`. `CarouselOverlayControls` positions
 controls over the slides.
+
+## Accessibility
+
+Give controls and indicators accessible names, set exactly one initial slide
+active, and provide alternative text for informative images. Avoid autoplay
+when users cannot pause or stop it.
+
+## See
+
+- [Bootstrap 6 Carousel documentation](https://getbootstrap.com/docs/6.0/components/carousel/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/carousel.tsx)

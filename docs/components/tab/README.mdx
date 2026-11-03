@@ -12,6 +12,8 @@ import { DemoContainer } from '../demo-container';
 relationships. Use the Bootstrap JavaScript bundle to switch tabs and update
 their active state.
 
+## Example
+
 <DemoContainer>
   <TabList aria-label='Example tabs'>
     <TabItem>
@@ -35,6 +37,11 @@ their active state.
   </TabContent>
 </DemoContainer>
 
+## Connect triggers and panels
+
+Each trigger's `targetId` must match its panel `id`; the panel should label
+itself with the corresponding trigger ID.
+
 ## API
 
 | Component prop   | Type          | Description                                   |
@@ -45,3 +52,14 @@ their active state.
 | `TabPane.active` | `boolean`     | Shows the panel and removes its hidden state. |
 | `component`      | `ElementType` | Changes the rendered element.                 |
 | `...props`       | `BoxProps<C>` | Native props and all Box utility props.       |
+
+## Accessibility
+
+Keep `aria-controls`, `aria-labelledby`, `aria-selected`, and the active panel
+state in sync. Use tabs for switching in-page panels, not for ordinary page
+navigation.
+
+## See
+
+- [Bootstrap 6 Tab documentation](https://getbootstrap.com/docs/6.0/components/tab/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/tab.tsx)

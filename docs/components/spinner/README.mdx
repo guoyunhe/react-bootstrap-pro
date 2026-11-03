@@ -11,10 +11,14 @@ import { DemoContainer } from '../demo-container';
 `Spinner` renders a CSS-only loading indicator and defaults to
 `role="status"` with an accessible label.
 
+## Example
+
 <DemoContainer>
   <Spinner label='Loading results' />
   <Spinner variant='grow' size='sm' label='Saving' />
 </DemoContainer>
+
+## Variants and sizes
 
 ```tsx
 <Spinner variant='border' size='sm' label='Loading' />
@@ -31,3 +35,14 @@ import { DemoContainer } from '../demo-container';
 | `...props`  | `BoxProps<C>`                    | Native props and all Box utility props.     |
 
 Spinners use `currentColor`; use Box foreground utilities to change their color.
+
+## Accessibility
+
+Provide a concise accessible label for the loading status. Hide the visual
+indicator from assistive technology when a separate status message already
+announces the same information.
+
+## See
+
+- [Bootstrap 6 Spinner documentation](https://getbootstrap.com/docs/6.0/components/spinner/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/spinner.tsx)

@@ -8,15 +8,45 @@ import { DemoContainer } from '../demo-container';
 
 # Tooltip
 
-`Tooltip` provides the styled tooltip surface. The Bootstrap JavaScript bundle
-creates and positions tooltips; do not rely on hover-only content to convey
-essential information.
+`Tooltip` provides the styled tooltip surface. Its `show` prop controls the
+rendered surface; Bootstrap's JavaScript plugin creates and positions tooltips
+from trigger elements. Do not rely on hover-only content to convey essential
+information.
+
+## Example
 
 <DemoContainer>
   <Tooltip show>
     <TooltipInner>Helpful context</TooltipInner>
   </Tooltip>
 </DemoContainer>
+
+```tsx
+<Tooltip show placement='top'>
+  <TooltipInner>Helpful context</TooltipInner>
+</Tooltip>
+```
+
+## Placement
+
+Set `placement` to `top`, `end`, `bottom`, or `start`.
+
+```tsx
+<Tooltip show placement='end'>
+  <TooltipInner>More information</TooltipInner>
+</Tooltip>
+```
+
+## Plugin trigger
+
+For Bootstrap-managed tooltips, initialize a native trigger with a title. The
+plugin creates and positions its own tooltip surface.
+
+```tsx
+<button type='button' data-bs-toggle='tooltip' data-bs-title='Helpful context'>
+  More information
+</button>
+```
 
 ## API
 
@@ -30,3 +60,13 @@ essential information.
 
 `TooltipInner` applies the inner text styling. Provide trigger text through
 Bootstrap's supported title attributes when using the plugin.
+
+## Accessibility
+
+Keep essential instructions available without a tooltip, support keyboard
+focus on its trigger, and make the trigger's accessible name clear.
+
+## See
+
+- [Bootstrap 6 Tooltip documentation](https://getbootstrap.com/docs/6.0/components/tooltip/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/tooltip.tsx)

@@ -21,6 +21,14 @@ the same props, so utilities work the same way everywhere.
 Import Bootstrap's stylesheet once in your application before using the
 component.
 
+## Example
+
+```tsx
+<Box bg='primary' fgContrast='primary' p={3}>
+  Content
+</Box>
+```
+
 ## Component
 
 Use `component` to choose the element or React component to render. It defaults
@@ -338,6 +346,15 @@ breakpoints use classes such as `.md:d-none`. Numeric values are shown as
 by the corresponding Bootstrap utilities. `Box`, `BoxProps`, and all Box utility
 types are exported from the package entry point. The props cover every
 class-producing utility page in Bootstrap's Utilities sidebar; `api` is
-documentation about Sass rather than a class utility. See the Bootstrap
-[Utilities documentation](https://getbootstrap.com/docs/6.0/utilities/) for
-details and examples.
+documentation about Sass rather than a class utility.
+
+## Accessibility
+
+Choose an element whose semantics match its content. `Box` only renders an
+element with utility classes; it does not add interactive behavior or ARIA
+semantics.
+
+## See
+
+- [Bootstrap 6 Utilities documentation](https://getbootstrap.com/docs/6.0/utilities/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/box.tsx)

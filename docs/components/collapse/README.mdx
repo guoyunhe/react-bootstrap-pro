@@ -11,6 +11,8 @@ import { DemoContainer } from '../demo-container';
 `Collapse` provides the `.collapse` panel classes. Control the `show` prop from
 React, or use Bootstrap's JavaScript plugin and matching `data-bs-*` attributes.
 
+## Example
+
 <DemoContainer>
   <Collapse show>Collapsible content</Collapse>
 </DemoContainer>
@@ -21,6 +23,23 @@ React, or use Bootstrap's JavaScript plugin and matching `data-bs-*` attributes.
 </Collapse>
 ```
 
+## Trigger
+
+Connect a button to the panel with matching IDs when using Bootstrap's plugin.
+
+```tsx
+<button
+  type='button'
+  data-bs-toggle='collapse'
+  data-bs-target='#details'
+  aria-expanded='false'
+  aria-controls='details'
+>
+  Toggle details
+</button>
+<Collapse id='details'>Details</Collapse>
+```
+
 ## API
 
 | Prop         | Type          | Description                             |
@@ -29,3 +48,14 @@ React, or use Bootstrap's JavaScript plugin and matching `data-bs-*` attributes.
 | `horizontal` | `boolean`     | Uses the horizontal collapse modifier.  |
 | `component`  | `ElementType` | Changes the root element.               |
 | `...props`   | `BoxProps<C>` | Native props and all Box utility props. |
+
+## Accessibility
+
+Keep `aria-expanded` in sync with the panel state and connect the trigger to the
+panel using `aria-controls`. Horizontal collapse also needs a width on its
+immediate child.
+
+## See
+
+- [Bootstrap 6 Collapse documentation](https://getbootstrap.com/docs/6.0/components/collapse/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/collapse.tsx)

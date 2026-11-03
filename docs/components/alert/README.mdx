@@ -12,13 +12,53 @@ import { DemoContainer } from '../demo-container';
 `role="alert"`. Dismissal requires the Bootstrap JavaScript plugin and a
 `CloseButton`.
 
+## Example
+
 <DemoContainer>
   <Alert theme='success'>Your changes have been saved.</Alert>
 </DemoContainer>
 
 ```tsx
+<Alert theme='success' role='status'>
+  Your changes have been saved.
+</Alert>
+```
+
+## Variants
+
+```tsx
 <Alert theme='warning' instant>
   Check the information before continuing.
+</Alert>
+```
+
+## Links and additional content
+
+Alerts can include links and structured content; keep related content grouped
+inside the alert.
+
+```tsx
+<Alert theme='info'>
+  <h2 className='alert-heading'>Heads up</h2>
+  <p>
+    Read the{' '}
+    <a href='/guide' className='alert-link'>
+      updated guide
+    </a>{' '}
+    before continuing.
+  </p>
+</Alert>
+```
+
+## Dismiss
+
+Pass Bootstrap's dismiss data attribute to a close button to enable plugin
+dismissal.
+
+```tsx
+<Alert theme='warning'>
+  <span>Check the information before continuing.</span>
+  <CloseButton data-bs-dismiss='alert' />
 </Alert>
 ```
 
@@ -31,4 +71,13 @@ import { DemoContainer } from '../demo-container';
 | `component` | `ElementType`           | Changes the root element.               |
 | `...props`  | `BoxProps<C>`           | Native props and all Box utility props. |
 
+## Accessibility
+
+Use the default `role='alert'` for urgent, dynamically announced content.
+For non-urgent updates, choose a less disruptive role such as `status`.
 Color is supplementary; keep the alert's meaning in its text.
+
+## See
+
+- [Bootstrap 6 Alert documentation](https://getbootstrap.com/docs/6.0/components/alert/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/alert.tsx)

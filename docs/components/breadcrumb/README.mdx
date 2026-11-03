@@ -11,6 +11,8 @@ import { DemoContainer } from '../demo-container';
 Use an accessible navigation landmark around `Breadcrumb`. Its item, link, and
 divider components render the expected list semantics.
 
+## Example
+
 <DemoContainer>
   <nav aria-label='Breadcrumb'>
     <Breadcrumb>
@@ -27,6 +29,30 @@ divider components render the expected list semantics.
   </nav>
 </DemoContainer>
 
+```tsx
+<nav aria-label='Breadcrumb'>
+  <Breadcrumb>
+    <BreadcrumbItem>
+      <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbDivider />
+    <BreadcrumbItem aria-current='page'>
+      <BreadcrumbLink href='/docs' active>
+        Docs
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+  </Breadcrumb>
+</nav>
+```
+
+## Custom divider
+
+`BreadcrumbDivider` can contain custom content instead of the default chevron.
+
+```tsx
+<BreadcrumbDivider aria-hidden='true'>/</BreadcrumbDivider>
+```
+
 ## API
 
 | Component           | Purpose                                                             |
@@ -36,3 +62,13 @@ divider components render the expected list semantics.
 | `BreadcrumbLink`    | Link with optional `active` state.                                  |
 | `BreadcrumbDivider` | Empty list item that displays the CSS chevron.                      |
 | `...props`          | Every component supports `component`, native props, and `BoxProps`. |
+
+## Accessibility
+
+Label the surrounding navigation landmark and mark the current page with
+`aria-current='page'`.
+
+## See
+
+- [Bootstrap 6 Breadcrumb documentation](https://getbootstrap.com/docs/6.0/components/breadcrumb/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/breadcrumb.tsx)
