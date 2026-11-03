@@ -1,4 +1,4 @@
-export { Box } from './box';
+export { Box } from './components/index';
 export type {
   BoxAlignContent,
   BoxAlignItems,
@@ -62,12 +62,12 @@ export type {
   BoxVisibility,
   BoxWidth,
   BoxZIndex,
-} from './box';
-export { Button } from './button';
-export type { ButtonProps, ButtonTheme, ButtonVariant } from './button';
-export { Container } from './container';
-export type { ContainerBreakpoint, ContainerProps } from './container';
-export { Col, Row } from './grid';
+} from './components/index';
+export { Button } from './components/index';
+export type { ButtonProps, ButtonTheme, ButtonVariant } from './components/index';
+export { Container } from './components/index';
+export type { ContainerBreakpoint, ContainerProps } from './components/index';
+export { Col, Row } from './components/index';
 export type {
   ColProps,
   GridAlignItems,
@@ -78,7 +78,7 @@ export type {
   GridResponsive,
   GridSpan,
   RowProps,
-} from './grid';
+} from './components/index';
 export {
   Accordion,
   AccordionBody,
@@ -170,7 +170,7 @@ export {
   Tooltip,
   TooltipInner,
   Toggler,
-} from './components';
+} from './components/index';
 export type {
   AccordionBodyProps,
   AccordionHeaderProps,
@@ -262,4 +262,4 @@ export type {
   TooltipInnerProps,
   TooltipProps,
   TogglerProps,
-} from './components';
+} from './components/index';
