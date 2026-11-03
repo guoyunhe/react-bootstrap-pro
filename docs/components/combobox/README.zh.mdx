@@ -1,0 +1,152 @@
+---
+title: Combobox 组合框
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { ComboboxBasicDemo } from './demos/basic';
+import { ComboboxCustomDemo } from './demos/custom';
+import { ComboboxGroupsDemo } from './demos/groups';
+import { ComboboxMultipleDemo } from './demos/multiple';
+import { ComboboxSearchDemo } from './demos/search';
+import { ComboboxSizingDemo } from './demos/sizing';
+
+# Combobox 组合框
+
+`Combobox` 由 `.form-control` 切换按钮与 `.menu` 浮层组成一个样式化下拉选择框。选项
+可以包含图标、描述以及任意 React 内容。选择、搜索、分组、多选、键盘导航与用于表单
+提交的隐藏输入都由 React 实现，无需加载 Bootstrap JavaScript 插件。
+
+## 示例
+
+<DemoContainer>
+  <ComboboxBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+用 `placeholder` 设置空状态文本，`defaultValue`（或受控的 `value`）设置初始选中项。
+将组件放入 `FormField` 即可与标签和描述文本组合。
+
+## 自定义内容
+
+选项支持 `icon` 前缀图标与 `description` 次要文本；设置 `check` 会在选中项上显示勾选
+图标。
+
+<DemoContainer>
+  <ComboboxCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom.tsx'
+
+```
+
+## 搜索
+
+设置 `search` 会在菜单内渲染搜索框，选项依次按 `text`、字符串 `label`、`value`
+进行匹配。
+
+<DemoContainer>
+  <ComboboxSearchDemo />
+</DemoContainer>
+
+```tsx src='./demos/search.tsx'
+
+```
+
+## 分组
+
+传入 `groups` 会用 `.menu-header` 渲染带标题的分组。
+
+<DemoContainer>
+  <ComboboxGroupsDemo />
+</DemoContainer>
+
+```tsx src='./demos/groups.tsx'
+
+```
+
+## 多选
+
+设置 `multiple` 后点击选项会切换选中状态且菜单保持打开；选中多个选项时，切换按钮会
+显示已选数量。
+
+<DemoContainer>
+  <ComboboxMultipleDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple.tsx'
+
+```
+
+## 尺寸与禁用
+
+`size='sm'` 或 `size='lg'` 调整切换按钮尺寸；`disabled` 禁止交互，单个选项可用
+`disabled: true` 禁用。
+
+<DemoContainer>
+  <ComboboxSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizing.tsx'
+
+```
+
+## 表单提交
+
+设置 `name` 会渲染隐藏输入框：单选时值为选中值，多选时为逗号分隔的值列表。
+
+## API
+
+| 属性                | 类型                                  | 说明                              |
+| ------------------- | ------------------------------------- | --------------------------------- |
+| `options`           | `readonly ComboboxOption[]`           | 平铺选项列表。                    |
+| `groups`            | `readonly ComboboxGroup[]`            | 带标题的选项分组。                |
+| `value`             | `string \| readonly string[]`         | 受控选中值。                      |
+| `defaultValue`      | `string \| readonly string[]`         | 非受控初始选中值。                |
+| `onChange`          | `(value: string \| string[]) => void` | 选中值变化时触发。                |
+| `multiple`          | `boolean`                             | 启用多选。                        |
+| `placeholder`       | `string`                              | 未选中时显示的文本。              |
+| `search`            | `boolean`                             | 在菜单内渲染搜索框。              |
+| `searchPlaceholder` | `string`                              | 搜索框占位文本与可访问名称。      |
+| `noResults`         | `ReactNode`                           | 搜索无结果时显示的内容。          |
+| `check`             | `boolean`                             | 在选中项上渲染勾选图标。          |
+| `name`              | `string`                              | 渲染带有该名称的隐藏输入框。      |
+| `size`              | `'sm' \| 'lg'`                        | 调整切换按钮尺寸。                |
+| `disabled`          | `boolean`                             | 禁用切换按钮。                    |
+| `id`、`aria-*`      |                                       | 透传给切换按钮。                  |
+| `...props`          | `BoxProps<'div'>`                     | 作用于外层容器的 Box 工具类属性。 |
+
+### ComboboxOption
+
+| 字段          | 类型        | 说明                         |
+| ------------- | ----------- | ---------------------------- |
+| `value`       | `string`    | 提交值与选中标识。           |
+| `label`       | `ReactNode` | 菜单与切换按钮中显示的内容。 |
+| `description` | `ReactNode` | 标签下方的次要文本。         |
+| `icon`        | `ReactNode` | 前置图标。                   |
+| `disabled`    | `boolean`   | 禁止选择该选项。             |
+| `text`        | `string`    | 用于搜索匹配的纯文本。       |
+
+## 键盘行为
+
+| 场景   | 按键                | 行为                                |
+| ------ | ------------------- | ----------------------------------- |
+| 切换键 | ArrowDown / ArrowUp | 打开菜单并聚焦第一个/最后一个选项。 |
+| 切换键 | Enter / Space       | 打开菜单。                          |
+| 菜单   | ArrowDown / ArrowUp | 在选项间移动焦点。                  |
+| 菜单   | Home / End          | 聚焦第一个或最后一个选项。          |
+| 菜单   | Enter / Space       | 选中当前聚焦的选项。                |
+| 菜单   | Escape              | 关闭菜单并聚焦切换键。              |
+| 菜单   | Tab                 | 关闭菜单。                          |
+
+点击组合框外部也会关闭菜单。
+
+## 无障碍
+
+切换按钮带有 `aria-haspopup='listbox'` 与 `aria-expanded`，菜单使用
+`role='listbox'`，每个选项使用 `role='option'` 与 `aria-selected`。禁用的选项带有
+`disabled` 与 `aria-disabled='true'`。使用通过 `htmlFor` 绑定的 `FormLabel` 或
+`aria-label` 命名切换按钮。

@@ -19,6 +19,7 @@ order: 1
 - [Chips](./chips/)
 - [Close button](./close-button/)
 - [Collapse](./collapse/)
+- [Combobox](./combobox/)
 - [Container](./container/)
 - [Dialog](./dialog/)
 - [Drawer](./drawer/)
