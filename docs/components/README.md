@@ -33,6 +33,7 @@ order: 1
 - [Popover](./popover/)
 - [Progress](./progress/)
 - [Radio](./radio/)
+- [Range](./range/)
 - [Scrollspy](./scrollspy/)
 - [Spinner](./spinner/)
 - [Stepper](./stepper/)

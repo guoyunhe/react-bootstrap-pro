@@ -30,6 +30,7 @@ export * from './placeholder';
 export * from './popover';
 export * from './progress';
 export * from './radio';
+export * from './range';
 export * from './scrollspy';
 export * from './spinner';
 export * from './stepper';

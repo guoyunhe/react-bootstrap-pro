@@ -1,0 +1,137 @@
+---
+title: Range
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { RangeBasicDemo } from './demos/basic';
+import { RangeBubbleDemo } from './demos/bubble';
+import { RangeDisabledDemo } from './demos/disabled';
+import { RangeFieldDemo } from './demos/field';
+import { RangeStepsDemo } from './demos/steps';
+import { RangeThemesDemo } from './demos/themes';
+import { RangeTicksDemo } from './demos/ticks';
+
+# Range
+
+Native range inputs cannot show a filled track consistently, because CSS cannot
+read an input's value. `Range` renders the `.form-range` track with an inner
+`.form-range-input` and keeps the `--bs-range-fill` custom property in sync, so
+the fill, value bubble, and tick marks render in every browser. Bootstrap uses a
+JavaScript plugin for this; the component implements the same behavior in React,
+so no plugin is required.
+
+## Overview
+
+<DemoContainer>
+  <RangeBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+`Range` forwards the native range attributes to the input and applies Box
+utility props to the track wrapper. Like native inputs, `min` defaults to `0` and
+`max` to `100`.
+
+## Theme colors
+
+Set `theme` to color the track fill and thumb through `.theme-{color}`.
+
+<DemoContainer>
+  <RangeThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/themes.tsx'
+
+```
+
+## Disabled
+
+Add `disabled` to gray out the range and prevent interaction.
+
+<DemoContainer>
+  <RangeDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## Min, max and steps
+
+Use `min` and `max` to change the value range and `step` to change the snapping
+behavior.
+
+<DemoContainer>
+  <RangeStepsDemo />
+</DemoContainer>
+
+```tsx src='./demos/steps.tsx'
+
+```
+
+## Value bubble
+
+Set `bubble` to show a value bubble above the thumb. Pass `format` to customize
+its label.
+
+<DemoContainer>
+  <RangeBubbleDemo />
+</DemoContainer>
+
+```tsx src='./demos/bubble.tsx'
+
+```
+
+## Tick marks
+
+Pass `ticks` to render a tick for each point, positioned by value and labelled
+from `label`. This is the React equivalent of the datalist markup Bootstrap's
+plugin turns into tick marks.
+
+<DemoContainer>
+  <RangeTicksDemo />
+</DemoContainer>
+
+```tsx src='./demos/ticks.tsx'
+
+```
+
+## With form field
+
+Wrap the range in a `FormField` to pair it with a label and description.
+
+<DemoContainer>
+  <RangeFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/field.tsx'
+
+```
+
+## API
+
+| Prop           | Type                           | Description                                     |
+| -------------- | ------------------------------ | ----------------------------------------------- |
+| `min`          | `number`                       | Minimum value; defaults to `0`.                 |
+| `max`          | `number`                       | Maximum value; defaults to `100`.               |
+| `step`         | `number \| 'any'`              | Snapping increment.                             |
+| `value`        | `number`                       | Controlled value.                               |
+| `defaultValue` | `number`                       | Initial value for uncontrolled usage.           |
+| `disabled`     | `boolean`                      | Disables the input.                             |
+| `bubble`       | `boolean`                      | Shows the value bubble above the thumb.         |
+| `format`       | `(value: number) => string`    | Formats the bubble label.                       |
+| `ticks`        | `readonly { value, label? }[]` | Renders tick marks positioned by value.         |
+| `component`    | `ElementType`                  | Changes the track element; defaults to a `div`. |
+| `...props`     | `BoxProps<C>`                  | Box utility props and remaining native props.   |
+
+Native input attributes such as `id`, `name`, `list`, `required`, `onChange`,
+`onInput`, and `aria-*` are forwarded to the inner input.
+
+## Accessibility
+
+Every range needs an accessible name. Use a visible `FormLabel` bound with
+`htmlFor`, or `aria-label` when no visible label fits. The value bubble is
+decorative (`aria-hidden`), so screen readers announce the input's own value.

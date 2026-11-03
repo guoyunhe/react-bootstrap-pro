@@ -1,0 +1,131 @@
+---
+title: Range 滑块
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { RangeBasicDemo } from './demos/basic';
+import { RangeBubbleDemo } from './demos/bubble';
+import { RangeDisabledDemo } from './demos/disabled';
+import { RangeFieldDemo } from './demos/field';
+import { RangeStepsDemo } from './demos/steps';
+import { RangeThemesDemo } from './demos/themes';
+import { RangeTicksDemo } from './demos/ticks';
+
+# Range 滑块
+
+原生滑块无法在各浏览器中一致地显示已填充轨道，因为 CSS 无法读取输入值。`Range`
+渲染 `.form-range` 轨道与内部的 `.form-range-input`，并同步 `--bs-range-fill`
+自定义属性，因此填充轨道、数值气泡与刻度都能在各浏览器中正常显示。Bootstrap 用
+JavaScript 插件实现该效果，本组件用 React 复刻了相同行为，无需加载插件。
+
+## 基础示例
+
+<DemoContainer>
+  <RangeBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+`Range` 会把原生滑块属性透传给输入框，Box 工具类属性作用于轨道容器。与原生输入
+一致，`min` 默认为 `0`，`max` 默认为 `100`。
+
+## 主题颜色
+
+通过 `theme` 生成 `.theme-{color}`，设置填充轨道与滑块颜色。
+
+<DemoContainer>
+  <RangeThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/themes.tsx'
+
+```
+
+## 禁用状态
+
+添加 `disabled` 使滑块变灰并禁止交互。
+
+<DemoContainer>
+  <RangeDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## 最小、最大值与步长
+
+用 `min`、`max` 调整取值范围，用 `step` 调整吸附步长。
+
+<DemoContainer>
+  <RangeStepsDemo />
+</DemoContainer>
+
+```tsx src='./demos/steps.tsx'
+
+```
+
+## 数值气泡
+
+设置 `bubble` 在滑块上方显示数值气泡；通过 `format` 自定义显示文本。
+
+<DemoContainer>
+  <RangeBubbleDemo />
+</DemoContainer>
+
+```tsx src='./demos/bubble.tsx'
+
+```
+
+## 刻度
+
+传入 `ticks` 会按数值定位渲染每个刻度，并显示 `label`。这相当于 Bootstrap 插件
+把 datalist 转换为刻度的 React 版本。
+
+<DemoContainer>
+  <RangeTicksDemo />
+</DemoContainer>
+
+```tsx src='./demos/ticks.tsx'
+
+```
+
+## 配合 FormField
+
+将滑块放入 `FormField`，即可与标签和描述文本组合。
+
+<DemoContainer>
+  <RangeFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/field.tsx'
+
+```
+
+## API
+
+| 属性           | 类型                           | 说明                           |
+| -------------- | ------------------------------ | ------------------------------ |
+| `min`          | `number`                       | 最小值，默认 `0`。             |
+| `max`          | `number`                       | 最大值，默认 `100`。           |
+| `step`         | `number \| 'any'`              | 吸附步长。                     |
+| `value`        | `number`                       | 受控值。                       |
+| `defaultValue` | `number`                       | 非受控初始值。                 |
+| `disabled`     | `boolean`                      | 禁用输入框。                   |
+| `bubble`       | `boolean`                      | 在滑块上方显示数值气泡。       |
+| `format`       | `(value: number) => string`    | 格式化气泡文本。               |
+| `ticks`        | `readonly { value, label? }[]` | 按数值渲染刻度。               |
+| `component`    | `ElementType`                  | 更换轨道元素，默认 `div`。     |
+| `...props`     | `BoxProps<C>`                  | Box 工具类属性及其余原生属性。 |
+
+原生输入属性（`id`、`name`、`list`、`required`、`onChange`、`onInput`、`aria-*`
+等）会透传给内部输入框。
+
+## 无障碍
+
+每个滑块都需要可访问名称：使用 `htmlFor` 绑定的可见 `FormLabel`，没有可见标签时
+使用 `aria-label`。数值气泡是装饰性的（`aria-hidden`），屏幕阅读器朗读的是输入
+框自身的值。
