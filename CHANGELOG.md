@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0] - 2026-11-04
+
+### Added
+
+- Add `IconButton` for square icon-only buttons.
+- Use `IconButton` for carousel controls.
+
 ## [0.1.0] - 2026-11-04
 
 ### Added
