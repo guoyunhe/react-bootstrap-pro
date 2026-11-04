@@ -1,7 +1,7 @@
 {
   "name": "react-bootstrap-pro",
   "version": "0.0.0",
-  "description": "Bootstrap 6 components for React 18+",
+  "description": "Bootstrap 6 components for React 18+, with TypeScript support.",
   "keywords": [
     "bootstrap",
     "component-library",
