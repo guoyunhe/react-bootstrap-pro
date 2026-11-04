@@ -218,6 +218,7 @@ type BoxOwnProps<C extends ElementType> = {
   themeStyle?: BoxThemeStyle | undefined;
   themeBorder?: boolean | undefined;
   themeReset?: boolean | undefined;
+  focusRing?: boolean | undefined;
   colorScheme?: BoxColorScheme | undefined;
   fg?: BoxFg | undefined;
   fgEmphasis?: BoxTheme | undefined;
@@ -441,6 +442,7 @@ export function Box<C extends ElementType = 'div'>({
   themeStyle,
   themeBorder,
   themeReset,
+  focusRing,
   colorScheme,
   fg,
   fgEmphasis,
@@ -574,6 +576,7 @@ export function Box<C extends ElementType = 'div'>({
     themeStyle && `theme-${themeStyle}`,
     themeBorder && 'theme-border',
     themeReset && 'theme-reset',
+    focusRing && 'focus-ring',
     colorScheme && `color-scheme-${colorScheme}`,
     fg && `fg-${fg}`,
     fgEmphasis && `fg-emphasis-${fgEmphasis}`,

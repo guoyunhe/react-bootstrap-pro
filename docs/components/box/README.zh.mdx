@@ -192,6 +192,17 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 </Box>
 ```
 
+## Focus ring 焦点环
+
+在可聚焦元素上设置 `focusRing`，即可应用 Bootstrap 的 `.focus-ring` 辅助类。使用 `theme`
+或主题工具类可更改焦点环颜色。
+
+```tsx
+<Box component='a' href='/settings' focusRing theme='primary'>
+  可聚焦链接
+</Box>
+```
+
 ## API
 
 | 属性                       | 类型                                                                                                                                                                                     | 默认值  | 说明                                                                       |
@@ -238,6 +249,7 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 | `flexShrink`               | `number`                                                                                                                                                                                 | —       | 添加响应式 `.flex-shrink-*`。                                              |
 | `flexWrap`                 | `'wrap' \| 'nowrap' \| 'wrap-reverse'`                                                                                                                                                   | —       | 添加响应式 `.flex-*` 换行类。                                              |
 | `float`                    | `'start' \| 'end' \| 'none'`                                                                                                                                                             | —       | 添加响应式 `.float-{value}` 类。                                           |
+| `focusRing`                | `boolean`                                                                                                                                                                                | `false` | 在可见焦点状态应用 `.focus-ring`。                                         |
 | `fontFamily`               | `'monospace' \| 'body'`                                                                                                                                                                  | —       | 添加 `.font-*`。                                                           |
 | `fontSize`                 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| '4xl' \| '5xl' \| '6xl'`                                                                                                      | —       | 添加 `.fs-*`。                                                             |
 | `fontStyle`                | `'italic' \| 'normal'`                                                                                                                                                                   | —       | 添加 `.fst-*`。                                                            |

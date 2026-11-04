@@ -24,6 +24,17 @@ test('renders a plain div by default', async () => {
   expect(box.element().getAttribute('class')).toBeNull();
 });
 
+test('applies the focus ring helper', async () => {
+  const screen = await render(
+    <Box component='a' href='#focus-ring' focusRing theme='primary' data-testid='focus-ring'>
+      Focus me
+    </Box>,
+  );
+
+  expect(screen.getByTestId('focus-ring').element().tagName).toBe('A');
+  expect(screen.getByTestId('focus-ring')).toHaveClass('focus-ring', 'theme-primary');
+});
+
 test('applies foreground utilities', async () => {
   const screen = await render(
     <>

@@ -162,6 +162,17 @@ Custom utility classes can still be passed through `className`. They are
 appended after the generated classes, and because Bootstrap utilities share the
 same specificity, the class that appears later in the stylesheet wins.
 
+## Focus ring
+
+Set `focusRing` on a focusable element to apply Bootstrap's `.focus-ring` helper.
+Use `theme` or theme utility classes to change the ring color.
+
+```tsx
+<Box component='a' href='/settings' focusRing theme='primary'>
+  Focusable link
+</Box>
+```
+
 ## API
 
 | Prop                       | Type                                                                                                                                                                                     | Default | Description                                                                   |
@@ -208,6 +219,7 @@ same specificity, the class that appears later in the stylesheet wins.
 | `flexShrink`               | `number`                                                                                                                                                                                 | —       | Applies responsive `.flex-shrink-*`.                                          |
 | `flexWrap`                 | `'wrap' \| 'nowrap' \| 'wrap-reverse'`                                                                                                                                                   | —       | Applies responsive `.flex-*` wrap classes.                                    |
 | `float`                    | `'start' \| 'end' \| 'none'`                                                                                                                                                             | —       | Applies responsive `.float-{value}` classes.                                  |
+| `focusRing`                | `boolean`                                                                                                                                                                                | `false` | Applies `.focus-ring` to visible focus states.                                |
 | `fontFamily`               | `'monospace' \| 'body'`                                                                                                                                                                  | —       | Applies `.font-*`.                                                            |
 | `fontSize`                 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| '4xl' \| '5xl' \| '6xl'`                                                                                                      | —       | Applies `.fs-*`.                                                              |
 | `fontStyle`                | `'italic' \| 'normal'`                                                                                                                                                                   | —       | Applies `.fst-*`.                                                             |
