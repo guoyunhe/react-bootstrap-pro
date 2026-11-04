@@ -2,6 +2,10 @@
 
 ## [0.3.0] - 2026-11-04
 
+### Breaking Changes
+
+- Replace Box `margin*` and `padding*` props with shorthand props; the long names are removed.
+
 ### Added
 
 - Add responsive placement support and expanded demos for Tooltip.
@@ -10,10 +14,6 @@
 ### Changed
 
 - Align Box spacing props with Bootstrap utility shorthand names.
-
-### Breaking Changes
-
-- Replace Box `margin*` and `padding*` props with shorthand props; the long names are removed.
 
 ### Fixed
 
