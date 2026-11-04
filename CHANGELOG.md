@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.3.0] - 2026-11-04
+
+### Added
+
+- Add responsive placement support and expanded demos for Tooltip.
+- Add Floating UI React documentation to the Tooltip reference.
+
+### Changed
+
+- Align Box spacing props with Bootstrap utility shorthand names.
+
+### Breaking Changes
+
+- Replace Box `margin*` and `padding*` props with shorthand props; the long names are removed.
+
+### Fixed
+
+- Correct Tooltip arrow positioning.
+
 ## [0.2.0] - 2026-11-04
 
 ### Added
