@@ -27,6 +27,7 @@ order: 1
 - [Floating labels](./floating-labels/)
 - [Form](./form/)
 - [Grid](./grid/)
+- [Icon link](./icon-link/)
 - [Images](./image/)
 - [Input group](./input-group/)
 - [List group](./list-group/)

@@ -1,0 +1,38 @@
+---
+title: Icon link 图标链接
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { IconLinkBasicDemo } from './demos/basic';
+
+# Icon link 图标链接
+
+`IconLink` 渲染带有 Bootstrap `.icon-link` 辅助类的链接，可对齐图标和文本、按文本字号缩放图标，
+并应用链接样式。
+
+<DemoContainer>
+  <IconLinkBasicDemo />
+</DemoContainer>
+
+## 悬停效果
+
+设置 `hover` 可添加 `.icon-link-hover`，使图标在鼠标悬停时移动。可使用 Bootstrap 的
+`--bs-icon-link-*` CSS 变量自定义样式。
+
+## 属性
+
+| 属性        | 类型          | 说明                               |
+| ----------- | ------------- | ---------------------------------- |
+| `hover`     | `boolean`     | 添加 `.icon-link-hover` 悬停效果。 |
+| `component` | `ElementType` | 更换渲染元素，默认为 `a`。         |
+| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。    |
+
+## 无障碍
+
+装饰性图标应设置 `aria-hidden='true'`。传递信息的图标应提供无障碍名称；链接文本应清楚描述目标或操作。
+
+## 参考
+
+- [Bootstrap 6 Icon link 文档](https://getbootstrap.com/docs/6.0/helpers/icon-link/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/icon-link.tsx)

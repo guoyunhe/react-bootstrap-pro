@@ -1,0 +1,46 @@
+---
+title: Icon link
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { IconLinkBasicDemo } from './demos/basic';
+
+# Icon link
+
+`IconLink` renders an anchor with Bootstrap's `.icon-link` helper, which aligns
+an icon and text, sizes the icon to the text, and applies link styling.
+
+## Example
+
+<DemoContainer>
+  <IconLinkBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## Hover variant
+
+Set `hover` to add `.icon-link-hover`, which moves the icon on hover. The helper
+can be customized with Bootstrap's `--bs-icon-link-*` CSS variables.
+
+## API
+
+| Prop        | Type          | Description                                        |
+| ----------- | ------------- | -------------------------------------------------- |
+| `hover`     | `boolean`     | Adds `.icon-link-hover` to move the icon on hover. |
+| `component` | `ElementType` | Changes the rendered element; defaults to `a`.     |
+| `...props`  | `BoxProps<C>` | Native props and all Box utility props.            |
+
+## Accessibility
+
+Hide decorative icons with `aria-hidden='true'`. For icons that convey
+information, provide an accessible name. The link text should describe its
+destination or action.
+
+## See
+
+- [Bootstrap 6 Icon link documentation](https://getbootstrap.com/docs/6.0/helpers/icon-link/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/icon-link.tsx)
