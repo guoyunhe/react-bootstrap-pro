@@ -20,7 +20,7 @@ export function TableNestingDemo() {
         </TableRow>
         <TableRow>
           <TableCell colSpan={4}>
-            <Table marginBottom={0}>
+            <Table mb={0}>
               <TableHead>
                 <TableRow>
                   <TableHeader scope='col'>Header</TableHeader>

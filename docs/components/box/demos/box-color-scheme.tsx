@@ -13,10 +13,10 @@ export function BoxColorSchemeDemo() {
           fg='body'
           themeBorder
           className='rounded'
-          padding={3}
+          p={3}
         >
           <strong>{`color-scheme-${scheme}`}</strong>
-          <Box marginTop={2}>
+          <Box mt={2}>
             <input type='date' className='form-control' aria-label={`${scheme} date picker`} />
           </Box>
         </Box>

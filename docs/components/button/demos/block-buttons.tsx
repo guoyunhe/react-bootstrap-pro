@@ -12,7 +12,7 @@ export function ButtonBlockDemo() {
         </Button>
       </Box>
       <Box display={{ xs: 'grid', md: 'flex' }} justifyContent={{ md: 'end' }} gap={2}>
-        <Button variant='solid' theme='primary' marginEnd={{ md: 2 }}>
+        <Button variant='solid' theme='primary' me={{ md: 2 }}>
           Responsive primary action
         </Button>
         <Button variant='outline' theme='secondary'>

@@ -284,20 +284,20 @@ type BoxOwnProps<C extends ElementType> = {
   gridColumn?: BoxResponsive<BoxGridColumn> | undefined;
   gridAutoFlow?: BoxResponsive<BoxGridAutoFlow> | undefined;
   order?: BoxResponsive<BoxOrder> | undefined;
-  margin?: BoxResponsive<BoxMargin> | undefined;
-  marginX?: BoxResponsive<BoxMargin> | undefined;
-  marginY?: BoxResponsive<BoxMargin> | undefined;
-  marginTop?: BoxResponsive<BoxMargin> | undefined;
-  marginEnd?: BoxResponsive<BoxNegativeMargin> | undefined;
-  marginBottom?: BoxResponsive<BoxMargin> | undefined;
-  marginStart?: BoxResponsive<BoxNegativeMargin> | undefined;
-  padding?: BoxResponsive<BoxSpacing> | undefined;
-  paddingX?: BoxResponsive<BoxSpacing> | undefined;
-  paddingY?: BoxResponsive<BoxSpacing> | undefined;
-  paddingTop?: BoxResponsive<BoxSpacing> | undefined;
-  paddingEnd?: BoxResponsive<BoxSpacing> | undefined;
-  paddingBottom?: BoxResponsive<BoxSpacing> | undefined;
-  paddingStart?: BoxResponsive<BoxSpacing> | undefined;
+  m?: BoxResponsive<BoxMargin> | undefined;
+  mx?: BoxResponsive<BoxMargin> | undefined;
+  my?: BoxResponsive<BoxMargin> | undefined;
+  mt?: BoxResponsive<BoxMargin> | undefined;
+  me?: BoxResponsive<BoxNegativeMargin> | undefined;
+  mb?: BoxResponsive<BoxMargin> | undefined;
+  ms?: BoxResponsive<BoxNegativeMargin> | undefined;
+  p?: BoxResponsive<BoxSpacing> | undefined;
+  px?: BoxResponsive<BoxSpacing> | undefined;
+  py?: BoxResponsive<BoxSpacing> | undefined;
+  pt?: BoxResponsive<BoxSpacing> | undefined;
+  pe?: BoxResponsive<BoxSpacing> | undefined;
+  pb?: BoxResponsive<BoxSpacing> | undefined;
+  ps?: BoxResponsive<BoxSpacing> | undefined;
   gap?: BoxResponsive<BoxSpacing> | undefined;
   rowGap?: BoxResponsive<BoxSpacing> | undefined;
   columnGap?: BoxResponsive<BoxSpacing> | undefined;
@@ -533,20 +533,20 @@ export function Box<C extends ElementType = 'div'>({
   gridColumn,
   gridAutoFlow,
   order,
-  margin,
-  marginX,
-  marginY,
-  marginTop,
-  marginEnd,
-  marginBottom,
-  marginStart,
-  padding,
-  paddingX,
-  paddingY,
-  paddingTop,
-  paddingEnd,
-  paddingBottom,
-  paddingStart,
+  m,
+  mx,
+  my,
+  mt,
+  me,
+  mb,
+  ms,
+  p,
+  px,
+  py,
+  pt,
+  pe,
+  pb,
+  ps,
   gap,
   rowGap,
   columnGap,
@@ -673,20 +673,20 @@ export function Box<C extends ElementType = 'div'>({
     getResponsiveClasses('grid-cols', gridColumn),
     getResponsiveClasses('grid-auto-flow', gridAutoFlow),
     getResponsiveClasses('order', order),
-    getResponsiveClasses('m', margin, formatSpacing),
-    getResponsiveClasses('mx', marginX, formatSpacing),
-    getResponsiveClasses('my', marginY, formatSpacing),
-    getResponsiveClasses('mt', marginTop, formatSpacing),
-    getResponsiveClasses('me', marginEnd, formatSpacing),
-    getResponsiveClasses('mb', marginBottom, formatSpacing),
-    getResponsiveClasses('ms', marginStart, formatSpacing),
-    getResponsiveClasses('p', padding),
-    getResponsiveClasses('px', paddingX),
-    getResponsiveClasses('py', paddingY),
-    getResponsiveClasses('pt', paddingTop),
-    getResponsiveClasses('pe', paddingEnd),
-    getResponsiveClasses('pb', paddingBottom),
-    getResponsiveClasses('ps', paddingStart),
+    getResponsiveClasses('m', m, formatSpacing),
+    getResponsiveClasses('mx', mx, formatSpacing),
+    getResponsiveClasses('my', my, formatSpacing),
+    getResponsiveClasses('mt', mt, formatSpacing),
+    getResponsiveClasses('me', me, formatSpacing),
+    getResponsiveClasses('mb', mb, formatSpacing),
+    getResponsiveClasses('ms', ms, formatSpacing),
+    getResponsiveClasses('p', p),
+    getResponsiveClasses('px', px),
+    getResponsiveClasses('py', py),
+    getResponsiveClasses('pt', pt),
+    getResponsiveClasses('pe', pe),
+    getResponsiveClasses('pb', pb),
+    getResponsiveClasses('ps', ps),
     getResponsiveClasses('gap', gap),
     getResponsiveClasses('row-gap', rowGap),
     getResponsiveClasses('column-gap', columnGap),

@@ -3,7 +3,7 @@ import { Box, Col, FormControl, FormLabel, Row } from 'react-bootstrap-pro';
 export function FormLayoutHorizontalSizingDemo() {
   return (
     <Box component='form' onSubmit={(event) => event.preventDefault()}>
-      <Row gutter={3} marginBottom={3}>
+      <Row gutter={3} mb={3}>
         <Col span={{ sm: 2 }}>
           <FormLabel col='sm' htmlFor='layout-label-sm'>
             Email
@@ -18,7 +18,7 @@ export function FormLayoutHorizontalSizingDemo() {
           />
         </Col>
       </Row>
-      <Row gutter={3} marginBottom={3}>
+      <Row gutter={3} mb={3}>
         <Col span={{ sm: 2 }}>
           <FormLabel col htmlFor='layout-label-default'>
             Email

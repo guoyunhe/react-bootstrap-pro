@@ -13,7 +13,7 @@ import {
 export function ValidationServerSideDemo() {
   return (
     <Box>
-      <Row gutter={3} marginBottom={3}>
+      <Row gutter={3} mb={3}>
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-server-name'>Name</FormLabel>
@@ -50,7 +50,7 @@ export function ValidationServerSideDemo() {
           </FormField>
         </Col>
       </Row>
-      <FormField marginBottom={3}>
+      <FormField mb={3}>
         <FormLabel htmlFor='validation-server-address'>Address</FormLabel>
         <FormControl
           id='validation-server-address'

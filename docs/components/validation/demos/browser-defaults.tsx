@@ -14,7 +14,7 @@ import {
 export function ValidationBrowserDefaultsDemo() {
   return (
     <Form noValidate={false} onSubmit={(event) => event.preventDefault()}>
-      <Row gutter={3} marginBottom={3}>
+      <Row gutter={3} mb={3}>
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-default-name'>Name</FormLabel>
@@ -36,11 +36,11 @@ export function ValidationBrowserDefaultsDemo() {
           </FormField>
         </Col>
       </Row>
-      <FormField marginBottom={3}>
+      <FormField mb={3}>
         <FormLabel htmlFor='validation-default-address'>Address</FormLabel>
         <FormControl id='validation-default-address' defaultValue='1234 Main St' required />
       </FormField>
-      <Row gutter={3} marginBottom={3}>
+      <Row gutter={3} mb={3}>
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-default-city'>City</FormLabel>
@@ -65,7 +65,7 @@ export function ValidationBrowserDefaultsDemo() {
           </FormField>
         </Col>
       </Row>
-      <Box marginBottom={3}>
+      <Box mb={3}>
         <Button type='submit' variant='solid' theme='primary'>
           Submit form
         </Button>

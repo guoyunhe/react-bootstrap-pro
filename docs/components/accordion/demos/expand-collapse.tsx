@@ -35,7 +35,7 @@ export function AccordionExpandCollapseDemo() {
   return (
     <>
       <Button
-        marginBottom={3}
+        mb={3}
         type='button'
         variant='subtle'
         theme='secondary'

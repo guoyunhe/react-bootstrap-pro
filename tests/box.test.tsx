@@ -24,6 +24,58 @@ test('renders a plain div by default', async () => {
   expect(box.element().getAttribute('class')).toBeNull();
 });
 
+test('supports m and p spacing shorthands', async () => {
+  const screen = await render(
+    <>
+      <Box data-testid='spacing' m={{ xs: 1, md: -2 }} p={3} />
+      <Box data-testid='preferred-spacing' m={2} p={1} />
+    </>,
+  );
+
+  expect(screen.getByTestId('spacing')).toHaveClass('m-1', 'md:m-n2', 'p-3');
+  expect(screen.getByTestId('preferred-spacing')).toHaveClass('m-2', 'p-1');
+});
+
+test('supports Bootstrap shorthand names for directional spacing utilities', async () => {
+  const screen = await render(
+    <Box
+      data-testid='spacing-shorthands'
+      m={{ xs: -1, md: 4 }}
+      mx={2}
+      my={3}
+      mt={0}
+      me={-2}
+      mb='auto'
+      ms={1}
+      p={{ sm: 2 }}
+      px={3}
+      py={4}
+      pt={5}
+      pe={6}
+      pb={7}
+      ps={8}
+    />,
+  );
+
+  expect(screen.getByTestId('spacing-shorthands')).toHaveClass(
+    'm-n1',
+    'md:m-4',
+    'mx-2',
+    'my-3',
+    'mt-0',
+    'me-n2',
+    'mb-auto',
+    'ms-1',
+    'sm:p-2',
+    'px-3',
+    'py-4',
+    'pt-5',
+    'pe-6',
+    'pb-7',
+    'ps-8',
+  );
+});
+
 test('applies the focus ring helper', async () => {
   const screen = await render(
     <Box component='a' href='#focus-ring' focusRing theme='primary' data-testid='focus-ring'>
@@ -276,20 +328,20 @@ test('applies flex, grid, and spacing utilities responsively', async () => {
       gridColumn='fill'
       gridAutoFlow='dense'
       order={{ md: 'last' }}
-      margin={{ xs: -1, md: 4 }}
-      marginX={2}
-      marginY={3}
-      marginTop={0}
-      marginEnd={-2}
-      marginBottom='auto'
-      marginStart={1}
-      padding={{ sm: 2 }}
-      paddingX={3}
-      paddingY={4}
-      paddingTop={5}
-      paddingEnd={6}
-      paddingBottom={7}
-      paddingStart={8}
+      m={{ xs: -1, md: 4 }}
+      mx={2}
+      my={3}
+      mt={0}
+      me={-2}
+      mb='auto'
+      ms={1}
+      p={{ sm: 2 }}
+      px={3}
+      py={4}
+      pt={5}
+      pe={6}
+      pb={7}
+      ps={8}
       gap={9}
       rowGap={10}
       columnGap={11}

@@ -12,7 +12,7 @@ export function AccordionNestedDemo() {
         <AccordionHeader>Parent item #1</AccordionHeader>
         <AccordionBody>
           This item contains a nested accordion.
-          <Accordion marginTop={3}>
+          <Accordion mt={3}>
             {nestedItems.map(({ heading, body }, index) => (
               <AccordionItem key={heading} name='inner' open={index === 0}>
                 <AccordionHeader>{heading}</AccordionHeader>

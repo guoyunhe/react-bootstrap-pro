@@ -121,7 +121,7 @@ test('reports level changes', async () => {
 
 test('passes box props and class names to the meter', async () => {
   const screen = await render(
-    <PasswordStrength value='abc' className='my-meter' marginTop={2} data-testid='meter' />,
+    <PasswordStrength value='abc' className='my-meter' mt={2} data-testid='meter' />,
   );
   const meter = screen.getByTestId('meter').element();
 

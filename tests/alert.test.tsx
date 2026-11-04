@@ -17,7 +17,7 @@ test('renders alert modifiers and preserves custom tags', async () => {
 test('renders alert headings through the AlertHeading subcomponent', async () => {
   const screen = await render(
     <Alert theme='success'>
-      <AlertHeading component='h2' marginBottom={0} data-testid='alert-heading'>
+      <AlertHeading component='h2' mb={0} data-testid='alert-heading'>
         Well done!
       </AlertHeading>
     </Alert>,

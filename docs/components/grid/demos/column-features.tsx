@@ -3,7 +3,7 @@ import { Box, Col, Row } from 'react-bootstrap-pro';
 
 function GridCell({ children }: { children: ReactNode }) {
   return (
-    <Box className='h-100 rounded border bg-body-tertiary text-center' padding={3}>
+    <Box className='h-100 rounded border bg-body-tertiary text-center' p={3}>
       {children}
     </Box>
   );
@@ -48,11 +48,7 @@ export function ColumnFeaturesDemo() {
           <GridCell>4 columns wrap because the total exceeds 12</GridCell>
         </Col>
       </Row>
-      <Col
-        span={{ xs: 6, md: 3 }}
-        className='rounded border bg-body-tertiary text-center'
-        padding={3}
-      >
+      <Col span={{ xs: 6, md: 3 }} className='rounded border bg-body-tertiary text-center' p={3}>
         Standalone column
       </Col>
     </Box>

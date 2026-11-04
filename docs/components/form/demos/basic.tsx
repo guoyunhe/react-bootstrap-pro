@@ -11,7 +11,7 @@ import {
 export function FormBasicDemo() {
   return (
     <Box component='form' onSubmit={(event) => event.preventDefault()}>
-      <FormField marginBottom={3}>
+      <FormField mb={3}>
         <FormLabel htmlFor='form-basic-email'>Email address</FormLabel>
         <FormControl
           id='form-basic-email'
@@ -23,11 +23,11 @@ export function FormBasicDemo() {
           We’ll never share your email with anyone else.
         </FormText>
       </FormField>
-      <FormField marginBottom={3}>
+      <FormField mb={3}>
         <FormLabel htmlFor='form-basic-password'>Password</FormLabel>
         <FormControl id='form-basic-password' type='password' />
       </FormField>
-      <FormField marginBottom={3}>
+      <FormField mb={3}>
         <Checkbox id='form-basic-check' />
         <label htmlFor='form-basic-check'>Check me out</label>
       </FormField>

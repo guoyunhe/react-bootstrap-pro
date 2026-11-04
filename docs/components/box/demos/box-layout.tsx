@@ -11,7 +11,7 @@ export function BoxLayoutDemo() {
     <Box display='grid' gap={4}>
       <Box>
         <strong>Aspect ratios</strong>
-        <Box display='flex' flexWrap='wrap' alignItems='start' gap={3} marginTop={2}>
+        <Box display='flex' flexWrap='wrap' alignItems='start' gap={3} mt={2}>
           {aspectRatios.map((aspectRatio) => (
             <Box
               key={aspectRatio}
@@ -32,24 +32,24 @@ export function BoxLayoutDemo() {
 
       <Box>
         <strong>Responsive display</strong>
-        <Box display='flex' flexWrap='wrap' gap={2} marginTop={2}>
-          <Box display={{ xs: 'none', md: 'inline-flex' }} bgSubtle='primary' padding={2}>
+        <Box display='flex' flexWrap='wrap' gap={2} mt={2}>
+          <Box display={{ xs: 'none', md: 'inline-flex' }} bgSubtle='primary' p={2}>
             Hidden below md
           </Box>
-          <Box display={{ xs: 'block', lg: 'none' }} bgSubtle='success' padding={2}>
+          <Box display={{ xs: 'block', lg: 'none' }} bgSubtle='success' p={2}>
             Hidden at lg and above
           </Box>
         </Box>
       </Box>
 
-      <Box containerQuery='inline' theme='secondary' themeStyle='subtle' padding={3}>
+      <Box containerQuery='inline' theme='secondary' themeStyle='subtle' p={3}>
         <strong>Inline-size query container</strong>
-        <Box marginTop={2}>{"containerQuery='inline' adds .contains-inline"}</Box>
+        <Box mt={2}>{"containerQuery='inline' adds .contains-inline"}</Box>
       </Box>
 
       <Box>
         <strong>Float and object fit</strong>
-        <Box display='flow-root' className='border rounded' padding={2} marginTop={2}>
+        <Box display='flow-root' className='border rounded' p={2} mt={2}>
           <Box
             component='img'
             src={imageSource}
@@ -57,7 +57,7 @@ export function BoxLayoutDemo() {
             objectFit='cover'
             aspectRatio='1x1'
             float='end'
-            marginStart={3}
+            ms={3}
             className='rounded'
             style={{ width: '5rem' }}
           />
@@ -67,8 +67,8 @@ export function BoxLayoutDemo() {
 
       <Box>
         <strong>Overflow and visibility</strong>
-        <Box display='flex' gap={3} marginTop={2}>
-          <Box overflow='hidden' className='border rounded' padding={2} style={{ width: '8rem' }}>
+        <Box display='flex' gap={3} mt={2}>
+          <Box overflow='hidden' className='border rounded' p={2} style={{ width: '8rem' }}>
             overflow hidden
           </Box>
           <Box visibility='invisible' aria-hidden='true'>
@@ -78,7 +78,7 @@ export function BoxLayoutDemo() {
         </Box>
       </Box>
 
-      <Box position='relative' theme='primary' themeStyle='subtle' className='rounded' padding={4}>
+      <Box position='relative' theme='primary' themeStyle='subtle' className='rounded' p={4}>
         <strong>Positioned parent</strong>
         <Box
           position='absolute'
@@ -89,21 +89,21 @@ export function BoxLayoutDemo() {
           theme='primary'
           themeStyle='contrast'
           rounded='pill'
-          paddingX={2}
-          paddingY={1}
+          px={2}
+          py={1}
         >
           Positioned marker
         </Box>
       </Box>
 
       <Box display='flex' flexWrap='wrap' gap={2}>
-        <Box zIndex={-1} className='border rounded' padding={2}>
+        <Box zIndex={-1} className='border rounded' p={2}>
           z-n1
         </Box>
-        <Box zIndex='menu' className='border rounded' padding={2}>
+        <Box zIndex='menu' className='border rounded' p={2}>
           z-menu
         </Box>
-        <Box zIndex='toast' className='border rounded' padding={2}>
+        <Box zIndex='toast' className='border rounded' p={2}>
           z-toast
         </Box>
       </Box>

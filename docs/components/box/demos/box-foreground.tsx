@@ -24,7 +24,7 @@ export function BoxForegroundDemo() {
           <Box fgEmphasis={theme} className='fw-semibold'>
             {`fg-emphasis-${theme}`}
           </Box>
-          <Box bg={theme} className='rounded' paddingX={2} paddingY={1}>
+          <Box bg={theme} className='rounded' px={2} py={1}>
             <Box fgContrast={theme}>{`fg-contrast-${theme}`}</Box>
           </Box>
         </Box>

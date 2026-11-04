@@ -5,7 +5,7 @@ import { NotProse, Prose } from '../src';
 
 test('renders prose typography with Box props', async () => {
   const screen = await render(
-    <Prose component='article' data-testid='prose' padding={3} className='custom'>
+    <Prose component='article' data-testid='prose' p={3} className='custom'>
       <h1>Article title</h1>
       <p>Article content</p>
     </Prose>,

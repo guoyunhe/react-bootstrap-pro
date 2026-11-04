@@ -12,7 +12,7 @@ export function AlertLiveDemo() {
       {visible && (
         <Alert display='flex' alignItems='center' gap={2}>
           <span>Nice, you triggered this alert message!</span>
-          <CloseButton label='Dismiss alert' marginStart='auto' onClick={() => setVisible(false)} />
+          <CloseButton label='Dismiss alert' ms='auto' onClick={() => setVisible(false)} />
         </Alert>
       )}
     </Box>

@@ -33,7 +33,7 @@ export function ValidationCustomDemo() {
         );
       }}
     >
-      <Row gutter={3} marginBottom={3}>
+      <Row gutter={3} mb={3}>
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-custom-name'>Name</FormLabel>
@@ -65,7 +65,7 @@ export function ValidationCustomDemo() {
           </FormField>
         </Col>
       </Row>
-      <FormField marginBottom={3}>
+      <FormField mb={3}>
         <FormLabel htmlFor='validation-custom-address'>Address</FormLabel>
         <FormControl
           id='validation-custom-address'
@@ -77,7 +77,7 @@ export function ValidationCustomDemo() {
           Please enter a mailing address
         </FormFeedback>
       </FormField>
-      <Row gutter={3} marginBottom={3}>
+      <Row gutter={3} mb={3}>
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-custom-city'>City</FormLabel>
@@ -119,9 +119,9 @@ export function ValidationCustomDemo() {
           </FormField>
         </Col>
       </Row>
-      <Box component='fieldset' marginBottom={3}>
+      <Box component='fieldset' mb={3}>
         <FormLabel component='legend'>Shipping method</FormLabel>
-        <FormField marginBottom={1}>
+        <FormField mb={1}>
           <Radio
             id='validation-custom-radio-1'
             name='validation-custom-shipping'
@@ -149,7 +149,7 @@ export function ValidationCustomDemo() {
           </FormFeedback>
         </FormField>
       </Box>
-      <FormField marginBottom={3}>
+      <FormField mb={3}>
         <Switch>
           <SwitchInput id='validation-custom-switch' />
         </Switch>
@@ -159,7 +159,7 @@ export function ValidationCustomDemo() {
         Submit form
       </Button>
       {message && (
-        <FormText component='output' display='block' marginTop={2}>
+        <FormText component='output' display='block' mt={2}>
           {message}
         </FormText>
       )}

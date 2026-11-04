@@ -16,8 +16,8 @@ export function BoxComponentDemo() {
         bgSubtle='primary'
         fgEmphasis='primary'
         display='inline-block'
-        paddingX={3}
-        paddingY={2}
+        px={3}
+        py={2}
         className='rounded text-decoration-none'
       >
         A link element
@@ -27,12 +27,12 @@ export function BoxComponentDemo() {
         theme='accent'
         themeStyle='subtle'
         className='rounded'
-        padding={3}
-        marginBottom={0}
+        p={3}
+        mb={0}
       >
         A blockquote element with theme utilities.
       </Box>
-      <Box component={Panel} bg='1' themeBorder className='rounded' padding={3}>
+      <Box component={Panel} bg='1' themeBorder className='rounded' p={3}>
         A custom component receiving the generated class names.
       </Box>
       <Box className='fw-semibold'>Any other utility class can go through className.</Box>

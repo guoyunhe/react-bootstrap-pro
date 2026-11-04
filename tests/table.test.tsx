@@ -73,7 +73,7 @@ test('applies accent and border modifiers', async () => {
 });
 
 test('applies a theme and box props', async () => {
-  const screen = await renderTable({ theme: 'success', verticalAlign: 'middle', marginBottom: 0 });
+  const screen = await renderTable({ theme: 'success', verticalAlign: 'middle', mb: 0 });
   const table = screen.getByTestId('table').element();
 
   expect(table).toHaveClass('theme-success', 'align-middle', 'mb-0');
