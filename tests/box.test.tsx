@@ -376,6 +376,7 @@ test('applies sizing, typography, link, and motion utilities', async () => {
         textAlign={{ xs: 'center', md: 'end' }}
         textDecoration='underline'
         textTransform='uppercase'
+        textTruncate
         textWrap='balance'
         textBreak
         linkOpacity={50}
@@ -425,6 +426,7 @@ test('applies sizing, typography, link, and motion utilities', async () => {
     'md:text-end',
     'text-decoration-underline',
     'text-uppercase',
+    'text-truncate',
     'text-balance',
     'text-break',
     'link-50',

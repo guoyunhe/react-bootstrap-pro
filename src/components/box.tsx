@@ -328,6 +328,7 @@ type BoxOwnProps<C extends ElementType> = {
   textAlign?: BoxResponsive<BoxTextAlign> | undefined;
   textDecoration?: BoxTextDecoration | undefined;
   textTransform?: BoxTextTransform | undefined;
+  textTruncate?: boolean | undefined;
   textWrap?: BoxTextWrap | undefined;
   textBreak?: boolean | undefined;
   linkOpacity?: BoxOpacity | undefined;
@@ -576,6 +577,7 @@ export function Box<C extends ElementType = 'div'>({
   textAlign,
   textDecoration,
   textTransform,
+  textTruncate,
   textWrap,
   textBreak,
   linkOpacity,
@@ -715,6 +717,7 @@ export function Box<C extends ElementType = 'div'>({
     getResponsiveClasses('text', textAlign),
     textDecoration && `text-decoration-${textDecoration}`,
     textTransform && `text-${textTransform}`,
+    textTruncate && 'text-truncate',
     textWrap && `text-${textWrap}`,
     textBreak && 'text-break',
     linkOpacity && `link-${linkOpacity}`,
