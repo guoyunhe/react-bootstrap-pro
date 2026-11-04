@@ -3,28 +3,184 @@ title: Tooltip 工具提示
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Tooltip, TooltipInner } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { TooltipBasicDemo } from './demos/basic';
+import { TooltipLinksDemo } from './demos/links';
+import { TooltipCustomDemo } from './demos/custom';
+import { TooltipPlacementDemo } from './demos/placement';
+import { TooltipResponsivePlacementDemo } from './demos/responsive-placement';
+import { TooltipCustomContentDemo } from './demos/custom-content';
+import { TooltipSvgTriggerDemo } from './demos/svg-trigger';
+import { TooltipInteractiveDemo } from './demos/interactive';
+import { TooltipDisabledDemo } from './demos/disabled';
 
 # Tooltip 工具提示
 
-`Tooltip` 提供工具提示表面样式。Bootstrap JavaScript bundle 负责创建和定位提示；
-不要仅依赖悬停内容传达关键信息。
+`Tooltip` 使用 `@floating-ui/react` 处理定位和交互。它不会初始化 Bootstrap
+JavaScript 插件，也不会读取 `data-bs-toggle` 属性。通过 `trigger` 传入单个触发元素，
+子节点作为提示内容渲染。
+
+## 概览
+
+悬停或聚焦按钮，即可在触发元素上方查看提示。
 
 <DemoContainer>
-  <Tooltip show>
-    <TooltipInner>辅助说明</TooltipInner>
-  </Tooltip>
+  <TooltipBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+使用此组件时请注意：
+
+- Tooltip 使用 Floating UI 定位，并通过 portal 渲染到 `document.body`。
+- 空内容不会显示。
+- 隐藏的触发元素无法可靠定位。
+- 禁用控件无法接收焦点或鼠标事件；请使用可聚焦的包装元素作为触发元素。
+- 重要信息应同时在 Tooltip 之外提供。
+
+## 示例
+
+### 链接上的提示
+
+可在段落的行内链接上使用 Tooltip：
+
+<DemoContainer>
+  <TooltipLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/links.tsx'
+
+```
+
+### 自定义 Tooltip
+
+使用 `className` 指定作用域，并覆盖 Bootstrap Tooltip CSS 变量：
+
+<DemoContainer>
+  <TooltipCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom.tsx'
+
+```
+
+```css src='./demos/custom-tooltip.css'
+
+```
+
+### 放置位置
+
+将 `placement` 设为 `left`、`top`、`bottom` 或 `right`。空间不足时，Floating UI
+会自动翻转或移动提示位置。
+
+<DemoContainer>
+  <TooltipPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+### 响应式放置位置
+
+传入响应式 placement 对象。支持的断点与 Bootstrap 6 一致：`xs`、`sm`、`md`、`lg`、
+`xl` 和 `2xl`。
+
+<DemoContainer>
+  <TooltipResponsivePlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive-placement.tsx'
+
+```
+
+调整页面宽度可观察提示在 `md` 和 `lg` 断点处改变方向。
+
+### 自定义内容
+
+Tooltip 内容支持 React 节点。与 Bootstrap 的 `data-bs-html` 不同，HTML 字符串不会被解析；
+请使用 JSX 明确声明内容，避免隐式 HTML 注入。
+
+<DemoContainer>
+  <TooltipCustomContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-content.tsx'
+
+```
+
+触发元素也可以包含 SVG：
+
+<DemoContainer>
+  <TooltipSvgTriggerDemo />
+</DemoContainer>
+
+```tsx src='./demos/svg-trigger.tsx'
+
+```
+
+### 可交互 Tooltip
+
+鼠标从触发元素移至提示内容时，提示会保持显示。鼠标离开两者、焦点离开或按下
+Escape 后，提示会关闭。
+
+<DemoContainer>
+  <TooltipInteractiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/interactive.tsx'
+
+```
+
+### 禁用元素
+
+使用可聚焦元素包装禁用控件，并将包装元素作为触发元素：
+
+<DemoContainer>
+  <TooltipDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## CSS 变量
+
+可在自定义类上覆盖 Bootstrap Tooltip 变量：
+
+```css
+.custom-tooltip {
+  --bs-tooltip-bg: #563d7c;
+  --bs-tooltip-color: #fff;
+}
+```
 
 ## API
 
-| 属性        | 类型                                    | 说明                            |
-| ----------- | --------------------------------------- | ------------------------------- |
-| `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | 选择放置方向样式。              |
-| `show`      | `boolean`                               | 添加 `.show`；默认关闭。        |
-| `instant`   | `boolean`                               | 禁用淡入淡出动画。              |
-| `component` | `ElementType`                           | 更换根元素。                    |
-| `...props`  | `BoxProps<C>`                           | 原生属性及所有 Box 工具类属性。 |
+| 属性           | 类型                                                                   | 说明                                             |
+| -------------- | ---------------------------------------------------------------------- | ------------------------------------------------ |
+| `trigger`      | `ReactElement`                                                         | 触发元素；传入后启用交互模式。                   |
+| `placement`    | `TooltipPlacement \| Partial<Record<BoxBreakpoint, TooltipPlacement>>` | 首选放置位置或响应式放置位置，默认为 `top`。     |
+| `triggers`     | `('hover' \| 'focus' \| 'click')[]`                                    | 触发方式，默认为 `['hover', 'focus']`。          |
+| `delay`        | `number \| { open?: number; close?: number }`                          | 鼠标悬停显示/隐藏的毫秒延迟。                    |
+| `show`         | `boolean`                                                              | 交互模式下控制显示；静态模式下用于添加显示样式。 |
+| `onShowChange` | `(show: boolean) => void`                                              | 交互请求改变显示状态时调用。                     |
+| `instant`      | `boolean`                                                              | 禁用淡入淡出动画。                               |
+| `component`    | `ElementType`                                                          | 更换提示表面的元素。                             |
+| `...props`     | `BoxProps<C>`                                                          | 提示表面的原生属性及所有 Box 工具类属性。        |
 
-`TooltipInner` 设置内部文本样式。使用插件时，可通过 Bootstrap 支持的 title 属性提供触发文本。
+`TooltipInner` 设置内部文本样式。可使用 `className`、Box 工具类属性或 Bootstrap Tooltip
+CSS 变量自定义外观。
+
+## 无障碍访问
+
+提示通过 `aria-describedby` 与触发元素关联。建议使用可键盘聚焦的交互元素作为触发元素，
+并提供清晰的无障碍名称。重要说明不应只存在于 Tooltip 中。若提示中包含链接或其他控件，
+请同时检查键盘和触屏操作。
+
+## 参阅
+
+- [Bootstrap 6 Tooltip 文档](https://getbootstrap.com/docs/6.0/components/tooltip/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/tooltip.tsx)

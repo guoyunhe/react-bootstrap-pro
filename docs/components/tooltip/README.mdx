@@ -3,18 +3,27 @@ title: Tooltip
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Tooltip, TooltipInner } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { TooltipBasicDemo } from './demos/basic';
+import { TooltipLinksDemo } from './demos/links';
+import { TooltipCustomDemo } from './demos/custom';
+import { TooltipPlacementDemo } from './demos/placement';
+import { TooltipResponsivePlacementDemo } from './demos/responsive-placement';
+import { TooltipCustomContentDemo } from './demos/custom-content';
+import { TooltipSvgTriggerDemo } from './demos/svg-trigger';
+import { TooltipInteractiveDemo } from './demos/interactive';
+import { TooltipDisabledDemo } from './demos/disabled';
 
 # Tooltip
 
-`Tooltip` provides the styled tooltip surface. Its `show` prop controls the
-rendered surface; Bootstrap's JavaScript plugin creates and positions tooltips
-from trigger elements. Do not rely on hover-only content to convey essential
-information.
+`Tooltip` uses `@floating-ui/react` for positioning and interactions. It does not
+initialize Bootstrap's JavaScript plugin or read `data-bs-toggle` attributes.
+Pass one trigger element through `trigger`; its children are rendered as the
+tooltip content.
 
-## Example
+## Overview
+
+Hover or focus the button to see a tooltip above its trigger.
 
 <DemoContainer>
   <TooltipBasicDemo />
@@ -24,32 +33,157 @@ information.
 
 ```
 
-## Placement
+Things to know when using this component:
 
-Set `placement` to `top`, `end`, `bottom`, or `start`.
+- Tooltips use Floating UI and render in a portal attached to `document.body`.
+- Empty content is not displayed.
+- Hidden triggers cannot be positioned reliably.
+- Disabled controls cannot receive focus or pointer events; use a focusable
+  wrapper as the trigger.
+- Keep essential information available outside the tooltip.
 
-## Plugin trigger
+## Examples
 
-For Bootstrap-managed tooltips, initialize a native trigger with a title. The
-plugin creates and positions its own tooltip surface.
+### Tooltips on links
+
+Use tooltips on inline links in a paragraph:
+
+<DemoContainer>
+  <TooltipLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/links.tsx'
+
+```
+
+### Custom tooltips
+
+Pass `className` to scope custom Bootstrap tooltip variables:
+
+<DemoContainer>
+  <TooltipCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom.tsx'
+
+```
+
+```css src='./demos/custom-tooltip.css'
+
+```
+
+### Placement
+
+Set `placement` to `left`, `top`, `bottom`, or `right`. Floating UI can flip or
+shift the final position when space is limited.
+
+<DemoContainer>
+  <TooltipPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+### Responsive placement
+
+Pass a responsive placement object. The supported breakpoints match Bootstrap 6:
+`xs`, `sm`, `md`, `lg`, `xl`, and `2xl`.
+
+<DemoContainer>
+  <TooltipResponsivePlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive-placement.tsx'
+
+```
+
+Resize the page to see the placement change at the `md` and `lg` breakpoints.
+
+### Custom content
+
+Tooltip content accepts React nodes. Unlike Bootstrap's `data-bs-html` option,
+HTML strings are not parsed; use JSX so content remains explicit and safe.
+
+<DemoContainer>
+  <TooltipCustomContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-content.tsx'
+
+```
+
+Triggers can also contain SVG:
+
+<DemoContainer>
+  <TooltipSvgTriggerDemo />
+</DemoContainer>
+
+```tsx src='./demos/svg-trigger.tsx'
+
+```
+
+### Interactive tooltips
+
+The tooltip stays open while the pointer moves from the trigger onto the
+tooltip. It closes when the pointer leaves both, when focus leaves, or when
+Escape is pressed.
+
+<DemoContainer>
+  <TooltipInteractiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/interactive.tsx'
+
+```
+
+### Disabled elements
+
+Wrap a disabled control in a focusable element and pass the wrapper as the
+trigger:
+
+<DemoContainer>
+  <TooltipDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## CSS variables
+
+Bootstrap tooltip variables can be overridden on a custom class:
+
+```css
+.custom-tooltip {
+  --bs-tooltip-bg: #563d7c;
+  --bs-tooltip-color: #fff;
+}
+```
 
 ## API
 
-| Prop        | Type                                    | Description                             |
-| ----------- | --------------------------------------- | --------------------------------------- |
-| `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | Selects the placement style.            |
-| `show`      | `boolean`                               | Adds `.show`; false by default.         |
-| `instant`   | `boolean`                               | Disables the fade transition.           |
-| `component` | `ElementType`                           | Changes the root element.               |
-| `...props`  | `BoxProps<C>`                           | Native props and all Box utility props. |
+| Prop           | Type                                                                   | Description                                                                   |
+| -------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `trigger`      | `ReactElement`                                                         | Trigger element; enables interactive mode.                                    |
+| `placement`    | `TooltipPlacement \| Partial<Record<BoxBreakpoint, TooltipPlacement>>` | Preferred placement or responsive placements; defaults to `top`.              |
+| `triggers`     | `('hover' \| 'focus' \| 'click')[]`                                    | Interaction sources; defaults to `['hover', 'focus']`.                        |
+| `delay`        | `number \| { open?: number; close?: number }`                          | Hover delay in milliseconds.                                                  |
+| `show`         | `boolean`                                                              | Controlled visibility in interactive mode; static surface modifier otherwise. |
+| `onShowChange` | `(show: boolean) => void`                                              | Called when an interaction requests a visibility change.                      |
+| `instant`      | `boolean`                                                              | Disables the fade transition.                                                 |
+| `component`    | `ElementType`                                                          | Changes the tooltip surface element.                                          |
+| `...props`     | `BoxProps<C>`                                                          | Native props and all Box utility props for the tooltip surface.               |
 
-`TooltipInner` applies the inner text styling. Provide trigger text through
-Bootstrap's supported title attributes when using the plugin.
+`TooltipInner` applies Bootstrap's inner text styling. Use `className`, Box
+utility props, or Bootstrap tooltip CSS variables to customize its appearance.
 
 ## Accessibility
 
-Keep essential instructions available without a tooltip, support keyboard
-focus on its trigger, and make the trigger's accessible name clear.
+The tooltip is associated with its trigger using `aria-describedby`. Prefer
+interactive, keyboard-focusable triggers and give them a clear accessible name.
+Do not rely on tooltip content alone for important instructions. Tooltips with
+links or other controls should be checked with both keyboard and touch input.
 
 ## See
 
