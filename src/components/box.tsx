@@ -259,6 +259,10 @@ type BoxOwnProps<C extends ElementType> = {
   overflow?: BoxOverflow | undefined;
   overflowX?: BoxOverflow | undefined;
   overflowY?: BoxOverflow | undefined;
+  fixedTop?: boolean | undefined;
+  fixedBottom?: boolean | undefined;
+  stickyTop?: BoxResponsive<boolean> | undefined;
+  stickyBottom?: BoxResponsive<boolean> | undefined;
   position?: BoxPosition | undefined;
   top?: BoxPositionOffset | undefined;
   bottom?: BoxPositionOffset | undefined;
@@ -404,6 +408,25 @@ function getResponsiveClasses<T extends string | number | boolean>(
   });
 }
 
+function getResponsiveBooleanClasses(utility: string, value: BoxResponsive<boolean> | undefined) {
+  if (value === undefined) {
+    return [];
+  }
+
+  if (typeof value === 'boolean') {
+    return value ? [utility] : [];
+  }
+
+  return breakpoints.flatMap((breakpoint) => {
+    if (!value[breakpoint]) {
+      return [];
+    }
+
+    const prefix = breakpoint === 'xs' ? '' : `${breakpoint}:`;
+    return [`${prefix}${utility}`];
+  });
+}
+
 function formatSpacing(value: BoxNegativeMargin | BoxSpacing) {
   if (value === -1) {
     return 'n1';
@@ -484,6 +507,10 @@ export function Box<C extends ElementType = 'div'>({
   overflow,
   overflowX,
   overflowY,
+  fixedTop,
+  fixedBottom,
+  stickyTop,
+  stickyBottom,
   position,
   top,
   bottom,
@@ -619,6 +646,10 @@ export function Box<C extends ElementType = 'div'>({
     overflow && `overflow-${overflow}`,
     overflowX && `overflow-x-${overflowX}`,
     overflowY && `overflow-y-${overflowY}`,
+    fixedTop && 'fixed-top',
+    fixedBottom && 'fixed-bottom',
+    getResponsiveBooleanClasses('sticky-top', stickyTop),
+    getResponsiveBooleanClasses('sticky-bottom', stickyBottom),
     position && `position-${position}`,
     top !== undefined && `top-${top}`,
     bottom !== undefined && `bottom-${bottom}`,

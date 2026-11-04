@@ -164,11 +164,24 @@ import { BoxThemeDemo } from './demos/box-theme';
 <Box component='img' objectFit='cover' alt='裁剪填充' src='/image.jpg' />
 ```
 
+使用 `fixedTop` 或 `fixedBottom` 可将元素固定在视口边缘；使用 `stickyTop` 或
+`stickyBottom` 可让元素在滚动到相应位置后保持粘性。这两个 sticky 属性支持以
+`xs`、`sm`、`md`、`lg`、`xl` 或 `2xl` 为键的响应式布尔值。
+
+```tsx
+<Box fixedTop>固定在视口顶部</Box>
+<Box stickyTop={{ md: true }}>从 md 断点开始粘在顶部</Box>
+```
+
 | 属性             | 类名                     | 取值                                                                                                                                                             |
 | ---------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `aspectRatio`    | `.ratio-*`               | `auto`、`1x1`、`4x3`、`16x9`、`21x9`                                                                                                                             |
 | `containerQuery` | `.contains-*`            | `inline`、`size`                                                                                                                                                 |
 | `display`        | `.d-*`                   | `inline`、`inline-block`、`block`、`grid`、`inline-grid`、`table`、`table-row`、`table-cell`、`flex`、`inline-flex`、`contents`、`flow-root`、`none`；支持响应式 |
+| `fixedTop`       | `.fixed-top`             | `boolean`                                                                                                                                                        |
+| `fixedBottom`    | `.fixed-bottom`          | `boolean`                                                                                                                                                        |
+| `stickyTop`      | `.sticky-top`            | `boolean`；支持响应式                                                                                                                                            |
+| `stickyBottom`   | `.sticky-bottom`         | `boolean`；支持响应式                                                                                                                                            |
 | `alignContent`   | `.align-content-*`       | `start`、`end`、`center`、`between`、`around`、`stretch`；支持响应式                                                                                             |
 | `float`          | `.float-*`               | `start`、`end`、`none`；支持响应式                                                                                                                               |
 | `objectFit`      | `.object-fit-*`          | `contain`、`cover`、`fill`、`scale`、`none`；支持响应式                                                                                                          |
@@ -261,6 +274,8 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 | `flexWrap`                 | `'wrap' \| 'nowrap' \| 'wrap-reverse'`                                                                                                                                                   | —       | 添加响应式 `.flex-*` 换行类。                                              |
 | `float`                    | `'start' \| 'end' \| 'none'`                                                                                                                                                             | —       | 添加响应式 `.float-{value}` 类。                                           |
 | `focusRing`                | `boolean`                                                                                                                                                                                | `false` | 在可见焦点状态应用 `.focus-ring`。                                         |
+| `fixedBottom`              | `boolean`                                                                                                                                                                                | `false` | 添加 `.fixed-bottom`。                                                     |
+| `fixedTop`                 | `boolean`                                                                                                                                                                                | `false` | 添加 `.fixed-top`。                                                        |
 | `fontFamily`               | `'monospace' \| 'body'`                                                                                                                                                                  | —       | 添加 `.font-*`。                                                           |
 | `fontSize`                 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| '4xl' \| '5xl' \| '6xl'`                                                                                                      | —       | 添加 `.fs-*`。                                                             |
 | `fontStyle`                | `'italic' \| 'normal'`                                                                                                                                                                   | —       | 添加 `.fst-*`。                                                            |
@@ -324,6 +339,8 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 | `shadowOpacity`            | `number`                                                                                                                                                                                 | —       | 添加 `.shadow-opacity-*`。                                                 |
 | `spaceX`                   | `number`                                                                                                                                                                                 | —       | 为子元素添加响应式 `.space-x-*` 间距。                                     |
 | `spaceY`                   | `number`                                                                                                                                                                                 | —       | 为子元素添加响应式 `.space-y-*` 间距。                                     |
+| `stickyBottom`             | `boolean \| Partial<Record<'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl', boolean>>`                                                                                                     | `false` | 添加 `.sticky-bottom`，并可选使用响应式断点前缀。                          |
+| `stickyTop`                | `boolean \| Partial<Record<'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl', boolean>>`                                                                                                     | `false` | 添加 `.sticky-top`，并可选使用响应式断点前缀。                             |
 | `start`                    | `number`                                                                                                                                                                                 | —       | 添加 `.start-{value}`。                                                    |
 | `textAlign`                | `'start' \| 'end' \| 'center'`                                                                                                                                                           | —       | 添加响应式 `.text-*` 对齐类。                                              |
 | `textBreak`                | `boolean`                                                                                                                                                                                | `false` | 添加 `.text-break`。                                                       |

@@ -155,6 +155,12 @@ test('applies overflow and positioning utilities', async () => {
         start={0}
         translateMiddle
       />
+      <Box data-testid='fixed-position' fixedTop fixedBottom />
+      <Box
+        data-testid='sticky-position'
+        stickyTop={{ sm: true, md: false, '2xl': true }}
+        stickyBottom
+      />
     </>,
   );
 
@@ -175,6 +181,13 @@ test('applies overflow and positioning utilities', async () => {
     'start-0',
     'translate-middle',
   );
+  expect(screen.getByTestId('fixed-position')).toHaveClass('fixed-top', 'fixed-bottom');
+  expect(screen.getByTestId('sticky-position')).toHaveClass(
+    'sm:sticky-top',
+    '2xl:sticky-top',
+    'sticky-bottom',
+  );
+  expect(screen.getByTestId('sticky-position')).not.toHaveClass('md:sticky-top');
 });
 
 test('applies visibility and z-index utilities', async () => {

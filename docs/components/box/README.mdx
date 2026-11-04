@@ -139,11 +139,24 @@ no prefix and the later breakpoints use classes such as `.md:d-none`.
 
 ```
 
+Use `fixedTop` or `fixedBottom` to pin an element to the viewport edge. Use
+`stickyTop` or `stickyBottom` to make it sticky after scrolling; these props
+accept responsive booleans keyed by `xs`, `sm`, `md`, `lg`, `xl`, or `2xl`.
+
+```tsx
+<Box fixedTop>Fixed to the top of the viewport</Box>
+<Box stickyTop={{ md: true }}>Sticky from the md breakpoint</Box>
+```
+
 | Prop             | Class                    | Values                                                                                                                                                           |
 | ---------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `aspectRatio`    | `.ratio-*`               | `auto`, `1x1`, `4x3`, `16x9`, `21x9`                                                                                                                             |
 | `containerQuery` | `.contains-*`            | `inline`, `size`                                                                                                                                                 |
 | `display`        | `.d-*`                   | `inline`, `inline-block`, `block`, `grid`, `inline-grid`, `table`, `table-row`, `table-cell`, `flex`, `inline-flex`, `contents`, `flow-root`, `none`; responsive |
+| `fixedTop`       | `.fixed-top`             | `boolean`                                                                                                                                                        |
+| `fixedBottom`    | `.fixed-bottom`          | `boolean`                                                                                                                                                        |
+| `stickyTop`      | `.sticky-top`            | `boolean`; responsive                                                                                                                                            |
+| `stickyBottom`   | `.sticky-bottom`         | `boolean`; responsive                                                                                                                                            |
 | `alignContent`   | `.align-content-*`       | `start`, `end`, `center`, `between`, `around`, `stretch`; responsive                                                                                             |
 | `float`          | `.float-*`               | `start`, `end`, `none`; responsive                                                                                                                               |
 | `objectFit`      | `.object-fit-*`          | `contain`, `cover`, `fill`, `scale`, `none`; responsive                                                                                                          |
@@ -233,6 +246,8 @@ Bootstrap's `--bs-hover-lift-*` CSS variables.
 | `flexWrap`                 | `'wrap' \| 'nowrap' \| 'wrap-reverse'`                                                                                                                                                   | —       | Applies responsive `.flex-*` wrap classes.                                    |
 | `float`                    | `'start' \| 'end' \| 'none'`                                                                                                                                                             | —       | Applies responsive `.float-{value}` classes.                                  |
 | `focusRing`                | `boolean`                                                                                                                                                                                | `false` | Applies `.focus-ring` to visible focus states.                                |
+| `fixedBottom`              | `boolean`                                                                                                                                                                                | `false` | Applies `.fixed-bottom`.                                                      |
+| `fixedTop`                 | `boolean`                                                                                                                                                                                | `false` | Applies `.fixed-top`.                                                         |
 | `fontFamily`               | `'monospace' \| 'body'`                                                                                                                                                                  | —       | Applies `.font-*`.                                                            |
 | `fontSize`                 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| '4xl' \| '5xl' \| '6xl'`                                                                                                      | —       | Applies `.fs-*`.                                                              |
 | `fontStyle`                | `'italic' \| 'normal'`                                                                                                                                                                   | —       | Applies `.fst-*`.                                                             |
@@ -296,6 +311,8 @@ Bootstrap's `--bs-hover-lift-*` CSS variables.
 | `shadowOpacity`            | `number`                                                                                                                                                                                 | —       | Applies `.shadow-opacity-*`.                                                  |
 | `spaceX`                   | `number`                                                                                                                                                                                 | —       | Applies responsive `.space-x-*` child spacing.                                |
 | `spaceY`                   | `number`                                                                                                                                                                                 | —       | Applies responsive `.space-y-*` child spacing.                                |
+| `stickyBottom`             | `boolean \| Partial<Record<'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl', boolean>>`                                                                                                     | `false` | Applies `.sticky-bottom` with optional responsive breakpoint prefixes.        |
+| `stickyTop`                | `boolean \| Partial<Record<'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl', boolean>>`                                                                                                     | `false` | Applies `.sticky-top` with optional responsive breakpoint prefixes.           |
 | `start`                    | `number`                                                                                                                                                                                 | —       | Applies `.start-{value}`.                                                     |
 | `textAlign`                | `'start' \| 'end' \| 'center'`                                                                                                                                                           | —       | Applies responsive `.text-*` alignment classes.                               |
 | `textBreak`                | `boolean`                                                                                                                                                                                | `false` | Applies `.text-break`.                                                        |
