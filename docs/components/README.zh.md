@@ -22,6 +22,7 @@ order: 1
 - [Dialog 对话框](./dialog/)
 - [Drawer 抽屉](./drawer/)
 - [Grid 网格](./grid/)
+- [Images 图片](./image/)
 - [List group 列表组](./list-group/)
 - [Menu 菜单](./menu/)
 - [Nav 导航](./nav/)

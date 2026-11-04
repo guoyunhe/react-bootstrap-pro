@@ -27,6 +27,7 @@ export * from './form-floating';
 export * from './form-label';
 export * from './form-text';
 export * from './grid';
+export * from './image';
 export * from './input-group';
 export * from './input-group-text';
 export * from './list-group';

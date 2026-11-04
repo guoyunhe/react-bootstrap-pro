@@ -1,0 +1,58 @@
+---
+title: Images
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Figure, FigureCaption, Image } from 'react-bootstrap-pro';
+import { DemoContainer } from '../demo-container';
+import { ImagesBasicDemo } from './demos/basic';
+
+# Images
+
+`Image` adds Bootstrap's responsive and thumbnail image classes. `Figure` and
+`FigureCaption` provide semantic figure markup with Bootstrap's baseline styles.
+
+## Example
+
+<DemoContainer>
+  <ImagesBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## Responsive images and thumbnails
+
+Use `fluid` to apply `.img-fluid` (`max-width: 100%; height: auto`) and
+`thumbnail` to apply `.img-thumbnail`. Both options can be combined. Alignment
+utilities such as `float-start`, `mx-auto`, and `text-center` can be passed
+through `className`.
+
+## Figures
+
+Use `Figure` and `FigureCaption` for an image with an optional caption. Images
+inside figures are not automatically responsive; add `fluid` to the `Image`.
+Use flex utilities on `Figure` to change the caption alignment.
+
+For responsive art direction, use the native `<picture>` and `<source>` elements
+and apply `fluid` or `thumbnail` to the nested `Image`, not to `<picture>`.
+
+## API
+
+| Component      | Prop        | Type          | Description                                        |
+| -------------- | ----------- | ------------- | -------------------------------------------------- |
+| `Image`        | `fluid`     | `boolean`     | Applies `.img-fluid` for responsive sizing.        |
+| `Image`        | `thumbnail` | `boolean`     | Applies `.img-thumbnail` for a bordered thumbnail. |
+| All components | `component` | `ElementType` | Changes the rendered element.                      |
+| All components | `...props`  | `BoxProps<C>` | Native props and all Box utility props.            |
+
+## Accessibility
+
+Provide meaningful `alt` text for informative images. Use `alt=""` for
+decorative images, and keep captions distinct from alternative text.
+
+## See
+
+- [Bootstrap 6 Images documentation](https://getbootstrap.com/docs/6.0/content/images/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/image.tsx)

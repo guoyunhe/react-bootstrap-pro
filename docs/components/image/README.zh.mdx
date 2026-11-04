@@ -1,0 +1,57 @@
+---
+title: Images 图片
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Figure, FigureCaption, Image } from 'react-bootstrap-pro';
+import { DemoContainer } from '../demo-container';
+
+# Images 图片
+
+`Image` 提供 Bootstrap 响应式图片和缩略图样式；`Figure` 与 `FigureCaption`
+用于语义化图片及其说明文字。
+
+<DemoContainer>
+  <Figure>
+    <Image
+      fluid
+      src='https://placehold.co/600x400'
+      alt='带有说明文字的风景占位图'
+      className='rounded-3'
+    />
+    <FigureCaption>图片说明文字。</FigureCaption>
+  </Figure>
+</DemoContainer>
+
+## 响应式图片与缩略图
+
+设置 `fluid` 会应用 `.img-fluid`（`max-width: 100%; height: auto`），设置
+`thumbnail` 会应用 `.img-thumbnail`。两者可以同时使用。可通过 `className`
+传入 `float-start`、`mx-auto`、`text-center` 等对齐工具类。
+
+## 图片与说明
+
+`Figure` 和 `FigureCaption` 用于组合图片及可选说明。Figure 中的图片不会自动变为响应式，
+请给 `Image` 添加 `fluid`。可在 `Figure` 上使用 flex 工具类调整说明文字的位置。
+
+需要根据屏幕尺寸选择图片时，可直接组合原生 `<picture>` 和 `<source>`，并将
+`fluid` 或 `thumbnail` 加到内部的 `Image`，而不是 `<picture>`。
+
+## 属性
+
+| 组件     | 属性        | 类型          | 说明                               |
+| -------- | ----------- | ------------- | ---------------------------------- |
+| `Image`  | `fluid`     | `boolean`     | 应用 `.img-fluid` 响应式尺寸样式。 |
+| `Image`  | `thumbnail` | `boolean`     | 应用 `.img-thumbnail` 缩略图样式。 |
+| 所有组件 | `component` | `ElementType` | 更换渲染元素。                     |
+| 所有组件 | `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。    |
+
+## 无障碍
+
+信息性图片应提供有意义的 `alt` 文本；装饰性图片应使用 `alt=""`。图片说明文字应与替代文本互补，
+不要重复传达相同内容。
+
+## 参考
+
+- [Bootstrap 6 图片文档](https://getbootstrap.com/docs/6.0/content/images/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/image.tsx)
