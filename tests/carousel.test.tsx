@@ -9,13 +9,24 @@ test('composes carousel structure and control attributes', async () => {
       <div className='carousel-inner'>
         <div className='carousel-item active'>Slide 1</div>
       </div>
-      <CarouselControl target='#carousel' direction='next' />
+      <CarouselControl
+        target='#carousel'
+        direction='next'
+        size='sm'
+        variant='outline'
+        className='custom-control'
+      />
     </Carousel>,
   );
 
   expect(screen.getByTestId('carousel')).toHaveClass('carousel', 'carousel-fade');
   expect(screen.getByRole('button', { name: 'Next' })).toHaveAttribute('data-bs-slide', 'next');
-  expect(screen.getByRole('button', { name: 'Next' })).toHaveClass('btn-icon');
+  expect(screen.getByRole('button', { name: 'Next' })).toHaveClass(
+    'btn-icon',
+    'btn-sm',
+    'btn-outline',
+    'custom-control',
+  );
   expect(screen.getByRole('button', { name: 'Next' })).toHaveAttribute(
     'data-bs-target',
     '#carousel',

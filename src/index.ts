@@ -65,6 +65,8 @@ export type {
 } from './components/index';
 export { Button } from './components/index';
 export type { ButtonProps, ButtonTheme, ButtonVariant } from './components/index';
+export { IconButton } from './components/index';
+export type { IconButtonProps } from './components/index';
 export { Container } from './components/index';
 export type { ContainerBreakpoint, ContainerProps } from './components/index';
 export { Col, Row } from './components/index';

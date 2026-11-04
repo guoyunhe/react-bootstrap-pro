@@ -3,7 +3,7 @@ title: Button
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Button } from 'react-bootstrap-pro';
+import { Button, IconButton } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { ButtonBasicDemo } from './demos/basic';
 import { ButtonBlockDemo } from './demos/block-buttons';
@@ -136,9 +136,9 @@ Use CSS variables for a custom size:
 
 ## Icon buttons
 
-Use `className='btn-icon'` for a square icon-only button. Always provide an
-accessible name with `aria-label`. Combine it with a size to adjust the icon
-button dimensions.
+Use `IconButton` for a square icon-only button. Always provide an accessible
+name with `aria-label`. It supports the same variants, themes, sizes, and
+properties as `Button`.
 
 <DemoContainer>
   <ButtonIconDemo />

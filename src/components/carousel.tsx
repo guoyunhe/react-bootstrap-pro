@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import type { BoxProps } from './box';
+import { IconButton, type IconButtonProps } from './icon-button';
 import { ClassedBox, type BoxComponentProps } from './shared';
 
 export type CarouselProps<C extends ElementType = 'div'> = BoxComponentProps<
@@ -149,20 +150,22 @@ export function CarouselControl<C extends ElementType = 'button'>({
   ...props
 }: CarouselControlProps<C>) {
   const action = direction === 'previous' ? 'prev' : 'next';
+  const iconButtonProps = {
+    ...props,
+    ...(component ? { component } : {}),
+    size,
+    variant,
+    ...(className === undefined ? {} : { className }),
+    type: type ?? 'button',
+    'aria-label': props['aria-label'] ?? (direction === 'previous' ? 'Previous' : 'Next'),
+    'data-bs-slide': action,
+    'data-bs-target': target,
+  } as IconButtonProps<C>;
+
   return (
-    <ClassedBox<C>
-      {...props}
-      baseClass={clsx('btn-icon', size && `btn-${size}`, variant && `btn-${variant}`)}
-      component={component}
-      defaultComponent={'button' as C}
-      className={className}
-      type={type ?? 'button'}
-      aria-label={props['aria-label'] ?? (direction === 'previous' ? 'Previous' : 'Next')}
-      data-bs-slide={action}
-      data-bs-target={target}
-    >
+    <IconButton<C> {...iconButtonProps}>
       <span className={`carousel-icon-${action}`} aria-hidden='true' />
-    </ClassedBox>
+    </IconButton>
   );
 }
 
