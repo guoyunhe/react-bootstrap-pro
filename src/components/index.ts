@@ -47,6 +47,7 @@ export * from './radio';
 export * from './range';
 export * from './scrollspy';
 export * from './spinner';
+export * from './stack';
 export * from './stepper';
 export * from './switch';
 export * from './switch-input';

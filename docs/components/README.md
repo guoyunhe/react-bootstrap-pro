@@ -46,6 +46,7 @@ order: 1
 - [Range](./range/)
 - [Scrollspy](./scrollspy/)
 - [Spinner](./spinner/)
+- [Stack](./stack/)
 - [Stepper](./stepper/)
 - [Switch](./switch/)
 - [Tab](./tab/)

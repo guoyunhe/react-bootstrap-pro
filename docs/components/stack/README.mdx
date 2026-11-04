@@ -1,0 +1,58 @@
+---
+title: Stack
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Stack, StackContainer } from 'react-bootstrap-pro';
+
+# Stack
+
+`Stack` wraps Bootstrap's `.hstack` and `.vstack` helpers, while `StackContainer`
+wraps `.stack-container` for responsive stack variants. Both render a `div` by
+default and accept all [`Box`](../box/) props.
+
+## Direction
+
+Set `direction` to `horizontal` to lay out children in a row, vertically
+centered, with each child taking only the width it needs. The default direction
+is `vertical`, which stretches children to the available width. Use `gap` to
+space the children.
+
+```tsx
+<Stack direction='horizontal' gap={3}>
+  <button type='button'>First</button>
+  <button type='button'>Second</button>
+</Stack>
+<Stack gap={2}>
+  <button type='button'>Save changes</button>
+  <button type='button'>Cancel</button>
+</Stack>
+```
+
+## Responsive direction
+
+Bootstrap's responsive stack variants use container queries. Wrap the stack in
+`StackContainer` and set `direction` to a breakpoint map:
+
+```tsx
+<StackContainer>
+  <Stack direction={{ xs: 'vertical', md: 'horizontal' }} gap={2}>
+    <button type='button'>Save changes</button>
+    <button type='button'>Cancel</button>
+  </Stack>
+</StackContainer>
+```
+
+## API
+
+| Prop        | Type                            | Default      | Description                                               |
+| ----------- | ------------------------------- | ------------ | --------------------------------------------------------- |
+| `direction` | `BoxResponsive<StackDirection>` | `'vertical'` | Direction at the base size or each responsive breakpoint. |
+| `component` | `ElementType`                   | `'div'`      | Changes the rendered element.                             |
+| `className` | `string`                        | —            | Additional classes.                                       |
+| `...props`  | `BoxProps<C>`                   | —            | Native props and all Box utility props.                   |
+
+## See
+
+- [Bootstrap 6 Stacks documentation](https://getbootstrap.com/docs/6.0/helpers/stacks/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/stack.tsx)
