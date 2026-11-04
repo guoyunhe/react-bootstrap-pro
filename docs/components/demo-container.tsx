@@ -2,6 +2,6 @@ import { Box, type BoxProps } from 'react-bootstrap-pro';
 
 export type DemoContainerProps = BoxProps<'div'>;
 
-export function DemoContainer({ className, ...props }: DemoContainerProps) {
-  return <Box border rounded p={5} my={5} {...props} className={className} />;
+export function DemoContainer({ ...props }: DemoContainerProps) {
+  return <Box border rounded p={5} my={5} {...props} />;
 }

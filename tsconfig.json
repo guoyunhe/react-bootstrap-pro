@@ -15,7 +15,5 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "verbatimModuleSyntax": true
-  },
-  "include": ["src"],
-  "exclude": ["docs_dist"]
+  }
 }
