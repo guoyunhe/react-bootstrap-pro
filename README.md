@@ -1,47 +1,29 @@
-# react-components-starter
+# React Bootstrap Pro
 
-A starter for creating a React component library.
+Bootstrap 6 components for React 18+, with TypeScript support.
 
-## Button
+## Installation
 
-Import Bootstrap's stylesheet in your application and use the component:
+```sh
+npm install --save react-bootstrap-pro bootstrap@6.0.0-alpha.1 react-bootstrap-icons-pro
+```
+
+## Usage
 
 ```tsx
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-components-starter';
+import 'bootstrap/dist/css/bootstrap.css'; // or your own bootstrap theme
+import { Button, Container } from 'react-bootstrap-pro';
 
-<Button variant='solid' theme='primary' size='lg'>
-  Save
-</Button>;
+export function Example() {
+  return (
+    <Container>
+      <Button variant='solid' theme='primary'>
+        Save
+      </Button>
+    </Container>
+  );
+}
 ```
 
-`Button` accepts native button props, Bootstrap variants, themes, and the `xs`,
-`sm`, or `lg` sizes. `variant` and `theme` have no defaults, so a plain
-`<Button>` only receives the base `btn` class. The native button type defaults
-to `type='button'`.
-
-## Development
-
-- Install dependencies:
-
-```bash
-npm install
-```
-
-- Run the playground:
-
-```bash
-npm run play
-```
-
-- Run the unit tests:
-
-```bash
-npm run test
-```
-
-- Build the library:
-
-```bash
-npm run build
-```
+Browse the [documentation](https://guoyunhe.github.io/react-bootstrap-pro) for demos and API
+details.

@@ -1,8 +1,18 @@
 {
   "name": "react-bootstrap-pro",
   "version": "0.0.0",
-  "description": "A starter for creating a React component library.",
-  "homepage": "https://github.com/guoyunhe/react-bootstrap-pro#readme",
+  "description": "Bootstrap 6 components for React 18+",
+  "keywords": [
+    "bootstrap",
+    "component-library",
+    "components",
+    "design-system",
+    "react",
+    "react-bootstrap",
+    "typescript",
+    "ui"
+  ],
+  "homepage": "https://guoyunhe.github.io/react-bootstrap-pro",
   "bugs": {
     "url": "https://github.com/guoyunhe/react-bootstrap-pro/issues"
   },
@@ -78,9 +88,9 @@
   },
   "peerDependencies": {
     "bootstrap": "^6.0.0-alpha.1",
-    "react": "^19.2.0",
+    "react": ">=18.0.0",
     "react-bootstrap-icons-pro": "^1.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": ">=18.0.0"
   },
   "lint-staged": {
     "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,vue}": [
