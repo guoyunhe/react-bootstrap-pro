@@ -35,6 +35,16 @@ test('applies the focus ring helper', async () => {
   expect(screen.getByTestId('focus-ring')).toHaveClass('focus-ring', 'theme-primary');
 });
 
+test('applies the hover lift helper', async () => {
+  const screen = await render(
+    <Box component='a' href='#hover-lift' hoverLift data-testid='hover-lift'>
+      Lift on hover or focus
+    </Box>,
+  );
+
+  expect(screen.getByTestId('hover-lift')).toHaveClass('hover-lift');
+});
+
 test('applies foreground utilities', async () => {
   const screen = await render(
     <>

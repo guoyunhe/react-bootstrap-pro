@@ -203,6 +203,17 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 </Box>
 ```
 
+## Hover lift 悬浮抬升
+
+设置 `hoverLift` 即可应用 Bootstrap 的 `.hover-lift` 辅助类。鼠标悬停或键盘聚焦时，元素会上移并加深阴影，
+同时尊重用户的减少动态效果偏好。可使用 Bootstrap 的 `--bs-hover-lift-*` CSS 变量自定义位移和过渡效果。
+
+```tsx
+<Box component='a' href='/details' hoverLift className='card text-decoration-none'>
+  <div className='card-body'>悬停或聚焦时抬升</div>
+</Box>
+```
+
 ## API
 
 | 属性                       | 类型                                                                                                                                                                                     | 默认值  | 说明                                                                       |
@@ -260,6 +271,7 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 | `gridColumn`               | `'fill'`                                                                                                                                                                                 | —       | 添加响应式 `.grid-cols-fill`。                                             |
 | `gridColumns`              | `number \| 'subgrid'`                                                                                                                                                                    | —       | 添加响应式 `.grid-cols-*` 列数类。                                         |
 | `height`                   | `number \| 'auto' \| 'min' \| 'max' \| 'fit'`                                                                                                                                            | —       | 添加 `.h-*`；不对应工具类的原生尺寸值会继续透传。                          |
+| `hoverLift`                | `boolean`                                                                                                                                                                                | `false` | 在鼠标悬停和键盘聚焦时应用 `.hover-lift`。                                 |
 | `hoverLinkOpacity`         | `number`                                                                                                                                                                                 | —       | 添加 `.hover:link-*`。                                                     |
 | `hoverUnderlineOffset`     | `number`                                                                                                                                                                                 | —       | 添加 `.hover:underline-offset-*`。                                         |
 | `hoverUnderlineOpacity`    | `number`                                                                                                                                                                                 | —       | 添加 `.hover:underline-*`。                                                |

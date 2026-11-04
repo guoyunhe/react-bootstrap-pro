@@ -173,6 +173,19 @@ Use `theme` or theme utility classes to change the ring color.
 </Box>
 ```
 
+## Hover lift
+
+Set `hoverLift` to apply Bootstrap's `.hover-lift` helper. It raises the element
+and deepens its shadow on hover or keyboard focus, while respecting the user's
+reduced-motion preference. The lift and transition can be customized with
+Bootstrap's `--bs-hover-lift-*` CSS variables.
+
+```tsx
+<Box component='a' href='/details' hoverLift className='card text-decoration-none'>
+  <div className='card-body'>Lift on hover or focus</div>
+</Box>
+```
+
 ## API
 
 | Prop                       | Type                                                                                                                                                                                     | Default | Description                                                                   |
@@ -230,6 +243,7 @@ Use `theme` or theme utility classes to change the ring color.
 | `gridColumn`               | `'fill'`                                                                                                                                                                                 | —       | Applies responsive `.grid-cols-fill`.                                         |
 | `gridColumns`              | `number \| 'subgrid'`                                                                                                                                                                    | —       | Applies responsive `.grid-cols-*` column-count classes.                       |
 | `height`                   | `number \| 'auto' \| 'min' \| 'max' \| 'fit'`                                                                                                                                            | —       | Applies `.h-*`; non-utility native dimension values are forwarded.            |
+| `hoverLift`                | `boolean`                                                                                                                                                                                | `false` | Applies `.hover-lift` on hover and keyboard focus.                            |
 | `hoverLinkOpacity`         | `number`                                                                                                                                                                                 | —       | Applies `.hover:link-*`.                                                      |
 | `hoverUnderlineOffset`     | `number`                                                                                                                                                                                 | —       | Applies `.hover:underline-offset-*`.                                          |
 | `hoverUnderlineOpacity`    | `number`                                                                                                                                                                                 | —       | Applies `.hover:underline-*`.                                                 |
