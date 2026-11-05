@@ -1,8 +1,8 @@
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type InputGroupTextProps<C extends ElementType = 'span'> = BoxComponentProps<C>;
+export type InputGroupTextProps<C extends ElementType = 'span'> = ComponentProps<C>;
 
 export function InputGroupText<C extends ElementType = 'span'>({
   component,

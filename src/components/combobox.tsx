@@ -7,7 +7,8 @@ import type { KeyboardEvent, ReactNode } from 'react';
 import { Fragment, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { BiCheck, BiChevronDown } from 'react-bootstrap-icons-pro';
 
-import { Box, type BoxProps } from './box';
+import { Box } from './box';
+import type { BoxProps } from './box';
 import { FormControl } from './form-control';
 import { Menu, MenuHeader } from './menu';
 import type { ValidationState } from './shared';

@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import type { BoxProps } from './box';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type AvatarProps<C extends ElementType = 'span'> = BoxComponentProps<
+export type AvatarProps<C extends ElementType = 'span'> = ComponentProps<
   C,
   { size?: 'xs' | 'sm' | 'lg' | 'xl' | undefined; subtle?: boolean | undefined }
 >;
@@ -45,7 +45,7 @@ export function AvatarImage<C extends ElementType = 'img'>({
   );
 }
 
-export type AvatarStatusProps<C extends ElementType = 'span'> = BoxComponentProps<
+export type AvatarStatusProps<C extends ElementType = 'span'> = ComponentProps<
   C,
   { status?: 'online' | 'offline' | 'busy' | 'away' | undefined }
 >;

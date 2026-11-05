@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import type { BoxProps } from './box';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
 export type BreadcrumbProps<C extends ElementType = 'ol'> = BoxProps<C>;
 
@@ -40,7 +40,7 @@ export function BreadcrumbItem<C extends ElementType = 'li'>({
   );
 }
 
-export type BreadcrumbLinkProps<C extends ElementType = 'a'> = BoxComponentProps<
+export type BreadcrumbLinkProps<C extends ElementType = 'a'> = ComponentProps<
   C,
   { active?: boolean | undefined }
 >;

@@ -1,9 +1,11 @@
 import clsx from 'clsx';
 import type { ElementType, MouseEvent } from 'react';
 
-import { Box, type BoxProps, type BoxTheme } from './box';
+import { Box } from './box';
+import type { BoxProps } from './box';
+import type { Theme } from './types';
 
-export type ButtonTheme = BoxTheme;
+export type ButtonTheme = Theme;
 
 export type ButtonVariant = 'solid' | 'outline' | 'subtle' | 'text' | 'link';
 

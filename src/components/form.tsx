@@ -1,6 +1,7 @@
 import type { FormEvent, FormEventHandler } from 'react';
 
-import { Box, type BoxProps } from './box';
+import { Box } from './box';
+import type { BoxProps } from './box';
 
 export type FormValidation = boolean | 'valid';
 

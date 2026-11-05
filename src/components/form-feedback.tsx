@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 
-import { Box, type BoxProps } from './box';
+import { Box } from './box';
+import type { BoxProps } from './box';
 import type { ValidationState } from './shared';
 
 export type FormFeedbackType = ValidationState;

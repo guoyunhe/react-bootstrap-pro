@@ -11,7 +11,8 @@ import {
   type ReactNode,
 } from 'react';
 
-import { Box, type BoxProps } from './box';
+import { Box } from './box';
+import type { BoxProps } from './box';
 
 export type OtpInputType = 'numeric' | 'alphanumeric' | 'alpha';
 export type OtpInputSize = 'sm' | 'lg';

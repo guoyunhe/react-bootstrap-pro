@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
 export type SwitchSize = 'sm' | 'lg';
 
-export type SwitchProps<C extends ElementType = 'div'> = BoxComponentProps<
+export type SwitchProps<C extends ElementType = 'div'> = ComponentProps<
   C,
   { size?: SwitchSize | undefined }
 >;

@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type AlertProps<C extends ElementType = 'div'> = BoxComponentProps<
+export type AlertProps<C extends ElementType = 'div'> = ComponentProps<
   C,
   { instant?: boolean | undefined }
 >;
@@ -27,7 +27,7 @@ export function Alert<C extends ElementType = 'div'>({
   );
 }
 
-export type AlertHeadingProps<C extends ElementType = 'h4'> = BoxComponentProps<C>;
+export type AlertHeadingProps<C extends ElementType = 'h4'> = ComponentProps<C>;
 
 export function AlertHeading<C extends ElementType = 'h4'>({
   component,

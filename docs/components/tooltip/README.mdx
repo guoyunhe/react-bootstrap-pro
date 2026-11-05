@@ -163,17 +163,17 @@ Bootstrap tooltip variables can be overridden on a custom class:
 
 ## API
 
-| Prop           | Type                                                                   | Description                                                                   |
-| -------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `trigger`      | `ReactElement`                                                         | Trigger element; enables interactive mode.                                    |
-| `placement`    | `TooltipPlacement \| Partial<Record<BoxBreakpoint, TooltipPlacement>>` | Preferred placement or responsive placements; defaults to `top`.              |
-| `triggers`     | `('hover' \| 'focus' \| 'click')[]`                                    | Interaction sources; defaults to `['hover', 'focus']`.                        |
-| `delay`        | `number \| { open?: number; close?: number }`                          | Hover delay in milliseconds.                                                  |
-| `show`         | `boolean`                                                              | Controlled visibility in interactive mode; static surface modifier otherwise. |
-| `onShowChange` | `(show: boolean) => void`                                              | Called when an interaction requests a visibility change.                      |
-| `instant`      | `boolean`                                                              | Disables the fade transition.                                                 |
-| `component`    | `ElementType`                                                          | Changes the tooltip surface element.                                          |
-| `...props`     | `BoxProps<C>`                                                          | Native props and all Box utility props for the tooltip surface.               |
+| Prop           | Type                                                                | Description                                                                   |
+| -------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `trigger`      | `ReactElement`                                                      | Trigger element; enables interactive mode.                                    |
+| `placement`    | `TooltipPlacement \| Partial<Record<Breakpoint, TooltipPlacement>>` | Preferred placement or responsive placements; defaults to `top`.              |
+| `triggers`     | `('hover' \| 'focus' \| 'click')[]`                                 | Interaction sources; defaults to `['hover', 'focus']`.                        |
+| `delay`        | `number \| { open?: number; close?: number }`                       | Hover delay in milliseconds.                                                  |
+| `show`         | `boolean`                                                           | Controlled visibility in interactive mode; static surface modifier otherwise. |
+| `onShowChange` | `(show: boolean) => void`                                           | Called when an interaction requests a visibility change.                      |
+| `instant`      | `boolean`                                                           | Disables the fade transition.                                                 |
+| `component`    | `ElementType`                                                       | Changes the tooltip surface element.                                          |
+| `...props`     | `BoxProps<C>`                                                       | Native props and all Box utility props for the tooltip surface.               |
 
 `TooltipInner` applies Bootstrap's inner text styling. Use `className`, Box
 utility props, or Bootstrap tooltip CSS variables to customize its appearance.

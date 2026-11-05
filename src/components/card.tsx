@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import type { BoxProps } from './box';
-import { ClassedBox, type BoxComponentProps, type ClassedBoxProps } from './shared';
+import { ClassedBox, type ComponentProps, type ClassedBoxProps } from './shared';
 
-export type CardProps<C extends ElementType = 'div'> = BoxComponentProps<
+export type CardProps<C extends ElementType = 'div'> = ComponentProps<
   C,
   { variant?: 'subtle' | 'translucent' | undefined }
 >;
@@ -82,7 +82,7 @@ export function CardText<C extends ElementType = 'p'>(props: CardTextProps<C>) {
   return <CardPart<C> {...props} baseClass='card-text' defaultComponent={'p' as C} />;
 }
 
-export type CardImageProps<C extends ElementType = 'img'> = BoxComponentProps<
+export type CardImageProps<C extends ElementType = 'img'> = ComponentProps<
   C,
   { placement?: 'top' | 'bottom' | undefined }
 >;

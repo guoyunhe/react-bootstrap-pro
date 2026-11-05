@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import { Fragment, useEffect, useRef } from 'react';
 
-import { Box, type BoxProps } from './box';
+import { Box } from './box';
+import type { BoxProps } from './box';
 
 export type PasswordStrengthLevel = 'weak' | 'fair' | 'good' | 'strong';
 export type PasswordStrengthVariant = 'segments' | 'bar';

@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { Box, type BoxProps } from './box';
+import { Box } from './box';
+import type { BoxProps } from './box';
 
 export type ContainerBreakpoint = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 

@@ -6,8 +6,8 @@ import { Box, type BoxProps } from './box';
 /** Server-side validation state applied as `.is-valid` or `.is-invalid`. */
 export type ValidationState = 'valid' | 'invalid';
 
-export type BoxComponentProps<C extends ElementType, OwnProps extends object = object> = OwnProps &
-  Omit<BoxProps<C>, keyof OwnProps>;
+export type ComponentProps<C extends ElementType, ExtraProps extends object = object> = ExtraProps &
+  Omit<BoxProps<C>, keyof ExtraProps>;
 
 export type ClassedBoxProps<C extends ElementType, P extends object> = P & {
   baseClass: string;

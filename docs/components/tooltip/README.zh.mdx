@@ -159,17 +159,17 @@ Escape 后，提示会关闭。
 
 ## API
 
-| 属性           | 类型                                                                   | 说明                                             |
-| -------------- | ---------------------------------------------------------------------- | ------------------------------------------------ |
-| `trigger`      | `ReactElement`                                                         | 触发元素；传入后启用交互模式。                   |
-| `placement`    | `TooltipPlacement \| Partial<Record<BoxBreakpoint, TooltipPlacement>>` | 首选放置位置或响应式放置位置，默认为 `top`。     |
-| `triggers`     | `('hover' \| 'focus' \| 'click')[]`                                    | 触发方式，默认为 `['hover', 'focus']`。          |
-| `delay`        | `number \| { open?: number; close?: number }`                          | 鼠标悬停显示/隐藏的毫秒延迟。                    |
-| `show`         | `boolean`                                                              | 交互模式下控制显示；静态模式下用于添加显示样式。 |
-| `onShowChange` | `(show: boolean) => void`                                              | 交互请求改变显示状态时调用。                     |
-| `instant`      | `boolean`                                                              | 禁用淡入淡出动画。                               |
-| `component`    | `ElementType`                                                          | 更换提示表面的元素。                             |
-| `...props`     | `BoxProps<C>`                                                          | 提示表面的原生属性及所有 Box 工具类属性。        |
+| 属性           | 类型                                                                | 说明                                             |
+| -------------- | ------------------------------------------------------------------- | ------------------------------------------------ |
+| `trigger`      | `ReactElement`                                                      | 触发元素；传入后启用交互模式。                   |
+| `placement`    | `TooltipPlacement \| Partial<Record<Breakpoint, TooltipPlacement>>` | 首选放置位置或响应式放置位置，默认为 `top`。     |
+| `triggers`     | `('hover' \| 'focus' \| 'click')[]`                                 | 触发方式，默认为 `['hover', 'focus']`。          |
+| `delay`        | `number \| { open?: number; close?: number }`                       | 鼠标悬停显示/隐藏的毫秒延迟。                    |
+| `show`         | `boolean`                                                           | 交互模式下控制显示；静态模式下用于添加显示样式。 |
+| `onShowChange` | `(show: boolean) => void`                                           | 交互请求改变显示状态时调用。                     |
+| `instant`      | `boolean`                                                           | 禁用淡入淡出动画。                               |
+| `component`    | `ElementType`                                                       | 更换提示表面的元素。                             |
+| `...props`     | `BoxProps<C>`                                                       | 提示表面的原生属性及所有 Box 工具类属性。        |
 
 `TooltipInner` 设置内部文本样式。可使用 `className`、Box 工具类属性或 Bootstrap Tooltip
 CSS 变量自定义外观。

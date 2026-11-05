@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type PlaceholderProps<C extends ElementType = 'span'> = BoxComponentProps<
+export type PlaceholderProps<C extends ElementType = 'span'> = ComponentProps<
   C,
   { size?: 'xs' | 'sm' | 'lg' | undefined }
 >;
@@ -26,7 +26,7 @@ export function Placeholder<C extends ElementType = 'span'>({
   );
 }
 
-export type PlaceholderGroupProps<C extends ElementType = 'span'> = BoxComponentProps<
+export type PlaceholderGroupProps<C extends ElementType = 'span'> = ComponentProps<
   C,
   { animation?: 'glow' | 'pulse' | 'wave' | undefined }
 >;

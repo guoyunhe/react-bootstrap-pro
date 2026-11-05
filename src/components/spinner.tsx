@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type SpinnerProps<C extends ElementType = 'span'> = BoxComponentProps<
+export type SpinnerProps<C extends ElementType = 'span'> = ComponentProps<
   C,
   {
     label?: string | undefined;

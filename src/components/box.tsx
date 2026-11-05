@@ -1,357 +1,165 @@
 import clsx from 'clsx';
 import type { ComponentPropsWithoutRef, ComponentPropsWithRef, ElementType } from 'react';
 
-export type BoxTheme =
-  | 'primary'
-  | 'accent'
-  | 'secondary'
-  | 'success'
-  | 'danger'
-  | 'warning'
-  | 'info'
-  | 'inverse';
-
-export type BoxFg = BoxTheme | 'body' | '1' | '2' | '3' | '4' | 'bg' | 'white' | 'black' | 'reset';
-
-export type BoxBg =
-  | BoxTheme
-  | 'body'
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | 'fg'
-  | 'white'
-  | 'black'
-  | 'transparent';
-
-export type BoxOpacity = 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;
-
-export type BoxColorScheme = 'light' | 'dark' | 'auto';
-
-export type BoxThemeStyle = 'contrast' | 'subtle' | 'muted';
-
-export type BoxBreakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-
-export type BoxResponsive<T> = T | Partial<Record<BoxBreakpoint, T>>;
-
-export type BoxAspectRatio = 'auto' | '1x1' | '4x3' | '16x9' | '21x9';
-
-export type BoxContainerQuery = 'inline' | 'size';
-
-export type BoxDisplay =
-  | 'inline'
-  | 'inline-block'
-  | 'block'
-  | 'grid'
-  | 'inline-grid'
-  | 'table'
-  | 'table-row'
-  | 'table-cell'
-  | 'flex'
-  | 'inline-flex'
-  | 'contents'
-  | 'flow-root'
-  | 'none';
-
-export type BoxFloat = 'start' | 'end' | 'none';
-
-export type BoxObjectFit = 'contain' | 'cover' | 'fill' | 'scale' | 'none';
-
-export type BoxOverflow = 'auto' | 'hidden' | 'visible' | 'scroll';
-
-export type BoxPosition = 'static' | 'relative' | 'absolute' | 'fixed' | 'sticky';
-
-export type BoxPositionOffset = 0 | 50 | 100;
-
-export type BoxVisibility = 'visible' | 'invisible';
-
-export type BoxZIndex =
-  | -1
-  | 0
-  | 1
-  | 2
-  | 3
-  | 'menu'
-  | 'sticky'
-  | 'fixed'
-  | 'drawer'
-  | 'dialog'
-  | 'popover'
-  | 'tooltip'
-  | 'toast';
-
-export type BoxAlignContent = 'start' | 'end' | 'center' | 'between' | 'around' | 'stretch';
-
-export type BoxAlignItems = 'start' | 'end' | 'center' | 'baseline' | 'stretch';
-
-export type BoxAlignSelf = 'auto' | 'start' | 'end' | 'center' | 'baseline' | 'stretch';
-
-export type BoxVerticalAlign =
-  | 'baseline'
-  | 'top'
-  | 'middle'
-  | 'bottom'
-  | 'text-bottom'
-  | 'text-top';
-
-export type BoxBorderColor =
-  | BoxTheme
-  | 'bg'
-  | 'body'
-  | 'muted'
-  | 'subtle'
-  | 'emphasized'
-  | 'white'
-  | 'black';
-
-export type BoxBorderWidth = 'keyline' | 0 | 1 | 2 | 3 | 4 | 5;
-
-export type BoxBorderToggle = boolean | 0;
-
-export type BoxRadius = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 'circle' | 'pill';
-
-export type BoxDivide = true | 0;
-
-export type BoxFlex = 'fill';
-
-export type BoxFlexDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
-
-export type BoxFlexGrowShrink = 0 | 1;
-
-export type BoxFlexWrap = 'wrap' | 'nowrap' | 'wrap-reverse';
-
-export type BoxJustifyContent = 'start' | 'end' | 'center' | 'between' | 'around' | 'evenly';
-
-export type BoxJustifyItems = 'start' | 'end' | 'center' | 'stretch';
-
-export type BoxJustifySelf = 'start' | 'end' | 'center';
-
-export type BoxGridColumns = 1 | 2 | 3 | 4 | 6 | 'subgrid';
-
-export type BoxGridColumn = 'fill';
-
-export type BoxGridAutoFlow = 'row' | 'column' | 'dense';
-
-export type BoxOrder = 'first' | 0 | 1 | 2 | 3 | 4 | 5 | 'last';
-
-export type BoxSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-
-export type BoxMargin = BoxSpacing | 'auto';
-
-export type BoxNegativeMargin = BoxMargin | -1 | -2;
-
-export type BoxWidth =
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 11
-  | 12
-  | 25
-  | 50
-  | 75
-  | 100
-  | 'auto'
-  | 'min'
-  | 'max'
-  | 'fit';
-
-export type BoxHeight = 25 | 50 | 75 | 100 | 'auto' | 'min' | 'max' | 'fit';
-
-export type BoxFontFamily = 'monospace' | 'body';
-
-export type BoxFontSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl';
-
-export type BoxFontStyle = 'italic' | 'normal';
-
-export type BoxFontWeight =
-  | 'lighter'
-  | 'light'
-  | 'normal'
-  | 'medium'
-  | 'semibold'
-  | 'bold'
-  | 'bolder';
-
-export type BoxLineHeight = 1 | 'sm' | 'md' | 'lg';
-
-export type BoxTextAlign = 'start' | 'end' | 'center';
-
-export type BoxTextDecoration = 'none' | 'underline' | 'line-through';
-
-export type BoxTextTransform = 'lowercase' | 'uppercase' | 'capitalize';
-
-export type BoxTextWrap = 'wrap' | 'nowrap' | 'balance' | 'pretty';
-
-export type BoxUnderlineColor = BoxTheme;
-
-export type BoxUnderlineOffset = 1 | 2 | 3;
-
-export type BoxUnderlineThickness = 1 | 2 | 3 | 4 | 5;
-
-export type BoxOpacityStep = 0 | 25 | 50 | 75 | 100;
-
-export type BoxShadow = 'xs' | 'sm' | 'lg' | 'xl' | 'none';
-
-export type BoxShadowColor = BoxTheme | 'current' | 'black' | 'white';
-
-export type BoxPointerEvents = 'none' | 'auto';
-
-export type BoxUserSelect = 'all' | 'auto' | 'text' | 'none';
-
-export type BoxAnimation = 'none' | 'shake' | 'pop';
+import type {
+  Breakpoint,
+  Responsive,
+  Radius,
+  Spacing,
+  NegativeMargin,
+  Width,
+  Height,
+} from './types';
 
 type NativeProp<
   C extends ElementType,
   K extends PropertyKey,
 > = K extends keyof ComponentPropsWithoutRef<C> ? ComponentPropsWithoutRef<C>[K] : never;
 
-type BoxOwnProps<C extends ElementType> = {
-  theme?: BoxTheme | undefined;
-  themeStyle?: BoxThemeStyle | undefined;
+type OwnProps<C extends ElementType> = {
+  theme?: Theme | undefined;
+  themeStyle?: ThemeStyle | undefined;
   themeBorder?: boolean | undefined;
   themeReset?: boolean | undefined;
   focusRing?: boolean | undefined;
   hoverLift?: boolean | undefined;
-  colorScheme?: BoxColorScheme | undefined;
-  fg?: BoxFg | undefined;
-  fgEmphasis?: BoxTheme | undefined;
-  fgContrast?: BoxTheme | undefined;
-  fgOpacity?: BoxOpacity | undefined;
-  bg?: BoxBg | undefined;
-  bgSubtle?: BoxTheme | undefined;
-  bgMuted?: BoxTheme | undefined;
-  bgOpacity?: BoxOpacity | undefined;
+  colorScheme?: ColorScheme | undefined;
+  fg?: Fg | undefined;
+  fgEmphasis?: Theme | undefined;
+  fgContrast?: Theme | undefined;
+  fgOpacity?: Opacity | undefined;
+  bg?: Bg | undefined;
+  bgSubtle?: Theme | undefined;
+  bgMuted?: Theme | undefined;
+  bgOpacity?: Opacity | undefined;
   gradient?: boolean | undefined;
-  aspectRatio?: BoxAspectRatio | undefined;
-  containerQuery?: BoxContainerQuery | undefined;
-  display?: BoxResponsive<BoxDisplay> | undefined;
-  alignContent?: BoxResponsive<BoxAlignContent> | undefined;
-  alignItems?: BoxResponsive<BoxAlignItems> | undefined;
-  alignSelf?: BoxResponsive<BoxAlignSelf> | undefined;
-  verticalAlign?: BoxVerticalAlign | undefined;
-  border?: BoxBorderToggle | undefined;
-  borderTop?: BoxBorderToggle | undefined;
-  borderEnd?: BoxBorderToggle | undefined;
-  borderBottom?: BoxBorderToggle | undefined;
-  borderStart?: BoxBorderToggle | undefined;
-  borderX?: BoxBorderToggle | undefined;
-  borderY?: BoxBorderToggle | undefined;
-  borderColor?: BoxBorderColor | undefined;
-  borderSubtle?: BoxTheme | undefined;
-  borderWidth?: BoxBorderWidth | undefined;
-  borderOpacity?: BoxOpacity | undefined;
-  rounded?: boolean | BoxRadius | undefined;
-  roundedSize?: BoxRadius | undefined;
-  roundedTop?: boolean | BoxRadius | undefined;
-  roundedEnd?: boolean | BoxRadius | undefined;
-  roundedBottom?: boolean | BoxRadius | undefined;
-  roundedStart?: boolean | BoxRadius | undefined;
-  float?: BoxResponsive<BoxFloat> | undefined;
-  objectFit?: BoxResponsive<BoxObjectFit> | undefined;
-  overflow?: BoxOverflow | undefined;
-  overflowX?: BoxOverflow | undefined;
-  overflowY?: BoxOverflow | undefined;
+  aspectRatio?: AspectRatio | undefined;
+  containerQuery?: ContainerQuery | undefined;
+  display?: Responsive<Display> | undefined;
+  alignContent?: Responsive<AlignContent> | undefined;
+  alignItems?: Responsive<AlignItems> | undefined;
+  alignSelf?: Responsive<AlignSelf> | undefined;
+  verticalAlign?: VerticalAlign | undefined;
+  border?: BorderToggle | undefined;
+  borderTop?: BorderToggle | undefined;
+  borderEnd?: BorderToggle | undefined;
+  borderBottom?: BorderToggle | undefined;
+  borderStart?: BorderToggle | undefined;
+  borderX?: BorderToggle | undefined;
+  borderY?: BorderToggle | undefined;
+  borderColor?: BorderColor | undefined;
+  borderSubtle?: Theme | undefined;
+  borderWidth?: BorderWidth | undefined;
+  borderOpacity?: Opacity | undefined;
+  rounded?: boolean | Radius | undefined;
+  roundedSize?: Radius | undefined;
+  roundedTop?: boolean | Radius | undefined;
+  roundedEnd?: boolean | Radius | undefined;
+  roundedBottom?: boolean | Radius | undefined;
+  roundedStart?: boolean | Radius | undefined;
+  float?: Responsive<Float> | undefined;
+  objectFit?: Responsive<ObjectFit> | undefined;
+  overflow?: Overflow | undefined;
+  overflowX?: Overflow | undefined;
+  overflowY?: Overflow | undefined;
   fixedTop?: boolean | undefined;
   fixedBottom?: boolean | undefined;
-  stickyTop?: BoxResponsive<boolean> | undefined;
-  stickyBottom?: BoxResponsive<boolean> | undefined;
-  position?: BoxPosition | undefined;
-  top?: BoxPositionOffset | undefined;
-  bottom?: BoxPositionOffset | undefined;
-  start?: BoxPositionOffset | undefined;
-  end?: BoxPositionOffset | undefined;
+  stickyTop?: Responsive<boolean> | undefined;
+  stickyBottom?: Responsive<boolean> | undefined;
+  position?: Position | undefined;
+  top?: PositionOffset | undefined;
+  bottom?: PositionOffset | undefined;
+  start?: PositionOffset | undefined;
+  end?: PositionOffset | undefined;
   translateMiddle?: boolean | 'x' | 'y' | undefined;
-  visibility?: BoxVisibility | undefined;
-  zIndex?: BoxZIndex | undefined;
-  flex?: BoxResponsive<BoxFlex> | undefined;
-  flexDirection?: BoxResponsive<BoxFlexDirection> | undefined;
-  flexGrow?: BoxResponsive<BoxFlexGrowShrink> | undefined;
-  flexShrink?: BoxResponsive<BoxFlexGrowShrink> | undefined;
-  flexWrap?: BoxResponsive<BoxFlexWrap> | undefined;
-  justifyContent?: BoxResponsive<BoxJustifyContent> | undefined;
-  justifyItems?: BoxResponsive<BoxJustifyItems> | undefined;
-  justifySelf?: BoxResponsive<BoxJustifySelf> | undefined;
-  placeItems?: BoxResponsive<BoxJustifyItems> | undefined;
-  gridColumns?: BoxResponsive<BoxGridColumns> | undefined;
-  gridColumn?: BoxResponsive<BoxGridColumn> | undefined;
-  gridAutoFlow?: BoxResponsive<BoxGridAutoFlow> | undefined;
-  order?: BoxResponsive<BoxOrder> | undefined;
-  m?: BoxResponsive<BoxMargin> | undefined;
-  mx?: BoxResponsive<BoxMargin> | undefined;
-  my?: BoxResponsive<BoxMargin> | undefined;
-  mt?: BoxResponsive<BoxMargin> | undefined;
-  me?: BoxResponsive<BoxNegativeMargin> | undefined;
-  mb?: BoxResponsive<BoxMargin> | undefined;
-  ms?: BoxResponsive<BoxNegativeMargin> | undefined;
-  p?: BoxResponsive<BoxSpacing> | undefined;
-  px?: BoxResponsive<BoxSpacing> | undefined;
-  py?: BoxResponsive<BoxSpacing> | undefined;
-  pt?: BoxResponsive<BoxSpacing> | undefined;
-  pe?: BoxResponsive<BoxSpacing> | undefined;
-  pb?: BoxResponsive<BoxSpacing> | undefined;
-  ps?: BoxResponsive<BoxSpacing> | undefined;
-  gap?: BoxResponsive<BoxSpacing> | undefined;
-  rowGap?: BoxResponsive<BoxSpacing> | undefined;
-  columnGap?: BoxResponsive<BoxSpacing> | undefined;
-  spaceX?: BoxResponsive<BoxSpacing> | undefined;
-  spaceY?: BoxResponsive<BoxSpacing> | undefined;
-  divideX?: BoxResponsive<BoxDivide> | undefined;
-  divideY?: BoxResponsive<BoxDivide> | undefined;
-  width?: BoxWidth | NativeProp<C, 'width'> | undefined;
+  visibility?: Visibility | undefined;
+  zIndex?: ZIndex | undefined;
+  flex?: Responsive<Flex> | undefined;
+  flexDirection?: Responsive<FlexDirection> | undefined;
+  flexGrow?: Responsive<FlexGrowShrink> | undefined;
+  flexShrink?: Responsive<FlexGrowShrink> | undefined;
+  flexWrap?: Responsive<FlexWrap> | undefined;
+  justifyContent?: Responsive<JustifyContent> | undefined;
+  justifyItems?: Responsive<JustifyItems> | undefined;
+  justifySelf?: Responsive<JustifySelf> | undefined;
+  placeItems?: Responsive<JustifyItems> | undefined;
+  gridColumns?: Responsive<GridColumns> | undefined;
+  gridColumn?: Responsive<GridColumn> | undefined;
+  gridAutoFlow?: Responsive<GridAutoFlow> | undefined;
+  order?: Responsive<Order> | undefined;
+  m?: Responsive<Margin> | undefined;
+  mx?: Responsive<Margin> | undefined;
+  my?: Responsive<Margin> | undefined;
+  mt?: Responsive<Margin> | undefined;
+  me?: Responsive<NegativeMargin> | undefined;
+  mb?: Responsive<Margin> | undefined;
+  ms?: Responsive<NegativeMargin> | undefined;
+  p?: Responsive<Spacing> | undefined;
+  px?: Responsive<Spacing> | undefined;
+  py?: Responsive<Spacing> | undefined;
+  pt?: Responsive<Spacing> | undefined;
+  pe?: Responsive<Spacing> | undefined;
+  pb?: Responsive<Spacing> | undefined;
+  ps?: Responsive<Spacing> | undefined;
+  gap?: Responsive<Spacing> | undefined;
+  rowGap?: Responsive<Spacing> | undefined;
+  columnGap?: Responsive<Spacing> | undefined;
+  spaceX?: Responsive<Spacing> | undefined;
+  spaceY?: Responsive<Spacing> | undefined;
+  divideX?: Responsive<Divide> | undefined;
+  divideY?: Responsive<Divide> | undefined;
+  width?: Width | NativeProp<C, 'width'> | undefined;
   maxWidth?: 100 | undefined;
   minWidth?: 0 | 100 | undefined;
   viewportWidth?: 100 | undefined;
   minViewportWidth?: 100 | undefined;
   dynamicViewportWidth?: 100 | undefined;
   minDynamicViewportWidth?: 100 | undefined;
-  height?: BoxHeight | NativeProp<C, 'height'> | undefined;
+  height?: Height | NativeProp<C, 'height'> | undefined;
   maxHeight?: 100 | undefined;
   minHeight?: 0 | 100 | undefined;
   viewportHeight?: 100 | undefined;
   minViewportHeight?: 100 | undefined;
   dynamicViewportHeight?: 100 | undefined;
   minDynamicViewportHeight?: 100 | undefined;
-  fontFamily?: BoxFontFamily | undefined;
-  fontSize?: BoxFontSize | undefined;
-  textSize?: BoxFontSize | undefined;
-  fontStyle?: BoxFontStyle | undefined;
-  fontWeight?: BoxFontWeight | undefined;
-  lineHeight?: BoxLineHeight | undefined;
-  textAlign?: BoxResponsive<BoxTextAlign> | undefined;
-  textDecoration?: BoxTextDecoration | undefined;
-  textTransform?: BoxTextTransform | undefined;
+  fontFamily?: FontFamily | undefined;
+  fontSize?: FontSize | undefined;
+  textSize?: FontSize | undefined;
+  fontStyle?: FontStyle | undefined;
+  fontWeight?: FontWeight | undefined;
+  lineHeight?: LineHeight | undefined;
+  textAlign?: Responsive<TextAlign> | undefined;
+  textDecoration?: TextDecoration | undefined;
+  textTransform?: TextTransform | undefined;
   textTruncate?: boolean | undefined;
-  textWrap?: BoxTextWrap | undefined;
+  textWrap?: TextWrap | undefined;
   textBreak?: boolean | undefined;
-  linkOpacity?: BoxOpacity | undefined;
-  hoverLinkOpacity?: BoxOpacity | undefined;
-  underlineOffset?: BoxUnderlineOffset | undefined;
-  hoverUnderlineOffset?: BoxUnderlineOffset | undefined;
-  underlineColor?: BoxUnderlineColor | undefined;
-  underlineOpacity?: BoxOpacity | undefined;
-  hoverUnderlineOpacity?: BoxOpacity | undefined;
-  underlineThickness?: BoxUnderlineThickness | undefined;
-  hoverUnderlineThickness?: BoxUnderlineThickness | undefined;
-  opacity?: BoxOpacityStep | undefined;
-  shadow?: boolean | BoxShadow | undefined;
-  shadowColor?: BoxShadowColor | undefined;
-  shadowOpacity?: BoxOpacity | undefined;
-  pointerEvents?: BoxPointerEvents | undefined;
-  userSelect?: BoxUserSelect | undefined;
+  linkOpacity?: Opacity | undefined;
+  hoverLinkOpacity?: Opacity | undefined;
+  underlineOffset?: UnderlineOffset | undefined;
+  hoverUnderlineOffset?: UnderlineOffset | undefined;
+  underlineColor?: UnderlineColor | undefined;
+  underlineOpacity?: Opacity | undefined;
+  hoverUnderlineOpacity?: Opacity | undefined;
+  underlineThickness?: UnderlineThickness | undefined;
+  hoverUnderlineThickness?: UnderlineThickness | undefined;
+  opacity?: OpacityStep | undefined;
+  shadow?: boolean | Shadow | undefined;
+  shadowColor?: ShadowColor | undefined;
+  shadowOpacity?: Opacity | undefined;
+  pointerEvents?: PointerEvents | undefined;
+  userSelect?: UserSelect | undefined;
   transition?: 'none' | undefined;
-  animation?: BoxAnimation | undefined;
+  animation?: Animation | undefined;
 };
 
-const breakpoints: readonly BoxBreakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
-const boxWidths: readonly BoxWidth[] = [
+export type BoxProps<C extends ElementType = 'div'> = OwnProps<C> & {
+  component?: C;
+  className?: string;
+} & Omit<ComponentPropsWithRef<C>, keyof OwnProps<C> | 'className' | 'component'>;
+
+const breakpoints: readonly Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+const boxWidths: readonly Width[] = [
   1,
   2,
   3,
@@ -373,19 +181,19 @@ const boxWidths: readonly BoxWidth[] = [
   'max',
   'fit',
 ];
-const boxHeights: readonly BoxHeight[] = [25, 50, 75, 100, 'auto', 'min', 'max', 'fit'];
+const boxHeights: readonly Height[] = [25, 50, 75, 100, 'auto', 'min', 'max', 'fit'];
 
-function isBoxWidth(value: unknown): value is BoxWidth {
+function isBoxWidth(value: unknown): value is Width {
   return boxWidths.some((boxWidth) => boxWidth === value);
 }
 
-function isBoxHeight(value: unknown): value is BoxHeight {
+function isBoxHeight(value: unknown): value is Height {
   return boxHeights.some((boxHeight) => boxHeight === value);
 }
 
 function getResponsiveClasses<T extends string | number | boolean>(
   utility: string,
-  value: BoxResponsive<T> | undefined,
+  value: Responsive<T> | undefined,
   formatValue: (value: T) => string = String,
 ) {
   if (value === undefined) {
@@ -409,7 +217,7 @@ function getResponsiveClasses<T extends string | number | boolean>(
   });
 }
 
-function getResponsiveBooleanClasses(utility: string, value: BoxResponsive<boolean> | undefined) {
+function getResponsiveBooleanClasses(utility: string, value: Responsive<boolean> | undefined) {
   if (value === undefined) {
     return [];
   }
@@ -428,7 +236,7 @@ function getResponsiveBooleanClasses(utility: string, value: BoxResponsive<boole
   });
 }
 
-function formatSpacing(value: BoxNegativeMargin | BoxSpacing) {
+function formatSpacing(value: NegativeMargin | Spacing) {
   if (value === -1) {
     return 'n1';
   }
@@ -449,17 +257,12 @@ function getBooleanUtilityClass(
   return value === true ? (defaultValue ?? utility) : `${utility}-${value}`;
 }
 
-function getRadiusClass(utility: string, value: boolean | BoxRadius | undefined) {
+function getRadiusClass(utility: string, value: boolean | Radius | undefined) {
   if (value === undefined || value === false) {
     return;
   }
   return value === true ? utility : `${utility}-${value}`;
 }
-
-export type BoxProps<C extends ElementType = 'div'> = BoxOwnProps<C> & {
-  component?: C;
-  className?: string;
-} & Omit<ComponentPropsWithRef<C>, keyof BoxOwnProps<C> | 'className' | 'component'>;
 
 export function Box<C extends ElementType = 'div'>({
   component,

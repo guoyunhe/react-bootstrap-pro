@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import type { GridBreakpoint } from './grid';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
 export type TableBreakpoint = Exclude<GridBreakpoint, 'xs'>;
 
@@ -32,7 +32,7 @@ type TableOwnProps = {
 };
 
 export type TableProps<C extends ElementType = 'table'> = TableOwnProps &
-  Omit<BoxComponentProps<C>, keyof TableOwnProps>;
+  Omit<ComponentProps<C>, keyof TableOwnProps>;
 
 export function Table<C extends ElementType = 'table'>({
   component,

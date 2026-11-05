@@ -1,8 +1,8 @@
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type TableCaptionProps<C extends ElementType = 'caption'> = BoxComponentProps<C>;
+export type TableCaptionProps<C extends ElementType = 'caption'> = ComponentProps<C>;
 
 export function TableCaption<C extends ElementType = 'caption'>({
   component,

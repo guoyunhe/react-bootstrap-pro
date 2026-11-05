@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type StepperProps<C extends ElementType = 'ol'> = BoxComponentProps<
+export type StepperProps<C extends ElementType = 'ol'> = ComponentProps<
   C,
   {
     horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined;
@@ -34,7 +34,7 @@ export function Stepper<C extends ElementType = 'ol'>({
   );
 }
 
-export type StepperItemProps<C extends ElementType = 'li'> = BoxComponentProps<
+export type StepperItemProps<C extends ElementType = 'li'> = ComponentProps<
   C,
   { active?: boolean | undefined }
 >;

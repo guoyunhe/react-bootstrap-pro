@@ -1,8 +1,8 @@
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type FormTextProps<C extends ElementType = 'div'> = BoxComponentProps<C>;
+export type FormTextProps<C extends ElementType = 'div'> = ComponentProps<C>;
 
 export function FormText<C extends ElementType = 'div'>({
   component,

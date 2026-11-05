@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import type { BoxProps } from './box';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type PopoverProps<C extends ElementType = 'div'> = BoxComponentProps<
+export type PopoverProps<C extends ElementType = 'div'> = ComponentProps<
   C,
   {
     instant?: boolean | undefined;

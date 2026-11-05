@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type PaginationProps<C extends ElementType = 'ul'> = BoxComponentProps<
+export type PaginationProps<C extends ElementType = 'ul'> = ComponentProps<
   C,
   { size?: 'sm' | 'lg' | undefined }
 >;
@@ -25,7 +25,7 @@ export function Pagination<C extends ElementType = 'ul'>({
   );
 }
 
-export type PaginationItemProps<C extends ElementType = 'li'> = BoxComponentProps<
+export type PaginationItemProps<C extends ElementType = 'li'> = ComponentProps<
   C,
   { active?: boolean | undefined; disabled?: boolean | undefined }
 >;
@@ -50,7 +50,7 @@ export function PaginationItem<C extends ElementType = 'li'>({
   );
 }
 
-export type PageLinkProps<C extends ElementType = 'a'> = BoxComponentProps<
+export type PageLinkProps<C extends ElementType = 'a'> = ComponentProps<
   C,
   { active?: boolean | undefined }
 >;

@@ -3,9 +3,9 @@ import type { ElementType, ReactNode } from 'react';
 import { BiChevronDown } from 'react-bootstrap-icons-pro';
 
 import type { BoxProps } from './box';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type AccordionProps<C extends ElementType = 'div'> = BoxComponentProps<
+export type AccordionProps<C extends ElementType = 'div'> = ComponentProps<
   C,
   { flush?: boolean | undefined; gap?: boolean | undefined; size?: 'sm' | undefined }
 >;
@@ -52,7 +52,7 @@ export function AccordionItem<C extends ElementType = 'details'>({
   );
 }
 
-export type AccordionHeaderProps<C extends ElementType = 'summary'> = BoxComponentProps<
+export type AccordionHeaderProps<C extends ElementType = 'summary'> = ComponentProps<
   C,
   { icon?: ReactNode | undefined }
 >;
@@ -73,7 +73,7 @@ export function AccordionHeader<C extends ElementType = 'summary'>({
       className={className}
     >
       {children}
-      {icon != null && (
+      {icon && (
         <span className='accordion-icon' aria-hidden='true'>
           {icon}
         </span>

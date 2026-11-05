@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
 export type FormLabelCol = 'sm' | 'lg';
 
-export type FormLabelProps<C extends ElementType = 'label'> = BoxComponentProps<
+export type FormLabelProps<C extends ElementType = 'label'> = ComponentProps<
   C,
   {
     /** Renders a `.col-form-label` for horizontal forms; `'sm'` and `'lg'` match the control size. */

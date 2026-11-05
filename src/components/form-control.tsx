@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps, type ValidationState } from './shared';
+import { ClassedBox, type ComponentProps, type ValidationState } from './shared';
 
 export type FormControlSize = 'sm' | 'lg';
 
-export type FormControlProps<C extends ElementType = 'input'> = BoxComponentProps<
+export type FormControlProps<C extends ElementType = 'input'> = ComponentProps<
   C,
   {
     size?: FormControlSize | undefined;

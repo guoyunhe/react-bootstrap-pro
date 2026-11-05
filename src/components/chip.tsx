@@ -3,14 +3,14 @@ import type { ElementType, MouseEvent, ReactNode } from 'react';
 import { BiX } from 'react-bootstrap-icons-pro';
 
 import { Box } from './box';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
 export type ChipImage = {
   src: string;
   alt?: string | undefined;
 };
 
-export type ChipProps<C extends ElementType = 'span'> = BoxComponentProps<
+export type ChipProps<C extends ElementType = 'span'> = ComponentProps<
   C,
   {
     active?: boolean | undefined;

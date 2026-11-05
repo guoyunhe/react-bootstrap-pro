@@ -1,8 +1,8 @@
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type ProseProps<C extends ElementType = 'div'> = BoxComponentProps<C>;
+export type ProseProps<C extends ElementType = 'div'> = ComponentProps<C>;
 
 export function Prose<C extends ElementType = 'div'>({
   component,
@@ -20,7 +20,7 @@ export function Prose<C extends ElementType = 'div'>({
   );
 }
 
-export type NotProseProps<C extends ElementType = 'div'> = BoxComponentProps<C>;
+export type NotProseProps<C extends ElementType = 'div'> = ComponentProps<C>;
 
 export function NotProse<C extends ElementType = 'div'>({
   component,

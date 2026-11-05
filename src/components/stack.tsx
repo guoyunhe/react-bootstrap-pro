@@ -1,25 +1,25 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import type { BoxBreakpoint, BoxResponsive } from './box';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
+import type { Breakpoint, Responsive } from './types';
 
 export type StackDirection = 'horizontal' | 'vertical';
 
 type StackOwnProps = {
-  direction?: BoxResponsive<StackDirection> | undefined;
+  direction?: Responsive<StackDirection> | undefined;
 };
 
 export type StackProps<C extends ElementType = 'div'> = StackOwnProps &
-  Omit<BoxComponentProps<C>, keyof StackOwnProps>;
+  Omit<ComponentProps<C>, keyof StackOwnProps>;
 
-const breakpoints: readonly BoxBreakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+const breakpoints: readonly Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 
 function directionClass(direction: StackDirection) {
   return direction === 'horizontal' ? 'hstack' : 'vstack';
 }
 
-function getStackClass(direction: BoxResponsive<StackDirection> | undefined) {
+function getStackClass(direction: Responsive<StackDirection> | undefined) {
   if (typeof direction !== 'object' || direction === null) {
     return directionClass(direction ?? 'vertical');
   }
@@ -52,7 +52,7 @@ export function Stack<C extends ElementType = 'div'>({
   );
 }
 
-export type StackContainerProps<C extends ElementType = 'div'> = BoxComponentProps<C>;
+export type StackContainerProps<C extends ElementType = 'div'> = ComponentProps<C>;
 
 export function StackContainer<C extends ElementType = 'div'>({
   component,

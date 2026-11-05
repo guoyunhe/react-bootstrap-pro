@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
 type ImageOwnProps = {
   fluid?: boolean | undefined;
   thumbnail?: boolean | undefined;
 };
 
-export type ImageProps<C extends ElementType = 'img'> = BoxComponentProps<C, ImageOwnProps>;
+export type ImageProps<C extends ElementType = 'img'> = ComponentProps<C, ImageOwnProps>;
 
 export function Image<C extends ElementType = 'img'>({
   component,
@@ -28,7 +28,7 @@ export function Image<C extends ElementType = 'img'>({
   );
 }
 
-export type FigureProps<C extends ElementType = 'figure'> = BoxComponentProps<C>;
+export type FigureProps<C extends ElementType = 'figure'> = ComponentProps<C>;
 
 export function Figure<C extends ElementType = 'figure'>({
   component,
@@ -46,7 +46,7 @@ export function Figure<C extends ElementType = 'figure'>({
   );
 }
 
-export type FigureCaptionProps<C extends ElementType = 'figcaption'> = BoxComponentProps<C>;
+export type FigureCaptionProps<C extends ElementType = 'figcaption'> = ComponentProps<C>;
 
 export function FigureCaption<C extends ElementType = 'figcaption'>({
   component,

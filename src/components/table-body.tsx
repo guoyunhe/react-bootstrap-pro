@@ -1,8 +1,8 @@
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type TableBodyProps<C extends ElementType = 'tbody'> = BoxComponentProps<
+export type TableBodyProps<C extends ElementType = 'tbody'> = ComponentProps<
   C,
   { divider?: boolean | undefined }
 >;

@@ -8,8 +8,8 @@ import type {
 } from 'react';
 import { useRef, useState } from 'react';
 
-import type { BoxProps } from './box';
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { Chip, type ChipProps } from './chip';
 import { FormControl } from './form-control';
 import { ClassedBox, type ValidationState } from './shared';

@@ -3,9 +3,9 @@ import type { ElementType } from 'react';
 
 import type { BoxProps } from './box';
 import { IconButton, type IconButtonProps } from './icon-button';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type CarouselProps<C extends ElementType = 'div'> = BoxComponentProps<
+export type CarouselProps<C extends ElementType = 'div'> = ComponentProps<
   C,
   {
     auto?: boolean | undefined;
@@ -59,7 +59,7 @@ export function CarouselInner<C extends ElementType = 'div'>({
   );
 }
 
-export type CarouselItemProps<C extends ElementType = 'div'> = BoxComponentProps<
+export type CarouselItemProps<C extends ElementType = 'div'> = ComponentProps<
   C,
   { active?: boolean | undefined }
 >;
@@ -99,7 +99,7 @@ export function CarouselIndicators<C extends ElementType = 'div'>({
   );
 }
 
-export type CarouselIndicatorProps<C extends ElementType = 'button'> = BoxComponentProps<
+export type CarouselIndicatorProps<C extends ElementType = 'button'> = ComponentProps<
   C,
   { active?: boolean | undefined; index: number; target: string }
 >;
@@ -129,7 +129,7 @@ export function CarouselIndicator<C extends ElementType = 'button'>({
   );
 }
 
-export type CarouselControlProps<C extends ElementType = 'button'> = BoxComponentProps<
+export type CarouselControlProps<C extends ElementType = 'button'> = ComponentProps<
   C,
   {
     direction: 'next' | 'previous';

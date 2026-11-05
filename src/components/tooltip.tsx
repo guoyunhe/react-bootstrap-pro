@@ -30,15 +30,16 @@ import {
   type Ref,
 } from 'react';
 
-import type { BoxBreakpoint, BoxProps, BoxResponsive } from './box';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import type { BoxProps } from './box';
+import { ClassedBox, type ComponentProps } from './shared';
+import type { Breakpoint, Responsive } from './types';
 
 export type TooltipTrigger = 'hover' | 'focus' | 'click';
 export type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left' | 'end' | 'start';
 
 const defaultTriggers: TooltipTrigger[] = ['hover', 'focus'];
-const breakpointNames: readonly BoxBreakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
-const breakpointWidths: ReadonlyArray<readonly [BoxBreakpoint, number]> = [
+const breakpointNames: readonly Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+const breakpointWidths: ReadonlyArray<readonly [Breakpoint, number]> = [
   ['xs', 0],
   ['sm', 576],
   ['md', 768],
@@ -74,9 +75,9 @@ function getTooltipPlacement(placement: Placement) {
   return side;
 }
 
-function getViewportBreakpoint(): BoxBreakpoint {
+function getViewportBreakpoint(): Breakpoint {
   const width = globalThis.window === undefined ? 0 : globalThis.window.innerWidth;
-  let currentBreakpoint: BoxBreakpoint = 'xs';
+  let currentBreakpoint: Breakpoint = 'xs';
 
   for (const [breakpoint, minWidth] of breakpointWidths) {
     if (width >= minWidth) {
@@ -87,7 +88,7 @@ function getViewportBreakpoint(): BoxBreakpoint {
   return currentBreakpoint;
 }
 
-function getServerViewportBreakpoint(): BoxBreakpoint {
+function getServerViewportBreakpoint(): Breakpoint {
   return 'xs';
 }
 
@@ -118,8 +119,8 @@ function subscribeToBreakpoint(subscriber: () => void) {
 }
 
 function resolvePlacement(
-  placement: BoxResponsive<TooltipPlacement>,
-  breakpoint: BoxBreakpoint,
+  placement: Responsive<TooltipPlacement>,
+  breakpoint: Breakpoint,
 ): TooltipPlacement {
   if (typeof placement === 'string') {
     return placement;
@@ -156,13 +157,13 @@ function getTriggerRef(trigger: ReactElement<{ ref?: Ref<unknown> }>): Ref<unkno
   return isReactRef(legacyRef) ? legacyRef : undefined;
 }
 
-export type TooltipProps<C extends ElementType = 'div'> = BoxComponentProps<
+export type TooltipProps<C extends ElementType = 'div'> = ComponentProps<
   C,
   {
     delay?: number | { close?: number; open?: number } | undefined;
     instant?: boolean | undefined;
     onShowChange?: ((show: boolean) => void) | undefined;
-    placement?: BoxResponsive<TooltipPlacement> | undefined;
+    placement?: Responsive<TooltipPlacement> | undefined;
     show?: boolean | undefined;
     trigger?: ReactElement<{ ref?: Ref<unknown> }> | undefined;
     triggers?: TooltipTrigger[] | undefined;
@@ -228,7 +229,7 @@ type InteractiveTooltipProps<C extends ElementType> = {
   delay?: number | { close?: number; open?: number } | undefined;
   instant?: boolean | undefined;
   onShowChange?: ((show: boolean) => void) | undefined;
-  placement?: BoxResponsive<TooltipPlacement> | undefined;
+  placement?: Responsive<TooltipPlacement> | undefined;
   show?: boolean | undefined;
   trigger: ReactElement<{ ref?: Ref<unknown> }>;
   triggers?: TooltipTrigger[] | undefined;

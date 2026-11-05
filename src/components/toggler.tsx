@@ -1,8 +1,8 @@
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type TogglerProps<C extends ElementType = 'button'> = BoxComponentProps<
+export type TogglerProps<C extends ElementType = 'button'> = ComponentProps<
   C,
   { attribute?: string | undefined; target?: string | undefined; value?: string | undefined }
 >;

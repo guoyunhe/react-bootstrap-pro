@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type ListGroupProps<C extends ElementType = 'ul'> = BoxComponentProps<
+export type ListGroupProps<C extends ElementType = 'ul'> = ComponentProps<
   C,
   {
     flush?: boolean | undefined;
@@ -37,7 +37,7 @@ export function ListGroup<C extends ElementType = 'ul'>({
   );
 }
 
-export type ListGroupItemProps<C extends ElementType = 'li'> = BoxComponentProps<
+export type ListGroupItemProps<C extends ElementType = 'li'> = ComponentProps<
   C,
   { action?: boolean | undefined; active?: boolean | undefined }
 >;

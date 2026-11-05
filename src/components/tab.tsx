@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import type { BoxProps } from './box';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
 export type TabListProps<C extends ElementType = 'ul'> = BoxProps<C>;
 
@@ -43,7 +43,7 @@ export function TabItem<C extends ElementType = 'li'>({
   );
 }
 
-export type TabProps<C extends ElementType = 'button'> = BoxComponentProps<
+export type TabProps<C extends ElementType = 'button'> = ComponentProps<
   C,
   { active?: boolean | undefined; targetId?: string | undefined }
 >;
@@ -92,7 +92,7 @@ export function TabContent<C extends ElementType = 'div'>({
   );
 }
 
-export type TabPaneProps<C extends ElementType = 'div'> = BoxComponentProps<
+export type TabPaneProps<C extends ElementType = 'div'> = ComponentProps<
   C,
   { active?: boolean | undefined }
 >;

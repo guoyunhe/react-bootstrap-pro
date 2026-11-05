@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import type { BoxProps } from './box';
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type NavProps<C extends ElementType = 'ul'> = BoxComponentProps<
+export type NavProps<C extends ElementType = 'ul'> = ComponentProps<
   C,
   {
     fill?: boolean | undefined;
@@ -58,7 +58,7 @@ export function NavItem<C extends ElementType = 'li'>({
   );
 }
 
-export type NavLinkProps<C extends ElementType = 'a'> = BoxComponentProps<
+export type NavLinkProps<C extends ElementType = 'a'> = ComponentProps<
   C,
   { active?: boolean | undefined; disabled?: boolean | undefined }
 >;

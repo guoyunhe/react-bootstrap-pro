@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type BoxComponentProps } from './shared';
+import { ClassedBox, type ComponentProps } from './shared';
 
-export type TableCellProps<C extends ElementType = 'td'> = BoxComponentProps<
+export type TableCellProps<C extends ElementType = 'td'> = ComponentProps<
   C,
   {
     active?: boolean | undefined;
