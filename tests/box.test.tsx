@@ -123,11 +123,13 @@ test('applies background utilities', async () => {
   const screen = await render(
     <>
       <Box data-testid='bg' bg='primary' />
-      <Box data-testid='bg-subtle' bgSubtle='accent' />
-      <Box data-testid='bg-muted' bgMuted='info' />
+      <Box data-testid='bg-subtle' bg='accent' bgSubtle />
+      <Box data-testid='bg-muted' bg='info' bgMuted />
       <Box data-testid='bg-opacity' bg='inverse' bgo={70} />
       <Box data-testid='bg-gradient' bg='success' gradient />
       <Box data-testid='bg-transparent' bg='transparent' />
+      <Box data-testid='bg-subtle-unsupported' bg='transparent' bgSubtle />
+      <Box data-testid='bg-muted-unsupported' bg='fg' bgMuted />
     </>,
   );
 
@@ -137,6 +139,8 @@ test('applies background utilities', async () => {
   expect(screen.getByTestId('bg-opacity')).toHaveClass('bg-inverse', 'bg-70');
   expect(screen.getByTestId('bg-gradient')).toHaveClass('bg-success', 'bg-gradient');
   expect(screen.getByTestId('bg-transparent')).toHaveClass('bg-transparent');
+  expect(screen.getByTestId('bg-subtle-unsupported')).not.toHaveClass('bg-subtle-transparent');
+  expect(screen.getByTestId('bg-muted-unsupported')).not.toHaveClass('bg-muted-fg');
 });
 
 test('applies theme utilities', async () => {
@@ -517,7 +521,7 @@ test('renders the selected component and forwards its props', async () => {
       <Box component='a' href='/docs' fg='primary'>
         Docs
       </Box>
-      <Box component={AppLink} to='/profile' bgSubtle='primary'>
+      <Box component={AppLink} to='/profile' bg='primary' bgSubtle>
         Profile
       </Box>
       <Box

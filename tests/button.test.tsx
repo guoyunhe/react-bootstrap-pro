@@ -160,7 +160,7 @@ test('renders the selected component and forwards its props', async () => {
 
 test('accepts box utility props', async () => {
   const screen = await render(
-    <Button theme='primary' bgSubtle='primary' fg='primary' fgEmphasis colorScheme='dark'>
+    <Button theme='primary' bg='primary' bgSubtle fg='primary' fgEmphasis colorScheme='dark'>
       Themed
     </Button>,
   );

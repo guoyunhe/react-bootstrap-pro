@@ -78,8 +78,8 @@ type OwnProps = {
   fgContrast?: boolean | undefined;
   fgo?: Opacity | undefined;
   bg?: Bg | undefined;
-  bgSubtle?: Theme | undefined;
-  bgMuted?: Theme | undefined;
+  bgSubtle?: boolean | undefined;
+  bgMuted?: boolean | undefined;
   bgo?: Opacity | undefined;
   gradient?: boolean | undefined;
   ratio?: AspectRatio | undefined;
@@ -251,7 +251,7 @@ const themeColors: readonly Theme[] = [
   'inverse',
 ];
 
-function isThemeColor(value: Fg | undefined): value is Theme {
+function isThemeColor(value: Fg | Bg | undefined): value is Theme {
   return value !== undefined && themeColors.some((themeColor) => themeColor === value);
 }
 
@@ -483,8 +483,8 @@ export function Box<C extends ElementType = 'div'>({
     fgContrast && isThemeColor(fg) && `fg-contrast-${fg}`,
     fgo && `fg-${fgo}`,
     bg && `bg-${bg}`,
-    bgSubtle && `bg-subtle-${bgSubtle}`,
-    bgMuted && `bg-muted-${bgMuted}`,
+    bgSubtle && isThemeColor(bg) && `bg-subtle-${bg}`,
+    bgMuted && isThemeColor(bg) && `bg-muted-${bg}`,
     bgo && `bg-${bgo}`,
     gradient && 'bg-gradient',
     ratio && `ratio-${ratio}`,

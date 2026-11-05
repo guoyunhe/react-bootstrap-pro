@@ -13,7 +13,8 @@ export function BoxComponentDemo() {
         href='https://getbootstrap.com/docs/6.0/utilities/colors/'
         target='_blank'
         rel='noreferrer'
-        bgSubtle='primary'
+        bg='primary'
+        bgSubtle
         fg='primary'
         fgEmphasis
         display='inline-block'

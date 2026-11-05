@@ -29,7 +29,7 @@ import { BoxThemeDemo } from './demos/box-theme';
 </DemoContainer>
 
 ```tsx
-<Box component='a' href='/settings' bgSubtle='primary' fg='primary' fgEmphasis>
+<Box component='a' href='/settings' bg='primary' bgSubtle fg='primary' fgEmphasis>
   设置
 </Box>
 <Box component='blockquote' theme='accent' themeStyle='subtle'>
@@ -72,9 +72,10 @@ import { BoxThemeDemo } from './demos/box-theme';
 
 ## 背景色
 
-`bg` 设置 `.bg-{color}`，`bgSubtle` 设置 `.bg-subtle-{color}`，`bgMuted` 设置
-`.bg-muted-{color}`。`bgo` 将当前背景色与页面背景混合，`gradient` 添加
-`.bg-gradient`。
+`bg` 设置 `.bg-{color}`。将 `bgSubtle` 或 `bgMuted` 与主题色 `bg` 搭配，可应用对应的
+`.bg-subtle-{color}` 或 `.bg-muted-{color}` 类。这些修饰属性仅支持主题色，并非所有
+`bg` 值都支持。`bgo` 将当前背景色与页面背景混合，`gradient` 添加 `.bg-gradient`。
+可用工具类请参阅 [Bootstrap background 文档](https://getbootstrap.com/docs/6.0/utilities/background/)。
 
 <DemoContainer>
   <BoxBackgroundDemo />
@@ -82,8 +83,8 @@ import { BoxThemeDemo } from './demos/box-theme';
 
 ```tsx
 <Box bg='primary'>实色背景</Box>
-<Box bgSubtle='danger' fg='danger' fgEmphasis>淡背景</Box>
-<Box bgMuted='info' fg='info' fgEmphasis>中等背景</Box>
+<Box bg='danger' bgSubtle fg='danger' fgEmphasis>淡背景</Box>
+<Box bg='info' bgMuted fg='info' fgEmphasis>中等背景</Box>
 <Box bg='inverse' bgo={50}>半透明背景</Box>
 <Box bg='primary' gradient>渐变背景</Box>
 ```
@@ -91,8 +92,8 @@ import { BoxThemeDemo } from './demos/box-theme';
 | 属性       | 类名           | 取值                                                           |
 | ---------- | -------------- | -------------------------------------------------------------- |
 | `bg`       | `.bg-*`        | 主题色、`body`、`1`–`4`、`fg`、`white`、`black`、`transparent` |
-| `bgSubtle` | `.bg-subtle-*` | 主题色                                                         |
-| `bgMuted`  | `.bg-muted-*`  | 主题色                                                         |
+| `bgSubtle` | `.bg-subtle-*` | `boolean`；需搭配主题色 `bg`                                   |
+| `bgMuted`  | `.bg-muted-*`  | `boolean`；需搭配主题色 `bg`                                   |
 | `bgo`      | `.bg-*`        | `10`、`20`、`30`、`40`、`50`、`60`、`70`、`80`、`90`、`100`    |
 | `gradient` | `.bg-gradient` | `boolean`                                                      |
 
@@ -241,9 +242,9 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 | `animation`               | `'none' \| 'shake' \| 'pop'`                                                                                                                                                             | —       | 添加 `.animation-*`。                                                                                                                           |
 | `ratio`                   | `'auto' \| '1x1' \| '4x3' \| '16x9' \| '21x9'`                                                                                                                                           | —       | 添加 `.ratio-{value}`。参阅 [Bootstrap aspect-ratio 工具类](https://getbootstrap.com/docs/6.0/utilities/aspect-ratio/)。                        |
 | `bg`                      | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse' \| 'body' \| '1' \| '2' \| '3' \| '4' \| 'fg' \| 'white' \| 'black' \| 'transparent'` | —       | 添加 `.bg-{value}`。                                                                                                                            |
-| `bgMuted`                 | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse'`                                                                                      | —       | 添加 `.bg-muted-{color}`。                                                                                                                      |
+| `bgMuted`                 | `boolean`                                                                                                                                                                                | `false` | `bg` 为主题色时添加 `.bg-muted-{bg}`。参阅 [Bootstrap background 文档](https://getbootstrap.com/docs/6.0/utilities/background/)。               |
 | `bgo`                     | `10 \| 20 \| 30 \| 40 \| 50 \| 60 \| 70 \| 80 \| 90 \| 100`                                                                                                                              | —       | 添加 `.bg-{opacity}`。                                                                                                                          |
-| `bgSubtle`                | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse'`                                                                                      | —       | 添加 `.bg-subtle-{color}`。                                                                                                                     |
+| `bgSubtle`                | `boolean`                                                                                                                                                                                | `false` | `bg` 为主题色时添加 `.bg-subtle-{bg}`。参阅 [Bootstrap background 文档](https://getbootstrap.com/docs/6.0/utilities/background/)。              |
 | `border`                  | `boolean \| number`                                                                                                                                                                      | —       | 添加 `.border` 或 `.border-0`。                                                                                                                 |
 | `borderBottom`            | `boolean \| number`                                                                                                                                                                      | —       | 添加 `.border-bottom` 或 `.border-bottom-0`。                                                                                                   |
 | `borderColor`             | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse' \| 'bg' \| 'body' \| 'muted' \| 'subtle' \| 'emphasized' \| 'white' \| 'black'`       | —       | 添加 `.border-{color}`。                                                                                                                        |
