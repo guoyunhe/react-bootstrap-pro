@@ -21,10 +21,10 @@ export function BoxBackgroundDemo() {
           <Box bg={theme} className='rounded' px={2} py={1}>
             {`bg-${theme}`}
           </Box>
-          <Box bgSubtle={theme} fgEmphasis={theme} className='rounded' px={2} py={1}>
+          <Box bgSubtle={theme} fg={theme} fgEmphasis className='rounded' px={2} py={1}>
             {`bg-subtle-${theme}`}
           </Box>
-          <Box bgMuted={theme} fgEmphasis={theme} className='rounded' px={2} py={1}>
+          <Box bgMuted={theme} fg={theme} fgEmphasis className='rounded' px={2} py={1}>
             {`bg-muted-${theme}`}
           </Box>
         </Box>
@@ -34,7 +34,7 @@ export function BoxBackgroundDemo() {
           bg-gradient
         </Box>
         {opacities.map((opacity) => (
-          <Box key={opacity} bg='primary' bgOpacity={opacity} className='rounded' px={2} py={1}>
+          <Box key={opacity} bg='primary' bgo={opacity} className='rounded' px={2} py={1}>
             {`bg-${opacity}`}
           </Box>
         ))}

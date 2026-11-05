@@ -74,13 +74,13 @@ type OwnProps = {
   hoverLift?: boolean | undefined;
   colorScheme?: ColorScheme | undefined;
   fg?: Fg | undefined;
-  fgEmphasis?: Theme | undefined;
-  fgContrast?: Theme | undefined;
-  fgOpacity?: Opacity | undefined;
+  fgEmphasis?: boolean | undefined;
+  fgContrast?: boolean | undefined;
+  fgo?: Opacity | undefined;
   bg?: Bg | undefined;
   bgSubtle?: Theme | undefined;
   bgMuted?: Theme | undefined;
-  bgOpacity?: Opacity | undefined;
+  bgo?: Opacity | undefined;
   gradient?: boolean | undefined;
   ratio?: AspectRatio | undefined;
   containerQuery?: ContainerQuery | undefined;
@@ -240,6 +240,21 @@ function isBoxHeight(value: unknown): value is Height {
   return boxHeights.some((boxHeight) => boxHeight === value);
 }
 
+const themeColors: readonly Theme[] = [
+  'primary',
+  'accent',
+  'secondary',
+  'success',
+  'danger',
+  'warning',
+  'info',
+  'inverse',
+];
+
+function isThemeColor(value: Fg | undefined): value is Theme {
+  return value !== undefined && themeColors.some((themeColor) => themeColor === value);
+}
+
 function getResponsiveClasses<T extends string | number | boolean>(
   utility: string,
   value: Responsive<T> | undefined,
@@ -325,11 +340,11 @@ export function Box<C extends ElementType = 'div'>({
   fg,
   fgEmphasis,
   fgContrast,
-  fgOpacity,
+  fgo,
   bg,
   bgSubtle,
   bgMuted,
-  bgOpacity,
+  bgo,
   gradient,
   ratio,
   containerQuery,
@@ -464,13 +479,13 @@ export function Box<C extends ElementType = 'div'>({
     hoverLift && 'hover-lift',
     colorScheme && `color-scheme-${colorScheme}`,
     fg && `fg-${fg}`,
-    fgEmphasis && `fg-emphasis-${fgEmphasis}`,
-    fgContrast && `fg-contrast-${fgContrast}`,
-    fgOpacity && `fg-${fgOpacity}`,
+    fgEmphasis && isThemeColor(fg) && `fg-emphasis-${fg}`,
+    fgContrast && isThemeColor(fg) && `fg-contrast-${fg}`,
+    fgo && `fg-${fgo}`,
     bg && `bg-${bg}`,
     bgSubtle && `bg-subtle-${bgSubtle}`,
     bgMuted && `bg-muted-${bgMuted}`,
-    bgOpacity && `bg-${bgOpacity}`,
+    bgo && `bg-${bgo}`,
     gradient && 'bg-gradient',
     ratio && `ratio-${ratio}`,
     containerQuery && `contains-${containerQuery}`,

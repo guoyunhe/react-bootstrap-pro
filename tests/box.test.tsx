@@ -101,10 +101,12 @@ test('applies foreground utilities', async () => {
   const screen = await render(
     <>
       <Box data-testid='fg' fg='primary' />
-      <Box data-testid='fg-emphasis' fgEmphasis='danger' />
-      <Box data-testid='fg-contrast' fgContrast='warning' />
-      <Box data-testid='fg-opacity' fg='secondary' fgOpacity={50} />
+      <Box data-testid='fg-emphasis' fg='danger' fgEmphasis />
+      <Box data-testid='fg-contrast' fg='warning' fgContrast />
+      <Box data-testid='fg-opacity' fg='secondary' fgo={50} />
       <Box data-testid='fg-reset' fg='reset' />
+      <Box data-testid='fg-emphasis-unsupported' fg='body' fgEmphasis />
+      <Box data-testid='fg-contrast-unsupported' fg='white' fgContrast />
     </>,
   );
 
@@ -113,6 +115,8 @@ test('applies foreground utilities', async () => {
   expect(screen.getByTestId('fg-contrast')).toHaveClass('fg-contrast-warning');
   expect(screen.getByTestId('fg-opacity')).toHaveClass('fg-secondary', 'fg-50');
   expect(screen.getByTestId('fg-reset')).toHaveClass('fg-reset');
+  expect(screen.getByTestId('fg-emphasis-unsupported')).not.toHaveClass('fg-emphasis-body');
+  expect(screen.getByTestId('fg-contrast-unsupported')).not.toHaveClass('fg-contrast-white');
 });
 
 test('applies background utilities', async () => {
@@ -121,7 +125,7 @@ test('applies background utilities', async () => {
       <Box data-testid='bg' bg='primary' />
       <Box data-testid='bg-subtle' bgSubtle='accent' />
       <Box data-testid='bg-muted' bgMuted='info' />
-      <Box data-testid='bg-opacity' bg='inverse' bgOpacity={70} />
+      <Box data-testid='bg-opacity' bg='inverse' bgo={70} />
       <Box data-testid='bg-gradient' bg='success' gradient />
       <Box data-testid='bg-transparent' bg='transparent' />
     </>,

@@ -14,7 +14,8 @@ export function BoxComponentDemo() {
         target='_blank'
         rel='noreferrer'
         bgSubtle='primary'
-        fgEmphasis='primary'
+        fg='primary'
+        fgEmphasis
         display='inline-block'
         px={3}
         py={2}

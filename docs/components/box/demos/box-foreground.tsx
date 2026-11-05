@@ -21,20 +21,20 @@ export function BoxForegroundDemo() {
           <Box fg={theme} className='fw-semibold'>
             {`fg-${theme}`}
           </Box>
-          <Box fgEmphasis={theme} className='fw-semibold'>
+          <Box fg={theme} fgEmphasis className='fw-semibold'>
             {`fg-emphasis-${theme}`}
           </Box>
           <Box bg={theme} className='rounded' px={2} py={1}>
-            <Box fgContrast={theme}>{`fg-contrast-${theme}`}</Box>
+            <Box fg={theme} fgContrast>{`fg-contrast-${theme}`}</Box>
           </Box>
         </Box>
       ))}
       <Box display='flex' flexWrap='wrap' alignItems='center' gap={3}>
-        <Box fg='primary' fgOpacity={100} className='fw-semibold'>
+        <Box fg='primary' fgo={100} className='fw-semibold'>
           fg-100
         </Box>
         {opacities.slice(1).map((opacity) => (
-          <Box key={opacity} fg='primary' fgOpacity={opacity} className='fw-semibold'>
+          <Box key={opacity} fg='primary' fgo={opacity} className='fw-semibold'>
             {`fg-${opacity}`}
           </Box>
         ))}

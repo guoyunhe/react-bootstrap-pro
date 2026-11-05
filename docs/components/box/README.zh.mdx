@@ -29,7 +29,7 @@ import { BoxThemeDemo } from './demos/box-theme';
 </DemoContainer>
 
 ```tsx
-<Box component='a' href='/settings' bgSubtle='primary' fgEmphasis='primary'>
+<Box component='a' href='/settings' bgSubtle='primary' fg='primary' fgEmphasis>
   设置
 </Box>
 <Box component='blockquote' theme='accent' themeStyle='subtle'>
@@ -42,9 +42,10 @@ import { BoxThemeDemo } from './demos/box-theme';
 
 ## 前景色
 
-`fg` 设置 `.fg-{color}`，可用于主题色和中性色；`fgEmphasis` 设置
-`.fg-emphasis-{color}`；`fgContrast` 设置 `.fg-contrast-{color}`，用于放在实色主题
-背景上的文字；`fgOpacity` 将当前前景色与页面背景混合。
+`fg` 设置 `.fg-{color}`，可用于主题色和中性色。将 `fgEmphasis` 或 `fgContrast`
+与主题色 `fg` 搭配，可应用对应的 `.fg-emphasis-{color}` 或 `.fg-contrast-{color}` 类。
+这些修饰属性仅支持主题色，并非所有 `fg` 值都支持。`fgo` 将当前前景色与页面背景混合。
+可用颜色工具类请参阅 [Bootstrap colors 文档](https://getbootstrap.com/docs/6.0/utilities/colors/)。
 
 <DemoContainer>
   <BoxForegroundDemo />
@@ -53,18 +54,18 @@ import { BoxThemeDemo } from './demos/box-theme';
 ```tsx
 <Box fg='primary'>主要文字</Box>
 <Box fg='2'>次要文字</Box>
-<Box fg='secondary' fgOpacity={50}>半透明文字</Box>
+<Box fg='secondary' fgo={50}>半透明文字</Box>
 <Box bg='success'>
-  <Box fgContrast='success'>在成功色上清晰可读</Box>
+  <Box fg='success' fgContrast>在成功色上清晰可读</Box>
 </Box>
 ```
 
 | 属性         | 类名             | 取值                                                        |
 | ------------ | ---------------- | ----------------------------------------------------------- |
 | `fg`         | `.fg-*`          | 主题色、`body`、`1`–`4`、`bg`、`white`、`black`、`reset`    |
-| `fgEmphasis` | `.fg-emphasis-*` | 主题色                                                      |
-| `fgContrast` | `.fg-contrast-*` | 主题色                                                      |
-| `fgOpacity`  | `.fg-*`          | `10`、`20`、`30`、`40`、`50`、`60`、`70`、`80`、`90`、`100` |
+| `fgEmphasis` | `.fg-emphasis-*` | `boolean`；需搭配主题色 `fg`                                |
+| `fgContrast` | `.fg-contrast-*` | `boolean`；需搭配主题色 `fg`                                |
+| `fgo`        | `.fg-*`          | `10`、`20`、`30`、`40`、`50`、`60`、`70`、`80`、`90`、`100` |
 
 主题色包括 `primary`、`accent`、`secondary`、`success`、`danger`、`warning`、
 `info` 和 `inverse`。
@@ -72,7 +73,7 @@ import { BoxThemeDemo } from './demos/box-theme';
 ## 背景色
 
 `bg` 设置 `.bg-{color}`，`bgSubtle` 设置 `.bg-subtle-{color}`，`bgMuted` 设置
-`.bg-muted-{color}`。`bgOpacity` 将当前背景色与页面背景混合，`gradient` 添加
+`.bg-muted-{color}`。`bgo` 将当前背景色与页面背景混合，`gradient` 添加
 `.bg-gradient`。
 
 <DemoContainer>
@@ -81,19 +82,19 @@ import { BoxThemeDemo } from './demos/box-theme';
 
 ```tsx
 <Box bg='primary'>实色背景</Box>
-<Box bgSubtle='danger' fgEmphasis='danger'>淡背景</Box>
-<Box bgMuted='info' fgEmphasis='info'>中等背景</Box>
-<Box bg='inverse' bgOpacity={50}>半透明背景</Box>
+<Box bgSubtle='danger' fg='danger' fgEmphasis>淡背景</Box>
+<Box bgMuted='info' fg='info' fgEmphasis>中等背景</Box>
+<Box bg='inverse' bgo={50}>半透明背景</Box>
 <Box bg='primary' gradient>渐变背景</Box>
 ```
 
-| 属性        | 类名           | 取值                                                           |
-| ----------- | -------------- | -------------------------------------------------------------- |
-| `bg`        | `.bg-*`        | 主题色、`body`、`1`–`4`、`fg`、`white`、`black`、`transparent` |
-| `bgSubtle`  | `.bg-subtle-*` | 主题色                                                         |
-| `bgMuted`   | `.bg-muted-*`  | 主题色                                                         |
-| `bgOpacity` | `.bg-*`        | `10`、`20`、`30`、`40`、`50`、`60`、`70`、`80`、`90`、`100`    |
-| `gradient`  | `.bg-gradient` | `boolean`                                                      |
+| 属性       | 类名           | 取值                                                           |
+| ---------- | -------------- | -------------------------------------------------------------- |
+| `bg`       | `.bg-*`        | 主题色、`body`、`1`–`4`、`fg`、`white`、`black`、`transparent` |
+| `bgSubtle` | `.bg-subtle-*` | 主题色                                                         |
+| `bgMuted`  | `.bg-muted-*`  | 主题色                                                         |
+| `bgo`      | `.bg-*`        | `10`、`20`、`30`、`40`、`50`、`60`、`70`、`80`、`90`、`100`    |
+| `gradient` | `.bg-gradient` | `boolean`                                                      |
 
 ## 色彩方案
 
@@ -241,7 +242,7 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 | `ratio`                   | `'auto' \| '1x1' \| '4x3' \| '16x9' \| '21x9'`                                                                                                                                           | —       | 添加 `.ratio-{value}`。参阅 [Bootstrap aspect-ratio 工具类](https://getbootstrap.com/docs/6.0/utilities/aspect-ratio/)。                        |
 | `bg`                      | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse' \| 'body' \| '1' \| '2' \| '3' \| '4' \| 'fg' \| 'white' \| 'black' \| 'transparent'` | —       | 添加 `.bg-{value}`。                                                                                                                            |
 | `bgMuted`                 | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse'`                                                                                      | —       | 添加 `.bg-muted-{color}`。                                                                                                                      |
-| `bgOpacity`               | `number`                                                                                                                                                                                 | —       | 添加 `.bg-{opacity}`。                                                                                                                          |
+| `bgo`                     | `number`                                                                                                                                                                                 | —       | 添加 `.bg-{opacity}`。                                                                                                                          |
 | `bgSubtle`                | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse'`                                                                                      | —       | 添加 `.bg-subtle-{color}`。                                                                                                                     |
 | `border`                  | `boolean \| number`                                                                                                                                                                      | —       | 添加 `.border` 或 `.border-0`。                                                                                                                 |
 | `borderBottom`            | `boolean \| number`                                                                                                                                                                      | —       | 添加 `.border-bottom` 或 `.border-bottom-0`。                                                                                                   |
@@ -266,10 +267,10 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 | `dvh`                     | `number`                                                                                                                                                                                 | —       | 添加 `.dvh-100`。                                                                                                                               |
 | `dvw`                     | `number`                                                                                                                                                                                 | —       | 添加 `.dvw-100`。                                                                                                                               |
 | `end`                     | `number`                                                                                                                                                                                 | —       | 添加 `.end-{value}`。                                                                                                                           |
-| `fg`                      | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse' \| 'body' \| '1' \| '2' \| '3' \| '4' \| 'bg' \| 'white' \| 'black' \| 'reset'`       | —       | 添加 `.fg-{value}`。                                                                                                                            |
-| `fgContrast`              | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse'`                                                                                      | —       | 添加 `.fg-contrast-{color}`。                                                                                                                   |
-| `fgEmphasis`              | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse'`                                                                                      | —       | 添加 `.fg-emphasis-{color}`。                                                                                                                   |
-| `fgOpacity`               | `number`                                                                                                                                                                                 | —       | 添加 `.fg-{opacity}`。                                                                                                                          |
+| `fg`                      | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse' \| 'body' \| '1' \| '2' \| '3' \| '4' \| 'bg' \| 'white' \| 'black' \| 'reset'`       | —       | 添加 `.fg-{value}`。参阅 [Bootstrap colors 文档](https://getbootstrap.com/docs/6.0/utilities/colors/)。                                         |
+| `fgContrast`              | `boolean`                                                                                                                                                                                | `false` | `fg` 为主题色时添加 `.fg-contrast-{fg}`。参阅 [Bootstrap colors 文档](https://getbootstrap.com/docs/6.0/utilities/colors/)。                    |
+| `fgEmphasis`              | `boolean`                                                                                                                                                                                | `false` | `fg` 为主题色时添加 `.fg-emphasis-{fg}`。参阅 [Bootstrap colors 文档](https://getbootstrap.com/docs/6.0/utilities/colors/)。                    |
+| `fgo`                     | `number`                                                                                                                                                                                 | —       | 添加 `.fg-{opacity}`。参阅 [Bootstrap colors 文档](https://getbootstrap.com/docs/6.0/utilities/colors/)。                                       |
 | `flex`                    | `'fill'`                                                                                                                                                                                 | —       | 添加响应式 `.flex-fill`。                                                                                                                       |
 | `flexDirection`           | `'row' \| 'column' \| 'row-reverse' \| 'column-reverse'`                                                                                                                                 | —       | 添加响应式 `.flex-*` 方向类。                                                                                                                   |
 | `flexGrow`                | `number`                                                                                                                                                                                 | —       | 添加响应式 `.flex-grow-*`。                                                                                                                     |
