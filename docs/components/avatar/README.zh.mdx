@@ -146,34 +146,30 @@ import { DemoContainer } from '../demo-container';
 
 渲染 `.avatar` 容器，默认使用 `span` 元素。
 
-| 属性        | 类型                           | 默认值  | 说明                            |
-| ----------- | ------------------------------ | ------- | ------------------------------- |
-| `size`      | `'xs' \| 'sm' \| 'lg' \| 'xl'` | —       | 设置头像尺寸。                  |
-| `subtle`    | `boolean`                      | `false` | 使用柔和的主题样式。            |
-| `component` | `ElementType`                  | `span`  | 更换根元素。                    |
-| `...props`  | `BoxProps<C>`                  | —       | 原生属性及所有 Box 工具类属性。 |
+| 属性     | 类型                           | 说明                 |
+| -------- | ------------------------------ | -------------------- |
+| `size`   | `'xs' \| 'sm' \| 'lg' \| 'xl'` | 设置头像尺寸。       |
+| `subtle` | `boolean`                      | 使用柔和的主题样式。 |
+
+继承原生 `span` 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `theme` 和 `component`。
 
 ### AvatarImage
 
 渲染带有 `.avatar-img` 类的图片，默认使用 `img` 元素。放在 `Avatar` 内时，图片会填满容器。
 
-| 属性        | 类型          | 默认值 | 说明                            |
-| ----------- | ------------- | ------ | ------------------------------- |
-| `component` | `ElementType` | `img`  | 更换图片元素。                  |
-| `...props`  | `BoxProps<C>` | —      | 图片属性及所有 Box 工具类属性。 |
+继承原生 `img` 属性（包括 `src`、`alt`、`width` 和 `height`）及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
 
 ### AvatarStatus
 
 渲染 `.avatar-status` 状态指示器，默认使用 `span` 元素。
 
-| 属性          | 类型                                        | 默认值 | 说明                                 |
-| ------------- | ------------------------------------------- | ------ | ------------------------------------ |
-| `status`      | `'online' \| 'offline' \| 'busy' \| 'away'` | —      | 添加对应的 `status-*` 类。           |
-| `component`   | `ElementType`                               | `span` | 更换指示器元素。                     |
-| `aria-hidden` | `boolean`                                   | `true` | 默认将装饰性指示器从辅助技术中隐藏。 |
-| `...props`    | `BoxProps<C>`                               | —      | 原生属性及所有 Box 工具类属性。      |
+| 属性     | 类型                                        | 说明               |
+| -------- | ------------------------------------------- | ------------------ |
+| `status` | `'online' \| 'offline' \| 'busy' \| 'away'` | 添加对应的状态类。 |
 
-若状态需要被辅助技术播报，请设置 `aria-hidden={false}` 并提供无障碍名称。
+继承原生 `span` 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。`aria-hidden` 默认为 `true`；
+若状态需要被辅助技术播报，请将其设为 `false` 并提供无障碍名称。
 
 ### AvatarStack
 
@@ -181,11 +177,7 @@ import { DemoContainer } from '../demo-container';
 `className` 添加 `avatar-stack-xs`、`avatar-stack-sm`、`avatar-stack-lg` 或
 `avatar-stack-xl` 类来设置头像组尺寸。
 
-| 属性        | 类型          | 默认值 | 说明                               |
-| ----------- | ------------- | ------ | ---------------------------------- |
-| `component` | `ElementType` | `div`  | 更换头像组容器元素。               |
-| `className` | `string`      | —      | 添加类名，例如 `avatar-stack-xl`。 |
-| `...props`  | `BoxProps<C>` | —      | 原生属性及所有 Box 工具类属性。    |
+继承原生 `div` 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `className` 和 `component`。
 
 ## 无障碍访问
 

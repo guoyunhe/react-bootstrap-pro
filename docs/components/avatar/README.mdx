@@ -151,36 +151,33 @@ Combine a stack with initials to show the number of additional users.
 
 Renders the `.avatar` wrapper, using a `span` by default.
 
-| Prop        | Type                           | Default | Description                             |
-| ----------- | ------------------------------ | ------- | --------------------------------------- |
-| `size`      | `'xs' \| 'sm' \| 'lg' \| 'xl'` | —       | Sets the avatar size.                   |
-| `subtle`    | `boolean`                      | `false` | Uses the subtle theme treatment.        |
-| `component` | `ElementType`                  | `span`  | Changes the root element.               |
-| `...props`  | `BoxProps<C>`                  | —       | Native props and all Box utility props. |
+| Prop     | Type                           | Description                      |
+| -------- | ------------------------------ | -------------------------------- |
+| `size`   | `'xs' \| 'sm' \| 'lg' \| 'xl'` | Sets the avatar size.            |
+| `subtle` | `boolean`                      | Uses the subtle theme treatment. |
+
+Inherits native `span` props and [`Box`](../box/README.mdx#api) utility props,
+including `theme` and `component`.
 
 ### AvatarImage
 
 Renders an image with the `.avatar-img` class. It defaults to an `img` element;
 when nested inside `Avatar`, the image fills the wrapper.
 
-| Prop        | Type          | Default | Description                                 |
-| ----------- | ------------- | ------- | ------------------------------------------- |
-| `component` | `ElementType` | `img`   | Changes the image element.                  |
-| `...props`  | `BoxProps<C>` | —       | Image attributes and all Box utility props. |
+Inherits native `img` props, including `src`, `alt`, `width`, and `height`, and
+[`Box`](../box/README.mdx#api) utility props, including `component`.
 
 ### AvatarStatus
 
 Renders the `.avatar-status` indicator, using a `span` by default.
 
-| Prop          | Type                                        | Default | Description                                         |
-| ------------- | ------------------------------------------- | ------- | --------------------------------------------------- |
-| `status`      | `'online' \| 'offline' \| 'busy' \| 'away'` | —       | Adds the matching `status-*` class.                 |
-| `component`   | `ElementType`                               | `span`  | Changes the indicator element.                      |
-| `aria-hidden` | `boolean`                                   | `true`  | Hides the decorative indicator from assistive tech. |
-| `...props`    | `BoxProps<C>`                               | —       | Native props and all Box utility props.             |
+| Prop     | Type                                        | Description              |
+| -------- | ------------------------------------------- | ------------------------ |
+| `status` | `'online' \| 'offline' \| 'busy' \| 'away'` | Adds the matching class. |
 
-Set `aria-hidden={false}` and provide an accessible name when the status needs
-to be announced.
+Inherits native `span` props and [`Box`](../box/README.mdx#api) utility props.
+`aria-hidden` defaults to `true`; set it to `false` and provide an accessible
+name when the status needs to be announced.
 
 ### AvatarStack
 
@@ -189,11 +186,8 @@ There is no size prop: use `avatar-stack-xs`, `avatar-stack-sm`,
 `avatar-stack-lg`, or `avatar-stack-xl` in `className` to size the avatars in a
 stack.
 
-| Prop        | Type          | Default | Description                             |
-| ----------- | ------------- | ------- | --------------------------------------- |
-| `component` | `ElementType` | `div`   | Changes the stack element.              |
-| `className` | `string`      | —       | Adds classes such as `avatar-stack-xl`. |
-| `...props`  | `BoxProps<C>` | —       | Native props and all Box utility props. |
+Inherits native `div` props and [`Box`](../box/README.mdx#api) utility props,
+including `className` and `component`.
 
 ## Accessibility
 
