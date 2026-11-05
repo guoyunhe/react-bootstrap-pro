@@ -5,11 +5,12 @@ title: Button 按钮
 import 'bootstrap/dist/css/bootstrap.css';
 import { Button, IconButton } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ButtonBasicDemo } from './demos/basic';
 import { ButtonBlockDemo } from './demos/block-buttons';
 import { ButtonTagsDemo } from './demos/button-tags';
 import { ButtonCSSVariablesDemo } from './demos/css-variables';
 import { ButtonDisabledDemo } from './demos/disabled-state';
-import { ButtonIconDemo } from './demos/icon-buttons';
+import { ButtonIconDemo, ButtonIconSizesDemo } from './demos/icon-buttons';
 import { ButtonInputToggleDemo } from './demos/input-toggles';
 import { ButtonLinkDemo } from './demos/link-buttons';
 import { ButtonPlaygroundDemo } from './demos/playground';
@@ -30,7 +31,7 @@ React `Button` 组件始终添加 `.btn`；只有显式传入 `variant` 和 `the
 才会添加对应的样式类。
 
 <DemoContainer>
-  <Button>按钮</Button>
+  <ButtonBasicDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
@@ -45,6 +46,10 @@ React `Button` 组件始终添加 `.btn`；只有显式传入 `variant` 和 `the
 <DemoContainer>
   <ButtonPlaygroundDemo />
 </DemoContainer>
+
+```tsx src='./demos/playground.tsx'
+
+```
 
 ## 变体
 
@@ -105,6 +110,7 @@ Bootstrap 默认链接颜色。
 
 如果链接用于页面内操作而非导航，可添加 `role='button'`。禁用链接还需设置
 `aria-disabled='true'` 并阻止导航；`disabled` 属性不会禁用 `<a>`。
+也可以通过 `component='input'` 将组件渲染为原生 `<input>` 按钮。
 
 ## 尺寸
 
@@ -118,12 +124,6 @@ Bootstrap 默认链接颜色。
 
 ```
 
-也可以通过 CSS 自定义属性调整尺寸：
-
-```tsx src='./demos/css-variables.tsx'
-
-```
-
 ## 图标按钮
 
 使用 `IconButton` 创建方形图标按钮。纯图标按钮必须用 `aria-label` 提供可访问名称。
@@ -131,6 +131,16 @@ Bootstrap 默认链接颜色。
 
 <DemoContainer>
   <ButtonIconDemo />
+</DemoContainer>
+
+```tsx src='./demos/icon-buttons.tsx'
+
+```
+
+结合尺寸类可以调整图标按钮大小：
+
+<DemoContainer>
+  <ButtonIconSizesDemo />
 </DemoContainer>
 
 ```tsx src='./demos/icon-buttons.tsx'
@@ -188,7 +198,8 @@ Bootstrap 的 `.btn-check` 样式，同时继续由输入框记录选择状态�
 ### 单选框
 
 同名的 radio 输入组成单选组。每个输入框都应关联到对应的标签；上方示例展示了
-选中、未选中和禁用状态。
+选中、未选中和禁用状态。复选框会向辅助技术报告“已选中/未选中”，而 JavaScript
+切换按钮会报告“按钮/按钮已按下”；应根据实际语义选择对应实现。
 
 ## Button 插件
 
@@ -218,26 +229,35 @@ JavaScript 已加载并初始化时才会生效。React 组件不提供 `toggle(
   <ButtonCSSVariablesDemo />
 </DemoContainer>
 
-| 变量                                                | 说明                   |
-| --------------------------------------------------- | ---------------------- |
-| `--bs-btn-min-height`                               | 按钮最小高度           |
-| `--bs-btn-padding-x` / `--bs-btn-padding-y`         | 水平和垂直内边距       |
-| `--bs-btn-font-size` / `--bs-btn-line-height`       | 字号和行高             |
-| `--bs-btn-border-radius`                            | 按钮圆角               |
-| `--bs-btn-gradient-start` / `--bs-btn-gradient-end` | `.btn-styled` 渐变颜色 |
-| `--bs-btn-shadow` / `--bs-btn-active-shadow`        | 默认和按下状态的阴影   |
+| 变量                                                | 说明                     |
+| --------------------------------------------------- | ------------------------ |
+| `--bs-btn-min-height`                               | 按钮最小高度             |
+| `--bs-btn-padding-x` / `--bs-btn-padding-y`         | 水平和垂直内边距         |
+| `--bs-btn-font-size` / `--bs-btn-line-height`       | 字号和行高               |
+| `--bs-btn-border-radius`                            | 按钮圆角                 |
+| `--bs-btn-gradient-start` / `--bs-btn-gradient-end` | `.btn-styled` 渐变颜色   |
+| `--bs-btn-border-mix-color`                         | 混合到按钮边框的颜色     |
+| `--bs-btn-border-mix-amount`                        | 边框颜色混合比例         |
+| `--bs-btn-border-hover-mix-amount`                  | 悬停时的边框颜色混合比例 |
+| `--bs-btn-border-active-mix-amount`                 | 按下时的边框颜色混合比例 |
+| `--bs-btn-shadow` / `--bs-btn-active-shadow`        | 默认和按下状态的阴影     |
 
 Bootstrap 工具类可通过 `className` 添加；单个按钮的 CSS 自定义属性可通过
 `style` 设置。
 Sass maps 和循环属于 Bootstrap 源码构建阶段的定制能力，本 React 包不提供 Sass API。
 
+```tsx src='./demos/css-variables.tsx'
+
+```
+
 ## API
+
+### Button
 
 | 属性         | 类型                          | 默认值                | 说明                                                                 |
 | ------------ | ----------------------------- | --------------------- | -------------------------------------------------------------------- |
 | `component`  | `C extends ElementType`       | `'button'`            | 要渲染的原生元素或 React 组件。                                      |
 | `variant`    | `ButtonVariant`               | —                     | 按钮样式：`'solid'`、`'outline'`、`'subtle'`、`'text'` 或 `'link'`。 |
-| `theme`      | `ButtonTheme`                 | —                     | 主题颜色。`variant='link'` 时省略可使用 Bootstrap 默认链接颜色。     |
 | `size`       | `'xs' \| 'sm' \| 'lg'`        | —                     | Bootstrap 按钮尺寸。不设置时使用默认尺寸。                           |
 | `active`     | `boolean`                     | `false`               | 添加 `.active` 类；不会自动设置 `aria-pressed`。                     |
 | `styled`     | `boolean`                     | `false`               | 添加 `.btn-styled` 修饰类。                                          |
@@ -248,7 +268,14 @@ Sass maps 和循环属于 Bootstrap 源码构建阶段的定制能力，本 Reac
 | `children`   | `C` 的原生属性                | —                     | 当前渲染组件接受的内容。                                             |
 | 其他组件属性 | `ComponentPropsWithoutRef<C>` | —                     | 属性会根据渲染目标推断，并转发给该组件。                             |
 
-`Button` 继承 [`BoxProps`](../box/)，因此除了上述按钮专属属性外，还支持
-`bg`、`fg`、`colorScheme`、`themeStyle` 等 [`Box`](../box/) 工具类属性。
+继承当前渲染元素的原生属性（例如 `<button>` 或 `<a>`），以及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
 
-包入口导出 `Button`、`ButtonProps`、`ButtonTheme` 和 `ButtonVariant`。
+### IconButton
+
+`IconButton` 默认渲染原生 `<button>`，并添加 `.btn-icon` 类；没有额外的专属属性。
+它接受所有 [`Button`](#button) 属性，包括多态的 `component` 属性以及
+[`Box`](../box/) 工具类属性。`IconButtonProps<C>` 是 `ButtonProps<C>` 的类型别名。
+
+包入口导出 `Button`、`ButtonProps`、`ButtonTheme`、`ButtonVariant`、
+`IconButton` 和 `IconButtonProps`。

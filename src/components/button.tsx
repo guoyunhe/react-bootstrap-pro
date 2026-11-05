@@ -11,7 +11,6 @@ export type ButtonVariant = 'solid' | 'outline' | 'subtle' | 'text' | 'link';
 
 type ButtonOwnProps = {
   variant?: ButtonVariant | undefined;
-  theme?: ButtonTheme | undefined;
   size?: 'xs' | 'sm' | 'lg' | undefined;
   active?: boolean | undefined;
   styled?: boolean | undefined;

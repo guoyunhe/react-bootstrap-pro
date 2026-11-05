@@ -30,6 +30,10 @@ export function ButtonInputToggleDemo() {
           <input type='radio' name='button-demo-options' disabled />
           {' Disabled'}
         </Button>
+        <Button component='label' variant='outline' theme='secondary' check>
+          <input type='radio' name='button-demo-options' />
+          {' Toggle'}
+        </Button>
       </Box>
     </Box>
   );

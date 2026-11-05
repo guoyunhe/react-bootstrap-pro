@@ -10,7 +10,7 @@ import { ButtonBlockDemo } from './demos/block-buttons';
 import { ButtonTagsDemo } from './demos/button-tags';
 import { ButtonCSSVariablesDemo } from './demos/css-variables';
 import { ButtonDisabledDemo } from './demos/disabled-state';
-import { ButtonIconDemo } from './demos/icon-buttons';
+import { ButtonIconDemo, ButtonIconSizesDemo } from './demos/icon-buttons';
 import { ButtonInputToggleDemo } from './demos/input-toggles';
 import { ButtonLinkDemo } from './demos/link-buttons';
 import { ButtonPlaygroundDemo } from './demos/playground';
@@ -119,6 +119,7 @@ If an anchor performs an in-page action instead of navigation, add
 `role='button'`. A disabled anchor needs `aria-disabled='true'` and must have
 its navigation behavior prevented; unlike a native button, the `disabled`
 attribute does not disable an anchor.
+The same component can render native `<input>` buttons with `component='input'`.
 
 ## Sizes
 
@@ -132,8 +133,6 @@ Use `size='xs'`, `size='sm'`, or `size='lg'`. Omit `size` for the default.
 
 ```
 
-Use CSS variables for a custom size:
-
 ## Icon buttons
 
 Use `IconButton` for a square icon-only button. Always provide an accessible
@@ -142,6 +141,16 @@ properties as `Button`.
 
 <DemoContainer>
   <ButtonIconDemo />
+</DemoContainer>
+
+```tsx src='./demos/icon-buttons.tsx'
+
+```
+
+Combine icon buttons with size classes for different dimensions:
+
+<DemoContainer>
+  <ButtonIconSizesDemo />
 </DemoContainer>
 
 ```tsx src='./demos/icon-buttons.tsx'
@@ -202,7 +211,10 @@ Checkbox buttons toggle independently:
 ### Radios
 
 Radio buttons with the same `name` form a single-choice group. Associate every
-input with a label as shown in the live demo above.
+input with a label as shown in the live demo above. Checkbox toggles are
+announced as checked or not checked, while JavaScript toggles are announced as
+buttons with a pressed state; choose the interaction that matches the intended
+semantics.
 
 ## Button plugin
 
@@ -240,14 +252,18 @@ native `style` prop:
 
 ```
 
-| Variable                                            | Description                     |
-| --------------------------------------------------- | ------------------------------- |
-| `--bs-btn-min-height`                               | Minimum button height           |
-| `--bs-btn-padding-x` / `--bs-btn-padding-y`         | Horizontal and vertical padding |
-| `--bs-btn-font-size` / `--bs-btn-line-height`       | Text size and line height       |
-| `--bs-btn-border-radius`                            | Button corner radius            |
-| `--bs-btn-gradient-start` / `--bs-btn-gradient-end` | `.btn-styled` gradient colors   |
-| `--bs-btn-shadow` / `--bs-btn-active-shadow`        | Resting and active shadows      |
+| Variable                                            | Description                         |
+| --------------------------------------------------- | ----------------------------------- |
+| `--bs-btn-min-height`                               | Minimum button height               |
+| `--bs-btn-padding-x` / `--bs-btn-padding-y`         | Horizontal and vertical padding     |
+| `--bs-btn-font-size` / `--bs-btn-line-height`       | Text size and line height           |
+| `--bs-btn-border-radius`                            | Button corner radius                |
+| `--bs-btn-gradient-start` / `--bs-btn-gradient-end` | `.btn-styled` gradient colors       |
+| `--bs-btn-border-mix-color`                         | Color mixed into the button border  |
+| `--bs-btn-border-mix-amount`                        | Border color mix amount             |
+| `--bs-btn-border-hover-mix-amount`                  | Border color mix amount on hover    |
+| `--bs-btn-border-active-mix-amount`                 | Border color mix amount when active |
+| `--bs-btn-shadow` / `--bs-btn-active-shadow`        | Resting and active shadows          |
 
 Use `className` for Bootstrap modifiers and utility classes, and `style` when
 you need to set per-instance CSS variables.
@@ -256,27 +272,34 @@ package exposes no Sass API.
 
 ## API
 
-| Prop                  | Type                          | Default                 | Description                                                                    |
-| --------------------- | ----------------------------- | ----------------------- | ------------------------------------------------------------------------------ |
-| `component`           | `C extends ElementType`       | `'button'`              | Native element or React component to render.                                   |
-| `variant`             | `ButtonVariant`               | —                       | Button style: `'solid'`, `'outline'`, `'subtle'`, `'text'`, or `'link'`.       |
-| `theme`               | `ButtonTheme`                 | —                       | Theme color. Omit with `variant='link'` to use Bootstrap's default link color. |
-| `size`                | `'xs' \| 'sm' \| 'lg'`        | —                       | Bootstrap button size. Omit for the default size.                              |
-| `active`              | `boolean`                     | `false`                 | Applies the `.active` class; it does not set `aria-pressed`.                   |
-| `styled`              | `boolean`                     | `false`                 | Applies the `.btn-styled` modifier.                                            |
-| `check`               | `boolean`                     | `false`                 | Applies the `.btn-check` modifier.                                             |
-| `className`           | `string`                      | —                       | Additional CSS classes, appended to the generated classes.                     |
-| `type`                | `C`'s native prop             | button only: `'button'` | Defaults to `'button'` when rendering a button element.                        |
-| `disabled`            | `C`'s native prop             | —                       | Disables the rendered element when supported.                                  |
-| `children`            | `C`'s native prop             | —                       | Content accepted by the selected component.                                    |
-| Other component props | `ComponentPropsWithoutRef<C>` | —                       | Props are inferred from the selected component and forwarded to it.            |
+### Button
 
-`Button` extends [`BoxProps`](../box/), so it also accepts `bg`, `fg`,
-`colorScheme`, `themeStyle`, and the other [`Box`](../box/) utility props in
-addition to the button-specific props above.
+| Prop                  | Type                          | Default                 | Description                                                              |
+| --------------------- | ----------------------------- | ----------------------- | ------------------------------------------------------------------------ |
+| `component`           | `C extends ElementType`       | `'button'`              | Native element or React component to render.                             |
+| `variant`             | `ButtonVariant`               | —                       | Button style: `'solid'`, `'outline'`, `'subtle'`, `'text'`, or `'link'`. |
+| `size`                | `'xs' \| 'sm' \| 'lg'`        | —                       | Bootstrap button size. Omit for the default size.                        |
+| `active`              | `boolean`                     | `false`                 | Applies the `.active` class; it does not set `aria-pressed`.             |
+| `styled`              | `boolean`                     | `false`                 | Applies the `.btn-styled` modifier.                                      |
+| `check`               | `boolean`                     | `false`                 | Applies the `.btn-check` modifier.                                       |
+| `className`           | `string`                      | —                       | Additional CSS classes, appended to the generated classes.               |
+| `type`                | `C`'s native prop             | button only: `'button'` | Defaults to `'button'` when rendering a button element.                  |
+| `disabled`            | `C`'s native prop             | —                       | Disables the rendered element when supported.                            |
+| `children`            | `C`'s native prop             | —                       | Content accepted by the selected component.                              |
+| Other component props | `ComponentPropsWithoutRef<C>` | —                       | Props are inferred from the selected component and forwarded to it.      |
 
-`Button`, `ButtonProps`, `ButtonTheme`, and `ButtonVariant` are exported from the
-package entry point.
+Accepts native props for the selected element, such as `<button>` or `<a>`, and
+[`Box`](../box/README.mdx#api) utility props.
+
+### IconButton
+
+`IconButton` renders a native `<button>` by default and adds `.btn-icon`. It has
+no additional props; it accepts every [`Button`](#button) prop, including the
+polymorphic `component` prop and [`Box`](../box/) utility props.
+`IconButtonProps<C>` is an alias of `ButtonProps<C>`.
+
+`Button`, `ButtonProps`, `ButtonTheme`, `ButtonVariant`, `IconButton`, and
+`IconButtonProps` are exported from the package entry point.
 
 ## Accessibility
 

@@ -9,6 +9,9 @@ export function ButtonTagsDemo() {
       <Button variant='solid' theme='primary' type='button'>
         Button
       </Button>
+      <Button component='input' variant='solid' theme='primary' type='button' value='Input' />
+      <Button component='input' variant='solid' theme='primary' type='submit' value='Submit' />
+      <Button component='input' variant='solid' theme='primary' type='reset' value='Reset' />
     </Box>
   );
 }
