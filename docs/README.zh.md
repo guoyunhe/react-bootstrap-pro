@@ -53,6 +53,7 @@ export function Example() {
 - [Drawer 抽屉](./components/drawer/)
 - [Floating labels 浮动标签](./components/floating-labels/)
 - [Form 表单](./components/form/)
+- [CSS Grid](./components/css-grid/)
 - [Grid 网格](./components/grid/)
 - [Icon link 图标链接](./components/icon-link/)
 - [Images 图片](./components/image/)

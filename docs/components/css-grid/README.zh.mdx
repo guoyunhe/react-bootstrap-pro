@@ -1,0 +1,271 @@
+---
+title: CSS Grid
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { Grid, GridItem } from 'react-bootstrap-pro';
+import { DemoContainer } from '../demo-container';
+import { CssGridDemo } from './demos/basic';
+
+# CSS Grid
+
+Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap Sass 构建中设置
+`$enable-cssgrid: true` 并重新编译样式表。`Grid` 和 `GridItem` 分别封装 `.grid`、
+`.g-col-*` 和 `.g-start-*`。此 API 独立于基于 Flexbox 的 [`Row` 和 `Col`](../grid/)。
+
+`.grid` 容器使用 CSS 变量设置行、列和间距。响应式项目类使用容器查询，因此会根据最近的
+`.grid` 宽度响应，而不是根据视口宽度响应。
+
+## 示例
+
+### 三列布局
+
+使用三个 `.g-col-4` 项目，将默认的 12 列网格划分为等宽三列。
+
+<DemoContainer>
+  <CssGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+### 响应式布局
+
+响应式类使用容器查询前缀。以下项目在窄容器中占据一半列宽，在 `md` 容器尺寸时各占三分之一：
+
+```tsx
+<Grid className='text-center'>
+  <GridItem span={{ xs: 6, md: 4 }}>.g-col-6 .md:g-col-4</GridItem>
+  <GridItem span={{ xs: 6, md: 4 }}>.g-col-6 .md:g-col-4</GridItem>
+  <GridItem span={{ xs: 6, md: 4 }}>.g-col-6 .md:g-col-4</GridItem>
+</Grid>
+```
+
+作为对比，两个 `.g-col-6` 项目在所有容器尺寸下都各占一半宽度：
+
+```tsx
+<Grid className='text-center'>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+</Grid>
+```
+
+容器查询断点取决于 `.grid` 的宽度，因此嵌套在窄列中的网格也能独立于视口切换布局。
+
+### 交互预览
+
+调整网格容器本身的宽度，即可观察项目如何跨越容器查询断点。
+
+## 自动换行
+
+当前行没有剩余空间时，项目会自动移至下一行。间距同时应用于水平方向和垂直方向。
+
+```tsx
+<Grid className='text-center'>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+</Grid>
+```
+
+## 起始列
+
+将 `start` 与 `span` 配合使用，可设置项目的起始网格线。
+
+```tsx
+<Grid className='text-center'>
+  <GridItem span={3} start={2}>
+    .g-col-3 .g-start-2
+  </GridItem>
+  <GridItem span={4} start={6}>
+    .g-col-4 .g-start-6
+  </GridItem>
+</Grid>
+```
+
+起始列从 `1` 开始；`0` 不是有效的网格线。
+
+## 自动列
+
+未设置列跨度时，`Grid` 的直接子元素会自动占据一列：
+
+```tsx
+<Grid className='text-center'>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+</Grid>
+```
+
+自动列也可以与显式指定跨度的项目混用：
+
+```tsx
+<Grid className='text-center'>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+  <div>1</div>
+</Grid>
+```
+
+## 嵌套
+
+嵌套网格会继承父级的行、列和间距设置，除非为嵌套网格单独设置属性。以下示例为外层网格
+设置三列；第一个内层网格继承列数，第二个内层网格则重设为 12 列：
+
+```tsx
+<Grid columns={3} className='text-center' overflowX='auto'>
+  <div>
+    第一自动列
+    <Grid>
+      <div>自动列</div>
+      <div>自动列</div>
+    </Grid>
+  </div>
+  <div>
+    第二自动列
+    <Grid columns={12}>
+      <GridItem span={6}>6 / 12 列</GridItem>
+      <GridItem span={4}>4 / 12 列</GridItem>
+      <GridItem span={2}>2 / 12 列</GridItem>
+    </Grid>
+  </div>
+  <div>第三自动列</div>
+</Grid>
+```
+
+## 自定义
+
+可通过 CSS 变量自定义网格模板和间距：
+
+| 变量           | 回退值   | 说明               |
+| -------------- | -------- | ------------------ |
+| `--bs-rows`    | `1`      | 网格模板中的行数。 |
+| `--bs-columns` | `12`     | 网格模板中的列数。 |
+| `--bs-gap`     | `1.5rem` | 行和列之间的间距。 |
+
+`Grid` 提供 `columns` 和 `rows` 属性设置前两个变量。`--bs-gap` 可通过 `style` 传入 CSS 值。
+
+### 不使用网格类
+
+即使不使用 `GridItem` 或 `.g-col-*` 类，直接子元素仍会成为网格项目：
+
+```tsx
+<Grid columns={3} className='text-center'>
+  <div>自动列</div>
+  <div>自动列</div>
+  <div>自动列</div>
+</Grid>
+```
+
+### 列数和间距
+
+分别设置列数和间距：
+
+```tsx
+<Grid columns={4} style={{ '--bs-gap': '5rem' }} className='text-center'>
+  <GridItem span={2}>.g-col-2</GridItem>
+  <GridItem span={2}>.g-col-2</GridItem>
+</Grid>
+```
+
+```tsx
+<Grid columns={10} style={{ '--bs-gap': '1rem' }} className='text-center'>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={4}>.g-col-4</GridItem>
+</Grid>
+```
+
+### 添加行
+
+设置行数，并通过 `style` 和 `start` 将项目放置在指定行：
+
+```tsx
+<Grid rows={3} columns={3} className='text-center'>
+  <div>自动列</div>
+  <GridItem start={2} style={{ gridRow: 2 }}>
+    自动列
+  </GridItem>
+  <GridItem start={3} style={{ gridRow: 3 }}>
+    自动列
+  </GridItem>
+</Grid>
+```
+
+### 间距
+
+在 `style` 中设置 `rowGap` 或 `columnGap`，只调整单个方向的间距：
+
+```tsx
+<Grid className='text-center' style={{ rowGap: 0 }}>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+</Grid>
+```
+
+`--bs-gap` 变量也可以分别设置行间距和列间距：
+
+```tsx
+<Grid className='text-center' style={{ '--bs-gap': '.25rem 1rem' }}>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+  <GridItem span={6}>.g-col-6</GridItem>
+</Grid>
+```
+
+## Sass
+
+Bootstrap 根据 Sass 变量生成 `.g-col-*` 和 `.g-start-*` 类。可以修改这些变量并重新编译，
+生成更多类；也可以将行内 CSS 与已有类结合使用：
+
+```tsx
+<Grid columns={18} style={{ '--bs-gap': '.5rem' }} className='text-center'>
+  <GridItem style={{ gridColumn: 'span 14' }}>14 列</GridItem>
+  <GridItem span={4}>.g-col-4</GridItem>
+</Grid>
+```
+
+## API
+
+### Grid
+
+| 属性        | 类型                    | 默认值  | 说明                                                           |
+| ----------- | ----------------------- | ------- | -------------------------------------------------------------- |
+| `columns`   | `number`                | —       | 设置 `--bs-columns`；同时传入时优先于 `style` 中的值。         |
+| `rows`      | `number`                | —       | 设置 `--bs-rows`；同时传入时优先于 `style` 中的值。            |
+| `style`     | `CssGridStyle`          | —       | 支持 CSS 属性及 `--bs-columns`、`--bs-rows`、`--bs-gap` 变量。 |
+| `component` | `C extends ElementType` | `'div'` | 渲染的原生元素或 React 组件。                                  |
+| `className` | `string`                | —       | 额外的类名。                                                   |
+| `...props`  | `BoxProps<C>`           | —       | 所选组件的原生属性，以及全部 [`Box`](../box/) 工具类属性。     |
+
+### GridItem
+
+| 属性        | 类型                                  | 默认值  | 说明                                                       |
+| ----------- | ------------------------------------- | ------- | ---------------------------------------------------------- |
+| `span`      | `CssGridResponsive<CssGridItemSpan>`  | —       | 设置 `.g-col-*`；未设置时使用 Bootstrap 自动尺寸。         |
+| `start`     | `CssGridResponsive<CssGridItemStart>` | —       | 使用 `.g-start-*` 将项目放置在指定网格列。                 |
+| `component` | `C extends ElementType`               | `'div'` | 渲染的原生元素或 React 组件。                              |
+| `className` | `string`                              | —       | 额外的类名。                                               |
+| `...props`  | `BoxProps<C>`                         | —       | 所选组件的原生属性，以及全部 [`Box`](../box/) 工具类属性。 |
+
+## 参阅
+
+- [Bootstrap 6 CSS Grid 文档](https://getbootstrap.com/docs/6.0/layout/css-grid/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/css-grid.tsx)

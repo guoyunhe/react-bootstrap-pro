@@ -69,9 +69,16 @@ export { IconButton } from './components/index';
 export type { IconButtonProps } from './components/index';
 export { Container } from './components/index';
 export type { ContainerBreakpoint, ContainerProps } from './components/index';
-export { Col, Row } from './components/index';
+export { Col, Grid, GridItem, Row } from './components/index';
 export type {
   ColProps,
+  CssGridBreakpoint,
+  CssGridItemProps,
+  CssGridItemSpan,
+  CssGridItemStart,
+  CssGridProps,
+  CssGridResponsive,
+  CssGridStyle,
   GridAlignItems,
   GridAlignSelf,
   GridBreakpoint,

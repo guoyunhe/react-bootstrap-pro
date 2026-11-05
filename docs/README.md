@@ -53,6 +53,7 @@ export function Example() {
 - [Drawer](./components/drawer/)
 - [Floating labels](./components/floating-labels/)
 - [Form](./components/form/)
+- [CSS Grid](./components/css-grid/)
 - [Grid](./components/grid/)
 - [Icon link](./components/icon-link/)
 - [Images](./components/image/)
