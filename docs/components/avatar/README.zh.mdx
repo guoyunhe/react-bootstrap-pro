@@ -3,36 +3,196 @@ title: Avatar 头像
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Avatar, AvatarImage, AvatarStatus } from 'react-bootstrap-pro';
+import { AvatarImagesDemo } from './demos/basic';
+import { AvatarInitialsDemo } from './demos/initials';
+import { AvatarSubtleInitialsDemo } from './demos/initials-subtle';
+import { AvatarSizesDemo } from './demos/sizes';
+import { AvatarCustomSizeDemo } from './demos/custom-size';
+import { AvatarStatusesDemo } from './demos/status';
+import { AvatarStatusSizesDemo } from './demos/status-sizes';
+import { AvatarStackDemo } from './demos/stack';
+import { AvatarStackSizesDemo } from './demos/stack-sizes';
+import { AvatarStackCountDemo } from './demos/stack-count';
 import { DemoContainer } from '../demo-container';
 
 # Avatar 头像
 
-`Avatar` 可显示姓名首字母，也可包裹头像图片和可选的状态标记。
+头像用于展示用户或其他实体的图片或姓名首字母。`Avatar` 也可作为状态指示器和重叠头像组的容器。
+
+## 示例
+
+### 图片
+
+将 `AvatarImage` 放在 `Avatar` 中，图片会填满头像容器。不需要容器时，也可以单独使用
+`AvatarImage`，并直接设置图片尺寸。
 
 <DemoContainer>
-  <Avatar size='lg' theme='primary'>
-    AB
-    <AvatarStatus status='online' />
-  </Avatar>
-  <Avatar size='lg'>
-    <AvatarImage src='https://example.com/avatar.png' alt='Alex Brown' />
-  </Avatar>
+  <AvatarImagesDemo />
 </DemoContainer>
 
-```tsx
-<Avatar size='sm' subtle theme='accent'>
-  AB
-</Avatar>
+```tsx src='./demos/basic.tsx'
+
+```
+
+### 首字母
+
+使用文本显示姓名首字母。设置 `theme` 可以应用对应主题的实色背景。
+
+<DemoContainer>
+  <AvatarInitialsDemo />
+</DemoContainer>
+
+```tsx src='./demos/initials.tsx'
+
+```
+
+使用 `subtle` 可应用更柔和的主题样式。
+
+<DemoContainer>
+  <AvatarSubtleInitialsDemo />
+</DemoContainer>
+
+```tsx src='./demos/initials-subtle.tsx'
+
+```
+
+## 尺寸
+
+头像支持超小、小、默认、大和超大尺寸。
+
+<DemoContainer>
+  <AvatarSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+修改 `--bs-avatar-size` CSS 变量可以设置自定义尺寸。
+
+<DemoContainer>
+  <AvatarCustomSizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-size.tsx'
+
+```
+
+## 状态指示器
+
+在头像中添加 `AvatarStatus`，即可显示在线、离线、忙碌或离开状态。如果状态包含有意义的信息，
+请为其提供无障碍名称。
+
+<DemoContainer>
+  <AvatarStatusesDemo />
+</DemoContainer>
+
+```tsx src='./demos/status.tsx'
+
+```
+
+### 随头像尺寸变化的状态指示器
+
+状态指示器会随头像尺寸缩放。
+
+<DemoContainer>
+  <AvatarStatusSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/status-sizes.tsx'
+
+```
+
+## 头像组
+
+使用 `AvatarStack` 将多个头像重叠排列。第一个头像会显示在最上层。
+
+<DemoContainer>
+  <AvatarStackDemo />
+</DemoContainer>
+
+```tsx src='./demos/stack.tsx'
+
+```
+
+### 头像组尺寸
+
+使用 `avatar-stack-xs`、`avatar-stack-sm`、`avatar-stack-lg` 或
+`avatar-stack-xl` 设置头像组中头像的尺寸。不设置尺寸类时使用默认尺寸。
+
+<DemoContainer>
+  <AvatarStackSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/stack-sizes.tsx'
+
+```
+
+### 显示额外人数
+
+结合首字母头像，可以显示头像组中未展示的额外人数。
+
+<DemoContainer>
+  <AvatarStackCountDemo />
+</DemoContainer>
+
+```tsx src='./demos/stack-count.tsx'
+
 ```
 
 ## API
 
-| 属性        | 类型                           | 说明                            |
-| ----------- | ------------------------------ | ------------------------------- |
-| `size`      | `'xs' \| 'sm' \| 'lg' \| 'xl'` | 设置头像尺寸。                  |
-| `subtle`    | `boolean`                      | 使用柔和主题样式。              |
-| `component` | `ElementType`                  | 更换头像根元素。                |
-| `...props`  | `BoxProps<C>`                  | 原生属性及所有 Box 工具类属性。 |
+### Avatar
 
-`AvatarImage`、`AvatarStatus` 和 `AvatarStack` 分别提供图片、状态标记和重叠头像组样式。
+渲染 `.avatar` 容器，默认使用 `span` 元素。
+
+| 属性        | 类型                           | 默认值  | 说明                            |
+| ----------- | ------------------------------ | ------- | ------------------------------- |
+| `size`      | `'xs' \| 'sm' \| 'lg' \| 'xl'` | —       | 设置头像尺寸。                  |
+| `subtle`    | `boolean`                      | `false` | 使用柔和的主题样式。            |
+| `component` | `ElementType`                  | `span`  | 更换根元素。                    |
+| `...props`  | `BoxProps<C>`                  | —       | 原生属性及所有 Box 工具类属性。 |
+
+### AvatarImage
+
+渲染带有 `.avatar-img` 类的图片，默认使用 `img` 元素。放在 `Avatar` 内时，图片会填满容器。
+
+| 属性        | 类型          | 默认值 | 说明                            |
+| ----------- | ------------- | ------ | ------------------------------- |
+| `component` | `ElementType` | `img`  | 更换图片元素。                  |
+| `...props`  | `BoxProps<C>` | —      | 图片属性及所有 Box 工具类属性。 |
+
+### AvatarStatus
+
+渲染 `.avatar-status` 状态指示器，默认使用 `span` 元素。
+
+| 属性          | 类型                                        | 默认值 | 说明                                 |
+| ------------- | ------------------------------------------- | ------ | ------------------------------------ |
+| `status`      | `'online' \| 'offline' \| 'busy' \| 'away'` | —      | 添加对应的 `status-*` 类。           |
+| `component`   | `ElementType`                               | `span` | 更换指示器元素。                     |
+| `aria-hidden` | `boolean`                                   | `true` | 默认将装饰性指示器从辅助技术中隐藏。 |
+| `...props`    | `BoxProps<C>`                               | —      | 原生属性及所有 Box 工具类属性。      |
+
+若状态需要被辅助技术播报，请设置 `aria-hidden={false}` 并提供无障碍名称。
+
+### AvatarStack
+
+渲染 `.avatar-stack` 重叠头像容器，默认使用 `div` 元素。组件没有尺寸属性；可通过
+`className` 添加 `avatar-stack-xs`、`avatar-stack-sm`、`avatar-stack-lg` 或
+`avatar-stack-xl` 类来设置头像组尺寸。
+
+| 属性        | 类型          | 默认值 | 说明                               |
+| ----------- | ------------- | ------ | ---------------------------------- |
+| `component` | `ElementType` | `div`  | 更换头像组容器元素。               |
+| `className` | `string`      | —      | 添加类名，例如 `avatar-stack-xl`。 |
+| `...props`  | `BoxProps<C>` | —      | 原生属性及所有 Box 工具类属性。    |
+
+## 无障碍访问
+
+为每张头像图片提供有意义的替代文本。如果状态指示器包含有意义的信息，请为其提供无障碍名称，并在
+`AvatarStatus` 上设置 `aria-hidden={false}`；该组件默认会将指示器从辅助技术中隐藏。
+
+## 参考
+
+- [Bootstrap 6 Avatar 文档](https://getbootstrap.com/docs/6.0/components/avatar/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/avatar.tsx)

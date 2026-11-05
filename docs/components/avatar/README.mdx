@@ -3,45 +3,205 @@ title: Avatar
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Avatar, AvatarImage, AvatarStatus } from 'react-bootstrap-pro';
+import { AvatarImagesDemo } from './demos/basic';
+import { AvatarInitialsDemo } from './demos/initials';
+import { AvatarSubtleInitialsDemo } from './demos/initials-subtle';
+import { AvatarSizesDemo } from './demos/sizes';
+import { AvatarCustomSizeDemo } from './demos/custom-size';
+import { AvatarStatusesDemo } from './demos/status';
+import { AvatarStatusSizesDemo } from './demos/status-sizes';
+import { AvatarStackDemo } from './demos/stack';
+import { AvatarStackSizesDemo } from './demos/stack-sizes';
+import { AvatarStackCountDemo } from './demos/stack-count';
 import { DemoContainer } from '../demo-container';
-import { AvatarBasicDemo } from './demos/basic';
 
 # Avatar
 
-Bootstrap does not include an avatar component; `Avatar` is a library extension
-for displaying initials or grouping an image and optional status indicator.
+Avatars represent users or entities with an image or initials. The `Avatar`
+component also provides wrappers for status indicators and overlapping stacks.
 
-## Example
+## Examples
+
+### Image
+
+Wrap `AvatarImage` in `Avatar` to make the image fill the avatar. `AvatarImage`
+can also be used on its own when a wrapper is not needed; set its dimensions
+directly in that case.
 
 <DemoContainer>
-  <AvatarBasicDemo />
+  <AvatarImagesDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
 
 ```
 
-## Variants
+### Initials
+
+Use text content for an initials-based avatar. Set `theme` to apply a solid
+contextual color.
+
+<DemoContainer>
+  <AvatarInitialsDemo />
+</DemoContainer>
+
+```tsx src='./demos/initials.tsx'
+
+```
+
+Use `subtle` for a softer theme treatment.
+
+<DemoContainer>
+  <AvatarSubtleInitialsDemo />
+</DemoContainer>
+
+```tsx src='./demos/initials-subtle.tsx'
+
+```
+
+## Sizes
+
+Avatars support extra-small, small, default, large, and extra-large sizes.
+
+<DemoContainer>
+  <AvatarSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+Set the `--bs-avatar-size` CSS variable for a custom size.
+
+<DemoContainer>
+  <AvatarCustomSizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-size.tsx'
+
+```
+
+## Status indicator
+
+Add `AvatarStatus` inside an avatar to show an online, offline, busy, or away
+indicator. Provide an accessible name when the status conveys information.
+
+<DemoContainer>
+  <AvatarStatusesDemo />
+</DemoContainer>
+
+```tsx src='./demos/status.tsx'
+
+```
+
+### Status with sizes
+
+The status indicator scales with the avatar size.
+
+<DemoContainer>
+  <AvatarStatusSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/status-sizes.tsx'
+
+```
+
+## Avatar stack
+
+Use `AvatarStack` to group avatars with an overlapping effect. The first avatar
+appears on top.
+
+<DemoContainer>
+  <AvatarStackDemo />
+</DemoContainer>
+
+```tsx src='./demos/stack.tsx'
+
+```
+
+### Stack with sizes
+
+Use `avatar-stack-xs`, `avatar-stack-sm`, `avatar-stack-lg`, or
+`avatar-stack-xl` to size the avatars in a stack. With no size class, avatars use
+the default size.
+
+<DemoContainer>
+  <AvatarStackSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/stack-sizes.tsx'
+
+```
+
+### Stack with count
+
+Combine a stack with initials to show the number of additional users.
+
+<DemoContainer>
+  <AvatarStackCountDemo />
+</DemoContainer>
+
+```tsx src='./demos/stack-count.tsx'
+
+```
 
 ## API
 
-| Prop        | Type                           | Description                             |
-| ----------- | ------------------------------ | --------------------------------------- |
-| `size`      | `'xs' \| 'sm' \| 'lg' \| 'xl'` | Sets avatar dimensions.                 |
-| `subtle`    | `boolean`                      | Uses the subtle theme treatment.        |
-| `component` | `ElementType`                  | Changes the avatar root element.        |
-| `...props`  | `BoxProps<C>`                  | Native props and all Box utility props. |
+### Avatar
 
-`AvatarImage`, `AvatarStatus`, and `AvatarStack` provide image, status, and
-overlapping-stack classes.
+Renders the `.avatar` wrapper, using a `span` by default.
+
+| Prop        | Type                           | Default | Description                             |
+| ----------- | ------------------------------ | ------- | --------------------------------------- |
+| `size`      | `'xs' \| 'sm' \| 'lg' \| 'xl'` | —       | Sets the avatar size.                   |
+| `subtle`    | `boolean`                      | `false` | Uses the subtle theme treatment.        |
+| `component` | `ElementType`                  | `span`  | Changes the root element.               |
+| `...props`  | `BoxProps<C>`                  | —       | Native props and all Box utility props. |
+
+### AvatarImage
+
+Renders an image with the `.avatar-img` class. It defaults to an `img` element;
+when nested inside `Avatar`, the image fills the wrapper.
+
+| Prop        | Type          | Default | Description                                 |
+| ----------- | ------------- | ------- | ------------------------------------------- |
+| `component` | `ElementType` | `img`   | Changes the image element.                  |
+| `...props`  | `BoxProps<C>` | —       | Image attributes and all Box utility props. |
+
+### AvatarStatus
+
+Renders the `.avatar-status` indicator, using a `span` by default.
+
+| Prop          | Type                                        | Default | Description                                         |
+| ------------- | ------------------------------------------- | ------- | --------------------------------------------------- |
+| `status`      | `'online' \| 'offline' \| 'busy' \| 'away'` | —       | Adds the matching `status-*` class.                 |
+| `component`   | `ElementType`                               | `span`  | Changes the indicator element.                      |
+| `aria-hidden` | `boolean`                                   | `true`  | Hides the decorative indicator from assistive tech. |
+| `...props`    | `BoxProps<C>`                               | —       | Native props and all Box utility props.             |
+
+Set `aria-hidden={false}` and provide an accessible name when the status needs
+to be announced.
+
+### AvatarStack
+
+Renders the `.avatar-stack` overlapping container, using a `div` by default.
+There is no size prop: use `avatar-stack-xs`, `avatar-stack-sm`,
+`avatar-stack-lg`, or `avatar-stack-xl` in `className` to size the avatars in a
+stack.
+
+| Prop        | Type          | Default | Description                             |
+| ----------- | ------------- | ------- | --------------------------------------- |
+| `component` | `ElementType` | `div`   | Changes the stack element.              |
+| `className` | `string`      | —       | Adds classes such as `avatar-stack-xl`. |
+| `...props`  | `BoxProps<C>` | —       | Native props and all Box utility props. |
 
 ## Accessibility
 
-Give each avatar image meaningful alternative text. If initials or a status
-indicator convey information, provide an accessible name and do not rely on
-color alone.
+Give each avatar image meaningful alternative text. If a status conveys
+information, provide an accessible name and set `aria-hidden={false}` on
+`AvatarStatus`; it is hidden from assistive technologies by default.
 
 ## See
 
+- [Bootstrap 6 Avatar documentation](https://getbootstrap.com/docs/6.0/components/avatar/)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/avatar.tsx)

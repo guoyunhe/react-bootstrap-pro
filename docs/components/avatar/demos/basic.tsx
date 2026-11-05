@@ -1,15 +1,14 @@
-import { Avatar, AvatarStatus, AvatarImage } from 'react-bootstrap-pro';
+import { Avatar, AvatarImage, Box } from 'react-bootstrap-pro';
 
-export function AvatarBasicDemo() {
+const avatarImage = 'https://avatars.githubusercontent.com/u/5836790';
+
+export function AvatarImagesDemo() {
   return (
-    <>
+    <Box display='flex' alignItems='center' gap={3}>
       <Avatar size='lg' theme='primary'>
-        AB
-        <AvatarStatus status='online' />
+        <AvatarImage src={avatarImage} alt='mdo' />
       </Avatar>
-      <Avatar size='lg'>
-        <AvatarImage src='https://example.com/avatar.png' alt='Alex Brown' />
-      </Avatar>
-    </>
+      <AvatarImage src={avatarImage} alt='mdo' width={50} height={50} />
+    </Box>
   );
 }
