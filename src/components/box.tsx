@@ -162,13 +162,13 @@ type OwnProps<C extends ElementType> = {
   spaceY?: Responsive<Spacing> | undefined;
   divideX?: Responsive<Divide> | undefined;
   divideY?: Responsive<Divide> | undefined;
-  width?: Width | NativeProp<C, 'width'> | undefined;
-  maxWidth?: 100 | undefined;
-  minWidth?: 0 | 100 | undefined;
-  viewportWidth?: 100 | undefined;
-  minViewportWidth?: 100 | undefined;
-  dynamicViewportWidth?: 100 | undefined;
-  minDynamicViewportWidth?: 100 | undefined;
+  w?: Width | undefined;
+  maxW?: 100 | undefined;
+  minW?: 0 | 100 | undefined;
+  vw?: 100 | undefined;
+  minVw?: 100 | undefined;
+  dvw?: 100 | undefined;
+  minDvw?: 100 | undefined;
   height?: Height | NativeProp<C, 'height'> | undefined;
   maxHeight?: 100 | undefined;
   minHeight?: 0 | 100 | undefined;
@@ -411,13 +411,13 @@ export function Box<C extends ElementType = 'div'>({
   spaceY,
   divideX,
   divideY,
-  width,
-  maxWidth,
-  minWidth,
-  viewportWidth,
-  minViewportWidth,
-  dynamicViewportWidth,
-  minDynamicViewportWidth,
+  w,
+  maxW,
+  minW,
+  vw,
+  minVw,
+  dvw,
+  minDvw,
   height,
   maxHeight,
   minHeight,
@@ -552,13 +552,13 @@ export function Box<C extends ElementType = 'div'>({
     getResponsiveClasses('space-y', spaceY),
     getResponsiveClasses('divide-x', divideX, (value) => (value ? '' : '0')),
     getResponsiveClasses('divide-y', divideY, (value) => (value ? '' : '0')),
-    isBoxWidth(width) && `w-${width}`,
-    maxWidth !== undefined && `max-w-${maxWidth}`,
-    minWidth !== undefined && `min-w-${minWidth}`,
-    viewportWidth !== undefined && `vw-${viewportWidth}`,
-    minViewportWidth !== undefined && `min-vw-${minViewportWidth}`,
-    dynamicViewportWidth !== undefined && `dvw-${dynamicViewportWidth}`,
-    minDynamicViewportWidth !== undefined && `min-dvw-${minDynamicViewportWidth}`,
+    isBoxWidth(w) && `w-${w}`,
+    maxW !== undefined && `max-w-${maxW}`,
+    minW !== undefined && `min-w-${minW}`,
+    vw !== undefined && `vw-${vw}`,
+    minVw !== undefined && `min-vw-${minVw}`,
+    dvw !== undefined && `dvw-${dvw}`,
+    minDvw !== undefined && `min-dvw-${minDvw}`,
     isBoxHeight(height) && `h-${height}`,
     maxHeight !== undefined && `max-h-${maxHeight}`,
     minHeight !== undefined && `min-h-${minHeight}`,
@@ -602,7 +602,6 @@ export function Box<C extends ElementType = 'div'>({
     <Component
       {...props}
       style={typeof z === 'number' ? { ...style, zIndex: z } : style}
-      width={width !== undefined && !isBoxWidth(width) ? width : undefined}
       height={height !== undefined && !isBoxHeight(height) ? height : undefined}
       className={classes || undefined}
     />

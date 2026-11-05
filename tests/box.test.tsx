@@ -399,13 +399,13 @@ test('applies sizing, typography, link, and motion utilities', async () => {
     <>
       <Box
         data-testid='sizing'
-        width={12}
-        maxWidth={100}
-        minWidth={0}
-        viewportWidth={100}
-        minViewportWidth={100}
-        dynamicViewportWidth={100}
-        minDynamicViewportWidth={100}
+        w={12}
+        maxW={100}
+        minW={0}
+        vw={100}
+        minVw={100}
+        dvw={100}
+        minDvw={100}
         height={75}
         maxHeight={100}
         minHeight={100}
