@@ -181,8 +181,8 @@ the corresponding Bootstrap `.z-*` utility when given a named layer. See the
 for the available layer names and values.
 
 Custom utility classes can still be passed through `className`. They are
-appended after the generated classes, and because Bootstrap utilities share the
-same specificity, the class that appears later in the stylesheet wins.
+appended after the generated classes. Use `classNameBefore` to prepend custom
+classes before the generated classes.
 
 ## Focus ring
 
@@ -235,6 +235,7 @@ Bootstrap utility props link to their corresponding Bootstrap 6 docs. Unlinked p
 | `borderY`                 | `boolean \| number`                                                                                                                                                                      | —       | Applies `.border-y` or `.border-y-0`. See [Bootstrap border utilities](https://getbootstrap.com/docs/6.0/utilities/border/).                                                                   |
 | `bottom`                  | `number`                                                                                                                                                                                 | —       | Applies `.bottom-{value}`. See [Bootstrap position utilities](https://getbootstrap.com/docs/6.0/utilities/position/).                                                                          |
 | `className`               | `string`                                                                                                                                                                                 | —       | Additional class names appended after the generated classes.                                                                                                                                   |
+| `classNameBefore`         | `string`                                                                                                                                                                                 | —       | Additional class names prepended before the generated classes.                                                                                                                                 |
 | `colorScheme`             | `'light' \| 'dark' \| 'auto'`                                                                                                                                                            | —       | Applies `.color-scheme-{value}`. See [Bootstrap color-scheme utilities](https://getbootstrap.com/docs/6.0/utilities/color-scheme/).                                                            |
 | `columnGap`               | `number`                                                                                                                                                                                 | —       | Applies responsive `.column-gap-*` classes. See [Bootstrap gap utilities](https://getbootstrap.com/docs/6.0/utilities/gap/).                                                                   |
 | `component`               | Inferred from `component`                                                                                                                                                                | `'div'` | Native element or React component to render.                                                                                                                                                   |

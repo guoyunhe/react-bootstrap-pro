@@ -199,8 +199,8 @@ import { BoxThemeDemo } from './demos/box-theme';
 Bootstrap `.z-*` 工具类。可用层级名称和取值请参阅
 [Bootstrap z-index 工具类](https://getbootstrap.com/docs/6.0/utilities/z-index/)。
 
-自定义工具类仍可通过 `className` 传入。它们会被追加在生成的类名之后；
-Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效。
+自定义工具类仍可通过 `className` 传入，并追加在生成的类名之后。使用
+`classNameBefore` 可将自定义类名放在生成类名之前。
 
 ```tsx
 <Box bg='body' className='shadow-sm' p={3} rounded>
@@ -257,6 +257,7 @@ Bootstrap 工具类属性均链接到对应的 Bootstrap 6 文档。未添加链
 | `borderY`                 | `boolean \| number`                                                                                                                                                                      | —       | 添加 `.border-y` 或 `.border-y-0`。 参阅 [Bootstrap border 文档](https://getbootstrap.com/docs/6.0/utilities/border/)。                                            |
 | `bottom`                  | `number`                                                                                                                                                                                 | —       | 添加 `.bottom-{value}`。 参阅 [Bootstrap position 文档](https://getbootstrap.com/docs/6.0/utilities/position/)。                                                   |
 | `className`               | `string`                                                                                                                                                                                 | —       | 追加在生成类名之后的额外类名。                                                                                                                                     |
+| `classNameBefore`         | `string`                                                                                                                                                                                 | —       | 添加在生成类名之前的额外类名。                                                                                                                                     |
 | `colorScheme`             | `'light' \| 'dark' \| 'auto'`                                                                                                                                                            | —       | 添加 `.color-scheme-{value}`。 参阅 [Bootstrap color-scheme 文档](https://getbootstrap.com/docs/6.0/utilities/color-scheme/)。                                     |
 | `columnGap`               | `number`                                                                                                                                                                                 | —       | 添加响应式 `.column-gap-*` 类。 参阅 [Bootstrap gap 文档](https://getbootstrap.com/docs/6.0/utilities/gap/)。                                                      |
 | `component`               | 根据 `component` 推断                                                                                                                                                                    | `'div'` | 渲染的原生元素或 React 组件。                                                                                                                                      |

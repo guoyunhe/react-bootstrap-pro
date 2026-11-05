@@ -31,6 +31,7 @@ export function Button<C extends ElementType = 'button'>({
   styled,
   disabled,
   check,
+  classNameBefore,
   className,
   ...props
 }: ButtonProps<C>) {
@@ -44,6 +45,7 @@ export function Button<C extends ElementType = 'button'>({
     styled && 'btn-styled',
     check && 'btn-check',
     isDisabledAnchor && 'disabled',
+    classNameBefore,
     className,
   );
 
@@ -60,7 +62,7 @@ export function Button<C extends ElementType = 'button'>({
       : {}),
     component: Component,
     theme,
-    className: classes,
+    classNameBefore: classes,
   } as BoxProps<C>;
 
   return <Box {...boxProps} />;

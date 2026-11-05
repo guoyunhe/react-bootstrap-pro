@@ -523,6 +523,21 @@ test('merges custom classes after utility classes', async () => {
   expect(screen.getByTestId('box').element().className).toBe('bg-body p-3 rounded');
 });
 
+test('places classNameBefore before utility classes', async () => {
+  const screen = await render(
+    <Box
+      data-testid='box'
+      bg='body'
+      classNameBefore='btn custom-button'
+      className='after-utilities'
+    />,
+  );
+
+  expect(screen.getByTestId('box').element().className).toBe(
+    'btn custom-button bg-body after-utilities',
+  );
+});
+
 test('renders the selected component and forwards its props', async () => {
   const screen = await render(
     <>

@@ -167,6 +167,8 @@ test('accepts box utility props', async () => {
       fg='primary'
       fgv='emphasis'
       colorScheme='dark'
+      w={100}
+      className='custom-button'
     >
       Themed
     </Button>,
@@ -179,5 +181,8 @@ test('accepts box utility props', async () => {
     'bg-subtle-primary',
     'fg-emphasis-primary',
     'color-scheme-dark',
+    'w-100',
+    'custom-button',
   );
+  expect(button).toHaveAttribute('class', expect.stringMatching(/^btn(?:\s|$)/));
 });

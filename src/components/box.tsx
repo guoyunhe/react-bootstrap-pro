@@ -66,6 +66,7 @@ import type {
 } from './types';
 
 type OwnProps = {
+  classNameBefore?: string | undefined;
   theme?: Theme | undefined;
   themeStyle?: ThemeStyle | undefined;
   themeBorder?: boolean | undefined;
@@ -462,11 +463,13 @@ export function Box<C extends ElementType = 'div'>({
   animation,
   style,
   className,
+  classNameBefore,
   ...props
 }: BoxProps<C>) {
   const Component = (component ?? 'div') as ElementType;
 
   const classes = clsx(
+    classNameBefore,
     theme && `theme-${theme}`,
     themeStyle && `theme-${themeStyle}`,
     themeBorder && 'theme-border',
