@@ -242,18 +242,21 @@ test('applies overflow and positioning utilities', async () => {
   expect(screen.getByTestId('sticky-position')).not.toHaveClass('md:sticky-top');
 });
 
-test('applies visibility and z-index utilities', async () => {
+test('applies visibility and z-index values', async () => {
   const screen = await render(
     <>
-      <Box data-testid='visible' visibility='visible' zIndex='tooltip' />
-      <Box data-testid='invisible' visibility='invisible' zIndex={-1} />
-      <Box data-testid='z-index-number' zIndex={3} />
+      <Box data-testid='visible' visibility='visible' z='tooltip' />
+      <Box data-testid='z-index-negative' z={-2} style={{ color: 'red' }} />
+      <Box data-testid='z-index-number' z={3} />
     </>,
   );
 
   expect(screen.getByTestId('visible')).toHaveClass('visible', 'z-tooltip');
-  expect(screen.getByTestId('invisible')).toHaveClass('invisible', 'z-n1');
-  expect(screen.getByTestId('z-index-number')).toHaveClass('z-3');
+  expect(screen.getByTestId('z-index-negative').element().style.zIndex).toBe('-2');
+  expect(screen.getByTestId('z-index-negative').element().style.color).toBe('red');
+  expect(screen.getByTestId('z-index-negative')).not.toHaveClass('z-n2');
+  expect(screen.getByTestId('z-index-number').element().style.zIndex).toBe('3');
+  expect(screen.getByTestId('z-index-number')).not.toHaveClass('z-3');
 });
 
 test('applies alignment, border, and radius utilities', async () => {

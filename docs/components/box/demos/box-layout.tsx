@@ -85,7 +85,7 @@ export function BoxLayoutDemo() {
           top={0}
           end={0}
           translateMiddle='y'
-          zIndex='tooltip'
+          z='tooltip'
           theme='primary'
           themeStyle='contrast'
           rounded='pill'
@@ -97,13 +97,16 @@ export function BoxLayoutDemo() {
       </Box>
 
       <Box display='flex' flexWrap='wrap' gap={2}>
-        <Box zIndex={-1} className='border rounded' p={2}>
-          z-n1
+        <Box z={-1} className='border rounded' p={2}>
+          z-index: -1
         </Box>
-        <Box zIndex='menu' className='border rounded' p={2}>
+        <Box z={3} className='border rounded' p={2}>
+          z-index: 3
+        </Box>
+        <Box z='menu' className='border rounded' p={2}>
           z-menu
         </Box>
-        <Box zIndex='toast' className='border rounded' p={2}>
+        <Box z='toast' className='border rounded' p={2}>
           z-toast
         </Box>
       </Box>

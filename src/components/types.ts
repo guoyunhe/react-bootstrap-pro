@@ -54,11 +54,7 @@ export type PositionOffset = 0 | 50 | 100;
 export type Visibility = 'visible' | 'invisible';
 
 export type ZIndex =
-  | -1
-  | 0
-  | 1
-  | 2
-  | 3
+  | number
   | 'menu'
   | 'sticky'
   | 'fixed'

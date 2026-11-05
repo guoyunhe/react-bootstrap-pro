@@ -73,7 +73,7 @@ type OwnProps<C extends ElementType> = {
   end?: PositionOffset | undefined;
   translateMiddle?: boolean | 'x' | 'y' | undefined;
   visibility?: Visibility | undefined;
-  zIndex?: ZIndex | undefined;
+  z?: ZIndex | undefined;
   flex?: Responsive<Flex> | undefined;
   flexDirection?: Responsive<FlexDirection> | undefined;
   flexGrow?: Responsive<FlexGrowShrink> | undefined;
@@ -322,7 +322,7 @@ export function Box<C extends ElementType = 'div'>({
   end,
   translateMiddle,
   visibility,
-  zIndex,
+  z,
   flex,
   flexDirection,
   flexGrow,
@@ -400,6 +400,7 @@ export function Box<C extends ElementType = 'div'>({
   userSelect,
   transition,
   animation,
+  style,
   className,
   ...props
 }: BoxProps<C>) {
@@ -462,7 +463,7 @@ export function Box<C extends ElementType = 'div'>({
     end !== undefined && `end-${end}`,
     translateMiddle && `translate-middle${translateMiddle === true ? '' : `-${translateMiddle}`}`,
     visibility,
-    zIndex !== undefined && `z-${zIndex === -1 ? 'n1' : zIndex}`,
+    typeof z === 'string' && `z-${z}`,
     getResponsiveClasses('flex', flex),
     getResponsiveClasses('flex', flexDirection),
     getResponsiveClasses('flex', flexGrow, (value) => `grow-${value}`),
@@ -543,12 +544,13 @@ export function Box<C extends ElementType = 'div'>({
     className,
   );
 
-  const componentProps = {
-    ...props,
-    ...(width === undefined || isBoxWidth(width) ? {} : { width }),
-    ...(height === undefined || isBoxHeight(height) ? {} : { height }),
-    ...(classes ? { className: classes } : {}),
-  };
-
-  return <Component {...componentProps} />;
+  return (
+    <Component
+      {...props}
+      style={typeof z === 'number' ? { ...style, zIndex: z } : style}
+      width={width !== undefined && !isBoxWidth(width) ? width : undefined}
+      height={height !== undefined && !isBoxHeight(height) ? height : undefined}
+      className={classes || undefined}
+    />
+  );
 }
