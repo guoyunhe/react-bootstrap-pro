@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { type ComponentProps } from '../types';
 import { Box, type BoxProps } from './box';
-import { type ComponentProps } from './shared';
 
 export type CardProps<C extends ElementType = 'div'> = ComponentProps<
   C,

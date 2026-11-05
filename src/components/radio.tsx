@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { type ComponentProps, type ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
-import { type ComponentProps, type ValidationState } from './shared';
 
 export type RadioSize = 'sm' | 'lg';
 

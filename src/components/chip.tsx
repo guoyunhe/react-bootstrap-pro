@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import type { ElementType, MouseEvent, ReactNode } from 'react';
 import { BiX } from 'react-bootstrap-icons-pro';
 
+import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
-import { type ComponentProps } from './shared';
 
 export type ChipImage = {
   src: string;

@@ -3,7 +3,7 @@ export * from './alert';
 export * from './avatar';
 export * from './badge';
 export * from './box';
-export * from './types';
+export * from '../types';
 export * from './breadcrumb';
 export * from './button';
 export * from './button-group';
@@ -66,5 +66,3 @@ export * from './toast';
 export * from './typography';
 export * from './toggler';
 export * from './tooltip';
-
-export type { ValidationState } from './shared';

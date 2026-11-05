@@ -62,7 +62,7 @@ import type {
   Visibility,
   Width,
   ZIndex,
-} from './types';
+} from '../types';
 
 type OwnProps<C extends ElementType> = {
   component?: C;

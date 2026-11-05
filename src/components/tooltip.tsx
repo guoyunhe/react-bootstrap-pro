@@ -30,10 +30,10 @@ import {
   type Ref,
 } from 'react';
 
+import { type ComponentProps } from '../types';
+import type { Breakpoint, Responsive } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
-import { type ComponentProps } from './shared';
-import type { Breakpoint, Responsive } from './types';
 
 export type TooltipTrigger = 'hover' | 'focus' | 'click';
 export type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left' | 'end' | 'start';

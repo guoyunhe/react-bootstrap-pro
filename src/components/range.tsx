@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import type { ChangeEventHandler, CSSProperties, ElementType, FormEventHandler } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
+import { type ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
-import { type ValidationState } from './shared';
 
 export type RangeTick = {
   value: number;

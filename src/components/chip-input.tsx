@@ -9,11 +9,11 @@ import type {
 } from 'react';
 import { useRef, useState } from 'react';
 
+import { type ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 import { Chip, type ChipProps } from './chip';
 import { FormControl } from './form-control';
-import { type ValidationState } from './shared';
 
 export type ChipInputChipProps = Omit<
   ChipProps<'span'>,

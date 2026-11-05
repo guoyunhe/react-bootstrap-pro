@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType, MouseEvent } from 'react';
 
+import type { Theme } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
-import type { Theme } from './types';
 
 export type ButtonTheme = Theme;
 
