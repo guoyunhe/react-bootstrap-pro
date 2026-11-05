@@ -1,10 +1,18 @@
-import { Grid, GridItem } from 'react-bootstrap-pro';
+import { Box, Grid, GridItem } from 'react-bootstrap-pro';
 
 export function SassColumnsDemo() {
   return (
     <Grid columns={18} style={{ '--bs-gap': '.5rem' }} className='text-center'>
-      <GridItem style={{ gridColumn: 'span 14' }}>14 columns</GridItem>
-      <GridItem span={4}>.g-col-4</GridItem>
+      <GridItem style={{ gridColumn: 'span 14' }}>
+        <Box bg='primary' bgo={10} rounded p={2}>
+          14 columns
+        </Box>
+      </GridItem>
+      <GridItem span={4}>
+        <Box bg='primary' bgo={10} rounded p={2}>
+          .g-col-4
+        </Box>
+      </GridItem>
     </Grid>
   );
 }

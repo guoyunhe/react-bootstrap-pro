@@ -1,11 +1,17 @@
-import { Grid } from 'react-bootstrap-pro';
+import { Box, Grid } from 'react-bootstrap-pro';
 
 export function NoGridClassesDemo() {
   return (
     <Grid columns={3} className='text-center'>
-      <div>Auto-column</div>
-      <div>Auto-column</div>
-      <div>Auto-column</div>
+      <Box bg='primary' bgo={10} rounded p={2}>
+        Auto-column
+      </Box>
+      <Box bg='primary' bgo={10} rounded p={2}>
+        Auto-column
+      </Box>
+      <Box bg='primary' bgo={10} rounded p={2}>
+        Auto-column
+      </Box>
     </Grid>
   );
 }
