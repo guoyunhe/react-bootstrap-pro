@@ -3,34 +3,470 @@ title: Card 卡片
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Button, Card, CardBody, CardHeader, CardTitle } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { CardBasicDemo } from './demos/basic';
+import { CardBodyDemo } from './demos/body';
+import { CardBodyCardDemo } from './demos/body-card';
+import { CardTitleTextLinksDemo } from './demos/title-text-links';
+import { CardImageBodyDemo } from './demos/image-body';
+import { CardImageCapsContentDemo } from './demos/image-caps-content';
+import { CardListGroupDemo } from './demos/list-group';
+import { CardListGroupHeaderDemo } from './demos/list-group-header';
+import { CardListGroupFooterDemo } from './demos/list-group-footer';
+import { CardKitchenSinkDemo } from './demos/kitchen-sink';
+import { CardHeaderBodyDemo } from './demos/header-body';
+import { CardHeadingHeaderDemo } from './demos/heading-header';
+import { CardBlockquoteDemo } from './demos/blockquote';
+import { CardHeaderFooterCenterDemo } from './demos/header-footer-center';
+import { CardGridWidthDemo } from './demos/grid-width';
+import { CardWidthUtilitiesDemo } from './demos/width-utilities';
+import { CardWidthCustomDemo } from './demos/width-custom';
+import { CardNavigationTabsDemo } from './demos/navigation-tabs';
+import { CardNavigationPillsDemo } from './demos/navigation-pills';
+import { CardImageCapsDemo } from './demos/image-caps';
+import { CardImageOverlayDemo } from './demos/image-overlay';
+import { CardRowStartDemo } from './demos/card-row-start';
+import { CardRowEndDemo } from './demos/card-row-end';
+import { CardThemeVariantsDemo } from './demos/theme-variants';
+import { CardThemeVariantsSubtleDemo } from './demos/theme-variants-subtle';
+import { CardTranslucentDemo } from './demos/translucent';
+import { CardTranslucentHeaderDemo } from './demos/translucent-header';
+import { CardGroupDemo } from './demos/card-group';
+import { CardGroupFooterDemo } from './demos/card-group-footer';
+import { CardGridCardsTwoDemo } from './demos/grid-cards-two';
+import { CardGridCardsThreeDemo } from './demos/grid-cards-three';
 
 # Card 卡片
 
-`Card` 是灵活的内容容器。可组合子组件添加页眉、主体、页脚或图片，并根据内容
-选择合适的语义元素。
+`Card` 是灵活的内容容器，可放置文本、图片、列表及其他内容。卡片默认没有固定宽度和内边距；
+可使用主体区域添加内边距，并通过工具类或网格布局调整尺寸。
 
 <DemoContainer>
-  <Card style={{ maxWidth: 320 }}>
-    <CardHeader>精选</CardHeader>
-    <CardBody>
-      <CardTitle>卡片标题</CardTitle>
-      <p>卡片内容。</p>
-      <Button variant='solid' theme='primary'>
-        继续
-      </Button>
-    </CardBody>
-  </Card>
+  <CardBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 工作方式
+
+- 卡片使用 Flexbox 容器，可配合 Flex 和网格工具类布局。
+- `.card` 默认没有内边距。使用 `CardBody` 创建带内边距的区域，并可组合页眉、页脚、
+  图片等结构。
+- 卡片默认没有外边距；按需添加外边距或间距工具类。
+- 选择与内容相符的语义 HTML。`Card` 默认渲染为 `<div>`，也可以渲染为
+  `<section>` 或 `<article>` 等元素。
+
+## 内容类型
+
+### 主体
+
+使用 `CardBody` 创建带内边距的区域：
+
+<DemoContainer>
+  <CardBodyDemo />
+</DemoContainer>
+
+```tsx src='./demos/body.tsx'
+
+```
+
+简单卡片也可以直接将主体类应用于卡片：
+
+<DemoContainer>
+  <CardBodyCardDemo />
+</DemoContainer>
+
+```tsx src='./demos/body-card.tsx'
+
+```
+
+### 标题、文本和链接
+
+卡片主体会将直接子元素垂直排列，并使用一致的间距。可使用 `CardTitle`、
+`CardSubtitle` 和 `CardText` 作为内容样式标记。链接无需专用的卡片类。
+
+<DemoContainer>
+  <CardTitleTextLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/title-text-links.tsx'
+
+```
+
+### 图片
+
+图片可放在卡片主体中，或放在卡片顶部、底部：
+
+<DemoContainer>
+  <CardImageBodyDemo />
+</DemoContainer>
+
+```tsx src='./demos/image-body.tsx'
+
+```
+
+使用 `placement='top'` 或 `placement='bottom'`，使图片圆角与卡片边缘匹配。未设置
+`placement` 时，`CardImage` 使用通用的 `.card-img` 类：
+
+<DemoContainer>
+  <CardImageCapsContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/image-caps-content.tsx'
+
+```
+
+### 列表组
+
+如果卡片只包含列表，可直接使用 `ListGroup`，避免外框重复：
+
+<DemoContainer>
+  <CardListGroupDemo />
+</DemoContainer>
+
+```tsx src='./demos/list-group.tsx'
+
+```
+
+将列表与其他卡片结构组合时，设置 `flush` 移除列表外边框：
+
+<DemoContainer>
+  <CardListGroupHeaderDemo />
+</DemoContainer>
+
+```tsx src='./demos/list-group-header.tsx'
+
+```
+
+<DemoContainer>
+  <CardListGroupFooterDemo />
+</DemoContainer>
+
+```tsx src='./demos/list-group-footer.tsx'
+
+```
+
+### 综合示例
+
+组合图片、主体内容、列表和链接：
+
+<DemoContainer>
+  <CardKitchenSinkDemo />
+</DemoContainer>
+
+```tsx src='./demos/kitchen-sink.tsx'
+
+```
+
+### 页眉和页脚
+
+可选添加页眉或页脚：
+
+<DemoContainer>
+  <CardHeaderBodyDemo />
+</DemoContainer>
+
+```tsx src='./demos/header-body.tsx'
+
+```
+
+也可以将页眉样式应用到标题元素：
+
+<DemoContainer>
+  <CardHeadingHeaderDemo />
+</DemoContainer>
+
+```tsx src='./demos/heading-header.tsx'
+
+```
+
+卡片也可以包含引用内容：
+
+<DemoContainer>
+  <CardBlockquoteDemo />
+</DemoContainer>
+
+```tsx src='./demos/blockquote.tsx'
+
+```
+
+可以居中对齐内容，并使用页脚显示辅助信息：
+
+<DemoContainer>
+  <CardHeaderFooterCenterDemo />
+</DemoContainer>
+
+```tsx src='./demos/header-footer-center.tsx'
+
+```
+
+## 宽度
+
+卡片默认填满父元素。可通过网格列、工具类或自定义 CSS 调整宽度：
+
+### 网格
+
+按需将卡片放入网格列中：
+
+<DemoContainer>
+  <CardGridWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/grid-width.tsx'
+
+```
+
+### 工具类
+
+使用宽度工具类设置卡片宽度：
+
+<DemoContainer>
+  <CardWidthUtilitiesDemo />
+</DemoContainer>
+
+```tsx src='./demos/width-utilities.tsx'
+
+```
+
+### 自定义 CSS
+
+可在样式表或行内样式中设置自定义宽度：
+
+<DemoContainer>
+  <CardWidthCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/width-custom.tsx'
+
+```
+
+## 导航
+
+可在卡片页眉中放置导航组件：
+
+<DemoContainer>
+  <CardNavigationTabsDemo />
+</DemoContainer>
+
+```tsx src='./demos/navigation-tabs.tsx'
+
+```
+
+也可以使用 pills 样式：
+
+<DemoContainer>
+  <CardNavigationPillsDemo />
+</DemoContainer>
+
+```tsx src='./demos/navigation-pills.tsx'
+
+```
+
+## 图片
+
+### 图片边栏
+
+使用顶部或底部图片，将图片与卡片边缘相连：
+
+<DemoContainer>
+  <CardImageCapsDemo />
+</DemoContainer>
+
+```tsx src='./demos/image-caps.tsx'
+
+```
+
+### 图片覆盖层
+
+使用 `CardImageOverlay` 在图片上叠加文本。确保内容不超出图片范围，并为文字选择足够的对比度：
+
+<DemoContainer>
+  <CardImageOverlayDemo />
+</DemoContainer>
+
+```tsx src='./demos/image-overlay.tsx'
+
+```
+
+## 横向卡片
+
+使用 `card-row` 类设置横向布局。`card-img-start` 和 `card-img-end` 可将图片放置在卡片的
+行内起始端或末尾：
+
+<DemoContainer>
+  <CardRowStartDemo />
+</DemoContainer>
+
+```tsx src='./demos/card-row-start.tsx'
+
+```
+
+将图片放到末尾即可反转布局：
+
+<DemoContainer>
+  <CardRowEndDemo />
+</DemoContainer>
+
+```tsx src='./demos/card-row-end.tsx'
+
+```
+
+## 主题变体
+
+使用 `theme` 应用语义化的表面和边框颜色。`variant='subtle'` 使用更柔和的表面和边框样式：
+
+<DemoContainer>
+  <CardThemeVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/theme-variants.tsx'
+
+```
+
+<DemoContainer>
+  <CardThemeVariantsSubtleDemo />
+</DemoContainer>
+
+```tsx src='./demos/theme-variants-subtle.tsx'
+
+```
+
+## 半透明卡片
+
+设置 `variant='translucent'` 可模糊并增强背景饱和度。页眉和页脚会同步调整表面样式：
+
+<DemoContainer>
+  <CardTranslucentDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent.tsx'
+
+```
+
+<DemoContainer>
+  <CardTranslucentHeaderDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent-header.tsx'
+
+```
+
+## 卡片布局
+
+### 卡片组
+
+使用 `.card-group` 将卡片连接为等宽列。在父级查询容器上添加 `.contains-inline`，
+即可启用横向布局；否则卡片会保持堆叠。
+
+<DemoContainer>
+  <CardGroupDemo />
+</DemoContainer>
+
+```tsx src='./demos/card-group.tsx'
+
+```
+
+使用页脚时，卡片组中的内容会自动对齐：
+
+<DemoContainer>
+  <CardGroupFooterDemo />
+</DemoContainer>
+
+```tsx src='./demos/card-group-footer.tsx'
+
+```
+
+### 网格卡片
+
+使用行列数工具类响应式地控制每行显示的卡片数量：
+
+<DemoContainer>
+  <CardGridCardsTwoDemo />
+</DemoContainer>
+
+```tsx src='./demos/grid-cards-two.tsx'
+
+```
+
+将中等断点及以上的网格列数改为三列：
+
+<DemoContainer>
+  <CardGridCardsThreeDemo />
+</DemoContainer>
+
+```tsx src='./demos/grid-cards-three.tsx'
+
+```
 
 ## API
 
-| 属性        | 类型                        | 说明                            |
-| ----------- | --------------------------- | ------------------------------- |
-| `variant`   | `'subtle' \| 'translucent'` | 选择卡片表面样式。              |
-| `component` | `ElementType`               | 更换卡片根元素。                |
-| `...props`  | `BoxProps<C>`               | 原生属性及所有 Box 工具类属性。 |
+### Card
 
-`CardHeader`、`CardBody`、`CardFooter`、`CardTitle`、`CardSubtitle`、`CardText`、
-`CardImage` 和 `CardImageOverlay` 提供对应的结构类名。
+| 属性        | 类型                        | 默认值  | 说明                            |
+| ----------- | --------------------------- | ------- | ------------------------------- |
+| `variant`   | `'subtle' \| 'translucent'` | —       | 选择卡片表面样式。              |
+| `component` | `C extends ElementType`     | `'div'` | 要渲染的原生元素或 React 组件。 |
+
+继承当前渲染元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CardBody
+
+默认渲染为 `<div>`。继承当前渲染元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CardHeader
+
+默认渲染为 `<div>`。继承当前渲染元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CardFooter
+
+默认渲染为 `<div>`。继承当前渲染元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CardTitle
+
+默认渲染为 `<h5>`。继承当前渲染元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CardSubtitle
+
+默认渲染为 `<h6>`。继承当前渲染元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CardText
+
+默认渲染为 `<p>`。继承当前渲染元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CardImage
+
+| 属性        | 类型                    | 默认值  | 说明                                               |
+| ----------- | ----------------------- | ------- | -------------------------------------------------- |
+| `placement` | `'top' \| 'bottom'`     | —       | 应用顶部或底部图片样式；未设置时使用 `.card-img`。 |
+| `component` | `C extends ElementType` | `'img'` | 要渲染的原生元素或 React 组件。                    |
+
+继承当前渲染元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。信息性图片应提供
+有意义的 `alt` 文本；装饰性图片的 `alt` 应为空字符串。
+
+### CardImageOverlay
+
+默认渲染为 `<div>`。继承当前渲染元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+包入口导出 `Card`、`CardProps`、`CardBody`、`CardBodyProps`、`CardHeader`、
+`CardHeaderProps`、`CardFooter`、`CardFooterProps`、`CardTitle`、`CardTitleProps`、
+`CardSubtitle`、`CardSubtitleProps`、`CardText`、`CardTextProps`、`CardImage`、
+`CardImageProps`、`CardImageOverlay` 和 `CardImageOverlayProps`。
+
+## 无障碍访问
+
+当卡片表示独立内容时，选择 `<article>` 或 `<section>` 等有意义的根元素。信息性图片应提供
+有用的替代文本，覆盖在图片上的文字应确保有足够的对比度。
+
+## 参考
+
+- [Bootstrap 6 Card 官方文档](https://getbootstrap.com/docs/6.0/components/card/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/card.tsx)

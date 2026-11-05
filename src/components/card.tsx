@@ -100,7 +100,7 @@ export function CardImage<C extends ElementType = 'img'>({
       {...(props as BoxProps<C>)}
       component={component ?? ('img' as C)}
       classNameBefore={clsx(
-        placement ? `card-img-${placement}` : 'card-img-top',
+        placement ? `card-img-${placement}` : 'card-img',
         props.classNameBefore,
       )}
       className={className}

@@ -3,16 +3,44 @@ title: Card
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Button, Card, CardBody, CardHeader, CardTitle } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { CardBasicDemo } from './demos/basic';
+import { CardBodyDemo } from './demos/body';
+import { CardBodyCardDemo } from './demos/body-card';
+import { CardTitleTextLinksDemo } from './demos/title-text-links';
+import { CardImageBodyDemo } from './demos/image-body';
+import { CardImageCapsContentDemo } from './demos/image-caps-content';
+import { CardListGroupDemo } from './demos/list-group';
+import { CardListGroupHeaderDemo } from './demos/list-group-header';
+import { CardListGroupFooterDemo } from './demos/list-group-footer';
+import { CardKitchenSinkDemo } from './demos/kitchen-sink';
+import { CardHeaderBodyDemo } from './demos/header-body';
+import { CardHeadingHeaderDemo } from './demos/heading-header';
+import { CardBlockquoteDemo } from './demos/blockquote';
+import { CardHeaderFooterCenterDemo } from './demos/header-footer-center';
+import { CardGridWidthDemo } from './demos/grid-width';
+import { CardWidthUtilitiesDemo } from './demos/width-utilities';
+import { CardWidthCustomDemo } from './demos/width-custom';
+import { CardNavigationTabsDemo } from './demos/navigation-tabs';
+import { CardNavigationPillsDemo } from './demos/navigation-pills';
+import { CardImageCapsDemo } from './demos/image-caps';
+import { CardImageOverlayDemo } from './demos/image-overlay';
+import { CardRowStartDemo } from './demos/card-row-start';
+import { CardRowEndDemo } from './demos/card-row-end';
+import { CardThemeVariantsDemo } from './demos/theme-variants';
+import { CardThemeVariantsSubtleDemo } from './demos/theme-variants-subtle';
+import { CardTranslucentDemo } from './demos/translucent';
+import { CardTranslucentHeaderDemo } from './demos/translucent-header';
+import { CardGroupDemo } from './demos/card-group';
+import { CardGroupFooterDemo } from './demos/card-group-footer';
+import { CardGridCardsTwoDemo } from './demos/grid-cards-two';
+import { CardGridCardsThreeDemo } from './demos/grid-cards-three';
 
 # Card
 
-`Card` is a flexible content container. Use its subcomponents to add a header,
-body, footer, or image while keeping semantic element choice in your control.
-
-## Example
+`Card` is a flexible content container for text, images, lists, and other
+content. Cards have no fixed width or padding by default; add a body for padded
+content and use utilities or grid layouts to size them.
 
 <DemoContainer>
   <CardBasicDemo />
@@ -22,26 +50,433 @@ body, footer, or image while keeping semantic element choice in your control.
 
 ```
 
+## How it works
+
+- Cards are flexbox containers and work with flex and grid utilities.
+- `.card` has no default padding. Use `CardBody` for a padded section alongside
+  optional headers, footers, images, and other content.
+- Cards have no default margin. Add margin or gap utilities as needed.
+- Choose semantic HTML that matches the content. `Card` renders a `<div>` by
+  default and can render elements such as `<section>` or `<article>`.
+
+## Content types
+
+### Body
+
+Use `CardBody` to add a padded section:
+
+<DemoContainer>
+  <CardBodyDemo />
+</DemoContainer>
+
+```tsx src='./demos/body.tsx'
+
+```
+
+For a simple card, the body class can be applied directly to the card:
+
+<DemoContainer>
+  <CardBodyCardDemo />
+</DemoContainer>
+
+```tsx src='./demos/body-card.tsx'
+
+```
+
+### Titles, text, and links
+
+Card bodies arrange their direct children in a column with a consistent gap.
+Use `CardTitle`, `CardSubtitle`, and `CardText` as content hooks. Links need no
+card-specific class.
+
+<DemoContainer>
+  <CardTitleTextLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/title-text-links.tsx'
+
+```
+
+### Images
+
+Images can appear in the body or at the top or bottom of a card:
+
+<DemoContainer>
+  <CardImageBodyDemo />
+</DemoContainer>
+
+```tsx src='./demos/image-body.tsx'
+
+```
+
+Use `placement='top'` or `placement='bottom'` to round image corners to match
+the card. Without `placement`, `CardImage` uses the general `.card-img` class:
+
+<DemoContainer>
+  <CardImageCapsContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/image-caps-content.tsx'
+
+```
+
+### List groups
+
+For a list-only card, use a `ListGroup` on its own to avoid a doubled outer
+border:
+
+<DemoContainer>
+  <CardListGroupDemo />
+</DemoContainer>
+
+```tsx src='./demos/list-group.tsx'
+
+```
+
+When combining a list with card parts, set `flush` to remove its outer border:
+
+<DemoContainer>
+  <CardListGroupHeaderDemo />
+</DemoContainer>
+
+```tsx src='./demos/list-group-header.tsx'
+
+```
+
+<DemoContainer>
+  <CardListGroupFooterDemo />
+</DemoContainer>
+
+```tsx src='./demos/list-group-footer.tsx'
+
+```
+
+### Kitchen sink
+
+Combine images, body content, lists, and links:
+
+<DemoContainer>
+  <CardKitchenSinkDemo />
+</DemoContainer>
+
+```tsx src='./demos/kitchen-sink.tsx'
+
+```
+
+### Header and footer
+
+Add an optional header or footer:
+
+<DemoContainer>
+  <CardHeaderBodyDemo />
+</DemoContainer>
+
+```tsx src='./demos/header-body.tsx'
+
+```
+
+Card headers can also be applied to heading elements:
+
+<DemoContainer>
+  <CardHeadingHeaderDemo />
+</DemoContainer>
+
+```tsx src='./demos/heading-header.tsx'
+
+```
+
+Cards can contain blockquotes:
+
+<DemoContainer>
+  <CardBlockquoteDemo />
+</DemoContainer>
+
+```tsx src='./demos/blockquote.tsx'
+
+```
+
+Align the contents and use a footer for supporting information:
+
+<DemoContainer>
+  <CardHeaderFooterCenterDemo />
+</DemoContainer>
+
+```tsx src='./demos/header-footer-center.tsx'
+
+```
+
+## Width
+
+Cards fill their parent by default. Change their width with grid columns,
+utility classes, or custom CSS:
+
+### Grid
+
+Wrap cards in columns as needed:
+
+<DemoContainer>
+  <CardGridWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/grid-width.tsx'
+
+```
+
+### Utilities
+
+Use width utilities to set a card's width:
+
+<DemoContainer>
+  <CardWidthUtilitiesDemo />
+</DemoContainer>
+
+```tsx src='./demos/width-utilities.tsx'
+
+```
+
+### Custom CSS
+
+Use a stylesheet or inline style for a custom width:
+
+<DemoContainer>
+  <CardWidthCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/width-custom.tsx'
+
+```
+
+## Navigation
+
+Place navigation components in a card header:
+
+<DemoContainer>
+  <CardNavigationTabsDemo />
+</DemoContainer>
+
+```tsx src='./demos/navigation-tabs.tsx'
+
+```
+
+This also works with pills:
+
+<DemoContainer>
+  <CardNavigationPillsDemo />
+</DemoContainer>
+
+```tsx src='./demos/navigation-pills.tsx'
+
+```
+
 ## Images
 
-Use `CardImage` for a card image and provide appropriate alternative text.
+### Image caps
+
+Use a top or bottom image cap to attach an image to the card:
+
+<DemoContainer>
+  <CardImageCapsDemo />
+</DemoContainer>
+
+```tsx src='./demos/image-caps.tsx'
+
+```
+
+### Image overlays
+
+Overlay text on an image with `CardImageOverlay`. Keep the content within the
+image bounds and choose text colors with sufficient contrast:
+
+<DemoContainer>
+  <CardImageOverlayDemo />
+</DemoContainer>
+
+```tsx src='./demos/image-overlay.tsx'
+
+```
+
+## Card row
+
+Use the `card-row` class for a horizontal layout. `card-img-start` and
+`card-img-end` place the image at the inline start or end:
+
+<DemoContainer>
+  <CardRowStartDemo />
+</DemoContainer>
+
+```tsx src='./demos/card-row-start.tsx'
+
+```
+
+Reverse the layout by placing the image at the end:
+
+<DemoContainer>
+  <CardRowEndDemo />
+</DemoContainer>
+
+```tsx src='./demos/card-row-end.tsx'
+
+```
+
+## Theme variants
+
+Use `theme` to apply a contextual surface and border color. `variant='subtle'`
+uses the subtler surface and border treatment:
+
+<DemoContainer>
+  <CardThemeVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/theme-variants.tsx'
+
+```
+
+<DemoContainer>
+  <CardThemeVariantsSubtleDemo />
+</DemoContainer>
+
+```tsx src='./demos/theme-variants-subtle.tsx'
+
+```
+
+## Translucent cards
+
+Set `variant='translucent'` to blur and saturate the background. Header and
+footer surfaces adjust to match:
+
+<DemoContainer>
+  <CardTranslucentDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent.tsx'
+
+```
+
+<DemoContainer>
+  <CardTranslucentHeaderDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent-header.tsx'
+
+```
+
+## Card layout
+
+### Card groups
+
+Use `.card-group` to attach cards with equal-width columns. Add
+`.contains-inline` to a parent query container for the row layout to activate;
+otherwise, cards remain stacked.
+
+<DemoContainer>
+  <CardGroupDemo />
+</DemoContainer>
+
+```tsx src='./demos/card-group.tsx'
+
+```
+
+With footers, card group content automatically lines up:
+
+<DemoContainer>
+  <CardGroupFooterDemo />
+</DemoContainer>
+
+```tsx src='./demos/card-group-footer.tsx'
+
+```
+
+### Grid cards
+
+Use row columns to control the number of cards per row responsively:
+
+<DemoContainer>
+  <CardGridCardsTwoDemo />
+</DemoContainer>
+
+```tsx src='./demos/grid-cards-two.tsx'
+
+```
+
+Change the grid to three columns at the medium breakpoint:
+
+<DemoContainer>
+  <CardGridCardsThreeDemo />
+</DemoContainer>
+
+```tsx src='./demos/grid-cards-three.tsx'
+
+```
 
 ## API
 
-| Prop        | Type                        | Description                             |
-| ----------- | --------------------------- | --------------------------------------- |
-| `variant`   | `'subtle' \| 'translucent'` | Selects a card surface treatment.       |
-| `component` | `ElementType`               | Changes the card root element.          |
-| `...props`  | `BoxProps<C>`               | Native props and all Box utility props. |
+### Card
 
-`CardHeader`, `CardBody`, `CardFooter`, `CardTitle`, `CardSubtitle`, `CardText`,
-`CardImage`, and `CardImageOverlay` provide the corresponding structural classes.
+| Prop        | Type                        | Default | Description                                  |
+| ----------- | --------------------------- | ------- | -------------------------------------------- |
+| `variant`   | `'subtle' \| 'translucent'` | —       | Selects a card surface treatment.            |
+| `component` | `C extends ElementType`     | `'div'` | Native element or React component to render. |
+
+Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### CardBody
+
+Renders a `<div>` by default. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### CardHeader
+
+Renders a `<div>` by default. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### CardFooter
+
+Renders a `<div>` by default. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### CardTitle
+
+Renders an `<h5>` by default. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### CardSubtitle
+
+Renders an `<h6>` by default. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### CardText
+
+Renders a `<p>` by default. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### CardImage
+
+| Prop        | Type                    | Default | Description                                                              |
+| ----------- | ----------------------- | ------- | ------------------------------------------------------------------------ |
+| `placement` | `'top' \| 'bottom'`     | —       | Applies the top or bottom image treatment. Without it, uses `.card-img`. |
+| `component` | `C extends ElementType` | `'img'` | Native element or React component to render.                             |
+
+Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props. Provide useful `alt` text for
+informative images; use an empty `alt` for decorative images.
+
+### CardImageOverlay
+
+Renders a `<div>` by default. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+`Card`, `CardProps`, `CardBody`, `CardBodyProps`, `CardHeader`, `CardHeaderProps`,
+`CardFooter`, `CardFooterProps`, `CardTitle`, `CardTitleProps`, `CardSubtitle`,
+`CardSubtitleProps`, `CardText`, `CardTextProps`, `CardImage`, `CardImageProps`,
+`CardImageOverlay`, and `CardImageOverlayProps` are exported from the package
+entry point.
 
 ## Accessibility
 
-Choose a meaningful root element such as `article` or `section` when the card
-represents a standalone piece of content. Images that convey information need
-useful alternative text.
+Choose a meaningful root element such as `<article>` or `<section>` when a card
+represents standalone content. Give informative images useful alternative text,
+and ensure overlaid text has sufficient contrast.
 
 ## See
 
