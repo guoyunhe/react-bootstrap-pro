@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { ComponentPropsWithoutRef, ComponentPropsWithRef, ElementType } from 'react';
+import type { ComponentPropsWithRef, ElementType } from 'react';
 
 import type {
   AlignContent,
@@ -65,12 +65,7 @@ import type {
   ZIndex,
 } from './types';
 
-type NativeProp<
-  C extends ElementType,
-  K extends PropertyKey,
-> = K extends keyof ComponentPropsWithoutRef<C> ? ComponentPropsWithoutRef<C>[K] : never;
-
-type OwnProps<C extends ElementType> = {
+type OwnProps = {
   theme?: Theme | undefined;
   themeStyle?: ThemeStyle | undefined;
   themeBorder?: boolean | undefined;
@@ -169,13 +164,13 @@ type OwnProps<C extends ElementType> = {
   minVw?: 100 | undefined;
   dvw?: 100 | undefined;
   minDvw?: 100 | undefined;
-  height?: Height | NativeProp<C, 'height'> | undefined;
-  maxHeight?: 100 | undefined;
-  minHeight?: 0 | 100 | undefined;
-  viewportHeight?: 100 | undefined;
-  minViewportHeight?: 100 | undefined;
-  dynamicViewportHeight?: 100 | undefined;
-  minDynamicViewportHeight?: 100 | undefined;
+  h?: Height | undefined;
+  maxH?: 100 | undefined;
+  minH?: 0 | 100 | undefined;
+  vh?: 100 | undefined;
+  minVh?: 100 | undefined;
+  dvh?: 100 | undefined;
+  minDvh?: 100 | undefined;
   fontFamily?: FontFamily | undefined;
   fontSize?: FontSize | undefined;
   textSize?: FontSize | undefined;
@@ -207,10 +202,10 @@ type OwnProps<C extends ElementType> = {
   animation?: Animation | undefined;
 };
 
-export type BoxProps<C extends ElementType = 'div'> = OwnProps<C> & {
+export type BoxProps<C extends ElementType = 'div'> = OwnProps & {
   component?: C;
   className?: string;
-} & Omit<ComponentPropsWithRef<C>, keyof OwnProps<C> | 'className' | 'component'>;
+} & Omit<ComponentPropsWithRef<C>, keyof OwnProps | 'className' | 'component'>;
 
 const breakpoints: readonly Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 const boxWidths: readonly Width[] = [
@@ -418,13 +413,13 @@ export function Box<C extends ElementType = 'div'>({
   minVw,
   dvw,
   minDvw,
-  height,
-  maxHeight,
-  minHeight,
-  viewportHeight,
-  minViewportHeight,
-  dynamicViewportHeight,
-  minDynamicViewportHeight,
+  h,
+  maxH,
+  minH,
+  vh,
+  minVh,
+  dvh,
+  minDvh,
   fontFamily,
   fontSize,
   textSize,
@@ -559,13 +554,13 @@ export function Box<C extends ElementType = 'div'>({
     minVw !== undefined && `min-vw-${minVw}`,
     dvw !== undefined && `dvw-${dvw}`,
     minDvw !== undefined && `min-dvw-${minDvw}`,
-    isBoxHeight(height) && `h-${height}`,
-    maxHeight !== undefined && `max-h-${maxHeight}`,
-    minHeight !== undefined && `min-h-${minHeight}`,
-    viewportHeight !== undefined && `vh-${viewportHeight}`,
-    minViewportHeight !== undefined && `min-vh-${minViewportHeight}`,
-    dynamicViewportHeight !== undefined && `dvh-${dynamicViewportHeight}`,
-    minDynamicViewportHeight !== undefined && `min-dvh-${minDynamicViewportHeight}`,
+    isBoxHeight(h) && `h-${h}`,
+    maxH !== undefined && `max-h-${maxH}`,
+    minH !== undefined && `min-h-${minH}`,
+    vh !== undefined && `vh-${vh}`,
+    minVh !== undefined && `min-vh-${minVh}`,
+    dvh !== undefined && `dvh-${dvh}`,
+    minDvh !== undefined && `min-dvh-${minDvh}`,
     fontFamily && `font-${fontFamily}`,
     fontSize && `fs-${fontSize}`,
     textSize && `text-${textSize}`,
@@ -602,7 +597,6 @@ export function Box<C extends ElementType = 'div'>({
     <Component
       {...props}
       style={typeof z === 'number' ? { ...style, zIndex: z } : style}
-      height={height !== undefined && !isBoxHeight(height) ? height : undefined}
       className={classes || undefined}
     />
   );
