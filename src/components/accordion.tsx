@@ -53,10 +53,12 @@ export type AccordionHeaderProps<C extends ElementType = 'summary'> = Omit<
   keyof { icon?: ReactNode | undefined }
 > & { icon?: ReactNode | undefined };
 
+const defaultIcon = <BiChevronDown className='accordion-icon' aria-hidden='true' />;
+
 export function AccordionHeader<C extends ElementType = 'summary'>({
   component,
   className,
-  icon = <BiChevronDown />,
+  icon = defaultIcon,
   children,
   ...props
 }: AccordionHeaderProps<C>) {
@@ -68,11 +70,7 @@ export function AccordionHeader<C extends ElementType = 'summary'>({
       className={className}
     >
       {children}
-      {icon && (
-        <span className='accordion-icon' aria-hidden='true'>
-          {icon}
-        </span>
-      )}
+      {icon}
     </Box>
   );
 }
