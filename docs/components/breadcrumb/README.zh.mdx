@@ -3,36 +3,129 @@ title: Breadcrumb 面包屑
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Breadcrumb, BreadcrumbDivider, BreadcrumbItem, BreadcrumbLink } from 'react-bootstrap-pro';
+import { BreadcrumbBasicDemo } from './demos/basic';
+import { BreadcrumbCustomDividerDemo } from './demos/divider-custom';
+import { BreadcrumbDefaultDividerDemo } from './demos/divider-default';
+import { BreadcrumbSvgDividerDemo } from './demos/divider-svg';
+import { BreadcrumbTextDividerDemo } from './demos/divider-text';
+import { BreadcrumbEllipsisDemo } from './demos/ellipsis';
 import { DemoContainer } from '../demo-container';
 
 # Breadcrumb 面包屑
 
-请在具备无障碍名称的导航区域中使用 `Breadcrumb`。其条目、链接和分隔符组件会
-渲染对应的列表语义。
+使用导航区域中的有序列表表示当前页面在层级结构中的位置。空的 `BreadcrumbDivider` 默认显示 CSS
+chevron，也可以在其中放入自定义内容。
+
+## 示例
+
+每个页面使用一个 `BreadcrumbItem`，并通过 `BreadcrumbLink` 的 `active` 属性标记当前页面。
 
 <DemoContainer>
-  <nav aria-label='面包屑'>
-    <Breadcrumb>
-      <BreadcrumbItem>
-        <BreadcrumbLink href='/'>首页</BreadcrumbLink>
-      </BreadcrumbItem>
-      <BreadcrumbDivider />
-      <BreadcrumbItem aria-current='page'>
-        <BreadcrumbLink href='/docs' active>
-          文档
-        </BreadcrumbLink>
-      </BreadcrumbItem>
-    </Breadcrumb>
-  </nav>
+  <BreadcrumbBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+对于较长的路径，可以用仅含图标的链接表示一组隐藏页面，并为该链接提供无障碍名称。
+
+<DemoContainer>
+  <BreadcrumbEllipsisDemo />
+</DemoContainer>
+
+```tsx src='./demos/ellipsis.tsx'
+
+```
+
+## 分隔符
+
+分隔符是列表中的独立条目。空的 `BreadcrumbDivider` 会显示默认 chevron；添加内容后则显示自定义内容。
+
+### 默认分隔符
+
+保持分隔符为空即可使用 CSS chevron。它会继承分隔符颜色，包括深色模式下的颜色。
+
+<DemoContainer>
+  <BreadcrumbDefaultDividerDemo />
+</DemoContainer>
+
+```tsx src='./demos/divider-default.tsx'
+
+```
+
+### SVG 分隔符
+
+添加内联 SVG 可使用清晰、可缩放的自定义分隔符。使用 `currentColor` 可让图标继承分隔符颜色。
+
+<DemoContainer>
+  <BreadcrumbSvgDividerDemo />
+</DemoContainer>
+
+```tsx src='./demos/divider-svg.tsx'
+
+```
+
+### 文本分隔符
+
+可以直接使用 `/` 等文本字符作为分隔符。
+
+<DemoContainer>
+  <BreadcrumbTextDividerDemo />
+</DemoContainer>
+
+```tsx src='./demos/divider-text.tsx'
+
+```
+
+### 自定义分隔符
+
+可以使用任意自定义内容，例如带主题颜色的 chevron。
+
+<DemoContainer>
+  <BreadcrumbCustomDividerDemo />
+</DemoContainer>
+
+```tsx src='./demos/divider-custom.tsx'
+
+```
 
 ## API
 
-| 组件                | 用途                                                |
-| ------------------- | --------------------------------------------------- |
-| `Breadcrumb`        | 带 `.breadcrumb` 的有序列表根元素。                 |
-| `BreadcrumbItem`    | 带 `.breadcrumb-item` 的列表项。                    |
-| `BreadcrumbLink`    | 支持 `active` 状态的链接。                          |
-| `BreadcrumbDivider` | 空列表项，由 CSS 绘制箭头分隔符。                   |
-| `...props`          | 所有组件均支持 `component`、原生属性和 `BoxProps`。 |
+### Breadcrumb
+
+默认使用 `ol` 元素渲染带有 `.breadcrumb` 类的有序列表。请将其放置在导航区域中。
+
+继承原生 `ol` 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
+
+### BreadcrumbItem
+
+默认使用 `li` 元素渲染带有 `.breadcrumb-item` 类的列表项。继承原生 `li` 属性及
+[`Box`](../box/README.zh.mdx#api) 属性，包括工具类属性和 `component`。
+
+### BreadcrumbLink
+
+默认在 `a` 元素上渲染 `.breadcrumb-link` 类。
+
+| 属性     | 类型      | 说明                                         |
+| -------- | --------- | -------------------------------------------- |
+| `active` | `boolean` | 添加当前页样式并设置 `aria-current='page'`。 |
+
+继承原生链接属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
+
+### BreadcrumbDivider
+
+默认使用 `li` 元素渲染带有 `.breadcrumb-divider` 类的列表项。内容为空时显示 CSS chevron；
+添加子内容会替换该图标。分隔符默认对辅助技术隐藏。继承原生 `li` 属性及
+[`Box`](../box/README.zh.mdx#api) 属性，包括 `component`。
+
+## 无障碍访问
+
+为外层 `<nav>` 添加易于理解的 `aria-label`，并使用 `aria-current='page'` 标记当前页面。
+分隔符默认对辅助技术隐藏；仅含图标的面包屑链接应提供无障碍名称。
+
+## 参考
+
+- [Bootstrap 6 Breadcrumb 文档](https://getbootstrap.com/docs/6.0/components/breadcrumb/)
+- [WAI-ARIA 面包屑模式](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/breadcrumb.tsx)

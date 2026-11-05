@@ -3,16 +3,24 @@ title: Breadcrumb
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Breadcrumb, BreadcrumbDivider, BreadcrumbItem, BreadcrumbLink } from 'react-bootstrap-pro';
-import { DemoContainer } from '../demo-container';
 import { BreadcrumbBasicDemo } from './demos/basic';
+import { BreadcrumbCustomDividerDemo } from './demos/divider-custom';
+import { BreadcrumbDefaultDividerDemo } from './demos/divider-default';
+import { BreadcrumbSvgDividerDemo } from './demos/divider-svg';
+import { BreadcrumbTextDividerDemo } from './demos/divider-text';
+import { BreadcrumbEllipsisDemo } from './demos/ellipsis';
+import { DemoContainer } from '../demo-container';
 
 # Breadcrumb
 
-Use an accessible navigation landmark around `Breadcrumb`. Its item, link, and
-divider components render the expected list semantics.
+Use an ordered list inside a navigation landmark to represent the current
+location in a hierarchy. The empty `BreadcrumbDivider` uses a CSS chevron by
+default; it can also contain custom content.
 
 ## Example
+
+Use a `BreadcrumbItem` for each page, and mark the current page with
+`BreadcrumbLink`'s `active` prop.
 
 <DemoContainer>
   <BreadcrumbBasicDemo />
@@ -22,26 +30,115 @@ divider components render the expected list semantics.
 
 ```
 
-## Custom divider
+For long paths, use an icon-only link to represent a group of hidden pages. Give
+the icon link an accessible name.
 
-`BreadcrumbDivider` can contain custom content instead of the default chevron.
+<DemoContainer>
+  <BreadcrumbEllipsisDemo />
+</DemoContainer>
+
+```tsx src='./demos/ellipsis.tsx'
+
+```
+
+## Dividers
+
+Dividers are explicit list items. An empty `BreadcrumbDivider` displays the
+default chevron; adding content replaces it.
+
+### Default divider
+
+Leave the divider empty to use the CSS chevron. It inherits the divider color,
+including in dark mode.
+
+<DemoContainer>
+  <BreadcrumbDefaultDividerDemo />
+</DemoContainer>
+
+```tsx src='./demos/divider-default.tsx'
+
+```
+
+### SVG divider
+
+Add an inline SVG for a crisp, scalable custom divider. Use `currentColor` so
+the icon inherits the divider color.
+
+<DemoContainer>
+  <BreadcrumbSvgDividerDemo />
+</DemoContainer>
+
+```tsx src='./demos/divider-svg.tsx'
+
+```
+
+### Text divider
+
+Use a text character such as `/` as the separator.
+
+<DemoContainer>
+  <BreadcrumbTextDividerDemo />
+</DemoContainer>
+
+```tsx src='./demos/divider-text.tsx'
+
+```
+
+### Custom divider
+
+Use any custom content, such as a themed chevron.
+
+<DemoContainer>
+  <BreadcrumbCustomDividerDemo />
+</DemoContainer>
+
+```tsx src='./demos/divider-custom.tsx'
+
+```
 
 ## API
 
-| Component           | Purpose                                                             |
-| ------------------- | ------------------------------------------------------------------- |
-| `Breadcrumb`        | Ordered-list root with `.breadcrumb`.                               |
-| `BreadcrumbItem`    | List item with `.breadcrumb-item`.                                  |
-| `BreadcrumbLink`    | Link with optional `active` state.                                  |
-| `BreadcrumbDivider` | Empty list item that displays the CSS chevron.                      |
-| `...props`          | Every component supports `component`, native props, and `BoxProps`. |
+### Breadcrumb
+
+Renders an ordered list with the `.breadcrumb` class, using `ol` by default.
+Place it inside a navigation landmark.
+
+Inherits native `ol` props and [`Box`](../box/README.mdx#api) utility props,
+including `component`.
+
+### BreadcrumbItem
+
+Renders a list item with the `.breadcrumb-item` class, using `li` by default.
+Inherits native `li` props and [`Box`](../box/README.mdx#api) props, including
+utility props and `component`.
+
+### BreadcrumbLink
+
+Renders the `.breadcrumb-link` class on an `a` element by default.
+
+| Prop     | Type      | Description                                           |
+| -------- | --------- | ----------------------------------------------------- |
+| `active` | `boolean` | Adds the active style and sets `aria-current='page'`. |
+
+Inherits native anchor props and [`Box`](../box/README.mdx#api) utility props,
+including `component`.
+
+### BreadcrumbDivider
+
+Renders a list item with the `.breadcrumb-divider` class, using `li` by default.
+When empty, it displays the CSS chevron. Custom children replace the chevron.
+The divider is hidden from assistive technology by default. Inherits native
+`li` props and [`Box`](../box/README.mdx#api) props, including `component`.
 
 ## Accessibility
 
-Label the surrounding navigation landmark and mark the current page with
-`aria-current='page'`.
+Add an accessible `aria-label` to the surrounding `<nav>` landmark and mark the
+current page with `aria-current='page'`. Divider elements are hidden from
+assistive technology; provide an accessible name for icon-only breadcrumb
+links.
 
 ## See
 
 - [Bootstrap 6 Breadcrumb documentation](https://getbootstrap.com/docs/6.0/components/breadcrumb/)
+- [WAI-ARIA breadcrumb pattern](https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/breadcrumb.tsx)

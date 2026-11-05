@@ -9,8 +9,12 @@ export function BreadcrumbBasicDemo() {
         </BreadcrumbItem>
         <BreadcrumbDivider />
         <BreadcrumbItem aria-current='page'>
-          <BreadcrumbLink href='/docs' active>
-            Docs
+          <BreadcrumbLink href='/library'>Library</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbDivider />
+        <BreadcrumbItem aria-current='page'>
+          <BreadcrumbLink href='/library/data' active>
+            Data
           </BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
