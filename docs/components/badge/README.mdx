@@ -3,15 +3,26 @@ title: Badge
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Badge } from 'react-bootstrap-pro';
-import { DemoContainer } from '../demo-container';
 import { BadgeBasicDemo } from './demos/basic';
+import { BadgeButtonsDemo } from './demos/buttons';
+import { BadgeHeadingsDemo } from './demos/headings';
+import { BadgeLargeDemo } from './demos/large';
+import { BadgePositionedCountDemo } from './demos/positioned-count';
+import { BadgePositionedIndicatorDemo } from './demos/positioned-indicator';
+import { BadgeVariantsOutlineDemo } from './demos/variants-outline';
+import { BadgeVariantsSolidDemo } from './demos/variants-solid';
+import { BadgeVariantsSubtleDemo } from './demos/variants-subtle';
+import { DemoContainer } from '../demo-container';
 
 # Badge
 
-`Badge` renders a compact label that scales with its surrounding text.
+`Badge` renders a small, static label that adds context to other content. Badges
+scale with their surrounding text and can be used in headings, buttons, and
+other controls.
 
-## Example
+## Examples
+
+Badges support solid, subtle, and outline treatments.
 
 <DemoContainer>
   <BadgeBasicDemo />
@@ -21,31 +32,121 @@ import { BadgeBasicDemo } from './demos/basic';
 
 ```
 
+### Headings
+
+Badges inherit the font size of their parent and scale with heading text.
+
+<DemoContainer>
+  <BadgeHeadingsDemo />
+</DemoContainer>
+
+```tsx src='./demos/headings.tsx'
+
+```
+
+### Buttons
+
+Badges can add a counter or label to a button. Include context in the button's
+text so the badge content is meaningful to assistive technology.
+
+<DemoContainer>
+  <BadgeButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/buttons.tsx'
+
+```
+
+### Positioned count
+
+Combine positioning utilities with a badge to place a count on a button. The
+visually hidden text gives the count context to screen readers.
+
+<DemoContainer>
+  <BadgePositionedCountDemo />
+</DemoContainer>
+
+```tsx src='./demos/positioned-count.tsx'
+
+```
+
+You can also build a generic indicator without a badge count.
+
+<DemoContainer>
+  <BadgePositionedIndicatorDemo />
+</DemoContainer>
+
+```tsx src='./demos/positioned-indicator.tsx'
+
+```
+
 ## Variants
 
-## In buttons
+Use the `theme` prop to apply contextual colors. Keep the meaning clear in text;
+color alone is not conveyed to assistive technology.
 
-Use nearby text to make a badge's meaning clear to assistive technology.
+### Solid
 
-## Positioned indicators
+<DemoContainer>
+  <BadgeVariantsSolidDemo />
+</DemoContainer>
 
-Combine positioning utilities with a badge to place a count on a button.
+```tsx src='./demos/variants-solid.tsx'
+
+```
+
+### Subtle
+
+<DemoContainer>
+  <BadgeVariantsSubtleDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants-subtle.tsx'
+
+```
+
+### Outline
+
+<DemoContainer>
+  <BadgeVariantsOutlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants-outline.tsx'
+
+```
+
+## Large badge
+
+Use `size='lg'` for a larger badge.
+
+<DemoContainer>
+  <BadgeLargeDemo />
+</DemoContainer>
+
+```tsx src='./demos/large.tsx'
+
+```
 
 ## API
 
-| Prop        | Type                               | Description                                    |
-| ----------- | ---------------------------------- | ---------------------------------------------- |
-| `variant`   | `'solid' \| 'subtle' \| 'outline'` | Selects badge treatment; solid is the default. |
-| `size`      | `'lg'`                             | Enlarges the badge.                            |
-| `theme`     | Bootstrap theme literal            | Sets contextual colors.                        |
-| `component` | `ElementType`                      | Changes the root element.                      |
-| `...props`  | `BoxProps<C>`                      | Native props and all Box utility props.        |
+### Badge
+
+Renders the `.badge` class on a `span` by default.
+
+| Prop      | Type                               | Description                                    |
+| --------- | ---------------------------------- | ---------------------------------------------- |
+| `variant` | `'solid' \| 'subtle' \| 'outline'` | Selects the treatment; `solid` is the default. |
+| `size`    | `'lg'`                             | Uses the larger badge size.                    |
+
+Inherits native `span` props and [`Box`](../box/README.mdx#api) utility props,
+including `theme` and `component`.
 
 ## Accessibility
 
-Badges do not add meaning beyond their text. Include context in the surrounding
+Badges add no meaning beyond their text. Include context in the surrounding
 label (for example, “Notifications 4”) and do not communicate status by color
-alone.
+alone. For positioned indicators, include visually hidden text that explains
+the indicator.
 
 ## See
 

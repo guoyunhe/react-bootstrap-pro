@@ -4,11 +4,11 @@ export function BadgeBasicDemo() {
   return (
     <>
       <Badge theme='primary'>New</Badge>{' '}
-      <Badge theme='success' variant='subtle'>
-        Ready
+      <Badge theme='primary' variant='subtle'>
+        New
       </Badge>{' '}
-      <Badge theme='danger' variant='outline'>
-        4
+      <Badge theme='primary' variant='outline'>
+        New
       </Badge>
     </>
   );

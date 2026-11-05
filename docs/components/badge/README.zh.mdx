@@ -3,35 +3,144 @@ title: Badge 徽标
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Badge } from 'react-bootstrap-pro';
+import { BadgeBasicDemo } from './demos/basic';
+import { BadgeButtonsDemo } from './demos/buttons';
+import { BadgeHeadingsDemo } from './demos/headings';
+import { BadgeLargeDemo } from './demos/large';
+import { BadgePositionedCountDemo } from './demos/positioned-count';
+import { BadgePositionedIndicatorDemo } from './demos/positioned-indicator';
+import { BadgeVariantsOutlineDemo } from './demos/variants-outline';
+import { BadgeVariantsSolidDemo } from './demos/variants-solid';
+import { BadgeVariantsSubtleDemo } from './demos/variants-subtle';
 import { DemoContainer } from '../demo-container';
 
 # Badge 徽标
 
-`Badge` 渲染紧凑标签，字号会随周围文本缩放。
+`Badge` 渲染静态的小标签，用于为其他内容补充上下文。徽标会随周围文本缩放，可用于标题、按钮和其他控件。
+
+## 示例
+
+徽标支持实心、柔和和描边样式。
 
 <DemoContainer>
-  <Badge theme='primary'>新建</Badge>{' '}
-  <Badge theme='success' variant='subtle'>
-    就绪
-  </Badge>{' '}
-  <Badge theme='danger' variant='outline'>
-    4
-  </Badge>
+  <BadgeBasicDemo />
 </DemoContainer>
 
-```tsx
-<Badge theme='primary' variant='outline' size='lg'>
-  新建
-</Badge>
+```tsx src='./demos/basic.tsx'
+
+```
+
+### 标题
+
+徽标会继承父元素的字号，并随标题文字缩放。
+
+<DemoContainer>
+  <BadgeHeadingsDemo />
+</DemoContainer>
+
+```tsx src='./demos/headings.tsx'
+
+```
+
+### 按钮
+
+徽标可以在按钮中显示计数或标签。应在按钮文本中提供上下文，确保辅助技术用户能够理解徽标含义。
+
+<DemoContainer>
+  <BadgeButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/buttons.tsx'
+
+```
+
+### 定位计数
+
+组合定位工具类和徽标，可在按钮上显示计数。视觉隐藏文本会为屏幕阅读器说明计数含义。
+
+<DemoContainer>
+  <BadgePositionedCountDemo />
+</DemoContainer>
+
+```tsx src='./demos/positioned-count.tsx'
+
+```
+
+也可以不显示数字，直接使用通用指示器。
+
+<DemoContainer>
+  <BadgePositionedIndicatorDemo />
+</DemoContainer>
+
+```tsx src='./demos/positioned-indicator.tsx'
+
+```
+
+## 变体
+
+使用 `theme` 属性应用对应的上下文颜色。请通过文本表达含义，不能只依赖颜色，因为辅助技术无法获知颜色传达的信息。
+
+### 实心
+
+<DemoContainer>
+  <BadgeVariantsSolidDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants-solid.tsx'
+
+```
+
+### 柔和
+
+<DemoContainer>
+  <BadgeVariantsSubtleDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants-subtle.tsx'
+
+```
+
+### 描边
+
+<DemoContainer>
+  <BadgeVariantsOutlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants-outline.tsx'
+
+```
+
+## 大尺寸徽标
+
+使用 `size='lg'` 渲染更大的徽标。
+
+<DemoContainer>
+  <BadgeLargeDemo />
+</DemoContainer>
+
+```tsx src='./demos/large.tsx'
+
 ```
 
 ## API
 
-| 属性        | 类型                               | 说明                            |
-| ----------- | ---------------------------------- | ------------------------------- |
-| `variant`   | `'solid' \| 'subtle' \| 'outline'` | 徽标样式，默认实心。            |
-| `size`      | `'lg'`                             | 放大徽标。                      |
-| `theme`     | Bootstrap 主题字面量               | 设置主题颜色。                  |
-| `component` | `ElementType`                      | 更换根元素。                    |
-| `...props`  | `BoxProps<C>`                      | 原生属性及所有 Box 工具类属性。 |
+### Badge
+
+默认在 `span` 元素上渲染 `.badge` 类。
+
+| 属性      | 类型                               | 说明                       |
+| --------- | ---------------------------------- | -------------------------- |
+| `variant` | `'solid' \| 'subtle' \| 'outline'` | 设置样式；默认为 `solid`。 |
+| `size`    | `'lg'`                             | 使用较大的徽标尺寸。       |
+
+继承原生 `span` 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `theme` 和 `component`。
+
+## 无障碍访问
+
+徽标本身不提供文本以外的含义。请在周围标签中补充上下文（例如“通知 4”），不要只用颜色表达状态。
+定位指示器应包含能够说明其含义的视觉隐藏文本。
+
+## 参考
+
+- [Bootstrap 6 Badge 文档](https://getbootstrap.com/docs/6.0/components/badge/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/badge.tsx)
