@@ -3,45 +3,298 @@ title: Button group 按钮组
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ButtonGroupBasicDemo } from './demos/basic';
+import { ButtonGroupDividersDemo } from './demos/dividers';
+import { ButtonGroupDividersSecondaryDemo } from './demos/dividers-secondary';
+import { ButtonGroupVerticalDividersDemo } from './demos/dividers-vertical';
+import { ButtonGroupVerticalDividersSecondaryDemo } from './demos/dividers-vertical-secondary';
+import { ButtonGroupLinksDemo } from './demos/links';
+import { ButtonGroupNestingDemo } from './demos/nesting';
+import { ButtonGroupCheckboxDemo } from './demos/toggle-checkbox';
+import { ButtonGroupRadioDemo } from './demos/toggle-radio';
+import { ButtonGroupSizingDemo } from './demos/sizing';
+import { ButtonGroupThemeVariantsDemo } from './demos/theme-variants';
+import { ButtonGroupThemeVariantsMixedDemo } from './demos/theme-variants-mixed';
+import { ButtonGroupStyleVariantsSolidDemo } from './demos/style-variants-solid';
+import { ButtonGroupStyleVariantsOutlineDemo } from './demos/style-variants-outline';
+import { ButtonGroupStyleVariantsSubtleDemo } from './demos/style-variants-subtle';
+import { ButtonGroupVerticalDemo } from './demos/vertical';
+import { ButtonGroupVerticalMenuDemo } from './demos/vertical-menu';
+import { ButtonGroupVerticalRadioDemo } from './demos/vertical-radio';
+import { ButtonToolbarDemo } from './demos/toolbar';
+import { ButtonToolbarInputDemo } from './demos/toolbar-input';
+import { ButtonToolbarJustifiedInputDemo } from './demos/toolbar-input-justified';
 
 # Button group 按钮组
 
-`ButtonGroup` 用于组合相关操作，默认设置 `role="group"`。请用 `aria-label` 或
-`aria-labelledby` 为每个按钮组提供无障碍名称。
+`ButtonGroup` 用于组合相关操作，默认设置 `role='group'`。使用
+`ButtonToolbar` 可以组合多个按钮组。请用 `aria-label` 或 `aria-labelledby`
+为每个按钮组和工具栏提供无障碍名称。
+
+## 示例
+
+将相关按钮放在同一个组中：
 
 <DemoContainer>
-  <ButtonGroup aria-label='文本对齐'>
-    <Button variant='outline' theme='secondary'>
-      左对齐
-    </Button>
-    <Button variant='outline' theme='secondary'>
-      居中
-    </Button>
-    <Button variant='outline' theme='secondary'>
-      右对齐
-    </Button>
-  </ButtonGroup>
+  <ButtonGroupBasicDemo />
 </DemoContainer>
 
-```tsx
-<ButtonToolbar aria-label='编辑器操作'>
-  <ButtonGroup aria-label='历史记录' size='sm'>
-    ...
-  </ButtonGroup>
-  <ButtonGroup aria-label='格式' divider>
-    ...
-  </ButtonGroup>
-</ButtonToolbar>
+```tsx src='./demos/basic.tsx'
+
+```
+
+### 链接
+
+按钮组也可以包含用于导航的链接。使用 `aria-current='page'` 标记当前链接。
+
+<DemoContainer>
+  <ButtonGroupLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/links.tsx'
+
+```
+
+### 分隔线
+
+设置 `divider` 可在控件之间添加分隔线。水平和垂直按钮组都支持分隔线；同一主题的
+实心按钮组搭配分隔线时效果较好。
+
+<DemoContainer>
+  <ButtonGroupDividersDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonGroupDividersSecondaryDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers-secondary.tsx'
+
+```
+
+垂直按钮组也支持分隔线：
+
+<DemoContainer>
+  <ButtonGroupVerticalDividersDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers-vertical.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonGroupVerticalDividersSecondaryDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers-vertical-secondary.tsx'
+
+```
+
+## 主题变体
+
+为按钮组中的所有按钮设置统一主题：
+
+<DemoContainer>
+  <ButtonGroupThemeVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/theme-variants.tsx'
+
+```
+
+也可以在同一组中组合不同主题：
+
+<DemoContainer>
+  <ButtonGroupThemeVariantsMixedDemo />
+</DemoContainer>
+
+```tsx src='./demos/theme-variants-mixed.tsx'
+
+```
+
+## 样式变体
+
+按钮组支持所有 [`Button`](../button/README.zh.mdx#api) 样式。实心或柔和样式可以
+搭配 `divider`，轮廓样式则可使用按钮边框作为分隔。
+
+<DemoContainer>
+  <ButtonGroupStyleVariantsSolidDemo />
+</DemoContainer>
+
+```tsx src='./demos/style-variants-solid.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonGroupStyleVariantsOutlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/style-variants-outline.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonGroupStyleVariantsSubtleDemo />
+</DemoContainer>
+
+```tsx src='./demos/style-variants-subtle.tsx'
+
+```
+
+## 切换按钮
+
+复选框和单选框切换按钮使用原生输入状态和语义。使用 `ButtonGroup` 组合它们，并通过
+`Button component='label' check` 添加按钮样式。
+
+### 复选框
+
+复选框可以独立选中：
+
+<DemoContainer>
+  <ButtonGroupCheckboxDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggle-checkbox.tsx'
+
+```
+
+### 单选框
+
+同名的 radio 输入组成单选组：
+
+<DemoContainer>
+  <ButtonGroupRadioDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggle-radio.tsx'
+
+```
+
+## 按钮工具栏
+
+使用工具栏组合多个按钮组，并通过间距工具类分隔它们。
+
+<DemoContainer>
+  <ButtonToolbarDemo />
+</DemoContainer>
+
+```tsx src='./demos/toolbar.tsx'
+
+```
+
+### 搭配输入组
+
+工具栏可以组合按钮组和输入组，并使用布局工具类调整间距和对齐方式。
+
+<DemoContainer>
+  <ButtonToolbarInputDemo />
+</DemoContainer>
+
+```tsx src='./demos/toolbar-input.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonToolbarJustifiedInputDemo />
+</DemoContainer>
+
+```tsx src='./demos/toolbar-input-justified.tsx'
+
+```
+
+## 尺寸
+
+在按钮组上设置 `size='lg'` 或 `size='sm'`，无需逐个设置按钮尺寸。默认尺寸无需传入
+属性。Bootstrap 的超小尺寸类可以通过 `className='btn-group-xs'` 添加。
+
+<DemoContainer>
+  <ButtonGroupSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizing.tsx'
+
+```
+
+## 嵌套
+
+可以在按钮组中嵌套另一个组，将操作与菜单组合起来。示例使用 React 状态切换
+[`Menu`](../menu/README.zh.mdx#api)；`ButtonGroup` 不会初始化 Bootstrap JavaScript。
+
+<DemoContainer>
+  <ButtonGroupNestingDemo />
+</DemoContainer>
+
+```tsx src='./demos/nesting.tsx'
+
+```
+
+## 垂直排列
+
+使用 `orientation='vertical'` 将组内控件垂直排列。组件只负责添加布局类；菜单行为和状态
+由嵌套组件或应用自行管理。
+
+<DemoContainer>
+  <ButtonGroupVerticalDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical.tsx'
+
+```
+
+单选切换按钮也可以垂直排列：
+
+<DemoContainer>
+  <ButtonGroupVerticalRadioDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical-radio.tsx'
+
+```
+
+如果由应用负责控制菜单的位置和展开状态，也可以在垂直按钮组中嵌套菜单：
+
+<DemoContainer>
+  <ButtonGroupVerticalMenuDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical-menu.tsx'
+
 ```
 
 ## API
 
-| 属性          | 类型                         | 说明                            |
-| ------------- | ---------------------------- | ------------------------------- |
-| `orientation` | `'horizontal' \| 'vertical'` | 设置按钮组方向。                |
-| `divider`     | `boolean`                    | 在控件之间添加分隔线。          |
-| `size`        | `'sm' \| 'lg'`               | 设置按钮组尺寸。                |
-| `component`   | `ElementType`                | 更换根元素。                    |
-| `...props`    | `BoxProps<C>`                | 原生属性及所有 Box 工具类属性。 |
+### ButtonGroup
+
+| 属性          | 类型                         | 默认值         | 说明                            |
+| ------------- | ---------------------------- | -------------- | ------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | 设置按钮组方向。                |
+| `divider`     | `boolean`                    | `false`        | 在控件之间添加分隔线。          |
+| `size`        | `'sm' \| 'lg'`               | —              | 设置小号或大号按钮组尺寸。      |
+| `component`   | `C extends ElementType`      | `'div'`        | 要渲染的原生元素或 React 组件。 |
+
+默认设置 `role='group'`。继承当前渲染元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### ButtonToolbar
+
+`ButtonToolbar` 默认渲染为 `<div>` 并设置 `role='toolbar'`。它没有专属属性；继承当前
+渲染元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。`component`
+属性可以更改根元素。
+
+包入口导出 `ButtonGroup`、`ButtonGroupProps`、`ButtonToolbar` 和
+`ButtonToolbarProps`。
+
+## 无障碍访问
+
+为每个按钮组和工具栏设置 `aria-label` 或 `aria-labelledby`。操作使用按钮，导航使用链接。
+切换按钮组保留原生复选框和单选框语义；当前链接应设置 `aria-current='page'`。
+
+## 参考
+
+- [Bootstrap 6 Button group 官方文档](https://getbootstrap.com/docs/6.0/components/button-group/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/button-group.tsx)

@@ -2,14 +2,14 @@ import { ButtonGroup, Button } from 'react-bootstrap-pro';
 
 export function ButtonGroupBasicDemo() {
   return (
-    <ButtonGroup aria-label='Text alignment'>
-      <Button variant='outline' theme='secondary'>
+    <ButtonGroup aria-label='Basic example'>
+      <Button variant='solid' theme='primary'>
         Left
       </Button>
-      <Button variant='outline' theme='secondary'>
-        Center
+      <Button variant='solid' theme='primary'>
+        Middle
       </Button>
-      <Button variant='outline' theme='secondary'>
+      <Button variant='solid' theme='primary'>
         Right
       </Button>
     </ButtonGroup>

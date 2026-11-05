@@ -10,8 +10,12 @@
 
 - Keep English and Chinese documentation under `docs/` in sync. Whenever one version changes, update its corresponding other-language document in the same change.
 - Translate Chinese section headings and explanatory text, including reference headings; leave technical names and identifiers unchanged.
+
+### Examples/Demos
+
 - Keep each component document's examples as close as possible to a one-to-one match with upstream documentation, preserving example coverage and order and linking each rendered example to its source.
 - Use `tsx src='./demos/…'` code fences to reference the actual demo implementation instead of duplicating snippets, and keep those references aligned in both languages.
+- Give each rendered demo its own source file and export only that demo component from the file; do not combine separate demos in one source file.
 
 ### API
 

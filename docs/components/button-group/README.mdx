@@ -3,16 +3,38 @@ title: Button group
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { ButtonGroupBasicDemo } from './demos/basic';
+import { ButtonGroupDividersDemo } from './demos/dividers';
+import { ButtonGroupDividersSecondaryDemo } from './demos/dividers-secondary';
+import { ButtonGroupVerticalDividersDemo } from './demos/dividers-vertical';
+import { ButtonGroupVerticalDividersSecondaryDemo } from './demos/dividers-vertical-secondary';
+import { ButtonGroupLinksDemo } from './demos/links';
+import { ButtonGroupNestingDemo } from './demos/nesting';
+import { ButtonGroupCheckboxDemo } from './demos/toggle-checkbox';
+import { ButtonGroupRadioDemo } from './demos/toggle-radio';
+import { ButtonGroupSizingDemo } from './demos/sizing';
+import { ButtonGroupThemeVariantsDemo } from './demos/theme-variants';
+import { ButtonGroupThemeVariantsMixedDemo } from './demos/theme-variants-mixed';
+import { ButtonGroupStyleVariantsSolidDemo } from './demos/style-variants-solid';
+import { ButtonGroupStyleVariantsOutlineDemo } from './demos/style-variants-outline';
+import { ButtonGroupStyleVariantsSubtleDemo } from './demos/style-variants-subtle';
+import { ButtonGroupVerticalDemo } from './demos/vertical';
+import { ButtonGroupVerticalMenuDemo } from './demos/vertical-menu';
+import { ButtonGroupVerticalRadioDemo } from './demos/vertical-radio';
+import { ButtonToolbarDemo } from './demos/toolbar';
+import { ButtonToolbarInputDemo } from './demos/toolbar-input';
+import { ButtonToolbarJustifiedInputDemo } from './demos/toolbar-input-justified';
 
 # Button group
 
-`ButtonGroup` groups related actions and defaults to `role="group"`.
-Give each group an accessible name with `aria-label` or `aria-labelledby`.
+`ButtonGroup` groups related actions and defaults to `role='group'`. Use
+`ButtonToolbar` to combine multiple groups. Give each group and toolbar an
+accessible name with `aria-label` or `aria-labelledby`.
 
 ## Example
+
+Wrap related buttons in a group:
 
 <DemoContainer>
   <ButtonGroupBasicDemo />
@@ -22,27 +44,265 @@ Give each group an accessible name with `aria-label` or `aria-labelledby`.
 
 ```
 
-## Toolbar
+### With links
 
-## Vertical groups and links
+Button groups can also contain links for navigation. Mark the current link with
+`aria-current='page'`.
 
-Use `orientation='vertical'` for stacked controls. Groups can also contain
-links when the items navigate rather than perform actions.
+<DemoContainer>
+  <ButtonGroupLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/links.tsx'
+
+```
+
+### Dividers
+
+Set `divider` to add dividers between controls. Dividers work with horizontal
+and vertical groups and are most useful with solid buttons using the same theme.
+
+<DemoContainer>
+  <ButtonGroupDividersDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonGroupDividersSecondaryDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers-secondary.tsx'
+
+```
+
+Dividers also work with vertical button groups:
+
+<DemoContainer>
+  <ButtonGroupVerticalDividersDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers-vertical.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonGroupVerticalDividersSecondaryDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers-vertical-secondary.tsx'
+
+```
+
+## Theme variants
+
+Use a theme to style all buttons in a group:
+
+<DemoContainer>
+  <ButtonGroupThemeVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/theme-variants.tsx'
+
+```
+
+You can mix themes within a group:
+
+<DemoContainer>
+  <ButtonGroupThemeVariantsMixedDemo />
+</DemoContainer>
+
+```tsx src='./demos/theme-variants-mixed.tsx'
+
+```
+
+## Style variants
+
+Button groups support all [`Button`](../button/README.mdx#api) styles. Use
+`divider` with solid or subtle styles, or rely on button borders for outlined
+styles.
+
+<DemoContainer>
+  <ButtonGroupStyleVariantsSolidDemo />
+</DemoContainer>
+
+```tsx src='./demos/style-variants-solid.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonGroupStyleVariantsOutlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/style-variants-outline.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonGroupStyleVariantsSubtleDemo />
+</DemoContainer>
+
+```tsx src='./demos/style-variants-subtle.tsx'
+
+```
+
+## Toggle buttons
+
+Checkbox and radio toggle buttons use native input state and semantics. Group
+them with `ButtonGroup` and use `Button` with `component='label'` and `check`
+for the button styling.
+
+### Checkboxes
+
+Checkboxes can be checked independently:
+
+<DemoContainer>
+  <ButtonGroupCheckboxDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggle-checkbox.tsx'
+
+```
+
+### Radios
+
+Radio inputs with the same `name` form a single-choice group:
+
+<DemoContainer>
+  <ButtonGroupRadioDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggle-radio.tsx'
+
+```
+
+## Button toolbar
+
+Combine groups in a toolbar and use spacing utilities to separate them.
+
+<DemoContainer>
+  <ButtonToolbarDemo />
+</DemoContainer>
+
+```tsx src='./demos/toolbar.tsx'
+
+```
+
+### With input groups
+
+Toolbars can combine button groups with input groups. Use layout utilities to
+space or align the children.
+
+<DemoContainer>
+  <ButtonToolbarInputDemo />
+</DemoContainer>
+
+```tsx src='./demos/toolbar-input.tsx'
+
+```
+
+<DemoContainer>
+  <ButtonToolbarJustifiedInputDemo />
+</DemoContainer>
+
+```tsx src='./demos/toolbar-input-justified.tsx'
+
+```
+
+## Sizing
+
+Set `size='lg'` or `size='sm'` on a group instead of sizing each button. The
+default group size needs no prop. Bootstrap's extra-small class can be added
+with `className='btn-group-xs'`.
+
+<DemoContainer>
+  <ButtonGroupSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizing.tsx'
+
+```
+
+## Nesting
+
+Place a group inside another group to combine actions with a menu. This example
+uses React state to toggle [`Menu`](../menu/README.mdx#api); `ButtonGroup` does
+not initialize Bootstrap JavaScript.
+
+<DemoContainer>
+  <ButtonGroupNestingDemo />
+</DemoContainer>
+
+```tsx src='./demos/nesting.tsx'
+
+```
+
+## Vertical variation
+
+Use `orientation='vertical'` to stack the group's controls. The component
+applies layout classes only; menu behavior and state remain the responsibility
+of the nested component or application.
+
+<DemoContainer>
+  <ButtonGroupVerticalDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical.tsx'
+
+```
+
+Radio toggle buttons can also be stacked vertically:
+
+<DemoContainer>
+  <ButtonGroupVerticalRadioDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical-radio.tsx'
+
+```
+
+Nest a menu in a vertical group when the application controls its positioning
+and expanded state:
+
+<DemoContainer>
+  <ButtonGroupVerticalMenuDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical-menu.tsx'
+
+```
 
 ## API
 
-| Prop          | Type                         | Description                             |
-| ------------- | ---------------------------- | --------------------------------------- |
-| `orientation` | `'horizontal' \| 'vertical'` | Selects the group layout.               |
-| `divider`     | `boolean`                    | Adds dividers between controls.         |
-| `size`        | `'sm' \| 'lg'`               | Applies button-group sizing.            |
-| `component`   | `ElementType`                | Changes the root element.               |
-| `...props`    | `BoxProps<C>`                | Native props and all Box utility props. |
+### ButtonGroup
+
+| Prop          | Type                         | Default        | Description                                   |
+| ------------- | ---------------------------- | -------------- | --------------------------------------------- |
+| `orientation` | `'horizontal' \| 'vertical'` | `'horizontal'` | Selects the group layout.                     |
+| `divider`     | `boolean`                    | `false`        | Adds dividers between controls.               |
+| `size`        | `'sm' \| 'lg'`               | —              | Applies the small or large button-group size. |
+| `component`   | `C extends ElementType`      | `'div'`        | Native element or React component to render.  |
+
+Defaults to `role='group'`. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### ButtonToolbar
+
+`ButtonToolbar` renders a `<div>` by default and sets `role='toolbar'`. It has
+no component-specific props; it accepts native props for the selected element
+and [`Box`](../box/README.mdx#api) utility props. The `component` prop can
+change its root element.
+
+`ButtonGroup`, `ButtonGroupProps`, `ButtonToolbar`, and `ButtonToolbarProps` are
+exported from the package entry point.
 
 ## Accessibility
 
-Give each group and toolbar an accessible name. Use native buttons for actions
-and links for navigation.
+Label every group and toolbar with `aria-label` or `aria-labelledby`. Use
+buttons for actions and links for navigation. Toggle groups retain native
+checkbox and radio semantics; set `aria-current='page'` on the current link.
 
 ## See
 
