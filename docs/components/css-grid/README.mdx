@@ -3,9 +3,23 @@ title: CSS Grid
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Grid, GridItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { AddingRowsDemo } from './demos/adding-rows';
+import { AutoColumnsGridDemo } from './demos/auto-columns';
 import { CssGridDemo } from './demos/basic';
+import { ColumnsGapFourDemo } from './demos/columns-gap-four';
+import { ColumnsGapTenDemo } from './demos/columns-gap-ten';
+import { MixedAutoColumnsGridDemo } from './demos/mixed-auto-columns';
+import { NestingGridDemo } from './demos/nesting';
+import { NoGridClassesDemo } from './demos/no-grid-classes';
+import { CssGridPlaygroundDemo } from './demos/playground';
+import { ResponsiveGridDemo } from './demos/responsive';
+import { RowGapDemo } from './demos/row-gap';
+import { SassColumnsDemo } from './demos/sass-columns';
+import { StartsGridDemo } from './demos/starts';
+import { TwoAxisGapDemo } from './demos/two-axis-gap';
+import { TwoColumnsGridDemo } from './demos/two-columns';
+import { WrappingGridDemo } from './demos/wrapping';
 
 # CSS Grid
 
@@ -38,21 +52,22 @@ columns.
 Responsive classes use container-query prefixes. These items take half the
 available columns at narrow widths and one-third at the `md` container size:
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={{ xs: 6, md: 4 }}>.g-col-6 .md:g-col-4</GridItem>
-  <GridItem span={{ xs: 6, md: 4 }}>.g-col-6 .md:g-col-4</GridItem>
-  <GridItem span={{ xs: 6, md: 4 }}>.g-col-6 .md:g-col-4</GridItem>
-</Grid>
+<DemoContainer>
+  <ResponsiveGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
 ```
 
 For comparison, two `.g-col-6` items remain half-width at every container size:
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-</Grid>
+<DemoContainer>
+  <TwoColumnsGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/two-columns.tsx'
+
 ```
 
 The container-query breakpoints are based on the width of `.grid`, so a grid
@@ -63,33 +78,33 @@ nested in a narrow column changes layout independently of the viewport.
 Resize the grid container, rather than the browser window, to see responsive
 items cross their container-query breakpoints.
 
+<DemoContainer>
+  <CssGridPlaygroundDemo />
+</DemoContainer>
+
 ## Wrapping
 
 Items automatically move to the next row when the current row has no remaining
 space. The gap applies horizontally and vertically.
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-</Grid>
+<DemoContainer>
+  <WrappingGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/wrapping.tsx'
+
 ```
 
 ## Starts
 
 Use `start` with `span` to set the starting grid line for an item.
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={3} start={2}>
-    .g-col-3 .g-start-2
-  </GridItem>
-  <GridItem span={4} start={6}>
-    .g-col-4 .g-start-6
-  </GridItem>
-</Grid>
+<DemoContainer>
+  <StartsGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/starts.tsx'
+
 ```
 
 Start values begin at `1`; `0` is not a valid grid line.
@@ -99,35 +114,22 @@ Start values begin at `1`; `0` is not a valid grid line.
 Direct children of `Grid` are automatically sized to one column when no span is
 provided:
 
-```tsx
-<Grid className='text-center'>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-</Grid>
+<DemoContainer>
+  <AutoColumnsGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/auto-columns.tsx'
+
 ```
 
 Automatic sizing can be combined with an explicitly sized item:
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-</Grid>
+<DemoContainer>
+  <MixedAutoColumnsGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/mixed-auto-columns.tsx'
+
 ```
 
 ## Nesting
@@ -137,25 +139,12 @@ nested grid sets its own values. This example uses three columns on the outer
 grid, inherits that count in the first nested grid, and resets the second
 nested grid to 12 columns:
 
-```tsx
-<Grid columns={3} className='text-center' overflowX='auto'>
-  <div>
-    First auto-column
-    <Grid>
-      <div>Auto-column</div>
-      <div>Auto-column</div>
-    </Grid>
-  </div>
-  <div>
-    Second auto-column
-    <Grid columns={12}>
-      <GridItem span={6}>6 of 12</GridItem>
-      <GridItem span={4}>4 of 12</GridItem>
-      <GridItem span={2}>2 of 12</GridItem>
-    </Grid>
-  </div>
-  <div>Third auto-column</div>
-</Grid>
+<DemoContainer>
+  <NestingGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/nesting.tsx'
+
 ```
 
 ## Customizing
@@ -175,70 +164,66 @@ CSS value for `--bs-gap` through `style`.
 
 Direct children are grid items even without `GridItem` or a `.g-col-*` class:
 
-```tsx
-<Grid columns={3} className='text-center'>
-  <div>Auto-column</div>
-  <div>Auto-column</div>
-  <div>Auto-column</div>
-</Grid>
+<DemoContainer>
+  <NoGridClassesDemo />
+</DemoContainer>
+
+```tsx src='./demos/no-grid-classes.tsx'
+
 ```
 
 ### Columns and gaps
 
 Set the column count and gap independently:
 
-```tsx
-<Grid columns={4} style={{ '--bs-gap': '5rem' }} className='text-center'>
-  <GridItem span={2}>.g-col-2</GridItem>
-  <GridItem span={2}>.g-col-2</GridItem>
-</Grid>
+<DemoContainer>
+  <ColumnsGapFourDemo />
+</DemoContainer>
+
+```tsx src='./demos/columns-gap-four.tsx'
+
 ```
 
-```tsx
-<Grid columns={10} style={{ '--bs-gap': '1rem' }} className='text-center'>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={4}>.g-col-4</GridItem>
-</Grid>
+<DemoContainer>
+  <ColumnsGapTenDemo />
+</DemoContainer>
+
+```tsx src='./demos/columns-gap-ten.tsx'
+
 ```
 
 ### Adding rows
 
 Configure explicit rows and place items on them with `style` and `start`:
 
-```tsx
-<Grid rows={3} columns={3} className='text-center'>
-  <div>Auto-column</div>
-  <GridItem start={2} style={{ gridRow: 2 }}>
-    Auto-column
-  </GridItem>
-  <GridItem start={3} style={{ gridRow: 3 }}>
-    Auto-column
-  </GridItem>
-</Grid>
+<DemoContainer>
+  <AddingRowsDemo />
+</DemoContainer>
+
+```tsx src='./demos/adding-rows.tsx'
+
 ```
 
 ### Gaps
 
 Set `rowGap` or `columnGap` in `style` to change one direction only:
 
-```tsx
-<Grid className='text-center' style={{ rowGap: 0 }}>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-</Grid>
+<DemoContainer>
+  <RowGapDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-gap.tsx'
+
 ```
 
 The `--bs-gap` variable also accepts separate row and column values:
 
-```tsx
-<Grid className='text-center' style={{ '--bs-gap': '.25rem 1rem' }}>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-</Grid>
+<DemoContainer>
+  <TwoAxisGapDemo />
+</DemoContainer>
+
+```tsx src='./demos/two-axis-gap.tsx'
+
 ```
 
 ## Sass
@@ -247,11 +232,12 @@ Bootstrap generates `.g-col-*` and `.g-start-*` classes based on its Sass
 variables. Change those variables and recompile to generate more classes, or
 combine inline CSS with the generated classes:
 
-```tsx
-<Grid columns={18} style={{ '--bs-gap': '.5rem' }} className='text-center'>
-  <GridItem style={{ gridColumn: 'span 14' }}>14 columns</GridItem>
-  <GridItem span={4}>.g-col-4</GridItem>
-</Grid>
+<DemoContainer>
+  <SassColumnsDemo />
+</DemoContainer>
+
+```tsx src='./demos/sass-columns.tsx'
+
 ```
 
 ## API

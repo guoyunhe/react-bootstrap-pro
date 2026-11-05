@@ -3,9 +3,23 @@ title: CSS Grid
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Grid, GridItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { AddingRowsDemo } from './demos/adding-rows';
+import { AutoColumnsGridDemo } from './demos/auto-columns';
 import { CssGridDemo } from './demos/basic';
+import { ColumnsGapFourDemo } from './demos/columns-gap-four';
+import { ColumnsGapTenDemo } from './demos/columns-gap-ten';
+import { MixedAutoColumnsGridDemo } from './demos/mixed-auto-columns';
+import { NestingGridDemo } from './demos/nesting';
+import { NoGridClassesDemo } from './demos/no-grid-classes';
+import { CssGridPlaygroundDemo } from './demos/playground';
+import { ResponsiveGridDemo } from './demos/responsive';
+import { RowGapDemo } from './demos/row-gap';
+import { SassColumnsDemo } from './demos/sass-columns';
+import { StartsGridDemo } from './demos/starts';
+import { TwoAxisGapDemo } from './demos/two-axis-gap';
+import { TwoColumnsGridDemo } from './demos/two-columns';
+import { WrappingGridDemo } from './demos/wrapping';
 
 # CSS Grid
 
@@ -34,21 +48,22 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 响应式类使用容器查询前缀。以下项目在窄容器中占据一半列宽，在 `md` 容器尺寸时各占三分之一：
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={{ xs: 6, md: 4 }}>.g-col-6 .md:g-col-4</GridItem>
-  <GridItem span={{ xs: 6, md: 4 }}>.g-col-6 .md:g-col-4</GridItem>
-  <GridItem span={{ xs: 6, md: 4 }}>.g-col-6 .md:g-col-4</GridItem>
-</Grid>
+<DemoContainer>
+  <ResponsiveGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
 ```
 
 作为对比，两个 `.g-col-6` 项目在所有容器尺寸下都各占一半宽度：
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-</Grid>
+<DemoContainer>
+  <TwoColumnsGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/two-columns.tsx'
+
 ```
 
 容器查询断点取决于 `.grid` 的宽度，因此嵌套在窄列中的网格也能独立于视口切换布局。
@@ -57,32 +72,32 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 调整网格容器本身的宽度，即可观察项目如何跨越容器查询断点。
 
+<DemoContainer>
+  <CssGridPlaygroundDemo />
+</DemoContainer>
+
 ## 自动换行
 
 当前行没有剩余空间时，项目会自动移至下一行。间距同时应用于水平方向和垂直方向。
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-</Grid>
+<DemoContainer>
+  <WrappingGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/wrapping.tsx'
+
 ```
 
 ## 起始列
 
 将 `start` 与 `span` 配合使用，可设置项目的起始网格线。
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={3} start={2}>
-    .g-col-3 .g-start-2
-  </GridItem>
-  <GridItem span={4} start={6}>
-    .g-col-4 .g-start-6
-  </GridItem>
-</Grid>
+<DemoContainer>
+  <StartsGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/starts.tsx'
+
 ```
 
 起始列从 `1` 开始；`0` 不是有效的网格线。
@@ -91,35 +106,22 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 未设置列跨度时，`Grid` 的直接子元素会自动占据一列：
 
-```tsx
-<Grid className='text-center'>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-</Grid>
+<DemoContainer>
+  <AutoColumnsGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/auto-columns.tsx'
+
 ```
 
 自动列也可以与显式指定跨度的项目混用：
 
-```tsx
-<Grid className='text-center'>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-  <div>1</div>
-</Grid>
+<DemoContainer>
+  <MixedAutoColumnsGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/mixed-auto-columns.tsx'
+
 ```
 
 ## 嵌套
@@ -127,25 +129,12 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 嵌套网格会继承父级的行、列和间距设置，除非为嵌套网格单独设置属性。以下示例为外层网格
 设置三列；第一个内层网格继承列数，第二个内层网格则重设为 12 列：
 
-```tsx
-<Grid columns={3} className='text-center' overflowX='auto'>
-  <div>
-    第一自动列
-    <Grid>
-      <div>自动列</div>
-      <div>自动列</div>
-    </Grid>
-  </div>
-  <div>
-    第二自动列
-    <Grid columns={12}>
-      <GridItem span={6}>6 / 12 列</GridItem>
-      <GridItem span={4}>4 / 12 列</GridItem>
-      <GridItem span={2}>2 / 12 列</GridItem>
-    </Grid>
-  </div>
-  <div>第三自动列</div>
-</Grid>
+<DemoContainer>
+  <NestingGridDemo />
+</DemoContainer>
+
+```tsx src='./demos/nesting.tsx'
+
 ```
 
 ## 自定义
@@ -164,70 +153,66 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 即使不使用 `GridItem` 或 `.g-col-*` 类，直接子元素仍会成为网格项目：
 
-```tsx
-<Grid columns={3} className='text-center'>
-  <div>自动列</div>
-  <div>自动列</div>
-  <div>自动列</div>
-</Grid>
+<DemoContainer>
+  <NoGridClassesDemo />
+</DemoContainer>
+
+```tsx src='./demos/no-grid-classes.tsx'
+
 ```
 
 ### 列数和间距
 
 分别设置列数和间距：
 
-```tsx
-<Grid columns={4} style={{ '--bs-gap': '5rem' }} className='text-center'>
-  <GridItem span={2}>.g-col-2</GridItem>
-  <GridItem span={2}>.g-col-2</GridItem>
-</Grid>
+<DemoContainer>
+  <ColumnsGapFourDemo />
+</DemoContainer>
+
+```tsx src='./demos/columns-gap-four.tsx'
+
 ```
 
-```tsx
-<Grid columns={10} style={{ '--bs-gap': '1rem' }} className='text-center'>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={4}>.g-col-4</GridItem>
-</Grid>
+<DemoContainer>
+  <ColumnsGapTenDemo />
+</DemoContainer>
+
+```tsx src='./demos/columns-gap-ten.tsx'
+
 ```
 
 ### 添加行
 
 设置行数，并通过 `style` 和 `start` 将项目放置在指定行：
 
-```tsx
-<Grid rows={3} columns={3} className='text-center'>
-  <div>自动列</div>
-  <GridItem start={2} style={{ gridRow: 2 }}>
-    自动列
-  </GridItem>
-  <GridItem start={3} style={{ gridRow: 3 }}>
-    自动列
-  </GridItem>
-</Grid>
+<DemoContainer>
+  <AddingRowsDemo />
+</DemoContainer>
+
+```tsx src='./demos/adding-rows.tsx'
+
 ```
 
 ### 间距
 
 在 `style` 中设置 `rowGap` 或 `columnGap`，只调整单个方向的间距：
 
-```tsx
-<Grid className='text-center' style={{ rowGap: 0 }}>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-</Grid>
+<DemoContainer>
+  <RowGapDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-gap.tsx'
+
 ```
 
 `--bs-gap` 变量也可以分别设置行间距和列间距：
 
-```tsx
-<Grid className='text-center' style={{ '--bs-gap': '.25rem 1rem' }}>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-  <GridItem span={6}>.g-col-6</GridItem>
-</Grid>
+<DemoContainer>
+  <TwoAxisGapDemo />
+</DemoContainer>
+
+```tsx src='./demos/two-axis-gap.tsx'
+
 ```
 
 ## Sass
@@ -235,11 +220,12 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 Bootstrap 根据 Sass 变量生成 `.g-col-*` 和 `.g-start-*` 类。可以修改这些变量并重新编译，
 生成更多类；也可以将行内 CSS 与已有类结合使用：
 
-```tsx
-<Grid columns={18} style={{ '--bs-gap': '.5rem' }} className='text-center'>
-  <GridItem style={{ gridColumn: 'span 14' }}>14 列</GridItem>
-  <GridItem span={4}>.g-col-4</GridItem>
-</Grid>
+<DemoContainer>
+  <SassColumnsDemo />
+</DemoContainer>
+
+```tsx src='./demos/sass-columns.tsx'
+
 ```
 
 ## API
