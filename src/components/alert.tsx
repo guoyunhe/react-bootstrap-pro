@@ -27,6 +27,23 @@ export function Alert<C extends ElementType = 'div'>({
   );
 }
 
+export type AlertLinkProps<C extends ElementType = 'a'> = BoxProps<C>;
+
+export function AlertLink<C extends ElementType = 'a'>({
+  component,
+  className,
+  ...props
+}: AlertLinkProps<C>) {
+  return (
+    <Box<C>
+      {...(props as BoxProps<C>)}
+      component={component ?? ('a' as C)}
+      classNameBefore={clsx('alert-link', props.classNameBefore)}
+      className={className}
+    />
+  );
+}
+
 export type AlertHeadingProps<C extends ElementType = 'h4'> = BoxProps<C>;
 
 export function AlertHeading<C extends ElementType = 'h4'>({

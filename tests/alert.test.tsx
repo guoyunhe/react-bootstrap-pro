@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { Alert, AlertHeading } from '../src';
+import { Alert, AlertHeading, AlertLink } from '../src';
 
 test('renders alert modifiers and preserves custom tags', async () => {
   const screen = await render(
@@ -26,4 +26,16 @@ test('renders alert headings through the AlertHeading subcomponent', async () =>
   const heading = screen.getByTestId('alert-heading');
   expect(heading.element().tagName).toBe('H2');
   expect(heading).toHaveClass('alert-heading', 'mb-0');
+});
+
+test('renders alert links with the alert-link class and anchor default', async () => {
+  const screen = await render(
+    <AlertLink href='#details' data-testid='alert-link'>
+      Details
+    </AlertLink>,
+  );
+
+  const link = screen.getByTestId('alert-link');
+  expect(link.element().tagName).toBe('A');
+  expect(link).toHaveClass('alert-link');
 });

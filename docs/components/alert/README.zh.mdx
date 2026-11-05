@@ -3,7 +3,7 @@ title: Alert 提示
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Alert } from 'react-bootstrap-pro';
+import { Alert, AlertLink } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 
 # Alert 提示
@@ -15,9 +15,12 @@ Bootstrap JavaScript 插件和 `CloseButton`。
   <Alert theme='success'>更改已保存。</Alert>
 </DemoContainer>
 
+`AlertLink` 渲染带有 Bootstrap `.alert-link` 样式的链接，默认使用 `<a>` 元素。
+可通过 `component` 属性更换元素。
+
 ```tsx
 <Alert theme='warning' instant>
-  继续之前请检查信息。
+  继续之前请检查 <AlertLink href='#details'>相关信息</AlertLink>。
 </Alert>
 ```
 
@@ -32,5 +35,7 @@ Bootstrap JavaScript 插件和 `CloseButton`。
 
 `AlertHeading` 渲染 `.alert-heading` 标题，默认使用 `h4` 元素；可通过 `component`
 更换标题级别。
+
+`AlertLink` 渲染 `.alert-link` 链接，默认使用 `a` 元素；可通过 `component` 更换元素。
 
 颜色仅作辅助提示，请通过文本说明提示含义。

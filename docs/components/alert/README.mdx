@@ -3,7 +3,7 @@ title: Alert
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Alert } from 'react-bootstrap-pro';
+import { Alert, AlertLink } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { AlertAdditionalContentDemo } from './demos/additional-content';
 import { AlertBasicDemo } from './demos/basic';
@@ -55,7 +55,7 @@ The button adds an alert; its close control removes it again.
 
 ## Link color
 
-Use `.alert-link` to style a link in contextually themed alerts.
+Use `AlertLink` to render a link with Bootstrap's `.alert-link` styling.
 
 <DemoContainer>
   <AlertLinkColorDemo />
@@ -115,7 +115,8 @@ dismissal.
 | `...props`  | `BoxProps<C>`           | Native props and all Box utility props. |
 
 `AlertHeading` provides the `.alert-heading` class; use its `component` prop to
-change the heading level.
+change the heading level. `AlertLink` provides the `.alert-link` class and
+defaults to an `<a>` element; use its `component` prop to change the element.
 
 ## Accessibility
 

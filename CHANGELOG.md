@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Add the `AlertLink` component for links styled within alerts.
+
 ## [0.3.0] - 2026-11-04
 
 ### Breaking Changes
