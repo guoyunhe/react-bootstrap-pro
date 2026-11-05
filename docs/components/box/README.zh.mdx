@@ -144,17 +144,18 @@ import { BoxThemeDemo } from './demos/box-theme';
 
 ## 布局与定位
 
-`aspectRatio` 设置标准 `.ratio-*` 比例；`containerQuery` 将元素设为内联尺寸或双向
+`ratio` 设置标准 `.ratio-*` 比例；`containerQuery` 将元素设为内联尺寸或双向
 尺寸查询容器。对齐、显示、flex、grid、float、object-fit、order、间距和文本对齐属性
 还支持以 `xs`、`sm`、`md`、`lg`、`xl` 或 `2xl` 为键的响应式值。与 Bootstrap 一致，
 `xs` 不带断点前缀，其余断点生成 `.md:d-none` 这样的类名。
+可用比例和用法请参阅 [Bootstrap aspect-ratio 工具类](https://getbootstrap.com/docs/6.0/utilities/aspect-ratio/)。
 
 <DemoContainer>
   <BoxLayoutDemo />
 </DemoContainer>
 
 ```tsx
-<Box aspectRatio='16x9'>16:9 内容</Box>
+<Box ratio='16x9'>16:9 内容</Box>
 <Box containerQuery='inline'>查询容器</Box>
 <Box display={{ xs: 'none', md: 'block' }}>小于 md 时隐藏</Box>
 <Box display='flex' flexWrap='wrap' alignContent={{ xs: 'start', md: 'between' }}>
@@ -175,7 +176,7 @@ import { BoxThemeDemo } from './demos/box-theme';
 
 | 属性             | 类名                     | 取值                                                                                                                                                             |
 | ---------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `aspectRatio`    | `.ratio-*`               | `auto`、`1x1`、`4x3`、`16x9`、`21x9`                                                                                                                             |
+| `ratio`          | `.ratio-*`               | `auto`、`1x1`、`4x3`、`16x9`、`21x9`                                                                                                                             |
 | `containerQuery` | `.contains-*`            | `inline`、`size`                                                                                                                                                 |
 | `display`        | `.d-*`                   | `inline`、`inline-block`、`block`、`grid`、`inline-grid`、`table`、`table-row`、`table-cell`、`flex`、`inline-flex`、`contents`、`flow-root`、`none`；支持响应式 |
 | `fixedTop`       | `.fixed-top`             | `boolean`                                                                                                                                                        |
@@ -237,7 +238,7 @@ Bootstrap 工具类的优先级相同，因此样式表中靠后的类会生效�
 | `alignItems`              | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'`                                                                                                                                | —       | 添加响应式 `.align-items-*` 类。                                                                                                                |
 | `alignSelf`               | `'auto' \| 'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'`                                                                                                                      | —       | 添加响应式 `.align-self-*` 类。                                                                                                                 |
 | `animation`               | `'none' \| 'shake' \| 'pop'`                                                                                                                                                             | —       | 添加 `.animation-*`。                                                                                                                           |
-| `aspectRatio`             | `'auto' \| '1x1' \| '4x3' \| '16x9' \| '21x9'`                                                                                                                                           | —       | 添加 `.ratio-{value}`。                                                                                                                         |
+| `ratio`                   | `'auto' \| '1x1' \| '4x3' \| '16x9' \| '21x9'`                                                                                                                                           | —       | 添加 `.ratio-{value}`。参阅 [Bootstrap aspect-ratio 工具类](https://getbootstrap.com/docs/6.0/utilities/aspect-ratio/)。                        |
 | `bg`                      | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse' \| 'body' \| '1' \| '2' \| '3' \| '4' \| 'fg' \| 'white' \| 'black' \| 'transparent'` | —       | 添加 `.bg-{value}`。                                                                                                                            |
 | `bgMuted`                 | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse'`                                                                                      | —       | 添加 `.bg-muted-{color}`。                                                                                                                      |
 | `bgOpacity`               | `number`                                                                                                                                                                                 | —       | 添加 `.bg-{opacity}`。                                                                                                                          |

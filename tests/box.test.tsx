@@ -170,7 +170,7 @@ test('applies color scheme utilities', async () => {
 test('applies aspect ratio, container query, and display utilities', async () => {
   const screen = await render(
     <>
-      <Box data-testid='ratio' aspectRatio='16x9' />
+      <Box data-testid='ratio' ratio='16x9' />
       <Box data-testid='container-query' containerQuery='inline' />
       <Box data-testid='display' display={{ xs: 'none', md: 'block', xl: 'grid' }} />
       <Box data-testid='display-single' display='inline-flex' />

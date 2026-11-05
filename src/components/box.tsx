@@ -82,7 +82,7 @@ type OwnProps = {
   bgMuted?: Theme | undefined;
   bgOpacity?: Opacity | undefined;
   gradient?: boolean | undefined;
-  aspectRatio?: AspectRatio | undefined;
+  ratio?: AspectRatio | undefined;
   containerQuery?: ContainerQuery | undefined;
   display?: Responsive<Display> | undefined;
   alignContent?: Responsive<AlignContent> | undefined;
@@ -331,7 +331,7 @@ export function Box<C extends ElementType = 'div'>({
   bgMuted,
   bgOpacity,
   gradient,
-  aspectRatio,
+  ratio,
   containerQuery,
   display,
   alignContent,
@@ -472,7 +472,7 @@ export function Box<C extends ElementType = 'div'>({
     bgMuted && `bg-muted-${bgMuted}`,
     bgOpacity && `bg-${bgOpacity}`,
     gradient && 'bg-gradient',
-    aspectRatio && `ratio-${aspectRatio}`,
+    ratio && `ratio-${ratio}`,
     containerQuery && `contains-${containerQuery}`,
     getResponsiveClasses('d', display),
     getResponsiveClasses('align-content', alignContent),

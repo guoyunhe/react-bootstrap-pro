@@ -15,7 +15,7 @@ export function BoxLayoutDemo() {
           {aspectRatios.map((aspectRatio) => (
             <Box
               key={aspectRatio}
-              aspectRatio={aspectRatio}
+              ratio={aspectRatio}
               theme='primary'
               themeStyle='subtle'
               themeBorder
@@ -55,7 +55,7 @@ export function BoxLayoutDemo() {
             src={imageSource}
             alt='A blue illustration with a white circle'
             objectFit='cover'
-            aspectRatio='1x1'
+            ratio='1x1'
             float='end'
             ms={3}
             className='rounded'

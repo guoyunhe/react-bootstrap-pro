@@ -125,11 +125,13 @@ Set `themeBorder` to add `.theme-border` for a border in the theme color, and
 
 ## Layout and positioning
 
-`aspectRatio` sets a standard `.ratio-*` ratio, while `containerQuery` makes the
+`ratio` sets a standard `.ratio-*` ratio, while `containerQuery` makes the
 element an inline-size or size query container. Alignment, display, flex, grid,
 float, object-fit, order, spacing, and text-alignment props accept responsive
 values keyed by `xs`, `sm`, `md`, `lg`, `xl`, or `2xl`. As in Bootstrap, `xs` has
 no prefix and the later breakpoints use classes such as `.md:d-none`.
+See [Bootstrap aspect-ratio utilities](https://getbootstrap.com/docs/6.0/utilities/aspect-ratio/)
+for the available ratios and usage.
 
 <DemoContainer>
   <BoxLayoutDemo />
@@ -150,7 +152,7 @@ accept responsive booleans keyed by `xs`, `sm`, `md`, `lg`, `xl`, or `2xl`.
 
 | Prop             | Class                    | Values                                                                                                                                                           |
 | ---------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `aspectRatio`    | `.ratio-*`               | `auto`, `1x1`, `4x3`, `16x9`, `21x9`                                                                                                                             |
+| `ratio`          | `.ratio-*`               | `auto`, `1x1`, `4x3`, `16x9`, `21x9`                                                                                                                             |
 | `containerQuery` | `.contains-*`            | `inline`, `size`                                                                                                                                                 |
 | `display`        | `.d-*`                   | `inline`, `inline-block`, `block`, `grid`, `inline-grid`, `table`, `table-row`, `table-cell`, `flex`, `inline-flex`, `contents`, `flow-root`, `none`; responsive |
 | `fixedTop`       | `.fixed-top`             | `boolean`                                                                                                                                                        |
@@ -210,7 +212,7 @@ Bootstrap's `--bs-hover-lift-*` CSS variables.
 | `alignItems`              | `'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'`                                                                                                                                | —       | Applies responsive `.align-items-*` classes.                                                                                                                     |
 | `alignSelf`               | `'auto' \| 'start' \| 'end' \| 'center' \| 'baseline' \| 'stretch'`                                                                                                                      | —       | Applies responsive `.align-self-*` classes.                                                                                                                      |
 | `animation`               | `'none' \| 'shake' \| 'pop'`                                                                                                                                                             | —       | Applies `.animation-*`.                                                                                                                                          |
-| `aspectRatio`             | `'auto' \| '1x1' \| '4x3' \| '16x9' \| '21x9'`                                                                                                                                           | —       | Applies `.ratio-{value}`.                                                                                                                                        |
+| `ratio`                   | `'auto' \| '1x1' \| '4x3' \| '16x9' \| '21x9'`                                                                                                                                           | —       | Applies `.ratio-{value}`. See [Bootstrap aspect-ratio utilities](https://getbootstrap.com/docs/6.0/utilities/aspect-ratio/).                                     |
 | `bg`                      | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse' \| 'body' \| '1' \| '2' \| '3' \| '4' \| 'fg' \| 'white' \| 'black' \| 'transparent'` | —       | Applies `.bg-{value}`.                                                                                                                                           |
 | `bgMuted`                 | `'primary' \| 'accent' \| 'secondary' \| 'success' \| 'danger' \| 'warning' \| 'info' \| 'inverse'`                                                                                      | —       | Applies `.bg-muted-{color}`.                                                                                                                                     |
 | `bgOpacity`               | `number`                                                                                                                                                                                 | —       | Applies `.bg-{opacity}`.                                                                                                                                         |
