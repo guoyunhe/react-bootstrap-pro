@@ -2,6 +2,7 @@
 
 ## Documentation
 
+- Use `docs/components/accordion/` as the structural template for component documentation.
 - When adding a component or changing a component interface, update `CHANGELOG.md` in the same change.
 
 ### Language parity

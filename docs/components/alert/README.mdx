@@ -16,8 +16,9 @@ import { AlertWithIconsDemo } from './demos/with-icons';
 # Alert
 
 `Alert` renders Bootstrap's contextual `.alert` container and defaults to
-`role="alert"`. Dismissal requires the Bootstrap JavaScript plugin and a
-`CloseButton`.
+`role="alert"`. Alerts support any text content and use neutral colors when no
+theme is set. Dismissal with [`CloseButton`](../close-button/) requires the
+Bootstrap JavaScript plugin.
 
 ## Default alert
 
@@ -31,7 +32,8 @@ import { AlertWithIconsDemo } from './demos/with-icons';
 
 ## Variants
 
-Show each of the contextual themes, including the neutral default.
+Show each contextual theme, including the neutral default. Keep the message
+clear in its text; color alone does not communicate meaning.
 
 <DemoContainer>
   <AlertVariantsDemo />
@@ -94,8 +96,9 @@ the icon.
 
 ## Dismiss
 
-Add a close control with `data-bs-dismiss='alert'` to enable Bootstrap plugin
-dismissal.
+Add a [`CloseButton`](../close-button/) with `data-bs-dismiss='alert'` to enable
+dismissal through the Bootstrap JavaScript plugin. The plugin fades the alert
+out before removing it; set `instant` to skip the exit transition.
 
 <DemoContainer>
   <AlertDismissDemo />
@@ -105,24 +108,41 @@ dismissal.
 
 ```
 
+The plugin removes a dismissed alert from the page. Since this can leave
+keyboard users without a predictable focus location, manage focus after
+dismissal when needed.
+
 ## API
 
-| Prop        | Type                    | Description                             |
-| ----------- | ----------------------- | --------------------------------------- |
-| `instant`   | `boolean`               | Disables the exit transition.           |
-| `theme`     | Bootstrap theme literal | Sets contextual theme colors.           |
-| `component` | `ElementType`           | Changes the root element.               |
-| `...props`  | `BoxProps<C>`           | Native props and all Box utility props. |
+### Alert
 
-`AlertHeading` provides the `.alert-heading` class; use its `component` prop to
-change the heading level. `AlertLink` provides the `.alert-link` class and
-defaults to an `<a>` element; use its `component` prop to change the element.
+Renders the `.alert` container as a `div` by default, with `role="alert"`. The
+inherited `theme` prop sets contextual colors; without a theme, the alert uses
+neutral colors.
+
+| Prop      | Type      | Description                                 |
+| --------- | --------- | ------------------------------------------- |
+| `instant` | `boolean` | Removes the exit transition when dismissed. |
+
+Inherits native `div` props, including `role`, and [`Box`](../box/README.mdx#api)
+utility props, including `theme` and `component`.
+
+### AlertLink
+
+Renders the `.alert-link` class on an `a` element by default. Inherits native
+anchor props, including `href`, and [`Box`](../box/README.mdx#api) utility props.
+
+### AlertHeading
+
+Renders the `.alert-heading` class on an `h4` element by default. Inherits
+native heading props and [`Box`](../box/README.mdx#api) utility props.
 
 ## Accessibility
 
 Use the default `role='alert'` for urgent, dynamically announced content.
 For non-urgent updates, choose a less disruptive role such as `status`.
-Color is supplementary; keep the alert's meaning in its text.
+Color is supplementary; keep the alert's meaning in its text. Decorative icons
+should be hidden from assistive technology.
 
 ## See
 

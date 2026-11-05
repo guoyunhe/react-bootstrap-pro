@@ -3,39 +3,137 @@ title: Alert 提示
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Alert, AlertLink } from 'react-bootstrap-pro';
+import { AlertAdditionalContentDemo } from './demos/additional-content';
+import { AlertBasicDemo } from './demos/basic';
+import { AlertDismissDemo } from './demos/dismiss';
+import { AlertLinkColorDemo } from './demos/link-color';
+import { AlertLiveDemo } from './demos/live-example';
+import { AlertVariantsDemo } from './demos/variants';
+import { AlertWithIconsDemo } from './demos/with-icons';
 import { DemoContainer } from '../demo-container';
 
 # Alert 提示
 
-`Alert` 渲染 Bootstrap `.alert` 容器，默认设置 `role="alert"`。关闭交互需要
-Bootstrap JavaScript 插件和 `CloseButton`。
+`Alert` 渲染 Bootstrap `.alert` 提示容器，默认设置 `role="alert"`。提示内容可包含任意文本；未设置
+主题时会使用中性色。通过 [`CloseButton`](../close-button/) 关闭提示需要加载 Bootstrap JavaScript 插件。
+
+## 默认提示
+
+提示可以包含任意长度的文本，也可以选择添加关闭按钮。
 
 <DemoContainer>
-  <Alert theme='success'>更改已保存。</Alert>
+  <AlertBasicDemo />
 </DemoContainer>
 
-`AlertLink` 渲染带有 Bootstrap `.alert-link` 样式的链接，默认使用 `<a>` 元素。
-可通过 `component` 属性更换元素。
+```tsx src='./demos/basic.tsx'
 
-```tsx
-<Alert theme='warning' instant>
-  继续之前请检查 <AlertLink href='#details'>相关信息</AlertLink>。
-</Alert>
 ```
+
+## 变体
+
+使用不同主题显示提示变体，包括中性默认样式。请在文本中明确表达提示含义，不要只依赖颜色传递信息。
+
+<DemoContainer>
+  <AlertVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## 实时示例
+
+点击按钮添加提示，再点击关闭按钮移除提示。
+
+<DemoContainer>
+  <AlertLiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/live-example.tsx'
+
+```
+
+## 链接颜色
+
+使用 `AlertLink` 渲染带有 Bootstrap `.alert-link` 样式的链接，其颜色会与提示主题相匹配。
+
+<DemoContainer>
+  <AlertLinkColorDemo />
+</DemoContainer>
+
+```tsx src='./demos/link-color.tsx'
+
+```
+
+## 附加内容
+
+提示中也可以包含标题、段落和分隔线等 HTML 元素。`AlertHeading` 渲染
+`.alert-heading` 标题，默认使用 `h4` 元素。提示容器采用 flex 布局，适合将内容垂直排列。
+
+<DemoContainer>
+  <AlertAdditionalContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/additional-content.tsx'
+
+```
+
+## 图标
+
+可以搭配装饰性图标和提示文字。图标应隐藏于辅助技术之外，确保提示含义仍可通过文本理解。
+
+<DemoContainer>
+  <AlertWithIconsDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-icons.tsx'
+
+```
+
+## 关闭
+
+为 [`CloseButton`](../close-button/) 添加 `data-bs-dismiss='alert'`，即可通过 Bootstrap JavaScript 插件关闭提示。
+插件会在移除提示前播放淡出动画；设置 `instant` 可跳过退出过渡动画。
+
+<DemoContainer>
+  <AlertDismissDemo />
+</DemoContainer>
+
+```tsx src='./demos/dismiss.tsx'
+
+```
+
+插件会从页面结构中移除已关闭的提示。对于键盘用户，这可能导致焦点位置不明确；必要时应在关闭后主动管理焦点。
 
 ## API
 
-| 属性        | 类型                 | 说明                            |
-| ----------- | -------------------- | ------------------------------- |
-| `instant`   | `boolean`            | 禁用退出过渡动画。              |
-| `theme`     | Bootstrap 主题字面量 | 设置提示主题颜色。              |
-| `component` | `ElementType`        | 更换根元素。                    |
-| `...props`  | `BoxProps<C>`        | 原生属性及所有 Box 工具类属性。 |
+### Alert
 
-`AlertHeading` 渲染 `.alert-heading` 标题，默认使用 `h4` 元素；可通过 `component`
-更换标题级别。
+渲染 `.alert` 容器，默认使用 `div` 元素，并设置 `role="alert"`。继承的 `theme` 属性用于设置提示主题；
+未设置主题时使用中性色。
 
-`AlertLink` 渲染 `.alert-link` 链接，默认使用 `a` 元素；可通过 `component` 更换元素。
+| 属性      | 类型      | 说明                     |
+| --------- | --------- | ------------------------ |
+| `instant` | `boolean` | 关闭时跳过退出过渡动画。 |
 
-颜色仅作辅助提示，请通过文本说明提示含义。
+继承原生 `div` 属性（包括 `role`）及 [`Box`](../box/README.zh.mdx#api) 工具类属性，其中包括 `theme` 和 `component`。
+
+### AlertLink
+
+默认在 `a` 元素上渲染 `.alert-link` 类。继承原生链接属性（包括 `href`）和
+[`Box`](../box/README.zh.mdx#api) 工具类属性；可使用继承的 `component` 属性更换元素。
+
+### AlertHeading
+
+默认在 `h4` 元素上渲染 `.alert-heading` 类。继承原生标题属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性；可使用继承的 `component` 属性更换标题级别或元素。
+
+## 无障碍访问
+
+紧急且需要动态播报的内容使用默认的 `role='alert'`。非紧急更新可选择干扰性较低的角色，例如
+`status`。颜色仅作辅助提示，应通过文本表达提示含义；装饰性图标应从辅助技术中隐藏。
+
+## 参考
+
+- [Bootstrap 6 Alert 文档](https://getbootstrap.com/docs/6.0/components/alert/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/alert.tsx)
