@@ -2,7 +2,7 @@ import { Box, FormControl, FormFloating } from 'react-bootstrap-pro';
 
 export function FloatingLabelsBasicDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <FormFloating>
         <label htmlFor='floating-basic-email'>Email address</label>
         <FormControl

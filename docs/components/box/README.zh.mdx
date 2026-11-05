@@ -157,8 +157,8 @@ import { BoxThemeDemo } from './demos/box-theme';
 ```tsx
 <Box ratio='16x9'>16:9 内容</Box>
 <Box containerQuery='inline'>查询容器</Box>
-<Box display={{ xs: 'none', md: 'block' }}>小于 md 时隐藏</Box>
-<Box display='flex' flexWrap='wrap' alignContent={{ xs: 'start', md: 'between' }}>
+<Box d={{ xs: 'none', md: 'block' }}>小于 md 时隐藏</Box>
+<Box d='flex' flexWrap='wrap' alignContent={{ xs: 'start', md: 'between' }}>
   自动换行的 flex 内容
 </Box>
 <Box float={{ sm: 'start', lg: 'end' }}>响应式浮动</Box>
@@ -178,7 +178,7 @@ import { BoxThemeDemo } from './demos/box-theme';
 | ---------------- | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ratio`          | `.ratio-*`               | `auto`、`1x1`、`4x3`、`16x9`、`21x9`                                                                                                                             |
 | `containerQuery` | `.contains-*`            | `inline`、`size`                                                                                                                                                 |
-| `display`        | `.d-*`                   | `inline`、`inline-block`、`block`、`grid`、`inline-grid`、`table`、`table-row`、`table-cell`、`flex`、`inline-flex`、`contents`、`flow-root`、`none`；支持响应式 |
+| `d`              | `.d-*`                   | `inline`、`inline-block`、`block`、`grid`、`inline-grid`、`table`、`table-row`、`table-cell`、`flex`、`inline-flex`、`contents`、`flow-root`、`none`；支持响应式 |
 | `fixedTop`       | `.fixed-top`             | `boolean`                                                                                                                                                        |
 | `fixedBottom`    | `.fixed-bottom`          | `boolean`                                                                                                                                                        |
 | `stickyTop`      | `.sticky-top`            | `boolean`；支持响应式                                                                                                                                            |
@@ -262,7 +262,7 @@ Bootstrap 工具类属性均链接到对应的 Bootstrap 6 文档。未添加链
 | `columnGap`               | `number`                                                                                                                                                                                 | —       | 添加响应式 `.column-gap-*` 类。 参阅 [Bootstrap gap 文档](https://getbootstrap.com/docs/6.0/utilities/gap/)。                                                      |
 | `component`               | 根据 `component` 推断                                                                                                                                                                    | `'div'` | 渲染的原生元素或 React 组件。                                                                                                                                      |
 | `containerQuery`          | `'inline' \| 'size'`                                                                                                                                                                     | —       | 添加 `.contains-{value}`。                                                                                                                                         |
-| `display`                 | `'inline' \| 'inline-block' \| 'block' \| 'grid' \| 'inline-grid' \| 'table' \| 'table-row' \| 'table-cell' \| 'flex' \| 'inline-flex' \| 'contents' \| 'flow-root' \| 'none'`           | —       | 添加响应式 `.d-{value}` 类。 参阅 [Bootstrap display 文档](https://getbootstrap.com/docs/6.0/utilities/display/)。                                                 |
+| `d`                       | `'inline' \| 'inline-block' \| 'block' \| 'grid' \| 'inline-grid' \| 'table' \| 'table-row' \| 'table-cell' \| 'flex' \| 'inline-flex' \| 'contents' \| 'flow-root' \| 'none'`           | —       | 添加响应式 `.d-{value}` 类。 参阅 [Bootstrap display 文档](https://getbootstrap.com/docs/6.0/utilities/display/)。                                                 |
 | `divideX`                 | `true \| number`                                                                                                                                                                         | —       | 添加响应式 `.divide-x` 或 `.divide-x-0`。 参阅 [Bootstrap divide 文档](https://getbootstrap.com/docs/6.0/utilities/divide/)。                                      |
 | `divideY`                 | `true \| number`                                                                                                                                                                         | —       | 添加响应式 `.divide-y` 或 `.divide-y-0`。 参阅 [Bootstrap divide 文档](https://getbootstrap.com/docs/6.0/utilities/divide/)。                                      |
 | `dvh`                     | `number`                                                                                                                                                                                 | —       | 添加 `.dvh-100`。 参阅 [Bootstrap height 文档](https://getbootstrap.com/docs/6.0/utilities/height/)。                                                              |

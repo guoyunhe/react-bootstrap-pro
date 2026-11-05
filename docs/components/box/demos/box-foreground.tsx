@@ -15,9 +15,9 @@ const opacities = [100, 80, 60, 40, 20] as const;
 
 export function BoxForegroundDemo() {
   return (
-    <Box display='grid' gap={3}>
+    <Box d='grid' gap={3}>
       {themes.map((theme) => (
-        <Box key={theme} display='flex' flexWrap='wrap' alignItems='center' gap={3}>
+        <Box key={theme} d='flex' flexWrap='wrap' alignItems='center' gap={3}>
           <Box fg={theme} className='fw-semibold'>
             {`fg-${theme}`}
           </Box>
@@ -29,7 +29,7 @@ export function BoxForegroundDemo() {
           </Box>
         </Box>
       ))}
-      <Box display='flex' flexWrap='wrap' alignItems='center' gap={3}>
+      <Box d='flex' flexWrap='wrap' alignItems='center' gap={3}>
         <Box fg='primary' fgo={100} className='fw-semibold'>
           fg-100
         </Box>

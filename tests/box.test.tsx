@@ -188,15 +188,15 @@ test('applies aspect ratio, container query, and display utilities', async () =>
     <>
       <Box data-testid='ratio' ratio='16x9' />
       <Box data-testid='container-query' containerQuery='inline' />
-      <Box data-testid='display' display={{ xs: 'none', md: 'block', xl: 'grid' }} />
-      <Box data-testid='display-single' display='inline-flex' />
+      <Box data-testid='d' d={{ xs: 'none', md: 'block', xl: 'grid' }} />
+      <Box data-testid='d-single' d='inline-flex' />
     </>,
   );
 
   expect(screen.getByTestId('ratio')).toHaveClass('ratio-16x9');
   expect(screen.getByTestId('container-query')).toHaveClass('contains-inline');
-  expect(screen.getByTestId('display')).toHaveClass('d-none', 'md:d-block', 'xl:d-grid');
-  expect(screen.getByTestId('display-single')).toHaveClass('d-inline-flex');
+  expect(screen.getByTestId('d')).toHaveClass('d-none', 'md:d-block', 'xl:d-grid');
+  expect(screen.getByTestId('d-single')).toHaveClass('d-inline-flex');
 });
 
 test('applies responsive float and object-fit utilities', async () => {

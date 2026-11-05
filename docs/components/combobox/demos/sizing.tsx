@@ -7,7 +7,7 @@ const options = [
 
 export function ComboboxSizingDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <Combobox size='sm' options={options} placeholder='Small select…' aria-label='Small select' />
       <Combobox options={options} placeholder='Default select…' aria-label='Default select' />
       <Combobox size='lg' options={options} placeholder='Large select…' aria-label='Large select' />

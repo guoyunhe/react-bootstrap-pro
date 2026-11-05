@@ -5,7 +5,7 @@ const avatarImage = 'https://avatars.githubusercontent.com/u/5836790';
 
 export function AvatarSizesDemo() {
   return (
-    <Box display='flex' alignItems='center' gap={2}>
+    <Box d='flex' alignItems='center' gap={2}>
       {avatarSizes.map((size) => (
         <Avatar key={size ?? 'default'} size={size}>
           <AvatarImage src={avatarImage} alt='mdo' />

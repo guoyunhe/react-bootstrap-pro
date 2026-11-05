@@ -14,7 +14,7 @@ const avatarThemes = [
 
 export function AvatarSubtleInitialsDemo() {
   return (
-    <Box display='flex' alignItems='center' gap={2} flexWrap='wrap'>
+    <Box d='flex' alignItems='center' gap={2} flexWrap='wrap'>
       {avatarThemes.map(({ label, theme }) => (
         <Avatar key={label} subtle={label !== 'Default'} theme={theme}>
           {label === 'Default' ? 'AB' : label.slice(0, 2).toUpperCase()}

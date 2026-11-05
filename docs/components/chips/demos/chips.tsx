@@ -10,7 +10,7 @@ export function ChipsDemo() {
   const [visible, setVisible] = useState(true);
 
   return (
-    <Box display='flex' flexWrap='wrap' alignItems='center' gap={2}>
+    <Box d='flex' flexWrap='wrap' alignItems='center' gap={2}>
       <Chip>Basic chip</Chip>
       <Chip image={{ src: avatarSource, alt: '' }}>With avatar</Chip>
       <Chip icon={<BiPerson />}>With icon</Chip>

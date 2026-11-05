@@ -2,7 +2,7 @@ import { Box, Checkbox, FormControl, InputGroup, InputGroupText, Radio } from 'r
 
 export function InputGroupCheckRadioDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <InputGroup>
         <InputGroupText component='div'>
           <Checkbox aria-label='Checkbox for following text input' />

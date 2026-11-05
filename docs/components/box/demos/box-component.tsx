@@ -7,7 +7,7 @@ function Panel({ className, ...props }: HTMLAttributes<HTMLElement>) {
 
 export function BoxComponentDemo() {
   return (
-    <Box display='grid' gap={3}>
+    <Box d='grid' gap={3}>
       <Box
         component='a'
         href='https://getbootstrap.com/docs/6.0/utilities/colors/'
@@ -17,7 +17,7 @@ export function BoxComponentDemo() {
         bgv='subtle'
         fg='primary'
         fgv='emphasis'
-        display='inline-block'
+        d='inline-block'
         px={3}
         py={2}
         className='rounded text-decoration-none'

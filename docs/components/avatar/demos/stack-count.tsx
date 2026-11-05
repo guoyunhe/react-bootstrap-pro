@@ -4,7 +4,7 @@ const avatarImage = 'https://avatars.githubusercontent.com/u/5836790';
 
 export function AvatarStackCountDemo() {
   return (
-    <Box display='grid' gap={3}>
+    <Box d='grid' gap={3}>
       {[undefined, 'avatar-stack-xl'].map((className) => (
         <AvatarStack key={className ?? 'default'} className={className}>
           {Array.from({ length: 3 }, (_, index) => (

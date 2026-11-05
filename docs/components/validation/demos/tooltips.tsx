@@ -11,7 +11,7 @@ import {
 export function ValidationTooltipsDemo() {
   return (
     <Form validation onSubmit={(event) => event.preventDefault()}>
-      <Box display='flex' flexDirection='column' gap={10}>
+      <Box d='flex' flexDirection='column' gap={10}>
         <FormField>
           <FormLabel htmlFor='validation-tooltip-name'>Name</FormLabel>
           <FormControl

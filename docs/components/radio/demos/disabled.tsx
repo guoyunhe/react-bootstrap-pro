@@ -2,7 +2,7 @@ import { Box, FormField, Radio } from 'react-bootstrap-pro';
 
 export function RadioDisabledDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={2}>
+    <Box d='flex' flexDirection='column' gap={2}>
       <FormField>
         <Radio id='radio-disabled' name='radio-disabled' disabled />
         <label htmlFor='radio-disabled'>Example new radio</label>

@@ -13,9 +13,9 @@ const themes = [
 
 export function BoxThemeDemo() {
   return (
-    <Box display='grid' gap={3}>
+    <Box d='grid' gap={3}>
       {themes.map((theme) => (
-        <Box key={theme} theme={theme} display='flex' flexWrap='wrap' alignItems='center' gap={2}>
+        <Box key={theme} theme={theme} d='flex' flexWrap='wrap' alignItems='center' gap={2}>
           <Box themeStyle='contrast' className='rounded' px={2} py={1}>
             {`${theme} contrast`}
           </Box>

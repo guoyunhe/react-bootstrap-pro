@@ -2,7 +2,7 @@ import { Box, Button } from 'react-bootstrap-pro';
 
 export function ButtonSizesDemo() {
   return (
-    <Box display='flex' flexWrap='wrap' alignItems='center' gap={2}>
+    <Box d='flex' flexWrap='wrap' alignItems='center' gap={2}>
       <Button variant='solid' theme='primary' size='xs'>
         Extra small
       </Button>

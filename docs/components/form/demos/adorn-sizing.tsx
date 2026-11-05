@@ -3,7 +3,7 @@ import { Box, FormControl } from 'react-bootstrap-pro';
 
 export function FormAdornSizingDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <FormControl component='label' adorn size='sm'>
         <Box className='form-adorn-icon' aria-hidden='true'>
           <BiSearch />

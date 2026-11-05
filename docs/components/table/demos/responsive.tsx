@@ -37,7 +37,7 @@ function WideTable() {
 
 export function TableResponsiveDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <WideTable />
       <Table responsive='md' striped>
         <TableHead>

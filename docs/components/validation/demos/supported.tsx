@@ -19,7 +19,7 @@ import {
 
 export function ValidationSupportedDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={4}>
+    <Box d='flex' flexDirection='column' gap={4}>
       <FormField>
         <FormLabel htmlFor='validation-supported-textarea'>Textarea</FormLabel>
         <FormControl
@@ -147,7 +147,7 @@ export function ValidationSupportedDemo() {
             aria-describedby='validation-supported-floating-feedback'
           />
         </FormFloating>
-        <FormFeedback id='validation-supported-floating-feedback' display='block'>
+        <FormFeedback id='validation-supported-floating-feedback' d='block'>
           Example invalid floating label feedback
         </FormFeedback>
       </FormField>

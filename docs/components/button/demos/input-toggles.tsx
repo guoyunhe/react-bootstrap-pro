@@ -2,8 +2,8 @@ import { Box, Button } from 'react-bootstrap-pro';
 
 export function ButtonInputToggleDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
-      <Box display='flex' flexWrap='wrap' gap={2}>
+    <Box d='flex' flexDirection='column' gap={3}>
+      <Box d='flex' flexWrap='wrap' gap={2}>
         <Button component='label' variant='solid' theme='primary' check>
           <input type='checkbox' defaultChecked />
           {' Checked'}
@@ -17,7 +17,7 @@ export function ButtonInputToggleDemo() {
           {' Disabled'}
         </Button>
       </Box>
-      <Box display='flex' flexWrap='wrap' gap={2}>
+      <Box d='flex' flexWrap='wrap' gap={2}>
         <Button component='label' variant='outline' theme='secondary' check>
           <input type='radio' name='button-demo-options' defaultChecked />
           {' First'}

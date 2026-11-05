@@ -30,7 +30,7 @@ test('renders tooltip feedback', async () => {
 
 test('accepts box props', async () => {
   const screen = await render(
-    <FormFeedback type='valid' className='custom' display='block'>
+    <FormFeedback type='valid' className='custom' d='block'>
       Looks great!
     </FormFeedback>,
   );

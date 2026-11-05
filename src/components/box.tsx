@@ -84,7 +84,7 @@ type OwnProps<C extends ElementType> = {
   gradient?: boolean | undefined;
   ratio?: AspectRatio | undefined;
   containerQuery?: ContainerQuery | undefined;
-  display?: Responsive<Display> | undefined;
+  d?: Responsive<Display> | undefined;
   alignContent?: Responsive<AlignContent> | undefined;
   alignItems?: Responsive<AlignItems> | undefined;
   alignSelf?: Responsive<AlignSelf> | undefined;
@@ -347,7 +347,7 @@ export function Box<C extends ElementType = 'div'>({
   gradient,
   ratio,
   containerQuery,
-  display,
+  d,
   alignContent,
   alignItems,
   alignSelf,
@@ -486,7 +486,7 @@ export function Box<C extends ElementType = 'div'>({
     gradient && 'bg-gradient',
     ratio && `ratio-${ratio}`,
     containerQuery && `contains-${containerQuery}`,
-    getResponsiveClasses('d', display),
+    getResponsiveClasses('d', d),
     getResponsiveClasses('align-content', alignContent),
     getResponsiveClasses('align-items', alignItems),
     getResponsiveClasses('align-self', alignSelf),

@@ -41,7 +41,7 @@ function Head() {
 
 export function TableCaptionDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <Table small>
         <TableCaption>List of users</TableCaption>
         <Head />

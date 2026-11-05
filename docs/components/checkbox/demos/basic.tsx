@@ -2,7 +2,7 @@ import { Box, Checkbox, FormField } from 'react-bootstrap-pro';
 
 export function CheckboxBasicDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={2}>
+    <Box d='flex' flexDirection='column' gap={2}>
       <FormField>
         <Checkbox id='checkbox-basic-1' defaultChecked />
         <label htmlFor='checkbox-basic-1'>First example checkbox</label>

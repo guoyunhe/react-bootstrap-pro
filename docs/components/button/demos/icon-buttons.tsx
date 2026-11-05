@@ -3,7 +3,7 @@ import { Box, IconButton } from 'react-bootstrap-pro';
 
 export function ButtonIconDemo() {
   return (
-    <Box display='flex' flexWrap='wrap' alignItems='center' gap={2}>
+    <Box d='flex' flexWrap='wrap' alignItems='center' gap={2}>
       <IconButton variant='solid' theme='primary' aria-label='Add item'>
         <BiPlus size={16} aria-hidden='true' />
       </IconButton>

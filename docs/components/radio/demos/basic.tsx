@@ -2,7 +2,7 @@ import { Box, FormField, Radio } from 'react-bootstrap-pro';
 
 export function RadioBasicDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={2}>
+    <Box d='flex' flexDirection='column' gap={2}>
       <FormField>
         <Radio id='radio-basic-1' name='radio-basic' defaultChecked />
         <label htmlFor='radio-basic-1'>First example radio</label>

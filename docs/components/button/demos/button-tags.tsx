@@ -2,7 +2,7 @@ import { Box, Button } from 'react-bootstrap-pro';
 
 export function ButtonTagsDemo() {
   return (
-    <Box display='flex' flexWrap='wrap' alignItems='center' gap={2}>
+    <Box d='flex' flexWrap='wrap' alignItems='center' gap={2}>
       <Button component='a' variant='solid' theme='primary' href='#button-tags'>
         Navigation link
       </Button>

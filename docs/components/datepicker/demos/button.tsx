@@ -3,7 +3,7 @@ import { Box, Datepicker } from 'react-bootstrap-pro';
 
 export function DatepickerButtonDemo() {
   return (
-    <Box display='flex' gap={3}>
+    <Box d='flex' gap={3}>
       <Datepicker
         trigger='button'
         icon={<BiCalendarWeek />}

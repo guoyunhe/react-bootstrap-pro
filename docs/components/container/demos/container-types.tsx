@@ -4,7 +4,7 @@ const breakpoints = ['sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 export function ContainerTypesDemo() {
   return (
-    <Box display='grid' gap={3}>
+    <Box d='grid' gap={3}>
       <Container className='border rounded bg-body-tertiary' p={3}>
         <strong>Default container</strong>
         <div className='text-body-secondary'>Max-width changes at each breakpoint.</div>

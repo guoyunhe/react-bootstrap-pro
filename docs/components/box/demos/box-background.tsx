@@ -15,9 +15,9 @@ const opacities = [20, 40, 60, 80, 100] as const;
 
 export function BoxBackgroundDemo() {
   return (
-    <Box display='grid' gap={3}>
+    <Box d='grid' gap={3}>
       {themes.map((theme) => (
-        <Box key={theme} display='flex' flexWrap='wrap' alignItems='center' gap={2}>
+        <Box key={theme} d='flex' flexWrap='wrap' alignItems='center' gap={2}>
           <Box bg={theme} className='rounded' px={2} py={1}>
             {`bg-${theme}`}
           </Box>
@@ -29,7 +29,7 @@ export function BoxBackgroundDemo() {
           </Box>
         </Box>
       ))}
-      <Box display='flex' flexWrap='wrap' alignItems='center' gap={2}>
+      <Box d='flex' flexWrap='wrap' alignItems='center' gap={2}>
         <Box bg='primary' gradient className='rounded' px={3} py={2}>
           bg-gradient
         </Box>

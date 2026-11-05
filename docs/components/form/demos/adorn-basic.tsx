@@ -3,7 +3,7 @@ import { Box, FormControl, FormLabel } from 'react-bootstrap-pro';
 
 export function FormAdornBasicDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <Box>
         <FormLabel htmlFor='form-adorn-search'>Search</FormLabel>
         <FormControl component='label' adorn>

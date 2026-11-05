@@ -13,7 +13,7 @@ const themes = [
 
 export function SwitchThemesDemo() {
   return (
-    <Box display='flex' flexWrap='wrap' gap={4}>
+    <Box d='flex' flexWrap='wrap' gap={4}>
       {themes.map((theme) => (
         <FormField key={theme}>
           <Switch theme={theme}>

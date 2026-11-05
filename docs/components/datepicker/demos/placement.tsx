@@ -2,7 +2,7 @@ import { Box, Datepicker, FormLabel } from 'react-bootstrap-pro';
 
 export function DatepickerPlacementDemo() {
   return (
-    <Box display='flex' gap={3}>
+    <Box d='flex' gap={3}>
       <Box>
         <FormLabel htmlFor='datepicker-left'>Left aligned</FormLabel>
         <Datepicker id='datepicker-left' placement='left' placeholder='Left' />

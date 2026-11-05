@@ -2,7 +2,7 @@ import { Box, FormControl, InputGroup, InputGroupText } from 'react-bootstrap-pr
 
 export function InputGroupMultipleDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <InputGroup>
         <FormControl type='text' aria-label='First name' />
         <FormControl type='text' aria-label='Middle name' />

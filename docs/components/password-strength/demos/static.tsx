@@ -9,7 +9,7 @@ const levels: { label: string; level: PasswordStrengthLevel }[] = [
 
 export function PasswordStrengthStaticDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={2}>
+    <Box d='flex' flexDirection='column' gap={2}>
       {levels.map(({ label, level }) => (
         <Box key={level}>
           <Box>{label}</Box>

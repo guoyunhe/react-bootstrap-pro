@@ -30,7 +30,7 @@ test('supports responsive CSS grid item spans and starts', async () => {
       <GridItem
         span={{ xs: 6, md: 4 }}
         start={{ sm: 2 }}
-        display='block'
+        d='block'
         className='custom-item'
         data-testid='grid-item'
       />

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Breaking Changes
+
+- Rename the Box `display` prop to `d`; the old prop is removed.
+
 ### Added
 
 - Add the `AlertLink` component for links styled within alerts.

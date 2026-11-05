@@ -2,7 +2,7 @@ import { Box, Button } from 'react-bootstrap-pro';
 
 export function ButtonDisabledDemo() {
   return (
-    <Box display='flex' flexWrap='wrap' alignItems='center' gap={2}>
+    <Box d='flex' flexWrap='wrap' alignItems='center' gap={2}>
       <Button variant='solid' theme='primary' disabled>
         Disabled solid
       </Button>

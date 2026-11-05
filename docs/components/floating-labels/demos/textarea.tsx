@@ -5,7 +5,7 @@ const tallTextarea = { '--bs-form-floating-height': '100px' } as CSSProperties;
 
 export function FloatingLabelsTextareaDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <FormFloating>
         <label htmlFor='floating-textarea'>Comments</label>
         <FormControl

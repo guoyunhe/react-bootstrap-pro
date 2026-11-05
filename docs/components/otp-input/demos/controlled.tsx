@@ -6,7 +6,7 @@ export function OtpInputControlledDemo() {
   const [complete, setComplete] = useState(false);
 
   return (
-    <Box display='flex' flexDirection='column' gap={2}>
+    <Box d='flex' flexDirection='column' gap={2}>
       <OtpInput
         aria-label='Verification code'
         value={code}

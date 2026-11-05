@@ -13,7 +13,7 @@ const themes = [
 
 export function CheckboxThemesDemo() {
   return (
-    <Box display='flex' flexWrap='wrap' gap={4}>
+    <Box d='flex' flexWrap='wrap' gap={4}>
       {themes.map((theme) => (
         <FormField key={theme}>
           <Checkbox id={`checkbox-theme-${theme}`} theme={theme} defaultChecked />

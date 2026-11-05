@@ -11,7 +11,7 @@ function GridCell({ children }: { children: ReactNode }) {
 
 export function ColumnFeaturesDemo() {
   return (
-    <Box display='grid' gap={4}>
+    <Box d='grid' gap={4}>
       <Row
         alignItems='center'
         justifyContent={{ xs: 'center', md: 'between' }}
@@ -32,7 +32,7 @@ export function ColumnFeaturesDemo() {
         <Col span={{ xs: 6, sm: 3 }}>
           <GridCell>Second</GridCell>
         </Col>
-        <Box className='w-100' display={{ xs: 'none', md: 'block' }} aria-hidden='true' />
+        <Box className='w-100' d={{ xs: 'none', md: 'block' }} aria-hidden='true' />
         <Col span={{ xs: 6, sm: 3 }} order={{ md: 1 }}>
           <GridCell>Third, reordered</GridCell>
         </Col>

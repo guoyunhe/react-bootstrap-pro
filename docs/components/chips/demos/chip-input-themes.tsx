@@ -2,7 +2,7 @@ import { Box, ChipInput } from 'react-bootstrap-pro';
 
 export function ChipInputThemesDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <ChipInput
         theme='primary'
         defaultValue={['Approved', 'Verified']}

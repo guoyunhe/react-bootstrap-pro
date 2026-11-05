@@ -13,7 +13,7 @@ const themes = [
 
 export function ChipsThemedDemo() {
   return (
-    <Box display='flex' flexWrap='wrap' alignItems='center' gap={2}>
+    <Box d='flex' flexWrap='wrap' alignItems='center' gap={2}>
       <Chip>Default</Chip>
       {themes.map((theme) => (
         <Chip key={theme} theme={theme}>

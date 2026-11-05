@@ -13,7 +13,7 @@ const themes = [
 
 export function AlertLinkColorDemo() {
   return (
-    <Box display='grid' gap={2}>
+    <Box d='grid' gap={2}>
       {themes.map((theme) => (
         <Alert key={theme} theme={theme}>
           A {theme} alert with an <AlertLink href='#details'>example link</AlertLink>.

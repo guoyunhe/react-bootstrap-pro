@@ -159,7 +159,7 @@ export function ValidationCustomDemo() {
         Submit form
       </Button>
       {message && (
-        <FormText component='output' display='block' mt={2}>
+        <FormText component='output' d='block' mt={2}>
           {message}
         </FormText>
       )}

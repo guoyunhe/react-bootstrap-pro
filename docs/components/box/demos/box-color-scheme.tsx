@@ -4,7 +4,7 @@ const schemes = ['light', 'dark', 'auto'] as const;
 
 export function BoxColorSchemeDemo() {
   return (
-    <Box display='grid' gap={3} style={{ gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' }}>
+    <Box d='grid' gap={3} style={{ gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' }}>
       {schemes.map((scheme) => (
         <Box
           key={scheme}

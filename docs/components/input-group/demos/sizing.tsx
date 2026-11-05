@@ -2,7 +2,7 @@ import { Box, FormControl, InputGroup, InputGroupText } from 'react-bootstrap-pr
 
 export function InputGroupSizingDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <InputGroup size='sm'>
         <InputGroupText id='input-group-sizing-sm'>Small</InputGroupText>
         <FormControl

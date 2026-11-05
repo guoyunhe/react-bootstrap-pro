@@ -2,7 +2,7 @@ import { Box, Button, FormControl, InputGroup } from 'react-bootstrap-pro';
 
 export function InputGroupButtonsDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <InputGroup>
         <Button
           type='button'

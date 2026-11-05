@@ -2,7 +2,7 @@ import { Box, FormControl, InputGroup, InputGroupText } from 'react-bootstrap-pr
 
 export function InputGroupBasicDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <InputGroup>
         <InputGroupText id='input-group-basic-addon-1'>@</InputGroupText>
         <FormControl

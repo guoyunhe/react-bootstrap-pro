@@ -40,7 +40,7 @@ function Head() {
 
 export function TableCardDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <Table card hover>
         <Head />
         <Rows />

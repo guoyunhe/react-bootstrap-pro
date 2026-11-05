@@ -13,7 +13,7 @@ function GridCell({ children }: { children: ReactNode }) {
 
 export function GridLayoutsDemo() {
   return (
-    <Box display='grid' gap={4}>
+    <Box d='grid' gap={4}>
       <Row cols={{ xs: 1, sm: 2, md: 4 }} gutter={3}>
         {cards.map((card) => (
           <Col key={card}>

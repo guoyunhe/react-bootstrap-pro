@@ -2,7 +2,7 @@ import { Box, ChipInput, FormField, FormLabel, FormText } from 'react-bootstrap-
 
 export function ChipInputDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={4}>
+    <Box d='flex' flexDirection='column' gap={4}>
       <FormField>
         <FormLabel htmlFor='chips-skills'>Skills</FormLabel>
         <ChipInput

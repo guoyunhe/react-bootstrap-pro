@@ -4,7 +4,7 @@ import { users } from './data';
 
 export function TableVariantsDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <Table theme='primary'>
         <TableBody>
           {users.map((user) => (

@@ -12,7 +12,7 @@ import {
 
 export function FormLayoutAutoSizingDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <Box component='form' onSubmit={(event) => event.preventDefault()}>
         <Row gutterX={3} gutterY={2} alignItems='center'>
           <Col span='auto'>

@@ -3,13 +3,7 @@ import { Alert, AlertHeading, Box } from 'react-bootstrap-pro';
 export function AlertAdditionalContentDemo() {
   return (
     <Alert theme='success'>
-      <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='stretch'
-        alignSelf='stretch'
-        flex='fill'
-      >
+      <Box d='flex' flexDirection='column' alignItems='stretch' alignSelf='stretch' flex='fill'>
         <AlertHeading mb={2}>Well done!</AlertHeading>
         <Box component='p'>
           Aww yeah, you successfully read this important alert message. This example text is going

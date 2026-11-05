@@ -2,7 +2,7 @@ import { Box, FormField, Switch, SwitchInput } from 'react-bootstrap-pro';
 
 export function SwitchSizesDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={2}>
+    <Box d='flex' flexDirection='column' gap={2}>
       <FormField>
         <Switch size='sm'>
           <SwitchInput id='switch-size-sm' />

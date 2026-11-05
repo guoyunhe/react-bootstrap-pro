@@ -5,12 +5,12 @@ export function AlertLiveDemo() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <Box display='grid' gap={2}>
+    <Box d='grid' gap={2}>
       <Button variant='solid' theme='primary' onClick={() => setVisible(true)}>
         Show live alert
       </Button>
       {visible && (
-        <Alert display='flex' alignItems='center' gap={2}>
+        <Alert d='flex' alignItems='center' gap={2}>
           <span>Nice, you triggered this alert message!</span>
           <CloseButton label='Dismiss alert' ms='auto' onClick={() => setVisible(false)} />
         </Alert>

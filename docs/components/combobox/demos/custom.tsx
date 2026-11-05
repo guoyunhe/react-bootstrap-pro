@@ -3,7 +3,7 @@ import { Box, Combobox } from 'react-bootstrap-pro';
 
 export function ComboboxCustomDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={4}>
+    <Box d='flex' flexDirection='column' gap={4}>
       <Combobox
         check
         placeholder='Choose a language…'

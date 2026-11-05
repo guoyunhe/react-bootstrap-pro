@@ -26,9 +26,9 @@ export function ButtonPlaygroundDemo() {
   );
 
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
-      <Box display='flex' flexWrap='wrap' alignItems='end' gap={3}>
-        <Box component='label' display='flex' flexDirection='column' gap={1}>
+    <Box d='flex' flexDirection='column' gap={3}>
+      <Box d='flex' flexWrap='wrap' alignItems='end' gap={3}>
+        <Box component='label' d='flex' flexDirection='column' gap={1}>
           Theme
           <select
             className='form-select'
@@ -45,7 +45,7 @@ export function ButtonPlaygroundDemo() {
             ))}
           </select>
         </Box>
-        <Box component='label' display='flex' flexDirection='column' gap={1}>
+        <Box component='label' d='flex' flexDirection='column' gap={1}>
           Style
           <select
             className='form-select'
@@ -62,7 +62,7 @@ export function ButtonPlaygroundDemo() {
             ))}
           </select>
         </Box>
-        <Box component='label' display='flex' flexDirection='column' gap={1}>
+        <Box component='label' d='flex' flexDirection='column' gap={1}>
           Size
           <select
             className='form-select'
@@ -79,7 +79,7 @@ export function ButtonPlaygroundDemo() {
             ))}
           </select>
         </Box>
-        <Box component='label' display='flex' flexDirection='column' gap={1}>
+        <Box component='label' d='flex' flexDirection='column' gap={1}>
           Content
           <select
             className='form-select'
@@ -96,7 +96,7 @@ export function ButtonPlaygroundDemo() {
             ))}
           </select>
         </Box>
-        <Box component='label' display='flex' flexDirection='column' gap={1}>
+        <Box component='label' d='flex' flexDirection='column' gap={1}>
           Shape
           <select
             className='form-select'
@@ -113,7 +113,7 @@ export function ButtonPlaygroundDemo() {
             ))}
           </select>
         </Box>
-        <Box component='label' display='flex' alignItems='center' gap={2}>
+        <Box component='label' d='flex' alignItems='center' gap={2}>
           <input
             type='checkbox'
             checked={styled}
@@ -122,7 +122,7 @@ export function ButtonPlaygroundDemo() {
           Styled
         </Box>
       </Box>
-      <Box display='flex' alignItems='center' gap={2}>
+      <Box d='flex' alignItems='center' gap={2}>
         <Button
           variant={variant}
           theme={theme}

@@ -3,7 +3,7 @@ import { Alert, Box } from 'react-bootstrap-pro';
 
 export function AlertWithIconsDemo() {
   return (
-    <Alert theme='warning' display='flex' alignItems='center' gap={3}>
+    <Alert theme='warning' d='flex' alignItems='center' gap={3}>
       <BiExclamationTriangle size={20} aria-hidden='true' />
       <Box component='p' mb={0}>
         Check the details before continuing.

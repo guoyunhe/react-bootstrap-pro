@@ -5,7 +5,7 @@ const avatarImage = 'https://avatars.githubusercontent.com/u/5836790';
 
 export function AvatarStackSizesDemo() {
   return (
-    <Box display='grid' gap={3}>
+    <Box d='grid' gap={3}>
       {avatarSizes.map((size) => (
         <AvatarStack key={size ?? 'default'} className={size ? `avatar-stack-${size}` : undefined}>
           {Array.from({ length: 3 }, (_, index) => (

@@ -4,7 +4,7 @@ import { themeOptions } from './shared';
 
 export function ButtonStyledDemo() {
   return (
-    <Box display='flex' flexWrap='wrap' gap={2}>
+    <Box d='flex' flexWrap='wrap' gap={2}>
       {themeOptions.map((theme) => (
         <Button key={theme} variant='solid' theme={theme} styled>
           {theme}

@@ -8,10 +8,10 @@ const imageSource = `data:image/svg+xml,${encodeURIComponent(
 
 export function BoxLayoutDemo() {
   return (
-    <Box display='grid' gap={4}>
+    <Box d='grid' gap={4}>
       <Box>
         <strong>Aspect ratios</strong>
-        <Box display='flex' flexWrap='wrap' alignItems='start' gap={3} mt={2}>
+        <Box d='flex' flexWrap='wrap' alignItems='start' gap={3} mt={2}>
           {aspectRatios.map((aspectRatio) => (
             <Box
               key={aspectRatio}
@@ -19,7 +19,7 @@ export function BoxLayoutDemo() {
               theme='primary'
               themeStyle='subtle'
               themeBorder
-              display='flex'
+              d='flex'
               alignItems='center'
               justifyContent='center'
               style={{ width: '7rem' }}
@@ -32,11 +32,11 @@ export function BoxLayoutDemo() {
 
       <Box>
         <strong>Responsive display</strong>
-        <Box display='flex' flexWrap='wrap' gap={2} mt={2}>
-          <Box display={{ xs: 'none', md: 'inline-flex' }} bg='primary' bgv='subtle' p={2}>
+        <Box d='flex' flexWrap='wrap' gap={2} mt={2}>
+          <Box d={{ xs: 'none', md: 'inline-flex' }} bg='primary' bgv='subtle' p={2}>
             Hidden below md
           </Box>
-          <Box display={{ xs: 'block', lg: 'none' }} bg='success' bgv='subtle' p={2}>
+          <Box d={{ xs: 'block', lg: 'none' }} bg='success' bgv='subtle' p={2}>
             Hidden at lg and above
           </Box>
         </Box>
@@ -49,7 +49,7 @@ export function BoxLayoutDemo() {
 
       <Box>
         <strong>Float and object fit</strong>
-        <Box display='flow-root' className='border rounded' p={2} mt={2}>
+        <Box d='flow-root' className='border rounded' p={2} mt={2}>
           <Box
             component='img'
             src={imageSource}
@@ -67,7 +67,7 @@ export function BoxLayoutDemo() {
 
       <Box>
         <strong>Overflow and visibility</strong>
-        <Box display='flex' gap={3} mt={2}>
+        <Box d='flex' gap={3} mt={2}>
           <Box overflow='hidden' className='border rounded' p={2} style={{ width: '8rem' }}>
             overflow hidden
           </Box>
@@ -96,7 +96,7 @@ export function BoxLayoutDemo() {
         </Box>
       </Box>
 
-      <Box display='flex' flexWrap='wrap' gap={2}>
+      <Box d='flex' flexWrap='wrap' gap={2}>
         <Box z={-1} className='border rounded' p={2}>
           z-index: -1
         </Box>

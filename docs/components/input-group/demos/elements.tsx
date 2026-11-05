@@ -2,7 +2,7 @@ import { Box, FormControl, InputGroup, InputGroupText } from 'react-bootstrap-pr
 
 export function InputGroupElementsDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <InputGroup>
         <InputGroupText>With textarea</InputGroupText>
         <FormControl component='textarea' aria-label='With textarea' />

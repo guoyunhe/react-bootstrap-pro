@@ -2,7 +2,7 @@ import { Box, FormControl } from 'react-bootstrap-pro';
 
 export function FormAdornTextDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       <FormControl component='label' adorn>
         <Box component='span' className='form-adorn-text' aria-hidden='true'>
           $

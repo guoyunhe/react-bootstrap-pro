@@ -8,7 +8,7 @@ const countries = [
 
 export function ComboboxBasicDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={4}>
+    <Box d='flex' flexDirection='column' gap={4}>
       <FormField>
         <FormLabel htmlFor='combobox-country'>Combobox</FormLabel>
         <Combobox

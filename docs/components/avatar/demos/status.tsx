@@ -5,7 +5,7 @@ const avatarImage = 'https://avatars.githubusercontent.com/u/5836790';
 
 export function AvatarStatusesDemo() {
   return (
-    <Box display='flex' alignItems='center' gap={3}>
+    <Box d='flex' alignItems='center' gap={3}>
       {avatarStatuses.map((status) => (
         <Avatar key={status}>
           <AvatarImage src={avatarImage} alt='mdo' />

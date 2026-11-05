@@ -13,7 +13,7 @@ const themes = [
 
 export function RangeThemesDemo() {
   return (
-    <Box display='flex' flexDirection='column' gap={3}>
+    <Box d='flex' flexDirection='column' gap={3}>
       {themes.map((theme) => (
         <Range key={theme} theme={theme} defaultValue={50} aria-label={`Example ${theme} range`} />
       ))}
