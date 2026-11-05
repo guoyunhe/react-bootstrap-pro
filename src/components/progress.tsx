@@ -1,19 +1,23 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type ProgressProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  {
+export type ProgressProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof {
     label: string;
     max?: number | undefined;
     min?: number | undefined;
     value?: number | undefined;
   }
->;
+> & {
+  label: string;
+  max?: number | undefined;
+  min?: number | undefined;
+  value?: number | undefined;
+};
 
 export function Progress<C extends ElementType = 'div'>({
   component,
@@ -40,15 +44,20 @@ export function Progress<C extends ElementType = 'div'>({
   );
 }
 
-export type ProgressBarProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  {
+export type ProgressBarProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof {
     animated?: boolean | undefined;
     max?: number | undefined;
     striped?: boolean | undefined;
     value?: number | undefined;
   }
->;
+> & {
+  animated?: boolean | undefined;
+  max?: number | undefined;
+  striped?: boolean | undefined;
+  value?: number | undefined;
+};
 
 export function ProgressBar<C extends ElementType = 'div'>({
   component,

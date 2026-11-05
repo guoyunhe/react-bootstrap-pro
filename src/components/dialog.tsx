@@ -1,13 +1,12 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type DialogProps<C extends ElementType = 'dialog'> = ComponentProps<
-  C,
-  {
+export type DialogProps<C extends ElementType = 'dialog'> = Omit<
+  BoxProps<C>,
+  keyof {
     fullscreen?: boolean | undefined;
     instant?: boolean | undefined;
     nonmodal?: boolean | undefined;
@@ -15,7 +14,14 @@ export type DialogProps<C extends ElementType = 'dialog'> = ComponentProps<
     size?: 'sm' | 'lg' | 'xl' | undefined;
     slide?: 'down' | 'up' | undefined;
   }
->;
+> & {
+  fullscreen?: boolean | undefined;
+  instant?: boolean | undefined;
+  nonmodal?: boolean | undefined;
+  scrollable?: boolean | undefined;
+  size?: 'sm' | 'lg' | 'xl' | undefined;
+  slide?: 'down' | 'up' | undefined;
+};
 
 export function Dialog<C extends ElementType = 'dialog'>({
   component,

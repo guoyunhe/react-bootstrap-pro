@@ -5,14 +5,14 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps, type ValidationState } from '../types';
+import { type ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type SwitchInputProps<C extends ElementType = 'input'> = ComponentProps<
-  C,
-  { validation?: ValidationState | undefined }
->;
+export type SwitchInputProps<C extends ElementType = 'input'> = Omit<
+  BoxProps<C>,
+  keyof { validation?: ValidationState | undefined }
+> & { validation?: ValidationState | undefined };
 
 export function SwitchInput<C extends ElementType = 'input'>({
   component,

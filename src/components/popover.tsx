@@ -1,18 +1,21 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type PopoverProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  {
+export type PopoverProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof {
     instant?: boolean | undefined;
     placement?: 'top' | 'end' | 'bottom' | 'start' | undefined;
     show?: boolean | undefined;
   }
->;
+> & {
+  instant?: boolean | undefined;
+  placement?: 'top' | 'end' | 'bottom' | 'start' | undefined;
+  show?: boolean | undefined;
+};
 
 export function Popover<C extends ElementType = 'div'>({
   component,

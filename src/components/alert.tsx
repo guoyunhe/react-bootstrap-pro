@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type AlertProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { instant?: boolean | undefined }
->;
+export type AlertProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof { instant?: boolean | undefined }
+> & { instant?: boolean | undefined };
 
 export function Alert<C extends ElementType = 'div'>({
   component,
@@ -28,7 +27,7 @@ export function Alert<C extends ElementType = 'div'>({
   );
 }
 
-export type AlertHeadingProps<C extends ElementType = 'h4'> = ComponentProps<C>;
+export type AlertHeadingProps<C extends ElementType = 'h4'> = BoxProps<C>;
 
 export function AlertHeading<C extends ElementType = 'h4'>({
   component,

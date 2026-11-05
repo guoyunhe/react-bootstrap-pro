@@ -12,8 +12,7 @@ type FormFeedbackOwnProps = {
   tooltip?: boolean | undefined;
 };
 
-export type FormFeedbackProps = FormFeedbackOwnProps &
-  Omit<BoxProps<'div'>, keyof FormFeedbackOwnProps>;
+export type FormFeedbackProps = FormFeedbackOwnProps & BoxProps<'div'>;
 
 export function FormFeedback({
   type = 'invalid',

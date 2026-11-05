@@ -1,18 +1,21 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type TableCellProps<C extends ElementType = 'td'> = ComponentProps<
-  C,
-  {
+export type TableCellProps<C extends ElementType = 'td'> = Omit<
+  BoxProps<C>,
+  keyof {
     active?: boolean | undefined;
     /** Label shown by the row when the table is stacked. */
     cell?: string | undefined;
   }
->;
+> & {
+  active?: boolean | undefined;
+  /** Label shown by the row when the table is stacked. */
+  cell?: string | undefined;
+};
 
 export function TableCell<C extends ElementType = 'td'>({
   component,

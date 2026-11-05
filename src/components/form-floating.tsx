@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type FormFloatingProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { always?: boolean | undefined }
->;
+export type FormFloatingProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof { always?: boolean | undefined }
+> & { always?: boolean | undefined };
 
 export function FormFloating<C extends ElementType = 'div'>({
   component,

@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type TableRowProps<C extends ElementType = 'tr'> = ComponentProps<
-  C,
-  { active?: boolean | undefined }
->;
+export type TableRowProps<C extends ElementType = 'tr'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined }
+> & { active?: boolean | undefined };
 
 export function TableRow<C extends ElementType = 'tr'>({
   component,

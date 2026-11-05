@@ -1,17 +1,19 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type StepperProps<C extends ElementType = 'ol'> = ComponentProps<
-  C,
-  {
+export type StepperProps<C extends ElementType = 'ol'> = Omit<
+  BoxProps<C>,
+  keyof {
     horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined;
     overflow?: boolean | undefined;
   }
->;
+> & {
+  horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined;
+  overflow?: boolean | undefined;
+};
 
 export function Stepper<C extends ElementType = 'ol'>({
   component,
@@ -36,10 +38,10 @@ export function Stepper<C extends ElementType = 'ol'>({
   );
 }
 
-export type StepperItemProps<C extends ElementType = 'li'> = ComponentProps<
-  C,
-  { active?: boolean | undefined }
->;
+export type StepperItemProps<C extends ElementType = 'li'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined }
+> & { active?: boolean | undefined };
 
 export function StepperItem<C extends ElementType = 'li'>({
   component,

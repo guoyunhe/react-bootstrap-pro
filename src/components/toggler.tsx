@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type TogglerProps<C extends ElementType = 'button'> = ComponentProps<
-  C,
-  { attribute?: string | undefined; target?: string | undefined; value?: string | undefined }
->;
+export type TogglerProps<C extends ElementType = 'button'> = Omit<
+  BoxProps<C>,
+  keyof { attribute?: string | undefined; target?: string | undefined; value?: string | undefined }
+> & { attribute?: string | undefined; target?: string | undefined; value?: string | undefined };
 
 export function Toggler<C extends ElementType = 'button'>({
   component,

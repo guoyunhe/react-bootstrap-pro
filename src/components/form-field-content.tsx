@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type FormFieldContentProps<C extends ElementType = 'div'> = ComponentProps<C>;
+export type FormFieldContentProps<C extends ElementType = 'div'> = BoxProps<C>;
 
 export function FormFieldContent<C extends ElementType = 'div'>({
   component,

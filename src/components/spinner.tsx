@@ -1,18 +1,21 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type SpinnerProps<C extends ElementType = 'span'> = ComponentProps<
-  C,
-  {
+export type SpinnerProps<C extends ElementType = 'span'> = Omit<
+  BoxProps<C>,
+  keyof {
     label?: string | undefined;
     size?: 'sm' | undefined;
     variant?: 'border' | 'grow' | 'rotate' | undefined;
   }
->;
+> & {
+  label?: string | undefined;
+  size?: 'sm' | undefined;
+  variant?: 'border' | 'grow' | 'rotate' | undefined;
+};
 
 export function Spinner<C extends ElementType = 'span'>({
   component,

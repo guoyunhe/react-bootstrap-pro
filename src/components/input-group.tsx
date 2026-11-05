@@ -1,16 +1,15 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
 export type InputGroupSize = 'sm' | 'lg';
 
-export type InputGroupProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { size?: InputGroupSize | undefined }
->;
+export type InputGroupProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof { size?: InputGroupSize | undefined }
+> & { size?: InputGroupSize | undefined };
 
 export function InputGroup<C extends ElementType = 'div'>({
   component,

@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 import type { GridBreakpoint } from './grid';
@@ -34,7 +33,7 @@ type TableOwnProps = {
 };
 
 export type TableProps<C extends ElementType = 'table'> = TableOwnProps &
-  Omit<ComponentProps<C>, keyof TableOwnProps>;
+  Omit<BoxProps<C>, keyof TableOwnProps>;
 
 export function Table<C extends ElementType = 'table'>({
   component,

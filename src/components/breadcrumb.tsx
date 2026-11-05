@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
@@ -39,10 +38,10 @@ export function BreadcrumbItem<C extends ElementType = 'li'>({
   );
 }
 
-export type BreadcrumbLinkProps<C extends ElementType = 'a'> = ComponentProps<
-  C,
-  { active?: boolean | undefined }
->;
+export type BreadcrumbLinkProps<C extends ElementType = 'a'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined }
+> & { active?: boolean | undefined };
 
 export function BreadcrumbLink<C extends ElementType = 'a'>({
   component,

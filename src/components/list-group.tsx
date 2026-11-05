@@ -1,18 +1,21 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type ListGroupProps<C extends ElementType = 'ul'> = ComponentProps<
-  C,
-  {
+export type ListGroupProps<C extends ElementType = 'ul'> = Omit<
+  BoxProps<C>,
+  keyof {
     flush?: boolean | undefined;
     horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined;
     numbered?: boolean | undefined;
   }
->;
+> & {
+  flush?: boolean | undefined;
+  horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined;
+  numbered?: boolean | undefined;
+};
 
 export function ListGroup<C extends ElementType = 'ul'>({
   component,
@@ -39,10 +42,10 @@ export function ListGroup<C extends ElementType = 'ul'>({
   );
 }
 
-export type ListGroupItemProps<C extends ElementType = 'li'> = ComponentProps<
-  C,
-  { action?: boolean | undefined; active?: boolean | undefined }
->;
+export type ListGroupItemProps<C extends ElementType = 'li'> = Omit<
+  BoxProps<C>,
+  keyof { action?: boolean | undefined; active?: boolean | undefined }
+> & { action?: boolean | undefined; active?: boolean | undefined };
 
 export function ListGroupItem<C extends ElementType = 'li'>({
   component,

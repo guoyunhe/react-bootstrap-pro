@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type InputGroupTextProps<C extends ElementType = 'span'> = ComponentProps<C>;
+export type InputGroupTextProps<C extends ElementType = 'span'> = BoxProps<C>;
 
 export function InputGroupText<C extends ElementType = 'span'>({
   component,

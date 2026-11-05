@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type ProseProps<C extends ElementType = 'div'> = ComponentProps<C>;
+export type ProseProps<C extends ElementType = 'div'> = BoxProps<C>;
 
 export function Prose<C extends ElementType = 'div'>({
   component,
@@ -22,7 +21,7 @@ export function Prose<C extends ElementType = 'div'>({
   );
 }
 
-export type NotProseProps<C extends ElementType = 'div'> = ComponentProps<C>;
+export type NotProseProps<C extends ElementType = 'div'> = BoxProps<C>;
 
 export function NotProse<C extends ElementType = 'div'>({
   component,

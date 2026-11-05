@@ -1,15 +1,15 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps, type ValidationState } from '../types';
+import { type ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
 export type FormControlSize = 'sm' | 'lg';
 
-export type FormControlProps<C extends ElementType = 'input'> = ComponentProps<
-  C,
-  {
+export type FormControlProps<C extends ElementType = 'input'> = Omit<
+  BoxProps<C>,
+  keyof {
     size?: FormControlSize | undefined;
     plaintext?: boolean | undefined;
     ghost?: boolean | undefined;
@@ -18,7 +18,15 @@ export type FormControlProps<C extends ElementType = 'input'> = ComponentProps<
     /** Applies server-side `.is-valid` or `.is-invalid` styling. */
     validation?: ValidationState | undefined;
   }
->;
+> & {
+  size?: FormControlSize | undefined;
+  plaintext?: boolean | undefined;
+  ghost?: boolean | undefined;
+  adorn?: boolean | undefined;
+  adornEnd?: boolean | undefined;
+  /** Applies server-side `.is-valid` or `.is-invalid` styling. */
+  validation?: ValidationState | undefined;
+};
 
 export function FormControl<C extends ElementType = 'input'>({
   component,

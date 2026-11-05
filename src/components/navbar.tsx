@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type NavbarProps<C extends ElementType = 'nav'> = ComponentProps<
-  C,
-  { expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined }
->;
+export type NavbarProps<C extends ElementType = 'nav'> = Omit<
+  BoxProps<C>,
+  keyof { expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined }
+> & { expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | undefined };
 
 export function Navbar<C extends ElementType = 'nav'>({
   component,

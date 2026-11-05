@@ -50,7 +50,7 @@ type OtpInputOwnProps = {
 };
 
 export type OtpInputProps = OtpInputOwnProps &
-  Omit<BoxProps<'div'>, keyof OtpInputOwnProps | 'children' | 'component'>;
+  Omit<BoxProps<'div'>, 'onChange' | 'children' | 'component'>;
 
 const TYPE_CONFIG = {
   numeric: { inputMode: 'numeric', pattern: '[0-9]*', filter: /[^0-9]/g },

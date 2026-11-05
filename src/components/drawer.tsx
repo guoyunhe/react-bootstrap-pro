@@ -1,20 +1,25 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type DrawerProps<C extends ElementType = 'dialog'> = ComponentProps<
-  C,
-  {
+export type DrawerProps<C extends ElementType = 'dialog'> = Omit<
+  BoxProps<C>,
+  keyof {
     fullscreen?: boolean | undefined;
     instant?: boolean | undefined;
     placement?: 'start' | 'end' | 'top' | 'bottom' | undefined;
     sheet?: boolean | undefined;
     translucent?: boolean | undefined;
   }
->;
+> & {
+  fullscreen?: boolean | undefined;
+  instant?: boolean | undefined;
+  placement?: 'start' | 'end' | 'top' | 'bottom' | undefined;
+  sheet?: boolean | undefined;
+  translucent?: boolean | undefined;
+};
 
 export function Drawer<C extends ElementType = 'dialog'>({
   component,

@@ -1,14 +1,21 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type ToastProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { instant?: boolean | undefined; show?: boolean | undefined; translucent?: boolean | undefined }
->;
+export type ToastProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof {
+    instant?: boolean | undefined;
+    show?: boolean | undefined;
+    translucent?: boolean | undefined;
+  }
+> & {
+  instant?: boolean | undefined;
+  show?: boolean | undefined;
+  translucent?: boolean | undefined;
+};
 
 export function Toast<C extends ElementType = 'div'>({
   component,

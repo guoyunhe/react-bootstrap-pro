@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
@@ -42,10 +41,10 @@ export function TabItem<C extends ElementType = 'li'>({
   );
 }
 
-export type TabProps<C extends ElementType = 'button'> = ComponentProps<
-  C,
-  { active?: boolean | undefined; targetId?: string | undefined }
->;
+export type TabProps<C extends ElementType = 'button'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined; targetId?: string | undefined }
+> & { active?: boolean | undefined; targetId?: string | undefined };
 
 export function Tab<C extends ElementType = 'button'>({
   component,
@@ -89,10 +88,10 @@ export function TabContent<C extends ElementType = 'div'>({
   );
 }
 
-export type TabPaneProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { active?: boolean | undefined }
->;
+export type TabPaneProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined }
+> & { active?: boolean | undefined };
 
 export function TabPane<C extends ElementType = 'div'>({
   component,

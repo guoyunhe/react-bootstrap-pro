@@ -1,18 +1,21 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type ButtonGroupProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  {
+export type ButtonGroupProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof {
     divider?: boolean | undefined;
     orientation?: 'horizontal' | 'vertical' | undefined;
     size?: 'sm' | 'lg' | undefined;
   }
->;
+> & {
+  divider?: boolean | undefined;
+  orientation?: 'horizontal' | 'vertical' | undefined;
+  size?: 'sm' | 'lg' | undefined;
+};
 
 export function ButtonGroup<C extends ElementType = 'div'>({
   component,

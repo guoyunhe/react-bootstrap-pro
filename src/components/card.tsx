@@ -1,13 +1,12 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box, type BoxProps } from './box';
 
-export type CardProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { variant?: 'subtle' | 'translucent' | undefined }
->;
+export type CardProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof { variant?: 'subtle' | 'translucent' | undefined }
+> & { variant?: 'subtle' | 'translucent' | undefined };
 
 export function Card<C extends ElementType = 'div'>({
   component,
@@ -85,10 +84,10 @@ export function CardText<C extends ElementType = 'p'>(props: CardTextProps<C>) {
   return <CardPart<C> {...props} baseClass='card-text' defaultComponent={'p' as C} />;
 }
 
-export type CardImageProps<C extends ElementType = 'img'> = ComponentProps<
-  C,
-  { placement?: 'top' | 'bottom' | undefined }
->;
+export type CardImageProps<C extends ElementType = 'img'> = Omit<
+  BoxProps<C>,
+  keyof { placement?: 'top' | 'bottom' | undefined }
+> & { placement?: 'top' | 'bottom' | undefined };
 
 export function CardImage<C extends ElementType = 'img'>({
   component,

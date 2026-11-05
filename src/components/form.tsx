@@ -15,7 +15,7 @@ type FormOwnProps = {
   onInput?: FormEventHandler<HTMLFormElement> | undefined;
 };
 
-export type FormProps = FormOwnProps & Omit<BoxProps<'form'>, keyof FormOwnProps>;
+export type FormProps = FormOwnProps & Omit<BoxProps<'form'>, 'onSubmit'>;
 
 function syncAriaInvalid(form: HTMLFormElement) {
   for (const control of form.elements) {

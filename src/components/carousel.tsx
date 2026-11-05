@@ -1,20 +1,24 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 import { IconButton, type IconButtonProps } from './icon-button';
 
-export type CarouselProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  {
+export type CarouselProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof {
     auto?: boolean | undefined;
     center?: boolean | undefined;
     fade?: boolean | undefined;
     overlay?: boolean | undefined;
   }
->;
+> & {
+  auto?: boolean | undefined;
+  center?: boolean | undefined;
+  fade?: boolean | undefined;
+  overlay?: boolean | undefined;
+};
 
 export function Carousel<C extends ElementType = 'div'>({
   component,
@@ -59,10 +63,10 @@ export function CarouselInner<C extends ElementType = 'div'>({
   );
 }
 
-export type CarouselItemProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { active?: boolean | undefined }
->;
+export type CarouselItemProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined }
+> & { active?: boolean | undefined };
 
 export function CarouselItem<C extends ElementType = 'div'>({
   component,
@@ -97,10 +101,10 @@ export function CarouselIndicators<C extends ElementType = 'div'>({
   );
 }
 
-export type CarouselIndicatorProps<C extends ElementType = 'button'> = ComponentProps<
-  C,
-  { active?: boolean | undefined; index: number; target: string }
->;
+export type CarouselIndicatorProps<C extends ElementType = 'button'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined; index: number; target: string }
+> & { active?: boolean | undefined; index: number; target: string };
 
 export function CarouselIndicator<C extends ElementType = 'button'>({
   component,
@@ -126,15 +130,20 @@ export function CarouselIndicator<C extends ElementType = 'button'>({
   );
 }
 
-export type CarouselControlProps<C extends ElementType = 'button'> = ComponentProps<
-  C,
-  {
+export type CarouselControlProps<C extends ElementType = 'button'> = Omit<
+  BoxProps<C>,
+  keyof {
     direction: 'next' | 'previous';
     size?: 'xs' | 'sm' | 'lg' | undefined;
     target: string;
     variant?: 'solid' | 'outline' | 'subtle' | undefined;
   }
->;
+> & {
+  direction: 'next' | 'previous';
+  size?: 'xs' | 'sm' | 'lg' | undefined;
+  target: string;
+  variant?: 'solid' | 'outline' | 'subtle' | undefined;
+};
 
 export function CarouselControl<C extends ElementType = 'button'>({
   component,

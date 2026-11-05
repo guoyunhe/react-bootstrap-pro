@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type CloseButtonProps<C extends ElementType = 'button'> = ComponentProps<
-  C,
-  { label?: string | undefined }
->;
+export type CloseButtonProps<C extends ElementType = 'button'> = Omit<
+  BoxProps<C>,
+  keyof { label?: string | undefined }
+> & { label?: string | undefined };
 
 export function CloseButton<C extends ElementType = 'button'>({
   component,

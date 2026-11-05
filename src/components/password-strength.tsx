@@ -43,7 +43,7 @@ type PasswordStrengthOwnProps = {
 };
 
 export type PasswordStrengthProps = PasswordStrengthOwnProps &
-  Omit<BoxProps<'div'>, keyof PasswordStrengthOwnProps | 'children'>;
+  Omit<BoxProps<'div'>, 'onChange' | 'children'>;
 
 const LEVELS = ['weak', 'fair', 'good', 'strong'] as const;
 const SEGMENT_COUNT = LEVELS.length;

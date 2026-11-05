@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import type { Breakpoint, Responsive } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
@@ -13,7 +12,7 @@ type StackOwnProps = {
 };
 
 export type StackProps<C extends ElementType = 'div'> = StackOwnProps &
-  Omit<ComponentProps<C>, keyof StackOwnProps>;
+  Omit<BoxProps<C>, keyof StackOwnProps>;
 
 const breakpoints: readonly Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 
@@ -53,7 +52,7 @@ export function Stack<C extends ElementType = 'div'>({
   );
 }
 
-export type StackContainerProps<C extends ElementType = 'div'> = ComponentProps<C>;
+export type StackContainerProps<C extends ElementType = 'div'> = BoxProps<C>;
 
 export function StackContainer<C extends ElementType = 'div'>({
   component,

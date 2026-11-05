@@ -1,19 +1,21 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
 export type FormLabelCol = 'sm' | 'lg';
 
-export type FormLabelProps<C extends ElementType = 'label'> = ComponentProps<
-  C,
-  {
+export type FormLabelProps<C extends ElementType = 'label'> = Omit<
+  BoxProps<C>,
+  keyof {
     /** Renders a `.col-form-label` for horizontal forms; `'sm'` and `'lg'` match the control size. */
     col?: boolean | FormLabelCol | undefined;
   }
->;
+> & {
+  /** Renders a `.col-form-label` for horizontal forms; `'sm'` and `'lg'` match the control size. */
+  col?: boolean | FormLabelCol | undefined;
+};
 
 export function FormLabel<C extends ElementType = 'label'>({
   component,

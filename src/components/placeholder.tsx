@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type PlaceholderProps<C extends ElementType = 'span'> = ComponentProps<
-  C,
-  { size?: 'xs' | 'sm' | 'lg' | undefined }
->;
+export type PlaceholderProps<C extends ElementType = 'span'> = Omit<
+  BoxProps<C>,
+  keyof { size?: 'xs' | 'sm' | 'lg' | undefined }
+> & { size?: 'xs' | 'sm' | 'lg' | undefined };
 
 export function Placeholder<C extends ElementType = 'span'>({
   component,
@@ -27,10 +26,10 @@ export function Placeholder<C extends ElementType = 'span'>({
   );
 }
 
-export type PlaceholderGroupProps<C extends ElementType = 'span'> = ComponentProps<
-  C,
-  { animation?: 'glow' | 'pulse' | 'wave' | undefined }
->;
+export type PlaceholderGroupProps<C extends ElementType = 'span'> = Omit<
+  BoxProps<C>,
+  keyof { animation?: 'glow' | 'pulse' | 'wave' | undefined }
+> & { animation?: 'glow' | 'pulse' | 'wave' | undefined };
 
 export function PlaceholderGroup<C extends ElementType = 'span'>({
   component,

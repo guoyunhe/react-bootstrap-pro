@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
@@ -14,7 +13,8 @@ type HeadingOwnProps = {
   size?: HeadingLevel | undefined;
 };
 
-export type HeadingProps<C extends ElementType = 'h1'> = ComponentProps<C, HeadingOwnProps>;
+export type HeadingProps<C extends ElementType = 'h1'> = Omit<BoxProps<C>, keyof HeadingOwnProps> &
+  HeadingOwnProps;
 
 export function Heading<C extends ElementType = 'h1'>({
   component,
@@ -37,10 +37,11 @@ type DisplayHeadingOwnProps = {
   size?: HeadingLevel | undefined;
 };
 
-export type DisplayHeadingProps<C extends ElementType = 'h1'> = ComponentProps<
-  C,
-  DisplayHeadingOwnProps
->;
+export type DisplayHeadingProps<C extends ElementType = 'h1'> = Omit<
+  BoxProps<C>,
+  keyof DisplayHeadingOwnProps
+> &
+  DisplayHeadingOwnProps;
 
 export function DisplayHeading<C extends ElementType = 'h1'>({
   component,
@@ -58,7 +59,7 @@ export function DisplayHeading<C extends ElementType = 'h1'>({
   );
 }
 
-export type LeadProps<C extends ElementType = 'p'> = ComponentProps<C>;
+export type LeadProps<C extends ElementType = 'p'> = BoxProps<C>;
 
 export function Lead<C extends ElementType = 'p'>({
   component,
@@ -75,7 +76,7 @@ export function Lead<C extends ElementType = 'p'>({
   );
 }
 
-export type BlockquoteProps<C extends ElementType = 'blockquote'> = ComponentProps<C>;
+export type BlockquoteProps<C extends ElementType = 'blockquote'> = BoxProps<C>;
 
 export function Blockquote<C extends ElementType = 'blockquote'>({
   component,
@@ -92,7 +93,7 @@ export function Blockquote<C extends ElementType = 'blockquote'>({
   );
 }
 
-export type BlockquoteFooterProps<C extends ElementType = 'footer'> = ComponentProps<C>;
+export type BlockquoteFooterProps<C extends ElementType = 'footer'> = BoxProps<C>;
 
 export function BlockquoteFooter<C extends ElementType = 'footer'>({
   component,
@@ -113,7 +114,8 @@ type AbbrOwnProps = {
   initialism?: boolean | undefined;
 };
 
-export type AbbrProps<C extends ElementType = 'abbr'> = ComponentProps<C, AbbrOwnProps>;
+export type AbbrProps<C extends ElementType = 'abbr'> = Omit<BoxProps<C>, keyof AbbrOwnProps> &
+  AbbrOwnProps;
 
 export function Abbr<C extends ElementType = 'abbr'>({
   component,
@@ -131,7 +133,7 @@ export function Abbr<C extends ElementType = 'abbr'>({
   );
 }
 
-export type UnstyledListProps<C extends ElementType = 'ul'> = ComponentProps<C>;
+export type UnstyledListProps<C extends ElementType = 'ul'> = BoxProps<C>;
 
 export function UnstyledList<C extends ElementType = 'ul'>({
   component,
@@ -148,7 +150,7 @@ export function UnstyledList<C extends ElementType = 'ul'>({
   );
 }
 
-export type InlineListProps<C extends ElementType = 'ul'> = ComponentProps<C>;
+export type InlineListProps<C extends ElementType = 'ul'> = BoxProps<C>;
 
 export function InlineList<C extends ElementType = 'ul'>({
   component,
@@ -165,7 +167,7 @@ export function InlineList<C extends ElementType = 'ul'>({
   );
 }
 
-export type InlineListItemProps<C extends ElementType = 'li'> = ComponentProps<C>;
+export type InlineListItemProps<C extends ElementType = 'li'> = BoxProps<C>;
 
 export function InlineListItem<C extends ElementType = 'li'>({
   component,

@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type BadgeProps<C extends ElementType = 'span'> = ComponentProps<
-  C,
-  { size?: 'lg' | undefined; variant?: 'solid' | 'subtle' | 'outline' | undefined }
->;
+export type BadgeProps<C extends ElementType = 'span'> = Omit<
+  BoxProps<C>,
+  keyof { size?: 'lg' | undefined; variant?: 'solid' | 'subtle' | 'outline' | undefined }
+> & { size?: 'lg' | undefined; variant?: 'solid' | 'subtle' | 'outline' | undefined };
 
 export function Badge<C extends ElementType = 'span'>({
   component,

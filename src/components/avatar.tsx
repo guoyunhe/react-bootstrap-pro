@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type AvatarProps<C extends ElementType = 'span'> = ComponentProps<
-  C,
-  { size?: 'xs' | 'sm' | 'lg' | 'xl' | undefined; subtle?: boolean | undefined }
->;
+export type AvatarProps<C extends ElementType = 'span'> = Omit<
+  BoxProps<C>,
+  keyof { size?: 'xs' | 'sm' | 'lg' | 'xl' | undefined; subtle?: boolean | undefined }
+> & { size?: 'xs' | 'sm' | 'lg' | 'xl' | undefined; subtle?: boolean | undefined };
 
 export function Avatar<C extends ElementType = 'span'>({
   component,
@@ -49,10 +48,10 @@ export function AvatarImage<C extends ElementType = 'img'>({
   );
 }
 
-export type AvatarStatusProps<C extends ElementType = 'span'> = ComponentProps<
-  C,
-  { status?: 'online' | 'offline' | 'busy' | 'away' | undefined }
->;
+export type AvatarStatusProps<C extends ElementType = 'span'> = Omit<
+  BoxProps<C>,
+  keyof { status?: 'online' | 'offline' | 'busy' | 'away' | undefined }
+> & { status?: 'online' | 'offline' | 'busy' | 'away' | undefined };
 
 export function AvatarStatus<C extends ElementType = 'span'>({
   component,

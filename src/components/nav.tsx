@@ -1,19 +1,23 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type NavProps<C extends ElementType = 'ul'> = ComponentProps<
-  C,
-  {
+export type NavProps<C extends ElementType = 'ul'> = Omit<
+  BoxProps<C>,
+  keyof {
     fill?: boolean | undefined;
     justified?: boolean | undefined;
     orientation?: 'horizontal' | 'vertical' | undefined;
     variant?: 'tabs' | 'pills' | 'underline' | undefined;
   }
->;
+> & {
+  fill?: boolean | undefined;
+  justified?: boolean | undefined;
+  orientation?: 'horizontal' | 'vertical' | undefined;
+  variant?: 'tabs' | 'pills' | 'underline' | undefined;
+};
 
 export function Nav<C extends ElementType = 'ul'>({
   component,
@@ -58,10 +62,10 @@ export function NavItem<C extends ElementType = 'li'>({
   );
 }
 
-export type NavLinkProps<C extends ElementType = 'a'> = ComponentProps<
-  C,
-  { active?: boolean | undefined; disabled?: boolean | undefined }
->;
+export type NavLinkProps<C extends ElementType = 'a'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined; disabled?: boolean | undefined }
+> & { active?: boolean | undefined; disabled?: boolean | undefined };
 
 export function NavLink<C extends ElementType = 'a'>({
   component,

@@ -1,18 +1,21 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type MenuProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  {
+export type MenuProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof {
     scrollable?: boolean | undefined;
     translucent?: boolean | undefined;
     show?: boolean | undefined;
   }
->;
+> & {
+  scrollable?: boolean | undefined;
+  translucent?: boolean | undefined;
+  show?: boolean | undefined;
+};
 
 export function Menu<C extends ElementType = 'div'>({
   component,
@@ -38,10 +41,10 @@ export function Menu<C extends ElementType = 'div'>({
   );
 }
 
-export type MenuItemProps<C extends ElementType = 'a'> = ComponentProps<
-  C,
-  { active?: boolean | undefined; disabled?: boolean | undefined }
->;
+export type MenuItemProps<C extends ElementType = 'a'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined; disabled?: boolean | undefined }
+> & { active?: boolean | undefined; disabled?: boolean | undefined };
 
 export function MenuItem<C extends ElementType = 'a'>({
   component,

@@ -30,7 +30,6 @@ import {
   type Ref,
 } from 'react';
 
-import { type ComponentProps } from '../types';
 import type { Breakpoint, Responsive } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
@@ -158,18 +157,18 @@ function getTriggerRef(trigger: ReactElement<{ ref?: Ref<unknown> }>): Ref<unkno
   return isReactRef(legacyRef) ? legacyRef : undefined;
 }
 
-export type TooltipProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  {
-    delay?: number | { close?: number; open?: number } | undefined;
-    instant?: boolean | undefined;
-    onShowChange?: ((show: boolean) => void) | undefined;
-    placement?: Responsive<TooltipPlacement> | undefined;
-    show?: boolean | undefined;
-    trigger?: ReactElement<{ ref?: Ref<unknown> }> | undefined;
-    triggers?: TooltipTrigger[] | undefined;
-  }
->;
+type TooltipOwnProps = {
+  delay?: number | { close?: number; open?: number } | undefined;
+  instant?: boolean | undefined;
+  onShowChange?: ((show: boolean) => void) | undefined;
+  placement?: Responsive<TooltipPlacement> | undefined;
+  show?: boolean | undefined;
+  trigger?: ReactElement<{ ref?: Ref<unknown> }> | undefined;
+  triggers?: TooltipTrigger[] | undefined;
+};
+
+export type TooltipProps<C extends ElementType = 'div'> = Omit<BoxProps<C>, keyof TooltipOwnProps> &
+  TooltipOwnProps;
 
 export function Tooltip<C extends ElementType = 'div'>({
   component,

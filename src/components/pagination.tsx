@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type PaginationProps<C extends ElementType = 'ul'> = ComponentProps<
-  C,
-  { size?: 'sm' | 'lg' | undefined }
->;
+export type PaginationProps<C extends ElementType = 'ul'> = Omit<
+  BoxProps<C>,
+  keyof { size?: 'sm' | 'lg' | undefined }
+> & { size?: 'sm' | 'lg' | undefined };
 
 export function Pagination<C extends ElementType = 'ul'>({
   component,
@@ -26,10 +25,10 @@ export function Pagination<C extends ElementType = 'ul'>({
   );
 }
 
-export type PaginationItemProps<C extends ElementType = 'li'> = ComponentProps<
-  C,
-  { active?: boolean | undefined; disabled?: boolean | undefined }
->;
+export type PaginationItemProps<C extends ElementType = 'li'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined; disabled?: boolean | undefined }
+> & { active?: boolean | undefined; disabled?: boolean | undefined };
 
 export function PaginationItem<C extends ElementType = 'li'>({
   component,
@@ -55,10 +54,10 @@ export function PaginationItem<C extends ElementType = 'li'>({
   );
 }
 
-export type PageLinkProps<C extends ElementType = 'a'> = ComponentProps<
-  C,
-  { active?: boolean | undefined }
->;
+export type PageLinkProps<C extends ElementType = 'a'> = Omit<
+  BoxProps<C>,
+  keyof { active?: boolean | undefined }
+> & { active?: boolean | undefined };
 
 export function PageLink<C extends ElementType = 'a'>({
   component,

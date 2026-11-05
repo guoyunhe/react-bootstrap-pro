@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
@@ -10,7 +9,8 @@ type ImageOwnProps = {
   thumbnail?: boolean | undefined;
 };
 
-export type ImageProps<C extends ElementType = 'img'> = ComponentProps<C, ImageOwnProps>;
+export type ImageProps<C extends ElementType = 'img'> = Omit<BoxProps<C>, keyof ImageOwnProps> &
+  ImageOwnProps;
 
 export function Image<C extends ElementType = 'img'>({
   component,
@@ -33,7 +33,7 @@ export function Image<C extends ElementType = 'img'>({
   );
 }
 
-export type FigureProps<C extends ElementType = 'figure'> = ComponentProps<C>;
+export type FigureProps<C extends ElementType = 'figure'> = BoxProps<C>;
 
 export function Figure<C extends ElementType = 'figure'>({
   component,
@@ -50,7 +50,7 @@ export function Figure<C extends ElementType = 'figure'>({
   );
 }
 
-export type FigureCaptionProps<C extends ElementType = 'figcaption'> = ComponentProps<C>;
+export type FigureCaptionProps<C extends ElementType = 'figcaption'> = BoxProps<C>;
 
 export function FigureCaption<C extends ElementType = 'figcaption'>({
   component,

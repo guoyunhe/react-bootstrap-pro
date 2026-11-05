@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import type { ElementType, MouseEvent, ReactNode } from 'react';
 import { BiX } from 'react-bootstrap-icons-pro';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
@@ -11,17 +10,17 @@ export type ChipImage = {
   alt?: string | undefined;
 };
 
-export type ChipProps<C extends ElementType = 'span'> = ComponentProps<
-  C,
-  {
-    active?: boolean | undefined;
-    disabled?: boolean | undefined;
-    icon?: ReactNode;
-    image?: ChipImage | undefined;
-    onDismiss?: (() => void) | undefined;
-    dismissLabel?: string | undefined;
-  }
->;
+type ChipOwnProps = {
+  active?: boolean | undefined;
+  disabled?: boolean | undefined;
+  icon?: ReactNode;
+  image?: ChipImage | undefined;
+  onDismiss?: (() => void) | undefined;
+  dismissLabel?: string | undefined;
+};
+
+export type ChipProps<C extends ElementType = 'span'> = Omit<BoxProps<C>, keyof ChipOwnProps> &
+  ChipOwnProps;
 
 export function Chip<C extends ElementType = 'span'>({
   component,

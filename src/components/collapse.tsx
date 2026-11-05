@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type CollapseProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { horizontal?: boolean | undefined; show?: boolean | undefined }
->;
+export type CollapseProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof { horizontal?: boolean | undefined; show?: boolean | undefined }
+> & { horizontal?: boolean | undefined; show?: boolean | undefined };
 
 export function Collapse<C extends ElementType = 'div'>({
   component,

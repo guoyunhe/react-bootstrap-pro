@@ -1,16 +1,15 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
 export type SwitchSize = 'sm' | 'lg';
 
-export type SwitchProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { size?: SwitchSize | undefined }
->;
+export type SwitchProps<C extends ElementType = 'div'> = Omit<
+  BoxProps<C>,
+  keyof { size?: SwitchSize | undefined }
+> & { size?: SwitchSize | undefined };
 
 export function Switch<C extends ElementType = 'div'>({
   component,

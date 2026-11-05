@@ -51,8 +51,7 @@ type ComboboxOwnProps = {
   'aria-describedby'?: string | undefined;
 };
 
-export type ComboboxProps = ComboboxOwnProps &
-  Omit<BoxProps<'div'>, keyof ComboboxOwnProps | 'children'>;
+export type ComboboxProps = ComboboxOwnProps & Omit<BoxProps<'div'>, 'onChange' | 'children'>;
 
 function normalizeValue(value: ComboboxValue | undefined): string[] {
   if (value === undefined) {

@@ -2,14 +2,14 @@ import clsx from 'clsx';
 import type { ElementType, ReactNode } from 'react';
 import { BiChevronDown } from 'react-bootstrap-icons-pro';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type AccordionProps<C extends ElementType = 'div'> = ComponentProps<
-  C,
-  { flush?: boolean | undefined; gap?: boolean | undefined; size?: 'sm' | undefined }
->;
+export type AccordionProps<C extends ElementType = 'div'> = BoxProps<C> & {
+  flush?: boolean | undefined;
+  gap?: boolean | undefined;
+  size?: 'sm' | undefined;
+};
 
 export function Accordion<C extends ElementType = 'div'>({
   component,
@@ -48,10 +48,10 @@ export function AccordionItem<C extends ElementType = 'details'>(props: Accordio
   );
 }
 
-export type AccordionHeaderProps<C extends ElementType = 'summary'> = ComponentProps<
-  C,
-  { icon?: ReactNode | undefined }
->;
+export type AccordionHeaderProps<C extends ElementType = 'summary'> = Omit<
+  BoxProps<C>,
+  keyof { icon?: ReactNode | undefined }
+> & { icon?: ReactNode | undefined };
 
 export function AccordionHeader<C extends ElementType = 'summary'>({
   component,

@@ -1,16 +1,16 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps, type ValidationState } from '../types';
+import { type ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
 export type RadioSize = 'sm' | 'lg';
 
-export type RadioProps<C extends ElementType = 'input'> = ComponentProps<
-  C,
-  { size?: RadioSize | undefined; validation?: ValidationState | undefined }
->;
+export type RadioProps<C extends ElementType = 'input'> = Omit<
+  BoxProps<C>,
+  keyof { size?: RadioSize | undefined; validation?: ValidationState | undefined }
+> & { size?: RadioSize | undefined; validation?: ValidationState | undefined };
 
 export function Radio<C extends ElementType = 'input'>({
   component,

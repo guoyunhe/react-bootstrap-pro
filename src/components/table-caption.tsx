@@ -1,11 +1,10 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { type ComponentProps } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type TableCaptionProps<C extends ElementType = 'caption'> = ComponentProps<C>;
+export type TableCaptionProps<C extends ElementType = 'caption'> = BoxProps<C>;
 
 export function TableCaption<C extends ElementType = 'caption'>({
   component,
