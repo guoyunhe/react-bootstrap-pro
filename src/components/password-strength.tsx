@@ -183,7 +183,7 @@ export function PasswordStrength({
   return (
     <Fragment>
       <Box
-        {...props}
+        {...(props as BoxProps)}
         classNameBefore={clsx(variant === 'bar' ? 'strength-bar' : 'strength', classNameBefore)}
         className={className}
         data-bs-strength={level}

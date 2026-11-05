@@ -14,7 +14,7 @@ export function TabList<C extends ElementType = 'ul'>({
 }: TabListProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('ul' as C)}
       classNameBefore={clsx('nav nav-tabs', props.classNameBefore)}
       className={className}
@@ -33,7 +33,7 @@ export function TabItem<C extends ElementType = 'li'>({
 }: TabItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('li' as C)}
       classNameBefore={clsx('nav-item', props.classNameBefore)}
       className={className}
@@ -58,7 +58,7 @@ export function Tab<C extends ElementType = 'button'>({
   const target = targetId ? `#${targetId}` : undefined;
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('button' as C)}
       classNameBefore={clsx('nav-link', active && 'active', props.classNameBefore)}
       className={className}
@@ -81,7 +81,7 @@ export function TabContent<C extends ElementType = 'div'>({
 }: TabContentProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('tab-content', props.classNameBefore)}
       className={className}
@@ -102,7 +102,7 @@ export function TabPane<C extends ElementType = 'div'>({
 }: TabPaneProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('tab-pane', active && 'active', props.classNameBefore)}
       className={className}

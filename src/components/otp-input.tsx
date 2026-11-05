@@ -322,7 +322,7 @@ export function OtpInput({
 
   return (
     <Box
-      {...props}
+      {...(props as BoxProps)}
       classNameBefore={clsx(
         'otp',
         connected && 'otp-connected',

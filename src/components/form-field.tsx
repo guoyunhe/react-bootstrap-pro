@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type FormFieldProps<C extends ElementType = 'div'> = ComponentProps<C>;
@@ -13,7 +14,7 @@ export function FormField<C extends ElementType = 'div'>({
 }: FormFieldProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('form-field', props.classNameBefore)}
       className={className}

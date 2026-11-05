@@ -25,7 +25,7 @@ export function ButtonGroup<C extends ElementType = 'div'>({
 }: ButtonGroupProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx(
         orientation === 'vertical' ? 'btn-group-vertical' : 'btn-group',
@@ -49,7 +49,7 @@ export function ButtonToolbar<C extends ElementType = 'div'>({
 }: ButtonToolbarProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('btn-toolbar', props.classNameBefore)}
       className={className}

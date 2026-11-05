@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type TogglerProps<C extends ElementType = 'button'> = ComponentProps<
@@ -20,7 +21,7 @@ export function Toggler<C extends ElementType = 'button'>({
 }: TogglerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('button' as C)}
       classNameBefore={clsx('', props.classNameBefore)}
       className={className}

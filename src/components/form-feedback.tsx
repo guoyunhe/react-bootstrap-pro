@@ -24,7 +24,7 @@ export function FormFeedback({
 }: FormFeedbackProps) {
   return (
     <Box
-      {...props}
+      {...(props as BoxProps)}
       classNameBefore={clsx(
         tooltip ? `tooltip ${type}-tooltip` : `${type}-feedback`,
         classNameBefore,

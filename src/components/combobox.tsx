@@ -336,7 +336,7 @@ export function Combobox({
 
   return (
     <Box
-      {...props}
+      {...(props as BoxProps)}
       ref={rootRef}
       classNameBefore={clsx(validation && `is-${validation}`, classNameBefore)}
       className={className}

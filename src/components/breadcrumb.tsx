@@ -14,7 +14,7 @@ export function Breadcrumb<C extends ElementType = 'ol'>({
 }: BreadcrumbProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('ol' as C)}
       classNameBefore={clsx('breadcrumb', props.classNameBefore)}
       className={className}
@@ -31,7 +31,7 @@ export function BreadcrumbItem<C extends ElementType = 'li'>({
 }: BreadcrumbItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('li' as C)}
       classNameBefore={clsx('breadcrumb-item', props.classNameBefore)}
       className={className}
@@ -52,7 +52,7 @@ export function BreadcrumbLink<C extends ElementType = 'a'>({
 }: BreadcrumbLinkProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('a' as C)}
       classNameBefore={clsx('breadcrumb-link', active && 'active', props.classNameBefore)}
       className={className}
@@ -70,7 +70,7 @@ export function BreadcrumbDivider<C extends ElementType = 'li'>({
 }: BreadcrumbDividerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('li' as C)}
       classNameBefore={clsx('breadcrumb-divider', props.classNameBefore)}
       className={className}

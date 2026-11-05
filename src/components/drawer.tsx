@@ -28,7 +28,7 @@ export function Drawer<C extends ElementType = 'dialog'>({
 }: DrawerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('dialog' as C)}
       classNameBefore={clsx(
         'drawer',
@@ -53,7 +53,7 @@ export function DrawerHeader<C extends ElementType = 'div'>({
 }: DrawerHeaderProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('drawer-header', props.classNameBefore)}
       className={className}
@@ -70,7 +70,7 @@ export function DrawerTitle<C extends ElementType = 'h5'>({
 }: DrawerTitleProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('h5' as C)}
       classNameBefore={clsx('drawer-title', props.classNameBefore)}
       className={className}
@@ -87,7 +87,7 @@ export function DrawerBody<C extends ElementType = 'div'>({
 }: DrawerBodyProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('drawer-body', props.classNameBefore)}
       className={className}
@@ -104,7 +104,7 @@ export function DrawerFooter<C extends ElementType = 'div'>({
 }: DrawerFooterProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('drawer-footer', props.classNameBefore)}
       className={className}

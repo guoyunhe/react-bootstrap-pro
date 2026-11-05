@@ -32,5 +32,5 @@ export function Container<C extends ElementType = 'div'>({
     className,
   } as BoxProps<C>;
 
-  return <Box {...boxProps} />;
+  return <Box<C> {...boxProps} />;
 }

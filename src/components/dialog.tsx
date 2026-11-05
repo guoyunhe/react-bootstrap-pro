@@ -30,7 +30,7 @@ export function Dialog<C extends ElementType = 'dialog'>({
 }: DialogProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('dialog' as C)}
       classNameBefore={clsx(
         'dialog',
@@ -56,7 +56,7 @@ export function DialogHeader<C extends ElementType = 'div'>({
 }: DialogHeaderProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('dialog-header', props.classNameBefore)}
       className={className}
@@ -73,7 +73,7 @@ export function DialogTitle<C extends ElementType = 'h1'>({
 }: DialogTitleProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('h1' as C)}
       classNameBefore={clsx('dialog-title', props.classNameBefore)}
       className={className}
@@ -90,7 +90,7 @@ export function DialogBody<C extends ElementType = 'div'>({
 }: DialogBodyProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('dialog-body', props.classNameBefore)}
       className={className}
@@ -107,7 +107,7 @@ export function DialogFooter<C extends ElementType = 'div'>({
 }: DialogFooterProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('dialog-footer', props.classNameBefore)}
       className={className}

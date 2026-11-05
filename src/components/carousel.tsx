@@ -27,7 +27,7 @@ export function Carousel<C extends ElementType = 'div'>({
 }: CarouselProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx(
         'carousel',
@@ -51,7 +51,7 @@ export function CarouselInner<C extends ElementType = 'div'>({
 }: CarouselInnerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('carousel-inner', props.classNameBefore)}
       className={className}
@@ -72,7 +72,7 @@ export function CarouselItem<C extends ElementType = 'div'>({
 }: CarouselItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('carousel-item', active && 'active', props.classNameBefore)}
       className={className}
@@ -89,7 +89,7 @@ export function CarouselIndicators<C extends ElementType = 'div'>({
 }: CarouselIndicatorsProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('carousel-indicators', props.classNameBefore)}
       className={className}
@@ -113,7 +113,7 @@ export function CarouselIndicator<C extends ElementType = 'button'>({
 }: CarouselIndicatorProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('button' as C)}
       classNameBefore={clsx(active && 'active', className, props.classNameBefore)}
       className={undefined}
@@ -175,7 +175,7 @@ export function CarouselOverlayControls<C extends ElementType = 'div'>({
 }: CarouselOverlayControlsProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('carousel-overlay-controls', props.classNameBefore)}
       className={className}
@@ -192,7 +192,7 @@ export function CarouselCaption<C extends ElementType = 'div'>({
 }: CarouselCaptionProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('carousel-caption', props.classNameBefore)}
       className={className}

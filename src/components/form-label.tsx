@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type FormLabelCol = 'sm' | 'lg';
@@ -28,7 +29,7 @@ export function FormLabel<C extends ElementType = 'label'>({
 
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('label' as C)}
       classNameBefore={clsx('form-label', colClass, props.classNameBefore)}
       className={className}

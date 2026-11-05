@@ -18,7 +18,7 @@ export function Navbar<C extends ElementType = 'nav'>({
 }: NavbarProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('nav' as C)}
       classNameBefore={clsx(
         'navbar',
@@ -40,7 +40,7 @@ export function NavbarBrand<C extends ElementType = 'a'>({
 }: NavbarBrandProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('a' as C)}
       classNameBefore={clsx('navbar-brand', props.classNameBefore)}
       className={className}
@@ -59,7 +59,7 @@ export function NavbarToggler<C extends ElementType = 'button'>({
 }: NavbarTogglerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('button' as C)}
       classNameBefore={clsx('navbar-toggler', props.classNameBefore)}
       className={className}
@@ -80,7 +80,7 @@ export function NavbarNav<C extends ElementType = 'ul'>({
 }: NavbarNavProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('ul' as C)}
       classNameBefore={clsx('nav navbar-nav', props.classNameBefore)}
       className={className}
@@ -97,7 +97,7 @@ export function NavbarText<C extends ElementType = 'span'>({
 }: NavbarTextProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('span' as C)}
       classNameBefore={clsx('navbar-text', props.classNameBefore)}
       className={className}

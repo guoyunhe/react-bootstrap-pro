@@ -80,7 +80,7 @@ export function Row<C extends ElementType = 'div'>({
     className,
   } as BoxProps<C>;
 
-  return <Box {...boxProps} />;
+  return <Box<C> {...boxProps} />;
 }
 
 type ColOwnProps = {
@@ -116,5 +116,5 @@ export function Col<C extends ElementType = 'div'>({
     className,
   } as BoxProps<C>;
 
-  return <Box {...boxProps} />;
+  return <Box<C> {...boxProps} />;
 }

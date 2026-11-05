@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps, type ValidationState } from './shared';
 
 export type FormControlSize = 'sm' | 'lg';
@@ -43,7 +44,7 @@ export function FormControl<C extends ElementType = 'input'>({
 
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('input' as C)}
       classNameBefore={clsx(
         baseClass,

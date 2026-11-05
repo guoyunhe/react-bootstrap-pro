@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 import type { Breakpoint, Responsive } from './types';
 
@@ -44,7 +45,7 @@ export function Stack<C extends ElementType = 'div'>({
 }: StackProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx(getStackClass(direction), props.classNameBefore)}
       className={className}
@@ -61,7 +62,7 @@ export function StackContainer<C extends ElementType = 'div'>({
 }: StackContainerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('stack-container', props.classNameBefore)}
       className={className}

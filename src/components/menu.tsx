@@ -24,7 +24,7 @@ export function Menu<C extends ElementType = 'div'>({
 }: MenuProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx(
         'menu',
@@ -52,7 +52,7 @@ export function MenuItem<C extends ElementType = 'a'>({
 }: MenuItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('a' as C)}
       classNameBefore={clsx(
         'menu-item',
@@ -76,7 +76,7 @@ export function MenuDivider<C extends ElementType = 'hr'>({
 }: MenuDividerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('hr' as C)}
       classNameBefore={clsx('menu-divider', props.classNameBefore)}
       className={className}
@@ -94,7 +94,7 @@ export function MenuHeader<C extends ElementType = 'h6'>({
 }: MenuHeaderProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('h6' as C)}
       classNameBefore={clsx('menu-header', props.classNameBefore)}
       className={className}
@@ -111,7 +111,7 @@ export function MenuText<C extends ElementType = 'span'>({
 }: MenuTextProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('span' as C)}
       classNameBefore={clsx('menu-text', props.classNameBefore)}
       className={className}

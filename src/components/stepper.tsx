@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type StepperProps<C extends ElementType = 'ol'> = ComponentProps<
@@ -21,7 +22,7 @@ export function Stepper<C extends ElementType = 'ol'>({
 }: StepperProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('ol' as C)}
       classNameBefore={clsx(
         'stepper',
@@ -48,7 +49,7 @@ export function StepperItem<C extends ElementType = 'li'>({
 }: StepperItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('li' as C)}
       classNameBefore={clsx('stepper-item', active && 'active', props.classNameBefore)}
       className={className}

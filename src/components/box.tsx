@@ -34,7 +34,6 @@ import type {
   JustifyItems,
   JustifySelf,
   LineHeight,
-  Margin,
   NegativeMargin,
   ObjectFit,
   Opacity,
@@ -65,7 +64,9 @@ import type {
   ZIndex,
 } from './types';
 
-type OwnProps = {
+type OwnProps<C extends ElementType> = {
+  component?: C;
+  className?: string | undefined;
   classNameBefore?: string | undefined;
   theme?: Theme | undefined;
   themeStyle?: ThemeStyle | undefined;
@@ -135,12 +136,12 @@ type OwnProps = {
   gridColumn?: Responsive<GridColumn> | undefined;
   gridAutoFlow?: Responsive<GridAutoFlow> | undefined;
   order?: Responsive<Order> | undefined;
-  m?: Responsive<Margin> | undefined;
-  mx?: Responsive<Margin> | undefined;
-  my?: Responsive<Margin> | undefined;
-  mt?: Responsive<Margin> | undefined;
+  m?: Responsive<NegativeMargin> | undefined;
+  mx?: Responsive<NegativeMargin> | undefined;
+  my?: Responsive<NegativeMargin> | undefined;
+  mt?: Responsive<NegativeMargin> | undefined;
   me?: Responsive<NegativeMargin> | undefined;
-  mb?: Responsive<Margin> | undefined;
+  mb?: Responsive<NegativeMargin> | undefined;
   ms?: Responsive<NegativeMargin> | undefined;
   p?: Responsive<Spacing> | undefined;
   px?: Responsive<Spacing> | undefined;
@@ -201,10 +202,11 @@ type OwnProps = {
   animation?: Animation | undefined;
 };
 
-export type BoxProps<C extends ElementType = 'div'> = OwnProps & {
-  component?: C;
-  className?: string;
-} & Omit<ComponentPropsWithRef<C>, keyof OwnProps | 'className' | 'component'>;
+export type BoxProps<C extends ElementType = 'div'> = Omit<
+  ComponentPropsWithRef<C>,
+  keyof OwnProps<C>
+> &
+  OwnProps<C>;
 
 const breakpoints: readonly Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
 const boxWidths: readonly Width[] = [

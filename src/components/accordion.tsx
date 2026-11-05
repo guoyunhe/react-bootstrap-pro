@@ -21,7 +21,7 @@ export function Accordion<C extends ElementType = 'div'>({
 }: AccordionProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx(
         'accordion',
@@ -37,17 +37,13 @@ export function Accordion<C extends ElementType = 'div'>({
 
 export type AccordionItemProps<C extends ElementType = 'details'> = BoxProps<C>;
 
-export function AccordionItem<C extends ElementType = 'details'>({
-  component,
-  className,
-  ...props
-}: AccordionItemProps<C>) {
+export function AccordionItem<C extends ElementType = 'details'>(props: AccordionItemProps<C>) {
   return (
     <Box<C>
-      {...props}
-      component={component ?? ('details' as C)}
+      {...(props as BoxProps<C>)}
+      component={props.component ?? ('details' as C)}
       classNameBefore={clsx('accordion-item', props.classNameBefore)}
-      className={className}
+      className={props.className}
     />
   );
 }
@@ -66,7 +62,7 @@ export function AccordionHeader<C extends ElementType = 'summary'>({
 }: AccordionHeaderProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('summary' as C)}
       classNameBefore={clsx('accordion-header', props.classNameBefore)}
       className={className}
@@ -90,7 +86,7 @@ export function AccordionBody<C extends ElementType = 'div'>({
 }: AccordionBodyProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('accordion-body', props.classNameBefore)}
       className={className}

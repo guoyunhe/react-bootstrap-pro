@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type PlaceholderProps<C extends ElementType = 'span'> = ComponentProps<
@@ -17,7 +18,7 @@ export function Placeholder<C extends ElementType = 'span'>({
 }: PlaceholderProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('span' as C)}
       classNameBefore={clsx('placeholder', size && `placeholder-${size}`, props.classNameBefore)}
       className={className}
@@ -39,7 +40,7 @@ export function PlaceholderGroup<C extends ElementType = 'span'>({
 }: PlaceholderGroupProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('span' as C)}
       classNameBefore={clsx(animation ? `placeholder-${animation}` : '', props.classNameBefore)}
       className={className}

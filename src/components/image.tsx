@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 type ImageOwnProps = {
@@ -20,7 +21,7 @@ export function Image<C extends ElementType = 'img'>({
 }: ImageProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('img' as C)}
       classNameBefore={clsx(
         fluid && 'img-fluid',
@@ -41,7 +42,7 @@ export function Figure<C extends ElementType = 'figure'>({
 }: FigureProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('figure' as C)}
       classNameBefore={clsx('figure', props.classNameBefore)}
       className={className}
@@ -58,7 +59,7 @@ export function FigureCaption<C extends ElementType = 'figcaption'>({
 }: FigureCaptionProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('figcaption' as C)}
       classNameBefore={clsx('figure-caption', props.classNameBefore)}
       className={className}

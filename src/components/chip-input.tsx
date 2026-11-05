@@ -312,7 +312,7 @@ export function ChipInput<C extends ElementType = 'div'>({
 
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('chip-input', props.classNameBefore)}
       className={className}

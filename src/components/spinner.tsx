@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type SpinnerProps<C extends ElementType = 'span'> = ComponentProps<
@@ -23,7 +24,7 @@ export function Spinner<C extends ElementType = 'span'>({
 }: SpinnerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('span' as C)}
       classNameBefore={clsx(`spinner-${variant}`, size && `spinner-${size}`, props.classNameBefore)}
       className={className}

@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps, type ValidationState } from './shared';
 
 export type CheckboxSize = 'sm' | 'lg';
@@ -21,7 +22,7 @@ export function Checkbox<C extends ElementType = 'input'>({
 }: CheckboxProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('input' as C)}
       classNameBefore={clsx(
         'check',

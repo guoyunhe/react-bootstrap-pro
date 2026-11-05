@@ -65,5 +65,5 @@ export function Button<C extends ElementType = 'button'>({
     classNameBefore: classes,
   } as BoxProps<C>;
 
-  return <Box {...boxProps} />;
+  return <Box<C> {...boxProps} />;
 }

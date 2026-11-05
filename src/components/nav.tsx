@@ -26,7 +26,7 @@ export function Nav<C extends ElementType = 'ul'>({
 }: NavProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('ul' as C)}
       classNameBefore={clsx(
         'nav',
@@ -50,7 +50,7 @@ export function NavItem<C extends ElementType = 'li'>({
 }: NavItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('li' as C)}
       classNameBefore={clsx('nav-item', props.classNameBefore)}
       className={className}
@@ -72,7 +72,7 @@ export function NavLink<C extends ElementType = 'a'>({
 }: NavLinkProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('a' as C)}
       classNameBefore={clsx(
         'nav-link',

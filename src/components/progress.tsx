@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type ProgressProps<C extends ElementType = 'div'> = ComponentProps<
@@ -26,7 +27,7 @@ export function Progress<C extends ElementType = 'div'>({
 }: ProgressProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('progress', props.classNameBefore)}
       className={className}
@@ -62,7 +63,7 @@ export function ProgressBar<C extends ElementType = 'div'>({
   const width = value === undefined ? undefined : `${max > 0 ? (value / max) * 100 : 0}%`;
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx(
         'progress-bar',

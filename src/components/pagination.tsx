@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type PaginationProps<C extends ElementType = 'ul'> = ComponentProps<
@@ -17,7 +18,7 @@ export function Pagination<C extends ElementType = 'ul'>({
 }: PaginationProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('ul' as C)}
       classNameBefore={clsx('pagination', size && `pagination-${size}`, props.classNameBefore)}
       className={className}
@@ -39,7 +40,7 @@ export function PaginationItem<C extends ElementType = 'li'>({
 }: PaginationItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('li' as C)}
       classNameBefore={clsx(
         'page-item',
@@ -67,7 +68,7 @@ export function PageLink<C extends ElementType = 'a'>({
 }: PageLinkProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('a' as C)}
       classNameBefore={clsx('page-link', active && 'active', props.classNameBefore)}
       className={className}

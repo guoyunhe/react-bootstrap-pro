@@ -17,7 +17,7 @@ export function Card<C extends ElementType = 'div'>({
 }: CardProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('card', variant && `card-${variant}`, props.classNameBefore)}
       className={className}
@@ -41,7 +41,7 @@ function CardPart<C extends ElementType>({
 }: CardPartRenderProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? defaultComponent}
       classNameBefore={clsx(baseClass, classNameBefore)}
       className={className}
@@ -98,7 +98,7 @@ export function CardImage<C extends ElementType = 'img'>({
 }: CardImageProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('img' as C)}
       classNameBefore={clsx(
         placement ? `card-img-${placement}` : 'card-img-top',

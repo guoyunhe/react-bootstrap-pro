@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
@@ -24,7 +25,7 @@ export function Heading<C extends ElementType = 'h1'>({
 }: HeadingProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? (`h${level}` as C)}
       classNameBefore={clsx(`h${size}`, props.classNameBefore)}
       className={className}
@@ -49,7 +50,7 @@ export function DisplayHeading<C extends ElementType = 'h1'>({
 }: DisplayHeadingProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('h1' as C)}
       classNameBefore={clsx(`display-${size}`, props.classNameBefore)}
       className={className}
@@ -66,7 +67,7 @@ export function Lead<C extends ElementType = 'p'>({
 }: LeadProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('p' as C)}
       classNameBefore={clsx('lead', props.classNameBefore)}
       className={className}
@@ -83,7 +84,7 @@ export function Blockquote<C extends ElementType = 'blockquote'>({
 }: BlockquoteProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('blockquote' as C)}
       classNameBefore={clsx('blockquote', props.classNameBefore)}
       className={className}
@@ -100,7 +101,7 @@ export function BlockquoteFooter<C extends ElementType = 'footer'>({
 }: BlockquoteFooterProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('footer' as C)}
       classNameBefore={clsx('blockquote-footer', props.classNameBefore)}
       className={className}
@@ -122,7 +123,7 @@ export function Abbr<C extends ElementType = 'abbr'>({
 }: AbbrProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('abbr' as C)}
       classNameBefore={clsx(initialism && 'initialism', props.classNameBefore)}
       className={className}
@@ -139,7 +140,7 @@ export function UnstyledList<C extends ElementType = 'ul'>({
 }: UnstyledListProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('ul' as C)}
       classNameBefore={clsx('list-unstyled', props.classNameBefore)}
       className={className}
@@ -156,7 +157,7 @@ export function InlineList<C extends ElementType = 'ul'>({
 }: InlineListProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('ul' as C)}
       classNameBefore={clsx('list-inline', props.classNameBefore)}
       className={className}
@@ -173,7 +174,7 @@ export function InlineListItem<C extends ElementType = 'li'>({
 }: InlineListItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('li' as C)}
       classNameBefore={clsx('list-inline-item', props.classNameBefore)}
       className={className}

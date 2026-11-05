@@ -21,7 +21,7 @@ export function Toast<C extends ElementType = 'div'>({
 }: ToastProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx(
         'toast',
@@ -47,7 +47,7 @@ export function ToastContainer<C extends ElementType = 'div'>({
 }: ToastContainerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('toast-container', props.classNameBefore)}
       className={className}
@@ -66,7 +66,7 @@ export function ToastHeader<C extends ElementType = 'div'>({
 }: ToastHeaderProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('toast-header', props.classNameBefore)}
       className={className}
@@ -83,7 +83,7 @@ export function ToastBody<C extends ElementType = 'div'>({
 }: ToastBodyProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('toast-body', props.classNameBefore)}
       className={className}

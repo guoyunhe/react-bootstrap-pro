@@ -67,7 +67,7 @@ export function Form({ validation, noValidate, onSubmit, onInput, ...props }: Fo
 
   return (
     <Box
-      {...props}
+      {...(props as BoxProps<'form'>)}
       component='form'
       data-bs-validate={validateAttribute}
       noValidate={noValidate ?? validation !== undefined}

@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type ScrollspyProps<C extends ElementType = 'div'> = ComponentProps<
@@ -17,7 +18,7 @@ export function Scrollspy<C extends ElementType = 'div'>({
 }: ScrollspyProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('', props.classNameBefore)}
       className={className}

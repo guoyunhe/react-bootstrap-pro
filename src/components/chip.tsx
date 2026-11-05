@@ -3,6 +3,7 @@ import type { ElementType, MouseEvent, ReactNode } from 'react';
 import { BiX } from 'react-bootstrap-icons-pro';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type ChipImage = {
@@ -36,7 +37,7 @@ export function Chip<C extends ElementType = 'span'>({
 }: ChipProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('span' as C)}
       classNameBefore={clsx(
         'chip',

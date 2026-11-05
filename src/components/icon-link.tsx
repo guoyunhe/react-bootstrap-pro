@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 type IconLinkOwnProps = {
@@ -18,7 +19,7 @@ export function IconLink<C extends ElementType = 'a'>({
 }: IconLinkProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('a' as C)}
       classNameBefore={clsx('icon-link', hover && 'icon-link-hover', props.classNameBefore)}
       className={className}

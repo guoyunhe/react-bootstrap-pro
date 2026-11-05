@@ -24,7 +24,7 @@ export function Popover<C extends ElementType = 'div'>({
 }: PopoverProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx(
         'popover',
@@ -47,7 +47,7 @@ export function PopoverHeader<C extends ElementType = 'h3'>({
 }: PopoverHeaderProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('h3' as C)}
       classNameBefore={clsx('popover-header', props.classNameBefore)}
       className={className}
@@ -64,7 +64,7 @@ export function PopoverBody<C extends ElementType = 'div'>({
 }: PopoverBodyProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('popover-body', props.classNameBefore)}
       className={className}

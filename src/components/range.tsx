@@ -124,7 +124,7 @@ export function Range<C extends ElementType = 'div'>({
 
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('form-range', props.classNameBefore)}
       className={className}

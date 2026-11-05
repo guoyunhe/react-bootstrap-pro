@@ -13,7 +13,7 @@ export function NavOverflow<C extends ElementType = 'div'>({
 }: NavOverflowProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('nav-overflow', props.classNameBefore)}
       className={className}
@@ -31,7 +31,7 @@ export function NavOverflowItem<C extends ElementType = 'li'>({
 }: NavOverflowItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('li' as C)}
       classNameBefore={clsx('nav-overflow-item', props.classNameBefore)}
       className={className}
@@ -48,7 +48,7 @@ export function NavOverflowIcon<C extends ElementType = 'span'>({
 }: NavOverflowIconProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('span' as C)}
       classNameBefore={clsx('nav-overflow-icon', props.classNameBefore)}
       className={className}

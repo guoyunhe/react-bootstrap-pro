@@ -186,8 +186,8 @@ export function Tooltip<C extends ElementType = 'div'>({
 }: TooltipProps<C>) {
   if (trigger) {
     return (
-      <InteractiveTooltip
-        boxProps={props}
+      <InteractiveTooltip<C>
+        boxProps={props as BoxProps<C>}
         className={className}
         component={component}
         delay={delay}
@@ -205,7 +205,7 @@ export function Tooltip<C extends ElementType = 'div'>({
 
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx(
         'tooltip',
@@ -334,7 +334,7 @@ function InteractiveTooltip<C extends ElementType = 'div'>({
       {open && (
         <FloatingPortal>
           <Box<C>
-            {...boxProps}
+            {...(boxProps as BoxProps<C>)}
             {...floatingStyleProps}
             {...interactions.getFloatingProps()}
             ref={setFloating}
@@ -367,7 +367,7 @@ export function TooltipInner<C extends ElementType = 'div'>({
 }: TooltipInnerProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('tooltip-inner', props.classNameBefore)}
       className={className}

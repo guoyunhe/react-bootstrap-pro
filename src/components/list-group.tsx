@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { ElementType } from 'react';
 
 import { Box } from './box';
+import type { BoxProps } from './box';
 import { type ComponentProps } from './shared';
 
 export type ListGroupProps<C extends ElementType = 'ul'> = ComponentProps<
@@ -23,7 +24,7 @@ export function ListGroup<C extends ElementType = 'ul'>({
 }: ListGroupProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('ul' as C)}
       classNameBefore={clsx(
         'list-group',
@@ -52,7 +53,7 @@ export function ListGroupItem<C extends ElementType = 'li'>({
 }: ListGroupItemProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('li' as C)}
       classNameBefore={clsx(
         'list-group-item',

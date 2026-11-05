@@ -19,7 +19,7 @@ export function Avatar<C extends ElementType = 'span'>({
 }: AvatarProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('span' as C)}
       classNameBefore={clsx(
         'avatar',
@@ -41,7 +41,7 @@ export function AvatarImage<C extends ElementType = 'img'>({
 }: AvatarImageProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('img' as C)}
       classNameBefore={clsx('avatar-img', props.classNameBefore)}
       className={className}
@@ -62,7 +62,7 @@ export function AvatarStatus<C extends ElementType = 'span'>({
 }: AvatarStatusProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('span' as C)}
       classNameBefore={clsx('avatar-status', status && `status-${status}`, props.classNameBefore)}
       className={className}
@@ -80,7 +80,7 @@ export function AvatarStack<C extends ElementType = 'div'>({
 }: AvatarStackProps<C>) {
   return (
     <Box<C>
-      {...props}
+      {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('avatar-stack', props.classNameBefore)}
       className={className}
