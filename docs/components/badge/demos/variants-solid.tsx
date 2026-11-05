@@ -1,4 +1,4 @@
-import { Badge, Box } from 'react-bootstrap-pro';
+import { Badge, Stack } from 'react-bootstrap-pro';
 
 const themes = [
   'primary',
@@ -13,12 +13,12 @@ const themes = [
 
 export function BadgeVariantsSolidDemo() {
   return (
-    <Box display='flex' gap={2} flexWrap='wrap'>
+    <Stack direction='horizontal' gap={2} flexWrap='wrap'>
       {themes.map((theme) => (
         <Badge key={theme} theme={theme}>
           {theme}
         </Badge>
       ))}
-    </Box>
+    </Stack>
   );
 }
