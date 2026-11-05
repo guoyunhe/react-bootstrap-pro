@@ -33,10 +33,10 @@ export function BoxLayoutDemo() {
       <Box>
         <strong>Responsive display</strong>
         <Box display='flex' flexWrap='wrap' gap={2} mt={2}>
-          <Box display={{ xs: 'none', md: 'inline-flex' }} bg='primary' bgSubtle p={2}>
+          <Box display={{ xs: 'none', md: 'inline-flex' }} bg='primary' bgv='subtle' p={2}>
             Hidden below md
           </Box>
-          <Box display={{ xs: 'block', lg: 'none' }} bg='success' bgSubtle p={2}>
+          <Box display={{ xs: 'block', lg: 'none' }} bg='success' bgv='subtle' p={2}>
             Hidden at lg and above
           </Box>
         </Box>

@@ -74,12 +74,10 @@ type OwnProps = {
   hoverLift?: boolean | undefined;
   colorScheme?: ColorScheme | undefined;
   fg?: Fg | undefined;
-  fgEmphasis?: boolean | undefined;
-  fgContrast?: boolean | undefined;
+  fgv?: 'emphasis' | 'contrast' | undefined;
   fgo?: Opacity | undefined;
   bg?: Bg | undefined;
-  bgSubtle?: boolean | undefined;
-  bgMuted?: boolean | undefined;
+  bgv?: 'subtle' | 'muted' | undefined;
   bgo?: Opacity | undefined;
   gradient?: boolean | undefined;
   ratio?: AspectRatio | undefined;
@@ -338,12 +336,10 @@ export function Box<C extends ElementType = 'div'>({
   hoverLift,
   colorScheme,
   fg,
-  fgEmphasis,
-  fgContrast,
+  fgv,
   fgo,
   bg,
-  bgSubtle,
-  bgMuted,
+  bgv,
   bgo,
   gradient,
   ratio,
@@ -478,13 +474,9 @@ export function Box<C extends ElementType = 'div'>({
     focusRing && 'focus-ring',
     hoverLift && 'hover-lift',
     colorScheme && `color-scheme-${colorScheme}`,
-    fg && `fg-${fg}`,
-    fgEmphasis && isThemeColor(fg) && `fg-emphasis-${fg}`,
-    fgContrast && isThemeColor(fg) && `fg-contrast-${fg}`,
+    fg && (fgv && isThemeColor(fg) ? `fg-${fgv}-${fg}` : `fg-${fg}`),
     fgo && `fg-${fgo}`,
-    bg && `bg-${bg}`,
-    bgSubtle && isThemeColor(bg) && `bg-subtle-${bg}`,
-    bgMuted && isThemeColor(bg) && `bg-muted-${bg}`,
+    bg && (bgv && isThemeColor(bg) ? `bg-${bgv}-${bg}` : `bg-${bg}`),
     bgo && `bg-${bgo}`,
     gradient && 'bg-gradient',
     ratio && `ratio-${ratio}`,

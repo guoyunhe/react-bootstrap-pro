@@ -101,21 +101,25 @@ test('applies foreground utilities', async () => {
   const screen = await render(
     <>
       <Box data-testid='fg' fg='primary' />
-      <Box data-testid='fg-emphasis' fg='danger' fgEmphasis />
-      <Box data-testid='fg-contrast' fg='warning' fgContrast />
+      <Box data-testid='fg-emphasis' fg='danger' fgv='emphasis' />
+      <Box data-testid='fg-contrast' fg='warning' fgv='contrast' />
       <Box data-testid='fg-opacity' fg='secondary' fgo={50} />
       <Box data-testid='fg-reset' fg='reset' />
-      <Box data-testid='fg-emphasis-unsupported' fg='body' fgEmphasis />
-      <Box data-testid='fg-contrast-unsupported' fg='white' fgContrast />
+      <Box data-testid='fg-emphasis-unsupported' fg='body' fgv='emphasis' />
+      <Box data-testid='fg-contrast-unsupported' fg='white' fgv='contrast' />
     </>,
   );
 
   expect(screen.getByTestId('fg')).toHaveClass('fg-primary');
   expect(screen.getByTestId('fg-emphasis')).toHaveClass('fg-emphasis-danger');
+  expect(screen.getByTestId('fg-emphasis')).not.toHaveClass('fg-danger');
   expect(screen.getByTestId('fg-contrast')).toHaveClass('fg-contrast-warning');
+  expect(screen.getByTestId('fg-contrast')).not.toHaveClass('fg-warning');
   expect(screen.getByTestId('fg-opacity')).toHaveClass('fg-secondary', 'fg-50');
   expect(screen.getByTestId('fg-reset')).toHaveClass('fg-reset');
+  expect(screen.getByTestId('fg-emphasis-unsupported')).toHaveClass('fg-body');
   expect(screen.getByTestId('fg-emphasis-unsupported')).not.toHaveClass('fg-emphasis-body');
+  expect(screen.getByTestId('fg-contrast-unsupported')).toHaveClass('fg-white');
   expect(screen.getByTestId('fg-contrast-unsupported')).not.toHaveClass('fg-contrast-white');
 });
 
@@ -123,23 +127,27 @@ test('applies background utilities', async () => {
   const screen = await render(
     <>
       <Box data-testid='bg' bg='primary' />
-      <Box data-testid='bg-subtle' bg='accent' bgSubtle />
-      <Box data-testid='bg-muted' bg='info' bgMuted />
+      <Box data-testid='bg-subtle' bg='accent' bgv='subtle' />
+      <Box data-testid='bg-muted' bg='info' bgv='muted' />
       <Box data-testid='bg-opacity' bg='inverse' bgo={70} />
       <Box data-testid='bg-gradient' bg='success' gradient />
       <Box data-testid='bg-transparent' bg='transparent' />
-      <Box data-testid='bg-subtle-unsupported' bg='transparent' bgSubtle />
-      <Box data-testid='bg-muted-unsupported' bg='fg' bgMuted />
+      <Box data-testid='bg-subtle-unsupported' bg='transparent' bgv='subtle' />
+      <Box data-testid='bg-muted-unsupported' bg='fg' bgv='muted' />
     </>,
   );
 
   expect(screen.getByTestId('bg')).toHaveClass('bg-primary');
   expect(screen.getByTestId('bg-subtle')).toHaveClass('bg-subtle-accent');
+  expect(screen.getByTestId('bg-subtle')).not.toHaveClass('bg-accent');
   expect(screen.getByTestId('bg-muted')).toHaveClass('bg-muted-info');
+  expect(screen.getByTestId('bg-muted')).not.toHaveClass('bg-info');
   expect(screen.getByTestId('bg-opacity')).toHaveClass('bg-inverse', 'bg-70');
   expect(screen.getByTestId('bg-gradient')).toHaveClass('bg-success', 'bg-gradient');
   expect(screen.getByTestId('bg-transparent')).toHaveClass('bg-transparent');
+  expect(screen.getByTestId('bg-subtle-unsupported')).toHaveClass('bg-transparent');
   expect(screen.getByTestId('bg-subtle-unsupported')).not.toHaveClass('bg-subtle-transparent');
+  expect(screen.getByTestId('bg-muted-unsupported')).toHaveClass('bg-fg');
   expect(screen.getByTestId('bg-muted-unsupported')).not.toHaveClass('bg-muted-fg');
 });
 
@@ -521,7 +529,7 @@ test('renders the selected component and forwards its props', async () => {
       <Box component='a' href='/docs' fg='primary'>
         Docs
       </Box>
-      <Box component={AppLink} to='/profile' bg='primary' bgSubtle>
+      <Box component={AppLink} to='/profile' bg='primary' bgv='subtle'>
         Profile
       </Box>
       <Box

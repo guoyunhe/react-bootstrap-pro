@@ -21,10 +21,10 @@ export function BoxBackgroundDemo() {
           <Box bg={theme} className='rounded' px={2} py={1}>
             {`bg-${theme}`}
           </Box>
-          <Box bg={theme} bgSubtle fg={theme} fgEmphasis className='rounded' px={2} py={1}>
+          <Box bg={theme} bgv='subtle' fg={theme} fgv='emphasis' className='rounded' px={2} py={1}>
             {`bg-subtle-${theme}`}
           </Box>
-          <Box bg={theme} bgMuted fg={theme} fgEmphasis className='rounded' px={2} py={1}>
+          <Box bg={theme} bgv='muted' fg={theme} fgv='emphasis' className='rounded' px={2} py={1}>
             {`bg-muted-${theme}`}
           </Box>
         </Box>

@@ -21,11 +21,11 @@ export function BoxForegroundDemo() {
           <Box fg={theme} className='fw-semibold'>
             {`fg-${theme}`}
           </Box>
-          <Box fg={theme} fgEmphasis className='fw-semibold'>
+          <Box fg={theme} fgv='emphasis' className='fw-semibold'>
             {`fg-emphasis-${theme}`}
           </Box>
           <Box bg={theme} className='rounded' px={2} py={1}>
-            <Box fg={theme} fgContrast>{`fg-contrast-${theme}`}</Box>
+            <Box fg={theme} fgv='contrast'>{`fg-contrast-${theme}`}</Box>
           </Box>
         </Box>
       ))}
