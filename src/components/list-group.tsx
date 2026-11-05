@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type ListGroupProps<C extends ElementType = 'ul'> = ComponentProps<
   C,
@@ -21,17 +22,17 @@ export function ListGroup<C extends ElementType = 'ul'>({
   ...props
 }: ListGroupProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('ul' as C)}
+      classNameBefore={clsx(
         'list-group',
         flush && 'list-group-flush',
         horizontal &&
           (horizontal === true ? 'list-group-horizontal' : `list-group-horizontal-${horizontal}`),
         numbered && 'list-group-numbered',
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'ul' as C}
       className={className}
     />
   );
@@ -50,11 +51,15 @@ export function ListGroupItem<C extends ElementType = 'li'>({
   ...props
 }: ListGroupItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('list-group-item', action && 'list-group-item-action', active && 'active')}
-      component={component}
-      defaultComponent={'li' as C}
+      component={component ?? ('li' as C)}
+      classNameBefore={clsx(
+        'list-group-item',
+        action && 'list-group-item-action',
+        active && 'active',
+        props.classNameBefore,
+      )}
       className={className}
     />
   );

@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type StepperProps<C extends ElementType = 'ol'> = ComponentProps<
   C,
@@ -19,16 +20,16 @@ export function Stepper<C extends ElementType = 'ol'>({
   ...props
 }: StepperProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('ol' as C)}
+      classNameBefore={clsx(
         'stepper',
         overflow && 'stepper-overflow',
         horizontal &&
           (horizontal === true ? 'stepper-horizontal' : `${horizontal}:stepper-horizontal`),
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'ol' as C}
       className={className}
     />
   );
@@ -46,11 +47,10 @@ export function StepperItem<C extends ElementType = 'li'>({
   ...props
 }: StepperItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('stepper-item', active && 'active')}
-      component={component}
-      defaultComponent={'li' as C}
+      component={component ?? ('li' as C)}
+      classNameBefore={clsx('stepper-item', active && 'active', props.classNameBefore)}
       className={className}
       aria-current={active ? (props['aria-current'] ?? 'step') : props['aria-current']}
     />

@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps, type ValidationState } from './shared';
+import { Box } from './box';
+import { type ComponentProps, type ValidationState } from './shared';
 
 export type RadioSize = 'sm' | 'lg';
 
@@ -19,11 +20,15 @@ export function Radio<C extends ElementType = 'input'>({
   ...props
 }: RadioProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('radio', size && `radio-${size}`, validation && `is-${validation}`)}
-      component={component}
-      defaultComponent={'input' as C}
+      component={component ?? ('input' as C)}
+      classNameBefore={clsx(
+        'radio',
+        size && `radio-${size}`,
+        validation && `is-${validation}`,
+        props.classNameBefore,
+      )}
       className={className}
       type={type ?? 'radio'}
     />

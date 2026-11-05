@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type DrawerProps<C extends ElementType = 'dialog'> = ComponentProps<
   C,
@@ -26,18 +27,18 @@ export function Drawer<C extends ElementType = 'dialog'>({
   ...props
 }: DrawerProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('dialog' as C)}
+      classNameBefore={clsx(
         'drawer',
         `drawer-${placement}`,
         fullscreen && 'drawer-fullscreen',
         instant && 'drawer-instant',
         sheet && 'drawer-sheet',
         translucent && 'drawer-translucent',
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'dialog' as C}
       className={className}
     />
   );
@@ -51,11 +52,10 @@ export function DrawerHeader<C extends ElementType = 'div'>({
   ...props
 }: DrawerHeaderProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='drawer-header'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('drawer-header', props.classNameBefore)}
       className={className}
     />
   );
@@ -69,11 +69,10 @@ export function DrawerTitle<C extends ElementType = 'h5'>({
   ...props
 }: DrawerTitleProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='drawer-title'
-      component={component}
-      defaultComponent={'h5' as C}
+      component={component ?? ('h5' as C)}
+      classNameBefore={clsx('drawer-title', props.classNameBefore)}
       className={className}
     />
   );
@@ -87,11 +86,10 @@ export function DrawerBody<C extends ElementType = 'div'>({
   ...props
 }: DrawerBodyProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='drawer-body'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('drawer-body', props.classNameBefore)}
       className={className}
     />
   );
@@ -105,11 +103,10 @@ export function DrawerFooter<C extends ElementType = 'div'>({
   ...props
 }: DrawerFooterProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='drawer-footer'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('drawer-footer', props.classNameBefore)}
       className={className}
     />
   );

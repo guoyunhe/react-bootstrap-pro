@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type ButtonGroupProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -23,15 +24,15 @@ export function ButtonGroup<C extends ElementType = 'div'>({
   ...props
 }: ButtonGroupProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
         orientation === 'vertical' ? 'btn-group-vertical' : 'btn-group',
         divider && 'btn-group-divider',
         size && `btn-group-${size}`,
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'div' as C}
       className={className}
       role={role ?? 'group'}
     />
@@ -47,11 +48,10 @@ export function ButtonToolbar<C extends ElementType = 'div'>({
   ...props
 }: ButtonToolbarProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='btn-toolbar'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('btn-toolbar', props.classNameBefore)}
       className={className}
       role={role ?? 'toolbar'}
     />

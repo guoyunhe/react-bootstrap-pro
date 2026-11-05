@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type PaginationProps<C extends ElementType = 'ul'> = ComponentProps<
   C,
@@ -15,11 +16,10 @@ export function Pagination<C extends ElementType = 'ul'>({
   ...props
 }: PaginationProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('pagination', size && `pagination-${size}`)}
-      component={component}
-      defaultComponent={'ul' as C}
+      component={component ?? ('ul' as C)}
+      classNameBefore={clsx('pagination', size && `pagination-${size}`, props.classNameBefore)}
       className={className}
     />
   );
@@ -38,11 +38,15 @@ export function PaginationItem<C extends ElementType = 'li'>({
   ...props
 }: PaginationItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('page-item', active && 'active', disabled && 'disabled')}
-      component={component}
-      defaultComponent={'li' as C}
+      component={component ?? ('li' as C)}
+      classNameBefore={clsx(
+        'page-item',
+        active && 'active',
+        disabled && 'disabled',
+        props.classNameBefore,
+      )}
       className={className}
       aria-current={active ? (props['aria-current'] ?? 'page') : props['aria-current']}
       aria-disabled={disabled || props['aria-disabled']}
@@ -62,11 +66,10 @@ export function PageLink<C extends ElementType = 'a'>({
   ...props
 }: PageLinkProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('page-link', active && 'active')}
-      component={component}
-      defaultComponent={'a' as C}
+      component={component ?? ('a' as C)}
+      classNameBefore={clsx('page-link', active && 'active', props.classNameBefore)}
       className={className}
       aria-current={active ? (props['aria-current'] ?? 'page') : props['aria-current']}
     />

@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type ScrollspyProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -14,11 +16,10 @@ export function Scrollspy<C extends ElementType = 'div'>({
   ...props
 }: ScrollspyProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass=''
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('', props.classNameBefore)}
       className={className}
       data-bs-spy={props['data-bs-spy'] ?? 'scroll'}
       data-bs-target={target ?? props['data-bs-target']}

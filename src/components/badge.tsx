@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type BadgeProps<C extends ElementType = 'span'> = ComponentProps<
   C,
@@ -16,15 +17,15 @@ export function Badge<C extends ElementType = 'span'>({
   ...props
 }: BadgeProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx(
         'badge',
         variant && variant !== 'solid' && `badge-${variant}`,
         size && `badge-${size}`,
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'span' as C}
       className={className}
     />
   );

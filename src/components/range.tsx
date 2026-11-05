@@ -2,8 +2,9 @@ import clsx from 'clsx';
 import type { ChangeEventHandler, CSSProperties, ElementType, FormEventHandler } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ValidationState } from './shared';
+import { type ValidationState } from './shared';
 
 export type RangeTick = {
   value: number;
@@ -122,11 +123,10 @@ export function Range<C extends ElementType = 'div'>({
     .join(' ');
 
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='form-range'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('form-range', props.classNameBefore)}
       className={className}
       style={{ ...style, '--bs-range-fill': fill } as CSSProperties}
     >
@@ -175,6 +175,6 @@ export function Range<C extends ElementType = 'div'>({
           ))}
         </div>
       )}
-    </ClassedBox>
+    </Box>
   );
 }

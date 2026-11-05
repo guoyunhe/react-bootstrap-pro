@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type TableHeaderProps<C extends ElementType = 'th'> = ComponentProps<
   C,
@@ -20,11 +21,10 @@ export function TableHeader<C extends ElementType = 'th'>({
   ...props
 }: TableHeaderProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(active && 'table-active')}
-      component={component}
-      defaultComponent={'th' as C}
+      component={component ?? ('th' as C)}
+      classNameBefore={clsx(active && 'table-active', props.classNameBefore)}
       className={className}
       data-cell={cell}
     />

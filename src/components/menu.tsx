@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type MenuProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -22,16 +23,16 @@ export function Menu<C extends ElementType = 'div'>({
   ...props
 }: MenuProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
         'menu',
         scrollable && 'menu-scrollable',
         show && 'show',
         translucent && 'menu-translucent',
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'div' as C}
       className={className}
     />
   );
@@ -50,11 +51,15 @@ export function MenuItem<C extends ElementType = 'a'>({
   ...props
 }: MenuItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('menu-item', active && 'active', disabled && 'disabled')}
-      component={component}
-      defaultComponent={'a' as C}
+      component={component ?? ('a' as C)}
+      classNameBefore={clsx(
+        'menu-item',
+        active && 'active',
+        disabled && 'disabled',
+        props.classNameBefore,
+      )}
       className={className}
       aria-disabled={disabled || props['aria-disabled']}
       tabIndex={disabled ? -1 : props['tabIndex']}
@@ -70,11 +75,10 @@ export function MenuDivider<C extends ElementType = 'hr'>({
   ...props
 }: MenuDividerProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='menu-divider'
-      component={component}
-      defaultComponent={'hr' as C}
+      component={component ?? ('hr' as C)}
+      classNameBefore={clsx('menu-divider', props.classNameBefore)}
       className={className}
       role={props['role'] ?? 'separator'}
     />
@@ -89,11 +93,10 @@ export function MenuHeader<C extends ElementType = 'h6'>({
   ...props
 }: MenuHeaderProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='menu-header'
-      component={component}
-      defaultComponent={'h6' as C}
+      component={component ?? ('h6' as C)}
+      classNameBefore={clsx('menu-header', props.classNameBefore)}
       className={className}
     />
   );
@@ -107,11 +110,10 @@ export function MenuText<C extends ElementType = 'span'>({
   ...props
 }: MenuTextProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='menu-text'
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx('menu-text', props.classNameBefore)}
       className={className}
     />
   );

@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type ProgressProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -24,11 +25,10 @@ export function Progress<C extends ElementType = 'div'>({
   ...props
 }: ProgressProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='progress'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('progress', props.classNameBefore)}
       className={className}
       role={role ?? 'progressbar'}
       aria-label={label ?? props['aria-label']}
@@ -61,15 +61,15 @@ export function ProgressBar<C extends ElementType = 'div'>({
 }: ProgressBarProps<C>) {
   const width = value === undefined ? undefined : `${max > 0 ? (value / max) * 100 : 0}%`;
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
         'progress-bar',
         striped && 'progress-bar-striped',
         animated && 'progress-bar-animated',
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'div' as C}
       className={className}
       style={{ ...style, ...(width ? { width } : {}) }}
     />

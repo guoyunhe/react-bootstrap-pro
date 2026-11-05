@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type ToastProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -19,16 +20,16 @@ export function Toast<C extends ElementType = 'div'>({
   ...props
 }: ToastProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
         'toast',
         instant && 'toast-instant',
         show && 'show',
         translucent && 'toast-translucent',
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'div' as C}
       className={className}
       role={role ?? 'alert'}
       aria-live={props['aria-live'] ?? 'assertive'}
@@ -45,11 +46,10 @@ export function ToastContainer<C extends ElementType = 'div'>({
   ...props
 }: ToastContainerProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='toast-container'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('toast-container', props.classNameBefore)}
       className={className}
       role={props['role'] ?? 'region'}
       aria-live={props['aria-live'] ?? 'polite'}
@@ -65,11 +65,10 @@ export function ToastHeader<C extends ElementType = 'div'>({
   ...props
 }: ToastHeaderProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='toast-header'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('toast-header', props.classNameBefore)}
       className={className}
     />
   );
@@ -83,11 +82,10 @@ export function ToastBody<C extends ElementType = 'div'>({
   ...props
 }: ToastBodyProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='toast-body'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('toast-body', props.classNameBefore)}
       className={className}
     />
   );

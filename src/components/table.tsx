@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { GridBreakpoint } from './grid';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type TableBreakpoint = Exclude<GridBreakpoint, 'xs'>;
 
@@ -50,9 +51,10 @@ export function Table<C extends ElementType = 'table'>({
   ...props
 }: TableProps<C>) {
   const table = (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('table' as C)}
+      classNameBefore={clsx(
         'table',
         striped && 'table-striped',
         stripedColumns && 'table-striped-columns',
@@ -62,9 +64,8 @@ export function Table<C extends ElementType = 'table'>({
         small && 'table-sm',
         captionTop && 'caption-top',
         stacked && breakpointClass('table-stacked', stacked),
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'table' as C}
       className={className}
     />
   );

@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type DialogProps<C extends ElementType = 'dialog'> = ComponentProps<
   C,
@@ -28,9 +29,10 @@ export function Dialog<C extends ElementType = 'dialog'>({
   ...props
 }: DialogProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('dialog' as C)}
+      classNameBefore={clsx(
         'dialog',
         fullscreen && 'dialog-fullscreen',
         instant && 'dialog-instant',
@@ -38,9 +40,8 @@ export function Dialog<C extends ElementType = 'dialog'>({
         scrollable && 'dialog-scrollable',
         size && `dialog-${size}`,
         slide && `dialog-slide-${slide}`,
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'dialog' as C}
       className={className}
     />
   );
@@ -54,11 +55,10 @@ export function DialogHeader<C extends ElementType = 'div'>({
   ...props
 }: DialogHeaderProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='dialog-header'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('dialog-header', props.classNameBefore)}
       className={className}
     />
   );
@@ -72,11 +72,10 @@ export function DialogTitle<C extends ElementType = 'h1'>({
   ...props
 }: DialogTitleProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='dialog-title'
-      component={component}
-      defaultComponent={'h1' as C}
+      component={component ?? ('h1' as C)}
+      classNameBefore={clsx('dialog-title', props.classNameBefore)}
       className={className}
     />
   );
@@ -90,11 +89,10 @@ export function DialogBody<C extends ElementType = 'div'>({
   ...props
 }: DialogBodyProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='dialog-body'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('dialog-body', props.classNameBefore)}
       className={className}
     />
   );
@@ -108,11 +106,10 @@ export function DialogFooter<C extends ElementType = 'div'>({
   ...props
 }: DialogFooterProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='dialog-footer'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('dialog-footer', props.classNameBefore)}
       className={className}
     />
   );

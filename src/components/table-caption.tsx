@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type TableCaptionProps<C extends ElementType = 'caption'> = ComponentProps<C>;
 
@@ -10,11 +12,10 @@ export function TableCaption<C extends ElementType = 'caption'>({
   ...props
 }: TableCaptionProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass=''
-      component={component}
-      defaultComponent={'caption' as C}
+      component={component ?? ('caption' as C)}
+      classNameBefore={clsx('', props.classNameBefore)}
       className={className}
     />
   );

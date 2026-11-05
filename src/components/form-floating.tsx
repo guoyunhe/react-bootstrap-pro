@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type FormFloatingProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -15,11 +16,14 @@ export function FormFloating<C extends ElementType = 'div'>({
   ...props
 }: FormFloatingProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('form-floating', always && 'form-floating-always')}
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
+        'form-floating',
+        always && 'form-floating-always',
+        props.classNameBefore,
+      )}
       className={className}
     />
   );

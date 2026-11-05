@@ -1,34 +1,9 @@
-import clsx from 'clsx';
-import type { ComponentPropsWithRef, ElementType } from 'react';
+import type { ElementType } from 'react';
 
-import { Box, type BoxProps } from './box';
+import type { BoxProps } from './box';
 
 /** Server-side validation state applied as `.is-valid` or `.is-invalid`. */
 export type ValidationState = 'valid' | 'invalid';
 
 export type ComponentProps<C extends ElementType, ExtraProps extends object = object> = ExtraProps &
   Omit<BoxProps<C>, keyof ExtraProps>;
-
-export type ClassedBoxProps<C extends ElementType, P extends object> = P & {
-  baseClass: string;
-  defaultComponent: C;
-  component?: C | undefined;
-  className?: string | undefined;
-  ref?: ComponentPropsWithRef<C>['ref'] | undefined;
-};
-
-export function ClassedBox<C extends ElementType, P extends object = object>({
-  baseClass,
-  defaultComponent,
-  component,
-  className,
-  ...props
-}: ClassedBoxProps<C, P>) {
-  const boxProps = {
-    ...props,
-    component: component ?? defaultComponent,
-    className: clsx(baseClass, className),
-  } as BoxProps<C>;
-
-  return <Box<C> {...boxProps} />;
-}

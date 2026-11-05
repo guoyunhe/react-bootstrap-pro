@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type AvatarProps<C extends ElementType = 'span'> = ComponentProps<
   C,
@@ -17,11 +18,15 @@ export function Avatar<C extends ElementType = 'span'>({
   ...props
 }: AvatarProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('avatar', size && `avatar-${size}`, subtle && 'avatar-subtle')}
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx(
+        'avatar',
+        size && `avatar-${size}`,
+        subtle && 'avatar-subtle',
+        props.classNameBefore,
+      )}
       className={className}
     />
   );
@@ -35,11 +40,10 @@ export function AvatarImage<C extends ElementType = 'img'>({
   ...props
 }: AvatarImageProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='avatar-img'
-      component={component}
-      defaultComponent={'img' as C}
+      component={component ?? ('img' as C)}
+      classNameBefore={clsx('avatar-img', props.classNameBefore)}
       className={className}
     />
   );
@@ -57,11 +61,10 @@ export function AvatarStatus<C extends ElementType = 'span'>({
   ...props
 }: AvatarStatusProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('avatar-status', status && `status-${status}`)}
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx('avatar-status', status && `status-${status}`, props.classNameBefore)}
       className={className}
       aria-hidden={props['aria-hidden'] ?? true}
     />
@@ -76,11 +79,10 @@ export function AvatarStack<C extends ElementType = 'div'>({
   ...props
 }: AvatarStackProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='avatar-stack'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('avatar-stack', props.classNameBefore)}
       className={className}
     />
   );

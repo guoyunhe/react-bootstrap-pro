@@ -82,6 +82,7 @@ export function Combobox({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
+  classNameBefore,
   className,
   ...props
 }: ComboboxProps) {
@@ -307,23 +308,23 @@ export function Combobox({
         type='button'
         role='option'
         tabIndex={-1}
-        className={clsx('menu-item', selected && 'selected')}
+        classNameBefore={clsx('menu-item', selected && 'selected')}
         aria-selected={selected}
         aria-disabled={option.disabled || undefined}
         disabled={option.disabled}
         onClick={() => selectOption(option)}
       >
         {option.icon && (
-          <Box component='span' className='menu-item-icon' aria-hidden='true'>
+          <Box component='span' classNameBefore='menu-item-icon' aria-hidden='true'>
             {option.icon}
           </Box>
         )}
         {option.description === undefined ? (
           option.label
         ) : (
-          <Box component='span' className='menu-item-content'>
+          <Box component='span' classNameBefore='menu-item-content'>
             <Box component='span'>{option.label}</Box>
-            <Box component='small' className='menu-item-description'>
+            <Box component='small' classNameBefore='menu-item-description'>
               {option.description}
             </Box>
           </Box>
@@ -337,7 +338,8 @@ export function Combobox({
     <Box
       {...props}
       ref={rootRef}
-      className={clsx(className, validation && `is-${validation}`)}
+      classNameBefore={clsx(validation && `is-${validation}`, classNameBefore)}
+      className={className}
       position='relative'
     >
       {name && <Box component='input' type='hidden' name={name} value={hiddenValue} readOnly />}
@@ -347,7 +349,7 @@ export function Combobox({
         type='button'
         id={id}
         disabled={disabled}
-        className={clsx(
+        classNameBefore={clsx(
           'form-control',
           size && `form-control-${size}`,
           'combobox-toggle',
@@ -365,7 +367,10 @@ export function Combobox({
       >
         <Box
           component='span'
-          className={clsx('combobox-value', selectedLabel === undefined && 'combobox-placeholder')}
+          classNameBefore={clsx(
+            'combobox-value',
+            selectedLabel === undefined && 'combobox-placeholder',
+          )}
         >
           {selectedLabel ?? placeholder}
         </Box>
@@ -380,7 +385,7 @@ export function Combobox({
         onKeyDown={handleMenuKeyDown}
       >
         {search && (
-          <Box className='combobox-search'>
+          <Box classNameBefore='combobox-search'>
             <FormControl
               ref={searchRef}
               className='combobox-search-input'
@@ -400,7 +405,7 @@ export function Combobox({
             {group.options.map((option) => renderOption(option))}
           </Fragment>
         ))}
-        {visibleCount === 0 && <Box className='combobox-no-results'>{noResults}</Box>}
+        {visibleCount === 0 && <Box classNameBefore='combobox-no-results'>{noResults}</Box>}
       </Menu>
     </Box>
   );

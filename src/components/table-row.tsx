@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type TableRowProps<C extends ElementType = 'tr'> = ComponentProps<
   C,
@@ -15,11 +16,10 @@ export function TableRow<C extends ElementType = 'tr'>({
   ...props
 }: TableRowProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(active && 'table-active')}
-      component={component}
-      defaultComponent={'tr' as C}
+      component={component ?? ('tr' as C)}
+      classNameBefore={clsx(active && 'table-active', props.classNameBefore)}
       className={className}
     />
   );

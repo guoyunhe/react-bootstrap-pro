@@ -160,6 +160,7 @@ export function PasswordStrength({
   scorer,
   showText = false,
   onChange,
+  classNameBefore,
   className,
   ...props
 }: PasswordStrengthProps) {
@@ -183,19 +184,25 @@ export function PasswordStrength({
     <Fragment>
       <Box
         {...props}
-        className={clsx(variant === 'bar' ? 'strength-bar' : 'strength', className)}
+        classNameBefore={clsx(variant === 'bar' ? 'strength-bar' : 'strength', classNameBefore)}
+        className={className}
         data-bs-strength={level}
       >
         {variant === 'segments' &&
           Array.from({ length: SEGMENT_COUNT }, (_, index) => (
             <Box
               key={index}
-              className={clsx('strength-segment', index < activeSegments && 'active')}
+              classNameBefore={clsx('strength-segment', index < activeSegments && 'active')}
             />
           ))}
       </Box>
       {showText && (
-        <Box component='span' className='strength-text' data-bs-strength={level} aria-live='polite'>
+        <Box
+          component='span'
+          classNameBefore='strength-text'
+          data-bs-strength={level}
+          aria-live='polite'
+        >
           {message}
         </Box>
       )}

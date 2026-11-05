@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type BreadcrumbProps<C extends ElementType = 'ol'> = BoxProps<C>;
 
@@ -12,11 +13,10 @@ export function Breadcrumb<C extends ElementType = 'ol'>({
   ...props
 }: BreadcrumbProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='breadcrumb'
-      component={component}
-      defaultComponent={'ol' as C}
+      component={component ?? ('ol' as C)}
+      classNameBefore={clsx('breadcrumb', props.classNameBefore)}
       className={className}
     />
   );
@@ -30,11 +30,10 @@ export function BreadcrumbItem<C extends ElementType = 'li'>({
   ...props
 }: BreadcrumbItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='breadcrumb-item'
-      component={component}
-      defaultComponent={'li' as C}
+      component={component ?? ('li' as C)}
+      classNameBefore={clsx('breadcrumb-item', props.classNameBefore)}
       className={className}
     />
   );
@@ -52,11 +51,10 @@ export function BreadcrumbLink<C extends ElementType = 'a'>({
   ...props
 }: BreadcrumbLinkProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('breadcrumb-link', active && 'active')}
-      component={component}
-      defaultComponent={'a' as C}
+      component={component ?? ('a' as C)}
+      classNameBefore={clsx('breadcrumb-link', active && 'active', props.classNameBefore)}
       className={className}
       aria-current={active ? 'page' : props['aria-current']}
     />
@@ -71,11 +69,10 @@ export function BreadcrumbDivider<C extends ElementType = 'li'>({
   ...props
 }: BreadcrumbDividerProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='breadcrumb-divider'
-      component={component}
-      defaultComponent={'li' as C}
+      component={component ?? ('li' as C)}
+      classNameBefore={clsx('breadcrumb-divider', props.classNameBefore)}
       className={className}
       aria-hidden={props['aria-hidden'] ?? true}
     />

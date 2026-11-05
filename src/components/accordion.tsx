@@ -2,8 +2,9 @@ import clsx from 'clsx';
 import type { ElementType, ReactNode } from 'react';
 import { BiChevronDown } from 'react-bootstrap-icons-pro';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type AccordionProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -19,16 +20,16 @@ export function Accordion<C extends ElementType = 'div'>({
   ...props
 }: AccordionProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
         'accordion',
         flush && 'accordion-flush',
         gap && 'accordion-gap',
         size && `accordion-${size}`,
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'div' as C}
       className={className}
     />
   );
@@ -42,11 +43,10 @@ export function AccordionItem<C extends ElementType = 'details'>({
   ...props
 }: AccordionItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='accordion-item'
-      component={component}
-      defaultComponent={'details' as C}
+      component={component ?? ('details' as C)}
+      classNameBefore={clsx('accordion-item', props.classNameBefore)}
       className={className}
     />
   );
@@ -65,11 +65,10 @@ export function AccordionHeader<C extends ElementType = 'summary'>({
   ...props
 }: AccordionHeaderProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='accordion-header'
-      component={component}
-      defaultComponent={'summary' as C}
+      component={component ?? ('summary' as C)}
+      classNameBefore={clsx('accordion-header', props.classNameBefore)}
       className={className}
     >
       {children}
@@ -78,7 +77,7 @@ export function AccordionHeader<C extends ElementType = 'summary'>({
           {icon}
         </span>
       )}
-    </ClassedBox>
+    </Box>
   );
 }
 
@@ -90,11 +89,10 @@ export function AccordionBody<C extends ElementType = 'div'>({
   ...props
 }: AccordionBodyProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='accordion-body'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('accordion-body', props.classNameBefore)}
       className={className}
     />
   );

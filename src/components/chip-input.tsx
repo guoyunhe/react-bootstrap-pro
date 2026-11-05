@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import type {
   ClipboardEvent,
   ElementType,
@@ -12,7 +13,7 @@ import { Box } from './box';
 import type { BoxProps } from './box';
 import { Chip, type ChipProps } from './chip';
 import { FormControl } from './form-control';
-import { ClassedBox, type ValidationState } from './shared';
+import { type ValidationState } from './shared';
 
 export type ChipInputChipProps = Omit<
   ChipProps<'span'>,
@@ -310,16 +311,15 @@ export function ChipInput<C extends ElementType = 'div'>({
   };
 
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='chip-input'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('chip-input', props.classNameBefore)}
       className={className}
       onClick={handleContainerClick}
     >
       {label !== undefined && (
-        <Box component='label' className='chip-input-label' htmlFor={id}>
+        <Box component='label' classNameBefore='chip-input-label' htmlFor={id}>
           {label}
         </Box>
       )}
@@ -358,6 +358,6 @@ export function ChipInput<C extends ElementType = 'div'>({
         onBlur={handleInputBlur}
         onPaste={handleInputPaste}
       />
-    </ClassedBox>
+    </Box>
   );
 }

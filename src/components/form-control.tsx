@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps, type ValidationState } from './shared';
+import { Box } from './box';
+import { type ComponentProps, type ValidationState } from './shared';
 
 export type FormControlSize = 'sm' | 'lg';
 
@@ -41,17 +42,17 @@ export function FormControl<C extends ElementType = 'input'>({
   }
 
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('input' as C)}
+      classNameBefore={clsx(
         baseClass,
         size && `form-control-${size}`,
         isAdorn && 'form-adorn',
         adornEnd && 'form-adorn-end',
         validation && `is-${validation}`,
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'input' as C}
       className={className}
     />
   );

@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type SpinnerProps<C extends ElementType = 'span'> = ComponentProps<
   C,
@@ -21,11 +22,10 @@ export function Spinner<C extends ElementType = 'span'>({
   ...props
 }: SpinnerProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(`spinner-${variant}`, size && `spinner-${size}`)}
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx(`spinner-${variant}`, size && `spinner-${size}`, props.classNameBefore)}
       className={className}
       role={props['role'] ?? 'status'}
       aria-label={props['aria-label'] ?? label}

@@ -3,7 +3,7 @@ import type { ElementType, MouseEvent, ReactNode } from 'react';
 import { BiX } from 'react-bootstrap-icons-pro';
 
 import { Box } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type ChipImage = {
   src: string;
@@ -35,17 +35,21 @@ export function Chip<C extends ElementType = 'span'>({
   ...props
 }: ChipProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('chip', active && 'active', disabled && 'disabled')}
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx(
+        'chip',
+        active && 'active',
+        disabled && 'disabled',
+        props.classNameBefore,
+      )}
       className={className}
     >
       {image && (
         <Box
           component='img'
-          className='chip-img'
+          classNameBefore='chip-img'
           src={image.src}
           alt={image.alt ?? ''}
           width={16}
@@ -53,7 +57,7 @@ export function Chip<C extends ElementType = 'span'>({
         />
       )}
       {icon && (
-        <Box component='span' className='chip-icon' aria-hidden='true'>
+        <Box component='span' classNameBefore='chip-icon' aria-hidden='true'>
           {icon}
         </Box>
       )}
@@ -62,7 +66,7 @@ export function Chip<C extends ElementType = 'span'>({
         <Box
           component='button'
           type='button'
-          className='chip-dismiss'
+          classNameBefore='chip-dismiss'
           aria-label={dismissLabel}
           disabled={disabled}
           tabIndex={-1}
@@ -74,6 +78,6 @@ export function Chip<C extends ElementType = 'span'>({
           <BiX size={16} aria-hidden='true' />
         </Box>
       )}
-    </ClassedBox>
+    </Box>
   );
 }

@@ -1,7 +1,8 @@
+import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox } from './shared';
 
 export type NavOverflowProps<C extends ElementType = 'div'> = BoxProps<C>;
 
@@ -11,11 +12,10 @@ export function NavOverflow<C extends ElementType = 'div'>({
   ...props
 }: NavOverflowProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='nav-overflow'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('nav-overflow', props.classNameBefore)}
       className={className}
       data-bs-toggle={props['data-bs-toggle'] ?? 'nav-overflow'}
     />
@@ -30,11 +30,10 @@ export function NavOverflowItem<C extends ElementType = 'li'>({
   ...props
 }: NavOverflowItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='nav-overflow-item'
-      component={component}
-      defaultComponent={'li' as C}
+      component={component ?? ('li' as C)}
+      classNameBefore={clsx('nav-overflow-item', props.classNameBefore)}
       className={className}
     />
   );
@@ -48,11 +47,10 @@ export function NavOverflowIcon<C extends ElementType = 'span'>({
   ...props
 }: NavOverflowIconProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='nav-overflow-icon'
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx('nav-overflow-icon', props.classNameBefore)}
       className={className}
       aria-hidden={props['aria-hidden'] ?? true}
     />

@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type PopoverProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -22,16 +23,16 @@ export function Popover<C extends ElementType = 'div'>({
   ...props
 }: PopoverProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
         'popover',
         `bs-popover-${placement}`,
         instant && 'popover-instant',
         show && 'show',
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'div' as C}
       className={className}
     />
   );
@@ -45,11 +46,10 @@ export function PopoverHeader<C extends ElementType = 'h3'>({
   ...props
 }: PopoverHeaderProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='popover-header'
-      component={component}
-      defaultComponent={'h3' as C}
+      component={component ?? ('h3' as C)}
+      classNameBefore={clsx('popover-header', props.classNameBefore)}
       className={className}
     />
   );
@@ -63,11 +63,10 @@ export function PopoverBody<C extends ElementType = 'div'>({
   ...props
 }: PopoverBodyProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='popover-body'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('popover-body', props.classNameBefore)}
       className={className}
     />
   );

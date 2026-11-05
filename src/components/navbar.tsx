@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type NavbarProps<C extends ElementType = 'nav'> = ComponentProps<
   C,
@@ -16,15 +17,15 @@ export function Navbar<C extends ElementType = 'nav'>({
   ...props
 }: NavbarProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('nav' as C)}
+      classNameBefore={clsx(
         'navbar',
         expand === true && 'navbar-expand',
         typeof expand === 'string' && `${expand}:navbar-expand`,
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'nav' as C}
       className={className}
     />
   );
@@ -38,11 +39,10 @@ export function NavbarBrand<C extends ElementType = 'a'>({
   ...props
 }: NavbarBrandProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='navbar-brand'
-      component={component}
-      defaultComponent={'a' as C}
+      component={component ?? ('a' as C)}
+      classNameBefore={clsx('navbar-brand', props.classNameBefore)}
       className={className}
     />
   );
@@ -58,17 +58,16 @@ export function NavbarToggler<C extends ElementType = 'button'>({
   ...props
 }: NavbarTogglerProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='navbar-toggler'
-      component={component}
-      defaultComponent={'button' as C}
+      component={component ?? ('button' as C)}
+      classNameBefore={clsx('navbar-toggler', props.classNameBefore)}
       className={className}
       type={type ?? 'button'}
       aria-label={props['aria-label'] ?? 'Toggle navigation'}
     >
       {children ?? <span className='navbar-toggler-icon' aria-hidden='true' />}
-    </ClassedBox>
+    </Box>
   );
 }
 
@@ -80,11 +79,10 @@ export function NavbarNav<C extends ElementType = 'ul'>({
   ...props
 }: NavbarNavProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='nav navbar-nav'
-      component={component}
-      defaultComponent={'ul' as C}
+      component={component ?? ('ul' as C)}
+      classNameBefore={clsx('nav navbar-nav', props.classNameBefore)}
       className={className}
     />
   );
@@ -98,11 +96,10 @@ export function NavbarText<C extends ElementType = 'span'>({
   ...props
 }: NavbarTextProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='navbar-text'
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx('navbar-text', props.classNameBefore)}
       className={className}
     />
   );

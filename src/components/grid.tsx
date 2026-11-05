@@ -60,6 +60,7 @@ export function Row<C extends ElementType = 'div'>({
   gutterX,
   gutterY,
   justifyContent,
+  classNameBefore,
   className,
   ...props
 }: RowProps<C>) {
@@ -71,10 +72,13 @@ export function Row<C extends ElementType = 'div'>({
     getResponsiveClasses('gx', gutterX),
     getResponsiveClasses('gy', gutterY),
     getResponsiveClasses('justify-content', justifyContent),
-    className,
   );
 
-  const boxProps = { ...props, className: classes } as BoxProps<C>;
+  const boxProps = {
+    ...props,
+    classNameBefore: clsx(classes, classNameBefore),
+    className,
+  } as BoxProps<C>;
 
   return <Box {...boxProps} />;
 }
@@ -94,6 +98,7 @@ export function Col<C extends ElementType = 'div'>({
   span,
   offset,
   order,
+  classNameBefore,
   className,
   ...props
 }: ColProps<C>) {
@@ -103,10 +108,13 @@ export function Col<C extends ElementType = 'div'>({
     getResponsiveClasses('offset', offset),
     getResponsiveClasses('order', order),
     getResponsiveClasses('align-self', alignSelf),
-    className,
   );
 
-  const boxProps = { ...props, className: classes } as BoxProps<C>;
+  const boxProps = {
+    ...props,
+    classNameBefore: clsx(classes, classNameBefore),
+    className,
+  } as BoxProps<C>;
 
   return <Box {...boxProps} />;
 }

@@ -30,8 +30,9 @@ import {
   type Ref,
 } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 import type { Breakpoint, Responsive } from './types';
 
 export type TooltipTrigger = 'hover' | 'focus' | 'click';
@@ -203,27 +204,27 @@ export function Tooltip<C extends ElementType = 'div'>({
   }
 
   return (
-    <ClassedBox<C, { children?: ReactNode }>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
         'tooltip',
         typeof placement === 'string'
           ? `bs-tooltip-${placement}`
           : placement?.xs && `bs-tooltip-${placement.xs}`,
         instant && 'tooltip-instant',
         show && 'show',
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'div' as C}
       className={className}
     >
       {children}
-    </ClassedBox>
+    </Box>
   );
 }
 
 type InteractiveTooltipProps<C extends ElementType> = {
-  boxProps: object;
+  boxProps: BoxProps<C>;
   className?: string | undefined;
   component?: C | undefined;
   delay?: number | { close?: number; open?: number } | undefined;
@@ -332,25 +333,25 @@ function InteractiveTooltip<C extends ElementType = 'div'>({
       {cloneElement(trigger, triggerProps)}
       {open && (
         <FloatingPortal>
-          <ClassedBox<C, { children?: ReactNode; style?: CSSProperties }>
+          <Box<C>
             {...boxProps}
             {...floatingStyleProps}
             {...interactions.getFloatingProps()}
             ref={setFloating}
-            baseClass={clsx(
+            component={component ?? ('div' as C)}
+            classNameBefore={clsx(
               'tooltip',
               `bs-tooltip-${tooltipPlacement}`,
               instant && 'tooltip-instant',
               'show',
+              boxProps.classNameBefore,
             )}
-            component={component}
-            defaultComponent={'div' as C}
             className={className}
             data-bs-placement={actualPlacement}
           >
             <div className='tooltip-arrow' ref={setArrowRef} style={arrowStyle} />
             <TooltipInner>{children}</TooltipInner>
-          </ClassedBox>
+          </Box>
         </FloatingPortal>
       )}
     </>
@@ -365,11 +366,10 @@ export function TooltipInner<C extends ElementType = 'div'>({
   ...props
 }: TooltipInnerProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='tooltip-inner'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('tooltip-inner', props.classNameBefore)}
       className={className}
     />
   );

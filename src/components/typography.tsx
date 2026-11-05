@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -22,11 +23,10 @@ export function Heading<C extends ElementType = 'h1'>({
   ...props
 }: HeadingProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={`h${size}`}
-      component={component}
-      defaultComponent={`h${level}` as C}
+      component={component ?? (`h${level}` as C)}
+      classNameBefore={clsx(`h${size}`, props.classNameBefore)}
       className={className}
     />
   );
@@ -48,11 +48,10 @@ export function DisplayHeading<C extends ElementType = 'h1'>({
   ...props
 }: DisplayHeadingProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={`display-${size}`}
-      component={component}
-      defaultComponent={'h1' as C}
+      component={component ?? ('h1' as C)}
+      classNameBefore={clsx(`display-${size}`, props.classNameBefore)}
       className={className}
     />
   );
@@ -66,11 +65,10 @@ export function Lead<C extends ElementType = 'p'>({
   ...props
 }: LeadProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='lead'
-      component={component}
-      defaultComponent={'p' as C}
+      component={component ?? ('p' as C)}
+      classNameBefore={clsx('lead', props.classNameBefore)}
       className={className}
     />
   );
@@ -84,11 +82,10 @@ export function Blockquote<C extends ElementType = 'blockquote'>({
   ...props
 }: BlockquoteProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='blockquote'
-      component={component}
-      defaultComponent={'blockquote' as C}
+      component={component ?? ('blockquote' as C)}
+      classNameBefore={clsx('blockquote', props.classNameBefore)}
       className={className}
     />
   );
@@ -102,11 +99,10 @@ export function BlockquoteFooter<C extends ElementType = 'footer'>({
   ...props
 }: BlockquoteFooterProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='blockquote-footer'
-      component={component}
-      defaultComponent={'footer' as C}
+      component={component ?? ('footer' as C)}
+      classNameBefore={clsx('blockquote-footer', props.classNameBefore)}
       className={className}
     />
   );
@@ -125,11 +121,10 @@ export function Abbr<C extends ElementType = 'abbr'>({
   ...props
 }: AbbrProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(initialism && 'initialism')}
-      component={component}
-      defaultComponent={'abbr' as C}
+      component={component ?? ('abbr' as C)}
+      classNameBefore={clsx(initialism && 'initialism', props.classNameBefore)}
       className={className}
     />
   );
@@ -143,11 +138,10 @@ export function UnstyledList<C extends ElementType = 'ul'>({
   ...props
 }: UnstyledListProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='list-unstyled'
-      component={component}
-      defaultComponent={'ul' as C}
+      component={component ?? ('ul' as C)}
+      classNameBefore={clsx('list-unstyled', props.classNameBefore)}
       className={className}
     />
   );
@@ -161,11 +155,10 @@ export function InlineList<C extends ElementType = 'ul'>({
   ...props
 }: InlineListProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='list-inline'
-      component={component}
-      defaultComponent={'ul' as C}
+      component={component ?? ('ul' as C)}
+      classNameBefore={clsx('list-inline', props.classNameBefore)}
       className={className}
     />
   );
@@ -179,11 +172,10 @@ export function InlineListItem<C extends ElementType = 'li'>({
   ...props
 }: InlineListItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='list-inline-item'
-      component={component}
-      defaultComponent={'li' as C}
+      component={component ?? ('li' as C)}
+      classNameBefore={clsx('list-inline-item', props.classNameBefore)}
       className={className}
     />
   );

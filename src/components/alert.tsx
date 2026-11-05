@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type AlertProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -16,11 +17,10 @@ export function Alert<C extends ElementType = 'div'>({
   ...props
 }: AlertProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('alert', instant && 'alert-instant')}
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('alert', instant && 'alert-instant', props.classNameBefore)}
       className={className}
       role={role ?? 'alert'}
     />
@@ -35,11 +35,10 @@ export function AlertHeading<C extends ElementType = 'h4'>({
   ...props
 }: AlertHeadingProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='alert-heading'
-      component={component}
-      defaultComponent={'h4' as C}
+      component={component ?? ('h4' as C)}
+      classNameBefore={clsx('alert-heading', props.classNameBefore)}
       className={className}
     />
   );

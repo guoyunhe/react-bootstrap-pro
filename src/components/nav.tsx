@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type NavProps<C extends ElementType = 'ul'> = ComponentProps<
   C,
@@ -24,17 +25,17 @@ export function Nav<C extends ElementType = 'ul'>({
   ...props
 }: NavProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('ul' as C)}
+      classNameBefore={clsx(
         'nav',
         variant && `nav-${variant}`,
         orientation === 'vertical' && variant === 'pills' && 'nav-pills-vertical',
         fill && 'nav-fill',
         justified && 'nav-justified',
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'ul' as C}
       className={className}
     />
   );
@@ -48,11 +49,10 @@ export function NavItem<C extends ElementType = 'li'>({
   ...props
 }: NavItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='nav-item'
-      component={component}
-      defaultComponent={'li' as C}
+      component={component ?? ('li' as C)}
+      classNameBefore={clsx('nav-item', props.classNameBefore)}
       className={className}
     />
   );
@@ -71,11 +71,15 @@ export function NavLink<C extends ElementType = 'a'>({
   ...props
 }: NavLinkProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('nav-link', active && 'active', disabled && 'disabled')}
-      component={component}
-      defaultComponent={'a' as C}
+      component={component ?? ('a' as C)}
+      classNameBefore={clsx(
+        'nav-link',
+        active && 'active',
+        disabled && 'disabled',
+        props.classNameBefore,
+      )}
       className={className}
       aria-current={active ? (props['aria-current'] ?? 'page') : props['aria-current']}
       aria-disabled={disabled || props['aria-disabled']}

@@ -16,6 +16,7 @@ export type ContainerProps<C extends ElementType = 'div'> = ContainerOwnProps &
 export function Container<C extends ElementType = 'div'>({
   fluid,
   className,
+  classNameBefore,
   ...props
 }: ContainerProps<C>) {
   let containerClass = 'container';
@@ -25,7 +26,11 @@ export function Container<C extends ElementType = 'div'>({
     containerClass = `${fluid}:container`;
   }
 
-  const boxProps = { ...props, className: clsx(containerClass, className) } as BoxProps<C>;
+  const boxProps = {
+    ...props,
+    classNameBefore: clsx(containerClass, classNameBefore),
+    className,
+  } as BoxProps<C>;
 
   return <Box {...boxProps} />;
 }

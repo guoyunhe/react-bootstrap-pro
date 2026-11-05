@@ -46,7 +46,6 @@ export function Button<C extends ElementType = 'button'>({
     check && 'btn-check',
     isDisabledAnchor && 'disabled',
     classNameBefore,
-    className,
   );
 
   const boxProps = {
@@ -62,6 +61,7 @@ export function Button<C extends ElementType = 'button'>({
       : {}),
     component: Component,
     theme,
+    className,
     classNameBefore: classes,
   } as BoxProps<C>;
 

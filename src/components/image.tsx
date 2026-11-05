@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 type ImageOwnProps = {
   fluid?: boolean | undefined;
@@ -18,11 +19,14 @@ export function Image<C extends ElementType = 'img'>({
   ...props
 }: ImageProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(fluid && 'img-fluid', thumbnail && 'img-thumbnail')}
-      component={component}
-      defaultComponent={'img' as C}
+      component={component ?? ('img' as C)}
+      classNameBefore={clsx(
+        fluid && 'img-fluid',
+        thumbnail && 'img-thumbnail',
+        props.classNameBefore,
+      )}
       className={className}
     />
   );
@@ -36,11 +40,10 @@ export function Figure<C extends ElementType = 'figure'>({
   ...props
 }: FigureProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='figure'
-      component={component}
-      defaultComponent={'figure' as C}
+      component={component ?? ('figure' as C)}
+      classNameBefore={clsx('figure', props.classNameBefore)}
       className={className}
     />
   );
@@ -54,11 +57,10 @@ export function FigureCaption<C extends ElementType = 'figcaption'>({
   ...props
 }: FigureCaptionProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='figure-caption'
-      component={component}
-      defaultComponent={'figcaption' as C}
+      component={component ?? ('figcaption' as C)}
+      classNameBefore={clsx('figure-caption', props.classNameBefore)}
       className={className}
     />
   );

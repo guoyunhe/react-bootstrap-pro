@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type ProseProps<C extends ElementType = 'div'> = ComponentProps<C>;
 
@@ -10,11 +12,10 @@ export function Prose<C extends ElementType = 'div'>({
   ...props
 }: ProseProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='prose'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('prose', props.classNameBefore)}
       className={className}
     />
   );
@@ -28,11 +29,10 @@ export function NotProse<C extends ElementType = 'div'>({
   ...props
 }: NotProseProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='not-prose'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('not-prose', props.classNameBefore)}
       className={className}
     />
   );

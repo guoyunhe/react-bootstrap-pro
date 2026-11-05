@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type InputGroupTextProps<C extends ElementType = 'span'> = ComponentProps<C>;
 
@@ -10,11 +12,10 @@ export function InputGroupText<C extends ElementType = 'span'>({
   ...props
 }: InputGroupTextProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='input-group-text'
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx('input-group-text', props.classNameBefore)}
       className={className}
     />
   );

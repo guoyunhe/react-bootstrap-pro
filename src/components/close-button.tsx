@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type CloseButtonProps<C extends ElementType = 'button'> = ComponentProps<
   C,
@@ -15,11 +17,10 @@ export function CloseButton<C extends ElementType = 'button'>({
   ...props
 }: CloseButtonProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='btn-close'
-      component={component}
-      defaultComponent={'button' as C}
+      component={component ?? ('button' as C)}
+      classNameBefore={clsx('btn-close', props.classNameBefore)}
       className={className}
       type={type ?? 'button'}
       aria-label={props['aria-label'] ?? label}

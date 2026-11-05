@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps, type ClassedBoxProps } from './shared';
+import { Box, type BoxProps } from './box';
+import { type ComponentProps } from './shared';
 
 export type CardProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -16,31 +16,34 @@ export function Card<C extends ElementType = 'div'>({
   ...props
 }: CardProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('card', variant && `card-${variant}`)}
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('card', variant && `card-${variant}`, props.classNameBefore)}
       className={className}
     />
   );
 }
 
 type CardPartProps<C extends ElementType> = BoxProps<C>;
+type CardPartRenderProps<C extends ElementType> = CardPartProps<C> & {
+  baseClass: string;
+  defaultComponent: C;
+};
 
 function CardPart<C extends ElementType>({
   baseClass,
   defaultComponent,
   component,
   className,
+  classNameBefore,
   ...props
-}: ClassedBoxProps<C, BoxProps<C>>) {
+}: CardPartRenderProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={baseClass}
-      component={component}
-      defaultComponent={defaultComponent}
+      component={component ?? defaultComponent}
+      classNameBefore={clsx(baseClass, classNameBefore)}
       className={className}
     />
   );
@@ -94,11 +97,13 @@ export function CardImage<C extends ElementType = 'img'>({
   ...props
 }: CardImageProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(placement ? `card-img-${placement}` : 'card-img-top')}
-      component={component}
-      defaultComponent={'img' as C}
+      component={component ?? ('img' as C)}
+      classNameBefore={clsx(
+        placement ? `card-img-${placement}` : 'card-img-top',
+        props.classNameBefore,
+      )}
       className={className}
     />
   );

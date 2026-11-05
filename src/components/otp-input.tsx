@@ -99,6 +99,7 @@ export function OtpInput({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
+  classNameBefore,
   className,
   ...props
 }: OtpInputProps) {
@@ -322,15 +323,16 @@ export function OtpInput({
   return (
     <Box
       {...props}
-      className={clsx(
+      classNameBefore={clsx(
         'otp',
         connected && 'otp-connected',
         size && `otp-${size}`,
         validation === 'valid' && 'is-valid',
         validation === 'invalid' && 'is-invalid',
         'otp-rendered',
-        className,
+        classNameBefore,
       )}
+      className={className}
     >
       <input
         ref={inputRef}

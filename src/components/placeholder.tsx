@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type PlaceholderProps<C extends ElementType = 'span'> = ComponentProps<
   C,
@@ -15,11 +16,10 @@ export function Placeholder<C extends ElementType = 'span'>({
   ...props
 }: PlaceholderProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('placeholder', size && `placeholder-${size}`)}
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx('placeholder', size && `placeholder-${size}`, props.classNameBefore)}
       className={className}
       aria-hidden={props['aria-hidden'] ?? true}
     />
@@ -38,11 +38,10 @@ export function PlaceholderGroup<C extends ElementType = 'span'>({
   ...props
 }: PlaceholderGroupProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={animation ? `placeholder-${animation}` : ''}
-      component={component}
-      defaultComponent={'span' as C}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx(animation ? `placeholder-${animation}` : '', props.classNameBefore)}
       className={className}
       aria-hidden={props['aria-hidden'] ?? true}
     />

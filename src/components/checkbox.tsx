@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps, type ValidationState } from './shared';
+import { Box } from './box';
+import { type ComponentProps, type ValidationState } from './shared';
 
 export type CheckboxSize = 'sm' | 'lg';
 
@@ -19,11 +20,15 @@ export function Checkbox<C extends ElementType = 'input'>({
   ...props
 }: CheckboxProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('check', size && `check-${size}`, validation && `is-${validation}`)}
-      component={component}
-      defaultComponent={'input' as C}
+      component={component ?? ('input' as C)}
+      classNameBefore={clsx(
+        'check',
+        size && `check-${size}`,
+        validation && `is-${validation}`,
+        props.classNameBefore,
+      )}
       className={className}
       type={type ?? 'checkbox'}
     />

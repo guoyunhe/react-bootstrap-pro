@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type CollapseProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -16,11 +17,15 @@ export function Collapse<C extends ElementType = 'div'>({
   ...props
 }: CollapseProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('collapse', horizontal && 'collapse-horizontal', show && 'show')}
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
+        'collapse',
+        horizontal && 'collapse-horizontal',
+        show && 'show',
+        props.classNameBefore,
+      )}
       className={className}
     />
   );

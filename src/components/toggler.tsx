@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type TogglerProps<C extends ElementType = 'button'> = ComponentProps<
   C,
@@ -17,11 +19,10 @@ export function Toggler<C extends ElementType = 'button'>({
   ...props
 }: TogglerProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass=''
-      component={component}
-      defaultComponent={'button' as C}
+      component={component ?? ('button' as C)}
+      classNameBefore={clsx('', props.classNameBefore)}
       className={className}
       type={type ?? 'button'}
       data-bs-toggle={props['data-bs-toggle'] ?? 'toggler'}

@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps } from './shared';
+import { Box } from './box';
+import { type ComponentProps } from './shared';
 
 export type TableHeadProps<C extends ElementType = 'thead'> = ComponentProps<
   C,
@@ -14,11 +16,10 @@ export function TableHead<C extends ElementType = 'thead'>({
   ...props
 }: TableHeadProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={divider ? 'table-group-divider' : ''}
-      component={component}
-      defaultComponent={'thead' as C}
+      component={component ?? ('thead' as C)}
+      classNameBefore={clsx(divider ? 'table-group-divider' : '', props.classNameBefore)}
       className={className}
     />
   );

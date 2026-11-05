@@ -19,12 +19,17 @@ export function FormFeedback({
   type = 'invalid',
   tooltip = false,
   className,
+  classNameBefore,
   ...props
 }: FormFeedbackProps) {
   return (
     <Box
       {...props}
-      className={clsx(tooltip ? `tooltip ${type}-tooltip` : `${type}-feedback`, className)}
+      classNameBefore={clsx(
+        tooltip ? `tooltip ${type}-tooltip` : `${type}-feedback`,
+        classNameBefore,
+      )}
+      className={className}
     />
   );
 }

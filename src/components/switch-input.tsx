@@ -5,7 +5,8 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
-import { ClassedBox, type ComponentProps, type ValidationState } from './shared';
+import { Box } from './box';
+import { type ComponentProps, type ValidationState } from './shared';
 
 export type SwitchInputProps<C extends ElementType = 'input'> = ComponentProps<
   C,
@@ -20,11 +21,10 @@ export function SwitchInput<C extends ElementType = 'input'>({
   ...props
 }: SwitchInputProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass=''
-      component={component}
-      defaultComponent={'input' as C}
+      component={component ?? ('input' as C)}
+      classNameBefore={clsx('', props.classNameBefore)}
       className={clsx(validation && `is-${validation}`, className)}
       type={type ?? 'checkbox'}
       role='switch'

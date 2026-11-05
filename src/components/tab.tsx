@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type TabListProps<C extends ElementType = 'ul'> = BoxProps<C>;
 
@@ -12,11 +13,10 @@ export function TabList<C extends ElementType = 'ul'>({
   ...props
 }: TabListProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='nav nav-tabs'
-      component={component}
-      defaultComponent={'ul' as C}
+      component={component ?? ('ul' as C)}
+      classNameBefore={clsx('nav nav-tabs', props.classNameBefore)}
       className={className}
       role={props['role'] ?? 'tablist'}
     />
@@ -32,11 +32,10 @@ export function TabItem<C extends ElementType = 'li'>({
   ...props
 }: TabItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='nav-item'
-      component={component}
-      defaultComponent={'li' as C}
+      component={component ?? ('li' as C)}
+      classNameBefore={clsx('nav-item', props.classNameBefore)}
       className={className}
       role={role ?? 'presentation'}
     />
@@ -58,11 +57,10 @@ export function Tab<C extends ElementType = 'button'>({
 }: TabProps<C>) {
   const target = targetId ? `#${targetId}` : undefined;
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('nav-link', active && 'active')}
-      component={component}
-      defaultComponent={'button' as C}
+      component={component ?? ('button' as C)}
+      classNameBefore={clsx('nav-link', active && 'active', props.classNameBefore)}
       className={className}
       type={type ?? 'button'}
       role={props['role'] ?? 'tab'}
@@ -82,11 +80,10 @@ export function TabContent<C extends ElementType = 'div'>({
   ...props
 }: TabContentProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='tab-content'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('tab-content', props.classNameBefore)}
       className={className}
     />
   );
@@ -104,11 +101,10 @@ export function TabPane<C extends ElementType = 'div'>({
   ...props
 }: TabPaneProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('tab-pane', active && 'active')}
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('tab-pane', active && 'active', props.classNameBefore)}
       className={className}
       role={props['role'] ?? 'tabpanel'}
       hidden={!active}

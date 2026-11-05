@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import type { ElementType } from 'react';
 
+import { Box } from './box';
 import type { BoxProps } from './box';
 import { IconButton, type IconButtonProps } from './icon-button';
-import { ClassedBox, type ComponentProps } from './shared';
+import { type ComponentProps } from './shared';
 
 export type CarouselProps<C extends ElementType = 'div'> = ComponentProps<
   C,
@@ -25,17 +26,17 @@ export function Carousel<C extends ElementType = 'div'>({
   ...props
 }: CarouselProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx(
         'carousel',
         auto && 'carousel-auto',
         center && 'carousel-center',
         fade && 'carousel-fade',
         overlay && 'carousel-overlay',
+        props.classNameBefore,
       )}
-      component={component}
-      defaultComponent={'div' as C}
       className={className}
     />
   );
@@ -49,11 +50,10 @@ export function CarouselInner<C extends ElementType = 'div'>({
   ...props
 }: CarouselInnerProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='carousel-inner'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('carousel-inner', props.classNameBefore)}
       className={className}
     />
   );
@@ -71,11 +71,10 @@ export function CarouselItem<C extends ElementType = 'div'>({
   ...props
 }: CarouselItemProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx('carousel-item', active && 'active')}
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('carousel-item', active && 'active', props.classNameBefore)}
       className={className}
     />
   );
@@ -89,11 +88,10 @@ export function CarouselIndicators<C extends ElementType = 'div'>({
   ...props
 }: CarouselIndicatorsProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='carousel-indicators'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('carousel-indicators', props.classNameBefore)}
       className={className}
     />
   );
@@ -114,11 +112,10 @@ export function CarouselIndicator<C extends ElementType = 'button'>({
   ...props
 }: CarouselIndicatorProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass={clsx(active && 'active', className)}
-      component={component}
-      defaultComponent={'button' as C}
+      component={component ?? ('button' as C)}
+      classNameBefore={clsx(active && 'active', className, props.classNameBefore)}
       className={undefined}
       type={type ?? 'button'}
       aria-current={active || undefined}
@@ -177,11 +174,10 @@ export function CarouselOverlayControls<C extends ElementType = 'div'>({
   ...props
 }: CarouselOverlayControlsProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='carousel-overlay-controls'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('carousel-overlay-controls', props.classNameBefore)}
       className={className}
     />
   );
@@ -195,11 +191,10 @@ export function CarouselCaption<C extends ElementType = 'div'>({
   ...props
 }: CarouselCaptionProps<C>) {
   return (
-    <ClassedBox<C>
+    <Box<C>
       {...props}
-      baseClass='carousel-caption'
-      component={component}
-      defaultComponent={'div' as C}
+      component={component ?? ('div' as C)}
+      classNameBefore={clsx('carousel-caption', props.classNameBefore)}
       className={className}
     />
   );
