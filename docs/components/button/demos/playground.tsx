@@ -1,7 +1,14 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import { BiArrowRight, BiPlus } from 'react-bootstrap-icons-pro';
-import { Box, Button, type ButtonTheme, type ButtonVariant } from 'react-bootstrap-pro';
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControl,
+  type ButtonTheme,
+  type ButtonVariant,
+} from 'react-bootstrap-pro';
 
 import {
   contentOptions,
@@ -30,10 +37,10 @@ export function ButtonPlaygroundDemo() {
       <Box d='flex' flexWrap='wrap' alignItems='end' gap={3}>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Theme
-          <select
-            className='form-select'
+          <FormControl
+            component='select'
             value={theme}
-            onChange={(event) => {
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
               if (isOption(themeOptions, value)) setTheme(value);
             }}
@@ -43,14 +50,14 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </select>
+          </FormControl>
         </Box>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Style
-          <select
-            className='form-select'
+          <FormControl
+            component='select'
             value={variant}
-            onChange={(event) => {
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
               if (isOption(variantOptions, value)) setVariant(value);
             }}
@@ -60,14 +67,14 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </select>
+          </FormControl>
         </Box>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Size
-          <select
-            className='form-select'
+          <FormControl
+            component='select'
             value={size}
-            onChange={(event) => {
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
               if (isOption(sizeOptions, value)) setSize(value);
             }}
@@ -77,14 +84,14 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </select>
+          </FormControl>
         </Box>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Content
-          <select
-            className='form-select'
+          <FormControl
+            component='select'
             value={buttonType}
-            onChange={(event) => {
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
               if (isOption(contentOptions, value)) setButtonType(value);
             }}
@@ -94,14 +101,14 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </select>
+          </FormControl>
         </Box>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Shape
-          <select
-            className='form-select'
+          <FormControl
+            component='select'
             value={rounding}
-            onChange={(event) => {
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
               if (isOption(roundingOptions, value)) setRounding(value);
             }}
@@ -111,14 +118,10 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </select>
+          </FormControl>
         </Box>
         <Box component='label' d='flex' alignItems='center' gap={2}>
-          <input
-            type='checkbox'
-            checked={styled}
-            onChange={(event) => setStyled(event.currentTarget.checked)}
-          />
+          <Checkbox checked={styled} onChange={(event) => setStyled(event.currentTarget.checked)} />
           Styled
         </Box>
       </Box>
