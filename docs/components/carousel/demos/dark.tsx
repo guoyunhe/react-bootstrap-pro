@@ -15,13 +15,13 @@ export function CarouselDarkDemo() {
     <Carousel overlay colorMode='dark'>
       <CarouselInner>
         <CarouselItem active>
-          <CarouselSlidePlaceholder label='First slide' />
+          <CarouselSlidePlaceholder>First slide</CarouselSlidePlaceholder>
         </CarouselItem>
         <CarouselItem>
-          <CarouselSlidePlaceholder label='Second slide' />
+          <CarouselSlidePlaceholder>Second slide</CarouselSlidePlaceholder>
         </CarouselItem>
         <CarouselItem>
-          <CarouselSlidePlaceholder label='Third slide' />
+          <CarouselSlidePlaceholder>Third slide</CarouselSlidePlaceholder>
         </CarouselItem>
       </CarouselInner>
       <CarouselOverlayControls>

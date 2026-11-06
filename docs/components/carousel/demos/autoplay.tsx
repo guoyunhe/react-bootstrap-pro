@@ -15,13 +15,13 @@ export function CarouselAutoplayDemo() {
     <Carousel autoplay>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
-          <CarouselSlidePlaceholder label='First slide' />
+          <CarouselSlidePlaceholder>First slide</CarouselSlidePlaceholder>
         </CarouselItem>
         <CarouselItem>
-          <CarouselSlidePlaceholder label='Second slide' />
+          <CarouselSlidePlaceholder>Second slide</CarouselSlidePlaceholder>
         </CarouselItem>
         <CarouselItem>
-          <CarouselSlidePlaceholder label='Third slide' />
+          <CarouselSlidePlaceholder>Third slide</CarouselSlidePlaceholder>
         </CarouselItem>
       </CarouselInner>
       <div className='d-flex justify-content-between align-items-center mt-3'>

@@ -14,13 +14,13 @@ export function CarouselIndividualIntervalsDemo() {
     <Carousel autoplay>
       <CarouselInner className='rounded-5'>
         <CarouselItem active interval={2000}>
-          <CarouselSlidePlaceholder label='First: 2 seconds' />
+          <CarouselSlidePlaceholder>First: 2 seconds</CarouselSlidePlaceholder>
         </CarouselItem>
         <CarouselItem interval={4000}>
-          <CarouselSlidePlaceholder label='Second: 4 seconds' />
+          <CarouselSlidePlaceholder>Second: 4 seconds</CarouselSlidePlaceholder>
         </CarouselItem>
         <CarouselItem interval={6000}>
-          <CarouselSlidePlaceholder label='Third: 6 seconds' />
+          <CarouselSlidePlaceholder>Third: 6 seconds</CarouselSlidePlaceholder>
         </CarouselItem>
       </CarouselInner>
       <div className='d-flex justify-content-between align-items-center mt-3'>

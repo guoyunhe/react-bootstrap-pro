@@ -15,13 +15,13 @@ export function CarouselOverlayControlsDemo() {
     <Carousel overlay>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
-          <CarouselSlidePlaceholder label='First slide' />
+          <CarouselSlidePlaceholder>First slide</CarouselSlidePlaceholder>
         </CarouselItem>
         <CarouselItem>
-          <CarouselSlidePlaceholder label='Second slide' />
+          <CarouselSlidePlaceholder>Second slide</CarouselSlidePlaceholder>
         </CarouselItem>
         <CarouselItem>
-          <CarouselSlidePlaceholder label='Third slide' />
+          <CarouselSlidePlaceholder>Third slide</CarouselSlidePlaceholder>
         </CarouselItem>
       </CarouselInner>
       <CarouselOverlayControls>
