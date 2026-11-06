@@ -17,6 +17,7 @@
 - Add the CarouselItem `interval` prop for configuring individual slide durations.
 - Add the Carousel `autoplay` prop for starting automatic cycling on page load.
 - Add the Carousel `colorMode` prop for configuring Bootstrap's `data-bs-theme` color mode.
+- Add the Carousel `itemsGap` prop for configuring spacing between slides.
 - Add the `CarouselPlayPause` component for autoplay pause and resume controls.
 
 ## [0.3.0] - 2026-11-04

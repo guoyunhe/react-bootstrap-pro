@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { createContext, useContext, useId, type ElementType } from 'react';
+import { createContext, useContext, useId, type CSSProperties, type ElementType } from 'react';
 
 import { Box } from './box';
 import type { BoxProps } from './box';
@@ -39,6 +39,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
     colorMode?: CarouselColorMode | undefined;
     effect?: CarouselEffect | undefined;
     ends?: CarouselEnds | undefined;
+    itemsGap?: CSSProperties['gap'] | undefined;
     overlay?: boolean | undefined;
   }
 > & {
@@ -48,6 +49,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
   colorMode?: CarouselColorMode | undefined;
   effect?: CarouselEffect | undefined;
   ends?: CarouselEnds | undefined;
+  itemsGap?: CSSProperties['gap'] | undefined;
   overlay?: boolean | undefined;
 };
 
@@ -61,11 +63,19 @@ export function Carousel<C extends ElementType = 'div'>({
   colorMode,
   effect = 'slide',
   ends,
+  itemsGap,
   overlay,
   ...props
 }: CarouselProps<C>) {
   const reactId = useId();
   const id = externalId || createCarouselId(reactId);
+  const style: CSSProperties | undefined =
+    itemsGap === undefined
+      ? props.style
+      : {
+          ...props.style,
+          '--bs-carousel-items-gap': typeof itemsGap === 'number' ? `${itemsGap}px` : itemsGap,
+        };
 
   return (
     <CarouselTargetContext.Provider value={`#${id}`}>
@@ -73,6 +83,7 @@ export function Carousel<C extends ElementType = 'div'>({
         {...(props as BoxProps<C>)}
         component={component ?? ('div' as C)}
         id={id}
+        style={style}
         data-bs-autoplay={autoplay ? 'true' : undefined}
         data-bs-ends={ends}
         data-bs-theme={colorMode}

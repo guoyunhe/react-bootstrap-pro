@@ -5,14 +5,13 @@ import { CarouselSlidePlaceholder } from './shared';
 
 const carouselStyle = {
   '--bs-carousel-items-peek': '3rem',
-  '--bs-carousel-items-gap': '1rem',
 } as CSSProperties;
 
 export function CarouselPeekingDemo() {
   const slides = ['First slide', 'Second slide', 'Third slide', 'Fourth slide', 'Fifth slide'];
 
   return (
-    <Carousel ends='stop' style={carouselStyle}>
+    <Carousel ends='stop' itemsGap='1rem' style={carouselStyle}>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Peek the neighbors</h5>
         <div>

@@ -55,6 +55,16 @@ test('defaults to the slide effect', async () => {
   expect(carousel).not.toHaveAttribute('data-bs-theme');
 });
 
+test('maps itemsGap to the CSS variable and preserves custom styles', async () => {
+  const screen = await render(
+    <Carousel itemsGap={16} style={{ color: 'red' }} data-testid='carousel' />,
+  );
+  const carousel = screen.getByTestId('carousel').element();
+
+  expect(carousel.style.getPropertyValue('--bs-carousel-items-gap')).toBe('16px');
+  expect(carousel.style.color).toBe('red');
+});
+
 test('generates a distinct internal id for each carousel', async () => {
   const screen = await render(
     <>

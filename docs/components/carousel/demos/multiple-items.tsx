@@ -5,12 +5,11 @@ import { CarouselSlidePlaceholder } from './shared';
 
 const carouselStyle = {
   '--bs-carousel-items': 3,
-  '--bs-carousel-items-gap': '1rem',
 } as CSSProperties;
 
 export function CarouselMultipleItemsDemo() {
   return (
-    <Carousel ends='stop' style={carouselStyle}>
+    <Carousel ends='stop' itemsGap='1rem' style={carouselStyle}>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Three at a time</h5>
         <div>
