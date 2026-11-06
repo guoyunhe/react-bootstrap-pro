@@ -3,16 +3,21 @@ title: Close button
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { CloseButton } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { CloseButtonBasicDemo } from './demos/basic';
+import { CloseButtonDisabledDemo } from './demos/disabled';
+import { CloseButtonDarkVariantDemo } from './demos/dark-variant';
 
 # Close button
 
-`CloseButton` renders the CSS-mask close icon as a native button. Its accessible
-name defaults to “Close”; change it with `label` or `aria-label`.
+Use `CloseButton` to dismiss or close a component. Bootstrap renders the icon
+with a CSS mask, so it inherits the button's color without an inline SVG. The
+component provides the accessible name “Close” by default.
 
 ## Example
+
+The close icon is rendered by the `.btn-close` class. Always give the button an
+accessible name; `CloseButton` defaults its `aria-label` to `Close`.
 
 <DemoContainer>
   <CloseButtonBasicDemo />
@@ -24,32 +29,69 @@ name defaults to “Close”; change it with `label` or `aria-label`.
 
 ## Disabled state
 
-Use the native `disabled` prop when dismissing is unavailable.
+Use the native `disabled` prop when the action is unavailable. Bootstrap reduces
+the button's opacity and prevents pointer and text-selection interactions.
+
+<DemoContainer>
+  <CloseButtonDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
 
 ## Dark variant
 
-Place the button inside a dark color-scheme region to use the inverted icon.
+Set `data-bs-theme='dark'` on the close button or an ancestor to invert the icon.
+This example applies the dark theme to a containing region.
+
+<DemoContainer>
+  <CloseButtonDarkVariantDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark-variant.tsx'
+
+```
+
+## CSS
+
+### Variables
+
+Override these Bootstrap CSS custom properties on the button or an ancestor.
+
+| Variable                          | Purpose                   |
+| --------------------------------- | ------------------------- |
+| `--bs-btn-close-size`             | Minimum width and height. |
+| `--bs-btn-close-color`            | Icon color.               |
+| `--bs-btn-close-icon`             | CSS mask image.           |
+| `--bs-btn-close-opacity`          | Default opacity.          |
+| `--bs-btn-close-hover-opacity`    | Opacity on hover.         |
+| `--bs-btn-close-focus-opacity`    | Opacity when focused.     |
+| `--bs-btn-close-disabled-opacity` | Opacity when disabled.    |
 
 ## API
 
 ### CloseButton
 
-Renders a `button` by default and defaults its native `type` to `button`.
-Its own prop is `label`, which supplies the accessible label when
-`aria-label` is not provided. It inherits native props for the selected element
-and all [`Box`](../box/README.mdx#api) props, including `component`,
-`className`, and `classNameBefore`.
+Renders a `button` with the `.btn-close` class by default and defaults its native
+`type` to `button`. Its own prop is `label`, which supplies the accessible name
+when `aria-label` is not provided.
 
-| Prop        | Type          | Description                                |
-| ----------- | ------------- | ------------------------------------------ |
-| `label`     | `string`      | Accessible name, defaulting to `'Close'`.  |
-| `component` | `ElementType` | Changes the element; defaults to `button`. |
-| `...props`  | `BoxProps<C>` | Native props and all Box utility props.    |
+`CloseButton` inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) props, including `component` and styling
+utilities. Replacing the root with `component` may remove native button
+semantics.
+
+| Prop    | Type     | Default   | Description                                        |
+| ------- | -------- | --------- | -------------------------------------------------- |
+| `label` | `string` | `'Close'` | Accessible name when `aria-label` is not provided. |
 
 ## Accessibility
 
-Keep the accessible name meaningful in context, and use the native `disabled`
-prop when the action is unavailable.
+Provide an accessible name that describes the action in context. Set `label` or
+`aria-label` when “Close” is not specific enough. The default `type='button'`
+prevents accidental form submission; use the native `disabled` prop when the
+action is unavailable.
 
 ## See
 

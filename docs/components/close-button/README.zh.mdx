@@ -3,33 +3,90 @@ title: Close button 关闭按钮
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { CloseButton } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { CloseButtonBasicDemo } from './demos/basic';
+import { CloseButtonDisabledDemo } from './demos/disabled';
+import { CloseButtonDarkVariantDemo } from './demos/dark-variant';
 
 # Close button 关闭按钮
 
-`CloseButton` 使用 CSS 遮罩图标渲染原生按钮。默认无障碍名称为“Close”，可通过
-`label` 或 `aria-label` 自定义。
+使用 `CloseButton` 关闭或移除组件。Bootstrap 使用 CSS mask 渲染图标，因此图标会继承
+按钮颜色，无需内联 SVG。组件默认提供“Close”无障碍名称。
+
+## 示例
+
+关闭图标由 `.btn-close` 类绘制。请始终为按钮提供可访问名称；
+`CloseButton` 的 `aria-label` 默认为 `Close`。
 
 <DemoContainer>
-  <CloseButton />
+  <CloseButtonBasicDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
-<CloseButton label='关闭通知' onClick={dismiss} />
+
 ```
+
+## 禁用状态
+
+操作不可用时使用原生 `disabled` 属性。Bootstrap 会降低按钮不透明度，并阻止指针和文本选择交互。
+
+<DemoContainer>
+  <CloseButtonDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## 深色变体
+
+在关闭按钮或其祖先元素上设置 `data-bs-theme='dark'` 可反转图标颜色。
+此示例将深色主题应用于容器。
+
+<DemoContainer>
+  <CloseButtonDarkVariantDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark-variant.tsx'
+
+```
+
+## CSS
+
+### 自定义属性
+
+可在按钮或其祖先元素上覆盖以下 Bootstrap CSS 自定义属性。
+
+| 属性                              | 用途               |
+| --------------------------------- | ------------------ |
+| `--bs-btn-close-size`             | 最小宽度和高度。   |
+| `--bs-btn-close-color`            | 图标颜色。         |
+| `--bs-btn-close-icon`             | CSS mask 图像。    |
+| `--bs-btn-close-opacity`          | 默认不透明度。     |
+| `--bs-btn-close-hover-opacity`    | 悬停时的不透明度。 |
+| `--bs-btn-close-focus-opacity`    | 聚焦时的不透明度。 |
+| `--bs-btn-close-disabled-opacity` | 禁用时的不透明度。 |
 
 ## API
 
 ### CloseButton
 
-默认渲染为 `button`，原生 `type` 默认值为 `button`。自有属性为 `label`；
-未提供 `aria-label` 时，它用于提供可访问名称。组件继承所选元素的原生属性及
-全部 [`Box`](../box/README.zh.mdx#api) 属性，包括 `component`、`className`
-和 `classNameBefore`。
+默认渲染为带有 `.btn-close` 类的 `button`，原生 `type` 默认值为 `button`。
+自有属性为 `label`；未提供 `aria-label` 时，它用于提供可访问名称。
 
-| 属性        | 类型          | 说明                            |
-| ----------- | ------------- | ------------------------------- |
-| `label`     | `string`      | 无障碍名称，默认为 `'Close'`。  |
-| `component` | `ElementType` | 更换元素，默认为 `button`。     |
-| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+`CloseButton` 还继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 属性，
+包括 `component` 和样式工具属性。更换 `component` 根元素可能会失去原生按钮语义。
+
+| 属性    | 类型     | 默认值    | 说明                                     |
+| ------- | -------- | --------- | ---------------------------------------- |
+| `label` | `string` | `'Close'` | 未提供 `aria-label` 时使用的可访问名称。 |
+
+## 无障碍
+
+请提供能描述当前操作的可访问名称。如果“Close”不够具体，可设置 `label` 或
+`aria-label`。默认 `type='button'` 可避免意外提交表单；操作不可用时使用原生 `disabled` 属性。
+
+## 参考
+
+- [Bootstrap 6 Close button 官方文档](https://getbootstrap.com/docs/6.0/components/close-button/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/close-button.tsx)
