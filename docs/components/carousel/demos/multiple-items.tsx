@@ -10,7 +10,7 @@ const carouselStyle = {
 
 export function CarouselMultipleItemsDemo() {
   return (
-    <Carousel id='carouselMultiple' data-bs-ends='stop' style={carouselStyle}>
+    <Carousel id='carouselMultiple' ends='stop' style={carouselStyle}>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Three at a time</h5>
         <div>

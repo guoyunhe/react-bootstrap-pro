@@ -1,17 +1,17 @@
+import './shared.css';
+import { Box } from 'react-bootstrap-pro';
+
 export function CarouselSlidePlaceholder({ label }: { label: string }) {
   return (
-    <div
+    <Box
       role='img'
       aria-label={`Placeholder: ${label}`}
-      className='d-flex align-items-center justify-content-center rounded-5'
-      style={{
-        aspectRatio: '2 / 1',
-        backgroundColor: '#888',
-        color: '#555',
-        fontSize: 'clamp(2rem, 5vw, 3rem)',
-      }}
+      className='carousel-slide-placeholder'
+      d='flex'
+      alignItems='center'
+      justifyContent='center'
     >
       {label}
-    </div>
+    </Box>
   );
 }

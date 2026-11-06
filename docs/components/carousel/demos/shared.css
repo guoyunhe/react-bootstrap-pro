@@ -1,0 +1,6 @@
+.carousel-slide-placeholder {
+  aspect-ratio: 2 / 1;
+  background-color: #888;
+  color: #555;
+  font-size: clamp(2rem, 5vw, 3rem);
+}

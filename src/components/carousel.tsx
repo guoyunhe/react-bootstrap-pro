@@ -6,6 +6,7 @@ import type { BoxProps } from './box';
 import { IconButton, type IconButtonProps } from './icon-button';
 
 export type CarouselEffect = 'slide' | 'fade';
+export type CarouselEnds = 'loop' | 'wrap' | 'stop';
 
 export type CarouselProps<C extends ElementType = 'div'> = Omit<
   BoxProps<C>,
@@ -13,12 +14,14 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
     auto?: boolean | undefined;
     center?: boolean | undefined;
     effect?: CarouselEffect | undefined;
+    ends?: CarouselEnds | undefined;
     overlay?: boolean | undefined;
   }
 > & {
   auto?: boolean | undefined;
   center?: boolean | undefined;
   effect?: CarouselEffect | undefined;
+  ends?: CarouselEnds | undefined;
   overlay?: boolean | undefined;
 };
 
@@ -28,6 +31,7 @@ export function Carousel<C extends ElementType = 'div'>({
   auto,
   center,
   effect = 'slide',
+  ends,
   overlay,
   ...props
 }: CarouselProps<C>) {
@@ -35,6 +39,7 @@ export function Carousel<C extends ElementType = 'div'>({
     <Box<C>
       {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
+      data-bs-ends={ends}
       classNameBefore={clsx(
         'carousel',
         auto && 'carousel-auto',

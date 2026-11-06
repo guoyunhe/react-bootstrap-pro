@@ -261,6 +261,7 @@ export type {
   CarouselCaptionProps,
   CarouselControlProps,
   CarouselEffect,
+  CarouselEnds,
   CarouselIndicatorProps,
   CarouselIndicatorsProps,
   CarouselInnerProps,

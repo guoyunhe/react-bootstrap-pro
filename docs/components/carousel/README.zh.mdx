@@ -203,7 +203,7 @@ Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻�
 
 ## 结束行为
 
-使用 `data-bs-ends` 选择轮播到达首尾时的行为：`loop`（默认）、`wrap` 或 `stop`。
+使用 `ends` 属性选择轮播到达首尾时的行为：`loop`（默认）、`wrap` 或 `stop`。
 
 ### 循环（默认）
 
@@ -259,13 +259,14 @@ Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻�
 
 ### Carousel
 
-| 属性        | 类型                | 默认值    | 说明                         |
-| ----------- | ------------------- | --------- | ---------------------------- |
-| `auto`      | `boolean`           | `false`   | 允许每个轮播项使用自身宽度。 |
-| `center`    | `boolean`           | `false`   | 将滚动捕捉位置置于视口中央。 |
-| `effect`    | `'slide' \| 'fade'` | `'slide'` | 选择滑动或淡入淡出效果。     |
-| `overlay`   | `boolean`           | `false`   | 将叠加控件放置在幻灯片上方。 |
-| `component` | `ElementType`       | `'div'`   | 更换根元素。                 |
+| 属性        | 类型                         | 默认值    | 说明                         |
+| ----------- | ---------------------------- | --------- | ---------------------------- |
+| `auto`      | `boolean`                    | `false`   | 允许每个轮播项使用自身宽度。 |
+| `center`    | `boolean`                    | `false`   | 将滚动捕捉位置置于视口中央。 |
+| `effect`    | `'slide' \| 'fade'`          | `'slide'` | 选择滑动或淡入淡出效果。     |
+| `ends`      | `'loop' \| 'wrap' \| 'stop'` | `'loop'`  | 选择轮播到达首尾时的行为。   |
+| `overlay`   | `boolean`                    | `false`   | 将叠加控件放置在幻灯片上方。 |
+| `component` | `ElementType`                | `'div'`   | 更换根元素。                 |
 
 接受所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
 

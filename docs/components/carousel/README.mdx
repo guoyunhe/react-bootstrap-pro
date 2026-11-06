@@ -213,7 +213,7 @@ The indicator progress fill follows each slide's interval.
 
 ## End behavior
 
-Use `data-bs-ends` to choose what happens at the first and last slide:
+Use the `ends` prop to choose what happens at the first and last slide:
 `loop` (the default), `wrap`, or `stop`.
 
 ### Loop (default)
@@ -270,13 +270,14 @@ with overlay controls when they need contrast against slide content.
 
 ### Carousel
 
-| Prop        | Type                | Default   | Description                                 |
-| ----------- | ------------------- | --------- | ------------------------------------------- |
-| `auto`      | `boolean`           | `false`   | Lets each item use its own width.           |
-| `center`    | `boolean`           | `false`   | Centers snap positions in the viewport.     |
-| `effect`    | `'slide' \| 'fade'` | `'slide'` | Chooses the slide or fade transition.       |
-| `overlay`   | `boolean`           | `false`   | Positions overlay controls over the slides. |
-| `component` | `ElementType`       | `'div'`   | Changes the root element.                   |
+| Prop        | Type                         | Default   | Description                                       |
+| ----------- | ---------------------------- | --------- | ------------------------------------------------- |
+| `auto`      | `boolean`                    | `false`   | Lets each item use its own width.                 |
+| `center`    | `boolean`                    | `false`   | Centers snap positions in the viewport.           |
+| `effect`    | `'slide' \| 'fade'`          | `'slide'` | Chooses the slide or fade transition.             |
+| `ends`      | `'loop' \| 'wrap' \| 'stop'` | `'loop'`  | Chooses the behavior at the first and last slide. |
+| `overlay`   | `boolean`                    | `false`   | Positions overlay controls over the slides.       |
+| `component` | `ElementType`                | `'div'`   | Changes the root element.                         |
 
 Accepts native props for the selected element and [`Box`](../box/README.mdx#api)
 utility props.

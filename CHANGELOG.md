@@ -11,6 +11,7 @@
 ### Added
 
 - Add the `AlertLink` component for links styled within alerts.
+- Add the Carousel `ends` prop for configuring end-of-carousel behavior.
 
 ## [0.3.0] - 2026-11-04
 
