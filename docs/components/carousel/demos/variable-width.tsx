@@ -18,12 +18,12 @@ const slides = [
 
 export function CarouselVariableWidthDemo() {
   return (
-    <Carousel id='carouselVariable' auto ends='stop' style={carouselStyle}>
+    <Carousel auto ends='stop' style={carouselStyle}>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Mixed widths</h5>
         <div>
-          <CarouselControl target='#carouselVariable' direction='previous' size='sm' />
-          <CarouselControl target='#carouselVariable' direction='next' size='sm' />
+          <CarouselControl direction='previous' size='sm' />
+          <CarouselControl direction='next' size='sm' />
         </div>
       </div>
       <CarouselInner>

@@ -12,7 +12,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselDarkDemo() {
   return (
-    <Carousel id='carouselExampleDark' overlay colorMode='dark'>
+    <Carousel overlay colorMode='dark'>
       <CarouselInner>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />
@@ -25,25 +25,13 @@ export function CarouselDarkDemo() {
         </CarouselItem>
       </CarouselInner>
       <CarouselOverlayControls>
-        <CarouselControl
-          target='#carouselExampleDark'
-          direction='previous'
-          size='sm'
-          variant='subtle'
-          theme='secondary'
-        />
+        <CarouselControl direction='previous' size='sm' variant='subtle' theme='secondary' />
         <CarouselIndicators>
-          <CarouselIndicator target='#carouselExampleDark' index={0} active />
-          <CarouselIndicator target='#carouselExampleDark' index={1} />
-          <CarouselIndicator target='#carouselExampleDark' index={2} />
+          <CarouselIndicator index={0} active />
+          <CarouselIndicator index={1} />
+          <CarouselIndicator index={2} />
         </CarouselIndicators>
-        <CarouselControl
-          target='#carouselExampleDark'
-          direction='next'
-          size='sm'
-          variant='subtle'
-          theme='secondary'
-        />
+        <CarouselControl direction='next' size='sm' variant='subtle' theme='secondary' />
       </CarouselOverlayControls>
     </Carousel>
   );

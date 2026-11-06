@@ -12,7 +12,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselOverlayControlsDemo() {
   return (
-    <Carousel id='carouselExample' overlay>
+    <Carousel overlay>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />
@@ -26,25 +26,13 @@ export function CarouselOverlayControlsDemo() {
       </CarouselInner>
       <CarouselOverlayControls>
         <div>
-          <CarouselControl
-            target='#carouselExample'
-            direction='previous'
-            size='sm'
-            variant='subtle'
-            theme='secondary'
-          />
-          <CarouselControl
-            target='#carouselExample'
-            direction='next'
-            size='sm'
-            variant='subtle'
-            theme='secondary'
-          />
+          <CarouselControl direction='previous' size='sm' variant='subtle' theme='secondary' />
+          <CarouselControl direction='next' size='sm' variant='subtle' theme='secondary' />
         </div>
         <CarouselIndicators>
-          <CarouselIndicator target='#carouselExample' index={0} active />
-          <CarouselIndicator target='#carouselExample' index={1} />
-          <CarouselIndicator target='#carouselExample' index={2} />
+          <CarouselIndicator index={0} active />
+          <CarouselIndicator index={1} />
+          <CarouselIndicator index={2} />
         </CarouselIndicators>
       </CarouselOverlayControls>
     </Carousel>

@@ -4,12 +4,12 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselTopControlsDemo() {
   return (
-    <Carousel id='carouselStacked'>
+    <Carousel>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Top controls</h5>
         <div>
-          <CarouselControl target='#carouselStacked' direction='previous' size='sm' />
-          <CarouselControl target='#carouselStacked' direction='next' size='sm' />
+          <CarouselControl direction='previous' size='sm' />
+          <CarouselControl direction='next' size='sm' />
         </div>
       </div>
       <CarouselInner className='rounded-5'>

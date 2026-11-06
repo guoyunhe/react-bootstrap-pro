@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { ElementType } from 'react';
+import { createContext, useContext, useId, type ElementType } from 'react';
 
 import { Box } from './box';
 import type { BoxProps } from './box';
@@ -8,6 +8,27 @@ import { IconButton, type IconButtonProps } from './icon-button';
 export type CarouselEffect = 'slide' | 'fade';
 export type CarouselEnds = 'loop' | 'wrap' | 'stop';
 export type CarouselColorMode = 'light' | 'dark';
+
+const CarouselTargetContext = createContext<string | undefined>(undefined);
+
+function useCarouselTarget() {
+  const target = useContext(CarouselTargetContext);
+
+  if (!target) {
+    throw new Error('Carousel controls must be rendered inside a Carousel.');
+  }
+
+  return target;
+}
+
+function createCarouselId(reactId: string) {
+  const id = reactId.replaceAll(
+    /[^a-zA-Z0-9_-]/g,
+    (char) => `_${char.charCodeAt(0).toString(16)}_`,
+  );
+
+  return `carousel-${id}`;
+}
 
 export type CarouselProps<C extends ElementType = 'div'> = Omit<
   BoxProps<C>,
@@ -33,6 +54,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
 export function Carousel<C extends ElementType = 'div'>({
   component,
   className,
+  id: externalId,
   auto,
   autoplay,
   center,
@@ -42,23 +64,29 @@ export function Carousel<C extends ElementType = 'div'>({
   overlay,
   ...props
 }: CarouselProps<C>) {
+  const reactId = useId();
+  const id = externalId || createCarouselId(reactId);
+
   return (
-    <Box<C>
-      {...(props as BoxProps<C>)}
-      component={component ?? ('div' as C)}
-      data-bs-autoplay={autoplay ? 'true' : undefined}
-      data-bs-ends={ends}
-      data-bs-theme={colorMode}
-      classNameBefore={clsx(
-        'carousel',
-        auto && 'carousel-auto',
-        center && 'carousel-center',
-        effect === 'fade' ? 'carousel-fade' : 'slide',
-        overlay && 'carousel-overlay',
-        props.classNameBefore,
-      )}
-      className={className}
-    />
+    <CarouselTargetContext.Provider value={`#${id}`}>
+      <Box<C>
+        {...(props as BoxProps<C>)}
+        component={component ?? ('div' as C)}
+        id={id}
+        data-bs-autoplay={autoplay ? 'true' : undefined}
+        data-bs-ends={ends}
+        data-bs-theme={colorMode}
+        classNameBefore={clsx(
+          'carousel',
+          auto && 'carousel-auto',
+          center && 'carousel-center',
+          effect === 'fade' ? 'carousel-fade' : 'slide',
+          overlay && 'carousel-overlay',
+          props.classNameBefore,
+        )}
+        className={className}
+      />
+    </CarouselTargetContext.Provider>
   );
 }
 
@@ -121,18 +149,19 @@ export function CarouselIndicators<C extends ElementType = 'div'>({
 
 export type CarouselIndicatorProps<C extends ElementType = 'button'> = Omit<
   BoxProps<C>,
-  keyof { active?: boolean | undefined; index: number; target: string }
-> & { active?: boolean | undefined; index: number; target: string };
+  keyof { active?: boolean | undefined; index: number } | 'target'
+> & { active?: boolean | undefined; index: number };
 
 export function CarouselIndicator<C extends ElementType = 'button'>({
   component,
   className,
   active,
   index,
-  target,
   type,
   ...props
 }: CarouselIndicatorProps<C>) {
+  const target = useCarouselTarget();
+
   return (
     <Box<C>
       {...(props as BoxProps<C>)}
@@ -150,16 +179,15 @@ export function CarouselIndicator<C extends ElementType = 'button'>({
 
 export type CarouselControlProps<C extends ElementType = 'button'> = Omit<
   BoxProps<C>,
-  keyof {
-    direction: 'next' | 'previous';
-    size?: 'xs' | 'sm' | 'lg' | undefined;
-    target: string;
-    variant?: 'solid' | 'outline' | 'subtle' | undefined;
-  }
+  | keyof {
+      direction: 'next' | 'previous';
+      size?: 'xs' | 'sm' | 'lg' | undefined;
+      variant?: 'solid' | 'outline' | 'subtle' | undefined;
+    }
+  | 'target'
 > & {
   direction: 'next' | 'previous';
   size?: 'xs' | 'sm' | 'lg' | undefined;
-  target: string;
   variant?: 'solid' | 'outline' | 'subtle' | undefined;
 };
 
@@ -168,11 +196,11 @@ export function CarouselControl<C extends ElementType = 'button'>({
   className,
   direction,
   size,
-  target,
   type,
   variant,
   ...props
 }: CarouselControlProps<C>) {
+  const target = useCarouselTarget();
   const action = direction === 'previous' ? 'prev' : 'next';
   const iconButtonProps = {
     ...props,
@@ -194,27 +222,26 @@ export function CarouselControl<C extends ElementType = 'button'>({
 }
 
 type CarouselPlayPauseOwnProps = {
-  target: string;
   pauseLabel?: string | undefined;
   playLabel?: string | undefined;
 };
 
 export type CarouselPlayPauseProps<C extends ElementType = 'button'> = Omit<
   IconButtonProps<C>,
-  keyof CarouselPlayPauseOwnProps | 'children'
+  keyof CarouselPlayPauseOwnProps | 'children' | 'target'
 > &
   CarouselPlayPauseOwnProps;
 
 export function CarouselPlayPause<C extends ElementType = 'button'>({
   component,
   className,
-  target,
   pauseLabel = 'Pause',
   playLabel = 'Play',
   type,
   'aria-label': ariaLabel,
   ...props
 }: CarouselPlayPauseProps<C>) {
+  const target = useCarouselTarget();
   const iconButtonProps = {
     ...props,
     ...(component ? { component } : {}),

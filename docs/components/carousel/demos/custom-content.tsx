@@ -2,7 +2,7 @@ import { Carousel, CarouselControl, CarouselInner, CarouselItem } from 'react-bo
 
 export function CarouselCustomContentDemo() {
   return (
-    <Carousel id='carouselExampleContent'>
+    <Carousel>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <div
@@ -54,8 +54,8 @@ export function CarouselCustomContentDemo() {
         </CarouselItem>
       </CarouselInner>
       <div className='d-flex justify-content-center gap-2'>
-        <CarouselControl target='#carouselExampleContent' direction='previous' size='sm' />
-        <CarouselControl target='#carouselExampleContent' direction='next' size='sm' />
+        <CarouselControl direction='previous' size='sm' />
+        <CarouselControl direction='next' size='sm' />
       </div>
     </Carousel>
   );

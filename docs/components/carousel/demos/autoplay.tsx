@@ -12,7 +12,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselAutoplayDemo() {
   return (
-    <Carousel id='carouselExampleAutoplaying' autoplay>
+    <Carousel autoplay>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />
@@ -26,14 +26,14 @@ export function CarouselAutoplayDemo() {
       </CarouselInner>
       <div className='d-flex justify-content-between align-items-center mt-3'>
         <CarouselIndicators>
-          <CarouselIndicator target='#carouselExampleAutoplaying' index={0} active />
-          <CarouselIndicator target='#carouselExampleAutoplaying' index={1} />
-          <CarouselIndicator target='#carouselExampleAutoplaying' index={2} />
+          <CarouselIndicator index={0} active />
+          <CarouselIndicator index={1} />
+          <CarouselIndicator index={2} />
         </CarouselIndicators>
         <div>
-          <CarouselPlayPause target='#carouselExampleAutoplaying' size='sm' />
-          <CarouselControl target='#carouselExampleAutoplaying' direction='previous' size='sm' />
-          <CarouselControl target='#carouselExampleAutoplaying' direction='next' size='sm' />
+          <CarouselPlayPause size='sm' />
+          <CarouselControl direction='previous' size='sm' />
+          <CarouselControl direction='next' size='sm' />
         </div>
       </div>
     </Carousel>

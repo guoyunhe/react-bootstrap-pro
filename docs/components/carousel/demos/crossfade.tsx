@@ -4,7 +4,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselCrossfadeDemo() {
   return (
-    <Carousel id='carouselExampleFade' effect='fade'>
+    <Carousel effect='fade'>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />
@@ -17,8 +17,8 @@ export function CarouselCrossfadeDemo() {
         </CarouselItem>
       </CarouselInner>
       <div>
-        <CarouselControl target='#carouselExampleFade' direction='previous' size='sm' />
-        <CarouselControl target='#carouselExampleFade' direction='next' size='sm' />
+        <CarouselControl direction='previous' size='sm' />
+        <CarouselControl direction='next' size='sm' />
       </div>
     </Carousel>
   );

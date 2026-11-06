@@ -11,7 +11,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselIndicatorsDemo() {
   return (
-    <Carousel id='carouselStackedIndicators'>
+    <Carousel>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />
@@ -25,13 +25,13 @@ export function CarouselIndicatorsDemo() {
       </CarouselInner>
       <div className='d-flex justify-content-between align-items-center'>
         <div>
-          <CarouselControl target='#carouselStackedIndicators' direction='previous' size='sm' />
-          <CarouselControl target='#carouselStackedIndicators' direction='next' size='sm' />
+          <CarouselControl direction='previous' size='sm' />
+          <CarouselControl direction='next' size='sm' />
         </div>
         <CarouselIndicators>
-          <CarouselIndicator target='#carouselStackedIndicators' index={0} active />
-          <CarouselIndicator target='#carouselStackedIndicators' index={1} />
-          <CarouselIndicator target='#carouselStackedIndicators' index={2} />
+          <CarouselIndicator index={0} active />
+          <CarouselIndicator index={1} />
+          <CarouselIndicator index={2} />
         </CarouselIndicators>
       </div>
     </Carousel>

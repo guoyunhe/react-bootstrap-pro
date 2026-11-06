@@ -11,7 +11,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselIndividualIntervalsDemo() {
   return (
-    <Carousel id='carouselExampleInterval' autoplay>
+    <Carousel autoplay>
       <CarouselInner className='rounded-5'>
         <CarouselItem active interval={2000}>
           <CarouselSlidePlaceholder label='First: 2 seconds' />
@@ -25,11 +25,11 @@ export function CarouselIndividualIntervalsDemo() {
       </CarouselInner>
       <div className='d-flex justify-content-between align-items-center mt-3'>
         <CarouselIndicators>
-          <CarouselIndicator target='#carouselExampleInterval' index={0} active />
-          <CarouselIndicator target='#carouselExampleInterval' index={1} />
-          <CarouselIndicator target='#carouselExampleInterval' index={2} />
+          <CarouselIndicator index={0} active />
+          <CarouselIndicator index={1} />
+          <CarouselIndicator index={2} />
         </CarouselIndicators>
-        <CarouselPlayPause target='#carouselExampleInterval' size='sm' />
+        <CarouselPlayPause size='sm' />
       </div>
     </Carousel>
   );

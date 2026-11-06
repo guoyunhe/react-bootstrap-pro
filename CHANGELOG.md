@@ -7,6 +7,8 @@
 - Rename the Box `display` prop to `d`; the old prop is removed.
 - Replace Carousel's `fade` and `slide` boolean props with an `effect` prop
   accepting `'slide'` or `'fade'`; the default is `'slide'`.
+- Generate Carousel ids internally by default and connect nested controls
+  automatically; remove the controls' public `target` props.
 
 ### Added
 

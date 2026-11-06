@@ -4,7 +4,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselBottomControlsDemo() {
   return (
-    <Carousel id='carouselStackedBottom'>
+    <Carousel>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />
@@ -17,8 +17,8 @@ export function CarouselBottomControlsDemo() {
         </CarouselItem>
       </CarouselInner>
       <div>
-        <CarouselControl target='#carouselStackedBottom' direction='previous' size='sm' />
-        <CarouselControl target='#carouselStackedBottom' direction='next' size='sm' />
+        <CarouselControl direction='previous' size='sm' />
+        <CarouselControl direction='next' size='sm' />
       </div>
     </Carousel>
   );

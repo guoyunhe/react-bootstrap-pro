@@ -4,12 +4,12 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselEndWrapDemo() {
   return (
-    <Carousel id='carouselEndsWrap' ends='wrap'>
+    <Carousel ends='wrap'>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Wrap around</h5>
         <div>
-          <CarouselControl target='#carouselEndsWrap' direction='previous' size='sm' />
-          <CarouselControl target='#carouselEndsWrap' direction='next' size='sm' />
+          <CarouselControl direction='previous' size='sm' />
+          <CarouselControl direction='next' size='sm' />
         </div>
       </div>
       <CarouselInner className='rounded-5'>
