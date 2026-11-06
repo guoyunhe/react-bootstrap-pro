@@ -161,7 +161,8 @@ Bootstrap 使用 CSS 变量设置每个网格的模板和间距：
 | `--bs-columns` | `12`     | 网格模板中的列数。 |
 | `--bs-gap`     | `1.5rem` | 行和列之间的间距。 |
 
-`Grid` 提供 `columns` 和 `rows` 属性设置前两个变量。`--bs-gap` 可通过 `style` 传入 CSS 值。
+`Grid` 提供 `columns`、`rows` 和 `gridGap` 属性来设置这些变量。`gridGap` 接受 CSS
+`gap` 语法，包括分别设置行和列的间距；也可以通过 `style` 直接设置这些变量。
 
 ### 不使用网格类
 
@@ -219,7 +220,7 @@ Bootstrap 使用 CSS 变量设置每个网格的模板和间距：
 
 ```
 
-`--bs-gap` 变量也可以分别设置行间距和列间距：
+`gridGap` 属性也可以分别设置行间距和列间距：
 
 <DemoContainer>
   <TwoAxisGapDemo />
@@ -252,10 +253,12 @@ Bootstrap 根据 Sass 变量生成 `.g-col-*` 和 `.g-start-*` 类，因此生�
 | --------- | -------------- | ------ | -------------------------------------------------------------- |
 | `columns` | `number`       | —      | 设置 `--bs-columns`；优先于 `style` 中的同名变量。             |
 | `rows`    | `number`       | —      | 设置 `--bs-rows`；优先于 `style` 中的同名变量。                |
+| `gridGap` | `string`       | —      | 设置 `--bs-gap`；优先于 `style` 中的同名变量。                 |
 | `style`   | `CssGridStyle` | —      | 支持 CSS 属性及 `--bs-columns`、`--bs-rows`、`--bs-gap` 变量。 |
 
 继承所选元素的原生属性，以及 [`Box`](../box/README.mdx#api) 的全部工具类属性，包括
 `component` 和 `className`。
+继承的 `gap` 属性仍是独立的 `Box` 间距工具类属性。
 
 ### GridItem
 

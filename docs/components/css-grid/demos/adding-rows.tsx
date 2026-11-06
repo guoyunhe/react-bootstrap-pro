@@ -2,7 +2,7 @@ import { Box, Grid, GridItem } from 'react-bootstrap-pro';
 
 export function AddingRowsDemo() {
   return (
-    <Grid rows={3} columns={3} className='text-center'>
+    <Grid rows={3} columns={3} textAlign='center'>
       <Box bg='primary' bgo={10} rounded p={2}>
         Auto-column
       </Box>

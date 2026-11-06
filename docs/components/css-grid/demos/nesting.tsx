@@ -2,7 +2,7 @@ import { Box, Grid, GridItem } from 'react-bootstrap-pro';
 
 export function NestingGridDemo() {
   return (
-    <Grid columns={3} className='text-center' overflowX='auto'>
+    <Grid columns={3} textAlign='center' overflowX='auto'>
       <Box bg='primary' bgo={10} rounded p={2}>
         First auto-column
         <Grid columns={3}>

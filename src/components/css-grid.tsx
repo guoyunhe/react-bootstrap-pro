@@ -42,6 +42,7 @@ export type CssGridStyle = CSSProperties & {
 type CssGridOwnProps = {
   columns?: number | undefined;
   rows?: number | undefined;
+  gridGap?: string | undefined;
 };
 
 export type CssGridProps<C extends ElementType = 'div'> = CssGridOwnProps &
@@ -52,18 +53,20 @@ export type CssGridProps<C extends ElementType = 'div'> = CssGridOwnProps &
 export function Grid<C extends ElementType = 'div'>({
   columns,
   rows,
+  gridGap,
   style,
   classNameBefore,
   className,
   ...props
 }: CssGridProps<C>) {
   const gridStyle =
-    columns === undefined && rows === undefined
+    columns === undefined && rows === undefined && gridGap === undefined
       ? style
       : {
           ...style,
           ...(columns === undefined ? {} : { '--bs-columns': columns }),
           ...(rows === undefined ? {} : { '--bs-rows': rows }),
+          ...(gridGap === undefined ? {} : { '--bs-gap': gridGap }),
         };
   const boxProps = {
     ...props,

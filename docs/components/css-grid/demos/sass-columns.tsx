@@ -2,7 +2,7 @@ import { Box, Grid, GridItem } from 'react-bootstrap-pro';
 
 export function SassColumnsDemo() {
   return (
-    <Grid columns={18} style={{ '--bs-gap': '.5rem' }} className='text-center'>
+    <Grid columns={18} gridGap='.5rem' textAlign='center'>
       <GridItem style={{ gridColumn: 'span 14' }}>
         <Box bg='primary' bgo={10} rounded p={2}>
           14 columns

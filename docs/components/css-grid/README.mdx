@@ -178,8 +178,9 @@ Bootstrap uses CSS variables for each grid's template and spacing:
 | `--bs-columns` | `12`     | Number of columns in the grid template. |
 | `--bs-gap`     | `1.5rem` | Gap between columns and rows.           |
 
-`Grid` exposes `columns` and `rows` props for the first two variables. Pass a
-CSS value for `--bs-gap` through `style`.
+`Grid` exposes `columns`, `rows`, and `gridGap` props for these variables. The
+`gridGap` value accepts the CSS `gap` syntax, including separate row and column
+values. You can also set the variables directly through `style`.
 
 ### No grid classes
 
@@ -237,7 +238,7 @@ Set `rowGap` or `columnGap` in `style` to change spacing in one direction:
 
 ```
 
-The `--bs-gap` variable also accepts separate row and column values:
+The `gridGap` prop also accepts separate row and column values:
 
 <DemoContainer>
   <TwoAxisGapDemo />
@@ -272,10 +273,12 @@ Renders a `<div>` by default.
 | --------- | -------------- | ------- | --------------------------------------------------------------------------------- |
 | `columns` | `number`       | —       | Sets `--bs-columns`; takes precedence over the same variable in `style`.          |
 | `rows`    | `number`       | —       | Sets `--bs-rows`; takes precedence over the same variable in `style`.             |
+| `gridGap` | `string`       | —       | Sets `--bs-gap`; takes precedence over the same variable in `style`.              |
 | `style`   | `CssGridStyle` | —       | Accepts CSS properties and `--bs-columns`, `--bs-rows`, and `--bs-gap` variables. |
 
 Inherits native props for the selected element and all [`Box`](../box/README.mdx#api)
 utility props, including `component` and `className`.
+The inherited `gap` prop remains the separate `Box` spacing utility.
 
 ### GridItem
 
