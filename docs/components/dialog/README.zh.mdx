@@ -3,61 +3,359 @@ title: Dialog 对话框
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { CloseButton, Dialog, DialogBody, DialogHeader, DialogTitle } from 'react-bootstrap-pro';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { DemoContainer } from '../demo-container';
+import { DialogBasicDemo } from './demos/basic';
+import { DialogWithoutJavaScriptDemo } from './demos/without-javascript';
+import { DialogDarkDemo } from './demos/dark';
+import { DialogStaticBackdropDemo } from './demos/static-backdrop';
+import { DialogOverlaysDemo } from './demos/overlays';
+import { DialogInstantDemo } from './demos/instant';
+import { DialogSlideDownDemo } from './demos/slide-down';
+import { DialogSlideUpDemo } from './demos/slide-up';
+import { DialogScrollableDemo } from './demos/scrollable';
+import { DialogSwappingDemo } from './demos/swapping';
+import { DialogNonmodalDemo } from './demos/nonmodal';
+import { DialogSizesDemo } from './demos/sizes';
+import { DialogFullscreenDemo } from './demos/fullscreen';
+import { DialogResponsiveFullscreenDemo } from './demos/responsive-fullscreen';
 
 # Dialog 对话框
 
-`Dialog` 默认渲染原生 `<dialog>`。要打开模态对话框，请使用 Bootstrap JavaScript
-插件或原生 `showModal()` API；单独设置 `open` 属性会以非模态方式打开。
+## 工作方式
+
+`Dialog` 默认渲染原生 `<dialog>` 元素，并添加 Bootstrap 对话框类名；组件本身不管理
+打开状态。可以使用 Bootstrap JavaScript data API，或浏览器原生的 `showModal()`、
+`show()` 和 `close()` 方法控制对话框。
+
+`showModal()` 会在浏览器顶层打开模态对话框、显示背景并使文档其他内容不可交互。
+`show()` 和 `open` 属性会创建非模态对话框。`nonmodal` 属性只添加定位类，不会改变
+打开方式。
+
+## 示例
+
+使用 Bootstrap data API 将对话框作为模态对话框打开。插件也支持关闭按钮，并会在
+对话框关闭后将焦点还给触发按钮。
 
 <DemoContainer>
-  <Dialog open size='sm'>
-    <DialogHeader>
-      <DialogTitle>对话框标题</DialogTitle>
-      <CloseButton />
-    </DialogHeader>
-    <DialogBody>对话框内容</DialogBody>
-  </Dialog>
+  <DialogBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 无需 JavaScript
+
+浏览器支持时，可以通过原生 Invoker Commands API 打开和关闭对话框，无需 Bootstrap
+JavaScript。该 API 尚未被所有浏览器支持；需要更广泛兼容时，请使用 data API 或原生
+dialog 方法。
+
+<DemoContainer>
+  <DialogWithoutJavaScriptDemo />
+</DemoContainer>
+
+```tsx src='./demos/without-javascript.tsx'
+
+```
+
+## 深色对话框
+
+在对话框上设置 `data-bs-theme='dark'` 即可应用深色模式。
+
+<DemoContainer>
+  <DialogDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+## 静态背景
+
+默认情况下，点击背景会关闭模态对话框。在触发器上设置
+`data-bs-backdrop='static'` 可阻止点击背景关闭对话框。除非同时设置
+`data-bs-keyboard='false'`，关闭按钮和 Escape 键仍可关闭对话框。
+
+<DemoContainer>
+  <DialogStaticBackdropDemo />
+</DemoContainer>
+
+```tsx src='./demos/static-backdrop.tsx'
+
+```
+
+## 浮层组件
+
+Tooltip、Popover、Toast 和 Menu 可以在对话框中使用。模态对话框位于浏览器顶层，
+传送到 `document.body` 的浮层会显示在其后方。为 Tooltip 和 Popover 设置
+`data-bs-container`，使其渲染到对话框内部；Toast 和 Menu 应直接放在对话框标记中。
+
+<DemoContainer>
+  <DialogOverlaysDemo />
+</DemoContainer>
+
+```tsx src='./demos/overlays.tsx'
+
+```
+
+## 动画
+
+对话框默认使用淡入淡出动画。`instant` 属性会禁用过渡动画；`slide='down'` 和
+`slide='up'` 分别设置垂直进入与退出方向。系统启用减少动态效果时，过渡动画会被禁用。
+
+### 即时显示
+
+<DemoContainer>
+  <DialogInstantDemo />
+</DemoContainer>
+
+```tsx src='./demos/instant.tsx'
+
+```
+
+### 向下滑入
+
+<DemoContainer>
+  <DialogSlideDownDemo />
+</DemoContainer>
+
+```tsx src='./demos/slide-down.tsx'
+
+```
+
+### 向上滑入
+
+<DemoContainer>
+  <DialogSlideUpDemo />
+</DemoContainer>
+
+```tsx src='./demos/slide-up.tsx'
+
+```
+
+## 可滚动内容
+
+设置 `scrollable` 可限制对话框高度，并只滚动主体内容，让页眉和页脚保持固定。
+
+<DemoContainer>
+  <DialogScrollableDemo />
+</DemoContainer>
+
+```tsx src='./demos/scrollable.tsx'
+
+```
+
+## 切换对话框
+
+当已打开的对话框内部的 Bootstrap 触发器指向另一个对话框时，插件会先打开目标对话框，
+再关闭当前对话框，使切换过程中背景保持可见。
+
+<DemoContainer>
+  <DialogSwappingDemo />
+</DemoContainer>
+
+```tsx src='./demos/swapping.tsx'
+
+```
+
+## 非模态对话框
+
+Bootstrap 插件默认以模态方式打开对话框。在触发器上设置
+`data-bs-modal='false'` 会改用原生 `show()`。非模态对话框没有背景、不限制焦点，
+页面其他区域仍可交互；除非设置 `data-bs-keyboard='false'`，仍可使用 Escape 关闭。
+
+<DemoContainer>
+  <DialogNonmodalDemo />
+</DemoContainer>
+
+```tsx src='./demos/nonmodal.tsx'
+
+```
+
+## 可选尺寸
+
+`size` 属性会选择预设的最大宽度。较窄视口下，对话框仍会留出水平空间。
+
+| 尺寸 | `size` 属性 | 宽度     |
+| ---- | ----------- | -------- |
+| 小   | `'sm'`      | `280px`  |
+| 默认 | —           | `500px`  |
+| 大   | `'lg'`      | `800px`  |
+| 特大 | `'xl'`      | `1140px` |
+
+<DemoContainer>
+  <DialogSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## 全屏对话框
+
+设置 `fullscreen` 可让对话框在所有断点下填满视口。若只希望在特定断点以下全屏，可通过
+`className` 添加 Bootstrap 工具类。
+
+<DemoContainer>
+  <DialogFullscreenDemo />
+</DemoContainer>
+
+```tsx src='./demos/fullscreen.tsx'
+
+```
+
+以下响应式类会让对话框在对应断点以下全屏：
+
+| 类名                         | 全屏范围      |
+| ---------------------------- | ------------- |
+| `sm-down:dialog-fullscreen`  | `576px` 以下  |
+| `md-down:dialog-fullscreen`  | `768px` 以下  |
+| `lg-down:dialog-fullscreen`  | `1024px` 以下 |
+| `xl-down:dialog-fullscreen`  | `1280px` 以下 |
+| `2xl-down:dialog-fullscreen` | `1536px` 以下 |
+
+<DemoContainer>
+  <DialogResponsiveFullscreenDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive-fullscreen.tsx'
+
+```
+
+## CSS
+
+### CSS 变量
+
+可在对话框上覆盖以下变量以自定义外观。
+
+| 变量                              | 默认值                                              | 说明             |
+| --------------------------------- | --------------------------------------------------- | ---------------- |
+| `--bs-dialog-padding`             | `1rem`                                              | 主体内边距。     |
+| `--bs-dialog-width`               | `500px`                                             | 对话框宽度。     |
+| `--bs-dialog-margin`              | `1.75rem`                                           | 对话框周围间距。 |
+| `--bs-dialog-color`               | `var(--bs-fg-body)`                                 | 文字颜色。       |
+| `--bs-dialog-bg`                  | `var(--bs-bg-body)`                                 | 背景颜色。       |
+| `--bs-dialog-border-color`        | `var(--bs-border-color-translucent)`                | 边框颜色。       |
+| `--bs-dialog-border-width`        | `var(--bs-border-width)`                            | 边框宽度。       |
+| `--bs-dialog-border-radius`       | `var(--bs-radius-7)`                                | 圆角。           |
+| `--bs-dialog-box-shadow`          | `var(--bs-box-shadow-xl)`                           | 对话框阴影。     |
+| `--bs-dialog-transition-property` | `opacity, transform, visibility`                    | 动画属性。       |
+| `--bs-dialog-transition-duration` | `.3s`                                               | 过渡时长。       |
+| `--bs-dialog-transition-timing`   | `var(--bs-transition-timing-overlay)`               | 过渡时间函数。   |
+| `--bs-dialog-backdrop-bg`         | `light-dark(rgba(0, 0, 0, .5), rgba(0, 0, 0, .65))` | 背景颜色。       |
+| `--bs-dialog-backdrop-blur`       | `8px`                                               | 背景模糊程度。   |
+| `--bs-dialog-header-padding`      | `1rem`                                              | 页眉内边距。     |
+| `--bs-dialog-header-border-color` | `var(--bs-border-color-translucent)`                | 页眉分隔线颜色。 |
+| `--bs-dialog-header-border-width` | `var(--bs-border-width)`                            | 页眉分隔线宽度。 |
+| `--bs-dialog-footer-padding`      | `1rem`                                              | 页脚内边距。     |
+| `--bs-dialog-footer-border-color` | `var(--bs-border-color-translucent)`                | 页脚分隔线颜色。 |
+| `--bs-dialog-footer-border-width` | `var(--bs-border-width)`                            | 页脚分隔线宽度。 |
+| `--bs-dialog-footer-gap`          | `.5rem`                                             | 页脚操作间距。   |
+
+Sass `$dialog-sizes` map 定义 `sm`、`lg` 和 `xl` 的宽度。运行时可通过 CSS 变量
+`--bs-dialog-width` 单独调整某个对话框。
+
+## JavaScript 行为
+
+React 组件只提供标记和类名，不管理显示状态，也不会将 Bootstrap 插件选项作为 React
+属性提供。本文通过 Bootstrap JavaScript bundle 演示 data API；应用中只需加载一次，
+也可以通过 ref 调用原生 `<dialog>` 方法。
+
+### Data attributes
+
+| 属性                         | 说明                                   |
+| ---------------------------- | -------------------------------------- |
+| `data-bs-toggle='dialog'`    | 打开或切换目标对话框。                 |
+| `data-bs-target='#myDialog'` | 指定要控制的对话框。                   |
+| `data-bs-dismiss='dialog'`   | 在对话框内部关闭对话框。               |
+| `data-bs-backdrop='static'`  | 点击背景时不关闭对话框。               |
+| `data-bs-keyboard='false'`   | 禁止使用 Escape 关闭对话框。           |
+| `data-bs-modal='false'`      | 使用 `show()` 以非模态方式打开对话框。 |
+
+### JavaScript API
+
+Bootstrap `Dialog` 插件支持 `backdrop`、`keyboard` 和 `modal` 选项。这些是插件选项，
+不是 `Dialog` 组件属性。
+
+| 选项       | 类型                  | 默认值 | 说明                                                   |
+| ---------- | --------------------- | ------ | ------------------------------------------------------ |
+| `backdrop` | `boolean \| 'static'` | `true` | 点击背景时关闭、设为 `'static'` 保持打开，或隐藏背景。 |
+| `keyboard` | `boolean`             | `true` | 按下 Escape 时关闭。                                   |
+| `modal`    | `boolean`             | `true` | `true` 使用 `showModal()`，`false` 使用 `show()`。     |
+
+可通过插件实例进行命令式控制：
+
+```js
+const dialog = new bootstrap.Dialog('#myDialog', { modal: false });
+await dialog.show();
+await dialog.hide();
+```
+
+插件还提供 `toggle`、`dispose`、`getInstance` 和 `getOrCreateInstance`。`handleUpdate`
+仅为 API 一致性保留；原生对话框会自行处理位置。
+
+| 事件                      | 说明                     |
+| ------------------------- | ------------------------ |
+| `show.bs.dialog`          | 开始打开时触发。         |
+| `shown.bs.dialog`         | 对话框显示完成后触发。   |
+| `hide.bs.dialog`          | 开始关闭时触发。         |
+| `hidden.bs.dialog`        | 对话框隐藏后触发。       |
+| `hidePrevented.bs.dialog` | 静态背景阻止关闭时触发。 |
+| `cancel.bs.dialog`        | 按下 Escape 时触发。     |
 
 ## API
 
 ### Dialog
 
-默认渲染为 `dialog`。自有属性为 `size?: 'sm' | 'lg' | 'xl'`、
-`fullscreen?: boolean`、`scrollable?: boolean`、`nonmodal?: boolean`、
-`instant?: boolean` 和 `slide?: 'down' | 'up'`；继承所选元素的原生属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染原生 `<dialog>`。`component` 可以覆盖默认元素；替换后的元素需要支持所使用的
+对话框行为。
 
-| 属性         | 类型                   | 说明                                    |
-| ------------ | ---------------------- | --------------------------------------- |
-| `size`       | `'sm' \| 'lg' \| 'xl'` | 设置对话框宽度。                        |
-| `fullscreen` | `boolean`              | 填满视口。                              |
-| `scrollable` | `boolean`              | 仅滚动主体，固定页眉和页脚。            |
-| `nonmodal`   | `boolean`              | 添加非模态定位类。                      |
-| `instant`    | `boolean`              | 禁用过渡动画。                          |
-| `slide`      | `'up' \| 'down'`       | 设置进入/退出方向。                     |
-| `...props`   | `BoxProps<C>`          | 原生 dialog 属性及所有 Box 工具类属性。 |
+| 属性         | 类型                   | 默认值  | 说明                                                             |
+| ------------ | ---------------------- | ------- | ---------------------------------------------------------------- |
+| `size`       | `'sm' \| 'lg' \| 'xl'` | —       | 设置对话框宽度；默认宽度为 `500px`。                             |
+| `fullscreen` | `boolean`              | `false` | 让对话框填满视口。                                               |
+| `scrollable` | `boolean`              | `false` | 滚动主体，同时固定页眉和页脚。                                   |
+| `nonmodal`   | `boolean`              | `false` | 添加非模态定位类；需通过 `show()` 或插件的 `modal: false` 打开。 |
+| `instant`    | `boolean`              | `false` | 禁用对话框过渡动画。                                             |
+| `slide`      | `'up' \| 'down'`       | —       | 设置垂直进入与退出方向。                                         |
 
-`DialogHeader`、`DialogTitle`、`DialogBody` 和 `DialogFooter` 提供对应的结构类名。
+继承所选元素的原生属性及全部 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括
+`component` 和 `className`。
 
 ### DialogHeader
 
-默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及通过 `BoxProps<C>`
-继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
 
 ### DialogTitle
 
-默认渲染为 `h1`。没有自有属性；继承原生标题属性及通过 `BoxProps<C>` 继承的
-全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `h1`。没有自有属性；继承原生标题属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
 
 ### DialogBody
 
-默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及通过 `BoxProps<C>`
-继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
 
 ### DialogFooter
 
-默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及通过 `BoxProps<C>`
-继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+## 无障碍访问
+
+为每个对话框提供可见的 `DialogTitle`，并通过 `aria-labelledby` 关联标题；同时提供
+带有明确可访问名称的关闭按钮。使用 `showModal()` 或 Bootstrap 插件打开模态对话框时，
+浏览器会管理焦点，并阻止交互背景内容。可通过插件的 `keyboard` 选项禁用原生 Escape
+关闭行为。
+
+单独设置 `open` 属性不会创建模态对话框或背景。仅在浏览器支持时使用 Invoker Commands
+API；对不支持的浏览器应提供 JavaScript 回退方案。
+
+## 参考
+
+- [Bootstrap 6 Dialog 官方文档](https://getbootstrap.com/docs/6.0/components/dialog/)
+- [MDN：`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog)
+- [MDN：Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/dialog.tsx)

@@ -3,17 +3,42 @@ title: Dialog
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { CloseButton, Dialog, DialogBody, DialogHeader, DialogTitle } from 'react-bootstrap-pro';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { DemoContainer } from '../demo-container';
 import { DialogBasicDemo } from './demos/basic';
+import { DialogWithoutJavaScriptDemo } from './demos/without-javascript';
+import { DialogDarkDemo } from './demos/dark';
+import { DialogStaticBackdropDemo } from './demos/static-backdrop';
+import { DialogOverlaysDemo } from './demos/overlays';
+import { DialogInstantDemo } from './demos/instant';
+import { DialogSlideDownDemo } from './demos/slide-down';
+import { DialogSlideUpDemo } from './demos/slide-up';
+import { DialogScrollableDemo } from './demos/scrollable';
+import { DialogSwappingDemo } from './demos/swapping';
+import { DialogNonmodalDemo } from './demos/nonmodal';
+import { DialogSizesDemo } from './demos/sizes';
+import { DialogFullscreenDemo } from './demos/fullscreen';
+import { DialogResponsiveFullscreenDemo } from './demos/responsive-fullscreen';
 
 # Dialog
 
-`Dialog` defaults to the native `<dialog>` element. Use Bootstrap's JavaScript
-plugin or the native `showModal()` API to open a modal dialog; an `open`
-attribute alone is non-modal.
+## How it works
+
+`Dialog` renders the native `<dialog>` element and adds Bootstrap's dialog
+classes. It does not manage open state by itself. Use Bootstrap's JavaScript
+data API or the browser's `showModal()`, `show()`, and `close()` methods to
+control it.
+
+`showModal()` opens a modal dialog in the browser's top layer, displays the
+backdrop, and makes the rest of the document inert. `show()` and the `open`
+attribute create a non-modal dialog. The `nonmodal` prop only adds a positioning
+class; it does not change how the dialog is opened.
 
 ## Example
+
+Use the Bootstrap data API to open the dialog as a modal. The plugin also
+supports dismissal buttons and restores focus to the trigger when the dialog
+closes.
 
 <DemoContainer>
   <DialogBasicDemo />
@@ -23,61 +48,330 @@ attribute alone is non-modal.
 
 ```
 
-## Modal behavior
+## Without JavaScript
 
-Use `showModal()` or Bootstrap's dialog plugin for modal focus and backdrop
-behavior. The `open` attribute alone only opens the native dialog non-modally.
+Supported browsers can open and close a dialog with the native Invoker Commands
+API. It does not require Bootstrap JavaScript, but browser support is limited.
+Use the data API or native dialog methods when you need broader browser support.
+
+<DemoContainer>
+  <DialogWithoutJavaScriptDemo />
+</DemoContainer>
+
+```tsx src='./demos/without-javascript.tsx'
+
+```
+
+## Dark dialog
+
+Set `data-bs-theme='dark'` on the dialog to apply the dark color mode.
+
+<DemoContainer>
+  <DialogDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+## Static backdrop
+
+By default, clicking the backdrop dismisses a modal dialog. Set
+`data-bs-backdrop='static'` on the trigger to keep it open when the backdrop is
+clicked. The close button and Escape key still dismiss it unless
+`data-bs-keyboard='false'` is also set.
+
+<DemoContainer>
+  <DialogStaticBackdropDemo />
+</DemoContainer>
+
+```tsx src='./demos/static-backdrop.tsx'
+
+```
+
+## Overlays
+
+Tooltips, popovers, toasts, and menus can be used inside a dialog. A modal
+dialog is rendered in the browser's top layer, so overlays portalled to
+`document.body` appear behind it. Set `data-bs-container` to the dialog for
+tooltips and popovers; place toasts and menus inside the dialog markup.
+
+<DemoContainer>
+  <DialogOverlaysDemo />
+</DemoContainer>
+
+```tsx src='./demos/overlays.tsx'
+
+```
+
+## Animations
+
+Dialogs fade by default. The `instant` prop disables transitions, while
+`slide='down'` and `slide='up'` select a vertical entry and exit direction.
+Reduced-motion preferences disable the transition.
+
+### Instant
+
+<DemoContainer>
+  <DialogInstantDemo />
+</DemoContainer>
+
+```tsx src='./demos/instant.tsx'
+
+```
+
+### Slide down
+
+<DemoContainer>
+  <DialogSlideDownDemo />
+</DemoContainer>
+
+```tsx src='./demos/slide-down.tsx'
+
+```
+
+### Slide up
+
+<DemoContainer>
+  <DialogSlideUpDemo />
+</DemoContainer>
+
+```tsx src='./demos/slide-up.tsx'
+
+```
+
+## Scrollable
+
+Set `scrollable` to constrain the dialog height and scroll its body while the
+header and footer remain fixed.
+
+<DemoContainer>
+  <DialogScrollableDemo />
+</DemoContainer>
+
+```tsx src='./demos/scrollable.tsx'
+
+```
+
+## Swapping dialogs
+
+When a Bootstrap dialog trigger inside an open dialog targets another dialog,
+the plugin opens the next dialog before closing the current one. This keeps the
+backdrop visible during the transition.
+
+<DemoContainer>
+  <DialogSwappingDemo />
+</DemoContainer>
+
+```tsx src='./demos/swapping.tsx'
+
+```
+
+## Non-modal dialogs
+
+The Bootstrap plugin opens modal dialogs by default. Set
+`data-bs-modal='false'` on a trigger to call the native `show()` method instead.
+A non-modal dialog has no backdrop, does not trap focus, and leaves the rest of
+the page interactive. It still closes with Escape unless
+`data-bs-keyboard='false'` is set.
+
+<DemoContainer>
+  <DialogNonmodalDemo />
+</DemoContainer>
+
+```tsx src='./demos/nonmodal.tsx'
+
+```
+
+## Optional sizes
+
+The `size` prop selects a predefined maximum width. Dialogs retain horizontal
+space on narrow viewports.
+
+| Size        | `size` prop | Width    |
+| ----------- | ----------- | -------- |
+| Small       | `'sm'`      | `280px`  |
+| Default     | —           | `500px`  |
+| Large       | `'lg'`      | `800px`  |
+| Extra large | `'xl'`      | `1140px` |
+
+<DemoContainer>
+  <DialogSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## Fullscreen dialog
+
+Set `fullscreen` to cover the viewport at every breakpoint. For responsive
+fullscreen behavior, use the Bootstrap utility class through `className`.
+
+<DemoContainer>
+  <DialogFullscreenDemo />
+</DemoContainer>
+
+```tsx src='./demos/fullscreen.tsx'
+
+```
+
+Available responsive classes make a dialog fullscreen below the named
+breakpoint:
+
+| Class                        | Fullscreen below |
+| ---------------------------- | ---------------- |
+| `sm-down:dialog-fullscreen`  | `576px`          |
+| `md-down:dialog-fullscreen`  | `768px`          |
+| `lg-down:dialog-fullscreen`  | `1024px`         |
+| `xl-down:dialog-fullscreen`  | `1280px`         |
+| `2xl-down:dialog-fullscreen` | `1536px`         |
+
+<DemoContainer>
+  <DialogResponsiveFullscreenDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive-fullscreen.tsx'
+
+```
+
+## CSS
+
+### CSS variables
+
+Override these variables on the dialog to customize its appearance.
+
+| Variable                          | Default                                             | Description                      |
+| --------------------------------- | --------------------------------------------------- | -------------------------------- |
+| `--bs-dialog-padding`             | `1rem`                                              | Body padding.                    |
+| `--bs-dialog-width`               | `500px`                                             | Dialog width.                    |
+| `--bs-dialog-margin`              | `1.75rem`                                           | Minimum space around the dialog. |
+| `--bs-dialog-color`               | `var(--bs-fg-body)`                                 | Text color.                      |
+| `--bs-dialog-bg`                  | `var(--bs-bg-body)`                                 | Background color.                |
+| `--bs-dialog-border-color`        | `var(--bs-border-color-translucent)`                | Border color.                    |
+| `--bs-dialog-border-width`        | `var(--bs-border-width)`                            | Border width.                    |
+| `--bs-dialog-border-radius`       | `var(--bs-radius-7)`                                | Border radius.                   |
+| `--bs-dialog-box-shadow`          | `var(--bs-box-shadow-xl)`                           | Dialog shadow.                   |
+| `--bs-dialog-transition-property` | `opacity, transform, visibility`                    | Animated properties.             |
+| `--bs-dialog-transition-duration` | `.3s`                                               | Transition duration.             |
+| `--bs-dialog-transition-timing`   | `var(--bs-transition-timing-overlay)`               | Transition timing function.      |
+| `--bs-dialog-backdrop-bg`         | `light-dark(rgba(0, 0, 0, .5), rgba(0, 0, 0, .65))` | Backdrop color.                  |
+| `--bs-dialog-backdrop-blur`       | `8px`                                               | Backdrop blur.                   |
+| `--bs-dialog-header-padding`      | `1rem`                                              | Header padding.                  |
+| `--bs-dialog-header-border-color` | `var(--bs-border-color-translucent)`                | Header divider color.            |
+| `--bs-dialog-header-border-width` | `var(--bs-border-width)`                            | Header divider width.            |
+| `--bs-dialog-footer-padding`      | `1rem`                                              | Footer padding.                  |
+| `--bs-dialog-footer-border-color` | `var(--bs-border-color-translucent)`                | Footer divider color.            |
+| `--bs-dialog-footer-border-width` | `var(--bs-border-width)`                            | Footer divider width.            |
+| `--bs-dialog-footer-gap`          | `.5rem`                                             | Gap between footer actions.      |
+
+The Sass `$dialog-sizes` map defines the `sm`, `lg`, and `xl` widths. Use the
+CSS variable `--bs-dialog-width` to customize an individual dialog at runtime.
+
+## JavaScript behavior
+
+The React components provide markup and classes; they do not manage visibility
+or expose Bootstrap plugin options as React props. The page imports Bootstrap's
+JavaScript bundle for the examples below. For an application, load the bundle
+once or control the native `<dialog>` element through a ref.
+
+### Data attributes
+
+| Attribute                    | Description                                 |
+| ---------------------------- | ------------------------------------------- |
+| `data-bs-toggle='dialog'`    | Opens or toggles the target dialog.         |
+| `data-bs-target='#myDialog'` | Selects the dialog to control.              |
+| `data-bs-dismiss='dialog'`   | Closes the dialog when activated inside it. |
+| `data-bs-backdrop='static'`  | Prevents dismissal from a backdrop click.   |
+| `data-bs-keyboard='false'`   | Prevents dismissal with Escape.             |
+| `data-bs-modal='false'`      | Opens the dialog non-modally with `show()`. |
+
+### JavaScript API
+
+The Bootstrap `Dialog` plugin accepts `backdrop`, `keyboard`, and `modal`
+options. These are plugin options, not `Dialog` component props.
+
+| Option     | Type                  | Default | Description                                                                 |
+| ---------- | --------------------- | ------- | --------------------------------------------------------------------------- |
+| `backdrop` | `boolean \| 'static'` | `true`  | Dismiss on backdrop click, keep open with `'static'`, or hide the backdrop. |
+| `keyboard` | `boolean`             | `true`  | Dismiss when Escape is pressed.                                             |
+| `modal`    | `boolean`             | `true`  | Use `showModal()` when true or `show()` when false.                         |
+
+Use the plugin instance for imperative control:
+
+```js
+const dialog = new bootstrap.Dialog('#myDialog', { modal: false });
+await dialog.show();
+await dialog.hide();
+```
+
+The plugin also provides `toggle`, `dispose`, `getInstance`, and
+`getOrCreateInstance`. `handleUpdate` is provided for API consistency; native
+dialogs handle their own positioning.
+
+| Event                     | Description                                 |
+| ------------------------- | ------------------------------------------- |
+| `show.bs.dialog`          | Fires when opening begins.                  |
+| `shown.bs.dialog`         | Fires after the dialog is visible.          |
+| `hide.bs.dialog`          | Fires when closing begins.                  |
+| `hidden.bs.dialog`        | Fires after the dialog is hidden.           |
+| `hidePrevented.bs.dialog` | Fires when a static backdrop blocks hiding. |
+| `cancel.bs.dialog`        | Fires when Escape is pressed.               |
 
 ## API
 
 ### Dialog
 
-Renders a `dialog` by default. Its own props are `size?: 'sm' | 'lg' | 'xl'`,
-`fullscreen?: boolean`, `scrollable?: boolean`, `nonmodal?: boolean`,
-`instant?: boolean`, and `slide?: 'down' | 'up'`; it inherits native props for
-the selected element and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+Renders a native `<dialog>` by default. `component` can override the element;
+when doing so, the replacement must support the dialog behavior you use.
 
-| Prop         | Type                   | Description                                                 |
-| ------------ | ---------------------- | ----------------------------------------------------------- |
-| `size`       | `'sm' \| 'lg' \| 'xl'` | Sets the dialog width.                                      |
-| `fullscreen` | `boolean`              | Fills the viewport.                                         |
-| `scrollable` | `boolean`              | Makes the body scroll while header and footer remain fixed. |
-| `nonmodal`   | `boolean`              | Adds the non-modal positioning class.                       |
-| `instant`    | `boolean`              | Disables transitions.                                       |
-| `slide`      | `'up' \| 'down'`       | Selects the entry/exit direction.                           |
-| `...props`   | `BoxProps<C>`          | Native dialog props and all Box utility props.              |
+| Prop         | Type                   | Default | Description                                                                                   |
+| ------------ | ---------------------- | ------- | --------------------------------------------------------------------------------------------- |
+| `size`       | `'sm' \| 'lg' \| 'xl'` | —       | Sets the dialog width; the default width is `500px`.                                          |
+| `fullscreen` | `boolean`              | `false` | Makes the dialog fill the viewport.                                                           |
+| `scrollable` | `boolean`              | `false` | Scrolls the body while keeping the header and footer in place.                                |
+| `nonmodal`   | `boolean`              | `false` | Adds the non-modal positioning class; use `show()` or the plugin's `modal: false` to open it. |
+| `instant`    | `boolean`              | `false` | Disables dialog transitions.                                                                  |
+| `slide`      | `'up' \| 'down'`       | —       | Selects the vertical entry and exit direction.                                                |
 
-`DialogHeader`, `DialogTitle`, `DialogBody`, and `DialogFooter` provide the
-corresponding structural classes.
+Inherits native props for the selected element and all [`Box`](../box/README.mdx#api)
+utility props, including `component` and `className`.
 
 ### DialogHeader
 
 Renders a `div` by default. It has no own props and inherits native `div` props
-and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+and [`Box`](../box/README.mdx#api) utility props.
 
 ### DialogTitle
 
 Renders an `h1` by default. It has no own props and inherits native heading
-props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+props and [`Box`](../box/README.mdx#api) utility props.
 
 ### DialogBody
 
 Renders a `div` by default. It has no own props and inherits native `div` props
-and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+and [`Box`](../box/README.mdx#api) utility props.
 
 ### DialogFooter
 
 Renders a `div` by default. It has no own props and inherits native `div` props
-and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+and [`Box`](../box/README.mdx#api) utility props.
 
 ## Accessibility
 
-Associate the dialog with a visible title using `aria-labelledby`, and provide
-a clear way to close it. Native modal dialogs manage focus when opened with
-`showModal()`.
+Give each dialog a visible `DialogTitle` and connect it with
+`aria-labelledby`. Provide a clearly labeled close button. Opening a modal with
+`showModal()` or the Bootstrap plugin enables native focus management and makes
+background content inert. The native Escape behavior can be disabled through
+the plugin's `keyboard` option.
+
+Setting the `open` attribute alone does not create a modal dialog or backdrop.
+Use the Invoker Commands API only where supported, and provide a JavaScript
+fallback for browsers that do not support it.
 
 ## See
 
 - [Bootstrap 6 Dialog documentation](https://getbootstrap.com/docs/6.0/components/dialog/)
+- [MDN: `<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog)
+- [MDN: Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/dialog.tsx)
