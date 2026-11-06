@@ -3,16 +3,32 @@ title: Collapse
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Collapse } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { CollapseBasicDemo } from './demos/basic';
+import { CollapseHorizontalDemo } from './demos/horizontal';
+import { CollapseMultipleTogglesDemo } from './demos/multiple-toggles';
 
 # Collapse
 
-`Collapse` provides the `.collapse` panel classes. Control the `show` prop from
-React, or use Bootstrap's JavaScript plugin and matching `data-bs-*` attributes.
+`Collapse` applies Bootstrap's `.collapse` classes to a panel. It does not
+manage state or initialize Bootstrap's JavaScript plugin; use React state with
+`show`, or load the Bootstrap plugin and use its data attributes.
+
+## How it works
+
+`.collapse` hides the panel and `.collapse.show` displays it. Bootstrap animates
+the panel's size when the browser supports `interpolate-size`. Browsers without
+that support still show and hide the panel, but without the size animation.
+Bootstrap also respects reduced-motion preferences.
+
+Do not put padding on the `.collapse` element itself. Use it as a wrapper and
+put padding on an inner element so the size transition can reach zero.
 
 ## Example
+
+Use a button to toggle a panel. The anchor demonstrates the alternate trigger
+style; buttons are preferred for actions. Both triggers below are controlled by
+React state rather than Bootstrap's JavaScript plugin.
 
 <DemoContainer>
   <CollapseBasicDemo />
@@ -22,34 +38,86 @@ React, or use Bootstrap's JavaScript plugin and matching `data-bs-*` attributes.
 
 ```
 
-## Trigger
+## Horizontal
 
-Connect a button to the panel with matching IDs when using Bootstrap's plugin.
+Set `horizontal` to animate the inline size instead of the block size. Set a
+width on the collapse element's immediate child; the `min-height` in the
+upstream example is only for layout and is not required.
+
+<DemoContainer>
+  <CollapseHorizontalDemo />
+</DemoContainer>
+
+```tsx src='./demos/horizontal.tsx'
+
+```
+
+## Multiple toggles and targets
+
+One control can toggle multiple panels, and multiple controls can toggle the
+same panel. Each React-controlled panel keeps its own `show` state.
+
+<DemoContainer>
+  <CollapseMultipleTogglesDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple-toggles.tsx'
+
+```
+
+## Accessibility
+
+Use a native button for each trigger and keep its `aria-expanded` value in sync
+with the controlled panel. Connect a trigger to its panel with `aria-controls`.
+When an anchor is used as a trigger, give it `role="button"` and prevent its
+default navigation behavior. Bootstrap's plugin updates the trigger state for
+you; React-controlled examples must update it from the same state as `show`.
+
+The collapse plugin does not implement all optional keyboard interactions from
+the ARIA accordion pattern. For grouped accordion behavior, use the
+[`Accordion`](../accordion/README.mdx) component or add the desired keyboard
+behavior yourself.
+
+## CSS
+
+Bootstrap exposes these collapse transition variables. Horizontal collapse
+changes the transition-property value to `inline-size, display`.
+
+| CSS variable                        | Default               | Description                         |
+| ----------------------------------- | --------------------- | ----------------------------------- |
+| `--bs-transition-collapse-property` | `block-size, display` | Properties used for the transition. |
+| `--bs-transition-collapse-duration` | `.35s`                | Transition duration.                |
+| `--bs-transition-collapse-timing`   | `ease`                | Transition timing function.         |
+
+## Bootstrap JavaScript plugin
+
+The Bootstrap plugin can be used instead of React state. Load Bootstrap's
+JavaScript separately, put an `id` on the `Collapse` panel, and connect a
+trigger with `data-bs-toggle="collapse"` and `data-bs-target="#panel-id"`.
+Multiple panels can be targeted with a selector. The `data-bs-parent` option
+adds accordion-like exclusive behavior. Do not let the plugin and React both
+control the same panel.
 
 ## API
 
 ### Collapse
 
-Renders a `div` by default. Its own props are `horizontal`, which applies the
-horizontal collapse modifier, and `show`, which applies the visible state.
-It inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) props, including `component`, `className`, and
-`classNameBefore`.
+Renders a `div` by default. Its own props are `show`, which adds the `.show`
+class, and `horizontal`, which adds the `.collapse-horizontal` class. These
+props default to `false` and only set classes; they do not manage state or
+invoke Bootstrap's JavaScript plugin.
 
-| Prop         | Type          | Description                             |
-| ------------ | ------------- | --------------------------------------- |
-| `show`       | `boolean`     | Adds `.show` to display the panel.      |
-| `horizontal` | `boolean`     | Uses the horizontal collapse modifier.  |
-| `component`  | `ElementType` | Changes the root element.               |
-| `...props`   | `BoxProps<C>` | Native props and all Box utility props. |
+`Collapse` inherits native props for its selected root element and all
+[`Box`](../box/README.mdx#api) props. The inherited `component` prop changes the
+root element; doing so also changes the applicable native props and semantics.
 
-## Accessibility
-
-Keep `aria-expanded` in sync with the panel state and connect the trigger to the
-panel using `aria-controls`. Horizontal collapse also needs a width on its
-immediate child.
+| Prop         | Type      | Default | Description                            |
+| ------------ | --------- | ------- | -------------------------------------- |
+| `show`       | `boolean` | `false` | Adds `.show` to display the panel.     |
+| `horizontal` | `boolean` | `false` | Animates the inline size of the panel. |
 
 ## See
 
 - [Bootstrap 6 Collapse documentation](https://getbootstrap.com/docs/6.0/components/collapse/)
+- [Accordion documentation](../accordion/README.mdx)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/collapse.tsx)
