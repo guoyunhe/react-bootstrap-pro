@@ -4,7 +4,7 @@ import {
   CarouselIndicators,
   CarouselInner,
   CarouselItem,
-  IconButton,
+  CarouselPlayPause,
 } from 'react-bootstrap-pro';
 
 import { CarouselSlidePlaceholder } from './shared';
@@ -29,17 +29,7 @@ export function CarouselIndividualIntervalsDemo() {
           <CarouselIndicator target='#carouselExampleInterval' index={1} />
           <CarouselIndicator target='#carouselExampleInterval' index={2} />
         </CarouselIndicators>
-        <IconButton
-          className='carousel-control-play-pause'
-          size='sm'
-          aria-label='Pause'
-          data-bs-target='#carouselExampleInterval'
-          data-bs-pause-label='Pause'
-          data-bs-play-label='Play'
-        >
-          <span className='carousel-icon-pause' aria-hidden='true' />
-          <span className='carousel-icon-play' aria-hidden='true' />
-        </IconButton>
+        <CarouselPlayPause target='#carouselExampleInterval' size='sm' />
       </div>
     </Carousel>
   );

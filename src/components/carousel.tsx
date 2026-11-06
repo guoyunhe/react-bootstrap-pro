@@ -193,6 +193,47 @@ export function CarouselControl<C extends ElementType = 'button'>({
   );
 }
 
+type CarouselPlayPauseOwnProps = {
+  target: string;
+  pauseLabel?: string | undefined;
+  playLabel?: string | undefined;
+};
+
+export type CarouselPlayPauseProps<C extends ElementType = 'button'> = Omit<
+  IconButtonProps<C>,
+  keyof CarouselPlayPauseOwnProps | 'children'
+> &
+  CarouselPlayPauseOwnProps;
+
+export function CarouselPlayPause<C extends ElementType = 'button'>({
+  component,
+  className,
+  target,
+  pauseLabel = 'Pause',
+  playLabel = 'Play',
+  type,
+  'aria-label': ariaLabel,
+  ...props
+}: CarouselPlayPauseProps<C>) {
+  const iconButtonProps = {
+    ...props,
+    ...(component ? { component } : {}),
+    className: clsx('carousel-control-play-pause', className),
+    type: type ?? 'button',
+    'aria-label': ariaLabel ?? pauseLabel,
+    'data-bs-target': target,
+    'data-bs-pause-label': pauseLabel,
+    'data-bs-play-label': playLabel,
+  } as IconButtonProps<C>;
+
+  return (
+    <IconButton<C> {...iconButtonProps}>
+      <span className='carousel-icon-pause' aria-hidden='true' />
+      <span className='carousel-icon-play' aria-hidden='true' />
+    </IconButton>
+  );
+}
+
 export type CarouselOverlayControlsProps<C extends ElementType = 'div'> = BoxProps<C>;
 
 export function CarouselOverlayControls<C extends ElementType = 'div'>({

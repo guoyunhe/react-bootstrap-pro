@@ -318,6 +318,19 @@ Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻�
 [`IconButton`](../button/README.zh.mdx#iconbutton) 属性及
 [`Box`](../box/README.zh.mdx#api) 工具类属性。
 
+### CarouselPlayPause
+
+| 属性         | 类型     | 默认值    | 说明                         |
+| ------------ | -------- | --------- | ---------------------------- |
+| `target`     | `string` | 必填      | 目标轮播的选择器。           |
+| `pauseLabel` | `string` | `'Pause'` | 轮播播放时使用的无障碍名称。 |
+| `playLabel`  | `string` | `'Play'`  | 轮播暂停时使用的无障碍名称。 |
+
+默认渲染为 `button`，包含播放和暂停图标。Bootstrap 轮播插件会根据标签属性切换图标和无障碍名称。
+继承的 `component` 属性可更换根元素。接受所选元素的原生属性、
+[`IconButton`](../button/README.zh.mdx#iconbutton) 属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
 ### CarouselOverlayControls
 
 默认渲染为用于将控件置于幻灯片上方的 `div`。继承的 `component` 属性可更换根元素。

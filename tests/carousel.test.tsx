@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { Carousel, CarouselControl, CarouselItem } from '../src';
+import { Carousel, CarouselControl, CarouselItem, CarouselPlayPause } from '../src';
 
 test('composes carousel structure and control attributes', async () => {
   const screen = await render(
@@ -54,4 +54,25 @@ test('defaults to the slide effect', async () => {
   expect(screen.getByTestId('carousel')).not.toHaveAttribute('data-bs-ends');
   expect(screen.getByTestId('carousel')).not.toHaveAttribute('data-bs-autoplay');
   expect(screen.getByTestId('carousel')).not.toHaveAttribute('data-bs-theme');
+});
+
+test('renders a play-pause control with labels and target attributes', async () => {
+  const screen = await render(
+    <CarouselPlayPause
+      target='#carousel'
+      size='sm'
+      pauseLabel='Pause slideshow'
+      playLabel='Play slideshow'
+    />,
+  );
+
+  const button = screen.getByRole('button', { name: 'Pause slideshow' });
+
+  expect(button).toHaveClass('btn-icon', 'btn-sm', 'carousel-control-play-pause');
+  expect(button).toHaveAttribute('type', 'button');
+  expect(button).toHaveAttribute('data-bs-target', '#carousel');
+  expect(button).toHaveAttribute('data-bs-pause-label', 'Pause slideshow');
+  expect(button).toHaveAttribute('data-bs-play-label', 'Play slideshow');
+  expect(button.element().querySelector('.carousel-icon-pause')).not.toBeNull();
+  expect(button.element().querySelector('.carousel-icon-play')).not.toBeNull();
 });
