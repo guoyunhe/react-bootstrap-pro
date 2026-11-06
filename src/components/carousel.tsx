@@ -39,6 +39,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
     colorMode?: CarouselColorMode | undefined;
     effect?: CarouselEffect | undefined;
     ends?: CarouselEnds | undefined;
+    items?: number | undefined;
     itemsGap?: CSSProperties['gap'] | undefined;
     itemsPeek?: CSSProperties['width'] | undefined;
     overlay?: boolean | undefined;
@@ -50,6 +51,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
   colorMode?: CarouselColorMode | undefined;
   effect?: CarouselEffect | undefined;
   ends?: CarouselEnds | undefined;
+  items?: number | undefined;
   itemsGap?: CSSProperties['gap'] | undefined;
   itemsPeek?: CSSProperties['width'] | undefined;
   overlay?: boolean | undefined;
@@ -65,6 +67,7 @@ export function Carousel<C extends ElementType = 'div'>({
   colorMode,
   effect = 'slide',
   ends,
+  items,
   itemsGap,
   itemsPeek,
   overlay,
@@ -73,10 +76,11 @@ export function Carousel<C extends ElementType = 'div'>({
   const reactId = useId();
   const id = externalId || createCarouselId(reactId);
   const style: CSSProperties | undefined =
-    itemsGap === undefined && itemsPeek === undefined
+    items === undefined && itemsGap === undefined && itemsPeek === undefined
       ? props.style
       : {
           ...props.style,
+          ...(items === undefined ? {} : { '--bs-carousel-items': String(items) }),
           ...(itemsGap === undefined
             ? {}
             : {

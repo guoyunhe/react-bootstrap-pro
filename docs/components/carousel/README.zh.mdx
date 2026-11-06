@@ -128,17 +128,13 @@ Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻�
 
 ## 幻灯片布局
 
-设置 `--bs-carousel-items` 控制同时显示的幻灯片数量。使用 `itemsGap` 属性增加间距，使用
-`itemsPeek` 属性露出相邻幻灯片的一部分。幻灯片数量对应的 CSS 选项不需要 JavaScript：
-
-- `--bs-carousel-items` 设置每个视口可完整显示的幻灯片数量（默认 `1`）。
-
-`itemsGap` 接受 CSS gap 值，`itemsPeek` 接受 CSS width 值，例如 `'1rem'`；数字值按像素处理。
-`itemsPeek` 默认为 `0`。
+使用 `items` 控制每个视口可完整显示的幻灯片数量（默认 `1`）。设置 `itemsGap` 增加间距，
+设置 `itemsPeek` 露出相邻幻灯片的一部分（默认 `0`）。`itemsGap` 和 `itemsPeek` 接受 CSS
+值，例如 `'1rem'`；数字值按像素处理。
 
 ### 多项显示
 
-设置 `--bs-carousel-items`，即可同时显示多个幻灯片。
+设置 `items`，例如 `items={3}`，即可同时显示多个幻灯片。
 
 <DemoContainer>
   <CarouselMultipleItemsDemo />
@@ -268,6 +264,7 @@ Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻�
 | `effect`    | `'slide' \| 'fade'`          | `'slide'` | 选择滑动或淡入淡出效果。                     |
 | `ends`      | `'loop' \| 'wrap' \| 'stop'` | `'loop'`  | 选择轮播到达首尾时的行为。                   |
 | `id`        | `string`                     | 自动生成  | 设置根元素的 id。                            |
+| `items`     | `number`                     | `1`       | 设置每个视口可完整显示的幻灯片数量。         |
 | `itemsGap`  | `string \| number`           | —         | 设置幻灯片间距；数字值按像素处理。           |
 | `itemsPeek` | `string \| number`           | —         | 露出相邻幻灯片；数字值按像素处理。           |
 | `overlay`   | `boolean`                    | `false`   | 将叠加控件放置在幻灯片上方。                 |

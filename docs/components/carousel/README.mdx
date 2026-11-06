@@ -132,19 +132,14 @@ content remains legible. Reduced-motion preferences disable the transition.
 
 ## Items
 
-Set `--bs-carousel-items` to control how many slides are visible. Use the
-`itemsGap` prop to add space between slides and `itemsPeek` to reveal parts of
-neighboring slides. The slide count CSS option requires no JavaScript:
-
-- `--bs-carousel-items` sets the number of whole slides visible per view (default `1`).
-
-`itemsGap` accepts a CSS gap value, and `itemsPeek` accepts a CSS width value,
-such as `'1rem'`; numeric values are treated as pixels. `itemsPeek` defaults to
-`0`.
+Use `items` to control how many whole slides are visible per view (default `1`).
+Set `itemsGap` to add space between slides and `itemsPeek` to reveal parts of
+neighboring slides (default `0`). `itemsGap` and `itemsPeek` accept CSS values
+such as `'1rem'`; numeric values are treated as pixels.
 
 ### Multiple items
 
-Show several slides at once by setting `--bs-carousel-items`.
+Show several slides at once by setting `items`, for example `items={3}`.
 
 <DemoContainer>
   <CarouselMultipleItemsDemo />
@@ -281,6 +276,7 @@ contrast against slide content.
 | `effect`    | `'slide' \| 'fade'`          | `'slide'` | Chooses the slide or fade transition.             |
 | `ends`      | `'loop' \| 'wrap' \| 'stop'` | `'loop'`  | Chooses the behavior at the first and last slide. |
 | `id`        | `string`                     | generated | Sets the root element's id.                       |
+| `items`     | `number`                     | `1`       | Sets the number of whole slides visible per view. |
 | `itemsGap`  | `string \| number`           | —         | Sets the gap between slides; numbers are pixels.  |
 | `itemsPeek` | `string \| number`           | —         | Reveals neighboring slides; numbers are pixels.   |
 | `overlay`   | `boolean`                    | `false`   | Positions overlay controls over the slides.       |

@@ -1,15 +1,10 @@
-import type { CSSProperties } from 'react';
 import { Carousel, CarouselControl, CarouselInner, CarouselItem } from 'react-bootstrap-pro';
 
 import { CarouselSlidePlaceholder } from './shared';
 
-const carouselStyle = {
-  '--bs-carousel-items': 3,
-} as CSSProperties;
-
 export function CarouselMultipleItemsDemo() {
   return (
-    <Carousel ends='stop' itemsGap='1rem' style={carouselStyle}>
+    <Carousel ends='stop' items={3} itemsGap='1rem'>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Three at a time</h5>
         <div>

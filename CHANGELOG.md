@@ -19,6 +19,7 @@
 - Add the Carousel `colorMode` prop for configuring Bootstrap's `data-bs-theme` color mode.
 - Add the Carousel `itemsGap` prop for configuring spacing between slides.
 - Add the Carousel `itemsPeek` prop for revealing neighboring slides.
+- Add the Carousel `items` prop for setting the number of visible slides.
 - Add the `CarouselPlayPause` component for autoplay pause and resume controls.
 
 ## [0.3.0] - 2026-11-04
