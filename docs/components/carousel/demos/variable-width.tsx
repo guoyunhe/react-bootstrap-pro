@@ -29,7 +29,7 @@ export function CarouselVariableWidthDemo() {
       <CarouselInner>
         {slides.map(({ label, width }, index) => (
           <CarouselItem key={label} active={index === 0} style={{ width }}>
-            <CarouselSlidePlaceholder label={label} />
+            <CarouselSlidePlaceholder label={label} rounded />
           </CarouselItem>
         ))}
       </CarouselInner>

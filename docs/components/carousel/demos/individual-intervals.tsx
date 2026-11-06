@@ -11,15 +11,15 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselIndividualIntervalsDemo() {
   return (
-    <Carousel id='carouselExampleInterval' data-bs-autoplay='true'>
+    <Carousel id='carouselExampleInterval' autoplay>
       <CarouselInner className='rounded-5'>
-        <CarouselItem active data-bs-interval={2000}>
+        <CarouselItem active interval={2000}>
           <CarouselSlidePlaceholder label='First: 2 seconds' />
         </CarouselItem>
-        <CarouselItem data-bs-interval={4000}>
+        <CarouselItem interval={4000}>
           <CarouselSlidePlaceholder label='Second: 4 seconds' />
         </CarouselItem>
-        <CarouselItem data-bs-interval={6000}>
+        <CarouselItem interval={6000}>
           <CarouselSlidePlaceholder label='Third: 6 seconds' />
         </CarouselItem>
       </CarouselInner>

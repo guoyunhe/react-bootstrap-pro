@@ -1,15 +1,30 @@
 import './shared.css';
-import { Box } from 'react-bootstrap-pro';
+import clsx from 'clsx';
+import { Box, type BoxProps } from 'react-bootstrap-pro';
 
-export function CarouselSlidePlaceholder({ label }: { label: string }) {
+export type CarouselSlidePlaceholderProps = Omit<BoxProps, 'children'> & {
+  label: string;
+};
+
+export function CarouselSlidePlaceholder({
+  label,
+  className,
+  role = 'img',
+  'aria-label': ariaLabel = `Placeholder: ${label}`,
+  d = 'flex',
+  alignItems = 'center',
+  justifyContent = 'center',
+  ...props
+}: CarouselSlidePlaceholderProps) {
   return (
     <Box
-      role='img'
-      aria-label={`Placeholder: ${label}`}
-      className='carousel-slide-placeholder'
-      d='flex'
-      alignItems='center'
-      justifyContent='center'
+      {...props}
+      role={role}
+      aria-label={ariaLabel}
+      className={clsx('carousel-slide-placeholder', className)}
+      d={d}
+      alignItems={alignItems}
+      justifyContent={justifyContent}
     >
       {label}
     </Box>

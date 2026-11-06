@@ -12,7 +12,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselAutoplayDemo() {
   return (
-    <Carousel id='carouselExampleAutoplaying' data-bs-autoplay='true'>
+    <Carousel id='carouselExampleAutoplaying' autoplay>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />

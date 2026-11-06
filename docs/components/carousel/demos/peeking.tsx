@@ -23,7 +23,7 @@ export function CarouselPeekingDemo() {
       <CarouselInner>
         {slides.map((label, index) => (
           <CarouselItem key={label} active={index === 0}>
-            <CarouselSlidePlaceholder label={label} />
+            <CarouselSlidePlaceholder label={label} rounded />
           </CarouselItem>
         ))}
       </CarouselInner>

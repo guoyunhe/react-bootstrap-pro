@@ -12,6 +12,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
   BoxProps<C>,
   keyof {
     auto?: boolean | undefined;
+    autoplay?: boolean | undefined;
     center?: boolean | undefined;
     effect?: CarouselEffect | undefined;
     ends?: CarouselEnds | undefined;
@@ -19,6 +20,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
   }
 > & {
   auto?: boolean | undefined;
+  autoplay?: boolean | undefined;
   center?: boolean | undefined;
   effect?: CarouselEffect | undefined;
   ends?: CarouselEnds | undefined;
@@ -29,6 +31,7 @@ export function Carousel<C extends ElementType = 'div'>({
   component,
   className,
   auto,
+  autoplay,
   center,
   effect = 'slide',
   ends,
@@ -39,6 +42,7 @@ export function Carousel<C extends ElementType = 'div'>({
     <Box<C>
       {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
+      data-bs-autoplay={autoplay ? 'true' : undefined}
       data-bs-ends={ends}
       classNameBefore={clsx(
         'carousel',
@@ -72,19 +76,21 @@ export function CarouselInner<C extends ElementType = 'div'>({
 
 export type CarouselItemProps<C extends ElementType = 'div'> = Omit<
   BoxProps<C>,
-  keyof { active?: boolean | undefined }
-> & { active?: boolean | undefined };
+  keyof { active?: boolean | undefined; interval?: number | undefined }
+> & { active?: boolean | undefined; interval?: number | undefined };
 
 export function CarouselItem<C extends ElementType = 'div'>({
   component,
   className,
   active,
+  interval,
   ...props
 }: CarouselItemProps<C>) {
   return (
     <Box<C>
       {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
+      data-bs-interval={interval}
       classNameBefore={clsx('carousel-item', active && 'active', props.classNameBefore)}
       className={className}
     />

@@ -12,7 +12,7 @@ export function CarouselTopControlsDemo() {
           <CarouselControl target='#carouselStacked' direction='next' size='sm' />
         </div>
       </div>
-      <CarouselInner>
+      <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />
         </CarouselItem>

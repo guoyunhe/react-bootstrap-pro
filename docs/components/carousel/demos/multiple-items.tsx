@@ -21,7 +21,7 @@ export function CarouselMultipleItemsDemo() {
       <CarouselInner>
         {Array.from({ length: 7 }, (_, index) => (
           <CarouselItem key={index} active={index === 0}>
-            <CarouselSlidePlaceholder label={`${index + 1}`} />
+            <CarouselSlidePlaceholder label={`${index + 1}`} rounded />
           </CarouselItem>
         ))}
       </CarouselInner>

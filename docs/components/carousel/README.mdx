@@ -181,7 +181,7 @@ slide to the center of the viewport.
 
 ## Autoplay
 
-Set `data-bs-autoplay='true'` to start cycling on page load. Autoplay pauses on
+Set the `autoplay` prop to start cycling on page load. Autoplay pauses on
 hover and while the page is hidden. When a visitor takes control, autoplay
 stops. Avoid autoplay where possible; if used, provide a discoverable control
 to pause and resume. Hover- or focus-only pauses are not sufficient.
@@ -200,7 +200,8 @@ this is disabled under reduced motion.
 
 ### Individual intervals
 
-Set `data-bs-interval` on a slide to customize how long it remains visible.
+Set the `interval` prop on a slide to customize how long it remains visible,
+in milliseconds.
 The indicator progress fill follows each slide's interval.
 
 <DemoContainer>
@@ -273,6 +274,7 @@ with overlay controls when they need contrast against slide content.
 | Prop        | Type                         | Default   | Description                                       |
 | ----------- | ---------------------------- | --------- | ------------------------------------------------- |
 | `auto`      | `boolean`                    | `false`   | Lets each item use its own width.                 |
+| `autoplay`  | `boolean`                    | `false`   | Starts cycling automatically on page load.        |
 | `center`    | `boolean`                    | `false`   | Centers snap positions in the viewport.           |
 | `effect`    | `'slide' \| 'fade'`          | `'slide'` | Chooses the slide or fade transition.             |
 | `ends`      | `'loop' \| 'wrap' \| 'stop'` | `'loop'`  | Chooses the behavior at the first and last slide. |
@@ -290,9 +292,10 @@ and [`Box`](../box/README.mdx#api) utility props.
 
 ### CarouselItem
 
-| Prop     | Type      | Default | Description                     |
-| -------- | --------- | ------- | ------------------------------- |
-| `active` | `boolean` | `false` | Marks the initial active slide. |
+| Prop       | Type      | Default | Description                                               |
+| ---------- | --------- | ------- | --------------------------------------------------------- |
+| `active`   | `boolean` | `false` | Marks the initial active slide.                           |
+| `interval` | `number`  | —       | Sets how long the slide remains visible, in milliseconds. |
 
 Renders a `div` by default. The inherited `component` prop can change the root
 element. Accepts native props for the selected element and

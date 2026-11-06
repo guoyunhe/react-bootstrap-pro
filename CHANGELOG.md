@@ -12,6 +12,8 @@
 
 - Add the `AlertLink` component for links styled within alerts.
 - Add the Carousel `ends` prop for configuring end-of-carousel behavior.
+- Add the CarouselItem `interval` prop for configuring individual slide durations.
+- Add the Carousel `autoplay` prop for starting automatic cycling on page load.
 
 ## [0.3.0] - 2026-11-04
 
