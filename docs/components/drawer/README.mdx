@@ -3,78 +3,402 @@ title: Drawer
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerTitle } from 'react-bootstrap-pro';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { DemoContainer } from '../demo-container';
-import { DrawerBasicDemo } from './demos/basic';
+import { DrawerComponentsDemo } from './demos/basic';
+import { DrawerLiveDemo } from './demos/live';
+import { DrawerWithoutJavaScriptDemo } from './demos/without-javascript';
+import { DrawerBodyScrollingDemo } from './demos/body-scrolling';
+import { DrawerBodyScrollingBackdropDemo } from './demos/body-scrolling-backdrop';
+import { DrawerStaticBackdropDemo } from './demos/static-backdrop';
+import { DrawerInstantDemo } from './demos/instant';
+import { DrawerDarkDemo } from './demos/dark';
+import { DrawerTranslucentDemo } from './demos/translucent';
+import { DrawerSheetDemo } from './demos/sheet';
+import { DrawerResponsiveDemo } from './demos/responsive';
+import { DrawerPlacementTopDemo } from './demos/placement-top';
+import { DrawerPlacementEndDemo } from './demos/placement-end';
+import { DrawerPlacementBottomDemo } from './demos/placement-bottom';
+import { DrawerPlacementFullscreenDemo } from './demos/placement-fullscreen';
+import { DrawerFooterDemo } from './demos/footer';
 
 # Drawer
 
-`Drawer` builds on native `<dialog>` and Bootstrap's JavaScript plugin for
-backdrop, focus management, and placement-aware dismissal.
+## How it works
 
-## Example
+`Drawer` renders a native `<dialog>` with Bootstrap drawer classes. It builds on
+the same native dialog behavior as [`Dialog`](../dialog/README.mdx#how-it-works)
+and uses Bootstrap's JavaScript plugin for its data API, swipe gestures, and
+transitions. The React component does not manage open state.
+
+The default placement is `end`; use `start`, `top`, or `bottom` to select
+another viewport edge. `start` and `end` follow the document's text direction.
+Modal drawers open with `showModal()`, which places them in the top layer,
+displays a backdrop, and traps focus. The `open` attribute alone opens a
+non-modal dialog.
+
+The plugin allows only one data-API drawer at a time. On touch devices, it adds
+a swipe-to-dismiss gesture that follows the drawer placement. Do not apply
+`margin` or `translate` directly to a drawer when it is animated; wrap it if
+additional spacing or movement is needed. When a responsive drawer is inside a
+navbar, the plugin closes it as the navbar changes to its inline layout.
+
+## Examples
+
+### Drawer components
+
+Use `DrawerHeader`, `DrawerTitle`, and `DrawerBody` to structure the panel. Add
+a close button or another explicit dismiss action whenever possible.
 
 <DemoContainer>
-  <DrawerBasicDemo />
+  <DrawerComponentsDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
 
 ```
 
+### Live demo
+
+Use a link with `href` or a button with `data-bs-target` to open a drawer. Both
+need `data-bs-toggle='drawer'`.
+
+<DemoContainer>
+  <DrawerLiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/live.tsx'
+
+```
+
+### Without JavaScript
+
+Supported browsers can use the native Invoker Commands API to open and close a
+drawer without Bootstrap JavaScript. Browser support is limited; use the data
+API when you need plugin options, swipe gestures, or animated dismissal.
+
+<DemoContainer>
+  <DrawerWithoutJavaScriptDemo />
+</DemoContainer>
+
+```tsx src='./demos/without-javascript.tsx'
+
+```
+
+### Body scrolling
+
+Set `data-bs-scroll='true'` and `data-bs-backdrop='false'` on the drawer to keep
+the page scrollable and open a non-modal drawer. Focus is not trapped, so the
+rest of the page remains interactive.
+
+<DemoContainer>
+  <DrawerBodyScrollingDemo />
+</DemoContainer>
+
+```tsx src='./demos/body-scrolling.tsx'
+
+```
+
+### Body scrolling and backdrop
+
+Set only `data-bs-scroll='true'` to keep page scrolling enabled while retaining
+the backdrop. Because the backdrop is present, the drawer remains modal and
+continues to trap focus.
+
+<DemoContainer>
+  <DrawerBodyScrollingBackdropDemo />
+</DemoContainer>
+
+```tsx src='./demos/body-scrolling-backdrop.tsx'
+
+```
+
+### Static backdrop
+
+Set `data-bs-backdrop='static'` on the drawer to prevent a click outside from
+dismissing it. The close button and Escape key continue to work unless
+`data-bs-keyboard='false'` is also set.
+
+<DemoContainer>
+  <DrawerStaticBackdropDemo />
+</DemoContainer>
+
+```tsx src='./demos/static-backdrop.tsx'
+
+```
+
+## Instant drawer
+
+Drawers slide in and out by default. Set `instant` to disable the transitions.
+Reduced-motion preferences also disable the animation.
+
+<DemoContainer>
+  <DrawerInstantDemo />
+</DemoContainer>
+
+```tsx src='./demos/instant.tsx'
+
+```
+
+## Dark drawer
+
+Set `data-bs-theme='dark'` on the drawer to apply dark color mode to its
+contents.
+
+<DemoContainer>
+  <DrawerDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+## Translucent drawer
+
+Set `translucent` to blur and saturate the background visible through the panel.
+
+<DemoContainer>
+  <DrawerTranslucentDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent.tsx'
+
+```
+
+## Sheet
+
+Set `sheet` for a bottom-sheet layout that reaches the viewport edges and
+flattens the bottom corners. On wide viewports, its width is capped by
+`--bs-drawer-sheet-width`.
+
+<DemoContainer>
+  <DrawerSheetDemo />
+</DemoContainer>
+
+```tsx src='./demos/sheet.tsx'
+
+```
+
+## Responsive
+
+Responsive drawer classes show a drawer below their breakpoint and display its
+contents inline at and above that breakpoint. Use a responsive display utility
+to hide the toggle when the drawer is inline. When the drawer is inside a
+`.navbar`, the plugin observes the navbar and closes an open drawer as it
+changes to the inline layout.
+
+| Class        | Drawer layout below | Inline layout from |
+| ------------ | ------------------- | ------------------ |
+| `sm:drawer`  | `576px`             | `576px`            |
+| `md:drawer`  | `768px`             | `768px`            |
+| `lg:drawer`  | `1024px`            | `1024px`           |
+| `xl:drawer`  | `1280px`            | `1280px`           |
+| `2xl:drawer` | `1536px`            | `1536px`           |
+
+<DemoContainer>
+  <DrawerResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
+```
+
 ## Placement
 
-Set `placement` to `start`, `end`, `top`, or `bottom`. The default is `end`.
+`placement` selects the edge where the drawer enters. The default is `end`.
+
+### Top
+
+<DemoContainer>
+  <DrawerPlacementTopDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement-top.tsx'
+
+```
+
+### Right
+
+`end` places the drawer at the right in left-to-right layouts and at the left in
+right-to-left layouts.
+
+<DemoContainer>
+  <DrawerPlacementEndDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement-end.tsx'
+
+```
+
+### Bottom
+
+<DemoContainer>
+  <DrawerPlacementBottomDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement-bottom.tsx'
+
+```
+
+### Fullscreen
+
+Set `fullscreen` to cover the viewport.
+
+<DemoContainer>
+  <DrawerPlacementFullscreenDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement-fullscreen.tsx'
+
+```
+
+Add an optional `DrawerFooter` for actions at the bottom of the panel:
+
+<DemoContainer>
+  <DrawerFooterDemo />
+</DemoContainer>
+
+```tsx src='./demos/footer.tsx'
+
+```
+
+## Accessibility
+
+`Drawer` uses the native `<dialog>` element. Give each drawer a visible
+`DrawerTitle` and point `aria-labelledby` to its `id`. Include a close button
+with an accessible name or another clear dismiss action.
+
+The Bootstrap plugin opens modal drawers with `showModal()`, which provides
+native focus management and makes the rest of the page inert. With
+`data-bs-scroll='true'` and `data-bs-backdrop='false'`, the plugin uses `show()`;
+focus is not trapped and the page remains interactive. The native Escape key
+behavior can be disabled with `data-bs-keyboard='false'`.
+
+## CSS
+
+### CSS variables
+
+Override these variables on the drawer to customize its size and appearance.
+
+| Variable                          | Default                                                   | Description                       |
+| --------------------------------- | --------------------------------------------------------- | --------------------------------- |
+| `--bs-drawer-inset`               | `var(--bs-spacer)`                                        | Distance from the viewport edge.  |
+| `--bs-drawer-zindex`              | `var(--bs-z-drawer)`                                      | Drawer stacking order.            |
+| `--bs-drawer-width`               | `400px`                                                   | Width of side drawers.            |
+| `--bs-drawer-height`              | `30vh`                                                    | Height of top and bottom drawers. |
+| `--bs-drawer-padding-x`           | `var(--bs-spacer)`                                        | Horizontal content padding.       |
+| `--bs-drawer-padding-y`           | `var(--bs-spacer)`                                        | Vertical content padding.         |
+| `--bs-drawer-color`               | `var(--bs-fg-body)`                                       | Text color.                       |
+| `--bs-drawer-bg`                  | `var(--bs-bg-body)`                                       | Panel background.                 |
+| `--bs-drawer-border-width`        | `var(--bs-border-width)`                                  | Border width.                     |
+| `--bs-drawer-border-color`        | `var(--bs-border-color-translucent)`                      | Border color.                     |
+| `--bs-drawer-border-radius`       | `var(--bs-radius-7)`                                      | Corner radius.                    |
+| `--bs-drawer-box-shadow`          | `var(--bs-box-shadow-xl)`                                 | Panel shadow.                     |
+| `--bs-drawer-transition-property` | `transform, visibility`                                   | Animated properties.              |
+| `--bs-drawer-transition-duration` | `.3s`                                                     | Transition duration.              |
+| `--bs-drawer-transition-timing`   | `var(--bs-transition-timing-overlay)`                     | Transition timing function.       |
+| `--bs-drawer-title-line-height`   | `1.5`                                                     | Title line height.                |
+| `--bs-drawer-backdrop-bg`         | `color-mix(in oklch, var(--bs-bg-body) 25%, transparent)` | Backdrop color.                   |
+| `--bs-drawer-backdrop-blur`       | `8px`                                                     | Backdrop blur.                    |
+
+The sheet uses `--bs-drawer-sheet-width` with a `760px` fallback on wide
+viewports. Bootstrap's Sass token maps configure the drawer and its native
+`::backdrop` separately.
+
+## JavaScript behavior
+
+The React components provide markup and classes; Bootstrap's JavaScript bundle
+controls visibility, modal behavior, swipe gestures, and dismissal. The bundle
+is imported for these examples. In an application, load it once or use the
+native `<dialog>` API directly.
+
+### Data attributes
+
+| Attribute                    | Applied to     | Description                                       |
+| ---------------------------- | -------------- | ------------------------------------------------- |
+| `data-bs-toggle='drawer'`    | Trigger        | Opens or toggles a drawer.                        |
+| `data-bs-target='#myDrawer'` | Trigger        | Selects the drawer to control.                    |
+| `href='#myDrawer'`           | Link trigger   | Alternative target selector.                      |
+| `data-bs-dismiss='drawer'`   | Dismiss button | Closes the current or explicitly targeted drawer. |
+| `data-bs-backdrop='static'`  | Drawer         | Prevents dismissal from a backdrop click.         |
+| `data-bs-backdrop='false'`   | Drawer         | Hides the backdrop.                               |
+| `data-bs-keyboard='false'`   | Drawer         | Prevents dismissal with Escape.                   |
+| `data-bs-scroll='true'`      | Drawer         | Allows body scrolling while the drawer is open.   |
+
+### JavaScript API
+
+The plugin options are not React props. Options can be set on the drawer with
+data attributes or passed to the Bootstrap `Drawer` constructor.
+
+| Option     | Type                  | Default | Description                                                             |
+| ---------- | --------------------- | ------- | ----------------------------------------------------------------------- |
+| `backdrop` | `boolean \| 'static'` | `true`  | Show a backdrop, keep it static, or hide it.                            |
+| `keyboard` | `boolean`             | `true`  | Close the drawer when Escape is pressed.                                |
+| `scroll`   | `boolean`             | `false` | Allow body scrolling; with `backdrop: false`, opens a non-modal drawer. |
+
+When `scroll` is true and the backdrop remains enabled, the drawer is still
+modal and traps focus, while the page can scroll.
+
+```js
+const drawer = new bootstrap.Drawer('#myDrawer', { scroll: true, backdrop: false });
+await drawer.show();
+await drawer.hide();
+```
+
+The plugin also provides `toggle`, `dispose`, `getInstance`, and
+`getOrCreateInstance`. Show and hide methods return promises that resolve after
+the transition finishes.
+
+| Event                     | Description                                                      |
+| ------------------------- | ---------------------------------------------------------------- |
+| `show.bs.drawer`          | Fires when opening begins.                                       |
+| `shown.bs.drawer`         | Fires after the drawer is visible.                               |
+| `hide.bs.drawer`          | Fires when closing begins.                                       |
+| `hidden.bs.drawer`        | Fires after the drawer is hidden.                                |
+| `hidePrevented.bs.drawer` | Fires when a static backdrop or disabled keyboard blocks hiding. |
 
 ## API
 
 ### Drawer
 
-Renders a `dialog` by default. Its own props are
-`placement?: 'start' | 'end' | 'top' | 'bottom'` (default: `'end'`),
-`fullscreen?: boolean`, `sheet?: boolean`, `translucent?: boolean`, and
-`instant?: boolean`; it inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders a native `<dialog>` by default. `component` can override the element;
+when doing so, the replacement must support the dialog behavior you use.
 
-| Prop          | Type                                    | Description                                    |
-| ------------- | --------------------------------------- | ---------------------------------------------- |
-| `placement`   | `'start' \| 'end' \| 'top' \| 'bottom'` | Selects the drawer edge.                       |
-| `fullscreen`  | `boolean`                               | Fills the available viewport.                  |
-| `sheet`       | `boolean`                               | Uses the sheet presentation.                   |
-| `translucent` | `boolean`                               | Adds the translucent surface treatment.        |
-| `instant`     | `boolean`                               | Disables transitions.                          |
-| `...props`    | `BoxProps<C>`                           | Native dialog props and all Box utility props. |
+| Prop          | Type                                    | Default | Description                                                             |
+| ------------- | --------------------------------------- | ------- | ----------------------------------------------------------------------- |
+| `placement`   | `'start' \| 'end' \| 'top' \| 'bottom'` | `'end'` | Selects the viewport edge. `start` and `end` follow the text direction. |
+| `fullscreen`  | `boolean`                               | `false` | Expands the panel to the available viewport area.                       |
+| `sheet`       | `boolean`                               | `false` | Applies the bottom-sheet presentation.                                  |
+| `translucent` | `boolean`                               | `false` | Blurs and saturates content behind the panel.                           |
+| `instant`     | `boolean`                               | `false` | Disables drawer transitions.                                            |
 
-`DrawerHeader`, `DrawerTitle`, `DrawerBody`, and `DrawerFooter` provide the
-corresponding structural classes. The Bootstrap JavaScript bundle is required
-for plugin-controlled modal behavior.
+Inherits native props for the selected element and all [`Box`](../box/README.mdx#api)
+utility props, including `component` and `className`.
 
 ### DrawerHeader
 
 Renders a `div` by default. It has no own props and inherits native `div` props
-and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+and [`Box`](../box/README.mdx#api) utility props.
 
 ### DrawerTitle
 
 Renders an `h5` by default. It has no own props and inherits native heading
-props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+props and [`Box`](../box/README.mdx#api) utility props.
 
 ### DrawerBody
 
 Renders a `div` by default. It has no own props and inherits native `div` props
-and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+and [`Box`](../box/README.mdx#api) utility props.
 
 ### DrawerFooter
 
 Renders a `div` by default. It has no own props and inherits native `div` props
-and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
-
-## Accessibility
-
-Label the drawer with `aria-labelledby`, include a close action, and use the
-Bootstrap plugin or native dialog API for modal focus and backdrop behavior.
+and [`Box`](../box/README.mdx#api) utility props.
 
 ## See
 
 - [Bootstrap 6 Drawer documentation](https://getbootstrap.com/docs/6.0/components/drawer/)
+- [Dialog component](../dialog/README.mdx)
+- [MDN: `<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog)
+- [MDN: Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/drawer.tsx)
