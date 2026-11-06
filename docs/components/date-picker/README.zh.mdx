@@ -1,32 +1,32 @@
 ---
-title: Datepicker 日期选择器
+title: DatePicker 日期选择器
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
-import { DatepickerBasicDemo } from './demos/basic';
-import { DatepickerButtonDemo } from './demos/button';
-import { DatepickerButtonRangeDemo } from './demos/button-range';
-import { DatepickerDarkDemo } from './demos/dark';
-import { DatepickerFieldDemo } from './demos/field';
-import { DatepickerFirstWeekdayDemo } from './demos/first-weekday';
-import { DatepickerFormatDemo } from './demos/format';
-import { DatepickerFormatFunctionDemo } from './demos/format-function';
-import { DatepickerIconDemo } from './demos/icon';
-import { DatepickerInlineDemo } from './demos/inline';
-import { DatepickerInlineMonthsDemo } from './demos/inline-months';
-import { DatepickerInlineRangeDemo } from './demos/inline-range';
-import { DatepickerMinMaxDemo } from './demos/min-max';
-import { DatepickerMultiMonthRangeDemo } from './demos/multi-month-range';
-import { DatepickerMultipleDemo } from './demos/multiple';
-import { DatepickerMultipleMonthsDemo } from './demos/multiple-months';
-import { DatepickerPlacementDemo } from './demos/placement';
-import { DatepickerRangeDemo } from './demos/range';
-import { DatepickerThemeOverrideDemo } from './demos/theme-override';
+import { DatePickerBasicDemo } from './demos/basic';
+import { DatePickerButtonDemo } from './demos/button';
+import { DatePickerButtonRangeDemo } from './demos/button-range';
+import { DatePickerDarkDemo } from './demos/dark';
+import { DatePickerFieldDemo } from './demos/field';
+import { DatePickerFirstWeekdayDemo } from './demos/first-weekday';
+import { DatePickerFormatDemo } from './demos/format';
+import { DatePickerFormatFunctionDemo } from './demos/format-function';
+import { DatePickerIconDemo } from './demos/icon';
+import { DatePickerInlineDemo } from './demos/inline';
+import { DatePickerInlineMonthsDemo } from './demos/inline-months';
+import { DatePickerInlineRangeDemo } from './demos/inline-range';
+import { DatePickerMinMaxDemo } from './demos/min-max';
+import { DatePickerMultiMonthRangeDemo } from './demos/multi-month-range';
+import { DatePickerMultipleDemo } from './demos/multiple';
+import { DatePickerMultipleMonthsDemo } from './demos/multiple-months';
+import { DatePickerPlacementDemo } from './demos/placement';
+import { DatePickerRangeDemo } from './demos/range';
+import { DatePickerThemeOverrideDemo } from './demos/theme-override';
 
-# Datepicker 日期选择器
+# DatePicker 日期选择器
 
-`Datepicker` 是基于 [Vanilla Calendar Pro](https://vanilla-calendar.pro/) 的 React
+`DatePicker` 是基于 [Vanilla Calendar Pro](https://vanilla-calendar.pro/) 的 React
 封装，并使用 Bootstrap 6 的日期选择器样式。它通过 React 属性而非 Bootstrap 的
 `data-bs-*` 初始化 API 使用，支持单日、多日和区间选择、弹出与内联日历、本地化日期格式，
 以及明暗主题。
@@ -34,7 +34,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 ## 概览
 
 <DemoContainer>
-  <DatepickerBasicDemo />
+  <DatePickerBasicDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
@@ -60,7 +60,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 使用 `FormField` 将日期选择器与标签和辅助文本组合在一起。
 
 <DemoContainer>
-  <DatepickerFieldDemo />
+  <DatePickerFieldDemo />
 </DemoContainer>
 
 ```tsx src='./demos/field.tsx'
@@ -72,7 +72,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 在表单装饰容器中使用 `ghost`，即可在输入框旁放置日历图标。弹出日历会相对于整个装饰控件定位。
 
 <DemoContainer>
-  <DatepickerIconDemo />
+  <DatePickerIconDemo />
 </DemoContainer>
 
 ```tsx src='./demos/icon.tsx'
@@ -84,7 +84,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 使用 `dateMin` 和 `dateMax` 限制可选日期。两者都接受 `YYYY-MM-DD` 字符串、`Date` 对象或时间戳。
 
 <DemoContainer>
-  <DatepickerMinMaxDemo />
+  <DatePickerMinMaxDemo />
 </DemoContainer>
 
 ```tsx src='./demos/min-max.tsx'
@@ -96,7 +96,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 设置 `selectionMode='multiple'`，允许用户选择任意多个日期。
 
 <DemoContainer>
-  <DatepickerMultipleDemo />
+  <DatePickerMultipleDemo />
 </DemoContainer>
 
 ```tsx src='./demos/multiple.tsx'
@@ -108,7 +108,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 设置 `displayMonthsCount` 并排显示多个月份。选择跨月区间时，这样能提供更多日历上下文。
 
 <DemoContainer>
-  <DatepickerMultipleMonthsDemo />
+  <DatePickerMultipleMonthsDemo />
 </DemoContainer>
 
 ```tsx src='./demos/multiple-months.tsx'
@@ -121,7 +121,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 `defaultValue`（或受控 `value`）可预选一个区间。
 
 <DemoContainer>
-  <DatepickerRangeDemo />
+  <DatePickerRangeDemo />
 </DemoContainer>
 
 ```tsx src='./demos/range.tsx'
@@ -133,7 +133,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 将 `selectionMode='multiple-ranged'` 与 `displayMonthsCount={2}` 配合使用，可在两个并排显示的月份中选择日期区间。
 
 <DemoContainer>
-  <DatepickerMultiMonthRangeDemo />
+  <DatePickerMultiMonthRangeDemo />
 </DemoContainer>
 
 ```tsx src='./demos/multi-month-range.tsx'
@@ -147,7 +147,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 设置 `firstWeekday` 可指定每周的第一天。`0` 表示周日，`1`（默认值）表示周一。
 
 <DemoContainer>
-  <DatepickerFirstWeekdayDemo />
+  <DatePickerFirstWeekdayDemo />
 </DemoContainer>
 
 ```tsx src='./demos/first-weekday.tsx'
@@ -159,7 +159,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 使用 `placement` 控制弹出日历相对触发器的位置。
 
 <DemoContainer>
-  <DatepickerPlacementDemo />
+  <DatePickerPlacementDemo />
 </DemoContainer>
 
 ```tsx src='./demos/placement.tsx'
@@ -172,7 +172,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 `aria-expanded` 暴露展开状态，也可以添加前置 `icon`。
 
 <DemoContainer>
-  <DatepickerButtonDemo />
+  <DatePickerButtonDemo />
 </DemoContainer>
 
 ```tsx src='./demos/button.tsx'
@@ -182,7 +182,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 选择日期区间时，开始和结束日期都选定后日历会关闭。
 
 <DemoContainer>
-  <DatepickerButtonRangeDemo />
+  <DatePickerButtonRangeDemo />
 </DemoContainer>
 
 ```tsx src='./demos/button-range.tsx'
@@ -192,11 +192,11 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 ### 内联模式
 
 设置 `inline` 可渲染始终可见的日历，而不是弹出日历。内联日历没有触发器，应将其放置在有
-可访问名称的区域中。设置 `name` 后，`Datepicker` 会添加隐藏输入框，以逗号分隔提交
+可访问名称的区域中。设置 `name` 后，`DatePicker` 会添加隐藏输入框，以逗号分隔提交
 `YYYY-MM-DD` 格式的日期。
 
 <DemoContainer>
-  <DatepickerInlineDemo />
+  <DatePickerInlineDemo />
 </DemoContainer>
 
 ```tsx src='./demos/inline.tsx'
@@ -206,7 +206,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 内联日历也支持区间选择：
 
 <DemoContainer>
-  <DatepickerInlineRangeDemo />
+  <DatePickerInlineRangeDemo />
 </DemoContainer>
 
 ```tsx src='./demos/inline-range.tsx'
@@ -216,7 +216,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 也可以同时显示多个月份：
 
 <DemoContainer>
-  <DatepickerInlineMonthsDemo />
+  <DatePickerInlineMonthsDemo />
 </DemoContainer>
 
 ```tsx src='./demos/inline-months.tsx'
@@ -229,7 +229,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 和解析后语言标签的函数。多个日期以逗号分隔；日期区间使用短横线（en dash）。
 
 <DemoContainer>
-  <DatepickerFormatDemo />
+  <DatePickerFormatDemo />
 </DemoContainer>
 
 ```tsx src='./demos/format.tsx'
@@ -239,7 +239,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 `format` 也可以是函数。例如，为每个所选日期返回简短的月份和日期文本：
 
 <DemoContainer>
-  <DatepickerFormatFunctionDemo />
+  <DatePickerFormatFunctionDemo />
 </DemoContainer>
 
 ```tsx src='./demos/format-function.tsx'
@@ -256,7 +256,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 在父元素上设置 `data-bs-theme='dark'`，可同时设置周围表单和日历的主题。
 
 <DemoContainer>
-  <DatepickerDarkDemo />
+  <DatePickerDarkDemo />
 </DemoContainer>
 
 ```tsx src='./demos/dark.tsx'
@@ -268,7 +268,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 设置 `theme='dark'` 或 `theme='light'`，可覆盖日历主题而不改变周围输入框的样式。
 
 <DemoContainer>
-  <DatepickerThemeOverrideDemo />
+  <DatePickerThemeOverrideDemo />
 </DemoContainer>
 
 ```tsx src='./demos/theme-override.tsx'
@@ -281,7 +281,7 @@ import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 ## Shadow DOM
 
 弹出日历会添加到 `document.body`，位于组件的 shadow root 之外。在 shadow root 中使用
-`Datepicker` 时，也要确保 Bootstrap 日期选择器样式在文档作用域中可用；仅应用于 shadow root
+`DatePicker` 时，也要确保 Bootstrap 日期选择器样式在文档作用域中可用；仅应用于 shadow root
 的样式不会影响弹出日历。
 
 ## CSS
@@ -313,12 +313,12 @@ Bootstrap 在 `[data-vc="calendar"]` 上定义了日历 CSS 变量。可在样�
 
 ## API
 
-### Datepicker
+### DatePicker
 
 默认弹出触发器为 `<input type="text">`。设置 `trigger='button'` 会渲染
 `<button type="button">`；设置 `inline` 则会在 `<div>` 中渲染日历。
 
-`Datepicker` 不是泛型组件，不继承原生 input、button 或 [`Box`](../box/README.mdx#api)
+`DatePicker` 不是泛型组件，不继承原生 input、button 或 [`Box`](../box/README.mdx#api)
 属性。组件只接受下表列出的属性；`w` 是单独提供的宽度属性，会为触发器或内联日历元素添加
 Bootstrap `w-*` 工具类。
 
@@ -367,6 +367,6 @@ JavaScript 未运行，弹出触发器仍是普通文本输入框，但日历不
 
 ## 参阅
 
-- [Bootstrap 6 Datepicker 文档](https://getbootstrap.com/docs/6.0/forms/datepicker/)
+- [Bootstrap 6 DatePicker 文档](https://getbootstrap.com/docs/6.0/forms/datepicker/)
 - [Vanilla Calendar Pro 文档](https://vanilla-calendar.pro/docs/learn)
-- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/datepicker.tsx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/date-picker.tsx)

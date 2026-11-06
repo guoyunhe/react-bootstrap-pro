@@ -18,7 +18,7 @@ order: 1
 - [Close button 关闭按钮](./close-button/)
 - [Collapse 折叠](./collapse/)
 - [Container 容器](./container/)
-- [Datepicker 日期选择器](./datepicker/)
+- [DatePicker 日期选择器](./date-picker/)
 - [Dialog 对话框](./dialog/)
 - [Drawer 抽屉](./drawer/)
 - [Grid 网格](./grid/)

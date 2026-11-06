@@ -1,32 +1,32 @@
 ---
-title: Datepicker
+title: DatePicker
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
-import { DatepickerBasicDemo } from './demos/basic';
-import { DatepickerButtonDemo } from './demos/button';
-import { DatepickerButtonRangeDemo } from './demos/button-range';
-import { DatepickerDarkDemo } from './demos/dark';
-import { DatepickerFieldDemo } from './demos/field';
-import { DatepickerFirstWeekdayDemo } from './demos/first-weekday';
-import { DatepickerFormatDemo } from './demos/format';
-import { DatepickerFormatFunctionDemo } from './demos/format-function';
-import { DatepickerIconDemo } from './demos/icon';
-import { DatepickerInlineDemo } from './demos/inline';
-import { DatepickerInlineMonthsDemo } from './demos/inline-months';
-import { DatepickerInlineRangeDemo } from './demos/inline-range';
-import { DatepickerMinMaxDemo } from './demos/min-max';
-import { DatepickerMultiMonthRangeDemo } from './demos/multi-month-range';
-import { DatepickerMultipleDemo } from './demos/multiple';
-import { DatepickerMultipleMonthsDemo } from './demos/multiple-months';
-import { DatepickerPlacementDemo } from './demos/placement';
-import { DatepickerRangeDemo } from './demos/range';
-import { DatepickerThemeOverrideDemo } from './demos/theme-override';
+import { DatePickerBasicDemo } from './demos/basic';
+import { DatePickerButtonDemo } from './demos/button';
+import { DatePickerButtonRangeDemo } from './demos/button-range';
+import { DatePickerDarkDemo } from './demos/dark';
+import { DatePickerFieldDemo } from './demos/field';
+import { DatePickerFirstWeekdayDemo } from './demos/first-weekday';
+import { DatePickerFormatDemo } from './demos/format';
+import { DatePickerFormatFunctionDemo } from './demos/format-function';
+import { DatePickerIconDemo } from './demos/icon';
+import { DatePickerInlineDemo } from './demos/inline';
+import { DatePickerInlineMonthsDemo } from './demos/inline-months';
+import { DatePickerInlineRangeDemo } from './demos/inline-range';
+import { DatePickerMinMaxDemo } from './demos/min-max';
+import { DatePickerMultiMonthRangeDemo } from './demos/multi-month-range';
+import { DatePickerMultipleDemo } from './demos/multiple';
+import { DatePickerMultipleMonthsDemo } from './demos/multiple-months';
+import { DatePickerPlacementDemo } from './demos/placement';
+import { DatePickerRangeDemo } from './demos/range';
+import { DatePickerThemeOverrideDemo } from './demos/theme-override';
 
-# Datepicker
+# DatePicker
 
-`Datepicker` is a React wrapper around [Vanilla Calendar Pro](https://vanilla-calendar.pro/)
+`DatePicker` is a React wrapper around [Vanilla Calendar Pro](https://vanilla-calendar.pro/)
 with Bootstrap 6 datepicker styles. It uses React props rather than Bootstrap's
 `data-bs-*` initialization API, and supports single, multiple, and ranged date
 selection, popup and inline calendars, localized formatting, and light and dark
@@ -35,7 +35,7 @@ themes.
 ## Overview
 
 <DemoContainer>
-  <DatepickerBasicDemo />
+  <DatePickerBasicDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
@@ -68,7 +68,7 @@ autocomplete.
 Use `FormField` to group the datepicker with a label and helper text.
 
 <DemoContainer>
-  <DatepickerFieldDemo />
+  <DatePickerFieldDemo />
 </DemoContainer>
 
 ```tsx src='./demos/field.tsx'
@@ -81,7 +81,7 @@ Use `ghost` inside a form adorn wrapper to place a calendar icon beside the
 input. The popup positions relative to the complete adorn control.
 
 <DemoContainer>
-  <DatepickerIconDemo />
+  <DatePickerIconDemo />
 </DemoContainer>
 
 ```tsx src='./demos/icon.tsx'
@@ -94,7 +94,7 @@ Restrict selectable dates with `dateMin` and `dateMax`. Each accepts a
 `YYYY-MM-DD` string, a `Date`, or a timestamp.
 
 <DemoContainer>
-  <DatepickerMinMaxDemo />
+  <DatePickerMinMaxDemo />
 </DemoContainer>
 
 ```tsx src='./demos/min-max.tsx'
@@ -106,7 +106,7 @@ Restrict selectable dates with `dateMin` and `dateMax`. Each accepts a
 Set `selectionMode='multiple'` to let users select any number of dates.
 
 <DemoContainer>
-  <DatepickerMultipleDemo />
+  <DatePickerMultipleDemo />
 </DemoContainer>
 
 ```tsx src='./demos/multiple.tsx'
@@ -119,7 +119,7 @@ Set `displayMonthsCount` to show months side by side. This is useful when
 choosing a range that spans more than one month.
 
 <DemoContainer>
-  <DatepickerMultipleMonthsDemo />
+  <DatePickerMultipleMonthsDemo />
 </DemoContainer>
 
 ```tsx src='./demos/multiple-months.tsx'
@@ -132,7 +132,7 @@ Set `selectionMode='multiple-ranged'` to choose a start and end date. Pass a
 two-item `defaultValue` (or controlled `value`) to preselect a range.
 
 <DemoContainer>
-  <DatepickerRangeDemo />
+  <DatePickerRangeDemo />
 </DemoContainer>
 
 ```tsx src='./demos/range.tsx'
@@ -145,7 +145,7 @@ Combine `selectionMode='multiple-ranged'` with `displayMonthsCount={2}` to
 select a range across two visible months.
 
 <DemoContainer>
-  <DatepickerMultiMonthRangeDemo />
+  <DatePickerMultiMonthRangeDemo />
 </DemoContainer>
 
 ```tsx src='./demos/multi-month-range.tsx'
@@ -160,7 +160,7 @@ Set `firstWeekday` to choose the first day of the week. `0` is Sunday and `1`
 (the default) is Monday.
 
 <DemoContainer>
-  <DatepickerFirstWeekdayDemo />
+  <DatePickerFirstWeekdayDemo />
 </DemoContainer>
 
 ```tsx src='./demos/first-weekday.tsx'
@@ -172,7 +172,7 @@ Set `firstWeekday` to choose the first day of the week. `0` is Sunday and `1`
 Use `placement` to control the popup's position relative to its trigger.
 
 <DemoContainer>
-  <DatepickerPlacementDemo />
+  <DatePickerPlacementDemo />
 </DemoContainer>
 
 ```tsx src='./demos/placement.tsx'
@@ -186,7 +186,7 @@ should not look like a text field. The button exposes its open state through
 `aria-expanded` and can include a leading `icon`.
 
 <DemoContainer>
-  <DatepickerButtonDemo />
+  <DatePickerButtonDemo />
 </DemoContainer>
 
 ```tsx src='./demos/button.tsx'
@@ -196,7 +196,7 @@ should not look like a text field. The button exposes its open state through
 For a date range, the popup closes after both endpoints have been selected.
 
 <DemoContainer>
-  <DatepickerButtonRangeDemo />
+  <DatePickerButtonRangeDemo />
 </DemoContainer>
 
 ```tsx src='./demos/button-range.tsx'
@@ -207,11 +207,11 @@ For a date range, the popup closes after both endpoints have been selected.
 
 Set `inline` to render an always-visible calendar instead of a popup. The
 calendar has no trigger; place it in a labelled region. When `name` is set,
-`Datepicker` adds a hidden input that submits the selected `YYYY-MM-DD` dates,
+`DatePicker` adds a hidden input that submits the selected `YYYY-MM-DD` dates,
 separated by commas.
 
 <DemoContainer>
-  <DatepickerInlineDemo />
+  <DatePickerInlineDemo />
 </DemoContainer>
 
 ```tsx src='./demos/inline.tsx'
@@ -221,7 +221,7 @@ separated by commas.
 Inline calendars also support range selection:
 
 <DemoContainer>
-  <DatepickerInlineRangeDemo />
+  <DatePickerInlineRangeDemo />
 </DemoContainer>
 
 ```tsx src='./demos/inline-range.tsx'
@@ -231,7 +231,7 @@ Inline calendars also support range selection:
 Or display multiple months at once:
 
 <DemoContainer>
-  <DatepickerInlineMonthsDemo />
+  <DatePickerInlineMonthsDemo />
 </DemoContainer>
 
 ```tsx src='./demos/inline-months.tsx'
@@ -246,7 +246,7 @@ resolved locale. Multiple dates are joined with commas; a date range uses an
 en dash.
 
 <DemoContainer>
-  <DatepickerFormatDemo />
+  <DatePickerFormatDemo />
 </DemoContainer>
 
 ```tsx src='./demos/format.tsx'
@@ -257,7 +257,7 @@ The formatting option can also be a function. For example, return a short
 month-and-day value for each selected date:
 
 <DemoContainer>
-  <DatepickerFormatFunctionDemo />
+  <DatePickerFormatFunctionDemo />
 </DemoContainer>
 
 ```tsx src='./demos/format-function.tsx'
@@ -276,20 +276,20 @@ Set `data-bs-theme='dark'` on a parent to style both the surrounding form and
 the calendar.
 
 <DemoContainer>
-  <DatepickerDarkDemo />
+  <DatePickerDarkDemo />
 </DemoContainer>
 
 ```tsx src='./demos/dark.tsx'
 
 ```
 
-### Datepicker-only theme
+### DatePicker-only theme
 
 Set `theme='dark'` or `theme='light'` to override the calendar theme without
 changing the surrounding input.
 
 <DemoContainer>
-  <DatepickerThemeOverrideDemo />
+  <DatePickerThemeOverrideDemo />
 </DemoContainer>
 
 ```tsx src='./demos/theme-override.tsx'
@@ -303,7 +303,7 @@ datepicker is mounted.
 ## Shadow DOM
 
 The popup is attached to `document.body`, outside the component's shadow root.
-When using `Datepicker` inside a shadow root, ensure Bootstrap's datepicker
+When using `DatePicker` inside a shadow root, ensure Bootstrap's datepicker
 styles are also available in the document scope; styles adopted only by the
 shadow root do not style the popup.
 
@@ -339,13 +339,13 @@ reach the popup.
 
 ## API
 
-### Datepicker
+### DatePicker
 
 The default popup trigger is an `<input type="text">`. Set `trigger='button'`
 to render a `<button type="button">`; set `inline` to render the calendar in a
 `<div>` instead.
 
-`Datepicker` is not generic and does not inherit native input, button, or
+`DatePicker` is not generic and does not inherit native input, button, or
 [`Box`](../box/README.mdx#api) props. Only the props listed below are accepted;
 `w` is an explicit width prop that applies a Bootstrap `w-*` utility to the
 trigger or inline calendar element.
@@ -399,6 +399,6 @@ native `type="date"` control and does not provide native date validation.
 
 ## See
 
-- [Bootstrap 6 Datepicker documentation](https://getbootstrap.com/docs/6.0/forms/datepicker/)
+- [Bootstrap 6 DatePicker documentation](https://getbootstrap.com/docs/6.0/forms/datepicker/)
 - [Vanilla Calendar Pro documentation](https://vanilla-calendar.pro/docs/learn)
-- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/datepicker.tsx)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/date-picker.tsx)

@@ -1,10 +1,10 @@
-import { Datepicker, FormLabel } from 'react-bootstrap-pro';
+import { DatePicker, FormLabel } from 'react-bootstrap-pro';
 
-export function DatepickerFirstWeekdayDemo() {
+export function DatePickerFirstWeekdayDemo() {
   return (
     <>
       <FormLabel htmlFor='datepicker-first-weekday'>Week starts on Sunday</FormLabel>
-      <Datepicker id='datepicker-first-weekday' w={12} firstWeekday={0} />
+      <DatePicker id='datepicker-first-weekday' w={12} firstWeekday={0} />
     </>
   );
 }

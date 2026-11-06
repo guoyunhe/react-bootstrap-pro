@@ -1,10 +1,10 @@
-import { Datepicker, FormLabel } from 'react-bootstrap-pro';
+import { DatePicker, FormLabel } from 'react-bootstrap-pro';
 
-export function DatepickerFormatFunctionDemo() {
+export function DatePickerFormatFunctionDemo() {
   return (
     <>
       <FormLabel htmlFor='datepicker-format-function'>Start and end dates</FormLabel>
-      <Datepicker
+      <DatePicker
         id='datepicker-format-function'
         locale='en-US'
         selectionMode='multiple-ranged'

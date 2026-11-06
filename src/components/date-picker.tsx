@@ -13,36 +13,36 @@ import {
 
 import type { Width } from '../types';
 
-export type DatepickerSelectionMode = DateMode;
-export type DatepickerPlacement = PositionToInput;
-export type DatepickerTheme = 'light' | 'dark' | 'auto';
-export type DatepickerWeekDay = WeekDayID;
-export type DatepickerMonthsCount = MonthsCount;
-export type DatepickerDate = string | Date | number;
-export type DatepickerTrigger = 'input' | 'button';
-export type DatepickerFormat =
+export type DatePickerSelectionMode = DateMode;
+export type DatePickerPlacement = PositionToInput;
+export type DatePickerTheme = 'light' | 'dark' | 'auto';
+export type DatePickerWeekDay = WeekDayID;
+export type DatePickerMonthsCount = MonthsCount;
+export type DatePickerDate = string | Date | number;
+export type DatePickerTrigger = 'input' | 'button';
+export type DatePickerFormat =
   | Intl.DateTimeFormatOptions
   | ((date: Date, locale: string | undefined) => string);
 
-export type DatepickerProps = {
+export type DatePickerProps = {
   /** Selected date(s) as `YYYY-MM-DD` strings. Makes the datepicker controlled. */
   value?: string | readonly string[] | undefined;
   defaultValue?: string | readonly string[] | undefined;
   onChange?: ((dates: string[]) => void) | undefined;
-  selectionMode?: DatepickerSelectionMode | undefined;
-  firstWeekday?: DatepickerWeekDay | undefined;
-  displayMonthsCount?: DatepickerMonthsCount | undefined;
-  dateMin?: DatepickerDate | undefined;
-  dateMax?: DatepickerDate | undefined;
+  selectionMode?: DatePickerSelectionMode | undefined;
+  firstWeekday?: DatePickerWeekDay | undefined;
+  displayMonthsCount?: DatePickerMonthsCount | undefined;
+  dateMin?: DatePickerDate | undefined;
+  dateMax?: DatePickerDate | undefined;
   locale?: string | undefined;
   /** Controls how the selected date(s) are formatted in the trigger. */
-  format?: DatepickerFormat | undefined;
-  theme?: DatepickerTheme | undefined;
-  placement?: DatepickerPlacement | undefined;
+  format?: DatePickerFormat | undefined;
+  theme?: DatePickerTheme | undefined;
+  placement?: DatePickerPlacement | undefined;
   /** Renders the calendar inline instead of in a popup. */
   inline?: boolean | undefined;
   /** Renders a button trigger instead of an input. */
-  trigger?: DatepickerTrigger | undefined;
+  trigger?: DatePickerTrigger | undefined;
   /** Leading icon of the button trigger. */
   icon?: ReactNode;
   /** Replaces the `.form-control` class of the input with `.form-ghost`. */
@@ -59,9 +59,9 @@ export type DatepickerProps = {
 };
 
 type FormatOptions = {
-  format: DatepickerFormat | undefined;
+  format: DatePickerFormat | undefined;
   locale: string;
-  selectionMode: DatepickerSelectionMode;
+  selectionMode: DatePickerSelectionMode;
 };
 
 const HIDE_DELAY = 100;
@@ -103,7 +103,7 @@ function formatDates(dates: string[], { format, locale, selectionMode }: FormatO
   return dates.map((date) => formatDate(date)).join(separator);
 }
 
-export function Datepicker({
+export function DatePicker({
   value,
   defaultValue,
   onChange,
@@ -129,7 +129,7 @@ export function Datepicker({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   'aria-describedby': ariaDescribedBy,
-}: DatepickerProps) {
+}: DatePickerProps) {
   const [selectedDates, setSelectedDates] = useState<string[]>(() =>
     normalizeDates(value ?? defaultValue),
   );

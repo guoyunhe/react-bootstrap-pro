@@ -1,9 +1,9 @@
-import { Box, Datepicker } from 'react-bootstrap-pro';
+import { Box, DatePicker } from 'react-bootstrap-pro';
 
-export function DatepickerInlineRangeDemo() {
+export function DatePickerInlineRangeDemo() {
   return (
     <Box component='section' aria-label='Inline date range'>
-      <Datepicker inline selectionMode='multiple-ranged' />
+      <DatePicker inline selectionMode='multiple-ranged' />
     </Box>
   );
 }

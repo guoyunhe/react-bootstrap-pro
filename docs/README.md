@@ -48,7 +48,7 @@ export function Example() {
 - [Collapse](./components/collapse/)
 - [Combobox](./components/combobox/)
 - [Container](./components/container/)
-- [Datepicker](./components/datepicker/)
+- [DatePicker](./components/date-picker/)
 - [Dialog](./components/dialog/)
 - [Drawer](./components/drawer/)
 - [Floating labels](./components/floating-labels/)

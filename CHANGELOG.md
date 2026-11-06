@@ -10,6 +10,8 @@
 - Generate Carousel ids internally by default and connect nested controls
   automatically; remove the controls' public `target` props.
 - Replace the Combobox `groups` prop with group entries inside `options`.
+- Rename the `Datepicker` component and its public types to `DatePicker` and
+  `DatePicker*`; remove the old exports.
 
 ### Added
 
@@ -24,7 +26,7 @@
 - Add the `CarouselPlayPause` component for autoplay pause and resume controls.
 - Add the Checkbox `indeterminate` prop for setting its mixed state.
 - Add the CSS Grid `gridGap` prop for setting `--bs-gap`.
-- Add the Datepicker `w` prop for setting trigger and inline calendar width.
+- Add the DatePicker `w` prop for setting trigger and inline calendar width.
 
 ## [0.3.0] - 2026-11-04
 
@@ -63,7 +65,7 @@
   `Tab`, and `Toggler`.
 - Forms: `Form`, `FormControl`, `FormFeedback`, `FormField`, `FormFloating`,
   `FormLabel`, `FormText`, `Checkbox`, `Radio`, `Switch`, `Range`,
-  `InputGroup`, `Chip`, `ChipInput`, `Combobox`, `Datepicker`, `OtpInput`, and
+  `InputGroup`, `Chip`, `ChipInput`, `Combobox`, `DatePicker`, `OtpInput`, and
   `PasswordStrength`.
 - Content and data display: `Accordion`, `Alert`, `Avatar`, `Badge`, `Card`,
   `Carousel`, `Image`, `Figure`, `Typography`, `Prose`, `NotProse`, `ListGroup`,

@@ -1,10 +1,10 @@
-import { Datepicker, FormLabel } from 'react-bootstrap-pro';
+import { DatePicker, FormLabel } from 'react-bootstrap-pro';
 
-export function DatepickerThemeOverrideDemo() {
+export function DatePickerThemeOverrideDemo() {
   return (
     <>
       <FormLabel htmlFor='datepicker-theme'>Light input, dark datepicker</FormLabel>
-      <Datepicker id='datepicker-theme' theme='dark' w={12} />
+      <DatePicker id='datepicker-theme' theme='dark' w={12} />
     </>
   );
 }

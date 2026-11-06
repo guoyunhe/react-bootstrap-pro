@@ -48,7 +48,7 @@ export function Example() {
 - [Collapse 折叠](./components/collapse/)
 - [Combobox 组合框](./components/combobox/)
 - [Container 容器](./components/container/)
-- [Datepicker 日期选择器](./components/datepicker/)
+- [DatePicker 日期选择器](./components/date-picker/)
 - [Dialog 对话框](./components/dialog/)
 - [Drawer 抽屉](./components/drawer/)
 - [Floating labels 浮动标签](./components/floating-labels/)

@@ -21,7 +21,7 @@ order: 1
 - [Collapse](./collapse/)
 - [Combobox](./combobox/)
 - [Container](./container/)
-- [Datepicker](./datepicker/)
+- [DatePicker](./date-picker/)
 - [Dialog](./dialog/)
 - [Drawer](./drawer/)
 - [Floating labels](./floating-labels/)

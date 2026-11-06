@@ -1,9 +1,9 @@
-import { Box, Datepicker } from 'react-bootstrap-pro';
+import { Box, DatePicker } from 'react-bootstrap-pro';
 
-export function DatepickerInlineDemo() {
+export function DatePickerInlineDemo() {
   return (
     <Box component='section' aria-label='Inline datepicker'>
-      <Datepicker inline />
+      <DatePicker inline />
     </Box>
   );
 }

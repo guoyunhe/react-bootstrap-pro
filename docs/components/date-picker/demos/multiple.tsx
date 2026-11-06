@@ -1,10 +1,10 @@
-import { Datepicker, FormLabel } from 'react-bootstrap-pro';
+import { DatePicker, FormLabel } from 'react-bootstrap-pro';
 
-export function DatepickerMultipleDemo() {
+export function DatePickerMultipleDemo() {
   return (
     <>
       <FormLabel htmlFor='datepicker-multiple'>Select multiple dates</FormLabel>
-      <Datepicker id='datepicker-multiple' selectionMode='multiple' placeholder='Select dates…' />
+      <DatePicker id='datepicker-multiple' selectionMode='multiple' placeholder='Select dates…' />
     </>
   );
 }

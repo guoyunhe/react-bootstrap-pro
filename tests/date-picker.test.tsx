@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { Datepicker, type DatepickerDate } from '../src';
+import { DatePicker, type DatePickerDate } from '../src';
 
 function clickDay(index: number) {
   const days = [...getCalendarElement().querySelectorAll<HTMLButtonElement>('[data-vc-date-btn]')];
@@ -15,7 +15,7 @@ function getCalendarElement(): HTMLElement {
 }
 
 test('renders an empty text input with the width utility', async () => {
-  const screen = await render(<Datepicker aria-label='Date' w={12} />);
+  const screen = await render(<DatePicker aria-label='Date' w={12} />);
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
   expect(input).toHaveClass('form-control');
@@ -27,7 +27,7 @@ test('renders an empty text input with the width utility', async () => {
 
 test('opens the calendar on focus and selects a date', async () => {
   const onChange = vi.fn();
-  const screen = await render(<Datepicker aria-label='Date' onChange={onChange} />);
+  const screen = await render(<DatePicker aria-label='Date' onChange={onChange} />);
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
   input.focus();
@@ -46,7 +46,7 @@ test('opens the calendar on focus and selects a date', async () => {
 
 test('shows the default value in the input', async () => {
   const screen = await render(
-    <Datepicker aria-label='Date' defaultValue='2024-03-15' locale='en-US' />,
+    <DatePicker aria-label='Date' defaultValue='2024-03-15' locale='en-US' />,
   );
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
@@ -54,18 +54,18 @@ test('shows the default value in the input', async () => {
 });
 
 test('syncs a controlled value', async () => {
-  const screen = await render(<Datepicker aria-label='Date' value='2024-01-01' locale='en-US' />);
+  const screen = await render(<DatePicker aria-label='Date' value='2024-01-01' locale='en-US' />);
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
   await expect.poll(() => input.value).toBe(new Date(2024, 0, 1).toLocaleDateString('en-US'));
 
-  await screen.rerender(<Datepicker aria-label='Date' value='2024-02-02' locale='en-US' />);
+  await screen.rerender(<DatePicker aria-label='Date' value='2024-02-02' locale='en-US' />);
   await expect.poll(() => input.value).toBe(new Date(2024, 1, 2).toLocaleDateString('en-US'));
 });
 
 test('renders an inline calendar with a width utility and hidden input', async () => {
   const screen = await render(
-    <Datepicker
+    <DatePicker
       inline
       w={12}
       className='custom-calendar'
@@ -84,7 +84,7 @@ test('renders an inline calendar with a width utility and hidden input', async (
   expect(getCalendarElement().hasAttribute('data-vc-input')).toBe(false);
 
   await screen.rerender(
-    <Datepicker
+    <DatePicker
       inline
       w={6}
       className='updated-calendar'
@@ -101,7 +101,7 @@ test('renders an inline calendar with a width utility and hidden input', async (
 test('selects and labels multiple dates', async () => {
   const onChange = vi.fn();
   const screen = await render(
-    <Datepicker aria-label='Date' selectionMode='multiple' onChange={onChange} />,
+    <DatePicker aria-label='Date' selectionMode='multiple' onChange={onChange} />,
   );
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
@@ -120,7 +120,7 @@ test('selects and labels multiple dates', async () => {
 test('joins a date range with an en dash', async () => {
   const onChange = vi.fn();
   const screen = await render(
-    <Datepicker aria-label='Date' selectionMode='multiple-ranged' onChange={onChange} />,
+    <DatePicker aria-label='Date' selectionMode='multiple-ranged' onChange={onChange} />,
   );
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
@@ -134,16 +134,16 @@ test('joins a date range with an en dash', async () => {
   await expect.poll(() => input.value).toContain('–');
 });
 
-function currentMonthDate(day: number): DatepickerDate {
+function currentMonthDate(day: number): DatePickerDate {
   const now = new Date();
   const month = String(now.getMonth() + 1).padStart(2, '0');
 
-  return `${now.getFullYear()}-${month}-${String(day).padStart(2, '0')}` as DatepickerDate;
+  return `${now.getFullYear()}-${month}-${String(day).padStart(2, '0')}` as DatePickerDate;
 }
 
 test('disables dates outside the min and max range', async () => {
   const screen = await render(
-    <Datepicker aria-label='Date' dateMin={currentMonthDate(10)} dateMax={currentMonthDate(20)} />,
+    <DatePicker aria-label='Date' dateMin={currentMonthDate(10)} dateMax={currentMonthDate(20)} />,
   );
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
@@ -163,7 +163,7 @@ test('disables dates outside the min and max range', async () => {
 
 test('shows several months at once', async () => {
   const screen = await render(
-    <Datepicker aria-label='Date' displayMonthsCount={3} defaultValue='2024-06-10' />,
+    <DatePicker aria-label='Date' displayMonthsCount={3} defaultValue='2024-06-10' />,
   );
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
@@ -175,7 +175,7 @@ test('shows several months at once', async () => {
 
 test('supports a custom date format and a disabled input', async () => {
   const screen = await render(
-    <Datepicker
+    <DatePicker
       aria-label='Date'
       defaultValue='2024-03-15'
       format={{ year: 'numeric', month: '2-digit', day: '2-digit' }}
@@ -195,7 +195,7 @@ test('supports a custom date format and a disabled input', async () => {
 });
 
 test('opens at the month of the preselected date', async () => {
-  const screen = await render(<Datepicker aria-label='Date' defaultValue='2024-03-15' />);
+  const screen = await render(<DatePicker aria-label='Date' defaultValue='2024-03-15' />);
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
   input.focus();
@@ -212,7 +212,7 @@ test('opens at the month of the preselected date', async () => {
 test('renders a button trigger', async () => {
   const onChange = vi.fn();
   const screen = await render(
-    <Datepicker
+    <DatePicker
       aria-label='Date'
       trigger='button'
       w={12}
@@ -249,7 +249,7 @@ test('renders a button trigger', async () => {
 test('inherits the surrounding color mode', async () => {
   const screen = await render(
     <div data-bs-theme='dark'>
-      <Datepicker aria-label='Date' />
+      <DatePicker aria-label='Date' />
     </div>,
   );
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
@@ -261,7 +261,7 @@ test('inherits the surrounding color mode', async () => {
 test('can override the color mode', async () => {
   const screen = await render(
     <div data-bs-theme='light'>
-      <Datepicker aria-label='Date' theme='dark' />
+      <DatePicker aria-label='Date' theme='dark' />
     </div>,
   );
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
@@ -271,7 +271,7 @@ test('can override the color mode', async () => {
 });
 
 test('renders a ghost input for form adorn wrappers', async () => {
-  const screen = await render(<Datepicker aria-label='Date' ghost />);
+  const screen = await render(<DatePicker aria-label='Date' ghost />);
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
   expect(input).toHaveClass('form-ghost');

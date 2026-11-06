@@ -1,9 +1,9 @@
 import { BiCalendarWeek } from 'react-bootstrap-icons-pro';
-import { Datepicker } from 'react-bootstrap-pro';
+import { DatePicker } from 'react-bootstrap-pro';
 
-export function DatepickerButtonRangeDemo() {
+export function DatePickerButtonRangeDemo() {
   return (
-    <Datepicker
+    <DatePicker
       trigger='button'
       icon={<BiCalendarWeek />}
       selectionMode='multiple-ranged'

@@ -1,10 +1,10 @@
-import { Datepicker, FormLabel } from 'react-bootstrap-pro';
+import { DatePicker, FormLabel } from 'react-bootstrap-pro';
 
-export function DatepickerMinMaxDemo() {
+export function DatePickerMinMaxDemo() {
   return (
     <>
       <FormLabel htmlFor='datepicker-min-max'>Event date (2026 only)</FormLabel>
-      <Datepicker
+      <DatePicker
         id='datepicker-min-max'
         w={12}
         dateMin='2026-01-01'

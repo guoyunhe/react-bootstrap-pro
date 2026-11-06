@@ -1,10 +1,10 @@
-import { Datepicker, FormLabel } from 'react-bootstrap-pro';
+import { DatePicker, FormLabel } from 'react-bootstrap-pro';
 
-export function DatepickerMultiMonthRangeDemo() {
+export function DatePickerMultiMonthRangeDemo() {
   return (
     <>
       <FormLabel htmlFor='datepicker-multi-month-range'>Select date range</FormLabel>
-      <Datepicker
+      <DatePicker
         id='datepicker-multi-month-range'
         selectionMode='multiple-ranged'
         displayMonthsCount={2}

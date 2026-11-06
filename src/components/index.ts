@@ -17,7 +17,7 @@ export * from './collapse';
 export * from './combobox';
 export * from './container';
 export * from './css-grid';
-export * from './datepicker';
+export * from './date-picker';
 export * from './dialog';
 export * from './drawer';
 export * from './form';

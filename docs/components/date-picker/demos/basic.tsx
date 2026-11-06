@@ -1,10 +1,10 @@
-import { Datepicker, FormLabel } from 'react-bootstrap-pro';
+import { DatePicker, FormLabel } from 'react-bootstrap-pro';
 
-export function DatepickerBasicDemo() {
+export function DatePickerBasicDemo() {
   return (
     <>
-      <FormLabel htmlFor='datepicker-basic'>Datepicker</FormLabel>
-      <Datepicker id='datepicker-basic' w={12} />
+      <FormLabel htmlFor='datepicker-basic'>DatePicker</FormLabel>
+      <DatePicker id='datepicker-basic' w={12} />
     </>
   );
 }
