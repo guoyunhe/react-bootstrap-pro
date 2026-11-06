@@ -5,17 +5,34 @@ title: Combobox 组合框
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { ComboboxBasicDemo } from './demos/basic';
-import { ComboboxCustomDemo } from './demos/custom';
+import { ComboboxCheckedIconDemo } from './demos/checked-icon';
+import { ComboboxDescriptionsDemo } from './demos/descriptions';
+import { ComboboxDisabledDemo } from './demos/disabled';
+import { ComboboxDisabledOptionDemo } from './demos/disabled-option';
+import { ComboboxFormSubmissionDemo } from './demos/form-submission';
+import { ComboboxAllTogetherDemo } from './demos/custom';
 import { ComboboxGroupsDemo } from './demos/groups';
+import { ComboboxIconsDemo } from './demos/icons';
 import { ComboboxMultipleDemo } from './demos/multiple';
+import { ComboboxPlaceholdersDemo } from './demos/placeholders';
+import { ComboboxPreSelectedDemo } from './demos/pre-selected';
 import { ComboboxSearchDemo } from './demos/search';
 import { ComboboxSizingDemo } from './demos/sizing';
+import { ComboboxWithFormFieldDemo } from './demos/with-form-field';
 
 # Combobox 组合框
 
-`Combobox` 由 `.form-control` 切换按钮与 `.menu` 浮层组成一个样式化下拉选择框。选项
-可以包含图标、描述以及任意 React 内容。选择、搜索、分组、多选、键盘导航与用于表单
-提交的隐藏输入都由 React 实现，无需加载 Bootstrap JavaScript 插件。
+`Combobox` 提供带有按钮触发器和列表框菜单的样式化选择控件。选项以 React 数据定义；
+组件负责管理选择、搜索、键盘导航和表单提交。
+
+本项目的 React 组件不会初始化 Bootstrap JavaScript combobox 插件。请使用下方的 React
+属性，而不是插件的 `data-bs-*` 属性、选项或方法。
+
+- 支持选项自定义内容，包括图标和描述
+- 可选搜索，以及选中项勾选标记
+- 支持单选和多选
+- 支持键盘导航和无障碍列表框语义
+- 设置 `name` 后提供用于原生表单提交的隐藏输入框
 
 ## 示例
 
@@ -27,38 +44,98 @@ import { ComboboxSizingDemo } from './demos/sizing';
 
 ```
 
-用 `placeholder` 设置空状态文本，`defaultValue`（或受控的 `value`）设置初始选中项。
-将组件放入 `FormField` 即可与标签和描述文本组合。
+### 占位符
+
+使用 `placeholder` 设置未选中任何选项时显示的文本。
+
+<DemoContainer>
+  <ComboboxPlaceholdersDemo />
+</DemoContainer>
+
+```tsx src='./demos/placeholders.tsx'
+
+```
+
+### 预选值
+
+使用 `defaultValue` 设置非受控模式的初始选中值。由 React 状态控制时，请使用
+`value` 和 `onChange`。
+
+<DemoContainer>
+  <ComboboxPreSelectedDemo />
+</DemoContainer>
+
+```tsx src='./demos/pre-selected.tsx'
+
+```
+
+### 搭配表单字段
+
+使用 [`FormField`](../form/README.zh.mdx#formfield) 将切换按钮与标签和描述组合。
+
+<DemoContainer>
+  <ComboboxWithFormFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-form-field.tsx'
+
+```
 
 ## 自定义内容
 
-选项支持 `icon` 前缀图标与 `description` 次要文本；设置 `check` 会在选中项上显示勾选
-图标。
+选项可以包含前置图标、次要描述，以及表示选中状态的勾选标记。
+
+### 图标
+
+设置 `icon` 可在选项前显示图标。
 
 <DemoContainer>
-  <ComboboxCustomDemo />
+  <ComboboxIconsDemo />
+</DemoContainer>
+
+```tsx src='./demos/icons.tsx'
+
+```
+
+### 描述
+
+设置 `description` 可在选项标签下方显示次要文本。
+
+<DemoContainer>
+  <ComboboxDescriptionsDemo />
+</DemoContainer>
+
+```tsx src='./demos/descriptions.tsx'
+
+```
+
+### 勾选图标
+
+设置 `check` 可在选中的选项旁显示勾选标记。
+
+<DemoContainer>
+  <ComboboxCheckedIconDemo />
+</DemoContainer>
+
+```tsx src='./demos/checked-icon.tsx'
+
+```
+
+### 组合使用
+
+组合使用图标、描述和勾选标记，展示更丰富的选项内容。
+
+<DemoContainer>
+  <ComboboxAllTogetherDemo />
 </DemoContainer>
 
 ```tsx src='./demos/custom.tsx'
 
 ```
 
-## 搜索
-
-设置 `search` 会在菜单内渲染搜索框，选项依次按 `text`、字符串 `label`、`value`
-进行匹配。
-
-<DemoContainer>
-  <ComboboxSearchDemo />
-</DemoContainer>
-
-```tsx src='./demos/search.tsx'
-
-```
-
 ## 分组
 
-传入 `groups` 会用 `.menu-header` 渲染带标题的分组。
+传入 `groups` 可将选项按带标题的菜单分组展示。
 
 <DemoContainer>
   <ComboboxGroupsDemo />
@@ -70,8 +147,7 @@ import { ComboboxSizingDemo } from './demos/sizing';
 
 ## 多选
 
-设置 `multiple` 后点击选项会切换选中状态且菜单保持打开；选中多个选项时，切换按钮会
-显示已选数量。
+设置 `multiple` 后，选择选项不会关闭菜单。选中多个选项时，切换按钮会显示选中数量。
 
 <DemoContainer>
   <ComboboxMultipleDemo />
@@ -81,10 +157,23 @@ import { ComboboxSizingDemo } from './demos/sizing';
 
 ```
 
-## 尺寸与禁用
+## 搜索
 
-`size='sm'` 或 `size='lg'` 调整切换按钮尺寸；`disabled` 禁止交互，单个选项可用
-`disabled: true` 禁用。
+设置 `search` 可在菜单中添加筛选框。匹配时忽略大小写：若设置了 `text`，则用它进行搜索；
+否则使用字符串类型的 `label`，或在标签不是字符串时使用 `value`。没有匹配项时，可用
+`noResults` 自定义提示内容。
+
+<DemoContainer>
+  <ComboboxSearchDemo />
+</DemoContainer>
+
+```tsx src='./demos/search.tsx'
+
+```
+
+## 尺寸
+
+使用 `size='sm'` 或 `size='lg'` 调整切换按钮尺寸。省略 `size` 时使用默认尺寸。
 
 <DemoContainer>
   <ComboboxSizingDemo />
@@ -94,41 +183,38 @@ import { ComboboxSizingDemo } from './demos/sizing';
 
 ```
 
+## 禁用
+
+使用 `disabled` 禁用整个控件，或在单个选项的 `disabled` 字段中禁用该选项。
+
+<DemoContainer>
+  <ComboboxDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+<DemoContainer>
+  <ComboboxDisabledOptionDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled-option.tsx'
+
+```
+
 ## 表单提交
 
-设置 `name` 会渲染隐藏输入框：单选时值为选中值，多选时为逗号分隔的值列表。
+设置 `name` 会向表单中添加隐藏输入框。单选模式下提交选中值，多选模式下提交以逗号分隔的
+选中值列表。
 
-## API
+<DemoContainer>
+  <ComboboxFormSubmissionDemo />
+</DemoContainer>
 
-| 属性                | 类型                                  | 说明                              |
-| ------------------- | ------------------------------------- | --------------------------------- |
-| `options`           | `readonly ComboboxOption[]`           | 平铺选项列表。                    |
-| `groups`            | `readonly ComboboxGroup[]`            | 带标题的选项分组。                |
-| `value`             | `string \| readonly string[]`         | 受控选中值。                      |
-| `defaultValue`      | `string \| readonly string[]`         | 非受控初始选中值。                |
-| `onChange`          | `(value: string \| string[]) => void` | 选中值变化时触发。                |
-| `multiple`          | `boolean`                             | 启用多选。                        |
-| `placeholder`       | `string`                              | 未选中时显示的文本。              |
-| `search`            | `boolean`                             | 在菜单内渲染搜索框。              |
-| `searchPlaceholder` | `string`                              | 搜索框占位文本与可访问名称。      |
-| `noResults`         | `ReactNode`                           | 搜索无结果时显示的内容。          |
-| `check`             | `boolean`                             | 在选中项上渲染勾选图标。          |
-| `name`              | `string`                              | 渲染带有该名称的隐藏输入框。      |
-| `size`              | `'sm' \| 'lg'`                        | 调整切换按钮尺寸。                |
-| `disabled`          | `boolean`                             | 禁用切换按钮。                    |
-| `id`、`aria-*`      |                                       | 透传给切换按钮。                  |
-| `...props`          | `BoxProps<'div'>`                     | 作用于外层容器的 Box 工具类属性。 |
+```tsx src='./demos/form-submission.tsx'
 
-### ComboboxOption
-
-| 字段          | 类型        | 说明                         |
-| ------------- | ----------- | ---------------------------- |
-| `value`       | `string`    | 提交值与选中标识。           |
-| `label`       | `ReactNode` | 菜单与切换按钮中显示的内容。 |
-| `description` | `ReactNode` | 标签下方的次要文本。         |
-| `icon`        | `ReactNode` | 前置图标。                   |
-| `disabled`    | `boolean`   | 禁止选择该选项。             |
-| `text`        | `string`    | 用于搜索匹配的纯文本。       |
+```
 
 ## 键盘行为
 
@@ -139,14 +225,90 @@ import { ComboboxSizingDemo } from './demos/sizing';
 | 菜单   | ArrowDown / ArrowUp | 在选项间移动焦点。                  |
 | 菜单   | Home / End          | 聚焦第一个或最后一个选项。          |
 | 菜单   | Enter / Space       | 选中当前聚焦的选项。                |
-| 菜单   | Escape              | 关闭菜单并聚焦切换键。              |
+| 菜单   | Escape              | 关闭菜单并聚焦切换按钮。            |
 | 菜单   | Tab                 | 关闭菜单。                          |
 
-点击组合框外部也会关闭菜单。
+使用方向键时，焦点会在可用选项间循环移动。通过指针操作控件外部也会关闭菜单。
 
 ## 无障碍
 
-切换按钮带有 `aria-haspopup='listbox'` 与 `aria-expanded`，菜单使用
-`role='listbox'`，每个选项使用 `role='option'` 与 `aria-selected`。禁用的选项带有
-`disabled` 与 `aria-disabled='true'`。使用通过 `htmlFor` 绑定的 `FormLabel` 或
-`aria-label` 命名切换按钮。
+切换按钮是原生按钮，带有 `aria-haspopup='listbox'`、`aria-expanded` 和
+`aria-controls`。菜单使用 `role='listbox'`，选项使用 `role='option'` 和
+`aria-selected`。多选模式还会设置 `aria-multiselectable`。禁用选项是禁用状态的按钮，并
+提供 `aria-disabled='true'`。
+
+使用通过 `htmlFor` 关联的 [`FormLabel`](../form/README.zh.mdx#formlabel)、`aria-label`
+或 `aria-labelledby` 为切换按钮命名。可用 `aria-describedby` 关联补充说明。
+
+## CSS 自定义属性
+
+相邻菜单使用以下默认值，可通过 CSS 覆盖：
+
+| CSS 变量               | 默认值  | 说明                     |
+| ---------------------- | ------- | ------------------------ |
+| `--bs-menu-max-height` | `300px` | combobox 菜单最大高度。  |
+| `--bs-menu-overflow-y` | `auto`  | 菜单的垂直溢出处理方式。 |
+
+菜单也会继承 Bootstrap [Menu 组件](https://getbootstrap.com/docs/6.0/components/menu/)文档中的
+`--bs-menu-*` 属性。
+
+## API
+
+### Combobox
+
+默认渲染为 `div` 容器，其中包含原生 `button` 切换按钮、列表框菜单，以及设置 `name` 时
+生成的隐藏输入框。组件自有属性如下。`id` 和表格中的 `aria-*` 属性作用于切换按钮；原生
+`div` 属性和 [`Box`](../box/README.zh.mdx#api) 属性作用于外层容器，但不包括 `children`
+和原生 `onChange`。由于选项通过 `options` 或 `groups` 传入，不接受 `children`。容器始终
+使用相对定位以锚定菜单。
+
+| 属性                | 类型                                  | 默认值               | 说明                                   |
+| ------------------- | ------------------------------------- | -------------------- | -------------------------------------- |
+| `options`           | `ComboboxOption[]`                    | `[]`                 | 平铺选项列表。                         |
+| `groups`            | `ComboboxGroup[]`                     | `[]`                 | 带标题的选项分组。                     |
+| `value`             | `string \| string[]`                  | —                    | 受控选中值。                           |
+| `defaultValue`      | `string \| string[]`                  | —                    | 非受控模式的初始选中值。               |
+| `onChange`          | `(value: string \| string[]) => void` | —                    | 选中值变化时调用，传入选中值或值列表。 |
+| `multiple`          | `boolean`                             | `false`              | 启用多选。                             |
+| `placeholder`       | `string`                              | `''`                 | 未选中时显示的文本。                   |
+| `name`              | `string`                              | —                    | 设置后添加带有该名称的隐藏输入框。     |
+| `disabled`          | `boolean`                             | `false`              | 禁用切换按钮。                         |
+| `size`              | `'sm' \| 'lg'`                        | 默认尺寸             | 调整切换按钮尺寸。                     |
+| `search`            | `boolean`                             | `false`              | 在菜单内渲染搜索框。                   |
+| `searchPlaceholder` | `string`                              | `'Search…'`          | 搜索框占位文本与可访问名称。           |
+| `noResults`         | `ReactNode`                           | `'No results found'` | 搜索无匹配项时显示的内容。             |
+| `check`             | `boolean`                             | `false`              | 在选中选项上显示勾选标记。             |
+| `validation`        | `'valid' \| 'invalid'`                | —                    | 为外层容器和切换按钮应用验证状态。     |
+| `id`                | `string`                              | —                    | 设置切换按钮的 `id`。                  |
+| `aria-label`        | `string`                              | —                    | 设置切换按钮的可访问名称。             |
+| `aria-labelledby`   | `string`                              | —                    | 引用为切换按钮提供名称的元素。         |
+| `aria-describedby`  | `string`                              | —                    | 引用切换按钮的描述文本。               |
+
+单选时使用字符串，多选时使用字符串数组。
+
+容器固定使用 `relative` 定位以锚定菜单。`className` 和 `classNameBefore` 用于设置外层
+容器样式。
+
+### ComboboxOption
+
+| 字段          | 类型        | 默认值  | 说明                                   |
+| ------------- | ----------- | ------- | -------------------------------------- |
+| `value`       | `string`    | —       | 必填；选项标识和表单提交值。           |
+| `label`       | `ReactNode` | —       | 必填；菜单及单选模式下切换按钮的内容。 |
+| `description` | `ReactNode` | —       | 标签下方的次要文本。                   |
+| `icon`        | `ReactNode` | —       | 前置图标。                             |
+| `disabled`    | `boolean`   | `false` | 禁止选择该选项。                       |
+| `text`        | `string`    | —       | 用于搜索匹配的纯文本。                 |
+
+### ComboboxGroup
+
+| 字段      | 类型               | 默认值 | 说明                   |
+| --------- | ------------------ | ------ | ---------------------- |
+| `label`   | `ReactNode`        | —      | 菜单中显示的分组标题。 |
+| `options` | `ComboboxOption[]` | —      | 该分组包含的选项。     |
+
+## 参阅
+
+- [Bootstrap 6 Combobox 官方文档](https://getbootstrap.com/docs/6.0/forms/combobox/)
+- [Form 表单文档](../form/README.zh.mdx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/combobox.tsx)

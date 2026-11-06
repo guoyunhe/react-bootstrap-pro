@@ -5,19 +5,36 @@ title: Combobox
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { ComboboxBasicDemo } from './demos/basic';
-import { ComboboxCustomDemo } from './demos/custom';
+import { ComboboxCheckedIconDemo } from './demos/checked-icon';
+import { ComboboxDescriptionsDemo } from './demos/descriptions';
+import { ComboboxDisabledDemo } from './demos/disabled';
+import { ComboboxDisabledOptionDemo } from './demos/disabled-option';
+import { ComboboxFormSubmissionDemo } from './demos/form-submission';
+import { ComboboxAllTogetherDemo } from './demos/custom';
 import { ComboboxGroupsDemo } from './demos/groups';
+import { ComboboxIconsDemo } from './demos/icons';
 import { ComboboxMultipleDemo } from './demos/multiple';
+import { ComboboxPlaceholdersDemo } from './demos/placeholders';
+import { ComboboxPreSelectedDemo } from './demos/pre-selected';
 import { ComboboxSearchDemo } from './demos/search';
 import { ComboboxSizingDemo } from './demos/sizing';
+import { ComboboxWithFormFieldDemo } from './demos/with-form-field';
 
 # Combobox
 
-`Combobox` provides a styled select built from a `.form-control` toggle button
-and a `.menu` overlay. Options accept icons, descriptions, and any other React
-content. Selection, search, groups, multiple selection, keyboard navigation, and
-the hidden input used for form submission are handled in React, so no Bootstrap
-JavaScript plugin is required.
+`Combobox` provides a styled select control with a button toggle and a listbox
+menu. Define options as React data; the component manages selection, search,
+keyboard navigation, and form submission.
+
+This package's React component does not initialize Bootstrap's JavaScript
+combobox plugin. Use the React props documented below rather than the plugin's
+`data-bs-*` attributes, options, or methods.
+
+- Custom option content, including icons and descriptions
+- Optional search and check marks for selected options
+- Single or multiple selection
+- Keyboard navigation and accessible listbox semantics
+- A hidden input for native form submission when `name` is provided
 
 ## Example
 
@@ -29,39 +46,99 @@ JavaScript plugin is required.
 
 ```
 
-Set `placeholder` for the empty state and `defaultValue` (or `value` for
-controlled usage) to preselect an option. Wrap the combobox in a `FormField` to
-pair it with a label and description.
+### Placeholders
+
+Use `placeholder` for the text shown when no option is selected.
+
+<DemoContainer>
+  <ComboboxPlaceholdersDemo />
+</DemoContainer>
+
+```tsx src='./demos/placeholders.tsx'
+
+```
+
+### Pre-selected value
+
+Use `defaultValue` for an initial uncontrolled selection. Use `value` and
+`onChange` when the selection is controlled by React state.
+
+<DemoContainer>
+  <ComboboxPreSelectedDemo />
+</DemoContainer>
+
+```tsx src='./demos/pre-selected.tsx'
+
+```
+
+### With form field
+
+Pair the toggle with a label and description using [`FormField`](../form/README.mdx#formfield).
+
+<DemoContainer>
+  <ComboboxWithFormFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-form-field.tsx'
+
+```
 
 ## Custom content
 
-Options accept `icon` for a leading icon and `description` for secondary text.
-Set `check` to render a check mark next to selected options.
+Options can include a leading icon, secondary description, and a check mark
+indicating selection.
+
+### Icons
+
+Set `icon` to render a leading icon in an option.
 
 <DemoContainer>
-  <ComboboxCustomDemo />
+  <ComboboxIconsDemo />
+</DemoContainer>
+
+```tsx src='./demos/icons.tsx'
+
+```
+
+### Descriptions
+
+Set `description` to show secondary text under an option label.
+
+<DemoContainer>
+  <ComboboxDescriptionsDemo />
+</DemoContainer>
+
+```tsx src='./demos/descriptions.tsx'
+
+```
+
+### Checked icon
+
+Set `check` to show a check mark beside selected options.
+
+<DemoContainer>
+  <ComboboxCheckedIconDemo />
+</DemoContainer>
+
+```tsx src='./demos/checked-icon.tsx'
+
+```
+
+### All together
+
+Combine icons, descriptions, and check marks for richer options.
+
+<DemoContainer>
+  <ComboboxAllTogetherDemo />
 </DemoContainer>
 
 ```tsx src='./demos/custom.tsx'
 
 ```
 
-## Search
-
-Set `search` to render a search field inside the menu. Options are filtered by
-their `text`, then their string `label`, and finally their `value`.
-
-<DemoContainer>
-  <ComboboxSearchDemo />
-</DemoContainer>
-
-```tsx src='./demos/search.tsx'
-
-```
-
 ## Groups
 
-Pass `groups` to render labeled sections using `.menu-header` elements.
+Pass `groups` to display options under labeled menu headings.
 
 <DemoContainer>
   <ComboboxGroupsDemo />
@@ -73,8 +150,8 @@ Pass `groups` to render labeled sections using `.menu-header` elements.
 
 ## Multiple select
 
-Set `multiple` to toggle options without closing the menu. The toggle shows the
-number of selected options when more than one is selected.
+Set `multiple` to toggle options without closing the menu. When more than one
+option is selected, the toggle shows the selected count.
 
 <DemoContainer>
   <ComboboxMultipleDemo />
@@ -84,10 +161,25 @@ number of selected options when more than one is selected.
 
 ```
 
-## Sizing and disabled
+## Search
 
-Use `size='sm'` or `size='lg'` to resize the toggle, and `disabled` to prevent
-interaction. Disable individual options with `disabled: true`.
+Set `search` to add a filter field to the menu. Matching is case-insensitive:
+the component searches `text` when provided, otherwise a string `label`, or
+`value` when the label is not a string. `noResults` customizes the message
+shown when no options match.
+
+<DemoContainer>
+  <ComboboxSearchDemo />
+</DemoContainer>
+
+```tsx src='./demos/search.tsx'
+
+```
+
+## Sizing
+
+Use `size='sm'` or `size='lg'` to change the toggle size. Omit `size` for the
+default size.
 
 <DemoContainer>
   <ComboboxSizingDemo />
@@ -97,42 +189,40 @@ interaction. Disable individual options with `disabled: true`.
 
 ```
 
+## Disabled
+
+Disable the entire control with `disabled`, or disable an individual option
+with its `disabled` field.
+
+<DemoContainer>
+  <ComboboxDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+<DemoContainer>
+  <ComboboxDisabledOptionDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled-option.tsx'
+
+```
+
 ## Form submission
 
-Set `name` to render a hidden input whose value is the selected value, or a
-comma-separated list of values in multiple mode.
+Set `name` to add a hidden input to the form. It submits the selected value in
+single-select mode and a comma-separated list of selected values in
+multiple-select mode.
 
-## API
+<DemoContainer>
+  <ComboboxFormSubmissionDemo />
+</DemoContainer>
 
-| Prop                | Type                                  | Description                                          |
-| ------------------- | ------------------------------------- | ---------------------------------------------------- |
-| `options`           | `readonly ComboboxOption[]`           | Flat list of options.                                |
-| `groups`            | `readonly ComboboxGroup[]`            | Labeled option groups.                               |
-| `value`             | `string \| readonly string[]`         | Controlled selection.                                |
-| `defaultValue`      | `string \| readonly string[]`         | Initial selection for uncontrolled usage.            |
-| `onChange`          | `(value: string \| string[]) => void` | Called when the selection changes.                   |
-| `multiple`          | `boolean`                             | Enables multiple selection.                          |
-| `placeholder`       | `string`                              | Text shown when nothing is selected.                 |
-| `search`            | `boolean`                             | Renders a search field inside the menu.              |
-| `searchPlaceholder` | `string`                              | Placeholder and accessible name of the search field. |
-| `noResults`         | `ReactNode`                           | Content shown when the search has no matches.        |
-| `check`             | `boolean`                             | Renders a check mark on selected options.            |
-| `name`              | `string`                              | Renders a hidden input with this name.               |
-| `size`              | `'sm' \| 'lg'`                        | Scales the toggle.                                   |
-| `disabled`          | `boolean`                             | Disables the toggle.                                 |
-| `id`, `aria-*`      |                                       | Forwarded to the toggle button.                      |
-| `...props`          | `BoxProps<'div'>`                     | Box utility props for the wrapper.                   |
+```tsx src='./demos/form-submission.tsx'
 
-### ComboboxOption
-
-| Field         | Type        | Description                                  |
-| ------------- | ----------- | -------------------------------------------- |
-| `value`       | `string`    | Submitted value and selection key.           |
-| `label`       | `ReactNode` | Content shown in the menu and on the toggle. |
-| `description` | `ReactNode` | Secondary text below the label.              |
-| `icon`        | `ReactNode` | Leading icon.                                |
-| `disabled`    | `boolean`   | Prevents selecting the option.               |
-| `text`        | `string`    | Plain text used for search matching.         |
+```
 
 ## Keyboard behavior
 
@@ -146,11 +236,92 @@ comma-separated list of values in multiple mode.
 | Menu    | Escape              | Closes the menu and focuses the toggle.           |
 | Menu    | Tab                 | Closes the menu.                                  |
 
-Clicking outside the combobox also closes the menu.
+Focus wraps between enabled options when using the arrow keys. A pointer event
+outside the control also closes the menu.
 
 ## Accessibility
 
-The toggle exposes `aria-haspopup='listbox'` and `aria-expanded`, the menu uses
-`role='listbox'`, and each option uses `role='option'` with `aria-selected`.
-Disabled options receive `disabled` and `aria-disabled='true'`. Name the toggle
-with a `FormLabel` bound through `htmlFor`, or with `aria-label`.
+The toggle is a native button with `aria-haspopup='listbox'`, `aria-expanded`,
+and `aria-controls`. The menu uses `role='listbox'`; options use
+`role='option'` and `aria-selected`. Multiple selection also sets
+`aria-multiselectable`. Disabled options are disabled buttons and expose
+`aria-disabled='true'`.
+
+Name the toggle with a [`FormLabel`](../form/README.mdx#formlabel) associated
+through `htmlFor`, or pass `aria-label` or `aria-labelledby`. Use
+`aria-describedby` to associate additional instructions.
+
+## CSS custom properties
+
+The adjacent menu uses these defaults, which can be overridden with CSS:
+
+| CSS variable           | Default | Description                             |
+| ---------------------- | ------- | --------------------------------------- |
+| `--bs-menu-max-height` | `300px` | Maximum height of the combobox menu.    |
+| `--bs-menu-overflow-y` | `auto`  | Vertical overflow behavior of the menu. |
+
+The menu also inherits the `--bs-menu-*` properties documented by Bootstrap's
+[Menu component](https://getbootstrap.com/docs/6.0/components/menu/).
+
+## API
+
+### Combobox
+
+Renders a `div` wrapper by default. It contains a native `button` toggle, a
+listbox menu, and a hidden input when `name` is set. Its own props are listed
+below. `id` and the listed `aria-*` props apply to the toggle; native `div`
+props and [`Box`](../box/README.mdx#api) props apply to the wrapper, except for
+`children` and native `onChange`. The wrapper is positioned relative to anchor
+the menu.
+
+| Prop                | Type                                  | Default              | Description                                           |
+| ------------------- | ------------------------------------- | -------------------- | ----------------------------------------------------- |
+| `options`           | `ComboboxOption[]`                    | `[]`                 | Flat list of options.                                 |
+| `groups`            | `ComboboxGroup[]`                     | `[]`                 | Labeled option groups.                                |
+| `value`             | `string \| string[]`                  | —                    | Controlled selection.                                 |
+| `defaultValue`      | `string \| string[]`                  | —                    | Initial selection for uncontrolled usage.             |
+| `onChange`          | `(value: string \| string[]) => void` | —                    | Called with the selected value or values.             |
+| `multiple`          | `boolean`                             | `false`              | Enables multiple selection.                           |
+| `placeholder`       | `string`                              | `''`                 | Text shown when nothing is selected.                  |
+| `name`              | `string`                              | —                    | Adds a hidden input with this name.                   |
+| `disabled`          | `boolean`                             | `false`              | Disables the toggle.                                  |
+| `size`              | `'sm' \| 'lg'`                        | Default size         | Scales the toggle.                                    |
+| `search`            | `boolean`                             | `false`              | Renders a search field inside the menu.               |
+| `searchPlaceholder` | `string`                              | `'Search…'`          | Search field placeholder and accessible name.         |
+| `noResults`         | `ReactNode`                           | `'No results found'` | Content shown when the search has no matches.         |
+| `check`             | `boolean`                             | `false`              | Renders a check mark on selected options.             |
+| `validation`        | `'valid' \| 'invalid'`                | —                    | Applies a validation state to the wrapper and toggle. |
+| `id`                | `string`                              | —                    | Sets the toggle button's `id`.                        |
+| `aria-label`        | `string`                              | —                    | Sets the toggle button's accessible name.             |
+| `aria-labelledby`   | `string`                              | —                    | References the element that names the toggle button.  |
+| `aria-describedby`  | `string`                              | —                    | References descriptive text for the toggle button.    |
+
+Use a string value for single selection and an array of strings for multiple
+selection.
+
+The wrapper's position is fixed to `relative` to anchor the menu. The
+`className` and `classNameBefore` props style the wrapper.
+
+### ComboboxOption
+
+| Field         | Type        | Default | Description                                                  |
+| ------------- | ----------- | ------- | ------------------------------------------------------------ |
+| `value`       | `string`    | —       | Required selection key and submitted value.                  |
+| `label`       | `ReactNode` | —       | Required content shown in the menu and single-select toggle. |
+| `description` | `ReactNode` | —       | Secondary text below the label.                              |
+| `icon`        | `ReactNode` | —       | Leading icon.                                                |
+| `disabled`    | `boolean`   | `false` | Prevents selecting the option.                               |
+| `text`        | `string`    | —       | Explicit plain text used for search matching.                |
+
+### ComboboxGroup
+
+| Field     | Type               | Default | Description                      |
+| --------- | ------------------ | ------- | -------------------------------- |
+| `label`   | `ReactNode`        | —       | Group heading shown in the menu. |
+| `options` | `ComboboxOption[]` | —       | Options in the group.            |
+
+## See
+
+- [Bootstrap 6 Combobox documentation](https://getbootstrap.com/docs/6.0/forms/combobox/)
+- [Form documentation](../form/README.mdx)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/combobox.tsx)
