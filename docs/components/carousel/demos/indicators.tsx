@@ -11,7 +11,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselIndicatorsDemo() {
   return (
-    <Carousel id='carouselStackedIndicators' slide>
+    <Carousel id='carouselStackedIndicators'>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />

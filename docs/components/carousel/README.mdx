@@ -118,9 +118,9 @@ Set `overlay` to position `CarouselOverlayControls` over the slides.
 
 ### Crossfade
 
-Set `fade` to crossfade slides instead of scrolling between them. For text-only
-slides, give each item a background so overlapping content remains legible.
-Reduced-motion preferences disable the transition.
+Set `effect='fade'` to crossfade slides instead of using the default slide
+transition. For text-only slides, give each item a background so overlapping
+content remains legible. Reduced-motion preferences disable the transition.
 
 <DemoContainer>
   <CarouselCrossfadeDemo />
@@ -270,14 +270,13 @@ with overlay controls when they need contrast against slide content.
 
 ### Carousel
 
-| Prop        | Type          | Default | Description                                 |
-| ----------- | ------------- | ------- | ------------------------------------------- |
-| `auto`      | `boolean`     | `false` | Lets each item use its own width.           |
-| `center`    | `boolean`     | `false` | Centers snap positions in the viewport.     |
-| `fade`      | `boolean`     | `false` | Uses the stacked fade transition mode.      |
-| `overlay`   | `boolean`     | `false` | Positions overlay controls over the slides. |
-| `slide`     | `boolean`     | `false` | Enables the slide transition behavior.      |
-| `component` | `ElementType` | `'div'` | Changes the root element.                   |
+| Prop        | Type                | Default   | Description                                 |
+| ----------- | ------------------- | --------- | ------------------------------------------- |
+| `auto`      | `boolean`           | `false`   | Lets each item use its own width.           |
+| `center`    | `boolean`           | `false`   | Centers snap positions in the viewport.     |
+| `effect`    | `'slide' \| 'fade'` | `'slide'` | Chooses the slide or fade transition.       |
+| `overlay`   | `boolean`           | `false`   | Positions overlay controls over the slides. |
+| `component` | `ElementType`       | `'div'`   | Changes the root element.                   |
 
 Accepts native props for the selected element and [`Box`](../box/README.mdx#api)
 utility props.

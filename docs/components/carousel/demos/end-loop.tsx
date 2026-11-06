@@ -4,7 +4,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselEndLoopDemo() {
   return (
-    <Carousel id='carouselEndsLoop' slide data-bs-ends='loop'>
+    <Carousel id='carouselEndsLoop' data-bs-ends='loop'>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Loop</h5>
         <div>

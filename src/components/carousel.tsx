@@ -5,21 +5,21 @@ import { Box } from './box';
 import type { BoxProps } from './box';
 import { IconButton, type IconButtonProps } from './icon-button';
 
+export type CarouselEffect = 'slide' | 'fade';
+
 export type CarouselProps<C extends ElementType = 'div'> = Omit<
   BoxProps<C>,
   keyof {
     auto?: boolean | undefined;
     center?: boolean | undefined;
-    fade?: boolean | undefined;
+    effect?: CarouselEffect | undefined;
     overlay?: boolean | undefined;
-    slide?: boolean | undefined;
   }
 > & {
   auto?: boolean | undefined;
   center?: boolean | undefined;
-  fade?: boolean | undefined;
+  effect?: CarouselEffect | undefined;
   overlay?: boolean | undefined;
-  slide?: boolean | undefined;
 };
 
 export function Carousel<C extends ElementType = 'div'>({
@@ -27,9 +27,8 @@ export function Carousel<C extends ElementType = 'div'>({
   className,
   auto,
   center,
-  fade,
+  effect = 'slide',
   overlay,
-  slide,
   ...props
 }: CarouselProps<C>) {
   return (
@@ -40,9 +39,8 @@ export function Carousel<C extends ElementType = 'div'>({
         'carousel',
         auto && 'carousel-auto',
         center && 'carousel-center',
-        fade && 'carousel-fade',
+        effect === 'fade' ? 'carousel-fade' : 'slide',
         overlay && 'carousel-overlay',
-        slide && 'slide',
         props.classNameBefore,
       )}
       className={className}

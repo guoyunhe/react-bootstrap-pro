@@ -11,7 +11,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselIndividualIntervalsDemo() {
   return (
-    <Carousel id='carouselExampleInterval' slide data-bs-autoplay='true'>
+    <Carousel id='carouselExampleInterval' data-bs-autoplay='true'>
       <CarouselInner className='rounded-5'>
         <CarouselItem active data-bs-interval={2000}>
           <CarouselSlidePlaceholder label='First: 2 seconds' />

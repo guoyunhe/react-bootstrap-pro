@@ -4,7 +4,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselEndStopDemo() {
   return (
-    <Carousel id='carouselEndsStop' slide data-bs-ends='stop'>
+    <Carousel id='carouselEndsStop' data-bs-ends='stop'>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Stop at the ends</h5>
         <div>

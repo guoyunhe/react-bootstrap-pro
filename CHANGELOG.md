@@ -5,11 +5,12 @@
 ### Breaking Changes
 
 - Rename the Box `display` prop to `d`; the old prop is removed.
+- Replace Carousel's `fade` and `slide` boolean props with an `effect` prop
+  accepting `'slide'` or `'fade'`; the default is `'slide'`.
 
 ### Added
 
 - Add the `AlertLink` component for links styled within alerts.
-- Add the `slide` prop to `Carousel`.
 
 ## [0.3.0] - 2026-11-04
 

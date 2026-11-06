@@ -2,7 +2,7 @@ import { Carousel, CarouselControl, CarouselInner, CarouselItem } from 'react-bo
 
 export function CarouselCustomContentDemo() {
   return (
-    <Carousel id='carouselExampleContent' slide>
+    <Carousel id='carouselExampleContent'>
       <CarouselInner className='rounded-5'>
         <CarouselItem active>
           <div

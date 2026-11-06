@@ -260,6 +260,7 @@ export type {
   CardTitleProps,
   CarouselCaptionProps,
   CarouselControlProps,
+  CarouselEffect,
   CarouselIndicatorProps,
   CarouselIndicatorsProps,
   CarouselInnerProps,

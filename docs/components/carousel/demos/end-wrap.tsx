@@ -4,7 +4,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselEndWrapDemo() {
   return (
-    <Carousel id='carouselEndsWrap' slide data-bs-ends='wrap'>
+    <Carousel id='carouselEndsWrap' data-bs-ends='wrap'>
       <div className='d-flex justify-content-between align-items-center'>
         <h5 className='mb-0'>Wrap around</h5>
         <div>
