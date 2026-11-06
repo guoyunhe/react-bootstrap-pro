@@ -55,13 +55,14 @@ test('defaults to the slide effect', async () => {
   expect(carousel).not.toHaveAttribute('data-bs-theme');
 });
 
-test('maps itemsGap to the CSS variable and preserves custom styles', async () => {
+test('maps item spacing props to CSS variables and preserves custom styles', async () => {
   const screen = await render(
-    <Carousel itemsGap={16} style={{ color: 'red' }} data-testid='carousel' />,
+    <Carousel itemsGap={16} itemsPeek={48} style={{ color: 'red' }} data-testid='carousel' />,
   );
   const carousel = screen.getByTestId('carousel').element();
 
   expect(carousel.style.getPropertyValue('--bs-carousel-items-gap')).toBe('16px');
+  expect(carousel.style.getPropertyValue('--bs-carousel-items-peek')).toBe('48px');
   expect(carousel.style.color).toBe('red');
 });
 

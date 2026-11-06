@@ -132,16 +132,15 @@ content remains legible. Reduced-motion preferences disable the transition.
 
 ## Items
 
-Set `--bs-carousel-items` to control how many slides are visible, use the
-`itemsGap` prop to add space between them, and set `--bs-carousel-items-peek` to
-reveal parts of the neighboring slides. These CSS options require no
-JavaScript:
+Set `--bs-carousel-items` to control how many slides are visible. Use the
+`itemsGap` prop to add space between slides and `itemsPeek` to reveal parts of
+neighboring slides. The slide count CSS option requires no JavaScript:
 
 - `--bs-carousel-items` sets the number of whole slides visible per view (default `1`).
-- `--bs-carousel-items-peek` sets how much of neighboring slides to reveal (default `0`).
 
-`itemsGap` accepts a CSS gap value such as `'1rem'`; numeric values are treated
-as pixels.
+`itemsGap` accepts a CSS gap value, and `itemsPeek` accepts a CSS width value,
+such as `'1rem'`; numeric values are treated as pixels. `itemsPeek` defaults to
+`0`.
 
 ### Multiple items
 
@@ -157,8 +156,7 @@ Show several slides at once by setting `--bs-carousel-items`.
 
 ### Peeking
 
-Set `--bs-carousel-items-peek` to hint that more slides are available beyond
-the current view.
+Set `itemsPeek` to hint that more slides are available beyond the current view.
 
 <DemoContainer>
   <CarouselPeekingDemo />
@@ -284,6 +282,7 @@ contrast against slide content.
 | `ends`      | `'loop' \| 'wrap' \| 'stop'` | `'loop'`  | Chooses the behavior at the first and last slide. |
 | `id`        | `string`                     | generated | Sets the root element's id.                       |
 | `itemsGap`  | `string \| number`           | —         | Sets the gap between slides; numbers are pixels.  |
+| `itemsPeek` | `string \| number`           | —         | Reveals neighboring slides; numbers are pixels.   |
 | `overlay`   | `boolean`                    | `false`   | Positions overlay controls over the slides.       |
 | `component` | `ElementType`                | `'div'`   | Changes the root element.                         |
 

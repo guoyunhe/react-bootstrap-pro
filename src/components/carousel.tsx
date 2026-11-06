@@ -40,6 +40,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
     effect?: CarouselEffect | undefined;
     ends?: CarouselEnds | undefined;
     itemsGap?: CSSProperties['gap'] | undefined;
+    itemsPeek?: CSSProperties['width'] | undefined;
     overlay?: boolean | undefined;
   }
 > & {
@@ -50,6 +51,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
   effect?: CarouselEffect | undefined;
   ends?: CarouselEnds | undefined;
   itemsGap?: CSSProperties['gap'] | undefined;
+  itemsPeek?: CSSProperties['width'] | undefined;
   overlay?: boolean | undefined;
 };
 
@@ -64,17 +66,29 @@ export function Carousel<C extends ElementType = 'div'>({
   effect = 'slide',
   ends,
   itemsGap,
+  itemsPeek,
   overlay,
   ...props
 }: CarouselProps<C>) {
   const reactId = useId();
   const id = externalId || createCarouselId(reactId);
   const style: CSSProperties | undefined =
-    itemsGap === undefined
+    itemsGap === undefined && itemsPeek === undefined
       ? props.style
       : {
           ...props.style,
-          '--bs-carousel-items-gap': typeof itemsGap === 'number' ? `${itemsGap}px` : itemsGap,
+          ...(itemsGap === undefined
+            ? {}
+            : {
+                '--bs-carousel-items-gap':
+                  typeof itemsGap === 'number' ? `${itemsGap}px` : itemsGap,
+              }),
+          ...(itemsPeek === undefined
+            ? {}
+            : {
+                '--bs-carousel-items-peek':
+                  typeof itemsPeek === 'number' ? `${itemsPeek}px` : itemsPeek,
+              }),
         };
 
   return (
