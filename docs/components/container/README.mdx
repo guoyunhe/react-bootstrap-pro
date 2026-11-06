@@ -3,36 +3,27 @@ title: Container
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Container } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
-import { ContainerTypesDemo } from './demos/container-types';
+import { ContainerDefaultDemo } from './demos/default';
+import { ContainerFluidDemo } from './demos/fluid';
+import { ContainerResponsiveDemo } from './demos/responsive';
 
 # Container
 
-`Container` provides a responsive, centered layout wrapper using Bootstrap 6
-container classes. Import Bootstrap's stylesheet once in your application
-before using the component.
+Containers contain, pad, and center page content. They are the basic layout
+element required by Bootstrap's default grid system. Containers can be nested,
+though most layouts do not need nested containers.
 
-## Example
+Bootstrap provides three container types:
 
-### Container types
+- `.container` sets a responsive `max-width` at each breakpoint.
+- `.sm:container`, `.md:container`, `.lg:container`, `.xl:container`, and
+  `.2xl:container` remain full width until the named breakpoint.
+- `.container-fluid` remains full width at every breakpoint.
 
-The default container changes its `max-width` at each breakpoint. Set `fluid` to
-make it full width, or pass a breakpoint to keep it full width until that
-breakpoint.
-
-<DemoContainer>
-  <ContainerTypesDemo />
-</DemoContainer>
-
-```tsx src='./demos/container-types.tsx'
-
-```
-
-### Responsive widths
-
-Bootstrap 6 uses a 100% width below the given breakpoint, then applies the
-container's responsive `max-width`:
+The table compares their widths at Bootstrap 6's default breakpoints. See the
+[Grid example](https://getbootstrap.com/docs/6.0/examples/grid/#containers) to
+compare containers in a layout.
 
 | Class              | Extra small<br />&lt;576px | Small<br />≥576px | Medium<br />≥768px | Large<br />≥1024px | X-large<br />≥1280px | 2X-large<br />≥1536px |
 | ------------------ | -------------------------: | ----------------: | -----------------: | -----------------: | -------------------: | --------------------: |
@@ -44,35 +35,89 @@ container's responsive `max-width`:
 | `.2xl:container`   |                       100% |              100% |               100% |               100% |                 100% |                1440px |
 | `.container-fluid` |                       100% |              100% |               100% |               100% |                 100% |                  100% |
 
-Breakpoint widths follow Bootstrap 6's defaults.
+## Default container
+
+The default container is full width on extra-small screens, then changes its
+`max-width` at each responsive breakpoint.
+
+<DemoContainer>
+  <ContainerDefaultDemo />
+</DemoContainer>
+
+```tsx src='./demos/default.tsx'
+
+```
+
+## Responsive containers
+
+Pass a breakpoint to `fluid` to keep the container full width until that
+breakpoint. It then uses the responsive `max-width` values for that breakpoint
+and larger ones.
+
+<DemoContainer>
+  <ContainerResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
+```
+
+## Fluid containers
+
+Set `fluid` to keep the container at 100% width across all breakpoints.
+
+<DemoContainer>
+  <ContainerFluidDemo />
+</DemoContainer>
+
+```tsx src='./demos/fluid.tsx'
+
+```
+
+## CSS
+
+### Sass variables
+
+Bootstrap generates its container classes from the `$container-max-widths` Sass
+map. Customize this map before compiling Bootstrap to change the responsive
+maximum widths. See the [Grid Sass documentation](https://getbootstrap.com/docs/6.0/layout/grid/#css)
+for details on customizing Sass maps.
+
+### Sass mixins
+
+Use Bootstrap's `make-container` Sass mixin to create a custom container class:
+
+```scss
+.custom-container {
+  @include make-container();
+}
+```
 
 ## API
 
 ### Container
 
-Renders a `div` by default. Its own prop is `fluid`, typed as
-`boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`; `true` renders
-`.container-fluid`, while a breakpoint value renders the corresponding
+Renders a `div` by default. Its own prop is `fluid`: `true` applies
+`.container-fluid`, and a breakpoint value applies the corresponding
 responsive container class. It inherits native props for the selected element
 and all [`Box`](../box/README.mdx#api) props, including `component`,
 `className`, and `classNameBefore`.
 
-| Prop        | Type                                               | Default | Description                                                                                           |
-| ----------- | -------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
-| `component` | `C extends ElementType`                            | `'div'` | Native element or React component to render.                                                          |
-| `fluid`     | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `false` | `true` applies `.container-fluid`; a breakpoint applies the corresponding responsive container class. |
-| `className` | `string`                                           | —       | Additional class names.                                                                               |
-| `...props`  | `BoxProps<C>`                                      | —       | Native props of the selected component, plus every [`Box`](../box/) utility prop.                     |
+| Prop    | Type                                               | Default | Description                                                                                           |
+| ------- | -------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| `fluid` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `false` | `true` applies `.container-fluid`; a breakpoint applies the corresponding responsive container class. |
 
 `Container` extends `BoxProps`, so `bg`, `fg`, `theme`, `colorScheme`, and the
-other [`Box`](../box/) utility props can be set directly on the container.
+other [`Box`](../box/README.mdx#api) utility props can be set directly on the
+container.
 
 ## Accessibility
 
-Choose a semantic element for the content inside the container; the wrapper
-does not create a landmark by itself.
+The container wrapper does not create a landmark by itself. Use `component` to
+choose a semantic element such as `main` or `section` when appropriate.
 
 ## See
 
 - [Bootstrap 6 Containers documentation](https://getbootstrap.com/docs/6.0/layout/containers/)
+- [Grid documentation](../grid/README.mdx)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/container.tsx)
