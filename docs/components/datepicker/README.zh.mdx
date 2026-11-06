@@ -6,26 +6,32 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { DatepickerBasicDemo } from './demos/basic';
 import { DatepickerButtonDemo } from './demos/button';
+import { DatepickerButtonRangeDemo } from './demos/button-range';
 import { DatepickerDarkDemo } from './demos/dark';
 import { DatepickerFieldDemo } from './demos/field';
 import { DatepickerFirstWeekdayDemo } from './demos/first-weekday';
 import { DatepickerFormatDemo } from './demos/format';
+import { DatepickerFormatFunctionDemo } from './demos/format-function';
 import { DatepickerIconDemo } from './demos/icon';
 import { DatepickerInlineDemo } from './demos/inline';
+import { DatepickerInlineMonthsDemo } from './demos/inline-months';
+import { DatepickerInlineRangeDemo } from './demos/inline-range';
 import { DatepickerMinMaxDemo } from './demos/min-max';
+import { DatepickerMultiMonthRangeDemo } from './demos/multi-month-range';
 import { DatepickerMultipleDemo } from './demos/multiple';
 import { DatepickerMultipleMonthsDemo } from './demos/multiple-months';
 import { DatepickerPlacementDemo } from './demos/placement';
 import { DatepickerRangeDemo } from './demos/range';
+import { DatepickerThemeOverrideDemo } from './demos/theme-override';
 
 # Datepicker 日期选择器
 
-`Datepicker` 与 Bootstrap 日期选择器一样封装了
-[Vanilla Calendar Pro](https://vanilla-calendar.pro/)，并复用 Bootstrap 的日期
-选择器样式。它支持明暗两种颜色模式、输入框与按钮两种触发器、内联日历，以及单日、
-多日与区间选择，并可按语言格式化日期。
+`Datepicker` 是基于 [Vanilla Calendar Pro](https://vanilla-calendar.pro/) 的 React
+封装，并使用 Bootstrap 6 的日期选择器样式。它通过 React 属性而非 Bootstrap 的
+`data-bs-*` 初始化 API 使用，支持单日、多日和区间选择、弹出与内联日历、本地化日期格式，
+以及明暗主题。
 
-## 示例
+## 概览
 
 <DemoContainer>
   <DatepickerBasicDemo />
@@ -35,10 +41,23 @@ import { DatepickerRangeDemo } from './demos/range';
 
 ```
 
-输入框使用 `.form-control`；加上 `.w-12` 宽度工具类可让所选日期完整显示。日历在
-聚焦时打开，选择完成后关闭，按 Escape、点击日历外部或将焦点移出时也会关闭。
+弹出触发器是文本输入框。使用 `.w-12` 宽度工具类为格式化后的日期留出足够空间。输入框在
+获得焦点时打开日历，并禁用浏览器自动补全。
 
-## 配合表单字段
+## 工作原理
+
+- `selectionMode` 控制用户可选择单个日期、多个日期或日期区间。
+- `value` 和 `defaultValue` 使用 `YYYY-MM-DD` 字符串。`onChange` 也会以相同格式返回所选日期；
+  触发器则显示本地化或自定义格式的日期文本。
+- 选择单日或完成日期区间后，弹出日历会关闭。多日选择会保持打开，直到用户将其关闭。
+- 点击外部、按 Escape 或将焦点移出日历后，弹出日历会关闭。按钮触发器通过激活操作打开或关闭日历。
+- 日历默认跟随最近的 Bootstrap `[data-bs-theme]` 颜色模式。也可以通过 `theme` 覆盖。
+
+## 示例
+
+### 配合表单字段
+
+使用 `FormField` 将日期选择器与标签和辅助文本组合在一起。
 
 <DemoContainer>
   <DatepickerFieldDemo />
@@ -48,10 +67,9 @@ import { DatepickerRangeDemo } from './demos/range';
 
 ```
 
-## 配合图标
+### 配合图标
 
-设置 `ghost` 可渲染 `.form-ghost` 输入框，再将其放入表单装饰（form adorn）容器中。
-日历会从输入框处打开，紧邻图标。
+在表单装饰容器中使用 `ghost`，即可在输入框旁放置日历图标。弹出日历会相对于整个装饰控件定位。
 
 <DemoContainer>
   <DatepickerIconDemo />
@@ -61,10 +79,9 @@ import { DatepickerRangeDemo } from './demos/range';
 
 ```
 
-## 最小与最大日期
+### 最小和最大日期
 
-用 `dateMin` 与 `dateMax` 限制可选范围。两者都接受 `YYYY-MM-DD` 字符串，也接受
-`Date` 对象与时间戳。
+使用 `dateMin` 和 `dateMax` 限制可选日期。两者都接受 `YYYY-MM-DD` 字符串、`Date` 对象或时间戳。
 
 <DemoContainer>
   <DatepickerMinMaxDemo />
@@ -74,9 +91,9 @@ import { DatepickerRangeDemo } from './demos/range';
 
 ```
 
-## 选择多个日期
+### 选择多个日期
 
-设置 `selectionMode='multiple'` 可选择任意多个日期，输入框中的日期以逗号分隔。
+设置 `selectionMode='multiple'`，允许用户选择任意多个日期。
 
 <DemoContainer>
   <DatepickerMultipleDemo />
@@ -86,9 +103,9 @@ import { DatepickerRangeDemo } from './demos/range';
 
 ```
 
-## 显示多个月份
+### 显示多个月份
 
-用 `displayMonthsCount` 同时显示多个月份，最常用于需要更多上下文的区间选择。
+设置 `displayMonthsCount` 并排显示多个月份。选择跨月区间时，这样能提供更多日历上下文。
 
 <DemoContainer>
   <DatepickerMultipleMonthsDemo />
@@ -98,10 +115,10 @@ import { DatepickerRangeDemo } from './demos/range';
 
 ```
 
-## 日期区间
+### 日期区间
 
-设置 `selectionMode='multiple-ranged'` 可选择开始与结束日期。通过 `defaultValue`
-（或受控的 `value`）传入两个日期即可预选区间。
+设置 `selectionMode='multiple-ranged'` 来选择开始和结束日期。传入两个日期组成的
+`defaultValue`（或受控 `value`）可预选一个区间。
 
 <DemoContainer>
   <DatepickerRangeDemo />
@@ -111,9 +128,23 @@ import { DatepickerRangeDemo } from './demos/range';
 
 ```
 
-## 每周第一天
+### 跨月日期区间
 
-`firstWeekday` 设置每周的第一天，`0` 为周日，`1`（默认值）为周一。
+将 `selectionMode='multiple-ranged'` 与 `displayMonthsCount={2}` 配合使用，可在两个并排显示的月份中选择日期区间。
+
+<DemoContainer>
+  <DatepickerMultiMonthRangeDemo />
+</DemoContainer>
+
+```tsx src='./demos/multi-month-range.tsx'
+
+```
+
+## 选项
+
+### 每周第一天
+
+设置 `firstWeekday` 可指定每周的第一天。`0` 表示周日，`1`（默认值）表示周一。
 
 <DemoContainer>
   <DatepickerFirstWeekdayDemo />
@@ -123,10 +154,9 @@ import { DatepickerRangeDemo } from './demos/range';
 
 ```
 
-## 对齐方式
+### 位置
 
-用 `placement` 控制日历相对触发器的位置：`'left'`（默认）、`'center'`、
-`'right'` 或 `'auto'`。
+使用 `placement` 控制弹出日历相对触发器的位置。
 
 <DemoContainer>
   <DatepickerPlacementDemo />
@@ -136,11 +166,10 @@ import { DatepickerRangeDemo } from './demos/range';
 
 ```
 
-## 按钮触发器
+### 按钮触发器
 
-设置 `trigger='button'` 会渲染按钮而非输入框，适用于仪表盘中的日期筛选。按钮显示
-格式化后的选择结果，未选择时显示 `placeholder`，并可用 `icon` 添加前置图标。组件在
-React 中维护展开状态，并通过 `aria-expanded` 暴露。
+设置 `trigger='button'`，即可在日期筛选器等不适合使用文本框的场景中改用按钮。按钮通过
+`aria-expanded` 暴露展开状态，也可以添加前置 `icon`。
 
 <DemoContainer>
   <DatepickerButtonDemo />
@@ -150,10 +179,21 @@ React 中维护展开状态，并通过 `aria-expanded` 暴露。
 
 ```
 
-## 内联模式
+选择日期区间时，开始和结束日期都选定后日历会关闭。
 
-设置 `inline` 可渲染不带浮层的日历。配合 `name` 会渲染隐藏输入框，按 `YYYY-MM-DD`
-以逗号分隔提交所选日期。
+<DemoContainer>
+  <DatepickerButtonRangeDemo />
+</DemoContainer>
+
+```tsx src='./demos/button-range.tsx'
+
+```
+
+### 内联模式
+
+设置 `inline` 可渲染始终可见的日历，而不是弹出日历。内联日历没有触发器，应将其放置在有
+可访问名称的区域中。设置 `name` 后，`Datepicker` 会添加隐藏输入框，以逗号分隔提交
+`YYYY-MM-DD` 格式的日期。
 
 <DemoContainer>
   <DatepickerInlineDemo />
@@ -163,10 +203,30 @@ React 中维护展开状态，并通过 `aria-expanded` 暴露。
 
 ```
 
-## 自定义日期格式
+内联日历也支持区间选择：
 
-用 `format` 控制触发器中的文本格式，可传入 `Intl.DateTimeFormat` 选项，或接收解析后
-的 `Date` 与语言标签的函数。
+<DemoContainer>
+  <DatepickerInlineRangeDemo />
+</DemoContainer>
+
+```tsx src='./demos/inline-range.tsx'
+
+```
+
+也可以同时显示多个月份：
+
+<DemoContainer>
+  <DatepickerInlineMonthsDemo />
+</DemoContainer>
+
+```tsx src='./demos/inline-months.tsx'
+
+```
+
+### 自定义日期格式
+
+使用 `format` 控制触发器中显示的文本。它接受 `Intl.DateTimeFormat` 选项，或接收 `Date`
+和解析后语言标签的函数。多个日期以逗号分隔；日期区间使用短横线（en dash）。
 
 <DemoContainer>
   <DatepickerFormatDemo />
@@ -176,10 +236,24 @@ React 中维护展开状态，并通过 `aria-expanded` 暴露。
 
 ```
 
+`format` 也可以是函数。例如，为每个所选日期返回简短的月份和日期文本：
+
+<DemoContainer>
+  <DatepickerFormatFunctionDemo />
+</DemoContainer>
+
+```tsx src='./demos/format-function.tsx'
+
+```
+
 ## 暗色模式
 
-日期选择器会继承最近的 `[data-bs-theme]` 祖先元素的颜色模式。将 `theme` 设为
-`'light'` 或 `'dark'` 可让日历样式独立于周围环境；默认值 `'auto'` 跟随周围颜色模式。
+默认情况下，日历会跟随最近的 `[data-bs-theme]` 祖先元素。如果祖先没有 Bootstrap 颜色模式，
+日历会跟随系统颜色方案。
+
+### 继承父级主题
+
+在父元素上设置 `data-bs-theme='dark'`，可同时设置周围表单和日历的主题。
 
 <DemoContainer>
   <DatepickerDarkDemo />
@@ -189,47 +263,108 @@ React 中维护展开状态，并通过 `aria-expanded` 暴露。
 
 ```
 
-日历浮层会被添加到 `document.body`，因此解析后的颜色模式会复制到浮层上。组件在挂载
-期间还会监听祖先元素的主题变化并同步。
+### 仅设置日期选择器主题
+
+设置 `theme='dark'` 或 `theme='light'`，可覆盖日历主题而不改变周围输入框的样式。
+
+<DemoContainer>
+  <DatepickerThemeOverrideDemo />
+</DemoContainer>
+
+```tsx src='./demos/theme-override.tsx'
+
+```
+
+弹出日历会添加到 `document.body`，因此解析后的 Bootstrap 颜色模式会复制到日历上。组件挂载期间，
+祖先元素的主题变化也会同步到弹出日历。
+
+## Shadow DOM
+
+弹出日历会添加到 `document.body`，位于组件的 shadow root 之外。在 shadow root 中使用
+`Datepicker` 时，也要确保 Bootstrap 日期选择器样式在文档作用域中可用；仅应用于 shadow root
+的样式不会影响弹出日历。
+
+## CSS
+
+Bootstrap 在 `[data-vc="calendar"]` 上定义了日历 CSS 变量。可在样式表中覆盖这些变量来自定义外观。
+
+| 变量                              | 默认值                            | 说明                 |
+| --------------------------------- | --------------------------------- | -------------------- |
+| `--datepicker-padding`            | `1rem`                            | 日历内边距。         |
+| `--datepicker-bg`                 | `var(--bg-body)`                  | 日历背景色。         |
+| `--datepicker-color`              | `var(--fg-body)`                  | 日历文字和控件颜色。 |
+| `--datepicker-border-color`       | `var(--border-color-translucent)` | 日历边框颜色。       |
+| `--datepicker-border-width`       | `var(--border-width)`             | 日历边框宽度。       |
+| `--datepicker-border-radius`      | `var(--radius-7)`                 | 日历圆角。           |
+| `--datepicker-box-shadow`         | `var(--box-shadow)`               | 弹出日历阴影。       |
+| `--datepicker-font-size`          | `var(--font-size-sm)`             | 日历字号。           |
+| `--datepicker-min-width`          | `280px`                           | 日历最小宽度。       |
+| `--datepicker-zindex`             | `var(--z-menu)`                   | 弹出层堆叠顺序。     |
+| `--datepicker-header-font-weight` | `600`                             | 月份和年份标题字重。 |
+| `--datepicker-weekday-color`      | `var(--fg-3)`                     | 星期标签颜色。       |
+| `--datepicker-day-hover-bg`       | `var(--bg-1)`                     | 日期悬停背景色。     |
+| `--datepicker-day-selected-bg`    | `var(--primary-bg)`               | 已选日期背景色。     |
+| `--datepicker-day-selected-color` | `var(--primary-contrast)`         | 已选日期文字颜色。   |
+| `--datepicker-day-today-bg`       | `var(--bg-2)`                     | 今天的背景色。       |
+| `--datepicker-day-today-color`    | `var(--fg-1)`                     | 今天的文字颜色。     |
+| `--datepicker-day-disabled-color` | `var(--fg-4)`                     | 禁用日期文字颜色。   |
+
+弹出日历会添加到 `document.body`，因此应全局覆盖变量或直接选择 `[data-vc="calendar"]`；仅作用于本地包装元素的样式不会应用到弹出日历。
 
 ## API
 
 ### Datepicker
 
-组件外层元素为 `div`。当 `trigger='input'`（默认值）时，浮层触发器为
-`HTMLInputElement`；当 `trigger='button'` 时为 `HTMLButtonElement`；
-`inline` 会在外层 `div` 中直接渲染日历。
+默认弹出触发器为 `<input type="text">`。设置 `trigger='button'` 会渲染
+`<button type="button">`；设置 `inline` 则会在 `<div>` 中渲染日历。
 
-所有组件属性都是自有属性。`Datepicker` 不是泛型组件，不继承 `BoxProps`，
-也不会转发任意原生属性或 Box 属性。下方现有表格记录了其属性，请保留全部
-表格行。
+`Datepicker` 不是泛型组件，不继承原生 input、button 或 [`Box`](../box/README.mdx#api)
+属性。组件只接受下表列出的属性。
 
-| 属性                 | 类型                                                     | 说明                                            |
-| -------------------- | -------------------------------------------------------- | ----------------------------------------------- |
-| `value`              | `string \| readonly string[]`                            | 受控选择值，格式为 `YYYY-MM-DD`。               |
-| `defaultValue`       | `string \| readonly string[]`                            | 非受控用法的初始选择值。                        |
-| `onChange`           | `(dates: string[]) => void`                              | 选择变化时以所选日期数组调用。                  |
-| `selectionMode`      | `'single' \| 'multiple' \| 'multiple-ranged'`            | 最多可选日期数量。                              |
-| `firstWeekday`       | `0`–`6`                                                  | 每周第一天，`0` 为周日。                        |
-| `displayMonthsCount` | `1`–`12`                                                 | 同时渲染的月份数量。                            |
-| `dateMin`            | `string \| Date \| number`                               | 可选的最早日期。                                |
-| `dateMax`            | `string \| Date \| number`                               | 可选的最晚日期。                                |
-| `locale`             | `string`                                                 | 用于月份、星期名称与输入框格式的语言标签。      |
-| `format`             | `Intl.DateTimeFormatOptions \| (date, locale) => string` | 所选日期的文本格式。                            |
-| `theme`              | `'light' \| 'dark' \| 'auto'`                            | 日历的颜色模式。                                |
-| `placement`          | `'left' \| 'center' \| 'right' \| 'auto'`                | 浮层相对触发器的对齐方式。                      |
-| `trigger`            | `'input' \| 'button'`                                    | 渲染输入框（默认）或按钮触发器。                |
-| `icon`               | `ReactNode`                                              | 按钮触发器的前置图标。                          |
-| `ghost`              | `boolean`                                                | 输入框使用 `.form-ghost` 而非 `.form-control`。 |
-| `inline`             | `boolean`                                                | 直接渲染日历而不使用浮层。                      |
-| `placeholder`        | `string`                                                 | 未选择任何日期时显示的文本。                    |
-| `name`               | `string`                                                 | 表单字段名；内联模式下会渲染隐藏输入框。        |
-| `disabled`           | `boolean`                                                | 禁用输入框或按钮。                              |
-| `id`、`aria-*`       |                                                          | 传递给输入框或按钮。                            |
+| 属性                 | 类型                                                                                            | 默认值           | 说明                                                                 |
+| -------------------- | ----------------------------------------------------------------------------------------------- | ---------------- | -------------------------------------------------------------------- |
+| `value`              | `string \| string[]`                                                                            | —                | 受控选择值，格式为 `YYYY-MM-DD`。                                    |
+| `defaultValue`       | `string \| string[]`                                                                            | —                | 非受控用法的初始选择值。                                             |
+| `onChange`           | `(dates: string[]) => void`                                                                     | —                | 选择变化时以 `YYYY-MM-DD` 日期数组调用。                             |
+| `selectionMode`      | `'single' \| 'multiple' \| 'multiple-ranged'`                                                   | `'single'`       | 选择单日、多日或开始与结束日期组成的区间。                           |
+| `firstWeekday`       | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6`                                                               | `1`              | 每周第一天；`0` 表示周日。                                           |
+| `displayMonthsCount` | `1`–`12`                                                                                        | `1`              | 并排显示的月份数量。                                                 |
+| `dateMin`            | `string \| Date \| number`                                                                      | —                | 最早可选日期；可用 `YYYY-MM-DD`、`'today'` 字符串、`Date` 或时间戳。 |
+| `dateMax`            | `string \| Date \| number`                                                                      | —                | 最晚可选日期；可用 `YYYY-MM-DD`、`'today'` 字符串、`Date` 或时间戳。 |
+| `locale`             | `string`                                                                                        | `'default'`      | 日历标签和默认触发器日期格式所用的语言标签。                         |
+| `format`             | `Intl.DateTimeFormatOptions \| ((date: Date, locale: string \| undefined) => string)`           | —                | 自定义触发器中显示的文本格式。                                       |
+| `theme`              | `'light' \| 'dark' \| 'auto'`                                                                   | `'auto'`         | 日历颜色模式；`auto` 跟随祖先元素或系统颜色方案。                    |
+| `placement`          | `'auto' \| 'left' \| 'center' \| 'right' \| ['top' \| 'bottom', 'left' \| 'center' \| 'right']` | `'left'`         | 弹出日历相对触发器的位置。                                           |
+| `trigger`            | `'input' \| 'button'`                                                                           | `'input'`        | 渲染文本输入框或按钮触发器；`inline` 为 `true` 时忽略。              |
+| `inline`             | `boolean`                                                                                       | `false`          | 渲染始终可见的日历，而不是弹出日历。                                 |
+| `icon`               | `ReactNode`                                                                                     | —                | 按钮触发器的前置图标。                                               |
+| `ghost`              | `boolean`                                                                                       | `false`          | 输入框触发器使用 `.form-ghost` 而非 `.form-control`。                |
+| `placeholder`        | `string`                                                                                        | `'Choose date…'` | 尚未选择日期时显示的文本。                                           |
+| `id`                 | `string`                                                                                        | —                | 传递给输入框或按钮触发器的 ID。                                      |
+| `name`               | `string`                                                                                        | —                | 传递给触发器的名称；内联模式下创建带逗号分隔 ISO 日期的隐藏输入框。  |
+| `disabled`           | `boolean`                                                                                       | `false`          | 禁用输入框或按钮触发器。                                             |
+| `className`          | `string`                                                                                        | —                | 添加到触发器；内联模式下添加到日历容器元素。                         |
+| `aria-label`         | `string`                                                                                        | —                | 传递给输入框或按钮触发器的可访问名称。                               |
+| `aria-labelledby`    | `string`                                                                                        | —                | 传递给输入框或按钮触发器的标签 ID 引用。                             |
+| `aria-describedby`   | `string`                                                                                        | —                | 传递给输入框或按钮触发器的描述 ID 引用。                             |
+
+选择和日历配置属性在内联模式下仍然生效，`className` 会添加到日历容器。`id`、`disabled`
+和 `aria-*` 只会传递给弹出触发器，不会应用于内联日历。`trigger`、`icon`、`ghost` 和
+`placeholder` 在内联模式下不生效；`format` 和 `placement` 也不会产生效果。`name` 会创建
+内联隐藏输入框。弹出输入框提交的原生值是格式化后的显示文本，不一定是 ISO 日期值。
 
 ## 无障碍
 
-输入框是普通文本输入框，请用 `htmlFor` 绑定的 `FormLabel` 或 `aria-label` 为其命名。
-按钮触发器带有 `aria-haspopup='dialog'` 与 `aria-expanded`，日历本身是带可访问名称的
-`role='dialog'` 区域。所选日期通过输入框的值朗读，日历支持方向键、Home、End、
-Page Up、Page Down 与 Escape 操作。
+使用可见的 `FormLabel`、`aria-label` 或 `aria-labelledby` 为弹出输入框和按钮提供可访问名称。
+按钮触发器带有 `aria-haspopup='dialog'` 和 `aria-expanded`。底层日历提供键盘导航、屏幕阅读器
+标签和焦点管理。
+
+内联日历没有可供组件 `aria-*` 属性标记的触发器，应将其放在具有可访问名称的区域中。若
+JavaScript 未运行，弹出触发器仍是普通文本输入框，但日历不可用。该输入框不是原生
+`type="date"` 控件，也不提供浏览器原生日期验证。
+
+## 参阅
+
+- [Bootstrap 6 Datepicker 文档](https://getbootstrap.com/docs/6.0/forms/datepicker/)
+- [Vanilla Calendar Pro 文档](https://vanilla-calendar.pro/docs/learn)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/datepicker.tsx)
