@@ -5,7 +5,7 @@ export function NestingGridDemo() {
     <Grid columns={3} className='text-center' overflowX='auto'>
       <Box bg='primary' bgo={10} rounded p={2}>
         First auto-column
-        <Grid>
+        <Grid columns={3}>
           <Box bg='primary' bgo={10} rounded p={2}>
             Auto-column
           </Box>

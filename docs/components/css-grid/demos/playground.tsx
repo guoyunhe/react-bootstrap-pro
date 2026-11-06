@@ -2,7 +2,7 @@ import { Box, Grid, GridItem } from 'react-bootstrap-pro';
 
 export function CssGridPlaygroundDemo() {
   return (
-    <div
+    <Box
       style={{
         resize: 'horizontal',
         overflow: 'auto',
@@ -28,6 +28,6 @@ export function CssGridPlaygroundDemo() {
           </Box>
         </GridItem>
       </Grid>
-    </div>
+    </Box>
   );
 }

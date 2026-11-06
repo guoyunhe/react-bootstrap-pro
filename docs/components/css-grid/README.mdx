@@ -23,21 +23,40 @@ import { WrappingGridDemo } from './demos/wrapping';
 
 # CSS Grid
 
-Bootstrap's CSS Grid is opt-in. Enable `$enable-cssgrid: true` in your Bootstrap
-Sass build and recompile the stylesheet before using these components.
-`Grid` and `GridItem` wrap `.grid`, `.g-col-*`, and `.g-start-*` respectively.
-This API is independent of the Flexbox-based [`Row` and `Col`](../grid/).
+Bootstrap CSS Grid is an optional alternative to the Flexbox-based
+[`Row` and `Col`](../grid/). It uses the `.grid`, `.g-col-*`, and `.g-start-*`
+utilities; `Grid` and `GridItem` expose them through React props. Enable
+`$enable-cssgrid: true` and recompile Bootstrap Sass. To replace the standard
+grid classes entirely, also set `$enable-grid-classes: false`.
 
-The `.grid` container uses CSS variables for its rows, columns, and gap.
-Responsive item classes use container queries and respond to the width of the
-nearest `.grid`, rather than the viewport.
+## How it works
+
+- `.grid` creates a CSS Grid container. Its rows, columns, and gaps are
+  controlled by CSS variables.
+- `Grid` sets `--bs-columns` and `--bs-rows` through its `columns` and `rows`
+  props. `GridItem` maps `span` and `start` to `.g-col-*` and `.g-start-*`
+  classes.
+- Responsive `span` and `start` values use container queries. They respond to
+  the width of the nearest `.grid`, not the viewport.
+- If CSS Grid is disabled in the compiled Bootstrap stylesheet, these
+  components still render but the grid layout styles are not applied.
+
+## Key differences
+
+- Flexbox alignment utilities do not affect CSS Grid columns in the same way.
+- Grid `gap` replaces the Flexbox grid's gutters. A CSS Grid has no negative row
+  margins, and margin utilities do not change its gaps.
+- Set the number of columns and gaps with CSS variables instead of Flexbox
+  `row-cols-*` classes.
+- Nested grids are separate grid containers. Set values on each nested grid
+  that needs a specific column count or gap; Bootstrap declares default grid
+  variables on each `.grid`.
 
 ## Examples
 
 ### Three columns
 
-Use three `.g-col-4` items to divide the default 12-column grid into equal
-columns.
+Three `.g-col-4` items divide the default 12-column grid into equal columns.
 
 <DemoContainer>
   <CssGridDemo />
@@ -49,8 +68,9 @@ columns.
 
 ### Responsive
 
-Responsive classes use container-query prefixes. These items take half the
-available columns at narrow widths and one-third at the `md` container size:
+Responsive classes use container-query breakpoints. These items take half the
+available columns at narrow container widths and one-third at the `md` container
+size:
 
 <DemoContainer>
   <ResponsiveGridDemo />
@@ -70,21 +90,22 @@ For comparison, two `.g-col-6` items remain half-width at every container size:
 
 ```
 
-The container-query breakpoints are based on the width of `.grid`, so a grid
-nested in a narrow column changes layout independently of the viewport.
-
 ### Playground
 
-Resize the grid container, rather than the browser window, to see responsive
-items cross their container-query breakpoints.
+Resize the grid container to see responsive items cross their container-query
+breakpoints independently of the browser viewport.
 
 <DemoContainer>
   <CssGridPlaygroundDemo />
 </DemoContainer>
 
+```tsx src='./demos/playground.tsx'
+
+```
+
 ## Wrapping
 
-Items automatically move to the next row when the current row has no remaining
+Grid items automatically move to the next row when the current row has no more
 space. The gap applies horizontally and vertically.
 
 <DemoContainer>
@@ -97,7 +118,9 @@ space. The gap applies horizontally and vertically.
 
 ## Starts
 
-Use `start` with `span` to set the starting grid line for an item.
+Use `start` with `span` to set the starting grid line for an item. Unlike
+Flexbox grid offsets, `start` maps to `grid-column-start`; values begin at `1`
+because `0` is not a valid grid line.
 
 <DemoContainer>
   <StartsGridDemo />
@@ -106,8 +129,6 @@ Use `start` with `span` to set the starting grid line for an item.
 ```tsx src='./demos/starts.tsx'
 
 ```
-
-Start values begin at `1`; `0` is not a valid grid line.
 
 ## Auto columns
 
@@ -134,10 +155,10 @@ Automatic sizing can be combined with an explicitly sized item:
 
 ## Nesting
 
-Nested grids inherit their parent's row, column, and gap settings unless a
-nested grid sets its own values. This example uses three columns on the outer
-grid, inherits that count in the first nested grid, and resets the second
-nested grid to 12 columns:
+Each nested grid has its own grid variables. Set `columns`, `rows`, or the gap
+again when a nested layout needs a specific value. This example uses three
+columns on the outer grid and first nested grid, then resets the second nested
+grid to 12 columns:
 
 <DemoContainer>
   <NestingGridDemo />
@@ -149,7 +170,7 @@ nested grid to 12 columns:
 
 ## Customizing
 
-Set CSS variables on an individual grid to customize its template and spacing:
+Bootstrap uses CSS variables for each grid's template and spacing:
 
 | Variable       | Fallback | Description                             |
 | -------------- | -------- | --------------------------------------- |
@@ -206,7 +227,7 @@ Configure explicit rows and place items on them with `style` and `start`:
 
 ### Gaps
 
-Set `rowGap` or `columnGap` in `style` to change one direction only:
+Set `rowGap` or `columnGap` in `style` to change spacing in one direction:
 
 <DemoContainer>
   <RowGapDemo />
@@ -228,9 +249,10 @@ The `--bs-gap` variable also accepts separate row and column values:
 
 ## Sass
 
-Bootstrap generates `.g-col-*` and `.g-start-*` classes based on its Sass
-variables. Change those variables and recompile to generate more classes, or
-combine inline CSS with the generated classes:
+Bootstrap generates `.g-col-*` and `.g-start-*` classes from its Sass
+variables, so the generated utility classes are limited to those configured
+values. Change the Bootstrap grid Sass variables and recompile to generate
+additional classes, or combine inline CSS with the generated classes:
 
 <DemoContainer>
   <SassColumnsDemo />
@@ -244,24 +266,36 @@ combine inline CSS with the generated classes:
 
 ### Grid
 
-| Prop        | Type                    | Default | Description                                                                       |
-| ----------- | ----------------------- | ------- | --------------------------------------------------------------------------------- |
-| `columns`   | `number`                | —       | Sets `--bs-columns`, overriding the variable in `style` when both are supplied.   |
-| `rows`      | `number`                | —       | Sets `--bs-rows`, overriding the variable in `style` when both are supplied.      |
-| `style`     | `CssGridStyle`          | —       | Accepts CSS properties and `--bs-columns`, `--bs-rows`, and `--bs-gap` variables. |
-| `component` | `C extends ElementType` | `'div'` | Native element or React component to render.                                      |
-| `className` | `string`                | —       | Additional class names.                                                           |
-| `...props`  | `BoxProps<C>`           | —       | Native props plus every [`Box`](../box/) utility prop.                            |
+Renders a `<div>` by default.
+
+| Prop      | Type           | Default | Description                                                                       |
+| --------- | -------------- | ------- | --------------------------------------------------------------------------------- |
+| `columns` | `number`       | —       | Sets `--bs-columns`; takes precedence over the same variable in `style`.          |
+| `rows`    | `number`       | —       | Sets `--bs-rows`; takes precedence over the same variable in `style`.             |
+| `style`   | `CssGridStyle` | —       | Accepts CSS properties and `--bs-columns`, `--bs-rows`, and `--bs-gap` variables. |
+
+Inherits native props for the selected element and all [`Box`](../box/README.mdx#api)
+utility props, including `component` and `className`.
 
 ### GridItem
 
-| Prop        | Type                                  | Default | Description                                                      |
-| ----------- | ------------------------------------- | ------- | ---------------------------------------------------------------- |
-| `span`      | `CssGridResponsive<CssGridItemSpan>`  | —       | Sets `.g-col-*`; omitted items use Bootstrap's automatic sizing. |
-| `start`     | `CssGridResponsive<CssGridItemStart>` | —       | Sets `.g-start-*` to place the item at a grid column.            |
-| `component` | `C extends ElementType`               | `'div'` | Native element or React component to render.                     |
-| `className` | `string`                              | —       | Additional class names.                                          |
-| `...props`  | `BoxProps<C>`                         | —       | Native props plus every [`Box`](../box/) utility prop.           |
+Renders a `<div>` by default.
+
+| Prop    | Type                                  | Default | Description                                                                                  |
+| ------- | ------------------------------------- | ------- | -------------------------------------------------------------------------------------------- |
+| `span`  | `CssGridResponsive<CssGridItemSpan>`  | —       | Sets `.g-col-*` (1–12); responsive objects accept `xs`, `sm`, `md`, `lg`, `xl`, and `2xl`.   |
+| `start` | `CssGridResponsive<CssGridItemStart>` | —       | Sets `.g-start-*` (1–11); responsive objects accept `xs`, `sm`, `md`, `lg`, `xl`, and `2xl`. |
+
+Inherits native props for the selected element and all [`Box`](../box/README.mdx#api)
+utility props, including `component` and `className`.
+
+## Accessibility
+
+CSS Grid changes visual layout but does not change DOM reading order. Keep the
+item order in JSX meaningful for assistive technology. Responsive modifier
+classes rely on container queries; without container-query support, unprefixed
+classes still apply but responsive overrides do not. Browsers without CSS Grid
+support display the children in normal document flow.
 
 ## See
 

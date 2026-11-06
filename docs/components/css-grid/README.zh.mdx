@@ -23,18 +23,31 @@ import { WrappingGridDemo } from './demos/wrapping';
 
 # CSS Grid
 
-Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap Sass 构建中设置
-`$enable-cssgrid: true` 并重新编译样式表。`Grid` 和 `GridItem` 分别封装 `.grid`、
-`.g-col-*` 和 `.g-start-*`。此 API 独立于基于 Flexbox 的 [`Row` 和 `Col`](../grid/)。
+Bootstrap CSS Grid 是基于 Flexbox 的 [`Row` 和 `Col`](../grid/) 的可选替代方案。它使用
+`.grid`、`.g-col-*` 和 `.g-start-*` 工具类；`Grid` 和 `GridItem` 通过 React 属性提供这些
+功能。设置 `$enable-cssgrid: true` 并重新编译 Bootstrap Sass，即可启用 CSS Grid。若要完全
+替代标准网格类，还需设置 `$enable-grid-classes: false`。
 
-`.grid` 容器使用 CSS 变量设置行、列和间距。响应式项目类使用容器查询，因此会根据最近的
-`.grid` 宽度响应，而不是根据视口宽度响应。
+## 工作原理
+
+- `.grid` 会创建 CSS Grid 容器，并通过 CSS 变量控制行、列和间距。
+- `Grid` 使用 `columns` 和 `rows` 属性设置 `--bs-columns` 和 `--bs-rows`。
+  `GridItem` 则将 `span` 和 `start` 映射为 `.g-col-*` 和 `.g-start-*` 类。
+- 响应式 `span` 和 `start` 值使用容器查询，根据最近的 `.grid` 宽度响应，而不是根据视口宽度响应。
+- 如果编译后的 Bootstrap 样式表未启用 CSS Grid，这些组件仍会渲染，但网格布局样式不会生效。
+
+## 主要区别
+
+- Flexbox 对齐工具类对 CSS Grid 列的影响方式有所不同。
+- CSS Grid 的 `gap` 替代了 Flexbox 网格的 gutter。CSS Grid 没有负外边距，外边距工具类也不会改变其间距。
+- 通过 CSS 变量设置列数和间距，而不是使用 Flexbox 的 `row-cols-*` 类。
+- 嵌套网格是独立的网格容器。需要指定列数或间距时，应在每个嵌套网格上单独设置；Bootstrap 会在每个 `.grid` 上声明网格变量默认值。
 
 ## 示例
 
 ### 三列布局
 
-使用三个 `.g-col-4` 项目，将默认的 12 列网格划分为等宽三列。
+三个 `.g-col-4` 项目可将默认的 12 列网格划分为等宽列。
 
 <DemoContainer>
   <CssGridDemo />
@@ -46,7 +59,7 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 ### 响应式布局
 
-响应式类使用容器查询前缀。以下项目在窄容器中占据一半列宽，在 `md` 容器尺寸时各占三分之一：
+响应式类使用容器查询断点。以下项目在较窄的容器中各占一半列宽，在 `md` 容器尺寸下各占三分之一：
 
 <DemoContainer>
   <ResponsiveGridDemo />
@@ -66,19 +79,21 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 ```
 
-容器查询断点取决于 `.grid` 的宽度，因此嵌套在窄列中的网格也能独立于视口切换布局。
-
 ### 交互预览
 
-调整网格容器本身的宽度，即可观察项目如何跨越容器查询断点。
+调整网格容器的宽度，即可观察响应式项目如何跨越容器查询断点，且不受浏览器视口宽度影响。
 
 <DemoContainer>
   <CssGridPlaygroundDemo />
 </DemoContainer>
 
+```tsx src='./demos/playground.tsx'
+
+```
+
 ## 自动换行
 
-当前行没有剩余空间时，项目会自动移至下一行。间距同时应用于水平方向和垂直方向。
+当前行没有剩余空间时，网格项目会自动移至下一行。间距同时应用于水平方向和垂直方向。
 
 <DemoContainer>
   <WrappingGridDemo />
@@ -90,7 +105,8 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 ## 起始列
 
-将 `start` 与 `span` 配合使用，可设置项目的起始网格线。
+将 `start` 与 `span` 配合使用，可设置项目的起始网格线。与 Flexbox 网格的偏移类不同，
+`start` 对应 `grid-column-start`；网格线从 `1` 开始，因为 `0` 不是有效值。
 
 <DemoContainer>
   <StartsGridDemo />
@@ -99,8 +115,6 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 ```tsx src='./demos/starts.tsx'
 
 ```
-
-起始列从 `1` 开始；`0` 不是有效的网格线。
 
 ## 自动列
 
@@ -126,8 +140,8 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 ## 嵌套
 
-嵌套网格会继承父级的行、列和间距设置，除非为嵌套网格单独设置属性。以下示例为外层网格
-设置三列；第一个内层网格继承列数，第二个内层网格则重设为 12 列：
+每个嵌套网格都有自己的网格变量。嵌套布局需要特定值时，应再次设置 `columns`、`rows` 或间距。
+以下示例为外层网格和第一个内层网格设置三列，并将第二个内层网格重设为 12 列：
 
 <DemoContainer>
   <NestingGridDemo />
@@ -139,7 +153,7 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 ## 自定义
 
-可通过 CSS 变量自定义网格模板和间距：
+Bootstrap 使用 CSS 变量设置每个网格的模板和间距：
 
 | 变量           | 回退值   | 说明               |
 | -------------- | -------- | ------------------ |
@@ -183,7 +197,7 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 ### 添加行
 
-设置行数，并通过 `style` 和 `start` 将项目放置在指定行：
+设置显式行数，并通过 `style` 和 `start` 将项目放置在指定位置：
 
 <DemoContainer>
   <AddingRowsDemo />
@@ -217,8 +231,8 @@ Bootstrap CSS Grid 默认不启用。使用这些组件前，需要在 Bootstrap
 
 ## Sass
 
-Bootstrap 根据 Sass 变量生成 `.g-col-*` 和 `.g-start-*` 类。可以修改这些变量并重新编译，
-生成更多类；也可以将行内 CSS 与已有类结合使用：
+Bootstrap 根据 Sass 变量生成 `.g-col-*` 和 `.g-start-*` 类，因此生成的工具类数量受配置值限制。
+修改 Bootstrap 网格 Sass 变量并重新编译即可生成更多类，也可以将行内 CSS 与已有类结合使用：
 
 <DemoContainer>
   <SassColumnsDemo />
@@ -232,24 +246,34 @@ Bootstrap 根据 Sass 变量生成 `.g-col-*` 和 `.g-start-*` 类。可以修�
 
 ### Grid
 
-| 属性        | 类型                    | 默认值  | 说明                                                           |
-| ----------- | ----------------------- | ------- | -------------------------------------------------------------- |
-| `columns`   | `number`                | —       | 设置 `--bs-columns`；同时传入时优先于 `style` 中的值。         |
-| `rows`      | `number`                | —       | 设置 `--bs-rows`；同时传入时优先于 `style` 中的值。            |
-| `style`     | `CssGridStyle`          | —       | 支持 CSS 属性及 `--bs-columns`、`--bs-rows`、`--bs-gap` 变量。 |
-| `component` | `C extends ElementType` | `'div'` | 渲染的原生元素或 React 组件。                                  |
-| `className` | `string`                | —       | 额外的类名。                                                   |
-| `...props`  | `BoxProps<C>`           | —       | 所选组件的原生属性，以及全部 [`Box`](../box/) 工具类属性。     |
+默认渲染为 `<div>`。
+
+| 属性      | 类型           | 默认值 | 说明                                                           |
+| --------- | -------------- | ------ | -------------------------------------------------------------- |
+| `columns` | `number`       | —      | 设置 `--bs-columns`；优先于 `style` 中的同名变量。             |
+| `rows`    | `number`       | —      | 设置 `--bs-rows`；优先于 `style` 中的同名变量。                |
+| `style`   | `CssGridStyle` | —      | 支持 CSS 属性及 `--bs-columns`、`--bs-rows`、`--bs-gap` 变量。 |
+
+继承所选元素的原生属性，以及 [`Box`](../box/README.mdx#api) 的全部工具类属性，包括
+`component` 和 `className`。
 
 ### GridItem
 
-| 属性        | 类型                                  | 默认值  | 说明                                                       |
-| ----------- | ------------------------------------- | ------- | ---------------------------------------------------------- |
-| `span`      | `CssGridResponsive<CssGridItemSpan>`  | —       | 设置 `.g-col-*`；未设置时使用 Bootstrap 自动尺寸。         |
-| `start`     | `CssGridResponsive<CssGridItemStart>` | —       | 使用 `.g-start-*` 将项目放置在指定网格列。                 |
-| `component` | `C extends ElementType`               | `'div'` | 渲染的原生元素或 React 组件。                              |
-| `className` | `string`                              | —       | 额外的类名。                                               |
-| `...props`  | `BoxProps<C>`                         | —       | 所选组件的原生属性，以及全部 [`Box`](../box/) 工具类属性。 |
+默认渲染为 `<div>`。
+
+| 属性    | 类型                                  | 默认值 | 说明                                                                              |
+| ------- | ------------------------------------- | ------ | --------------------------------------------------------------------------------- |
+| `span`  | `CssGridResponsive<CssGridItemSpan>`  | —      | 设置 `.g-col-*`（1–12）；响应式对象支持 `xs`、`sm`、`md`、`lg`、`xl` 和 `2xl`。   |
+| `start` | `CssGridResponsive<CssGridItemStart>` | —      | 设置 `.g-start-*`（1–11）；响应式对象支持 `xs`、`sm`、`md`、`lg`、`xl` 和 `2xl`。 |
+
+继承所选元素的原生属性，以及 [`Box`](../box/README.mdx#api) 的全部工具类属性，包括
+`component` 和 `className`。
+
+## 无障碍
+
+CSS Grid 只改变视觉布局，不会改变 DOM 的阅读顺序。请确保 JSX 中的项目顺序对辅助技术仍然合理。
+响应式修饰类依赖容器查询；不支持容器查询的浏览器仍会应用无前缀类，但不会应用响应式覆盖。
+不支持 CSS Grid 的浏览器会按普通文档流显示子元素。
 
 ## 参阅
 
