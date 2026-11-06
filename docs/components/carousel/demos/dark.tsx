@@ -12,7 +12,7 @@ import { CarouselSlidePlaceholder } from './shared';
 
 export function CarouselDarkDemo() {
   return (
-    <Carousel id='carouselExampleDark' overlay data-bs-theme='dark'>
+    <Carousel id='carouselExampleDark' overlay colorMode='dark'>
       <CarouselInner>
         <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />

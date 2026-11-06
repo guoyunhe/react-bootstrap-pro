@@ -256,8 +256,9 @@ peek, centered, and variable-width layouts fall back to `wrap`.
 
 ## Dark carousel
 
-Set `data-bs-theme='dark'` to use dark controls and indicators. This is useful
-with overlay controls when they need contrast against slide content.
+Set `colorMode='dark'` to use dark controls and indicators. This sets Bootstrap's
+`data-bs-theme` attribute and is useful with overlay controls when they need
+contrast against slide content.
 
 <DemoContainer>
   <CarouselDarkDemo />
@@ -276,6 +277,7 @@ with overlay controls when they need contrast against slide content.
 | `auto`      | `boolean`                    | `false`   | Lets each item use its own width.                 |
 | `autoplay`  | `boolean`                    | `false`   | Starts cycling automatically on page load.        |
 | `center`    | `boolean`                    | `false`   | Centers snap positions in the viewport.           |
+| `colorMode` | `'light' \| 'dark'`          | —         | Sets Bootstrap's `data-bs-theme` color mode.      |
 | `effect`    | `'slide' \| 'fade'`          | `'slide'` | Chooses the slide or fade transition.             |
 | `ends`      | `'loop' \| 'wrap' \| 'stop'` | `'loop'`  | Chooses the behavior at the first and last slide. |
 | `overlay`   | `boolean`                    | `false`   | Positions overlay controls over the slides.       |

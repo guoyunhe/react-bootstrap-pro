@@ -7,6 +7,7 @@ import { IconButton, type IconButtonProps } from './icon-button';
 
 export type CarouselEffect = 'slide' | 'fade';
 export type CarouselEnds = 'loop' | 'wrap' | 'stop';
+export type CarouselColorMode = 'light' | 'dark';
 
 export type CarouselProps<C extends ElementType = 'div'> = Omit<
   BoxProps<C>,
@@ -14,6 +15,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
     auto?: boolean | undefined;
     autoplay?: boolean | undefined;
     center?: boolean | undefined;
+    colorMode?: CarouselColorMode | undefined;
     effect?: CarouselEffect | undefined;
     ends?: CarouselEnds | undefined;
     overlay?: boolean | undefined;
@@ -22,6 +24,7 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
   auto?: boolean | undefined;
   autoplay?: boolean | undefined;
   center?: boolean | undefined;
+  colorMode?: CarouselColorMode | undefined;
   effect?: CarouselEffect | undefined;
   ends?: CarouselEnds | undefined;
   overlay?: boolean | undefined;
@@ -33,6 +36,7 @@ export function Carousel<C extends ElementType = 'div'>({
   auto,
   autoplay,
   center,
+  colorMode,
   effect = 'slide',
   ends,
   overlay,
@@ -44,6 +48,7 @@ export function Carousel<C extends ElementType = 'div'>({
       component={component ?? ('div' as C)}
       data-bs-autoplay={autoplay ? 'true' : undefined}
       data-bs-ends={ends}
+      data-bs-theme={colorMode}
       classNameBefore={clsx(
         'carousel',
         auto && 'carousel-auto',
