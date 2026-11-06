@@ -13,7 +13,7 @@ const themes = [
 
 export function RadioThemesDemo() {
   return (
-    <Box d='flex' flexWrap='wrap' gap={4}>
+    <Box d='flex' flexDirection='column' gap={2}>
       {themes.map((theme) => (
         <FormField key={theme}>
           <Radio

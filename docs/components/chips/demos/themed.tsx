@@ -20,14 +20,6 @@ export function ChipsThemedDemo() {
           {theme}
         </Chip>
       ))}
-      <Chip theme='primary'>Default</Chip>
-      <Chip theme='primary' active>
-        Active
-      </Chip>
-      <Chip theme='success'>Default</Chip>
-      <Chip theme='success' active>
-        Active
-      </Chip>
     </Box>
   );
 }

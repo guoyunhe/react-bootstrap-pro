@@ -5,6 +5,7 @@ title: Radio 单选
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { RadioBasicDemo } from './demos/basic';
+import { RadioWithFormFieldDemo } from './demos/with-form-field';
 import { RadioDescriptionDemo } from './demos/description';
 import { RadioDisabledDemo } from './demos/disabled';
 import { RadioSizesDemo } from './demos/sizes';
@@ -12,11 +13,12 @@ import { RadioThemesDemo } from './demos/themes';
 
 # Radio 单选
 
-`Radio` 渲染 `.radio` 输入框。单选按钮的选中态完全由 CSS 绘制，不使用自定义
-SVG，因此在任意尺寸下都保持清晰。同一组的单选按钮共享 `name`，并将每个选项放在
-`FormField` 中与标签并排。
+`Radio` 默认渲染原生 `<input type='radio'>`，并将 Bootstrap 6 的 `.radio`
+类直接添加到输入框。
 
 ## 基础单选
+
+`.radio` 类用于自定义原生输入框外观。选中标记完全由 CSS 绘制，无需自定义 SVG。
 
 <DemoContainer>
   <RadioBasicDemo />
@@ -26,14 +28,22 @@ SVG，因此在任意尺寸下都保持清晰。同一组的单选按钮共享 `
 
 ```
 
-## 配合 FormField
+## 使用表单字段布局
 
-`FormField` 的网格布局会把单选按钮和标签并排摆放。嵌套的 `FormField` 行为相同，
-因此一组单选按钮可以共用一个外层容器和标签。
+使用 `FormField` 包裹每个单选按钮并添加标签。`.form-field` 网格布局会将单选按钮和标签并排放置。
+同一组的单选按钮应共享 `name`。
+
+<DemoContainer>
+  <RadioWithFormFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-form-field.tsx'
+
+```
 
 ## 描述文本
 
-在标签后添加描述，并用 `FormFieldContent` 包裹二者，使标签与说明文本堆叠在第二列。
+在标签后添加描述。`FormFieldContent` 会让标签和描述保持在一起，并使用表单布局的间距与对齐方式。
 
 <DemoContainer>
   <RadioDescriptionDemo />
@@ -45,7 +55,7 @@ SVG，因此在任意尺寸下都保持清晰。同一组的单选按钮共享 `
 
 ## 主题颜色
 
-通过 `theme` 设置选中态颜色，生成 `.theme-{color}` 类。
+设置 `theme` 会添加 `.theme-{color}` 类，从而修改已选中单选按钮的背景色和边框颜色。
 
 <DemoContainer>
   <RadioThemesDemo />
@@ -57,7 +67,7 @@ SVG，因此在任意尺寸下都保持清晰。同一组的单选按钮共享 `
 
 ## 禁用状态
 
-添加原生 `disabled` 属性，关联的标签会自动变浅以匹配状态。
+原生 `disabled` 属性会阻止交互，并将关联标签调整为较浅的颜色。
 
 <DemoContainer>
   <RadioDisabledDemo />
@@ -69,7 +79,7 @@ SVG，因此在任意尺寸下都保持清晰。同一组的单选按钮共享 `
 
 ## 尺寸
 
-使用 `size='sm'` 或 `size='lg'` 生成 `.radio-sm` 和 `.radio-lg`。
+添加 `size='sm'` 或 `size='lg'` 可缩小或放大单选按钮。
 
 <DemoContainer>
   <RadioSizesDemo />
@@ -79,24 +89,49 @@ SVG，因此在任意尺寸下都保持清晰。同一组的单选按钮共享 `
 
 ```
 
+## CSS
+
+### 自定义属性
+
+单选按钮的 CSS 自定义属性基于 Sass tokens。可在输入框或其祖先元素上覆盖这些属性。
+
+| 属性                              | 用途                         |
+| --------------------------------- | ---------------------------- |
+| `--bs-radio-size`                 | 单选按钮宽度和高度。         |
+| `--bs-radio-margin-block`         | 单选按钮上下间距。           |
+| `--bs-radio-bg`                   | 未选中状态的背景色。         |
+| `--bs-radio-border-color`         | 未选中状态的边框颜色。       |
+| `--bs-radio-checked-bg`           | 选中状态的背景色。           |
+| `--bs-radio-checked-border-color` | 选中状态的边框颜色。         |
+| `--bs-radio-disabled-bg`          | 禁用状态的背景色。           |
+| `--bs-radio-disabled-opacity`     | 禁用且已选中控件的不透明度。 |
+
 ## API
 
 ### Radio
 
-默认渲染为 `input` 元素，原生 `type` 默认值为 `radio`。自有属性为 `size` 和
-`validation`；`theme` 继承自 `Box`。组件继承所选元素的原生属性及
-[`Box`](../box/README.zh.mdx#api) 工具类属性。
+默认渲染为 `input` 元素，设置 `type='radio'` 并添加 `.radio` 类。自有属性包括
+`size` 和 `validation`。
 
-| 属性        | 类型                 | 说明                             |
-| ----------- | -------------------- | -------------------------------- |
-| `size`      | `'sm' \| 'lg'`       | 调整单选按钮及其标签的尺寸。     |
-| `theme`     | Bootstrap 主题字面量 | 通过 `.theme-*` 设置选中态颜色。 |
-| `component` | `ElementType`        | 默认渲染 `input type='radio'`。  |
-| `...props`  | `BoxProps<C>`        | 原生属性及所有 Box 工具类属性。  |
+`Radio` 还继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 属性，
+包括 `component` 和 `theme`。更换 `component` 根元素或 input 的 `type` 可能会失去原生
+单选按钮行为。
 
-`FormFieldContent` 在 `FormField` 内包裹标签与描述文本，默认渲染 `div`。
+| 属性         | 类型                   | 默认值 | 说明                              |
+| ------------ | ---------------------- | ------ | --------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | —      | 添加 `.radio-sm` 或 `.radio-lg`。 |
+| `validation` | `'valid' \| 'invalid'` | —      | 添加对应的表单校验状态类。        |
+
+当根元素为 `input` 时，`type` 默认为 `'radio'`。原生输入属性包括 `checked`、
+`defaultChecked`、`disabled`、`name`、`required` 和 `type`。
 
 ## 无障碍
 
-为每个单选按钮提供可访问名称：用 `<label for>` 并通过 `htmlFor` 关联。同组单选
-按钮必须共享相同的 `name`，浏览器才会将它们视为同一组。
+为每个单选按钮提供可访问名称。对于可见文本，使用 `htmlFor` 和唯一的输入框 `id` 关联
+`<label>`；对于无可见标签的单选按钮，提供 `aria-label` 或 `aria-labelledby`。
+同组单选按钮必须共享相同的 `name`，浏览器才会提供原生单选和键盘交互行为。
+
+## 参考
+
+- [Bootstrap 6 Radio 官方文档](https://getbootstrap.com/docs/6.0/forms/radio/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/radio.tsx)

@@ -8,19 +8,14 @@ export function ChipInputThemesDemo() {
         defaultValue={['Approved', 'Verified']}
         placeholder='Add status…'
         aria-label='Statuses'
+        dismissible={false}
       />
       <ChipInput
         theme='danger'
         defaultValue={['Bug', 'Critical']}
-        placeholder='Add issue…'
+        placeholder='Add issue'
         aria-label='Issues'
-      />
-      <ChipInput
-        theme='primary'
-        defaultValue={['Bug', 'Critical']}
-        chipProps={(value) => ({ theme: value === 'Bug' ? 'warning' : 'danger' })}
-        placeholder='Add issue…'
-        aria-label='Issue severities'
+        dismissible={false}
       />
     </Box>
   );

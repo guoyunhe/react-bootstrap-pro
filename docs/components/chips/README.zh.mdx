@@ -4,22 +4,29 @@ title: Chips 标签
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
+import { ChipsActiveStateDemo } from './demos/active-state';
 import { ChipInputDemo } from './demos/chip-input';
+import { ChipInputControlledDemo } from './demos/chip-input-controlled';
 import { ChipInputDisabledDemo } from './demos/chip-input-disabled';
+import { ChipInputEmptyStateDemo } from './demos/chip-input-empty-state';
+import { ChipInputIndividualThemesDemo } from './demos/chip-input-individual-themes';
 import { ChipInputThemesDemo } from './demos/chip-input-themes';
+import { ChipInputWithLabelDemo } from './demos/chip-input-with-label';
 import { ChipsDemo } from './demos/chips';
 import { ChipsThemedDemo } from './demos/themed';
 
 # Chips 标签
 
-Chips 是表示实体的小型交互元素。与 Badge 不同，chips 是交互式的、尺寸固定，并且
-可以包含图标、头像与删除按钮。`Chip` 渲染单个标签，`ChipInput` 则渲染由 React
-管理标签值的输入框。
+## 概览
 
-## 基础标签
+Chips 用于在表单或其他交互场景中表示值或实体。与徽章不同，Chip 尺寸固定，可包含
+图标、头像、主题色和删除操作。`Chip` 渲染单个标签；`ChipInput` 则在 React 中管理
+支持键盘导航的标签集合。
 
-用 `icon` 添加前置图标，`image` 添加前置头像，`onDismiss` 渲染删除按钮；
-`dismissLabel` 设置删除按钮的可访问名称。
+## Chips
+
+使用 `icon` 添加前置图标，`image` 添加头像，使用 `onDismiss` 添加删除按钮。
+删除按钮的可访问名称默认为 `Remove`。
 
 <DemoContainer>
   <ChipsDemo />
@@ -29,10 +36,9 @@ Chips 是表示实体的小型交互元素。与 Badge 不同，chips 是交互�
 
 ```
 
-## 主题标签
+### 主题标签
 
-通过 `theme` 设置标签颜色。标签默认为 subtle 样式，`active` 会切换为实心样式，
-适合用于切换式选择。
+设置 `theme` 为标签应用主题色。默认使用柔和的主题颜色。
 
 <DemoContainer>
   <ChipsThemedDemo />
@@ -42,11 +48,22 @@ Chips 是表示实体的小型交互元素。与 Badge 不同，chips 是交互�
 
 ```
 
-## 标签输入框
+### 激活状态
 
-`ChipInput` 渲染 `.chip-input` 容器与 ghost 输入框，并管理标签值：输入后按 Enter
-或分隔符添加标签，点击删除按钮移除标签，输入框为空时按 Backspace 会选中并删除最后
-一个标签。受控用法使用 `value` 与 `onChange`，非受控用法使用 `defaultValue`。
+设置 `active` 可切换为实心背景与高对比度文字，适合显示已选中的标签。
+
+<DemoContainer>
+  <ChipsActiveStateDemo />
+</DemoContainer>
+
+```tsx src='./demos/active-state.tsx'
+
+```
+
+## Chip input 标签输入框
+
+`ChipInput` 将标签和 ghost 输入框放入 `.chip-input` 容器。按 Enter 或分隔符可添加值；
+粘贴包含分隔符的文本时会拆分为多个值。可通过鼠标或键盘选择并删除标签。
 
 <DemoContainer>
   <ChipInputDemo />
@@ -56,13 +73,9 @@ Chips 是表示实体的小型交互元素。与 Badge 不同，chips 是交互�
 
 ```
 
-配合 `FormLabel` 与 `FormText` 可添加标签与描述；也可以使用 `label` 属性在容器内
-渲染 `.chip-input-label`。
+### 主题变体
 
-## 主题变体
-
-在容器上设置 `theme`，容器内所有标签都会使用该主题色；用 `chipProps` 可按值或
-索引为单个标签设置主题。
+在 `ChipInput` 上设置 `theme`，即可为其中的标签应用主题色。
 
 <DemoContainer>
   <ChipInputThemesDemo />
@@ -72,9 +85,43 @@ Chips 是表示实体的小型交互元素。与 Badge 不同，chips 是交互�
 
 ```
 
-## 禁用状态
+也可以通过 `chipProps` 为单个标签设置主题。
 
-设置 `disabled` 后无法添加标签，已有标签不可交互，删除按钮也会被禁用。
+<DemoContainer>
+  <ChipInputIndividualThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-individual-themes.tsx'
+
+```
+
+### 空状态
+
+初始值可以为空，用户输入后即可创建标签。
+
+<DemoContainer>
+  <ChipInputEmptyStateDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-empty-state.tsx'
+
+```
+
+### 使用标签
+
+将可见表单标签与 ghost 输入框关联，并在下方添加帮助文本。
+
+<DemoContainer>
+  <ChipInputWithLabelDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-with-label.tsx'
+
+```
+
+### 禁用状态
+
+设置 `disabled` 可阻止添加和选择标签，同时禁用已有标签的删除按钮。
 
 <DemoContainer>
   <ChipInputDisabledDemo />
@@ -84,57 +131,145 @@ Chips 是表示实体的小型交互元素。与 Badge 不同，chips 是交互�
 
 ```
 
+## 使用方式
+
+这是 React 组件，不使用 Bootstrap 的 `data-bs-chips` 属性或命令式
+`bootstrap.Chips` 插件 API。非受控用法传入 `defaultValue`；受控用法传入 `value` 和
+`onChange`。
+
+<DemoContainer>
+  <ChipInputControlledDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-controlled.tsx'
+
+```
+
+添加或删除值时会调用 `onChange`，选择状态变化时不会调用。`name` 属性作用于 ghost
+文本输入框；`ChipInput` 不会自动将标签值序列化为表单字段。提交标签值时，请通过
+`onChange` 同步表单状态，或添加隐藏输入框。
+
 ## API
 
 ### Chip
 
-| 属性           | 类型            | 说明                                      |
-| -------------- | --------------- | ----------------------------------------- |
-| `active`       | `boolean`       | 使用选中（实心）样式。                    |
-| `disabled`     | `boolean`       | 变淡并禁用删除按钮。                      |
-| `icon`         | `ReactNode`     | 在文字前渲染 `.chip-icon`。               |
-| `image`        | `{ src, alt? }` | 在文字前渲染 `.chip-img` 头像。           |
-| `onDismiss`    | `() => void`    | 渲染 `.chip-dismiss` 删除按钮。           |
-| `dismissLabel` | `string`        | 删除按钮的可访问名称。                    |
-| `component`    | `ElementType`   | 默认渲染 `span`。                         |
-| `...props`     | `BoxProps<C>`   | 原生属性、全部 Box 工具类属性及 `theme`。 |
+`Chip` 默认渲染带有 `.chip` 类的 `span`。`active` 只改变外观，不会单独添加选择交互；
+`onDismiss` 会在标签中渲染按钮。
+
+| 属性           | 类型                            | 默认值     | 说明                                           |
+| -------------- | ------------------------------- | ---------- | ---------------------------------------------- |
+| `active`       | `boolean`                       | `false`    | 使用实心的选中样式。                           |
+| `disabled`     | `boolean`                       | `false`    | 应用禁用样式并禁用删除操作。                   |
+| `icon`         | `ReactNode`                     | —          | 在前方渲染 `.chip-icon`。                      |
+| `image`        | `{ src: string; alt?: string }` | —          | 在前方渲染 `.chip-img`；`alt` 默认为空字符串。 |
+| `onDismiss`    | `() => void`                    | —          | 渲染删除按钮并在点击时调用。                   |
+| `dismissLabel` | `string`                        | `'Remove'` | 删除按钮的可访问名称。                         |
+
+`Chip` 还继承所选根元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 属性，
+包括 `component` 和 `theme`。
 
 ### ChipInput
 
-| 属性                                              | 类型                          | 说明                                      |
-| ------------------------------------------------- | ----------------------------- | ----------------------------------------- |
-| `value`                                           | `readonly string[]`           | 受控标签值。                              |
-| `defaultValue`                                    | `readonly string[]`           | 非受控初始值。                            |
-| `onChange`                                        | `(values: string[]) => void`  | 添加或删除标签时触发。                    |
-| `separator`                                       | `string \| null`              | 触发添加标签的字符，默认 `,`。            |
-| `allowDuplicates`                                 | `boolean`                     | 是否允许重复值，默认 `false`。            |
-| `maxChips`                                        | `number`                      | 标签数量上限，默认不限。                  |
-| `createOnBlur`                                    | `boolean`                     | 失焦时提交草稿值，默认 `true`。           |
-| `dismissible`                                     | `boolean`                     | 是否为生成的标签渲染删除按钮。            |
-| `label`                                           | `ReactNode`                   | 在容器内渲染 `.chip-input-label`。        |
-| `chipProps`                                       | `(value, index) => ChipProps` | 单个标签的配置，例如 `theme`。            |
-| `id`、`name`、`placeholder`、`disabled`、`aria-*` |                               | 透传给 ghost 输入框。                     |
-| `component`                                       | `ElementType`                 | 默认渲染 `div`。                          |
-| `...props`                                        | `BoxProps<C>`                 | 原生属性、全部 Box 工具类属性及 `theme`。 |
+`ChipInput` 默认渲染带有 `.chip-input` 类的 `div`，其中包含标签集合和用于输入新值的文本框。
+
+| 属性                                                | 类型                                                   | 默认值  | 说明                                                           |
+| --------------------------------------------------- | ------------------------------------------------------ | ------- | -------------------------------------------------------------- |
+| `value`                                             | `readonly string[]`                                    | —       | 受控标签值。                                                   |
+| `defaultValue`                                      | `readonly string[]`                                    | `[]`    | 非受控初始值。                                                 |
+| `onChange`                                          | `(values: string[]) => void`                           | —       | 添加或删除值时调用。                                           |
+| `separator`                                         | `string \| null`                                       | `','`   | 触发创建标签的字符；`null` 禁用分隔符拆分，但 Enter 仍可添加。 |
+| `allowDuplicates`                                   | `boolean`                                              | `false` | 是否允许重复值。                                               |
+| `maxChips`                                          | `number`                                               | 不限    | 标签数量上限。                                                 |
+| `createOnBlur`                                      | `boolean`                                              | `true`  | 失焦时将草稿值创建为标签。                                     |
+| `dismissible`                                       | `boolean`                                              | `true`  | 是否为生成的标签显示删除按钮。                                 |
+| `disabled`                                          | `boolean`                                              | `false` | 禁用 ghost 输入框、标签和删除按钮。                            |
+| `validation`                                        | `'valid' \| 'invalid'`                                 | —       | 为 ghost 输入框应用校验样式。                                  |
+| `label`                                             | `ReactNode`                                            | —       | 在容器中渲染 `.chip-input-label`；需提供 `id` 关联输入框。     |
+| `chipProps`                                         | `(value: string, index: number) => ChipInputChipProps` | —       | 配置每个生成的标签，例如设置主题色。                           |
+| `id`、`name`、`placeholder`                         | `string`                                               | —       | 透传给 ghost 输入框。                                          |
+| `aria-label`、`aria-labelledby`、`aria-describedby` | `string`                                               | —       | 透传给 ghost 输入框。                                          |
+
+`ChipInput` 继承根元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 属性，
+包括 `component` 和 `theme`。其他 Box 属性作用于容器。
 
 ## 键盘行为
 
-| 场景   | 按键                   | 行为                                    |
-| ------ | ---------------------- | --------------------------------------- |
-| 输入框 | Enter、分隔符          | 用当前值创建标签。                      |
-| 输入框 | Backspace / Delete     | 输入框为空时选中并聚焦最后一个标签。    |
-| 输入框 | ArrowLeft              | 光标在开头时聚焦最后一个标签。          |
-| 输入框 | Escape                 | 清空值与选择并失焦。                    |
-| 标签   | Backspace / Delete     | 删除选中的标签。                        |
-| 标签   | ArrowLeft / ArrowRight | 移动到上一个/下一个标签，或回到输入框。 |
-| 标签   | Shift + 方向键         | 扩展选择范围。                          |
-| 标签   | Home / End             | 移动到第一个标签或输入框。              |
-| 标签   | Ctrl/Cmd + A           | 全选标签。                              |
-| 标签   | Escape                 | 清除选择并聚焦输入框。                  |
+### 输入框获得焦点时
 
-点击标签选中，Cmd/Ctrl+点击切换选择，Shift+点击进行范围选择。
+| 按键                   | 行为                                 |
+| ---------------------- | ------------------------------------ |
+| `Enter` 或分隔符       | 添加当前草稿值。                     |
+| 粘贴包含分隔符的文本   | 拆分文本并添加有效值。               |
+| `Backspace` / `Delete` | 草稿为空时，选中并聚焦最后一个标签。 |
+| `ArrowLeft`            | 光标位于开头时，聚焦最后一个标签。   |
+| `Shift` + `ArrowLeft`  | 选择或切换最后一个标签。             |
+| `Escape`               | 清空草稿和选择，然后使输入框失焦。   |
+
+### 标签获得焦点时
+
+| 按键                       | 行为                                                         |
+| -------------------------- | ------------------------------------------------------------ |
+| `Backspace` / `Delete`     | 删除选中的标签并聚焦输入框。                                 |
+| `ArrowLeft` / `ArrowRight` | 移至上一个或下一个标签；从最后一个标签继续向右会返回输入框。 |
+| `Shift` + 方向键           | 扩展标签选择范围。                                           |
+| `Home`                     | 聚焦第一个标签。                                             |
+| `End`                      | 清除选择并聚焦输入框。                                       |
+| `Ctrl` / `Cmd` + `A`       | 选中所有标签。                                               |
+| `Escape`                   | 清除选择并聚焦输入框。                                       |
+
+点击标签可选中；`Ctrl` / `Cmd` + 点击可切换选择；`Shift` + 点击可选择范围。
+选中的标签会获得 `.active` 类。
 
 ## 无障碍
 
-使用通过 `htmlFor` 绑定的 `<label>` 命名输入框；没有可见标签时使用 `aria-label`。
-生成的删除按钮都带有 `aria-label`，标签可聚焦，选中的标签会获得 `.active` 类。
+使用可见 `<label>`（通过 `htmlFor` 关联）、`label` 属性，或
+`aria-label` / `aria-labelledby` 为输入框命名。删除按钮均有可访问名称：`Chip` 可通过
+`dismissLabel` 设置，`ChipInput` 可通过 `chipProps` 设置。`ChipInput` 中的标签可聚焦并
+支持上述键盘导航。独立的 `Chip` 默认渲染为 `span`，本身不提供选择语义。
+
+## CSS
+
+### Chip 变量
+
+可在 `.chip` 或其祖先元素上覆盖以下 Bootstrap CSS 自定义属性。
+
+| 属性                              | 用途                       |
+| --------------------------------- | -------------------------- |
+| `--bs-chip-height`                | 标签高度。                 |
+| `--bs-chip-padding-x`             | 水平内边距。               |
+| `--bs-chip-gap`                   | 标签内容之间的间距。       |
+| `--bs-chip-border-radius`         | 标签圆角。                 |
+| `--bs-chip-img-size`              | 头像尺寸。                 |
+| `--bs-chip-icon-size`             | 前置图标尺寸。             |
+| `--bs-chip-dismiss-size`          | 删除按钮尺寸。             |
+| `--bs-chip-dismiss-opacity`       | 删除按钮默认不透明度。     |
+| `--bs-chip-dismiss-hover-opacity` | 删除按钮悬停时的不透明度。 |
+| `--bs-chip-color`、`--bs-chip-bg` | 默认文字和背景颜色。       |
+| `--bs-chip-border-color`          | 默认边框颜色。             |
+| `--bs-chip-selected-color`        | 激活状态的文字颜色。       |
+| `--bs-chip-selected-bg`           | 激活状态的背景颜色。       |
+| `--bs-chip-selected-border-color` | 激活状态的边框颜色。       |
+
+### Chip input 变量
+
+以下属性作用于 `.chip-input`。共享的 `--bs-control-*` 属性也会影响输入文字、背景、
+边框和圆角。
+
+| 属性                              | 用途                            |
+| --------------------------------- | ------------------------------- |
+| `--bs-chip-input-padding-y`       | 容器垂直内边距。                |
+| `--bs-chip-input-padding-x`       | 容器水平内边距。                |
+| `--bs-chip-input-gap`             | 标签与 ghost 输入框之间的间距。 |
+| `--bs-chip-input-ghost-min-width` | 文本输入框最小宽度。            |
+| `--bs-control-fg`                 | 文字颜色。                      |
+| `--bs-control-bg`                 | 容器背景颜色。                  |
+| `--bs-control-border-width`       | 容器边框宽度。                  |
+| `--bs-control-border-color`       | 容器边框颜色。                  |
+| `--bs-control-border-radius`      | 容器圆角。                      |
+
+## 参考
+
+- [Bootstrap 6 Chips 官方文档](https://getbootstrap.com/docs/6.0/forms/chips/)
+- [Bootstrap 6 Badges 官方文档](https://getbootstrap.com/docs/6.0/components/badge/)
+- [Chip 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/chip.tsx)
+- [ChipInput 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/chip-input.tsx)

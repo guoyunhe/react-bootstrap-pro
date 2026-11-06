@@ -5,6 +5,7 @@ title: Radio
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { RadioBasicDemo } from './demos/basic';
+import { RadioWithFormFieldDemo } from './demos/with-form-field';
 import { RadioDescriptionDemo } from './demos/description';
 import { RadioDisabledDemo } from './demos/disabled';
 import { RadioSizesDemo } from './demos/sizes';
@@ -12,11 +13,13 @@ import { RadioThemesDemo } from './demos/themes';
 
 # Radio
 
-`Radio` renders a `.radio` input. Radios use CSS for the checked state instead of
-a custom SVG, so they scale without losing sharpness. Group radios with a shared
-`name` and place each one in a `FormField` beside its label.
+`Radio` renders a native `<input type='radio'>` by default and adds Bootstrap
+6's `.radio` class directly to the input.
 
 ## Basic radio
+
+The `.radio` class customizes the native input. Its checked indicator is drawn
+with CSS, so no custom SVG is needed.
 
 <DemoContainer>
   <RadioBasicDemo />
@@ -28,13 +31,21 @@ a custom SVG, so they scale without losing sharpness. Group radios with a shared
 
 ## With form field
 
-The `FormField` grid places the radio and its label side by side. Nested fields
-work the same way, so a group of radios can share one wrapper and label.
+Wrap each radio in `FormField` and add a label. The `.form-field` grid places
+the radio and label side by side. Radios in the same group share a `name`.
+
+<DemoContainer>
+  <RadioWithFormFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-form-field.tsx'
+
+```
 
 ## Description
 
-Add a description after the label and wrap both in `FormFieldContent` so the
-label and help text stack in the second column.
+Add a description after the label. `FormFieldContent` keeps the label and
+description together with the spacing and alignment used by the form layout.
 
 <DemoContainer>
   <RadioDescriptionDemo />
@@ -46,7 +57,8 @@ label and help text stack in the second column.
 
 ## Theme colors
 
-Set `theme` to color the checked radio through `.theme-{color}`.
+Set `theme` to add a `.theme-{color}` class and change the background and border
+colors of a checked radio.
 
 <DemoContainer>
   <RadioThemesDemo />
@@ -58,7 +70,8 @@ Set `theme` to color the checked radio through `.theme-{color}`.
 
 ## Disabled
 
-Add the native `disabled` attribute; the associated label is styled to match.
+The native `disabled` attribute prevents interaction and styles the associated
+label with a lighter color.
 
 <DemoContainer>
   <RadioDisabledDemo />
@@ -70,7 +83,7 @@ Add the native `disabled` attribute; the associated label is styled to match.
 
 ## Sizes
 
-Use `size='sm'` or `size='lg'` for `.radio-sm` and `.radio-lg`.
+Add `size='sm'` or `size='lg'` to make the radio smaller or larger.
 
 <DemoContainer>
   <RadioSizesDemo />
@@ -80,27 +93,54 @@ Use `size='sm'` or `size='lg'` for `.radio-sm` and `.radio-lg`.
 
 ```
 
+## CSS
+
+### Variables
+
+The radio component's CSS custom properties are built on Sass tokens. Override
+these properties on the input or an ancestor.
+
+| Variable                          | Purpose                                |
+| --------------------------------- | -------------------------------------- |
+| `--bs-radio-size`                 | Radio width and height.                |
+| `--bs-radio-margin-block`         | Vertical spacing around the radio.     |
+| `--bs-radio-bg`                   | Unchecked background color.            |
+| `--bs-radio-border-color`         | Unchecked border color.                |
+| `--bs-radio-checked-bg`           | Checked background color.              |
+| `--bs-radio-checked-border-color` | Checked border color.                  |
+| `--bs-radio-disabled-bg`          | Disabled background color.             |
+| `--bs-radio-disabled-opacity`     | Opacity for disabled checked controls. |
+
 ## API
 
 ### Radio
 
-Renders an `input` element by default and defaults its native `type` to
-`radio`. Its own props are `size` and `validation`; `theme` is inherited from
-`Box`. It inherits native props for the selected element and
-[`Box`](../box/README.mdx#api) utility props.
+Renders an `input` element by default, sets `type='radio'`, and adds the
+`.radio` class. Its own props are `size` and `validation`.
 
-| Prop        | Type                    | Description                                 |
-| ----------- | ----------------------- | ------------------------------------------- |
-| `size`      | `'sm' \| 'lg'`          | Scales the radio and its label.             |
-| `theme`     | Bootstrap theme literal | Sets the checked color via `.theme-*`.      |
-| `component` | `ElementType`           | Renders an `input type='radio'` by default. |
-| `...props`  | `BoxProps<C>`           | Native props and all Box utility props.     |
+`Radio` also inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) props, including `component` and `theme`. Changing
+the root with `component` or changing the input `type` may remove native radio
+behavior.
 
-`FormFieldContent` wraps a label and its description inside a `FormField`; it
-renders a `div` by default.
+| Prop         | Type                   | Default | Description                              |
+| ------------ | ---------------------- | ------- | ---------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | —       | Adds `.radio-sm` or `.radio-lg`.         |
+| `validation` | `'valid' \| 'invalid'` | —       | Adds the corresponding validation class. |
+
+When the selected root is an `input`, `type` defaults to `'radio'`. Native input
+props include `checked`, `defaultChecked`, `disabled`, `name`, `required`, and
+`type`.
 
 ## Accessibility
 
-Give every radio an accessible name with a `<label for>` bound through `htmlFor`.
-Radios that belong together must share the same `name` so browsers treat them as
-one group.
+Give every radio an accessible name. For visible text, associate a `<label>`
+using `htmlFor` and a unique input `id`; for an unlabeled radio, provide
+`aria-label` or `aria-labelledby`. Radios that belong together must share the
+same `name`, which enables the browser's native single-selection and keyboard
+behavior.
+
+## See
+
+- [Bootstrap 6 Radio documentation](https://getbootstrap.com/docs/6.0/forms/radio/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/radio.tsx)

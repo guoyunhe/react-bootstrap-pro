@@ -4,23 +4,30 @@ title: Chips
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
+import { ChipsActiveStateDemo } from './demos/active-state';
 import { ChipInputDemo } from './demos/chip-input';
+import { ChipInputControlledDemo } from './demos/chip-input-controlled';
 import { ChipInputDisabledDemo } from './demos/chip-input-disabled';
+import { ChipInputEmptyStateDemo } from './demos/chip-input-empty-state';
+import { ChipInputIndividualThemesDemo } from './demos/chip-input-individual-themes';
 import { ChipInputThemesDemo } from './demos/chip-input-themes';
+import { ChipInputWithLabelDemo } from './demos/chip-input-with-label';
 import { ChipsDemo } from './demos/chips';
 import { ChipsThemedDemo } from './demos/themed';
 
 # Chips
 
-Chips are small interactive elements that represent entities. Unlike badges,
-chips are interactive, keep a single size, and can include icons, avatars, and
-dismiss buttons. `Chip` renders a standalone chip, and `ChipInput` renders a tag
-field that manages a list of chip values in React.
+## Overview
+
+Chips represent values or entities in forms and other interactive contexts.
+Unlike badges, chips have a fixed size and support icons, avatars, themes, active
+states, and dismiss actions. `Chip` renders one chip; `ChipInput` manages a
+keyboard-navigable collection of chips in React.
 
 ## Chips
 
-Use `icon` for a leading icon, `image` for a leading avatar, and `onDismiss` to
-render a remove button. `dismissLabel` sets the remove button's accessible name.
+Use `icon` for a leading icon, `image` for an avatar, and `onDismiss` to add a
+remove button. The dismiss button's accessible name defaults to `Remove`.
 
 <DemoContainer>
   <ChipsDemo />
@@ -30,10 +37,9 @@ render a remove button. `dismissLabel` sets the remove button's accessible name.
 
 ```
 
-## Themed chips
+### Themed chips
 
-Set `theme` to color a chip. Chips are subtle by default, and `active` switches
-them to the solid appearance for toggle-style selections.
+Set `theme` to apply a color to a chip. Chips use subtle colors by default.
 
 <DemoContainer>
   <ChipsThemedDemo />
@@ -43,13 +49,24 @@ them to the solid appearance for toggle-style selections.
 
 ```
 
+### Active state
+
+Set `active` to use the solid background and contrast color. This is useful for
+showing selected chips.
+
+<DemoContainer>
+  <ChipsActiveStateDemo />
+</DemoContainer>
+
+```tsx src='./demos/active-state.tsx'
+
+```
+
 ## Chip input
 
-`ChipInput` renders the `.chip-input` container with a ghost input. It manages
-the chip values: typing and pressing Enter or the separator adds a chip, clicking
-the dismiss button removes one, and pressing Backspace in an empty input selects
-and then deletes the last chip. Use `value` and `onChange` for controlled usage,
-or `defaultValue` for uncontrolled usage.
+`ChipInput` wraps chips and a ghost input in `.chip-input`. Enter or the
+separator adds a value; pasted text containing the separator is split into
+values. Chips can be selected and removed with the mouse or keyboard.
 
 <DemoContainer>
   <ChipInputDemo />
@@ -59,13 +76,9 @@ or `defaultValue` for uncontrolled usage.
 
 ```
 
-`FormLabel` and `FormText` pair the field with a label and a description. Set
-`label` instead to render a `.chip-input-label` inside the container.
+### Theme variants
 
-## Theme variants
-
-Set `theme` on the container to color every chip inside it. Use `chipProps` to
-theme individual chips by value or index.
+Set `theme` on `ChipInput` to apply a theme to its chips.
 
 <DemoContainer>
   <ChipInputThemesDemo />
@@ -75,10 +88,44 @@ theme individual chips by value or index.
 
 ```
 
-## Disabled
+You can also theme individual chips with `chipProps`.
 
-Set `disabled` to prevent adding chips. Existing chips become non-interactive and
-their dismiss buttons are disabled.
+<DemoContainer>
+  <ChipInputIndividualThemesDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-individual-themes.tsx'
+
+```
+
+### Empty state
+
+Start with an empty value list; users can create chips as they type.
+
+<DemoContainer>
+  <ChipInputEmptyStateDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-empty-state.tsx'
+
+```
+
+### With label
+
+Associate a visible form label with the ghost input and add help text below it.
+
+<DemoContainer>
+  <ChipInputWithLabelDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-with-label.tsx'
+
+```
+
+### Disabled
+
+Set `disabled` to prevent adding and selecting chips. Existing dismiss buttons
+are disabled as well.
 
 <DemoContainer>
   <ChipInputDisabledDemo />
@@ -88,59 +135,151 @@ their dismiss buttons are disabled.
 
 ```
 
+## Usage
+
+This is a React component, so Bootstrap's `data-bs-chips` attribute and
+imperative `bootstrap.Chips` plugin API are not used. Pass `defaultValue` for
+uncontrolled usage, or pass `value` and `onChange` to control the chip list.
+
+<DemoContainer>
+  <ChipInputControlledDemo />
+</DemoContainer>
+
+```tsx src='./demos/chip-input-controlled.tsx'
+
+```
+
+`onChange` runs when values are added or removed, not when the selection
+changes. The `name` prop belongs to the ghost text input; `ChipInput` does not
+serialize its chip values as a form field. Use `onChange` to sync form state or
+add hidden inputs when submitting the values.
+
 ## API
 
 ### Chip
 
-| Prop           | Type            | Description                                            |
-| -------------- | --------------- | ------------------------------------------------------ |
-| `active`       | `boolean`       | Uses the selected (solid) appearance.                  |
-| `disabled`     | `boolean`       | Dims the chip and disables its dismiss button.         |
-| `icon`         | `ReactNode`     | Renders a `.chip-icon` before the label.               |
-| `image`        | `{ src, alt? }` | Renders a `.chip-img` avatar before the label.         |
-| `onDismiss`    | `() => void`    | Renders a `.chip-dismiss` button.                      |
-| `dismissLabel` | `string`        | Accessible name of the dismiss button.                 |
-| `component`    | `ElementType`   | Renders a `span` by default.                           |
-| `...props`     | `BoxProps<C>`   | Native props and all Box utility props, incl. `theme`. |
+`Chip` renders a `span` with the `.chip` class by default. `active` changes its
+appearance but does not add selection behavior by itself. `onDismiss` renders a
+button inside the chip.
+
+| Prop           | Type                            | Default    | Description                                                       |
+| -------------- | ------------------------------- | ---------- | ----------------------------------------------------------------- |
+| `active`       | `boolean`                       | `false`    | Uses the solid selected appearance.                               |
+| `disabled`     | `boolean`                       | `false`    | Applies disabled styling and disables dismissal.                  |
+| `icon`         | `ReactNode`                     | —          | Renders a leading `.chip-icon`.                                   |
+| `image`        | `{ src: string; alt?: string }` | —          | Renders a leading `.chip-img`; `alt` defaults to an empty string. |
+| `onDismiss`    | `() => void`                    | —          | Renders a dismiss button and calls this handler.                  |
+| `dismissLabel` | `string`                        | `'Remove'` | Accessible name for the dismiss button.                           |
+
+`Chip` inherits native props for its selected element and
+[`Box`](../box/README.mdx#api) props, including `component` and `theme`.
 
 ### ChipInput
 
-| Prop                                              | Type                          | Description                                                 |
-| ------------------------------------------------- | ----------------------------- | ----------------------------------------------------------- |
-| `value`                                           | `readonly string[]`           | Controlled chip values.                                     |
-| `defaultValue`                                    | `readonly string[]`           | Initial values for uncontrolled usage.                      |
-| `onChange`                                        | `(values: string[]) => void`  | Called when chips are added or removed.                     |
-| `separator`                                       | `string \| null`              | Character that adds a chip; defaults to `,`.                |
-| `allowDuplicates`                                 | `boolean`                     | Allows duplicate values; defaults to `false`.               |
-| `maxChips`                                        | `number`                      | Maximum number of chips; unlimited by default.              |
-| `createOnBlur`                                    | `boolean`                     | Adds the draft value when focus leaves; defaults to `true`. |
-| `dismissible`                                     | `boolean`                     | Renders dismiss buttons on generated chips.                 |
-| `label`                                           | `ReactNode`                   | Renders a `.chip-input-label` inside the container.         |
-| `chipProps`                                       | `(value, index) => ChipProps` | Per-chip configuration, such as `theme`.                    |
-| `id`, `name`, `placeholder`, `disabled`, `aria-*` |                               | Forwarded to the ghost input.                               |
-| `component`                                       | `ElementType`                 | Renders a `div` by default.                                 |
-| `...props`                                        | `BoxProps<C>`                 | Native props and all Box utility props, incl. `theme`.      |
+`ChipInput` renders a `div` with the `.chip-input` class by default. It contains
+the chip collection and a text input used to enter new values.
+
+| Prop                                                | Type                                                   | Default   | Description                                                                                       |
+| --------------------------------------------------- | ------------------------------------------------------ | --------- | ------------------------------------------------------------------------------------------------- |
+| `value`                                             | `readonly string[]`                                    | —         | Controlled chip values.                                                                           |
+| `defaultValue`                                      | `readonly string[]`                                    | `[]`      | Initial values for uncontrolled usage.                                                            |
+| `onChange`                                          | `(values: string[]) => void`                           | —         | Called when values are added or removed.                                                          |
+| `separator`                                         | `string \| null`                                       | `','`     | Character that creates a chip; `null` disables separator splitting. Enter still adds a chip.      |
+| `allowDuplicates`                                   | `boolean`                                              | `false`   | Allows duplicate values.                                                                          |
+| `maxChips`                                          | `number`                                               | Unlimited | Maximum number of chips.                                                                          |
+| `createOnBlur`                                      | `boolean`                                              | `true`    | Creates a chip from the draft when focus leaves the field.                                        |
+| `dismissible`                                       | `boolean`                                              | `true`    | Renders dismiss buttons on generated chips.                                                       |
+| `disabled`                                          | `boolean`                                              | `false`   | Disables the ghost input, chips, and dismiss buttons.                                             |
+| `validation`                                        | `'valid' \| 'invalid'`                                 | —         | Applies validation styling to the ghost input.                                                    |
+| `label`                                             | `ReactNode`                                            | —         | Renders a `.chip-input-label` inside the container; requires `id` to associate it with the input. |
+| `chipProps`                                         | `(value: string, index: number) => ChipInputChipProps` | —         | Configures each generated chip, such as its theme.                                                |
+| `id`, `name`, `placeholder`                         | `string`                                               | —         | Forwarded to the ghost input.                                                                     |
+| `aria-label`, `aria-labelledby`, `aria-describedby` | `string`                                               | —         | Forwarded to the ghost input.                                                                     |
+
+`ChipInput` inherits native props for its root and
+[`Box`](../box/README.mdx#api) props, including `component` and `theme`. Other
+Box props apply to the container.
 
 ## Keyboard behavior
 
-| Context | Keys                   | Action                                                     |
-| ------- | ---------------------- | ---------------------------------------------------------- |
-| Input   | Enter, separator       | Adds a chip from the current value.                        |
-| Input   | Backspace / Delete     | With an empty input, selects and focuses the last chip.    |
-| Input   | ArrowLeft              | With the caret at the start, moves focus to the last chip. |
-| Input   | Escape                 | Clears the value and selection, then blurs the input.      |
-| Chip    | Backspace / Delete     | Removes the selected chips.                                |
-| Chip    | ArrowLeft / ArrowRight | Moves to the previous or next chip, or back to the input.  |
-| Chip    | Shift + arrow          | Extends the selection.                                     |
-| Chip    | Home / End             | Moves to the first chip or the input.                      |
-| Chip    | Ctrl/Cmd + A           | Selects all chips.                                         |
-| Chip    | Escape                 | Clears the selection and focuses the input.                |
+### When the input is focused
 
-Click a chip to select it, Cmd/Ctrl+click to toggle it, and Shift+click to select
-a range.
+| Key                    | Action                                                      |
+| ---------------------- | ----------------------------------------------------------- |
+| `Enter` or separator   | Adds the current draft.                                     |
+| Paste with separator   | Splits the pasted text and adds valid values.               |
+| `Backspace` / `Delete` | When the draft is empty, selects and focuses the last chip. |
+| `ArrowLeft`            | At the start of the input, focuses the last chip.           |
+| `Shift` + `ArrowLeft`  | Selects or toggles the last chip.                           |
+| `Escape`               | Clears the draft and selection, then blurs the input.       |
+
+### When a chip is focused
+
+| Key                        | Action                                                                                    |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| `Backspace` / `Delete`     | Removes the selected chips and focuses the input.                                         |
+| `ArrowLeft` / `ArrowRight` | Moves to the previous or next chip; moving right past the last chip returns to the input. |
+| `Shift` + arrow            | Extends the chip selection.                                                               |
+| `Home`                     | Focuses the first chip.                                                                   |
+| `End`                      | Clears the selection and focuses the input.                                               |
+| `Ctrl` / `Cmd` + `A`       | Selects all chips.                                                                        |
+| `Escape`                   | Clears the selection and focuses the input.                                               |
+
+Click a chip to select it, `Ctrl`/`Cmd`-click to toggle it, or `Shift`-click to
+select a range. Selected chips receive the `.active` class.
 
 ## Accessibility
 
-Name the field with a `<label>` bound through `htmlFor`, or use `aria-label` when
-no visible label fits. Each generated dismiss button has an `aria-label`, chips
-are focusable, and selected chips receive the `.active` class.
+Name the text input with a visible `<label>` associated through `htmlFor`, the
+`label` prop, or `aria-label` / `aria-labelledby`. Each dismiss button has an
+accessible name, configurable through `dismissLabel` on `Chip` or `chipProps`
+on `ChipInput`. Chips inside `ChipInput` are focusable and support the keyboard
+navigation described above. Standalone `Chip` renders a `span` by default and
+does not provide selection semantics.
+
+## CSS
+
+### Chip variables
+
+Override these Bootstrap CSS custom properties on `.chip` or an ancestor.
+
+| Variable                          | Purpose                             |
+| --------------------------------- | ----------------------------------- |
+| `--bs-chip-height`                | Chip height.                        |
+| `--bs-chip-padding-x`             | Horizontal padding.                 |
+| `--bs-chip-gap`                   | Space between chip contents.        |
+| `--bs-chip-border-radius`         | Chip corner radius.                 |
+| `--bs-chip-img-size`              | Avatar size.                        |
+| `--bs-chip-icon-size`             | Leading icon size.                  |
+| `--bs-chip-dismiss-size`          | Dismiss button size.                |
+| `--bs-chip-dismiss-opacity`       | Default dismiss button opacity.     |
+| `--bs-chip-dismiss-hover-opacity` | Dismiss button opacity on hover.    |
+| `--bs-chip-color`, `--bs-chip-bg` | Default text and background colors. |
+| `--bs-chip-border-color`          | Default border color.               |
+| `--bs-chip-selected-color`        | Active text color.                  |
+| `--bs-chip-selected-bg`           | Active background color.            |
+| `--bs-chip-selected-border-color` | Active border color.                |
+
+### Chip input variables
+
+These properties are scoped to `.chip-input`. Shared `--bs-control-*` variables
+also control its text, background, border, and corner radius.
+
+| Variable                          | Purpose                                |
+| --------------------------------- | -------------------------------------- |
+| `--bs-chip-input-padding-y`       | Vertical container padding.            |
+| `--bs-chip-input-padding-x`       | Horizontal container padding.          |
+| `--bs-chip-input-gap`             | Gap between chips and the ghost input. |
+| `--bs-chip-input-ghost-min-width` | Minimum width of the text input.       |
+| `--bs-control-fg`                 | Text color.                            |
+| `--bs-control-bg`                 | Container background color.            |
+| `--bs-control-border-width`       | Container border width.                |
+| `--bs-control-border-color`       | Container border color.                |
+| `--bs-control-border-radius`      | Container corner radius.               |
+
+## See
+
+- [Bootstrap 6 Chips documentation](https://getbootstrap.com/docs/6.0/forms/chips/)
+- [Bootstrap 6 Badges documentation](https://getbootstrap.com/docs/6.0/components/badge/)
+- [Chip component source](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/chip.tsx)
+- [ChipInput component source](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/chip-input.tsx)
