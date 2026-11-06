@@ -1,4 +1,5 @@
 import {
+  Box,
   Carousel,
   CarouselIndicator,
   CarouselIndicators,
@@ -23,14 +24,14 @@ export function CarouselIndividualIntervalsDemo() {
           <CarouselSlidePlaceholder>Third: 6 seconds</CarouselSlidePlaceholder>
         </CarouselItem>
       </CarouselInner>
-      <div className='d-flex justify-content-between align-items-center mt-3'>
+      <Box d='flex' justifyContent='between' alignItems='center' mt={3}>
         <CarouselIndicators>
           <CarouselIndicator index={0} active />
           <CarouselIndicator index={1} />
           <CarouselIndicator index={2} />
         </CarouselIndicators>
         <CarouselPlayPause size='sm' />
-      </div>
+      </Box>
     </Carousel>
   );
 }

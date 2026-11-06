@@ -1,4 +1,4 @@
-import { Carousel, CarouselControl, CarouselInner, CarouselItem } from 'react-bootstrap-pro';
+import { Box, Carousel, CarouselControl, CarouselInner, CarouselItem } from 'react-bootstrap-pro';
 
 import { CarouselSlidePlaceholder } from './shared';
 
@@ -14,13 +14,13 @@ const slides = [
 export function CarouselVariableWidthDemo() {
   return (
     <Carousel auto ends='stop' itemsGap='1rem'>
-      <div className='d-flex justify-content-between align-items-center'>
+      <Box d='flex' justifyContent='between' alignItems='center'>
         <h5 className='mb-0'>Mixed widths</h5>
         <div>
           <CarouselControl direction='previous' size='sm' />
           <CarouselControl direction='next' size='sm' />
         </div>
-      </div>
+      </Box>
       <CarouselInner>
         {slides.map(({ label, width }, index) => (
           <CarouselItem key={label} active={index === 0} style={{ width }}>

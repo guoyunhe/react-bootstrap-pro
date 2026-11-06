@@ -1,12 +1,19 @@
-import { Carousel, CarouselControl, CarouselInner, CarouselItem } from 'react-bootstrap-pro';
+import { Box, Carousel, CarouselControl, CarouselInner, CarouselItem } from 'react-bootstrap-pro';
 
 export function CarouselCustomContentDemo() {
   return (
     <Carousel>
       <CarouselInner rounded={5}>
         <CarouselItem active>
-          <div
-            className='d-flex flex-column justify-content-center bg-subtle-primary p-9 bg-1 rounded-5'
+          <Box
+            d='flex'
+            flexDirection='column'
+            justifyContent='center'
+            bg='primary'
+            bgv='subtle'
+            p={9}
+            className='bg-1'
+            rounded={5}
             style={{ minHeight: 320 }}
           >
             <h3>Build anything</h3>
@@ -18,11 +25,19 @@ export function CarouselCustomContentDemo() {
                 Get started
               </a>
             </div>
-          </div>
+          </Box>
         </CarouselItem>
         <CarouselItem>
-          <div
-            className='d-flex flex-column justify-content-center text-center bg-subtle-success p-9 bg-2 rounded-5'
+          <Box
+            d='flex'
+            flexDirection='column'
+            justifyContent='center'
+            textAlign='center'
+            bg='success'
+            bgv='subtle'
+            p={9}
+            className='bg-2'
+            rounded={5}
             style={{ minHeight: 320 }}
           >
             <h3>Style it your way</h3>
@@ -34,11 +49,19 @@ export function CarouselCustomContentDemo() {
                 Learn more
               </a>
             </div>
-          </div>
+          </Box>
         </CarouselItem>
         <CarouselItem>
-          <div
-            className='d-flex flex-column justify-content-center text-end bg-subtle-warning p-9 bg-3 rounded-5'
+          <Box
+            d='flex'
+            flexDirection='column'
+            justifyContent='center'
+            textAlign='end'
+            bg='warning'
+            bgv='subtle'
+            p={9}
+            className='bg-3'
+            rounded={5}
             style={{ minHeight: 320 }}
           >
             <h3>Mix and match</h3>
@@ -50,13 +73,13 @@ export function CarouselCustomContentDemo() {
                 Browse examples
               </a>
             </div>
-          </div>
+          </Box>
         </CarouselItem>
       </CarouselInner>
-      <div className='d-flex justify-content-center gap-2'>
+      <Box d='flex' justifyContent='center' gap={2}>
         <CarouselControl direction='previous' size='sm' />
         <CarouselControl direction='next' size='sm' />
-      </div>
+      </Box>
     </Carousel>
   );
 }

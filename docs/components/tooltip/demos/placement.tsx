@@ -1,8 +1,8 @@
-import { Tooltip } from 'react-bootstrap-pro';
+import { Box, Tooltip } from 'react-bootstrap-pro';
 
 export function TooltipPlacementDemo() {
   return (
-    <div className='d-flex flex-wrap justify-content-center gap-3'>
+    <Box d='flex' flexWrap='wrap' justifyContent='center' gap={3}>
       <Tooltip
         placement='left'
         trigger={
@@ -43,6 +43,6 @@ export function TooltipPlacementDemo() {
       >
         Tooltip on right
       </Tooltip>
-    </div>
+    </Box>
   );
 }

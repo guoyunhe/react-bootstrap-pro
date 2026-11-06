@@ -1,11 +1,11 @@
-import { Card, CardBody, CardImage, CardText } from 'react-bootstrap-pro';
+import { Box, Card, CardBody, CardImage, CardText } from 'react-bootstrap-pro';
 
 const imageUrl =
   'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=640&h=360&q=80';
 
 export function CardImageCapsContentDemo() {
   return (
-    <div className='d-flex flex-wrap gap-3'>
+    <Box d='flex' flexWrap='wrap' gap={3}>
       <Card style={{ width: 288 }}>
         <CardImage src={imageUrl} placement='top' alt='Mountain landscape' />
         <CardBody>
@@ -24,6 +24,6 @@ export function CardImageCapsContentDemo() {
         </CardBody>
         <CardImage src={imageUrl} placement='bottom' alt='Mountain landscape' />
       </Card>
-    </div>
+    </Box>
   );
 }

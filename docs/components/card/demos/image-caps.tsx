@@ -1,4 +1,4 @@
-import { Card, CardBody, CardImage, CardTitle, CardText } from 'react-bootstrap-pro';
+import { Box, Card, CardBody, CardImage, CardTitle, CardText } from 'react-bootstrap-pro';
 
 const imageUrl =
   'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=960&h=540&q=80';
@@ -7,7 +7,7 @@ const supportingText =
 
 export function CardImageCapsDemo() {
   return (
-    <div className='d-flex flex-column gap-3'>
+    <Box d='flex' flexDirection='column' gap={3}>
       <Card>
         <CardImage src={imageUrl} placement='top' alt='Mountain landscape' />
         <CardBody>
@@ -28,6 +28,6 @@ export function CardImageCapsDemo() {
         </CardBody>
         <CardImage src={imageUrl} placement='bottom' alt='Mountain landscape' />
       </Card>
-    </div>
+    </Box>
   );
 }

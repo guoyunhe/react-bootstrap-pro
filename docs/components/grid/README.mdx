@@ -71,6 +71,16 @@ Columns wrap naturally when their widths exceed the 12-column row. To start a
 new line at a specific point, add a full-width element. Use responsive display
 utilities to make the break conditional:
 
+```tsx
+<Row>
+  <Col span={{ xs: 6, sm: 3 }}>First column</Col>
+  <Col span={{ xs: 6, sm: 3 }}>Second column</Col>
+  <Box w={100} d={{ xs: 'none', md: 'block' }} aria-hidden='true' />
+  <Col span={{ xs: 6, sm: 3 }}>Third column</Col>
+  <Col span={{ xs: 6, sm: 3 }}>Fourth column</Col>
+</Row>
+```
+
 ## Reordering
 
 Use `order` to change the visual order at selected breakpoints. Available

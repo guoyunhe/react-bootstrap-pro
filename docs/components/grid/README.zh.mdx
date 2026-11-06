@@ -91,7 +91,7 @@ import { GridLayoutsDemo } from './demos/grid-layouts';
 <Row>
   <Col span={{ xs: 6, sm: 3 }}>第一列</Col>
   <Col span={{ xs: 6, sm: 3 }}>第二列</Col>
-  <div className='w-100 d-none md:d-block' aria-hidden='true' />
+  <Box w={100} d={{ xs: 'none', md: 'block' }} aria-hidden='true' />
   <Col span={{ xs: 6, sm: 3 }}>第三列</Col>
   <Col span={{ xs: 6, sm: 3 }}>第四列</Col>
 </Row>

@@ -1,4 +1,5 @@
 import {
+  Box,
   Carousel,
   CarouselControl,
   CarouselIndicator,
@@ -23,7 +24,7 @@ export function CarouselIndicatorsDemo() {
           <CarouselSlidePlaceholder>Third slide</CarouselSlidePlaceholder>
         </CarouselItem>
       </CarouselInner>
-      <div className='d-flex justify-content-between align-items-center'>
+      <Box d='flex' justifyContent='between' alignItems='center'>
         <div>
           <CarouselControl direction='previous' size='sm' />
           <CarouselControl direction='next' size='sm' />
@@ -33,7 +34,7 @@ export function CarouselIndicatorsDemo() {
           <CarouselIndicator index={1} />
           <CarouselIndicator index={2} />
         </CarouselIndicators>
-      </div>
+      </Box>
     </Carousel>
   );
 }

@@ -1,8 +1,8 @@
-import { Tooltip } from 'react-bootstrap-pro';
+import { Box, Tooltip } from 'react-bootstrap-pro';
 
 export function TooltipResponsivePlacementDemo() {
   return (
-    <div className='d-flex flex-wrap justify-content-center gap-3'>
+    <Box d='flex' flexWrap='wrap' justifyContent='center' gap={3}>
       <Tooltip
         placement={{ xs: 'top', md: 'right', lg: 'bottom' }}
         trigger={
@@ -23,6 +23,6 @@ export function TooltipResponsivePlacementDemo() {
       >
         Responsive tooltip
       </Tooltip>
-    </div>
+    </Box>
   );
 }
