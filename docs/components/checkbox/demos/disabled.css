@@ -1,0 +1,3 @@
+.check:disabled:indeterminate {
+  opacity: var(--bs-check-disabled-opacity);
+}

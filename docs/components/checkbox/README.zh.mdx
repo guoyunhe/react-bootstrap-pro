@@ -5,19 +5,31 @@ title: Checkbox 复选框
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { CheckboxBasicDemo } from './demos/basic';
+import { CheckboxIndeterminateDemo } from './demos/indeterminate';
+import { CheckboxWithFormFieldDemo } from './demos/with-form-field';
 import { CheckboxDescriptionDemo } from './demos/description';
 import { CheckboxDisabledDemo } from './demos/disabled';
-import { CheckboxIndeterminateDemo } from './demos/indeterminate';
-import { CheckboxSizesDemo } from './demos/sizes';
+import { CheckboxDisabledIndeterminateDemo } from './demos/disabled-indeterminate';
 import { CheckboxThemesDemo } from './demos/themes';
+import { CheckboxSizesDemo } from './demos/sizes';
+import { CheckboxStackedDemo } from './demos/stacked';
+import { CheckboxInlineDemo } from './demos/inline';
+import { CheckboxReverseDemo } from './demos/reverse';
+import { CheckboxWithoutLabelsDemo } from './demos/without-labels';
+import { CheckboxToggleButtonsDemo } from './demos/toggle-buttons';
+import { CheckboxToggleButtonsBaseDemo } from './demos/toggle-buttons-base';
+import { CheckboxOutlinedStylesDemo } from './demos/outlined-styles';
 
 # Checkbox 复选框
 
-`Checkbox` 渲染 `.check` 输入框。该类用主题色替换浏览器默认外观，并通过 CSS
-mask 绘制选中与不确定状态的图标，因此图标会继承对比色，无需内联 SVG。标签与布局
-由 `FormField` 负责。
+`Checkbox` 默认渲染原生 `<input type='checkbox'>`，并将 Bootstrap 6 的 `.check`
+类直接添加到输入框。
 
 ## 基础复选框
+
+`.check` 类会替换浏览器默认外观，显示带主题色的控件。它通过输入框
+`::before` 伪元素上的 CSS mask 绘制选中与不确定标记，因此无需内联 SVG。
+可覆盖 `--bs-check-icon-checked` 和 `--bs-check-icon-indeterminate` 来替换 mask 图像。
 
 <DemoContainer>
   <CheckboxBasicDemo />
@@ -29,8 +41,9 @@ mask 绘制选中与不确定状态的图标，因此图标会继承对比色，
 
 ## 不确定状态
 
-HTML 没有对应属性，需要通过 `ref` 设置 DOM 的 `indeterminate` 属性。`Checkbox`
-会把 ref 透传给底层输入框。
+原生输入框可以设置为不确定状态，但 HTML 没有对应属性，因此请使用
+`indeterminate` 属性。该状态独立于 `checked`，不会改变表单提交的值。用户激活复选框时
+会清除混合状态；如果该状态表示一组项目的选中情况，请根据应用状态计算此属性。
 
 <DemoContainer>
   <CheckboxIndeterminateDemo />
@@ -40,17 +53,21 @@ HTML 没有对应属性，需要通过 `ref` 设置 DOM 的 `indeterminate` 属�
 
 ```
 
-如需替换内置图标，可用自定义的 `mask-image` 覆盖
-`--bs-check-icon-checked` 与 `--bs-check-icon-indeterminate` 自定义属性。
+## 使用表单字段布局
 
-## 配合 FormField
+使用 `FormField` 包裹复选框并添加标签。`.form-field` 网格布局会将复选框与标签并排放置。
 
-`FormField` 的网格布局会把复选框和标签并排摆放。嵌套的 `FormField` 行为相同，
-因此一组复选框可以共用一个外层容器和标签。
+<DemoContainer>
+  <CheckboxWithFormFieldDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-form-field.tsx'
+
+```
 
 ## 描述文本
 
-在标签后添加描述，并用 `FormFieldContent` 包裹二者，使标签与说明文本堆叠在第二列。
+在标签后添加描述。`FormFieldContent` 会让标签和描述保持在一起，并使用表单布局的间距与对齐方式。
 
 <DemoContainer>
   <CheckboxDescriptionDemo />
@@ -62,7 +79,7 @@ HTML 没有对应属性，需要通过 `ref` 设置 DOM 的 `indeterminate` 属�
 
 ## 主题颜色
 
-通过 `theme` 设置选中态颜色，生成 `.theme-{color}` 类。
+设置 `theme` 会添加 `.theme-{color}` 类，从而修改已选中复选框的背景色和边框颜色。
 
 <DemoContainer>
   <CheckboxThemesDemo />
@@ -74,7 +91,7 @@ HTML 没有对应属性，需要通过 `ref` 设置 DOM 的 `indeterminate` 属�
 
 ## 禁用状态
 
-添加原生 `disabled` 属性，关联的标签会自动变浅以匹配状态。
+原生 `disabled` 属性会阻止交互，并将关联标签调整为较浅的颜色。示例展示未选中和已选中的禁用复选框。
 
 <DemoContainer>
   <CheckboxDisabledDemo />
@@ -84,9 +101,21 @@ HTML 没有对应属性，需要通过 `ref` 设置 DOM 的 `indeterminate` 属�
 
 ```
 
+### 禁用的不确定状态
+
+Bootstrap 还会降低已选中禁用复选框的不透明度。此补充示例为禁用的不确定状态应用相同的不透明度。
+
+<DemoContainer>
+  <CheckboxDisabledIndeterminateDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled-indeterminate.tsx'
+
+```
+
 ## 尺寸
 
-使用 `size='sm'` 或 `size='lg'` 生成 `.check-sm` 和 `.check-lg`。
+添加 `size='sm'` 或 `size='lg'` 可缩小或放大复选框。
 
 <DemoContainer>
   <CheckboxSizesDemo />
@@ -96,26 +125,140 @@ HTML 没有对应属性，需要通过 `ref` 设置 DOM 的 `indeterminate` 属�
 
 ```
 
+## CSS
+
+### 自定义属性
+
+复选框通过 CSS 自定义属性公开尺寸、颜色和标记配置。可在输入框或其祖先元素上覆盖这些属性。
+
+| 属性                              | 用途                           |
+| --------------------------------- | ------------------------------ |
+| `--bs-check-size`                 | 复选框宽度和高度。             |
+| `--bs-check-margin-block`         | 复选框上下间距。               |
+| `--bs-check-bg`                   | 未选中状态的背景色。           |
+| `--bs-check-border-color`         | 未选中状态的边框颜色。         |
+| `--bs-check-checked-bg`           | 选中和不确定状态的背景色。     |
+| `--bs-check-checked-border-color` | 选中和不确定状态的边框颜色。   |
+| `--bs-check-icon-checked`         | 选中标记的 CSS mask 图像。     |
+| `--bs-check-icon-indeterminate`   | 混合状态标记的 CSS mask 图像。 |
+| `--bs-check-disabled-bg`          | 禁用状态的背景色。             |
+| `--bs-check-disabled-opacity`     | 禁用且已选中控件的不透明度。   |
+
+## 其他示例
+
+### 默认垂直排列
+
+使用标准 `FormField` 布局即可将多个复选框垂直排列。
+
+<DemoContainer>
+  <CheckboxStackedDemo />
+</DemoContainer>
+
+```tsx src='./demos/stacked.tsx'
+
+```
+
+### 水平排列
+
+将复选框和标签排列在同一行。
+
+<DemoContainer>
+  <CheckboxInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/inline.tsx'
+
+```
+
+### 反向排列
+
+反转视觉顺序，将复选框放在标签之后。仍需为输入框关联可见标签。
+
+<DemoContainer>
+  <CheckboxReverseDemo />
+</DemoContainer>
+
+```tsx src='./demos/reverse.tsx'
+
+```
+
+### 无可见标签
+
+没有可见标签时，请使用 `aria-label` 或 `aria-labelledby` 为复选框提供可访问名称。
+
+<DemoContainer>
+  <CheckboxWithoutLabelsDemo />
+</DemoContainer>
+
+```tsx src='./demos/without-labels.tsx'
+
+```
+
+### 切换按钮
+
+将 Bootstrap 的 `.btn-check` 输入与相邻的按钮样式标签组合，可将复选框显示为按钮。
+它对辅助技术仍保留复选框语义。
+
+<DemoContainer>
+  <CheckboxToggleButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggle-buttons.tsx'
+
+```
+
+相同的切换模式也可以使用不带主题色的基础 `.btn` 样式。
+
+<DemoContainer>
+  <CheckboxToggleButtonsBaseDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggle-buttons-base.tsx'
+
+```
+
+### 轮廓样式
+
+复选框切换按钮也可以使用轮廓按钮样式。
+
+<DemoContainer>
+  <CheckboxOutlinedStylesDemo />
+</DemoContainer>
+
+```tsx src='./demos/outlined-styles.tsx'
+
+```
+
 ## API
 
 ### Checkbox
 
-默认渲染为 `input` 元素；如果未传入其他原生输入类型，则默认设置
-`type='checkbox'`。自有属性包括 `size` 和 `validation`；`theme` 继承自 `Box`。
+默认渲染为 `input` 元素，设置 `type='checkbox'` 并添加 `.check` 类。自有属性包括
+`indeterminate`、`size` 和 `validation`。
 
-`Checkbox` 还继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api)
-工具类属性，包括 `component`、`theme`、`className` 和 `classNameBefore`。
-`component` 默认值为 `'input'`；当所选组件为 input 时，默认 `type` 为
-`'checkbox'`。
+`Checkbox` 还继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 属性，
+包括 `component` 和 `theme`。更换 `component` 根元素或 input 的 `type` 可能会失去原生
+复选框行为；`indeterminate` 仅对原生复选框输入生效。
 
-| 属性        | 类型                 | 说明                               |
-| ----------- | -------------------- | ---------------------------------- |
-| `size`      | `'sm' \| 'lg'`       | 调整复选框及其标签的尺寸。         |
-| `theme`     | Bootstrap 主题字面量 | 通过 `.theme-*` 设置选中态颜色。   |
-| `component` | `ElementType`        | 默认渲染 `input type='checkbox'`。 |
-| `...props`  | `BoxProps<C>`        | 原生属性及所有 Box 工具类属性。    |
+| 属性            | 类型                   | 默认值  | 说明                              |
+| --------------- | ---------------------- | ------- | --------------------------------- |
+| `indeterminate` | `boolean`              | `false` | 设置原生复选框的混合状态。        |
+| `size`          | `'sm' \| 'lg'`         | —       | 添加 `.check-sm` 或 `.check-lg`。 |
+| `validation`    | `'valid' \| 'invalid'` | —       | 添加对应的表单校验状态类。        |
+
+当根元素为 `input` 时，`type` 默认为 `'checkbox'`。原生输入属性包括 `checked`、
+`defaultChecked`、`disabled`、`name`、`required` 和 `type`。
 
 ## 无障碍
 
-为每个复选框提供可访问名称：用 `<label for>` 并通过 `htmlFor` 关联。多个复选框属于
-同一问题时，可放在嵌套的 `FormField` 中并共用外层标签。
+为每个复选框提供可访问名称。对于可见文本，使用 `htmlFor` 和唯一的输入框 `id` 关联
+`<label>`；对于无可见标签的复选框，提供 `aria-label` 或 `aria-labelledby`。
+原生混合状态是独立于选中状态的 DOM 属性；辅助技术可能会将其播报为“部分选中”。
+切换按钮仍保留复选框语义。
+
+## 参考
+
+- [Bootstrap 6 复选框文档](https://getbootstrap.com/docs/6.0/forms/checkbox/)
+- [Radio 组件](../radio/README.zh.mdx)
+- [Switch 组件](../switch/README.zh.mdx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/checkbox.tsx)

@@ -21,6 +21,7 @@
 - Add the Carousel `itemsPeek` prop for revealing neighboring slides.
 - Add the Carousel `items` prop for setting the number of visible slides.
 - Add the `CarouselPlayPause` component for autoplay pause and resume controls.
+- Add the Checkbox `indeterminate` prop for setting its mixed state.
 
 ## [0.3.0] - 2026-11-04
 

@@ -27,6 +27,15 @@ test('forwards refs to the underlying control', async () => {
   expect(ref.current?.indeterminate).toBe(true);
 });
 
+test('sets the native indeterminate property', async () => {
+  const screen = await render(<Checkbox aria-label='Select all' indeterminate />);
+
+  expect(screen.getByRole('checkbox', { name: 'Select all' }).element()).toHaveProperty(
+    'indeterminate',
+    true,
+  );
+});
+
 test('applies a validation state', async () => {
   const screen = await render(<Checkbox aria-label='Agree' validation='invalid' />);
 
