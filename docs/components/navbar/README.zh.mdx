@@ -34,6 +34,12 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### Navbar
+
+默认渲染为 `nav`。自有属性为 `expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`；
+继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性        | 类型                                               | 说明                            |
 | ----------- | -------------------------------------------------- | ------------------------------- |
 | `expand`    | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 设置响应式展开断点。            |
@@ -42,3 +48,24 @@ import { DemoContainer } from '../demo-container';
 
 `NavbarBrand`、`NavbarToggler`、`NavbarNav` 和 `NavbarText` 覆盖常见导航栏区域。
 请通过插件属性将切换按钮关联到受控元素。
+
+### NavbarBrand
+
+默认渲染为 `a`，没有自有属性。继承原生链接属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
+### NavbarToggler
+
+默认渲染为 `button`，没有自有属性。默认 `type="button"`、无障碍标签为
+`Toggle navigation`；未提供子元素时会渲染切换图标。继承原生按钮属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### NavbarNav
+
+默认渲染为 `ul`，没有自有属性。继承原生列表属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
+### NavbarText
+
+默认渲染为 `span`，没有自有属性。继承原生 `span` 属性及通过 `BoxProps<C>` 继承的
+全部 [`Box`](../box/README.zh.mdx#api) 属性。

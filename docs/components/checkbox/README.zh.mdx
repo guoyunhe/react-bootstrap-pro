@@ -98,6 +98,16 @@ HTML 没有对应属性，需要通过 `ref` 设置 DOM 的 `indeterminate` 属�
 
 ## API
 
+### Checkbox
+
+默认渲染为 `input` 元素；如果未传入其他原生输入类型，则默认设置
+`type='checkbox'`。自有属性包括 `size` 和 `validation`；`theme` 继承自 `Box`。
+
+`Checkbox` 还继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api)
+工具类属性，包括 `component`、`theme`、`className` 和 `classNameBefore`。
+`component` 默认值为 `'input'`；当所选组件为 input 时，默认 `type` 为
+`'checkbox'`。
+
 | 属性        | 类型                 | 说明                               |
 | ----------- | -------------------- | ---------------------------------- |
 | `size`      | `'sm' \| 'lg'`       | 调整复选框及其标签的尺寸。         |

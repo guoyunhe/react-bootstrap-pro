@@ -101,6 +101,17 @@ Use `size='sm'` or `size='lg'` for `.check-sm` and `.check-lg`.
 
 ## API
 
+### Checkbox
+
+Renders an `input` element by default and sets `type='checkbox'` unless another
+native input type is supplied. Its own props are `size` and `validation`;
+`theme` is inherited from `Box`.
+
+`Checkbox` also inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props, including `component`, `theme`,
+`className`, and `classNameBefore`. `component` defaults to `'input'`; when the
+selected component is an input, the default `type` is `'checkbox'`.
+
 | Prop        | Type                    | Description                                    |
 | ----------- | ----------------------- | ---------------------------------------------- |
 | `size`      | `'sm' \| 'lg'`          | Scales the checkbox and its label.             |

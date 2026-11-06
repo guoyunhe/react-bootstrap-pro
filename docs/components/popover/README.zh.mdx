@@ -29,3 +29,20 @@ JavaScript bundle。
 | `...props`  | `BoxProps<C>`                           | 原生属性及所有 Box 工具类属性。 |
 
 `PopoverHeader` 和 `PopoverBody` 分别设置标题和内容区域样式。
+
+### Popover
+
+默认渲染为 `div`。自有属性为 `instant?: boolean`、
+`placement?: 'top' | 'end' | 'bottom' | 'start'`（默认值：`'top'`）和
+`show?: boolean`（默认值：`false`）；继承所选元素的原生属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### PopoverHeader
+
+默认渲染为 `h3`，没有自有属性。继承原生标题属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
+### PopoverBody
+
+默认渲染为 `div`，没有自有属性。继承原生 `div` 属性及通过 `BoxProps<C>` 继承的
+全部 [`Box`](../box/README.zh.mdx#api) 属性。

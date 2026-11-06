@@ -15,13 +15,20 @@ Bootstrap JavaScript 插件及对应的 `data-bs-*` 属性。
   <Collapse show>可折叠内容</Collapse>
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/basic.tsx'
 <Collapse horizontal show={expanded}>
   内容
 </Collapse>
 ```
 
 ## API
+
+### Collapse
+
+默认渲染为 `div`。自有属性为 `horizontal`（应用水平折叠修饰类）和
+`show`（应用显示状态类）。组件继承所选元素的原生属性及全部
+[`Box`](../box/README.zh.mdx#api) 属性，包括 `component`、`className` 和
+`classNameBefore`。
 
 | 属性         | 类型          | 说明                            |
 | ------------ | ------------- | ------------------------------- |

@@ -29,6 +29,13 @@ Set `placement` to `top`, `end`, `bottom`, or `start`.
 
 ## API
 
+### Popover
+
+Renders a `div` by default. Its own props are `instant?: boolean`,
+`placement?: 'top' | 'end' | 'bottom' | 'start'` (default: `'top'`), and
+`show?: boolean` (default: `false`); it inherits native props for the selected
+element and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
 | Prop        | Type                                    | Description                             |
 | ----------- | --------------------------------------- | --------------------------------------- |
 | `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | Selects the placement style.            |
@@ -38,6 +45,16 @@ Set `placement` to `top`, `end`, `bottom`, or `start`.
 | `...props`  | `BoxProps<C>`                           | Native props and all Box utility props. |
 
 `PopoverHeader` and `PopoverBody` style the title and content regions.
+
+### PopoverHeader
+
+Renders an `h3` by default and has no own props. It inherits native heading
+props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### PopoverBody
+
+Renders a `div` by default and has no own props. It inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

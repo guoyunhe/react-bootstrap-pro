@@ -21,7 +21,7 @@ import { DemoContainer } from '../demo-container';
   </Stepper>
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/basic.tsx'
 <Stepper horizontal='md'>
   <StepperItem active>第一步</StepperItem>
   <StepperItem>第二步</StepperItem>
@@ -29,6 +29,13 @@ import { DemoContainer } from '../demo-container';
 ```
 
 ## API
+
+### Stepper
+
+默认渲染为 `ol`。自有属性为
+`horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'` 和 `overflow?: boolean`；
+继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
 
 | 属性         | 类型                                               | 说明                            |
 | ------------ | -------------------------------------------------- | ------------------------------- |
@@ -38,3 +45,9 @@ import { DemoContainer } from '../demo-container';
 | `...props`   | `BoxProps<C>`                                      | 原生属性及所有 Box 工具类属性。 |
 
 `StepperItem` 渲染带序号的步骤，并支持 `active` 属性。
+
+### StepperItem
+
+默认渲染为 `li`。自有属性为 `active?: boolean`；激活时默认设置
+`aria-current="step"`。继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。

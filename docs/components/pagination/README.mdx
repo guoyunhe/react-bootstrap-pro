@@ -32,6 +32,12 @@ Use descriptive labels when replacing text with symbols or icons.
 
 ## API
 
+### Pagination
+
+Renders a `ul` by default. Its own prop is `size?: 'sm' | 'lg'`; it inherits
+native props for the selected element and all [`Box`](../box/README.mdx#api)
+props through `BoxProps<C>`.
+
 | Prop        | Type           | Description                             |
 | ----------- | -------------- | --------------------------------------- |
 | `size`      | `'sm' \| 'lg'` | Selects pagination sizing.              |
@@ -40,6 +46,19 @@ Use descriptive labels when replacing text with symbols or icons.
 
 `PaginationItem` supports `active` and `disabled`; use `PageLink` for the
 interactive link and its optional `active` state.
+
+### PaginationItem
+
+Renders an `li` by default. Its own props are `active?: boolean` and
+`disabled?: boolean`; it updates `aria-current`/`aria-disabled` accordingly.
+It inherits native props and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
+
+### PageLink
+
+Renders an `a` by default. Its own prop is `active?: boolean`, which defaults
+`aria-current` to `page`; it inherits native anchor props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

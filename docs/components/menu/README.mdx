@@ -32,6 +32,13 @@ Use `scrollable` when a menu may exceed the available height.
 
 ## API
 
+### Menu
+
+Renders a `div` by default. Its own props are `scrollable?: boolean`,
+`translucent?: boolean`, and `show?: boolean`; it inherits native props for the
+selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
+
 | Prop          | Type          | Description                                        |
 | ------------- | ------------- | -------------------------------------------------- |
 | `show`        | `boolean`     | Adds `.show` to display the menu.                  |
@@ -41,6 +48,29 @@ Use `scrollable` when a menu may exceed the available height.
 | `...props`    | `BoxProps<C>` | Native props and all Box utility props.            |
 
 `MenuItem`, `MenuHeader`, `MenuDivider`, and `MenuText` provide menu structure.
+
+### MenuItem
+
+Renders an `a` by default. Its own props are `active?: boolean` and
+`disabled?: boolean`; when disabled, it sets `aria-disabled` and removes the
+item from sequential keyboard focus. It inherits native props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### MenuDivider
+
+Renders an `hr` by default and has no own props. It defaults to
+`role="separator"` and inherits native props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### MenuHeader
+
+Renders an `h6` by default and has no own props. It inherits native heading
+props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### MenuText
+
+Renders a `span` by default and has no own props. It inherits native `span`
+props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

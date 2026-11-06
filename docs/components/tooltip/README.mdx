@@ -163,6 +163,16 @@ Bootstrap tooltip variables can be overridden on a custom class:
 
 ## API
 
+### Tooltip
+
+Renders a `div` by default. Its own props are
+`delay?: number | { close?: number; open?: number }`, `instant?: boolean`,
+`onShowChange?: (show: boolean) => void`,
+`placement?: Responsive<TooltipPlacement>`, `show?: boolean`,
+`trigger?: ReactElement`, and `triggers?: TooltipTrigger[]`; it inherits native
+props for the selected element and all [`Box`](../box/README.mdx#api) props
+through `BoxProps<C>`.
+
 | Prop           | Type                                                                | Description                                                                   |
 | -------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | `trigger`      | `ReactElement`                                                      | Trigger element; enables interactive mode.                                    |
@@ -177,6 +187,11 @@ Bootstrap tooltip variables can be overridden on a custom class:
 
 `TooltipInner` applies Bootstrap's inner text styling. Use `className`, Box
 utility props, or Bootstrap tooltip CSS variables to customize its appearance.
+
+### TooltipInner
+
+Renders a `div` by default and has no own props. It inherits native props and
+all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

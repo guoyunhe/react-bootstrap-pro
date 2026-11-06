@@ -159,6 +159,15 @@ Escape 后，提示会关闭。
 
 ## API
 
+### Tooltip
+
+默认渲染为 `div`。自有属性为
+`delay?: number | { close?: number; open?: number }`、`instant?: boolean`、
+`onShowChange?: (show: boolean) => void`、`placement?: Responsive<TooltipPlacement>`、
+`show?: boolean`、`trigger?: ReactElement` 和 `triggers?: TooltipTrigger[]`；继承所选
+元素的原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性           | 类型                                                                | 说明                                             |
 | -------------- | ------------------------------------------------------------------- | ------------------------------------------------ |
 | `trigger`      | `ReactElement`                                                      | 触发元素；传入后启用交互模式。                   |
@@ -173,6 +182,11 @@ Escape 后，提示会关闭。
 
 `TooltipInner` 设置内部文本样式。可使用 `className`、Box 工具类属性或 Bootstrap Tooltip
 CSS 变量自定义外观。
+
+### TooltipInner
+
+默认渲染为 `div`，没有自有属性。继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
 
 ## 无障碍访问
 

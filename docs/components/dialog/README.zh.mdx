@@ -23,6 +23,13 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### Dialog
+
+默认渲染为 `dialog`。自有属性为 `size?: 'sm' | 'lg' | 'xl'`、
+`fullscreen?: boolean`、`scrollable?: boolean`、`nonmodal?: boolean`、
+`instant?: boolean` 和 `slide?: 'down' | 'up'`；继承所选元素的原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性         | 类型                   | 说明                                    |
 | ------------ | ---------------------- | --------------------------------------- |
 | `size`       | `'sm' \| 'lg' \| 'xl'` | 设置对话框宽度。                        |
@@ -34,3 +41,23 @@ import { DemoContainer } from '../demo-container';
 | `...props`   | `BoxProps<C>`          | 原生 dialog 属性及所有 Box 工具类属性。 |
 
 `DialogHeader`、`DialogTitle`、`DialogBody` 和 `DialogFooter` 提供对应的结构类名。
+
+### DialogHeader
+
+默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### DialogTitle
+
+默认渲染为 `h1`。没有自有属性；继承原生标题属性及通过 `BoxProps<C>` 继承的
+全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### DialogBody
+
+默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### DialogFooter
+
+默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。

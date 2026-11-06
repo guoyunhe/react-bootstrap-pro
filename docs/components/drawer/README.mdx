@@ -28,6 +28,14 @@ Set `placement` to `start`, `end`, `top`, or `bottom`. The default is `end`.
 
 ## API
 
+### Drawer
+
+Renders a `dialog` by default. Its own props are
+`placement?: 'start' | 'end' | 'top' | 'bottom'` (default: `'end'`),
+`fullscreen?: boolean`, `sheet?: boolean`, `translucent?: boolean`, and
+`instant?: boolean`; it inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
 | Prop          | Type                                    | Description                                    |
 | ------------- | --------------------------------------- | ---------------------------------------------- |
 | `placement`   | `'start' \| 'end' \| 'top' \| 'bottom'` | Selects the drawer edge.                       |
@@ -40,6 +48,26 @@ Set `placement` to `start`, `end`, `top`, or `bottom`. The default is `end`.
 `DrawerHeader`, `DrawerTitle`, `DrawerBody`, and `DrawerFooter` provide the
 corresponding structural classes. The Bootstrap JavaScript bundle is required
 for plugin-controlled modal behavior.
+
+### DrawerHeader
+
+Renders a `div` by default. It has no own props and inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### DrawerTitle
+
+Renders an `h5` by default. It has no own props and inherits native heading
+props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### DrawerBody
+
+Renders a `div` by default. It has no own props and inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### DrawerFooter
+
+Renders a `div` by default. It has no own props and inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

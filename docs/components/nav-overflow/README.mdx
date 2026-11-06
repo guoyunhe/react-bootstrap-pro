@@ -25,6 +25,12 @@ JavaScript bundle measures the wrapper and moves items that do not fit into a
 
 ## API
 
+### NavOverflow
+
+Renders a `div` by default and has no own props. It inherits native props for
+the selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
+
 | Prop        | Type          | Description                             |
 | ----------- | ------------- | --------------------------------------- |
 | `component` | `ElementType` | Changes the wrapper element.            |
@@ -33,6 +39,17 @@ JavaScript bundle measures the wrapper and moves items that do not fit into a
 
 The component adds `data-bs-toggle="nav-overflow"` automatically. Use
 `NavOverflowItem` and `NavOverflowIcon` for custom overflow-menu markup.
+
+### NavOverflowItem
+
+Renders an `li` by default and has no own props. It inherits native props and
+all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### NavOverflowIcon
+
+Renders a `span` by default and has no own props. It defaults to
+`aria-hidden={true}` and inherits native props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

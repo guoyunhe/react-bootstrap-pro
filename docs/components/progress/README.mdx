@@ -26,6 +26,13 @@ import { ProgressBasicDemo } from './demos/basic';
 
 ## API
 
+### Progress
+
+Renders a `div` by default. Its own props are required `label: string`,
+`max?: number` (default: `100`), `min?: number` (default: `0`), and
+`value?: number`; it inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
 | Component prop                     | Type          | Description                               |
 | ---------------------------------- | ------------- | ----------------------------------------- |
 | `Progress.label`                   | `string`      | Accessible name for the progressbar.      |
@@ -34,6 +41,13 @@ import { ProgressBasicDemo } from './demos/basic';
 | `ProgressBar.value` / `max`        | `number`      | Sets the bar width as a percentage.       |
 | `ProgressBar.striped` / `animated` | `boolean`     | Enables stripes or animation.             |
 | `...props`                         | `BoxProps<C>` | Native props and all Box utility props.   |
+
+### ProgressBar
+
+Renders a `div` by default. Its own props are `animated?: boolean`,
+`max?: number` (default: `100`), `striped?: boolean`, and `value?: number`; it
+inherits native props and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
 
 ## Accessibility
 

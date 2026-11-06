@@ -26,6 +26,11 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### NavOverflow
+
+默认渲染为 `div`，没有自有属性。继承所选元素的原生属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性        | 类型          | 说明                            |
 | ----------- | ------------- | ------------------------------- |
 | `component` | `ElementType` | 更换容器元素。                  |
@@ -34,3 +39,13 @@ import { DemoContainer } from '../demo-container';
 
 组件会自动添加 `data-bs-toggle="nav-overflow"`。可使用 `NavOverflowItem` 和
 `NavOverflowIcon` 自定义溢出菜单标记。
+
+### NavOverflowItem
+
+默认渲染为 `li`，没有自有属性。继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
+### NavOverflowIcon
+
+默认渲染为 `span`，没有自有属性；默认设置 `aria-hidden={true}`。继承原生属性及
+通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。

@@ -31,6 +31,11 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### Pagination
+
+默认渲染为 `ul`。自有属性为 `size?: 'sm' | 'lg'`；继承所选元素的原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性        | 类型           | 说明                            |
 | ----------- | -------------- | ------------------------------- |
 | `size`      | `'sm' \| 'lg'` | 设置分页尺寸。                  |
@@ -39,3 +44,15 @@ import { DemoContainer } from '../demo-container';
 
 `PaginationItem` 支持 `active` 和 `disabled`；使用 `PageLink` 渲染交互链接，并可设置
 `active` 状态。
+
+### PaginationItem
+
+默认渲染为 `li`。自有属性为 `active?: boolean` 和 `disabled?: boolean`；会相应设置
+`aria-current` 和 `aria-disabled`。继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
+### PageLink
+
+默认渲染为 `a`。自有属性为 `active?: boolean`；激活时默认设置
+`aria-current="page"`。继承原生链接属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。

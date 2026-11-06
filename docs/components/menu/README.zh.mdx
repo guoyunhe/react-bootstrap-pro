@@ -21,6 +21,12 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### Menu
+
+默认渲染为 `div`。自有属性为 `scrollable?: boolean`、`translucent?: boolean` 和
+`show?: boolean`；继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性          | 类型          | 说明                            |
 | ------------- | ------------- | ------------------------------- |
 | `show`        | `boolean`     | 添加 `.show` 以显示菜单。       |
@@ -30,3 +36,24 @@ import { DemoContainer } from '../demo-container';
 | `...props`    | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
 
 `MenuItem`、`MenuHeader`、`MenuDivider` 和 `MenuText` 提供菜单结构。
+
+### MenuItem
+
+默认渲染为 `a`。自有属性为 `active?: boolean` 和 `disabled?: boolean`；禁用时设置
+`aria-disabled` 并从顺序键盘焦点中移除。继承原生属性及通过 `BoxProps<C>` 继承的
+全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### MenuDivider
+
+默认渲染为 `hr`，没有自有属性；默认设置 `role="separator"`。继承原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### MenuHeader
+
+默认渲染为 `h6`，没有自有属性。继承原生标题属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
+### MenuText
+
+默认渲染为 `span`，没有自有属性。继承原生 `span` 属性及通过 `BoxProps<C>` 继承的
+全部 [`Box`](../box/README.zh.mdx#api) 属性。

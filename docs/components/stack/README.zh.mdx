@@ -43,12 +43,24 @@ Bootstrap 的响应式堆叠变体使用容器查询。使用 `StackContainer` �
 
 ## API
 
+### Stack
+
+默认渲染为 `div`。自有属性为
+`direction?: Responsive<'horizontal' | 'vertical'>`（默认值：`'vertical'`）；继承所选
+元素的原生属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api)
+属性。
+
 | 属性        | 类型                         | 默认值       | 说明                                 |
 | ----------- | ---------------------------- | ------------ | ------------------------------------ |
 | `direction` | `Responsive<StackDirection>` | `'vertical'` | 基础尺寸或各响应式断点下的堆叠方向。 |
 | `component` | `ElementType`                | `'div'`      | 更改渲染的元素。                     |
 | `className` | `string`                     | —            | 额外类名。                           |
 | `...props`  | `BoxProps<C>`                | —            | 原生属性及全部 Box 工具类属性。      |
+
+### StackContainer
+
+默认渲染为 `div`，没有自有属性。继承所选元素的原生属性及通过 `BoxProps<C>` 继承的
+全部 [`Box`](../box/README.zh.mdx#api) 属性。
 
 ## 参考
 

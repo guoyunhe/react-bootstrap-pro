@@ -158,6 +158,16 @@ JavaScript 插件。
 
 ## API
 
+### OtpInput
+
+默认渲染为 `div`。自有属性用于配置验证码长度和允许字符（`length`、`type`）、
+显示方式（`mask`、`groups`、`separator`、`connected`、`size`、`validation`）、
+值与回调（`value`、`defaultValue`、`onChange`、`onComplete`），以及原生输入状态
+和标签（`id`、`name`、`autoComplete`、`disabled`、`readOnly`、`required`、
+`autoFocus`、`aria-label`、`aria-labelledby`、`aria-describedby`）。组件继承
+原生 `div` 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，但不包括
+`children`、`component` 和 `onChange`。
+
 | 属性                                            | 类型                                     | 说明                                            |
 | ----------------------------------------------- | ---------------------------------------- | ----------------------------------------------- |
 | `length`                                        | `number`                                 | 格子数量与最大长度，默认 `6`。                  |

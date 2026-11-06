@@ -28,7 +28,7 @@ import { BoxThemeDemo } from './demos/box-theme';
   <BoxComponentDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/box-component.tsx'
 <Box component='a' href='/settings' bg='primary' bgv='subtle' fg='primary' fgv='emphasis'>
   设置
 </Box>
@@ -51,7 +51,7 @@ import { BoxThemeDemo } from './demos/box-theme';
   <BoxForegroundDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/box-foreground.tsx'
 <Box fg='primary'>主要文字</Box>
 <Box fg='2'>次要文字</Box>
 <Box fg='secondary' fgo={50}>半透明文字</Box>
@@ -80,7 +80,7 @@ import { BoxThemeDemo } from './demos/box-theme';
   <BoxBackgroundDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/box-background.tsx'
 <Box bg='primary'>实色背景</Box>
 <Box bg='danger' bgv='subtle' fg='danger' fgv='emphasis'>淡背景</Box>
 <Box bg='info' bgv='muted' fg='info' fgv='emphasis'>中等背景</Box>
@@ -105,7 +105,7 @@ import { BoxThemeDemo } from './demos/box-theme';
   <BoxColorSchemeDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/box-color-scheme.tsx'
 <Box colorScheme='dark' bg='body' fg='body'>
   深色子树
 </Box>
@@ -133,7 +133,7 @@ import { BoxThemeDemo } from './demos/box-theme';
   <BoxThemeDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/box-theme.tsx'
 <Box theme='primary' themeStyle='contrast'>强调内容</Box>
 <Box theme='primary' themeStyle='subtle' themeBorder>带边框的淡色内容</Box>
 <Box theme='primary'>
@@ -154,7 +154,7 @@ import { BoxThemeDemo } from './demos/box-theme';
   <BoxLayoutDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/box-layout.tsx'
 <Box ratio='16x9'>16:9 内容</Box>
 <Box containerQuery='inline'>查询容器</Box>
 <Box d={{ xs: 'none', md: 'block' }}>小于 md 时隐藏</Box>
@@ -231,6 +231,19 @@ Bootstrap `.z-*` 工具类。可用层级名称和取值请参阅
 ```
 
 ## API
+
+### Box
+
+`Box` 默认渲染为 `div`。将 `component` 设置为其他原生元素或 React 组件即可
+切换渲染目标；原生属性会根据所选组件自动推断。
+
+自有属性包括 `component`、`className`、`classNameBefore`，以及下方表格列出的
+全部 Box 工具类属性。这些工具类属性属于 Box 自身属性，不是继承的原生元素
+属性。
+
+Box 还会通过 `ComponentPropsWithRef<C>` 继承所选元素的原生属性。因此默认
+`div` 会继承 `div` 的原生属性和 `children`；更换 `component` 后则继承对应
+元素或组件的属性。
 
 Bootstrap 工具类属性均链接到对应的 Bootstrap 6 文档。未添加链接的属性为组件/原生属性，或 Box 自定义且无直接 Bootstrap 对应项的辅助属性。
 

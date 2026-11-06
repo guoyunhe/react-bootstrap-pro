@@ -33,6 +33,13 @@ Set `attribute='aria-expanded'` to toggle an attribute on the target.
 
 ## API
 
+### Toggler
+
+Renders a `button` by default and defaults its native `type` to `button`.
+Its own props are `attribute`, `target`, and `value`, which configure the
+Bootstrap toggler data attributes. It inherits native props for the selected
+element and [`Box`](../box/README.mdx#api) utility props.
+
 | Prop        | Type          | Description                                        |
 | ----------- | ------------- | -------------------------------------------------- |
 | `target`    | `string`      | Optional selector for the element to update.       |

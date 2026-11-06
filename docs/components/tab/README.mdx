@@ -30,6 +30,12 @@ itself with the corresponding trigger ID.
 
 ## API
 
+### TabList
+
+Renders a `ul` by default and has no own props. It inherits native props for
+the selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
+
 | Component prop   | Type          | Description                                   |
 | ---------------- | ------------- | --------------------------------------------- |
 | `TabItem`        | —             | Wraps each tab in a presentation list item.   |
@@ -38,6 +44,30 @@ itself with the corresponding trigger ID.
 | `TabPane.active` | `boolean`     | Shows the panel and removes its hidden state. |
 | `component`      | `ElementType` | Changes the rendered element.                 |
 | `...props`       | `BoxProps<C>` | Native props and all Box utility props.       |
+
+### TabItem
+
+Renders an `li` by default and has no own props. It defaults to
+`role="presentation"` and inherits native props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### Tab
+
+Renders a `button` by default. Its own props are `active?: boolean` and
+`targetId?: string`; it defaults to `type="button"` and `role="tab"` and maps
+`targetId` to the controlled pane. It inherits native button props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### TabContent
+
+Renders a `div` by default and has no own props. It inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### TabPane
+
+Renders a `div` by default. Its own prop is `active?: boolean`; it defaults to
+`role="tabpanel"` and hides the pane when inactive. It inherits native props and
+all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

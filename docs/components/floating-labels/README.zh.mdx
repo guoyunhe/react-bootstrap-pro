@@ -134,6 +134,11 @@ date、time、datetime-local、month、week 类型的输入框始终显示浮动
 
 ## API
 
+### FormFloating
+
+默认渲染为 `div`。自有属性为 `always?: boolean`；继承所选元素的原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性        | 类型          | 说明                               |
 | ----------- | ------------- | ---------------------------------- |
 | `always`    | `boolean`     | 标签始终浮动，并始终显示占位文本。 |
@@ -142,6 +147,18 @@ date、time、datetime-local、month、week 类型的输入框始终显示浮动
 
 校验样式可通过 `className` 传入：为容器和控件添加 `is-invalid`，再在字段下方渲染
 反馈信息。
+
+### FormControl
+
+默认渲染为 `input`。自有属性为 `size?: 'sm' | 'lg'`、`plaintext?: boolean`、
+`ghost?: boolean`、`adorn?: boolean`、`adornEnd?: boolean` 和
+`validation?: ValidationState`；继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
+### FormLabel
+
+默认渲染为 `label`。自有属性为 `col?: boolean | 'sm' | 'lg'`；继承原生 `label`
+属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
 
 ## 无障碍
 

@@ -15,11 +15,18 @@ import { DemoContainer } from '../demo-container';
   <CloseButton />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/basic.tsx'
 <CloseButton label='关闭通知' onClick={dismiss} />
 ```
 
 ## API
+
+### CloseButton
+
+默认渲染为 `button`，原生 `type` 默认值为 `button`。自有属性为 `label`；
+未提供 `aria-label` 时，它用于提供可访问名称。组件继承所选元素的原生属性及
+全部 [`Box`](../box/README.zh.mdx#api) 属性，包括 `component`、`className`
+和 `classNameBefore`。
 
 | 属性        | 类型          | 说明                            |
 | ----------- | ------------- | ------------------------------- |

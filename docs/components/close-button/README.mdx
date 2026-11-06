@@ -32,6 +32,14 @@ Place the button inside a dark color-scheme region to use the inverted icon.
 
 ## API
 
+### CloseButton
+
+Renders a `button` by default and defaults its native `type` to `button`.
+Its own prop is `label`, which supplies the accessible label when
+`aria-label` is not provided. It inherits native props for the selected element
+and all [`Box`](../box/README.mdx#api) props, including `component`,
+`className`, and `classNameBefore`.
+
 | Prop        | Type          | Description                                |
 | ----------- | ------------- | ------------------------------------------ |
 | `label`     | `string`      | Accessible name, defaulting to `'Close'`.  |

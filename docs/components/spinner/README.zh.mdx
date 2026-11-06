@@ -15,11 +15,17 @@ import { DemoContainer } from '../demo-container';
   <Spinner variant='grow' size='sm' label='正在保存' />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/basic.tsx'
 <Spinner variant='border' size='sm' label='正在加载' />
 ```
 
 ## API
+
+### Spinner
+
+默认渲染为 `span`，默认使用 `border` 变体、`Loading` 标签和 `status` 角色。
+自有属性为 `variant`、`size` 和 `label`；`aria-label` 可覆盖无障碍名称。
+组件继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
 
 | 属性        | 类型                             | 说明                             |
 | ----------- | -------------------------------- | -------------------------------- |

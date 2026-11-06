@@ -28,6 +28,13 @@ Set `translucent` to apply the translucent surface treatment.
 
 ## API
 
+### Toast
+
+Renders a `div` by default. Its own props are `instant?: boolean`,
+`show?: boolean`, and `translucent?: boolean`; it inherits native props for the
+selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
+
 | Prop          | Type          | Description                              |
 | ------------- | ------------- | ---------------------------------------- |
 | `show`        | `boolean`     | Adds `.show` to display the toast.       |
@@ -38,6 +45,22 @@ Set `translucent` to apply the translucent surface treatment.
 
 `ToastHeader`, `ToastBody`, and `ToastContainer` provide the corresponding
 layout classes. Dismissal and autohide require JavaScript.
+
+### ToastContainer
+
+Renders a `div` by default and has no own props. It defaults to
+`role="region"` and `aria-live="polite"`, and inherits native props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### ToastHeader
+
+Renders a `div` by default and has no own props. It inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### ToastBody
+
+Renders a `div` by default and has no own props. It inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

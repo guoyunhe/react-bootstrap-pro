@@ -22,6 +22,13 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### ListGroup
+
+默认渲染为 `ul`。自有属性为 `flush?: boolean`、
+`horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'` 和
+`numbered?: boolean`；继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性         | 类型                                               | 说明                            |
 | ------------ | -------------------------------------------------- | ------------------------------- |
 | `flush`      | `boolean`                                          | 移除外侧边框和圆角。            |
@@ -31,3 +38,8 @@ import { DemoContainer } from '../demo-container';
 | `...props`   | `BoxProps<C>`                                      | 原生属性及所有 Box 工具类属性。 |
 
 `ListGroupItem` 支持 `action` 和 `active` 修饰属性。
+
+### ListGroupItem
+
+默认渲染为 `li`。自有属性为 `action?: boolean` 和 `active?: boolean`；继承所选元素
+的原生属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。

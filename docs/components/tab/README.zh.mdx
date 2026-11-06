@@ -36,6 +36,11 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### TabList
+
+默认渲染为 `ul`，没有自有属性。继承所选元素的原生属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
 | 组件属性         | 类型          | 说明                                     |
 | ---------------- | ------------- | ---------------------------------------- |
 | `TabItem`        | —             | 将每个标签包装在 presentation 列表项中。 |
@@ -44,3 +49,25 @@ import { DemoContainer } from '../demo-container';
 | `TabPane.active` | `boolean`     | 显示面板并移除隐藏状态。                 |
 | `component`      | `ElementType` | 更换渲染元素。                           |
 | `...props`       | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。          |
+
+### TabItem
+
+默认渲染为 `li`，没有自有属性；默认设置 `role="presentation"`。继承原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### Tab
+
+默认渲染为 `button`。自有属性为 `active?: boolean` 和 `targetId?: string`；默认设置
+`type="button"`、`role="tab"`，并根据 `targetId` 指向对应面板。继承原生按钮属性及
+通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### TabContent
+
+默认渲染为 `div`，没有自有属性。继承原生 `div` 属性及通过 `BoxProps<C>` 继承的
+全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### TabPane
+
+默认渲染为 `div`。自有属性为 `active?: boolean`；默认设置 `role="tabpanel"`，并在未
+激活时隐藏面板。继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。

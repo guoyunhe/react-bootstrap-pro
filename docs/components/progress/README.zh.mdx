@@ -17,13 +17,19 @@ import { DemoContainer } from '../demo-container';
   </Progress>
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/basic.tsx'
 <Progress label='上传' value={current} max={total}>
   <ProgressBar value={current} max={total} striped animated />
 </Progress>
 ```
 
 ## API
+
+### Progress
+
+默认渲染为 `div`。自有属性为必需的 `label: string`、`max?: number`（默认值：`100`）、
+`min?: number`（默认值：`0`）和 `value?: number`；继承所选元素的原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
 
 | 组件属性                           | 类型          | 说明                             |
 | ---------------------------------- | ------------- | -------------------------------- |
@@ -33,3 +39,9 @@ import { DemoContainer } from '../demo-container';
 | `ProgressBar.value` / `max`        | `number`      | 将进度条宽度设置为百分比。       |
 | `ProgressBar.striped` / `animated` | `boolean`     | 启用条纹或动画。                 |
 | `...props`                         | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。  |
+
+### ProgressBar
+
+默认渲染为 `div`。自有属性为 `animated?: boolean`、`max?: number`（默认值：`100`）、
+`striped?: boolean` 和 `value?: number`；继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。

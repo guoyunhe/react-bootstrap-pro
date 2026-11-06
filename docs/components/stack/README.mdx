@@ -45,12 +45,25 @@ Bootstrap's responsive stack variants use container queries. Wrap the stack in
 
 ## API
 
+### Stack
+
+Renders a `div` by default. Its own prop is
+`direction?: Responsive<'horizontal' | 'vertical'>` (default: `'vertical'`); it
+inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
 | Prop        | Type                         | Default      | Description                                               |
 | ----------- | ---------------------------- | ------------ | --------------------------------------------------------- |
 | `direction` | `Responsive<StackDirection>` | `'vertical'` | Direction at the base size or each responsive breakpoint. |
 | `component` | `ElementType`                | `'div'`      | Changes the rendered element.                             |
 | `className` | `string`                     | —            | Additional classes.                                       |
 | `...props`  | `BoxProps<C>`                | —            | Native props and all Box utility props.                   |
+
+### StackContainer
+
+Renders a `div` by default and has no own props. It inherits native props for
+the selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
 
 ## See
 

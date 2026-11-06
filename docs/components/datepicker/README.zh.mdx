@@ -194,6 +194,16 @@ React 中维护展开状态，并通过 `aria-expanded` 暴露。
 
 ## API
 
+### Datepicker
+
+组件外层元素为 `div`。当 `trigger='input'`（默认值）时，浮层触发器为
+`HTMLInputElement`；当 `trigger='button'` 时为 `HTMLButtonElement`；
+`inline` 会在外层 `div` 中直接渲染日历。
+
+所有组件属性都是自有属性。`Datepicker` 不是泛型组件，不继承 `BoxProps`，
+也不会转发任意原生属性或 Box 属性。下方现有表格记录了其属性，请保留全部
+表格行。
+
 | 属性                 | 类型                                                     | 说明                                            |
 | -------------------- | -------------------------------------------------------- | ----------------------------------------------- |
 | `value`              | `string \| readonly string[]`                            | 受控选择值，格式为 `YYYY-MM-DD`。               |

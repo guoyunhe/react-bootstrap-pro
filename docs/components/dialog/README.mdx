@@ -30,6 +30,14 @@ behavior. The `open` attribute alone only opens the native dialog non-modally.
 
 ## API
 
+### Dialog
+
+Renders a `dialog` by default. Its own props are `size?: 'sm' | 'lg' | 'xl'`,
+`fullscreen?: boolean`, `scrollable?: boolean`, `nonmodal?: boolean`,
+`instant?: boolean`, and `slide?: 'down' | 'up'`; it inherits native props for
+the selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
+
 | Prop         | Type                   | Description                                                 |
 | ------------ | ---------------------- | ----------------------------------------------------------- |
 | `size`       | `'sm' \| 'lg' \| 'xl'` | Sets the dialog width.                                      |
@@ -42,6 +50,26 @@ behavior. The `open` attribute alone only opens the native dialog non-modally.
 
 `DialogHeader`, `DialogTitle`, `DialogBody`, and `DialogFooter` provide the
 corresponding structural classes.
+
+### DialogHeader
+
+Renders a `div` by default. It has no own props and inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### DialogTitle
+
+Renders an `h1` by default. It has no own props and inherits native heading
+props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### DialogBody
+
+Renders a `div` by default. It has no own props and inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### DialogFooter
+
+Renders a `div` by default. It has no own props and inherits native `div` props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

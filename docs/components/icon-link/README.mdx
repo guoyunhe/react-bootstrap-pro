@@ -28,6 +28,13 @@ can be customized with Bootstrap's `--bs-icon-link-*` CSS variables.
 
 ## API
 
+### IconLink
+
+Renders an `a` element by default. Its own prop is `hover`, which adds the
+hover modifier class. It inherits native anchor props and all
+[`Box`](../box/README.mdx#api) utility props; `component` can change the
+rendered element.
+
 | Prop        | Type          | Description                                        |
 | ----------- | ------------- | -------------------------------------------------- |
 | `hover`     | `boolean`     | Adds `.icon-link-hover` to move the icon on hover. |

@@ -30,6 +30,14 @@ the available width.
 
 ## API
 
+### Nav
+
+Renders a `ul` by default. Its own props are `fill?: boolean`,
+`justified?: boolean`, `orientation?: 'horizontal' | 'vertical'`, and
+`variant?: 'tabs' | 'pills' | 'underline'`; it inherits native props for the
+selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
+
 | Prop          | Type                               | Description                               |
 | ------------- | ---------------------------------- | ----------------------------------------- |
 | `variant`     | `'tabs' \| 'pills' \| 'underline'` | Selects the navigation style.             |
@@ -40,6 +48,18 @@ the available width.
 | `...props`    | `BoxProps<C>`                      | Native props and all Box utility props.   |
 
 `NavItem` and `NavLink` render the corresponding item and link classes.
+
+### NavItem
+
+Renders an `li` by default and has no own props. It inherits native props and
+all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### NavLink
+
+Renders an `a` by default. Its own props are `active?: boolean` and
+`disabled?: boolean`; active links default `aria-current` to `page`, and
+disabled links receive `aria-disabled` and `tabIndex={-1}`. It inherits native
+props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

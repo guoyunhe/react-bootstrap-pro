@@ -26,6 +26,13 @@ current steps, and use the responsive `horizontal` option when space allows.
 
 ## API
 
+### Stepper
+
+Renders an `ol` by default. Its own props are
+`horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'` and
+`overflow?: boolean`; it inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
 | Prop         | Type                                               | Description                                           |
 | ------------ | -------------------------------------------------- | ----------------------------------------------------- |
 | `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Switches to horizontal layout.                        |
@@ -34,6 +41,12 @@ current steps, and use the responsive `horizontal` option when space allows.
 | `...props`   | `BoxProps<C>`                                      | Native props and all Box utility props.               |
 
 `StepperItem` renders a numbered step and supports `active`.
+
+### StepperItem
+
+Renders an `li` by default. Its own prop is `active?: boolean`; active items
+default `aria-current` to `step`. It inherits native props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

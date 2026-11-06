@@ -20,6 +20,11 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### Placeholder
+
+默认渲染为 `span`。自有属性为 `size?: 'xs' | 'sm' | 'lg'`；继承所选元素的原生属性
+及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性        | 类型                          | 说明                            |
 | ----------- | ----------------------------- | ------------------------------- |
 | `size`      | `'xs' \| 'sm' \| 'lg'`        | 调整占位符高度。                |
@@ -28,3 +33,8 @@ import { DemoContainer } from '../demo-container';
 | `...props`  | `BoxProps<C>`                 | 原生属性及所有 Box 工具类属性。 |
 
 占位符只负责展示。请在应用中切换实际内容和骨架的可见状态，并按需设置 `aria-hidden`。
+
+### PlaceholderGroup
+
+默认渲染为 `span`。自有属性为 `animation?: 'glow' | 'pulse' | 'wave'`；继承所选元素
+的原生属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。

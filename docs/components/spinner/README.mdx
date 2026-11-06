@@ -26,6 +26,13 @@ import { SpinnerBasicDemo } from './demos/basic';
 
 ## API
 
+### Spinner
+
+Renders a `span` by default and defaults to the `border` variant, `Loading`
+label, and `status` role. Its own props are `variant`, `size`, and `label`;
+`aria-label` can override the accessible label. It inherits native props for
+the selected element and [`Box`](../box/README.mdx#api) utility props.
+
 | Prop        | Type                             | Description                                 |
 | ----------- | -------------------------------- | ------------------------------------------- |
 | `variant`   | `'border' \| 'grow' \| 'rotate'` | Selects the spinner appearance.             |

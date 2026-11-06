@@ -207,6 +207,17 @@ datepicker is mounted.
 
 ## API
 
+### Datepicker
+
+The component's outer element is a `div`. The popup trigger is an
+`HTMLInputElement` when `trigger='input'` (the default), or an
+`HTMLButtonElement` when `trigger='button'`; `inline` renders the calendar inside
+the outer `div`.
+
+All component props are own props. `Datepicker` is not generic, does not extend
+`BoxProps`, and does not spread arbitrary native or Box props. The existing
+table below documents its props; retain all rows.
+
 | Prop                 | Type                                                     | Description                                                    |
 | -------------------- | -------------------------------------------------------- | -------------------------------------------------------------- |
 | `value`              | `string \| readonly string[]`                            | Controlled selection, as `YYYY-MM-DD` strings.                 |

@@ -40,12 +40,29 @@ and apply `fluid` or `thumbnail` to the nested `Image`, not to `<picture>`.
 
 ## API
 
+### Image
+
+Renders an `img` by default. Its own props are `fluid?: boolean` and
+`thumbnail?: boolean`; it inherits native props for the selected element and
+all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
 | Component      | Prop        | Type          | Description                                        |
 | -------------- | ----------- | ------------- | -------------------------------------------------- |
 | `Image`        | `fluid`     | `boolean`     | Applies `.img-fluid` for responsive sizing.        |
 | `Image`        | `thumbnail` | `boolean`     | Applies `.img-thumbnail` for a bordered thumbnail. |
 | All components | `component` | `ElementType` | Changes the rendered element.                      |
 | All components | `...props`  | `BoxProps<C>` | Native props and all Box utility props.            |
+
+### Figure
+
+Renders a `figure` by default and has no own props. It inherits native figure
+props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### FigureCaption
+
+Renders a `figcaption` by default and has no own props. It inherits native
+figcaption props and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
 
 ## Accessibility
 

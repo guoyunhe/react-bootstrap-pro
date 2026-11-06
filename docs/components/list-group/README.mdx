@@ -34,6 +34,13 @@ the layout responsively.
 
 ## API
 
+### ListGroup
+
+Renders a `ul` by default. Its own props are `flush?: boolean`,
+`horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`, and
+`numbered?: boolean`; it inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
 | Prop         | Type                                               | Description                             |
 | ------------ | -------------------------------------------------- | --------------------------------------- |
 | `flush`      | `boolean`                                          | Removes the outer border and rounding.  |
@@ -43,6 +50,12 @@ the layout responsively.
 | `...props`   | `BoxProps<C>`                                      | Native props and all Box utility props. |
 
 `ListGroupItem` accepts `action` and `active` modifiers.
+
+### ListGroupItem
+
+Renders an `li` by default. Its own props are `action?: boolean` and
+`active?: boolean`; it inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

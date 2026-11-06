@@ -43,6 +43,13 @@ target ID and Bootstrap's drawer data attributes.
 
 ## API
 
+### Navbar
+
+Renders a `nav` by default. Its own prop is
+`expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`; it inherits native props
+for the selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
+
 | Prop        | Type                                               | Description                               |
 | ----------- | -------------------------------------------------- | ----------------------------------------- |
 | `expand`    | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Selects the responsive expand breakpoint. |
@@ -53,6 +60,28 @@ target ID and Bootstrap's drawer data attributes.
 navbar sections. Connect the toggler to its controlled element with plugin
 attributes. The example uses a drawer element as the responsive controlled
 region, matching the Bootstrap 6 navbar pattern.
+
+### NavbarBrand
+
+Renders an `a` by default and has no own props. It inherits native anchor props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### NavbarToggler
+
+Renders a `button` by default and has no own props. It defaults to
+`type="button"`, an accessible label of “Toggle navigation”, and a toggler icon
+when no children are provided. It inherits native button props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### NavbarNav
+
+Renders a `ul` by default and has no own props. It inherits native list props
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### NavbarText
+
+Renders a `span` by default and has no own props. It inherits native `span`
+props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 

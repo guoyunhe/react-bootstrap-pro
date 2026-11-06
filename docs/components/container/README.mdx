@@ -48,6 +48,15 @@ Breakpoint widths follow Bootstrap 6's defaults.
 
 ## API
 
+### Container
+
+Renders a `div` by default. Its own prop is `fluid`, typed as
+`boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`; `true` renders
+`.container-fluid`, while a breakpoint value renders the corresponding
+responsive container class. It inherits native props for the selected element
+and all [`Box`](../box/README.mdx#api) props, including `component`,
+`className`, and `classNameBefore`.
+
 | Prop        | Type                                               | Default | Description                                                                                           |
 | ----------- | -------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
 | `component` | `C extends ElementType`                            | `'div'` | Native element or React component to render.                                                          |

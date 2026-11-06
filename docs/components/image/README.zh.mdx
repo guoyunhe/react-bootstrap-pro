@@ -46,6 +46,22 @@ import { DemoContainer } from '../demo-container';
 | 所有组件 | `component` | `ElementType` | 更换渲染元素。                     |
 | 所有组件 | `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。    |
 
+### Image
+
+默认渲染为 `img`。自有属性为 `fluid?: boolean` 和 `thumbnail?: boolean`；继承所选
+元素的原生属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api)
+属性。
+
+### Figure
+
+默认渲染为 `figure`，没有自有属性。继承原生 `figure` 属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### FigureCaption
+
+默认渲染为 `figcaption`，没有自有属性。继承原生 `figcaption` 属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
 ## 无障碍
 
 信息性图片应提供有意义的 `alt` 文本；装饰性图片应使用 `alt=""`。图片说明文字应与替代文本互补，

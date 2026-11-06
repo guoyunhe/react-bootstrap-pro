@@ -25,7 +25,7 @@ import { AccordionVariantsDemo } from './demos/variants';
   <AccordionBasicDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/basic.tsx'
 <Accordion>
   <AccordionItem name='faq' open>
     <AccordionHeader>Accordion 条目 #1</AccordionHeader>
@@ -61,7 +61,7 @@ import { AccordionVariantsDemo } from './demos/variants';
   <AccordionVariantsDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/variants.tsx'
 <Accordion theme='primary'>...</Accordion>
 ```
 
@@ -73,7 +73,7 @@ import { AccordionVariantsDemo } from './demos/variants';
   <AccordionSmallDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/small.tsx'
 <Accordion size='sm'>...</Accordion>
 ```
 
@@ -85,7 +85,7 @@ import { AccordionVariantsDemo } from './demos/variants';
   <AccordionFlushDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/flush.tsx'
 <Accordion flush>...</Accordion>
 ```
 
@@ -97,7 +97,7 @@ import { AccordionVariantsDemo } from './demos/variants';
   <AccordionGapDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/gap.tsx'
 <Accordion gap>
   <AccordionItem name='faq' open>
     <AccordionHeader>问题</AccordionHeader>
@@ -114,7 +114,7 @@ import { AccordionVariantsDemo } from './demos/variants';
   <AccordionAlwaysOpenDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/always-open.tsx'
 <Accordion>
   <AccordionItem open>...</AccordionItem>
   <AccordionItem open>...</AccordionItem>
@@ -130,7 +130,7 @@ import { AccordionVariantsDemo } from './demos/variants';
   <AccordionExpandCollapseDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/expand-collapse.tsx'
 function toggleAll(accordion: HTMLElement, expand: boolean) {
   const items = accordion.querySelectorAll<HTMLDetailsElement>('.accordion-item');
 
@@ -154,7 +154,7 @@ function toggleAll(accordion: HTMLElement, expand: boolean) {
   <AccordionNestedDemo />
 </DemoContainer>
 
-```tsx
+```tsx src='./demos/nested.tsx'
 <Accordion>
   <AccordionItem name='outer'>
     <AccordionHeader>外层条目</AccordionHeader>

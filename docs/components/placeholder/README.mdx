@@ -29,6 +29,12 @@ replace; `size` changes their height.
 
 ## API
 
+### Placeholder
+
+Renders a `span` by default. Its own prop is `size?: 'xs' | 'sm' | 'lg'`; it
+inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
 | Prop        | Type                          | Description                             |
 | ----------- | ----------------------------- | --------------------------------------- |
 | `size`      | `'xs' \| 'sm' \| 'lg'`        | Adjusts the placeholder height.         |
@@ -38,6 +44,13 @@ replace; `size` changes their height.
 
 Placeholders are presentational. Toggle the real content and skeleton visibility
 in your application, and use `aria-hidden` where appropriate.
+
+### PlaceholderGroup
+
+Renders a `span` by default. Its own prop is
+`animation?: 'glow' | 'pulse' | 'wave'`; it inherits native props for the
+selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
 
 ## Accessibility
 

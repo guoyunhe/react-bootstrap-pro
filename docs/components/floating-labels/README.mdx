@@ -138,6 +138,12 @@ When using the grid, place each floating label inside a column.
 
 ## API
 
+### FormFloating
+
+Renders a `div` by default. Its own prop is `always?: boolean`; it inherits
+native props for the selected element and all [`Box`](../box/README.mdx#api)
+props through `BoxProps<C>`.
+
 | Prop        | Type          | Description                                        |
 | ----------- | ------------- | -------------------------------------------------- |
 | `always`    | `boolean`     | Keeps the label floated and shows the placeholder. |
@@ -146,6 +152,19 @@ When using the grid, place each floating label inside a column.
 
 Validation classes can be passed through `className`: add `is-invalid` to the
 wrapper and the control, then render feedback below the field.
+
+### FormControl
+
+Renders an `input` by default. Its own props are `size?: 'sm' | 'lg'`,
+`plaintext?: boolean`, `ghost?: boolean`, `adorn?: boolean`,
+`adornEnd?: boolean`, and `validation?: ValidationState`; it inherits native
+props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+
+### FormLabel
+
+Renders a `label` by default. Its own prop is `col?: boolean | 'sm' | 'lg'`; it
+inherits native label props and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
 
 ## Accessibility
 

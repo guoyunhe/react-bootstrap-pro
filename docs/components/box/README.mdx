@@ -210,6 +210,20 @@ Bootstrap's `--bs-hover-lift-*` CSS variables.
 
 ## API
 
+### Box
+
+`Box` renders a `div` by default. Set `component` to another native element or
+React component; native props are inferred from the selected component.
+
+Own props are `component`, `className`, and `classNameBefore`, together with all
+Box utility props listed in the tables below. These utility props are
+component-specific Box props, not inherited native attributes.
+
+Box also inherits the selected element's native props through
+`ComponentPropsWithRef<C>`. Thus, for the default `div`, this includes native
+`div` attributes and children; when `component` changes, the corresponding
+element or component props apply.
+
 Bootstrap utility props link to their corresponding Bootstrap 6 docs. Unlinked props are component/native attributes or Box-specific helpers without a direct Bootstrap equivalent.
 
 | Prop                      | Type                                                                                                                                                                                     | Default | Description                                                                                                                                                                                    |

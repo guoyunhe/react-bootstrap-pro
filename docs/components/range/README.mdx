@@ -113,6 +113,15 @@ Wrap the range in a `FormField` to pair it with a label and description.
 
 ## API
 
+### Range
+
+Renders a `div` by default. Its own props are `min`, `max`, `step`, `value`,
+`defaultValue`, `disabled`, `id`, `name`, `list`, `required`, `bubble`,
+`format`, `ticks`, `validation`, `onChange`, `onInput`, `aria-label`,
+`aria-describedby`, and `aria-labelledby`. It inherits native props for the
+selected element and [`Box`](../box/README.mdx#api) utility props, except
+`children`.
+
 | Prop           | Type                           | Description                                     |
 | -------------- | ------------------------------ | ----------------------------------------------- |
 | `min`          | `number`                       | Minimum value; defaults to `0`.                 |

@@ -168,6 +168,17 @@ every slot is filled.
 
 ## API
 
+### OtpInput
+
+Renders a `div` by default. Its own props configure code length and accepted
+characters (`length`, `type`), display (`mask`, `groups`, `separator`,
+`connected`, `size`, `validation`), value and callbacks (`value`,
+`defaultValue`, `onChange`, `onComplete`), and input state and labeling (`id`,
+`name`, `autoComplete`, `disabled`, `readOnly`, `required`, `autoFocus`,
+`aria-label`, `aria-labelledby`, `aria-describedby`). It inherits native `div`
+props and [`Box`](../box/README.mdx#api) utility props, except `children`,
+`component`, and `onChange`.
+
 | Prop                                            | Type                                     | Description                                               |
 | ----------------------------------------------- | ---------------------------------------- | --------------------------------------------------------- |
 | `length`                                        | `number`                                 | Number of slots and maximum length. Defaults to `6`.      |

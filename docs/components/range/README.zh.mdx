@@ -107,6 +107,14 @@ JavaScript 插件实现该效果，本组件用 React 复刻了相同行为，�
 
 ## API
 
+### Range
+
+默认渲染为 `div`。自有属性包括 `min`、`max`、`step`、`value`、`defaultValue`、
+`disabled`、`id`、`name`、`list`、`required`、`bubble`、`format`、`ticks`、
+`validation`、`onChange`、`onInput`、`aria-label`、`aria-describedby` 和
+`aria-labelledby`。组件继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，但不包括 `children`。
+
 | 属性           | 类型                           | 说明                           |
 | -------------- | ------------------------------ | ------------------------------ |
 | `min`          | `number`                       | 最小值，默认 `0`。             |

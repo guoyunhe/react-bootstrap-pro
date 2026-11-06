@@ -26,6 +26,13 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### Nav
+
+默认渲染为 `ul`。自有属性为 `fill?: boolean`、`justified?: boolean`、
+`orientation?: 'horizontal' | 'vertical'` 和
+`variant?: 'tabs' | 'pills' | 'underline'`；继承所选元素的原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性          | 类型                               | 说明                            |
 | ------------- | ---------------------------------- | ------------------------------- |
 | `variant`     | `'tabs' \| 'pills' \| 'underline'` | 选择导航样式。                  |
@@ -36,3 +43,14 @@ import { DemoContainer } from '../demo-container';
 | `...props`    | `BoxProps<C>`                      | 原生属性及所有 Box 工具类属性。 |
 
 `NavItem` 和 `NavLink` 分别渲染对应的条目和链接类名。
+
+### NavItem
+
+默认渲染为 `li`，没有自有属性。继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
+### NavLink
+
+默认渲染为 `a`。自有属性为 `active?: boolean` 和 `disabled?: boolean`；激活链接默认
+设置 `aria-current="page"`，禁用链接设置 `aria-disabled` 并设为 `tabIndex={-1}`。
+继承原生属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。

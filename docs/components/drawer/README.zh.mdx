@@ -23,6 +23,14 @@ import { DemoContainer } from '../demo-container';
 
 ## API
 
+### Drawer
+
+默认渲染为 `dialog`。自有属性为
+`placement?: 'start' | 'end' | 'top' | 'bottom'`（默认值：`'end'`）、
+`fullscreen?: boolean`、`sheet?: boolean`、`translucent?: boolean` 和
+`instant?: boolean`；继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
+
 | 属性          | 类型                                    | 说明                                    |
 | ------------- | --------------------------------------- | --------------------------------------- |
 | `placement`   | `'start' \| 'end' \| 'top' \| 'bottom'` | 选择抽屉位置。                          |
@@ -34,3 +42,23 @@ import { DemoContainer } from '../demo-container';
 
 `DrawerHeader`、`DrawerTitle`、`DrawerBody` 和 `DrawerFooter` 提供对应的结构类名。
 插件控制的模态行为需要 Bootstrap JavaScript bundle。
+
+### DrawerHeader
+
+默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### DrawerTitle
+
+默认渲染为 `h5`。没有自有属性；继承原生标题属性及通过 `BoxProps<C>` 继承的
+全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### DrawerBody
+
+默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### DrawerFooter
+
+默认渲染为 `div`。没有自有属性；继承原生 `div` 属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
