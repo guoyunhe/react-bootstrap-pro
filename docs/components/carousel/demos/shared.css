@@ -1,6 +1,31 @@
 .carousel-slide-placeholder {
   aspect-ratio: 2 / 1;
-  background-color: #888;
+  background-color: #777;
   color: #555;
   font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.carousel-item:nth-child(3n + 2) .carousel-slide-placeholder {
+  background-color: #666;
+  color: #444;
+}
+
+.carousel-item:nth-child(3n) .carousel-slide-placeholder {
+  background-color: #555;
+  color: #333;
+}
+
+.carousel[data-bs-theme='dark'] .carousel-item:nth-child(3n + 1) .carousel-slide-placeholder {
+  background-color: #f5f5f5;
+  color: #aaa;
+}
+
+.carousel[data-bs-theme='dark'] .carousel-item:nth-child(3n + 2) .carousel-slide-placeholder {
+  background-color: #eee;
+  color: #bbb;
+}
+
+.carousel[data-bs-theme='dark'] .carousel-item:nth-child(3n) .carousel-slide-placeholder {
+  background-color: #e5e5e5;
+  color: #999;
 }
