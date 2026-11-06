@@ -9,6 +9,7 @@
 ### Added
 
 - Add the `AlertLink` component for links styled within alerts.
+- Add the `slide` prop to `Carousel`.
 
 ## [0.3.0] - 2026-11-04
 

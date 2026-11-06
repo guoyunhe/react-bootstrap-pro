@@ -3,66 +3,352 @@ title: Carousel
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import {
-  Carousel,
-  CarouselControl,
-  CarouselIndicator,
-  CarouselIndicators,
-  CarouselInner,
-  CarouselItem,
-  CarouselOverlayControls,
-} from 'react-bootstrap-pro';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { DemoContainer } from '../demo-container';
-import { CarouselBasicDemo } from './demos/basic';
+import { CarouselTopControlsDemo } from './demos/top-controls';
+import { CarouselBottomControlsDemo } from './demos/bottom-controls';
+import { CarouselIndicatorsDemo } from './demos/indicators';
+import { CarouselCustomContentDemo } from './demos/custom-content';
+import { CarouselOverlayControlsDemo } from './demos/overlay-controls';
+import { CarouselCrossfadeDemo } from './demos/crossfade';
+import { CarouselMultipleItemsDemo } from './demos/multiple-items';
+import { CarouselPeekingDemo } from './demos/peeking';
+import { CarouselVariableWidthDemo } from './demos/variable-width';
+import { CarouselAutoplayDemo } from './demos/autoplay';
+import { CarouselIndividualIntervalsDemo } from './demos/individual-intervals';
+import { CarouselEndLoopDemo } from './demos/end-loop';
+import { CarouselEndWrapDemo } from './demos/end-wrap';
+import { CarouselEndStopDemo } from './demos/end-stop';
+import { CarouselDarkDemo } from './demos/dark';
 
 # Carousel
 
-`Carousel` uses a native horizontal scroll container with CSS scroll snapping.
-The Bootstrap JavaScript bundle is required for previous/next controls,
-indicators, and autoplay.
+## How it works
 
-## Example
+`Carousel` uses CSS scroll snapping, so sliding, touch dragging, momentum, and
+keyboard scrolling come from the browser. Bootstrap JavaScript manages autoplay,
+previous/next controls, indicators, and active-slide syncing.
+
+Because slides live in a real scroll container, a carousel can show multiple
+slides, peek at neighboring slides, and mix variable-width slides. Slides can
+contain arbitrary content and are not sized automatically, so use utilities or
+custom styles to size them. Controls and indicators are optional.
+
+Mark one slide active to set the starting position; if none is marked, the first
+slide is used. Give each carousel a unique `id` when it has controls or
+indicators. Their `target` must match that `id`.
+
+## Examples
+
+### Top controls
+
+Controls can sit above the slides or outside the inner carousel container.
 
 <DemoContainer>
-  <CarouselBasicDemo />
+  <CarouselTopControlsDemo />
 </DemoContainer>
 
-```tsx src='./demos/basic.tsx'
+```tsx src='./demos/top-controls.tsx'
+
+```
+
+### Bottom controls
+
+Place the previous and next controls below the slides.
+
+<DemoContainer>
+  <CarouselBottomControlsDemo />
+</DemoContainer>
+
+```tsx src='./demos/bottom-controls.tsx'
+
+```
+
+### Indicators
+
+Place indicators wherever they fit the layout. With an overlay carousel, put
+them inside `CarouselOverlayControls` to position them over the slides.
+
+<DemoContainer>
+  <CarouselIndicatorsDemo />
+</DemoContainer>
+
+```tsx src='./demos/indicators.tsx'
+
+```
+
+### Custom content
+
+Put any markup inside each slide, then size and style it with utilities or
+custom CSS. The example composes text, links, and themed content in the slides.
+
+#### Build anything
+
+Compose slides from your own markup—text, buttons, cards, or media.
+
+#### Style it your way
+
+Use utilities or custom CSS to size and theme each slide.
+
+#### Mix and match
+
+Combine custom content with controls and overlay positioning.
+
+<DemoContainer>
+  <CarouselCustomContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-content.tsx'
 
 ```
 
 ## Modifiers
 
-`auto` fits slides to their own widths, `center` centers snap positions, and
-`fade` switches to the stacked fade presentation.
+### Overlay controls
+
+Set `overlay` to position `CarouselOverlayControls` over the slides.
+
+<DemoContainer>
+  <CarouselOverlayControlsDemo />
+</DemoContainer>
+
+```tsx src='./demos/overlay-controls.tsx'
+
+```
+
+### Crossfade
+
+Set `fade` to crossfade slides instead of scrolling between them. For text-only
+slides, give each item a background so overlapping content remains legible.
+Reduced-motion preferences disable the transition.
+
+<DemoContainer>
+  <CarouselCrossfadeDemo />
+</DemoContainer>
+
+```tsx src='./demos/crossfade.tsx'
+
+```
+
+## Items
+
+Set `--bs-carousel-items` to control how many slides are visible, and
+`--bs-carousel-items-gap` to add space between them. Set
+`--bs-carousel-items-peek` to reveal parts of the neighboring slides. These
+native CSS options require no JavaScript:
+
+- `--bs-carousel-items` sets the number of whole slides visible per view (default `1`).
+- `--bs-carousel-items-gap` sets the space between slides (default `0`).
+- `--bs-carousel-items-peek` sets how much of neighboring slides to reveal (default `0`).
+
+### Multiple items
+
+Show several slides at once by setting `--bs-carousel-items`.
+
+<DemoContainer>
+  <CarouselMultipleItemsDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple-items.tsx'
+
+```
+
+### Peeking
+
+Set `--bs-carousel-items-peek` to hint that more slides are available beyond
+the current view.
+
+<DemoContainer>
+  <CarouselPeekingDemo />
+</DemoContainer>
+
+```tsx src='./demos/peeking.tsx'
+
+```
+
+### Variable width
+
+Set `auto` and give each slide its own width. Add `center` to snap the active
+slide to the center of the viewport.
+
+<DemoContainer>
+  <CarouselVariableWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/variable-width.tsx'
+
+```
 
 ## Autoplay
 
-Use Bootstrap's `data-bs-autoplay` option to enable autoplay. Provide controls
-so users can pause or navigate the slides.
+Set `data-bs-autoplay='true'` to start cycling on page load. Autoplay pauses on
+hover and while the page is hidden. When a visitor takes control, autoplay
+stops. Avoid autoplay where possible; if used, provide a discoverable control
+to pause and resume. Hover- or focus-only pauses are not sufficient.
+
+The play/pause button toggles autoplay and updates its accessible name. The
+active indicator also shows a progress fill for the current slide's interval;
+this is disabled under reduced motion.
+
+<DemoContainer>
+  <CarouselAutoplayDemo />
+</DemoContainer>
+
+```tsx src='./demos/autoplay.tsx'
+
+```
+
+### Individual intervals
+
+Set `data-bs-interval` on a slide to customize how long it remains visible.
+The indicator progress fill follows each slide's interval.
+
+<DemoContainer>
+  <CarouselIndividualIntervalsDemo />
+</DemoContainer>
+
+```tsx src='./demos/individual-intervals.tsx'
+
+```
+
+## End behavior
+
+Use `data-bs-ends` to choose what happens at the first and last slide:
+`loop` (the default), `wrap`, or `stop`.
+
+### Loop (default)
+
+`loop` scrolls seamlessly past the ends for a single-slide carousel. Multi-item,
+peek, centered, and variable-width layouts fall back to `wrap`.
+
+<DemoContainer>
+  <CarouselEndLoopDemo />
+</DemoContainer>
+
+```tsx src='./demos/end-loop.tsx'
+
+```
+
+### Wrap
+
+`wrap` jumps from the last slide to the first, and vice versa.
+
+<DemoContainer>
+  <CarouselEndWrapDemo />
+</DemoContainer>
+
+```tsx src='./demos/end-wrap.tsx'
+
+```
+
+### Stop
+
+`stop` disables the previous or next control when the carousel reaches an end.
+
+<DemoContainer>
+  <CarouselEndStopDemo />
+</DemoContainer>
+
+```tsx src='./demos/end-stop.tsx'
+
+```
+
+## Dark carousel
+
+Set `data-bs-theme='dark'` to use dark controls and indicators. This is useful
+with overlay controls when they need contrast against slide content.
+
+<DemoContainer>
+  <CarouselDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
 
 ## API
 
-| Prop        | Type          | Description                             |
-| ----------- | ------------- | --------------------------------------- |
-| `auto`      | `boolean`     | Lets each item use its own width.       |
-| `center`    | `boolean`     | Centers snap positions in the viewport. |
-| `fade`      | `boolean`     | Uses the stacked fade transition mode.  |
-| `overlay`   | `boolean`     | Positions controls over the slides.     |
-| `component` | `ElementType` | Changes the root element.               |
-| `...props`  | `BoxProps<C>` | Native props and all Box utility props. |
+### Carousel
 
-Use `CarouselInner` and `CarouselItem` for the scroll viewport and slides.
-`CarouselControl` and `CarouselIndicator` require a selector `target` matching
-the carousel `id`; controls also accept `direction`, `size`, and `variant`, while
-indicators accept `index` and `active`. `CarouselOverlayControls` positions
-controls over the slides.
+| Prop        | Type          | Default | Description                                 |
+| ----------- | ------------- | ------- | ------------------------------------------- |
+| `auto`      | `boolean`     | `false` | Lets each item use its own width.           |
+| `center`    | `boolean`     | `false` | Centers snap positions in the viewport.     |
+| `fade`      | `boolean`     | `false` | Uses the stacked fade transition mode.      |
+| `overlay`   | `boolean`     | `false` | Positions overlay controls over the slides. |
+| `slide`     | `boolean`     | `false` | Enables the slide transition behavior.      |
+| `component` | `ElementType` | `'div'` | Changes the root element.                   |
+
+Accepts native props for the selected element and [`Box`](../box/README.mdx#api)
+utility props.
+
+### CarouselInner
+
+Renders a `div` by default for the slide viewport. The inherited `component`
+prop can change the root element. Accepts native props for the selected element
+and [`Box`](../box/README.mdx#api) utility props.
+
+### CarouselItem
+
+| Prop     | Type      | Default | Description                     |
+| -------- | --------- | ------- | ------------------------------- |
+| `active` | `boolean` | `false` | Marks the initial active slide. |
+
+Renders a `div` by default. The inherited `component` prop can change the root
+element. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### CarouselIndicators
+
+Renders a `div` by default to contain indicators. The inherited `component`
+prop can change the root element. Accepts native props for the selected element
+and [`Box`](../box/README.mdx#api) utility props.
+
+### CarouselIndicator
+
+| Prop     | Type      | Default  | Description                               |
+| -------- | --------- | -------- | ----------------------------------------- |
+| `index`  | `number`  | Required | Zero-based slide index.                   |
+| `target` | `string`  | Required | Selector for the target carousel.         |
+| `active` | `boolean` | `false`  | Marks the indicator for the active slide. |
+
+Renders a `button` by default and generates an accessible name from `index`
+(for example, “Slide 1”). The inherited `component` prop can change the root
+element. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
+
+### CarouselControl
+
+| Prop        | Type                               | Default  | Description                       |
+| ----------- | ---------------------------------- | -------- | --------------------------------- |
+| `direction` | `'next' \| 'previous'`             | Required | Direction to navigate.            |
+| `target`    | `string`                           | Required | Selector for the target carousel. |
+| `size`      | `'xs' \| 'sm' \| 'lg'`             | —        | Icon button size.                 |
+| `variant`   | `'solid' \| 'outline' \| 'subtle'` | —        | Icon button style.                |
+
+Renders a `button` by default, with “Next” or “Previous” as its accessible name.
+The inherited `component` prop can change the root element. Accepts native props
+for the selected element, [`IconButton`](../button/README.mdx#iconbutton) props,
+and [`Box`](../box/README.mdx#api) utility props.
+
+### CarouselOverlayControls
+
+Renders a `div` by default to position controls over slides. The inherited
+`component` prop can change the root element. Accepts native props for the
+selected element and [`Box`](../box/README.mdx#api) utility props.
+
+### CarouselCaption
+
+Renders a `div` by default for slide captions. The inherited `component` prop
+can change the root element. Accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
 
 ## Accessibility
 
-Give controls and indicators accessible names, set exactly one initial slide
-active, and provide alternative text for informative images. Avoid autoplay
-when users cannot pause or stop it.
+Use informative alternative text for images. Controls and indicators are
+optional; if used, give the carousel an `id` that matches each one's `target`.
+Mark one initial slide active. Autoplay must have a discoverable pause/resume
+control, and the carousel respects reduced-motion preferences.
 
 ## See
 

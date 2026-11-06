@@ -3,51 +3,335 @@ title: Carousel 轮播
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import {
-  Carousel,
-  CarouselControl,
-  CarouselIndicator,
-  CarouselIndicators,
-  CarouselInner,
-  CarouselItem,
-  CarouselOverlayControls,
-} from 'react-bootstrap-pro';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { DemoContainer } from '../demo-container';
+import { CarouselTopControlsDemo } from './demos/top-controls';
+import { CarouselBottomControlsDemo } from './demos/bottom-controls';
+import { CarouselIndicatorsDemo } from './demos/indicators';
+import { CarouselCustomContentDemo } from './demos/custom-content';
+import { CarouselOverlayControlsDemo } from './demos/overlay-controls';
+import { CarouselCrossfadeDemo } from './demos/crossfade';
+import { CarouselMultipleItemsDemo } from './demos/multiple-items';
+import { CarouselPeekingDemo } from './demos/peeking';
+import { CarouselVariableWidthDemo } from './demos/variable-width';
+import { CarouselAutoplayDemo } from './demos/autoplay';
+import { CarouselIndividualIntervalsDemo } from './demos/individual-intervals';
+import { CarouselEndLoopDemo } from './demos/end-loop';
+import { CarouselEndWrapDemo } from './demos/end-wrap';
+import { CarouselEndStopDemo } from './demos/end-stop';
+import { CarouselDarkDemo } from './demos/dark';
 
 # Carousel 轮播
 
-`Carousel` 使用原生横向滚动容器和 CSS 滚动捕捉。前后控制按钮、指示器和自动播放
-需要 Bootstrap JavaScript bundle。
+## 工作原理
+
+`Carousel` 使用 CSS 滚动捕捉，因此滑动、触摸拖动、惯性滚动和键盘滚动都由浏览器处理。
+Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻灯片同步。
+
+由于幻灯片位于真实的滚动容器中，轮播可以同时显示多个幻灯片、露出相邻幻灯片的一部分，
+也可以混合不同宽度的幻灯片。幻灯片可以包含任意内容，但不会自动调整尺寸；请使用工具类
+或自定义样式设置尺寸。控件和指示器均为可选。
+
+设置一个活动幻灯片作为起始位置；若未标记，默认使用第一张幻灯片。包含控件或指示器时，
+为每个轮播设置唯一的 `id`，并确保其 `target` 与该 `id` 匹配。
+
+## 示例
+
+### 顶部控件
+
+控件可以放在幻灯片上方，也可以放在轮播内部视口之外。
 
 <DemoContainer>
-  <Carousel id='features' overlay>
-    <CarouselInner>
-      <CarouselItem active>第一张</CarouselItem>
-      <CarouselItem>第二张</CarouselItem>
-    </CarouselInner>
-    <CarouselOverlayControls>
-      <CarouselControl target='#features' direction='previous' />
-      <CarouselIndicators>
-        <CarouselIndicator target='#features' index={0} active />
-        <CarouselIndicator target='#features' index={1} />
-      </CarouselIndicators>
-      <CarouselControl target='#features' direction='next' />
-    </CarouselOverlayControls>
-  </Carousel>
+  <CarouselTopControlsDemo />
 </DemoContainer>
+
+```tsx src='./demos/top-controls.tsx'
+
+```
+
+### 底部控件
+
+将前后导航控件放在幻灯片下方。
+
+<DemoContainer>
+  <CarouselBottomControlsDemo />
+</DemoContainer>
+
+```tsx src='./demos/bottom-controls.tsx'
+
+```
+
+### 指示器
+
+可根据布局将指示器放在合适位置。若使用叠加轮播，可将指示器放入
+`CarouselOverlayControls`，使其显示在幻灯片上方。
+
+<DemoContainer>
+  <CarouselIndicatorsDemo />
+</DemoContainer>
+
+```tsx src='./demos/indicators.tsx'
+
+```
+
+### 自定义内容
+
+每张幻灯片中都可以放入任意标记，再使用工具类或自定义 CSS 设置尺寸和样式。
+此示例在幻灯片中组合文本、链接和主题内容。
+
+#### 随心组合
+
+使用自定义标记组合文本、按钮、卡片或媒体内容。
+
+#### 自定义样式
+
+使用工具类或自定义 CSS 设置幻灯片的尺寸和主题。
+
+#### 混合搭配
+
+将自定义内容与导航控件和叠加布局组合使用。
+
+<DemoContainer>
+  <CarouselCustomContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-content.tsx'
+
+```
+
+## 修饰属性
+
+### 叠加控件
+
+设置 `overlay`，将 `CarouselOverlayControls` 放置在幻灯片上方。
+
+<DemoContainer>
+  <CarouselOverlayControlsDemo />
+</DemoContainer>
+
+```tsx src='./demos/overlay-controls.tsx'
+
+```
+
+### 淡入淡出
+
+设置 `fade`，使幻灯片之间淡入淡出，而非滚动切换。纯文本幻灯片应设置背景，
+避免重叠内容难以辨认。用户偏好减少动态效果时会禁用过渡动画。
+
+<DemoContainer>
+  <CarouselCrossfadeDemo />
+</DemoContainer>
+
+```tsx src='./demos/crossfade.tsx'
+
+```
+
+## 幻灯片布局
+
+设置 `--bs-carousel-items` 控制同时显示的幻灯片数量，设置
+`--bs-carousel-items-gap` 增加间距。设置 `--bs-carousel-items-peek` 可露出相邻幻灯片的一部分。
+这些原生 CSS 选项不需要 JavaScript：
+
+- `--bs-carousel-items` 设置每个视口可完整显示的幻灯片数量（默认 `1`）。
+- `--bs-carousel-items-gap` 设置幻灯片之间的间距（默认 `0`）。
+- `--bs-carousel-items-peek` 设置相邻幻灯片的露出宽度（默认 `0`）。
+
+### 多项显示
+
+设置 `--bs-carousel-items`，即可同时显示多个幻灯片。
+
+<DemoContainer>
+  <CarouselMultipleItemsDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple-items.tsx'
+
+```
+
+### 预览相邻项
+
+设置 `--bs-carousel-items-peek`，提示当前视口之外还有更多幻灯片。
+
+<DemoContainer>
+  <CarouselPeekingDemo />
+</DemoContainer>
+
+```tsx src='./demos/peeking.tsx'
+
+```
+
+### 可变宽度
+
+设置 `auto`，并为每张幻灯片指定宽度。添加 `center` 可将活动幻灯片捕捉到视口中央。
+
+<DemoContainer>
+  <CarouselVariableWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/variable-width.tsx'
+
+```
+
+## 自动播放
+
+设置 `data-bs-autoplay='true'`，即可在页面加载时开始循环播放。鼠标悬停或页面隐藏时会暂停；
+用户进行操作后自动播放会停止。建议尽量避免自动播放；若启用，应提供易于发现的暂停和恢复控件。
+仅在悬停或聚焦时暂停并不充分。
+
+播放/暂停按钮会切换自动播放状态并更新其无障碍名称。活动指示器还会显示当前幻灯片间隔的进度；
+用户偏好减少动态效果时会禁用该效果。
+
+<DemoContainer>
+  <CarouselAutoplayDemo />
+</DemoContainer>
+
+```tsx src='./demos/autoplay.tsx'
+
+```
+
+### 单项播放间隔
+
+在幻灯片上设置 `data-bs-interval`，自定义该幻灯片的显示时长。指示器进度会匹配每张幻灯片的间隔。
+
+<DemoContainer>
+  <CarouselIndividualIntervalsDemo />
+</DemoContainer>
+
+```tsx src='./demos/individual-intervals.tsx'
+
+```
+
+## 结束行为
+
+使用 `data-bs-ends` 选择轮播到达首尾时的行为：`loop`（默认）、`wrap` 或 `stop`。
+
+### 循环（默认）
+
+单项轮播使用 `loop` 时会在首尾之间无缝滚动。多项显示、相邻项预览、居中及可变宽度布局
+会回退为 `wrap`。
+
+<DemoContainer>
+  <CarouselEndLoopDemo />
+</DemoContainer>
+
+```tsx src='./demos/end-loop.tsx'
+
+```
+
+### 循环跳转
+
+`wrap` 会在最后一张与第一张幻灯片之间跳转，反向亦然。
+
+<DemoContainer>
+  <CarouselEndWrapDemo />
+</DemoContainer>
+
+```tsx src='./demos/end-wrap.tsx'
+
+```
+
+### 停止
+
+`stop` 会在轮播到达首尾时禁用对应的前进或后退控件。
+
+<DemoContainer>
+  <CarouselEndStopDemo />
+</DemoContainer>
+
+```tsx src='./demos/end-stop.tsx'
+
+```
+
+## 深色轮播
+
+设置 `data-bs-theme='dark'` 使用深色控件和指示器。当叠加控件需要与幻灯片内容形成反差时，
+这种设置尤其有用。
+
+<DemoContainer>
+  <CarouselDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
 
 ## API
 
-| 属性        | 类型          | 说明                            |
-| ----------- | ------------- | ------------------------------- |
-| `auto`      | `boolean`     | 允许每个轮播项使用自身宽度。    |
-| `center`    | `boolean`     | 将滚动捕捉位置置于视口中央。    |
-| `fade`      | `boolean`     | 使用堆叠淡入淡出模式。          |
-| `overlay`   | `boolean`     | 将控件放置在幻灯片上方。        |
-| `component` | `ElementType` | 更换根元素。                    |
-| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+### Carousel
 
-使用 `CarouselInner` 和 `CarouselItem` 定义滚动视口和幻灯片。
-`CarouselControl` 和 `CarouselIndicator` 的 `target` 必须匹配轮播的 `id`。
-控制按钮还支持 `direction`、`size` 和 `variant`；指示器支持 `index` 和 `active`。
-`CarouselOverlayControls` 可将控件放置在幻灯片上方。
+| 属性        | 类型          | 默认值  | 说明                         |
+| ----------- | ------------- | ------- | ---------------------------- |
+| `auto`      | `boolean`     | `false` | 允许每个轮播项使用自身宽度。 |
+| `center`    | `boolean`     | `false` | 将滚动捕捉位置置于视口中央。 |
+| `fade`      | `boolean`     | `false` | 使用堆叠淡入淡出模式。       |
+| `overlay`   | `boolean`     | `false` | 将叠加控件放置在幻灯片上方。 |
+| `slide`     | `boolean`     | `false` | 启用滑动切换效果。           |
+| `component` | `ElementType` | `'div'` | 更换根元素。                 |
+
+接受所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CarouselInner
+
+默认渲染为用于容纳幻灯片的 `div`。继承的 `component` 属性可更换根元素。
+接受所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CarouselItem
+
+| 属性     | 类型      | 默认值  | 说明                 |
+| -------- | --------- | ------- | -------------------- |
+| `active` | `boolean` | `false` | 标记初始活动幻灯片。 |
+
+默认渲染为 `div`。继承的 `component` 属性可更换根元素。接受所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CarouselIndicators
+
+默认渲染为用于容纳指示器的 `div`。继承的 `component` 属性可更换根元素。
+接受所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CarouselIndicator
+
+| 属性     | 类型      | 默认值  | 说明                         |
+| -------- | --------- | ------- | ---------------------------- |
+| `index`  | `number`  | 必填    | 从零开始的幻灯片索引。       |
+| `target` | `string`  | 必填    | 目标轮播的选择器。           |
+| `active` | `boolean` | `false` | 标记当前幻灯片对应的指示器。 |
+
+默认渲染为 `button`，并根据 `index` 生成无障碍名称（例如“Slide 1”）。
+继承的 `component` 属性可更换根元素。接受所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CarouselControl
+
+| 属性        | 类型                               | 默认值 | 说明               |
+| ----------- | ---------------------------------- | ------ | ------------------ |
+| `direction` | `'next' \| 'previous'`             | 必填   | 导航方向。         |
+| `target`    | `string`                           | 必填   | 目标轮播的选择器。 |
+| `size`      | `'xs' \| 'sm' \| 'lg'`             | —      | 图标按钮尺寸。     |
+| `variant`   | `'solid' \| 'outline' \| 'subtle'` | —      | 图标按钮样式。     |
+
+默认渲染为 `button`，无障碍名称默认为“Next”或“Previous”。继承的 `component`
+属性可更换根元素。接受所选元素的原生属性、
+[`IconButton`](../button/README.zh.mdx#iconbutton) 属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CarouselOverlayControls
+
+默认渲染为用于将控件置于幻灯片上方的 `div`。继承的 `component` 属性可更换根元素。
+接受所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### CarouselCaption
+
+默认渲染为用于显示幻灯片说明文字的 `div`。继承的 `component` 属性可更换根元素。
+接受所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+## 无障碍访问
+
+为图片提供有意义的替代文本。控件和指示器均为可选；若使用，请为轮播设置 `id`，
+并确保每个控件和指示器的 `target` 与之匹配。标记一个初始活动幻灯片。自动播放必须提供
+易于发现的暂停/恢复控件，并尊重用户减少动态效果的偏好。
+
+## 参考
+
+- [Bootstrap 6 Carousel 官方文档](https://getbootstrap.com/docs/6.0/components/carousel/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/carousel.tsx)

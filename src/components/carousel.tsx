@@ -12,12 +12,14 @@ export type CarouselProps<C extends ElementType = 'div'> = Omit<
     center?: boolean | undefined;
     fade?: boolean | undefined;
     overlay?: boolean | undefined;
+    slide?: boolean | undefined;
   }
 > & {
   auto?: boolean | undefined;
   center?: boolean | undefined;
   fade?: boolean | undefined;
   overlay?: boolean | undefined;
+  slide?: boolean | undefined;
 };
 
 export function Carousel<C extends ElementType = 'div'>({
@@ -27,6 +29,7 @@ export function Carousel<C extends ElementType = 'div'>({
   center,
   fade,
   overlay,
+  slide,
   ...props
 }: CarouselProps<C>) {
   return (
@@ -39,6 +42,7 @@ export function Carousel<C extends ElementType = 'div'>({
         center && 'carousel-center',
         fade && 'carousel-fade',
         overlay && 'carousel-overlay',
+        slide && 'slide',
         props.classNameBefore,
       )}
       className={className}

@@ -5,7 +5,7 @@ import { Carousel, CarouselControl } from '../src';
 
 test('composes carousel structure and control attributes', async () => {
   const screen = await render(
-    <Carousel id='carousel' data-testid='carousel' fade>
+    <Carousel id='carousel' data-testid='carousel' fade slide>
       <div className='carousel-inner'>
         <div className='carousel-item active'>Slide 1</div>
       </div>
@@ -19,7 +19,7 @@ test('composes carousel structure and control attributes', async () => {
     </Carousel>,
   );
 
-  expect(screen.getByTestId('carousel')).toHaveClass('carousel', 'carousel-fade');
+  expect(screen.getByTestId('carousel')).toHaveClass('carousel', 'carousel-fade', 'slide');
   expect(screen.getByRole('button', { name: 'Next' })).toHaveAttribute('data-bs-slide', 'next');
   expect(screen.getByRole('button', { name: 'Next' })).toHaveClass(
     'btn-icon',
