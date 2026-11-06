@@ -13,7 +13,7 @@ import { CarouselSlidePlaceholder } from './shared';
 export function CarouselOverlayControlsDemo() {
   return (
     <Carousel overlay>
-      <CarouselInner className='rounded-5'>
+      <CarouselInner rounded={5}>
         <CarouselItem active>
           <CarouselSlidePlaceholder>First slide</CarouselSlidePlaceholder>
         </CarouselItem>

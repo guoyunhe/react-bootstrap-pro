@@ -5,7 +5,7 @@ import { CarouselSlidePlaceholder } from './shared';
 export function CarouselBottomControlsDemo() {
   return (
     <Carousel>
-      <CarouselInner className='rounded-5'>
+      <CarouselInner rounded={5}>
         <CarouselItem active>
           <CarouselSlidePlaceholder>First slide</CarouselSlidePlaceholder>
         </CarouselItem>

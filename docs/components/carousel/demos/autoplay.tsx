@@ -13,7 +13,7 @@ import { CarouselSlidePlaceholder } from './shared';
 export function CarouselAutoplayDemo() {
   return (
     <Carousel autoplay>
-      <CarouselInner className='rounded-5'>
+      <CarouselInner rounded={5}>
         <CarouselItem active>
           <CarouselSlidePlaceholder>First slide</CarouselSlidePlaceholder>
         </CarouselItem>

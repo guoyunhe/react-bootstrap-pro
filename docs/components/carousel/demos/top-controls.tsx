@@ -12,7 +12,7 @@ export function CarouselTopControlsDemo() {
           <CarouselControl direction='next' size='sm' />
         </div>
       </div>
-      <CarouselInner className='rounded-5'>
+      <CarouselInner rounded={5}>
         <CarouselItem active>
           <CarouselSlidePlaceholder>First slide</CarouselSlidePlaceholder>
         </CarouselItem>

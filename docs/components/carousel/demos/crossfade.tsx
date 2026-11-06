@@ -5,7 +5,7 @@ import { CarouselSlidePlaceholder } from './shared';
 export function CarouselCrossfadeDemo() {
   return (
     <Carousel effect='fade'>
-      <CarouselInner className='rounded-5'>
+      <CarouselInner rounded={5}>
         <CarouselItem active>
           <CarouselSlidePlaceholder>First slide</CarouselSlidePlaceholder>
         </CarouselItem>

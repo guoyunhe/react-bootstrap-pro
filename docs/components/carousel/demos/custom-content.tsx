@@ -3,7 +3,7 @@ import { Carousel, CarouselControl, CarouselInner, CarouselItem } from 'react-bo
 export function CarouselCustomContentDemo() {
   return (
     <Carousel>
-      <CarouselInner className='rounded-5'>
+      <CarouselInner rounded={5}>
         <CarouselItem active>
           <div
             className='d-flex flex-column justify-content-center bg-subtle-primary p-9 bg-1 rounded-5'

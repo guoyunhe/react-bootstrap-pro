@@ -12,7 +12,7 @@ import { CarouselSlidePlaceholder } from './shared';
 export function CarouselIndividualIntervalsDemo() {
   return (
     <Carousel autoplay>
-      <CarouselInner className='rounded-5'>
+      <CarouselInner rounded={5}>
         <CarouselItem active interval={2000}>
           <CarouselSlidePlaceholder>First: 2 seconds</CarouselSlidePlaceholder>
         </CarouselItem>
