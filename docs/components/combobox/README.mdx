@@ -138,7 +138,8 @@ Combine icons, descriptions, and check marks for richer options.
 
 ## Groups
 
-Pass `groups` to display options under labeled menu headings.
+Add a group item to `options` at the position where its labeled heading and
+options should appear. Plain options and groups render in array order.
 
 <DemoContainer>
   <ComboboxGroupsDemo />
@@ -276,8 +277,7 @@ the menu.
 
 | Prop                | Type                                  | Default              | Description                                           |
 | ------------------- | ------------------------------------- | -------------------- | ----------------------------------------------------- |
-| `options`           | `ComboboxOption[]`                    | `[]`                 | Flat list of options.                                 |
-| `groups`            | `ComboboxGroup[]`                     | `[]`                 | Labeled option groups.                                |
+| `options`           | `(ComboboxOption \| ComboboxGroup)[]` | `[]`                 | Options and group items in display order.             |
 | `value`             | `string \| string[]`                  | —                    | Controlled selection.                                 |
 | `defaultValue`      | `string \| string[]`                  | —                    | Initial selection for uncontrolled usage.             |
 | `onChange`          | `(value: string \| string[]) => void` | —                    | Called with the selected value or values.             |
@@ -314,6 +314,8 @@ The wrapper's position is fixed to `relative` to anchor the menu. The
 | `text`        | `string`    | —       | Explicit plain text used for search matching.                |
 
 ### ComboboxGroup
+
+A group is an item in the `options` array.
 
 | Field     | Type               | Default | Description                      |
 | --------- | ------------------ | ------- | -------------------------------- |

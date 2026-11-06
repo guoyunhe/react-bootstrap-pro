@@ -135,7 +135,8 @@ import { ComboboxWithFormFieldDemo } from './demos/with-form-field';
 
 ## 分组
 
-传入 `groups` 可将选项按带标题的菜单分组展示。
+将分组项插入 `options`，即可在对应位置显示分组标题和选项。普通选项与分组会按照数组顺序
+展示。
 
 <DemoContainer>
   <ComboboxGroupsDemo />
@@ -259,13 +260,12 @@ import { ComboboxWithFormFieldDemo } from './demos/with-form-field';
 默认渲染为 `div` 容器，其中包含原生 `button` 切换按钮、列表框菜单，以及设置 `name` 时
 生成的隐藏输入框。组件自有属性如下。`id` 和表格中的 `aria-*` 属性作用于切换按钮；原生
 `div` 属性和 [`Box`](../box/README.zh.mdx#api) 属性作用于外层容器，但不包括 `children`
-和原生 `onChange`。由于选项通过 `options` 或 `groups` 传入，不接受 `children`。容器始终
+和原生 `onChange`。由于选项和分组都通过 `options` 传入，不接受 `children`。容器始终
 使用相对定位以锚定菜单。
 
 | 属性                | 类型                                  | 默认值               | 说明                                   |
 | ------------------- | ------------------------------------- | -------------------- | -------------------------------------- |
-| `options`           | `ComboboxOption[]`                    | `[]`                 | 平铺选项列表。                         |
-| `groups`            | `ComboboxGroup[]`                     | `[]`                 | 带标题的选项分组。                     |
+| `options`           | `(ComboboxOption \| ComboboxGroup)[]` | `[]`                 | 按显示顺序排列的普通选项或分组项。     |
 | `value`             | `string \| string[]`                  | —                    | 受控选中值。                           |
 | `defaultValue`      | `string \| string[]`                  | —                    | 非受控模式的初始选中值。               |
 | `onChange`          | `(value: string \| string[]) => void` | —                    | 选中值变化时调用，传入选中值或值列表。 |
@@ -301,6 +301,8 @@ import { ComboboxWithFormFieldDemo } from './demos/with-form-field';
 | `text`        | `string`    | —       | 用于搜索匹配的纯文本。                 |
 
 ### ComboboxGroup
+
+分组项是 `options` 数组中的一项。
 
 | 字段      | 类型               | 默认值 | 说明                   |
 | --------- | ------------------ | ------ | ---------------------- |

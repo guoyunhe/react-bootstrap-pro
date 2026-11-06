@@ -27,11 +27,12 @@ export type ComboboxGroup = {
   options: readonly ComboboxOption[];
 };
 
+type ComboboxItem = ComboboxOption | ComboboxGroup;
+
 export type ComboboxValue = string | readonly string[];
 
 type ComboboxOwnProps = {
-  options?: readonly ComboboxOption[] | undefined;
-  groups?: readonly ComboboxGroup[] | undefined;
+  options?: readonly ComboboxItem[] | undefined;
   value?: ComboboxValue | undefined;
   defaultValue?: ComboboxValue | undefined;
   onChange?: ((value: string | string[]) => void) | undefined;
@@ -63,7 +64,6 @@ function normalizeValue(value: ComboboxValue | undefined): string[] {
 
 export function Combobox({
   options,
-  groups,
   value,
   defaultValue,
   onChange,
@@ -105,30 +105,26 @@ export function Combobox({
       .toLowerCase()
       .includes(normalizedQuery);
 
-  const visibleOptions = useMemo(
-    () => (options ?? []).filter((option) => matches(option)),
+  const visibleItems = useMemo<ComboboxItem[]>(
+    () =>
+      (options ?? []).flatMap((item): ComboboxItem[] => {
+        if ('options' in item) {
+          const groupOptions = item.options.filter(matches);
+          return groupOptions.length > 0 ? [{ ...item, options: groupOptions }] : [];
+        }
+
+        return matches(item) ? [item] : [];
+      }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [options, normalizedQuery],
   );
 
-  const visibleGroups = useMemo(
-    () =>
-      (groups ?? [])
-        .map((group) => ({
-          label: group.label,
-          options: group.options.filter((option) => matches(option)),
-        }))
-        .filter((group) => group.options.length > 0),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [groups, normalizedQuery],
-  );
-
-  const visibleCount =
-    visibleOptions.length + visibleGroups.reduce((count, group) => count + group.options.length, 0);
-
   const allOptions = useMemo(
-    () => [...(options ?? []), ...(groups ?? []).flatMap((group) => group.options)],
-    [groups, options],
+    () =>
+      (options ?? []).flatMap((item): ComboboxOption[] =>
+        'options' in item ? [...item.options] : [item],
+      ),
+    [options],
   );
 
   const selectedOptions = allOptions.filter((option) => selectedValues.includes(option.value));
@@ -153,7 +149,8 @@ export function Combobox({
   };
 
   const getFocusableItems = () =>
-    [...visibleOptions, ...visibleGroups.flatMap((group) => group.options)]
+    visibleItems
+      .flatMap((item): ComboboxOption[] => ('options' in item ? [...item.options] : [item]))
       .filter((option) => !option.disabled)
       .map((option) => itemRefs.current.get(option.value))
       .filter((element): element is HTMLButtonElement => element !== undefined);
@@ -397,14 +394,17 @@ export function Combobox({
             />
           </Box>
         )}
-        {visibleOptions.map((option) => renderOption(option))}
-        {visibleGroups.map((group, groupIndex) => (
-          <Fragment key={`group-${groupIndex}`}>
-            <MenuHeader>{group.label}</MenuHeader>
-            {group.options.map((option) => renderOption(option))}
-          </Fragment>
-        ))}
-        {visibleCount === 0 && <Box classNameBefore='combobox-no-results'>{noResults}</Box>}
+        {visibleItems.map((item, itemIndex) =>
+          'options' in item ? (
+            <Fragment key={`group-${itemIndex}`}>
+              <MenuHeader>{item.label}</MenuHeader>
+              {item.options.map((option) => renderOption(option))}
+            </Fragment>
+          ) : (
+            renderOption(item)
+          ),
+        )}
+        {visibleItems.length === 0 && <Box classNameBefore='combobox-no-results'>{noResults}</Box>}
       </Menu>
     </Box>
   );

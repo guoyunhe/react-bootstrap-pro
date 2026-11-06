@@ -5,7 +5,8 @@ export function ComboboxGroupsDemo() {
     <Combobox
       placeholder='Select a language…'
       aria-label='Language'
-      groups={[
+      options={[
+        { value: 'rust', label: 'Rust' },
         {
           label: 'Frontend',
           options: [
@@ -22,6 +23,7 @@ export function ComboboxGroupsDemo() {
             { value: 'go', label: 'Go' },
           ],
         },
+        { value: 'swift', label: 'Swift' },
       ]}
     />
   );

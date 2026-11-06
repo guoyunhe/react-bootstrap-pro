@@ -85,7 +85,22 @@ test('supports multiple selection and renders the count', async () => {
 });
 
 test('filters options with the search field', async () => {
-  const screen = await render(<Combobox search options={countries} placeholder='Pick…' />);
+  const screen = await render(
+    <Combobox
+      search
+      placeholder='Pick…'
+      options={[
+        { value: 'us', label: 'United States' },
+        {
+          label: 'Europe',
+          options: [
+            { value: 'uk', label: 'United Kingdom' },
+            { value: 'ca', label: 'Canada' },
+          ],
+        },
+      ]}
+    />,
+  );
 
   const root = screen.container;
   const toggle = root.querySelector('.combobox-toggle') as HTMLButtonElement;
@@ -98,9 +113,11 @@ test('filters options with the search field', async () => {
   typeInto(search as HTMLInputElement, 'king');
   await expect.poll(() => root.querySelectorAll('[role=option]').length).toBe(1);
   expect(root.querySelector('[role=option]')?.textContent).toBe('United Kingdom');
+  expect(root.querySelector('.menu-header')?.textContent).toBe('Europe');
 
   typeInto(search as HTMLInputElement, 'zzz');
   await expect.poll(() => root.querySelector('.combobox-no-results')).not.toBeNull();
+  expect(root.querySelector('.menu-header')).toBeNull();
 });
 
 test('navigates with the keyboard and toggles with Escape', async () => {
@@ -133,7 +150,8 @@ test('renders groups, check icons and disabled options', async () => {
       check
       defaultValue='html'
       placeholder='Pick a language…'
-      groups={[
+      options={[
+        { value: 'standalone', label: 'Standalone' },
         {
           label: 'Frontend',
           options: [
@@ -155,6 +173,11 @@ test('renders groups, check icons and disabled options', async () => {
     'Frontend',
     'Backend',
   ]);
+  expect(
+    [...root.querySelectorAll('.menu-header, [role=option]')].map((item) =>
+      item.textContent?.trim(),
+    ),
+  ).toEqual(['Standalone', 'Frontend', 'HTML', 'CSS', 'Backend', 'Go']);
 
   const html = [...root.querySelectorAll('[role=option]')].find(
     (item) => item.textContent === 'HTML',

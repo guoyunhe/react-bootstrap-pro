@@ -9,6 +9,7 @@
   accepting `'slide'` or `'fade'`; the default is `'slide'`.
 - Generate Carousel ids internally by default and connect nested controls
   automatically; remove the controls' public `target` props.
+- Replace the Combobox `groups` prop with group entries inside `options`.
 
 ### Added
 
