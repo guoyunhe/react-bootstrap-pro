@@ -42,9 +42,9 @@ themes.
 
 ```
 
-The popup trigger is a text input. Use the `.w-12` width utility to give the
-formatted date enough room. The input opens the calendar on focus and disables
-browser autocomplete.
+The popup trigger is a text input. Use `w={12}` to give the formatted date
+enough room. The input opens the calendar on focus and disables browser
+autocomplete.
 
 ## How it works
 
@@ -346,7 +346,9 @@ to render a `<button type="button">`; set `inline` to render the calendar in a
 `<div>` instead.
 
 `Datepicker` is not generic and does not inherit native input, button, or
-[`Box`](../box/README.mdx#api) props. Only the props listed below are accepted.
+[`Box`](../box/README.mdx#api) props. Only the props listed below are accepted;
+`w` is an explicit width prop that applies a Bootstrap `w-*` utility to the
+trigger or inline calendar element.
 
 | Prop                 | Type                                                                                            | Default          | Description                                                                                           |
 | -------------------- | ----------------------------------------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------- |
@@ -370,13 +372,14 @@ to render a `<button type="button">`; set `inline` to render the calendar in a
 | `id`                 | `string`                                                                                        | —                | ID forwarded to the input or button trigger.                                                          |
 | `name`               | `string`                                                                                        | —                | Name forwarded to the trigger; in inline mode, creates a hidden input with comma-separated ISO dates. |
 | `disabled`           | `boolean`                                                                                       | `false`          | Disables the input or button trigger.                                                                 |
-| `className`          | `string`                                                                                        | —                | Class added to the trigger or, in inline mode, the calendar host element.                             |
+| `w`                  | `Width`                                                                                         | —                | Applies `w-*`; accepts `1`–`12`, `25`, `50`, `75`, `100`, `'auto'`, `'min'`, `'max'`, or `'fit'`.     |
+| `className`          | `string`                                                                                        | —                | Class added to the trigger or, in inline mode, the calendar element.                                  |
 | `aria-label`         | `string`                                                                                        | —                | Accessible name forwarded to the input or button trigger.                                             |
 | `aria-labelledby`    | `string`                                                                                        | —                | ID reference forwarded to the input or button trigger.                                                |
 | `aria-describedby`   | `string`                                                                                        | —                | Description reference forwarded to the input or button trigger.                                       |
 
 Selection and calendar settings continue to apply in inline mode, and
-`className` is added to its host `<div>`. `id`, `disabled`, and `aria-*` are
+`className` is added to the calendar element. `id`, `disabled`, and `aria-*` are
 forwarded only to popup triggers. `trigger`, `icon`, `ghost`, and `placeholder`
 do not affect inline calendars; neither does `format` or `placement`. `name`
 creates an inline hidden input. For popup inputs, the submitted native input

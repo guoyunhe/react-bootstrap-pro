@@ -4,7 +4,7 @@ export function DatepickerBasicDemo() {
   return (
     <>
       <FormLabel htmlFor='datepicker-basic'>Datepicker</FormLabel>
-      <Datepicker id='datepicker-basic' className='w-12' />
+      <Datepicker id='datepicker-basic' w={12} />
     </>
   );
 }

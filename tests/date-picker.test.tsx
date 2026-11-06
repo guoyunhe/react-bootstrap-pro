@@ -14,11 +14,12 @@ function getCalendarElement(): HTMLElement {
   return element as HTMLElement;
 }
 
-test('renders an empty text input', async () => {
-  const screen = await render(<Datepicker aria-label='Date' />);
+test('renders an empty text input with the width utility', async () => {
+  const screen = await render(<Datepicker aria-label='Date' w={12} />);
   const input = screen.getByLabelText('Date').element() as HTMLInputElement;
 
   expect(input).toHaveClass('form-control');
+  expect(input).toHaveClass('w-12');
   expect(input.type).toBe('text');
   expect(input.value).toBe('');
   expect(input.getAttribute('autocomplete')).toBe('off');
@@ -62,14 +63,39 @@ test('syncs a controlled value', async () => {
   await expect.poll(() => input.value).toBe(new Date(2024, 1, 2).toLocaleDateString('en-US'));
 });
 
-test('renders an inline calendar with a hidden input', async () => {
-  await render(<Datepicker inline name='date' defaultValue={['2024-05-06']} />);
+test('renders an inline calendar with a width utility and hidden input', async () => {
+  const screen = await render(
+    <Datepicker
+      inline
+      w={12}
+      className='custom-calendar'
+      name='date'
+      defaultValue={['2024-05-06']}
+    />,
+  );
 
   const hidden = document.querySelector<HTMLInputElement>('input[type=hidden]');
+  const calendar = getCalendarElement();
   expect(hidden).not.toBeNull();
+  expect(calendar.classList.contains('w-12')).toBe(true);
+  expect(calendar.classList.contains('custom-calendar')).toBe(true);
   expect(hidden?.name).toBe('date');
   expect(hidden?.value).toBe('2024-05-06');
   expect(getCalendarElement().hasAttribute('data-vc-input')).toBe(false);
+
+  await screen.rerender(
+    <Datepicker
+      inline
+      w={6}
+      className='updated-calendar'
+      name='date'
+      defaultValue={['2024-05-06']}
+    />,
+  );
+  expect(calendar.classList.contains('w-12')).toBe(false);
+  expect(calendar.classList.contains('custom-calendar')).toBe(false);
+  expect(calendar.classList.contains('w-6')).toBe(true);
+  expect(calendar.classList.contains('updated-calendar')).toBe(true);
 });
 
 test('selects and labels multiple dates', async () => {
@@ -189,6 +215,7 @@ test('renders a button trigger', async () => {
     <Datepicker
       aria-label='Date'
       trigger='button'
+      w={12}
       defaultValue='2024-03-15'
       locale='en-US'
       onChange={onChange}
@@ -197,6 +224,7 @@ test('renders a button trigger', async () => {
   const button = screen.getByLabelText('Date').element() as HTMLButtonElement;
 
   expect(button.tagName).toBe('BUTTON');
+  expect(button).toHaveClass('w-12');
   expect(button).toHaveAttribute('aria-haspopup', 'dialog');
   expect(button).toHaveAttribute('aria-expanded', 'false');
   expect(button.textContent).toBe(new Date(2024, 2, 15).toLocaleDateString('en-US'));

@@ -24,6 +24,7 @@
 - Add the `CarouselPlayPause` component for autoplay pause and resume controls.
 - Add the Checkbox `indeterminate` prop for setting its mixed state.
 - Add the CSS Grid `gridGap` prop for setting `--bs-gap`.
+- Add the Datepicker `w` prop for setting trigger and inline calendar width.
 
 ## [0.3.0] - 2026-11-04
 

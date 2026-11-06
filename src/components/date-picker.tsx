@@ -11,6 +11,8 @@ import {
   type WeekDayID,
 } from 'vanilla-calendar-pro';
 
+import type { Width } from '../types';
+
 export type DatepickerSelectionMode = DateMode;
 export type DatepickerPlacement = PositionToInput;
 export type DatepickerTheme = 'light' | 'dark' | 'auto';
@@ -49,6 +51,7 @@ export type DatepickerProps = {
   id?: string | undefined;
   name?: string | undefined;
   disabled?: boolean | undefined;
+  w?: Width | undefined;
   className?: string | undefined;
   'aria-label'?: string | undefined;
   'aria-labelledby'?: string | undefined;
@@ -121,6 +124,7 @@ export function Datepicker({
   id,
   name,
   disabled,
+  w,
   className,
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
@@ -133,6 +137,7 @@ export function Datepicker({
   const controlRef = useRef<HTMLInputElement | HTMLButtonElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const calendarRef = useRef<Calendar | undefined>(undefined);
+  const inlineClassNamesRef = useRef<string[]>([]);
   const hideTimerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const shownRef = useRef(false);
   const wasOpenRef = useRef(false);
@@ -144,6 +149,7 @@ export function Datepicker({
 
   const displayValue = formatDates(selectedDates, formatOptionsRef.current);
   const isButton = !inline && trigger === 'button';
+  const widthClass = w === undefined ? undefined : `w-${w}`;
 
   const renderValue = (dates: string[]) => {
     setSelectedDates(dates);
@@ -263,6 +269,7 @@ export function Datepicker({
       observer?.disconnect();
       calendar.destroy();
       calendarRef.current = undefined;
+      inlineClassNamesRef.current = [];
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -290,10 +297,30 @@ export function Datepicker({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
+  useEffect(() => {
+    const mainElement = inline ? calendarRef.current?.context.mainElement : undefined;
+    if (!mainElement) {
+      return;
+    }
+
+    if (inlineClassNamesRef.current.length > 0) {
+      mainElement.classList.remove(...inlineClassNamesRef.current);
+    }
+
+    const classNames = clsx(widthClass, className).split(/\s+/).filter(Boolean);
+    const addedClassNames = classNames.filter(
+      (classNameToken) => !mainElement.classList.contains(classNameToken),
+    );
+    if (classNames.length > 0) {
+      mainElement.classList.add(...classNames);
+    }
+    inlineClassNamesRef.current = addedClassNames;
+  }, [inline, widthClass, className]);
+
   if (inline) {
     return (
       <>
-        <div ref={containerRef} className={className} />
+        <div ref={containerRef} />
         {name && <input type='hidden' name={name} value={selectedDates.join(',')} readOnly />}
       </>
     );
@@ -308,7 +335,7 @@ export function Datepicker({
         type='button'
         id={id}
         name={name}
-        className={clsx('btn-outline theme-secondary', className)}
+        className={clsx('btn-outline theme-secondary', widthClass, className)}
         disabled={disabled}
         aria-haspopup='dialog'
         aria-expanded={open}
@@ -345,7 +372,7 @@ export function Datepicker({
       type='text'
       id={id}
       name={name}
-      className={clsx(ghost ? 'form-ghost' : 'form-control', className)}
+      className={clsx(ghost ? 'form-ghost' : 'form-control', widthClass, className)}
       placeholder={placeholder}
       autoComplete='off'
       disabled={disabled}

@@ -6,7 +6,7 @@ export function DatepickerMinMaxDemo() {
       <FormLabel htmlFor='datepicker-min-max'>Event date (2026 only)</FormLabel>
       <Datepicker
         id='datepicker-min-max'
-        className='w-12'
+        w={12}
         dateMin='2026-01-01'
         dateMax='2026-12-31'
         placeholder='Select a date in 2026'

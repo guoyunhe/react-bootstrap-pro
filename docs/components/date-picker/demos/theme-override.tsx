@@ -4,7 +4,7 @@ export function DatepickerThemeOverrideDemo() {
   return (
     <>
       <FormLabel htmlFor='datepicker-theme'>Light input, dark datepicker</FormLabel>
-      <Datepicker id='datepicker-theme' theme='dark' className='w-12' />
+      <Datepicker id='datepicker-theme' theme='dark' w={12} />
     </>
   );
 }
