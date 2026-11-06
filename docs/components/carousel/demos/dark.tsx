@@ -14,10 +14,10 @@ export function CarouselDarkDemo() {
   return (
     <Carousel id='carouselExampleDark' overlay data-bs-theme='dark'>
       <CarouselInner>
-        <CarouselItem active data-bs-interval={10000}>
+        <CarouselItem active>
           <CarouselSlidePlaceholder label='First slide' />
         </CarouselItem>
-        <CarouselItem data-bs-interval={2000}>
+        <CarouselItem>
           <CarouselSlidePlaceholder label='Second slide' />
         </CarouselItem>
         <CarouselItem>
