@@ -5,12 +5,26 @@ title: Input 输入框
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { InputBasicDemo } from './demos/basic';
-import { InputStatesDemo } from './demos/states';
+import { InputFieldDemo } from './demos/field';
+import { InputSizesDemo } from './demos/sizes';
+import { InputHelpBlockDemo } from './demos/help-block';
+import { InputHelpInlineDemo } from './demos/help-inline';
+import { InputDisabledDemo } from './demos/disabled';
+import { InputReadonlyDemo } from './demos/readonly';
+import { InputPlaintextDemo } from './demos/plaintext';
+import { InputPlaintextInlineDemo } from './demos/plaintext-inline';
+import { InputDateTimeDemo } from './demos/date-time';
+import { InputColorDemo } from './demos/color';
+import { InputColorSizesDemo } from './demos/color-sizes';
+import { InputDatalistDemo } from './demos/datalist';
+import { InputDatalistCaretDemo } from './demos/datalist-caret';
+import { InputFileDemo } from './demos/file';
+import { InputGhostDemo } from './demos/ghost';
 
 # Input 输入框
 
-`Input` 使用 Bootstrap 的 `.form-control` 样式渲染原生 `<input>`。请设置合适的原生
-`type`，以便浏览器提供预期的键盘、校验、自动填充与输入行为。
+`Input` 使用 Bootstrap 表单控件样式渲染原生 `input`。请选择合适的原生 `type`，
+以使用浏览器提供的输入、校验、键盘和自动填充行为。
 
 ## 示例
 
@@ -22,17 +36,185 @@ import { InputStatesDemo } from './demos/states';
 
 ```
 
-## 尺寸与样式
+## 配合表单字段
 
-使用 `size='sm'` 或 `size='lg'` 设置 Bootstrap 尺寸。`plaintext` 应用
-`.form-control-plaintext`，`ghost` 应用无边框的 `.form-ghost` 样式，适用于带装饰元素
-的字段。
+使用 [`FormField`](../form/) 组合标签、输入框、说明文字和校验反馈。
 
 <DemoContainer>
-  <InputStatesDemo />
+  <InputFieldDemo />
 </DemoContainer>
 
-```tsx src='./demos/states.tsx'
+```tsx src='./demos/field.tsx'
+
+```
+
+## 尺寸
+
+使用 `size='sm'` 或 `size='lg'` 设置 Bootstrap 尺寸。
+
+<DemoContainer>
+  <InputSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## 表单说明文字
+
+使用 `aria-describedby` 将说明文字与输入框关联。
+
+<DemoContainer>
+  <InputHelpBlockDemo />
+</DemoContainer>
+
+```tsx src='./demos/help-block.tsx'
+
+```
+
+说明文字也可以行内显示：
+
+<DemoContainer>
+  <InputHelpInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/help-inline.tsx'
+
+```
+
+## 状态
+
+### 禁用
+
+禁用的输入框无法聚焦或编辑，也不会随表单提交。
+
+<DemoContainer>
+  <InputDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+### 只读
+
+只读输入框不能编辑，但仍可聚焦并随表单提交。
+
+<DemoContainer>
+  <InputReadonlyDemo />
+</DemoContainer>
+
+```tsx src='./demos/readonly.tsx'
+
+```
+
+### 只读纯文本
+
+结合 `plaintext` 和 `readOnly` 可将输入框显示为纯文本。`plaintext` 只改变样式，
+不会使输入框变为只读。
+
+<DemoContainer>
+  <InputPlaintextDemo />
+</DemoContainer>
+
+```tsx src='./demos/plaintext.tsx'
+
+```
+
+行内表单也可以使用相同样式：
+
+<DemoContainer>
+  <InputPlaintextInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/plaintext-inline.tsx'
+
+```
+
+## 类型
+
+### 日期与时间
+
+原生日期和时间控件的外观及功能因浏览器和操作系统而异。也可使用
+[`DatePicker`](../date-picker/)。
+
+<DemoContainer>
+  <InputDateTimeDemo />
+</DemoContainer>
+
+```tsx src='./demos/date-time.tsx'
+
+```
+
+### 颜色
+
+当 `type='color'` 时，`Input` 会在 `.form-control` 之外自动添加
+`.form-control-color`。颜色选择器由浏览器提供。
+
+<DemoContainer>
+  <InputColorDemo />
+</DemoContainer>
+
+```tsx src='./demos/color.tsx'
+
+```
+
+颜色输入框也支持 Bootstrap 尺寸。
+
+<DemoContainer>
+  <InputColorSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/color-sizes.tsx'
+
+```
+
+### 数据列表
+
+使用 `list` 与原生 `datalist` 提供建议值，用户仍可输入其他值。外观与支持情况因
+浏览器和平台而异。
+
+<DemoContainer>
+  <InputDatalistDemo />
+</DemoContainer>
+
+```tsx src='./demos/datalist.tsx'
+
+```
+
+设置 `caret` 可添加 `.form-control-caret` 并显示装饰性箭头。该属性不会添加下拉
+行为；数据列表建议由浏览器提供。
+
+<DemoContainer>
+  <InputDatalistCaretDemo />
+</DemoContainer>
+
+```tsx src='./demos/datalist-caret.tsx'
+
+```
+
+### 文件
+
+文件输入框支持原生 `multiple`、`disabled` 属性和 Bootstrap 尺寸修饰。
+
+<DemoContainer>
+  <InputFileDemo />
+</DemoContainer>
+
+```tsx src='./demos/file.tsx'
+
+```
+
+### Ghost
+
+`ghost` 将 `.form-control` 替换为 `.form-ghost`，适用于组合控件。该样式移除输入框
+的焦点轮廓，因此容器必须提供可见的焦点指示；`FormControl` 提供 `:focus-within` 样式。
+
+<DemoContainer>
+  <InputGhostDemo />
+</DemoContainer>
+
+```tsx src='./demos/ghost.tsx'
 
 ```
 
@@ -40,21 +222,25 @@ import { InputStatesDemo } from './demos/states';
 
 ### Input
 
-默认渲染为 `input`，不提供多态 `component` 属性。下表列出自有属性；此外还继承其余
-原生 input 属性及 [`Box`](../box/README.zh.mdx#api) 的全部工具类属性。
+默认渲染为 `input`，不提供多态 `component` 属性。下表列出自有属性；此外继承其余原生
+input 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。`size` 用于 Bootstrap
+尺寸，而不是原生输入框的数字 `size` 属性。
 
-| 属性         | 类型                   | 说明                                                  |
-| ------------ | ---------------------- | ----------------------------------------------------- |
-| `size`       | `'sm' \| 'lg'`         | 应用小型或大型 Bootstrap 输入框尺寸。                 |
-| `plaintext`  | `boolean`              | 应用 `.form-control-plaintext` 样式。                 |
-| `ghost`      | `boolean`              | 应用无边框的 `.form-ghost` 样式。                     |
-| `validation` | `'valid' \| 'invalid'` | 应用对应的校验状态类。                                |
-| `...props`   | `BoxProps<'input'>`    | 原生 input 属性（包括 `type`）及全部 Box 工具类属性。 |
+| 属性         | 类型                   | 说明                                     |
+| ------------ | ---------------------- | ---------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | 应用小型或大型 Bootstrap 尺寸。          |
+| `plaintext`  | `boolean`              | 应用 `.form-control-plaintext` 样式。    |
+| `ghost`      | `boolean`              | 应用 `.form-ghost`；优先于 `plaintext`。 |
+| `caret`      | `boolean`              | 添加 `.form-control-caret` 装饰性箭头。  |
+| `validation` | `'valid' \| 'invalid'` | 应用对应的校验状态类。                   |
+
+`validation` 只添加 CSS 类；请在适当情况下设置 `aria-invalid` 并关联反馈。校验处理
+请参阅 [`Form`](../form/)。
 
 ## 无障碍
 
-使用通过 `htmlFor` 绑定的可见 `<label>` 为输入框提供可访问名称；无法显示可见标签时，
-可使用 `aria-label`。原生输入类型保留浏览器提供的键盘、校验与自动填充行为。
+使用可见标签为输入框提供无障碍名称；必要时可使用 `aria-label`。占位文本不能替代标签。
+使用 `aria-describedby` 关联说明和反馈；原生控件和键盘交互取决于浏览器与操作系统支持。
 
 ## 参考
 

@@ -33,6 +33,65 @@ test('renders a textarea with textarea props and Bootstrap sizing', async () => 
   expect(screen.getByTestId('textarea')).toHaveClass('form-control', 'form-control-sm');
 });
 
+test('styles standard color inputs while preserving ghost and plaintext modes', async () => {
+  const screen = await render(
+    <>
+      <Input
+        type='color'
+        size='sm'
+        classNameBefore='before'
+        className='custom'
+        data-testid='color'
+      />
+      <Input type='text' data-testid='text' />
+      <Input type='color' ghost data-testid='ghost-color' />
+      <Input type='color' plaintext data-testid='plaintext-color' />
+    </>,
+  );
+  expect(screen.getByTestId('color')).toHaveClass(
+    'form-control',
+    'form-control-color',
+    'form-control-sm',
+    'before',
+    'custom',
+  );
+  expect(screen.getByTestId('color')).toHaveAttribute('type', 'color');
+  expect(screen.getByTestId('text')).not.toHaveClass('form-control-color');
+  expect(screen.getByTestId('ghost-color')).toHaveClass('form-ghost');
+  expect(screen.getByTestId('ghost-color')).not.toHaveClass('form-control-color');
+  expect(screen.getByTestId('plaintext-color')).toHaveClass('form-control-plaintext');
+  expect(screen.getByTestId('plaintext-color')).not.toHaveClass('form-control-color');
+});
+
+test('applies the optional caret class without forwarding the prop', async () => {
+  const screen = await render(
+    <>
+      <Input
+        caret
+        size='lg'
+        validation='invalid'
+        classNameBefore='before'
+        className='custom'
+        data-testid='caret'
+      />
+      <Input caret={false} data-testid='no-caret' />
+      <Input data-testid='default-caret' />
+    </>,
+  );
+  const input = screen.getByTestId('caret').element();
+  expect(input).toHaveClass(
+    'form-control',
+    'form-control-caret',
+    'form-control-lg',
+    'is-invalid',
+    'before',
+    'custom',
+  );
+  expect(input).not.toHaveAttribute('caret');
+  expect(screen.getByTestId('no-caret')).not.toHaveClass('form-control-caret');
+  expect(screen.getByTestId('default-caret')).not.toHaveClass('form-control-caret');
+});
+
 test('renders adorned controls with ghost inputs', async () => {
   const screen = await render(
     <FormControl component='label' adorn size='sm' data-testid='adorn'>

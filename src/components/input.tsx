@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import type { ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
@@ -7,6 +9,7 @@ type InputOwnProps = {
   size?: 'sm' | 'lg' | undefined;
   plaintext?: boolean | undefined;
   ghost?: boolean | undefined;
+  caret?: boolean | undefined;
   validation?: ValidationState | undefined;
 };
 
@@ -18,6 +21,7 @@ export function Input({
   size,
   plaintext,
   ghost,
+  caret,
   validation,
   ...props
 }: InputProps) {
@@ -32,7 +36,11 @@ export function Input({
         size,
         'form-control',
         validation,
-        classNameBefore,
+        clsx(
+          baseClass === 'form-control' && props.type === 'color' && 'form-control-color',
+          caret && 'form-control-caret',
+          classNameBefore,
+        ),
       )}
       className={className}
     />

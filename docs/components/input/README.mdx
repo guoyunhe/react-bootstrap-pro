@@ -5,13 +5,27 @@ title: Input
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { InputBasicDemo } from './demos/basic';
-import { InputStatesDemo } from './demos/states';
+import { InputFieldDemo } from './demos/field';
+import { InputSizesDemo } from './demos/sizes';
+import { InputHelpBlockDemo } from './demos/help-block';
+import { InputHelpInlineDemo } from './demos/help-inline';
+import { InputDisabledDemo } from './demos/disabled';
+import { InputReadonlyDemo } from './demos/readonly';
+import { InputPlaintextDemo } from './demos/plaintext';
+import { InputPlaintextInlineDemo } from './demos/plaintext-inline';
+import { InputDateTimeDemo } from './demos/date-time';
+import { InputColorDemo } from './demos/color';
+import { InputColorSizesDemo } from './demos/color-sizes';
+import { InputDatalistDemo } from './demos/datalist';
+import { InputDatalistCaretDemo } from './demos/datalist-caret';
+import { InputFileDemo } from './demos/file';
+import { InputGhostDemo } from './demos/ghost';
 
 # Input
 
-`Input` renders a native `<input>` with Bootstrap's `.form-control` styling.
-Choose an appropriate native `type` so browsers provide the expected keyboard,
-validation, autofill, and input behavior.
+`Input` renders a native `input` with Bootstrap's form-control styling.
+Choose an appropriate native `type` for browser-provided input, validation,
+keyboard and autofill behavior.
 
 ## Example
 
@@ -23,17 +37,187 @@ validation, autofill, and input behavior.
 
 ```
 
-## Sizes and styles
+## With form field
 
-Use `size='sm'` or `size='lg'` for Bootstrap sizing. `plaintext` applies
-`.form-control-plaintext`, while `ghost` applies the borderless `.form-ghost`
-style used inside adorned fields.
+Use [`FormField`](../form/) to group a label, input, help text and feedback.
 
 <DemoContainer>
-  <InputStatesDemo />
+  <InputFieldDemo />
 </DemoContainer>
 
-```tsx src='./demos/states.tsx'
+```tsx src='./demos/field.tsx'
+
+```
+
+## Sizes
+
+Use `size='sm'` or `size='lg'` for Bootstrap sizing.
+
+<DemoContainer>
+  <InputSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## Form text
+
+Associate help text with the input using `aria-describedby`.
+
+<DemoContainer>
+  <InputHelpBlockDemo />
+</DemoContainer>
+
+```tsx src='./demos/help-block.tsx'
+
+```
+
+Help text can also be inline:
+
+<DemoContainer>
+  <InputHelpInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/help-inline.tsx'
+
+```
+
+## States
+
+### Disabled
+
+Disabled inputs cannot be focused or edited and are excluded from form submission.
+
+<DemoContainer>
+  <InputDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+### Readonly
+
+Readonly inputs cannot be edited but remain focusable and are submitted with the form.
+
+<DemoContainer>
+  <InputReadonlyDemo />
+</DemoContainer>
+
+```tsx src='./demos/readonly.tsx'
+
+```
+
+### Readonly plain text
+
+Combine `plaintext` with `readOnly` to present an input as plain text. The
+`plaintext` prop only changes styling; it does not make the input readonly.
+
+<DemoContainer>
+  <InputPlaintextDemo />
+</DemoContainer>
+
+```tsx src='./demos/plaintext.tsx'
+
+```
+
+Use the same style in an inline form:
+
+<DemoContainer>
+  <InputPlaintextInlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/plaintext-inline.tsx'
+
+```
+
+## Types
+
+### Date and time
+
+Native date and time controls vary by browser and operating system. See also
+[`DatePicker`](../date-picker/) for an alternative.
+
+<DemoContainer>
+  <InputDateTimeDemo />
+</DemoContainer>
+
+```tsx src='./demos/date-time.tsx'
+
+```
+
+### Color
+
+For `type='color'`, `Input` automatically adds `.form-control-color` alongside
+`.form-control`. The browser provides the color picker.
+
+<DemoContainer>
+  <InputColorDemo />
+</DemoContainer>
+
+```tsx src='./demos/color.tsx'
+
+```
+
+Color inputs also support Bootstrap sizes.
+
+<DemoContainer>
+  <InputColorSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/color-sizes.tsx'
+
+```
+
+### Datalists
+
+Use `list` with a native `datalist` to suggest values. The user can still enter
+other values; appearance and support vary across browsers and platforms.
+
+<DemoContainer>
+  <InputDatalistDemo />
+</DemoContainer>
+
+```tsx src='./demos/datalist.tsx'
+
+```
+
+Set `caret` to add `.form-control-caret` and display a decorative caret. It
+does not add dropdown behavior; the browser provides datalist suggestions.
+
+<DemoContainer>
+  <InputDatalistCaretDemo />
+</DemoContainer>
+
+```tsx src='./demos/datalist-caret.tsx'
+
+```
+
+### File
+
+File inputs support native `multiple` and `disabled` attributes and Bootstrap
+size modifiers.
+
+<DemoContainer>
+  <InputFileDemo />
+</DemoContainer>
+
+```tsx src='./demos/file.tsx'
+
+```
+
+### Ghost
+
+`ghost` replaces `.form-control` with `.form-ghost` for composite controls.
+The ghost style removes the input's focus outline, so its wrapper must provide
+a visible focus indicator; `FormControl` supplies a `:focus-within` style.
+
+<DemoContainer>
+  <InputGhostDemo />
+</DemoContainer>
+
+```tsx src='./demos/ghost.tsx'
 
 ```
 
@@ -42,23 +226,27 @@ style used inside adorned fields.
 ### Input
 
 Renders an `input` by default and does not expose a polymorphic `component`
-prop. Its own props are listed below; it inherits the remaining native input
-props and all [`Box`](../box/README.mdx#api) utility props.
+prop. Its own props are listed below; it inherits remaining native input props
+and [`Box`](../box/README.mdx#api) utility props. `size` is reserved for
+Bootstrap sizing rather than the native input's numeric `size` attribute.
 
-| Prop         | Type                   | Description                                                       |
-| ------------ | ---------------------- | ----------------------------------------------------------------- |
-| `size`       | `'sm' \| 'lg'`         | Applies the small or large Bootstrap input size.                  |
-| `plaintext`  | `boolean`              | Applies `.form-control-plaintext` styling.                        |
-| `ghost`      | `boolean`              | Applies the borderless `.form-ghost` style.                       |
-| `validation` | `'valid' \| 'invalid'` | Applies the corresponding validation class.                       |
-| `...props`   | `BoxProps<'input'>`    | Native input props, including `type`, plus all Box utility props. |
+| Prop         | Type                   | Description                                               |
+| ------------ | ---------------------- | --------------------------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | Applies the small or large Bootstrap size.                |
+| `plaintext`  | `boolean`              | Applies `.form-control-plaintext` styling.                |
+| `ghost`      | `boolean`              | Applies `.form-ghost`; takes precedence over `plaintext`. |
+| `caret`      | `boolean`              | Adds `.form-control-caret` for a decorative caret.        |
+| `validation` | `'valid' \| 'invalid'` | Applies the matching validation class.                    |
+
+`validation` adds a CSS class; set `aria-invalid` and associate feedback when
+appropriate. See [`Form`](../form/) for validation handling.
 
 ## Accessibility
 
-Give each input an accessible name with a visible `<label>` bound through
-`htmlFor`, or with `aria-label` when a visible label is not possible. Native
-input types retain their browser-provided keyboard, validation, and autofill
-behavior.
+Give each input an accessible name with a visible label or, when necessary,
+`aria-label`. Placeholders do not replace labels. Associate instructions and
+feedback using `aria-describedby`; native controls and keyboard interactions
+depend on browser and operating system support.
 
 ## See
 

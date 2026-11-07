@@ -19,6 +19,7 @@
 
 ### Added
 
+- Add the `Input` `caret` prop for Bootstrap's form-control caret styling.
 - Add `FormAdornIcon` for icons in adorned form controls.
 - Add `FormAdornText` for text in adorned form controls.
 - Add `FormControl` support for adorned control wrappers.
@@ -37,6 +38,7 @@
 
 ### Fixed
 
+- Apply Bootstrap's color control styling automatically to standard color `Input` elements.
 - Style `Select` with Bootstrap 6 form control and size classes.
 
 ## [0.3.0] - 2026-11-04
