@@ -1,32 +1,32 @@
-import { Box, FormControl } from 'react-bootstrap-pro';
+import { Box, Input } from 'react-bootstrap-pro';
 
 export function FormAdornTextDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
-      <FormControl component='label' adorn>
+      <Box component='label' classNameBefore='form-control form-adorn'>
         <Box component='span' className='form-adorn-text' aria-hidden='true'>
           $
         </Box>
-        <FormControl ghost placeholder='0.00' aria-label='Amount' />
-      </FormControl>
-      <FormControl component='label' adorn adornEnd>
+        <Input ghost placeholder='0.00' aria-label='Amount' />
+      </Box>
+      <Box component='label' classNameBefore='form-control form-adorn form-adorn-end'>
         <Box component='span' className='form-adorn-text' aria-hidden='true'>
           USD
         </Box>
-        <FormControl ghost placeholder='Amount' aria-label='Amount in USD' />
-      </FormControl>
-      <FormControl component='label' adorn>
+        <Input ghost placeholder='Amount' aria-label='Amount in USD' />
+      </Box>
+      <Box component='label' classNameBefore='form-control form-adorn'>
         <Box component='span' className='form-adorn-text' aria-hidden='true'>
           https://
         </Box>
-        <FormControl ghost placeholder='example.com' aria-label='Website address' />
-      </FormControl>
-      <FormControl component='label' adorn adornEnd>
+        <Input ghost placeholder='example.com' aria-label='Website address' />
+      </Box>
+      <Box component='label' classNameBefore='form-control form-adorn form-adorn-end'>
         <Box component='span' className='form-adorn-text' aria-hidden='true'>
           @example.com
         </Box>
-        <FormControl ghost placeholder='username' aria-label='Email username' />
-      </FormControl>
+        <Input ghost placeholder='username' aria-label='Email username' />
+      </Box>
     </Box>
   );
 }

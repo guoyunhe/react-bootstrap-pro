@@ -1,15 +1,15 @@
-import { Box, FormControl, FormFloating } from 'react-bootstrap-pro';
+import { Box, FormFloating, Input } from 'react-bootstrap-pro';
 
 export function FloatingLabelsDateTimeDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
       <FormFloating>
         <label htmlFor='floating-date'>Date</label>
-        <FormControl type='date' id='floating-date' />
+        <Input type='date' id='floating-date' />
       </FormFloating>
       <FormFloating>
         <label htmlFor='floating-time'>Time</label>
-        <FormControl type='time' id='floating-time' />
+        <Input type='time' id='floating-time' />
       </FormFloating>
     </Box>
   );

@@ -1,11 +1,11 @@
-import { Box, FormControl, InputGroup, InputGroupText } from 'react-bootstrap-pro';
+import { Box, Input, InputGroup, InputGroupText } from 'react-bootstrap-pro';
 
 export function InputGroupSizingDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
       <InputGroup size='sm'>
         <InputGroupText id='input-group-sizing-sm'>Small</InputGroupText>
-        <FormControl
+        <Input
           type='text'
           aria-label='Small input group'
           aria-describedby='input-group-sizing-sm'
@@ -13,7 +13,7 @@ export function InputGroupSizingDemo() {
       </InputGroup>
       <InputGroup>
         <InputGroupText id='input-group-sizing-default'>Default</InputGroupText>
-        <FormControl
+        <Input
           type='text'
           aria-label='Default input group'
           aria-describedby='input-group-sizing-default'
@@ -21,7 +21,7 @@ export function InputGroupSizingDemo() {
       </InputGroup>
       <InputGroup size='lg'>
         <InputGroupText id='input-group-sizing-lg'>Large</InputGroupText>
-        <FormControl
+        <Input
           type='text'
           aria-label='Large input group'
           aria-describedby='input-group-sizing-lg'

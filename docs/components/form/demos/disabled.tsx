@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, FormControl, FormField, FormLabel } from 'react-bootstrap-pro';
+import { Box, Button, Checkbox, FormField, FormLabel, Input, Select } from 'react-bootstrap-pro';
 
 export function FormDisabledDemo() {
   return (
@@ -7,13 +7,13 @@ export function FormDisabledDemo() {
         <Box component='legend'>Disabled fieldset example</Box>
         <FormField mb={3}>
           <FormLabel htmlFor='form-disabled-input'>Disabled input</FormLabel>
-          <FormControl id='form-disabled-input' placeholder='Disabled input' />
+          <Input id='form-disabled-input' placeholder='Disabled input' />
         </FormField>
         <FormField mb={3}>
           <FormLabel htmlFor='form-disabled-select'>Disabled select menu</FormLabel>
-          <FormControl component='select' id='form-disabled-select'>
+          <Select id='form-disabled-select'>
             <option>Disabled select</option>
-          </FormControl>
+          </Select>
         </FormField>
         <FormField mb={3}>
           <Checkbox id='form-disabled-check' />

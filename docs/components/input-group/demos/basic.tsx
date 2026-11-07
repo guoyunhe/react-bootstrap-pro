@@ -1,11 +1,11 @@
-import { Box, FormControl, InputGroup, InputGroupText } from 'react-bootstrap-pro';
+import { Box, Input, InputGroup, InputGroupText } from 'react-bootstrap-pro';
 
 export function InputGroupBasicDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
       <InputGroup>
         <InputGroupText id='input-group-basic-addon-1'>@</InputGroupText>
-        <FormControl
+        <Input
           type='text'
           placeholder='Username'
           aria-label='Username'
@@ -13,7 +13,7 @@ export function InputGroupBasicDemo() {
         />
       </InputGroup>
       <InputGroup>
-        <FormControl
+        <Input
           type='text'
           placeholder='Recipient’s username'
           aria-label='Recipient’s username'

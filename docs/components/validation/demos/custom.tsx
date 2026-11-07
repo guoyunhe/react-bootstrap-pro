@@ -4,16 +4,17 @@ import {
   Button,
   Col,
   Form,
-  FormControl,
   FormFeedback,
   FormField,
   FormFieldContent,
   FormLabel,
   FormText,
+  Input,
   InputGroup,
   InputGroupText,
   Radio,
   Row,
+  Select,
   Switch,
   SwitchInput,
 } from 'react-bootstrap-pro';
@@ -37,7 +38,7 @@ export function ValidationCustomDemo() {
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-custom-name'>Name</FormLabel>
-            <FormControl
+            <Input
               id='validation-custom-name'
               defaultValue='Mark Otto'
               required
@@ -51,7 +52,7 @@ export function ValidationCustomDemo() {
             <FormLabel htmlFor='validation-custom-donation'>Donation amount</FormLabel>
             <InputGroup>
               <InputGroupText>$</InputGroupText>
-              <FormControl
+              <Input
                 type='number'
                 id='validation-custom-donation'
                 defaultValue={100}
@@ -67,7 +68,7 @@ export function ValidationCustomDemo() {
       </Row>
       <FormField mb={3}>
         <FormLabel htmlFor='validation-custom-address'>Address</FormLabel>
-        <FormControl
+        <Input
           id='validation-custom-address'
           defaultValue='1234 Main St'
           required
@@ -81,7 +82,7 @@ export function ValidationCustomDemo() {
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-custom-city'>City</FormLabel>
-            <FormControl
+            <Input
               id='validation-custom-city'
               required
               aria-describedby='validation-custom-city-feedback'
@@ -92,8 +93,7 @@ export function ValidationCustomDemo() {
         <Col span={{ md: 4 }}>
           <FormField>
             <FormLabel htmlFor='validation-custom-state'>State</FormLabel>
-            <FormControl
-              component='select'
+            <Select
               id='validation-custom-state'
               defaultValue=''
               required
@@ -103,14 +103,14 @@ export function ValidationCustomDemo() {
                 Choose…
               </option>
               <option>...</option>
-            </FormControl>
+            </Select>
             <FormFeedback id='validation-custom-state-feedback'>Please select a state</FormFeedback>
           </FormField>
         </Col>
         <Col span={{ md: 2 }}>
           <FormField>
             <FormLabel htmlFor='validation-custom-zip'>Zip</FormLabel>
-            <FormControl
+            <Input
               id='validation-custom-zip'
               required
               aria-describedby='validation-custom-zip-feedback'

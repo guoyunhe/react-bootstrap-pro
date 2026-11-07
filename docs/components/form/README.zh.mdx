@@ -21,12 +21,14 @@ import { FormLayoutUtilitiesDemo } from './demos/layout-utilities';
 
 # Form 表单
 
-Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`、`FormLabel`、
-`FormText` 和 `FormControl` 组合出带标签与帮助文本的控件，`Checkbox`、`Radio`、
-`Switch` 和 `Range` 分别渲染 `.check` 复选框、`.radio` 单选按钮、`.switch` 开关与
-`.form-range` 滑块；`InputGroup` 为控件挂载附加内容，`FormFloating` 将控件与标签
-包装为浮动标签字段，`FormControl adorn` 则围绕 ghost 输入框构建带装饰控件的字段。
-请始终为输入框设置合适的 `type`，以便浏览器提供对应的键盘、校验与自动填充行为。
+Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`、`FormLabel` 和
+`FormText` 组合出带标签与帮助文本的控件；[`Input`](../input/README.zh.mdx)、
+[`Select`](../select/README.zh.mdx) 和 [`Textarea`](../textarea/README.zh.mdx) 分别封装
+对应的原生元素。`Checkbox`、`Radio`、`Switch` 和 `Range` 分别渲染 `.check` 复选框、
+`.radio` 单选按钮、`.switch` 开关与 `.form-range` 滑块；`InputGroup` 为控件挂载附加
+内容，`FormFloating` 将控件与标签包装为浮动标签字段，带装饰控件则由 ghost `Input`
+与 `.form-adorn` 容器组合而成。请始终为输入框设置合适的 `type`，以便浏览器提供对应
+的键盘、校验与自动填充行为。
 
 ## 基础示例
 
@@ -38,8 +40,8 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 
 ```
 
-通过修改 `component`，`FormControl` 可用于 `input`、`textarea` 和 `select`。
-`FormText` 渲染 `.form-text` 帮助文本，可配合 `aria-describedby` 关联到控件。
+使用 `Input`、`Textarea` 和 `Select` 分别渲染对应的原生元素。`FormText` 渲染
+`.form-text` 帮助文本，可配合 `aria-describedby` 关联到控件。
 
 ## 禁用表单
 
@@ -58,10 +60,10 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 
 ## 装饰控件
 
-在 `FormControl` 上设置 `adorn` 会渲染 `.form-adorn` 容器：它本身是
-`.form-control`，用 flex 布局把装饰元素与「ghost 输入框」并排。把容器渲染为
-`label`，并在其中放入 `FormControl ghost` 输入框，点击图标、文字或内边距即可聚焦
-控件，无需 JavaScript。添加 `adornEnd` 可将装饰元素放到末尾。
+将 ghost `Input` 放入带有
+`classNameBefore='form-control form-adorn'` 的 `Box component='label'`，即可让装饰元素
+与输入框并排；点击图标、文字或内边距即可聚焦控件，无需 JavaScript。在容器上添加
+`form-adorn-end` 可将装饰元素放到末尾。
 
 <DemoContainer>
   <FormAdornBasicDemo />
@@ -92,7 +94,7 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 
 ```
 
-在容器上设置 `size` 可整体调整带装饰控件的尺寸。
+在容器上添加 `form-control-sm` 或 `form-control-lg` 可整体调整带装饰控件的尺寸。
 
 <DemoContainer>
   <FormAdornSizingDemo />
@@ -170,8 +172,7 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 
 #### 水平表单标签尺寸
 
-用 `FormLabel` 的 `col='sm'` 或 `col='lg'` 匹配 `FormControl size='sm'` 与
-`size='lg'` 的尺寸。
+用 `FormLabel` 的 `col='sm'` 或 `col='lg'` 匹配 `Input size='sm'` 与 `size='lg'` 的尺寸。
 
 <DemoContainer>
   <FormLayoutHorizontalSizingDemo />
@@ -226,18 +227,6 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 没有可见标签时可用 `aria-label`。帮助文本通过 `aria-describedby` 关联。
 
 ## API
-
-### FormControl
-
-| 属性        | 类型           | 说明                                                          |
-| ----------- | -------------- | ------------------------------------------------------------- |
-| `size`      | `'sm' \| 'lg'` | 调整高度、内边距、字号和圆角。                                |
-| `plaintext` | `boolean`      | 渲染 `.form-control-plaintext` 而非 `.form-control`。         |
-| `ghost`     | `boolean`      | 渲染无边框的 `.form-ghost`，用于装饰控件字段。                |
-| `adorn`     | `boolean`      | 添加 `.form-adorn`，把装饰元素与 ghost 输入框并排布局。       |
-| `adornEnd`  | `boolean`      | 添加 `.form-adorn-end` 与 `.form-adorn`，将装饰元素放到末尾。 |
-| `component` | `ElementType`  | 默认渲染 `input`，也可渲染 `textarea` 或 `select`。           |
-| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。                               |
 
 ### FormField
 

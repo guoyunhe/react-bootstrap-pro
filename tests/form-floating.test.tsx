@@ -1,18 +1,18 @@
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { FormControl, FormFloating } from '../src';
+import { FormFloating, Input } from '../src';
 
 test('renders floating labels with the always variant', async () => {
   const screen = await render(
     <>
       <FormFloating data-testid='floating'>
         <label htmlFor='floating-test'>Email address</label>
-        <FormControl type='email' id='floating-test' placeholder='name@example.com' />
+        <Input type='email' id='floating-test' placeholder='name@example.com' />
       </FormFloating>
       <FormFloating always data-testid='floating-always'>
         <label htmlFor='floating-always'>Password</label>
-        <FormControl type='password' id='floating-always' placeholder='Password' />
+        <Input type='password' id='floating-always' placeholder='Password' />
       </FormFloating>
     </>,
   );

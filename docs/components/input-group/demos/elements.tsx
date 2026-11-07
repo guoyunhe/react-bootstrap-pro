@@ -1,28 +1,28 @@
-import { Box, FormControl, InputGroup, InputGroupText } from 'react-bootstrap-pro';
+import { Box, Input, InputGroup, InputGroupText, Select, Textarea } from 'react-bootstrap-pro';
 
 export function InputGroupElementsDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
       <InputGroup>
         <InputGroupText>With textarea</InputGroupText>
-        <FormControl component='textarea' aria-label='With textarea' />
+        <Textarea aria-label='With textarea' />
       </InputGroup>
       <InputGroup>
         <InputGroupText component='label' htmlFor='input-group-select'>
           Options
         </InputGroupText>
-        <FormControl component='select' id='input-group-select' defaultValue=''>
+        <Select id='input-group-select' defaultValue=''>
           <option value=''>Choose...</option>
           <option value='1'>One</option>
           <option value='2'>Two</option>
           <option value='3'>Three</option>
-        </FormControl>
+        </Select>
       </InputGroup>
       <InputGroup>
         <InputGroupText component='label' htmlFor='input-group-file'>
           Upload
         </InputGroupText>
-        <FormControl type='file' id='input-group-file' />
+        <Input type='file' id='input-group-file' />
       </InputGroup>
     </Box>
   );

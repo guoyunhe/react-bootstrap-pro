@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { Form, FormControl, FormFeedback, FormLabel } from '../src';
+import { Form, FormFeedback, FormLabel, Input } from '../src';
 
 function setNativeValue(input: HTMLInputElement, value: string) {
   Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set?.call(input, value);
@@ -12,7 +12,7 @@ function ValidationForm({ onSubmit }: { onSubmit: (event: SubmitEvent) => void }
   return (
     <Form validation onSubmit={onSubmit}>
       <FormLabel htmlFor='validation-name'>Name</FormLabel>
-      <FormControl id='validation-name' required aria-describedby='validation-name-feedback' />
+      <Input id='validation-name' required aria-describedby='validation-name-feedback' />
       <FormFeedback id='validation-name-feedback'>Full name is required</FormFeedback>
       <button type='submit'>Submit</button>
     </Form>
@@ -22,7 +22,7 @@ function ValidationForm({ onSubmit }: { onSubmit: (event: SubmitEvent) => void }
 test('opts in to client-side validation', async () => {
   const screen = await render(
     <Form validation data-testid='form'>
-      <FormControl aria-label='Name' required />
+      <Input aria-label='Name' required />
     </Form>,
   );
   const form = screen.getByTestId('form').element() as HTMLFormElement;

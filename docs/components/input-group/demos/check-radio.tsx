@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControl, InputGroup, InputGroupText, Radio } from 'react-bootstrap-pro';
+import { Box, Checkbox, Input, InputGroup, InputGroupText, Radio } from 'react-bootstrap-pro';
 
 export function InputGroupCheckRadioDemo() {
   return (
@@ -7,13 +7,13 @@ export function InputGroupCheckRadioDemo() {
         <InputGroupText component='div'>
           <Checkbox aria-label='Checkbox for following text input' />
         </InputGroupText>
-        <FormControl type='text' aria-label='Text input with checkbox' />
+        <Input type='text' aria-label='Text input with checkbox' />
       </InputGroup>
       <InputGroup>
         <InputGroupText component='div'>
           <Radio name='input-group-radio' aria-label='Radio button for following text input' />
         </InputGroupText>
-        <FormControl type='text' aria-label='Text input with radio button' />
+        <Input type='text' aria-label='Text input with radio button' />
       </InputGroup>
     </Box>
   );

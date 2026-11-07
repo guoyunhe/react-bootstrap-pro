@@ -13,7 +13,7 @@ import { type ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 import { Chip, type ChipProps } from './chip';
-import { FormControl } from './form-control';
+import { Input } from './input';
 
 export type ChipInputChipProps = Omit<
   ChipProps<'span'>,
@@ -340,7 +340,7 @@ export function ChipInput<C extends ElementType = 'div'>({
           {chipValue}
         </Chip>
       ))}
-      <FormControl
+      <Input
         ref={inputRef}
         ghost
         id={id}

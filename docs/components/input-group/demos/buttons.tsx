@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, InputGroup } from 'react-bootstrap-pro';
+import { Box, Button, Input, InputGroup } from 'react-bootstrap-pro';
 
 export function InputGroupButtonsDemo() {
   return (
@@ -13,14 +13,14 @@ export function InputGroupButtonsDemo() {
         >
           Button
         </Button>
-        <FormControl
+        <Input
           type='text'
           aria-label='Example text with button addon'
           aria-describedby='input-group-button-1'
         />
       </InputGroup>
       <InputGroup>
-        <FormControl
+        <Input
           type='text'
           placeholder='Recipient’s username'
           aria-label='Recipient’s username'

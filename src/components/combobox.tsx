@@ -10,7 +10,7 @@ import { BiCheck, BiChevronDown } from 'react-bootstrap-icons-pro';
 import type { ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
-import { FormControl } from './form-control';
+import { Input } from './input';
 import { Menu, MenuHeader } from './menu';
 
 export type ComboboxOption = {
@@ -382,7 +382,7 @@ export function Combobox({
       >
         {search && (
           <Box classNameBefore='combobox-search'>
-            <FormControl
+            <Input
               ref={searchRef}
               className='combobox-search-input'
               type='search'

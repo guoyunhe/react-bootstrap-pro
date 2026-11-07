@@ -1,13 +1,13 @@
-import { Col, FormControl, Row } from 'react-bootstrap-pro';
+import { Col, Input, Row } from 'react-bootstrap-pro';
 
 export function FormLayoutGridDemo() {
   return (
     <Row>
       <Col>
-        <FormControl placeholder='First name' aria-label='First name' />
+        <Input placeholder='First name' aria-label='First name' />
       </Col>
       <Col>
-        <FormControl placeholder='Last name' aria-label='Last name' />
+        <Input placeholder='Last name' aria-label='Last name' />
       </Col>
     </Row>
   );

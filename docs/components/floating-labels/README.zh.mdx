@@ -85,7 +85,7 @@ date、time、datetime-local、month、week 类型的输入框始终显示浮动
 
 ## 只读纯文本
 
-在 `FormControl` 上设置 `plaintext` 会渲染 `.form-control-plaintext`，保持浮动标签
+在 `Input` 上设置 `plaintext` 会渲染 `.form-control-plaintext`，保持浮动标签
 布局的同时以纯文本展示值。
 
 <DemoContainer>
@@ -148,34 +148,6 @@ date、time、datetime-local、month、week 类型的输入框始终显示浮动
 校验样式可通过 `className` 传入：为容器和控件添加 `is-invalid`，再在字段下方渲染
 反馈信息。
 
-### FormControl
-
-默认渲染为 `input`。自有 `size` 属性替代原生 `size` 属性，用于设置 Bootstrap
-控件尺寸；继承所选元素的其他原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
-
-| 属性         | 类型                   | 说明                                          |
-| ------------ | ---------------------- | --------------------------------------------- |
-| `size`       | `'sm' \| 'lg'`         | 设置小型或大型 Bootstrap 表单控件尺寸。       |
-| `plaintext`  | `boolean`              | 使用 `.form-control-plaintext` 样式渲染控件。 |
-| `ghost`      | `boolean`              | 使用 `.form-ghost` 样式渲染控件。             |
-| `adorn`      | `boolean`              | 添加输入框组装饰元素样式。                    |
-| `adornEnd`   | `boolean`              | 在控件末尾添加装饰元素样式。                  |
-| `validation` | `'valid' \| 'invalid'` | 应用对应的服务端校验状态类。                  |
-| `component`  | `ElementType`          | 指定渲染元素，默认为 `input`。                |
-| `...props`   | `BoxProps<C>`          | 所选元素的原生属性及全部 Box 工具类属性。     |
-
-### FormLabel
-
-默认渲染为 `label`。自有 `col` 属性用于添加水平表单标签样式；继承所选元素的原生
-属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
-
-| 属性        | 类型                      | 说明                                               |
-| ----------- | ------------------------- | -------------------------------------------------- |
-| `col`       | `boolean \| 'sm' \| 'lg'` | 添加 `.col-form-label`，并可设置与控件相同的尺寸。 |
-| `component` | `ElementType`             | 指定渲染元素，默认为 `label`。                     |
-| `...props`  | `BoxProps<C>`             | 所选元素的原生属性及全部 Box 工具类属性。          |
-
 ## 无障碍
 
 `<label>` 必须写在控件之前，并通过 `htmlFor` 绑定。文本控件需要非空
@@ -185,5 +157,6 @@ date、time、datetime-local、month、week 类型的输入框始终显示浮动
 
 - [Bootstrap 6 浮动标签文档](https://getbootstrap.com/docs/6.0/forms/floating-labels/)
 - [FormFloating 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-floating.tsx)
-- [FormControl 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-control.tsx)
-- [FormLabel 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-label.tsx)
+- [Input 文档](../input/README.zh.mdx)
+- [Select 文档](../select/README.zh.mdx)
+- [Textarea 文档](../textarea/README.zh.mdx)

@@ -4,6 +4,8 @@
 
 ### Breaking Changes
 
+- Replace the polymorphic `FormControl` with dedicated `Input`, `Select`, and
+  `Textarea` components; remove the `FormControl` export.
 - Rename the Box `display` prop to `d`; the old prop is removed.
 - Replace Carousel's `fade` and `slide` boolean props with an `effect` prop
   accepting `'slide'` or `'fade'`; the default is `'slide'`.

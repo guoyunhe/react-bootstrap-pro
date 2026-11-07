@@ -1,11 +1,11 @@
-import { Box, FormControl, FormFloating } from 'react-bootstrap-pro';
+import { Box, FormFloating, Input } from 'react-bootstrap-pro';
 
 export function FloatingLabelsAlwaysDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
       <FormFloating always>
         <label htmlFor='floating-always-email'>Email address</label>
-        <FormControl
+        <Input
           type='email'
           id='floating-always-email'
           placeholder='name@example.com'
@@ -14,7 +14,7 @@ export function FloatingLabelsAlwaysDemo() {
       </FormFloating>
       <FormFloating always>
         <label htmlFor='floating-always-password'>Password</label>
-        <FormControl
+        <Input
           type='password'
           id='floating-always-password'
           placeholder='••••••••'

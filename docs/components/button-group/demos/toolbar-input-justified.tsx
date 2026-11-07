@@ -2,7 +2,7 @@ import {
   Button,
   ButtonGroup,
   ButtonToolbar,
-  FormControl,
+  Input,
   InputGroup,
   InputGroupText,
 } from 'react-bootstrap-pro';
@@ -26,7 +26,7 @@ export function ButtonToolbarJustifiedInputDemo() {
       </ButtonGroup>
       <InputGroup>
         <InputGroupText id='button-toolbar-justified-input-addon'>@</InputGroupText>
-        <FormControl
+        <Input
           placeholder='Input group example'
           aria-label='Input group example'
           aria-describedby='button-toolbar-justified-input-addon'

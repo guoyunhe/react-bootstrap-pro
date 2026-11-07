@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { FormControl, FormField, FormLabel, FormText } from '../src';
+import { FormField, FormLabel, FormText, Input } from '../src';
 
 test('composes form fields, labels and help text', async () => {
   const screen = await render(
@@ -9,7 +9,7 @@ test('composes form fields, labels and help text', async () => {
       <FormLabel htmlFor='form-email' data-testid='label'>
         Email address
       </FormLabel>
-      <FormControl
+      <Input
         id='form-email'
         type='email'
         aria-describedby='form-email-help'

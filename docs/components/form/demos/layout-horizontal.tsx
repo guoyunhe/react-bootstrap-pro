@@ -3,9 +3,9 @@ import {
   Button,
   Checkbox,
   Col,
-  FormControl,
   FormField,
   FormLabel,
+  Input,
   Radio,
   Row,
 } from 'react-bootstrap-pro';
@@ -20,7 +20,7 @@ export function FormLayoutHorizontalDemo() {
           </FormLabel>
         </Col>
         <Col span={{ sm: 10 }}>
-          <FormControl type='email' id='layout-horizontal-email' />
+          <Input type='email' id='layout-horizontal-email' />
         </Col>
       </Row>
       <Row gutter={3} mb={3}>
@@ -30,7 +30,7 @@ export function FormLayoutHorizontalDemo() {
           </FormLabel>
         </Col>
         <Col span={{ sm: 10 }}>
-          <FormControl type='password' id='layout-horizontal-password' />
+          <Input type='password' id='layout-horizontal-password' />
         </Col>
       </Row>
       <Box component='fieldset' mb={3}>

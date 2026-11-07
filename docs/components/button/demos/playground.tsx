@@ -5,7 +5,7 @@ import {
   Box,
   Button,
   Checkbox,
-  FormControl,
+  Select,
   type ButtonTheme,
   type ButtonVariant,
 } from 'react-bootstrap-pro';
@@ -37,8 +37,7 @@ export function ButtonPlaygroundDemo() {
       <Box d='flex' flexWrap='wrap' alignItems='end' gap={3}>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Theme
-          <FormControl
-            component='select'
+          <Select
             value={theme}
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
@@ -50,12 +49,11 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </FormControl>
+          </Select>
         </Box>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Style
-          <FormControl
-            component='select'
+          <Select
             value={variant}
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
@@ -67,12 +65,11 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </FormControl>
+          </Select>
         </Box>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Size
-          <FormControl
-            component='select'
+          <Select
             value={size}
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
@@ -84,12 +81,11 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </FormControl>
+          </Select>
         </Box>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Content
-          <FormControl
-            component='select'
+          <Select
             value={buttonType}
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
@@ -101,12 +97,11 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </FormControl>
+          </Select>
         </Box>
         <Box component='label' d='flex' flexDirection='column' gap={1}>
           Shape
-          <FormControl
-            component='select'
+          <Select
             value={rounding}
             onChange={(event: ChangeEvent<HTMLSelectElement>) => {
               const value = event.currentTarget.value;
@@ -118,7 +113,7 @@ export function ButtonPlaygroundDemo() {
                 {value}
               </option>
             ))}
-          </FormControl>
+          </Select>
         </Box>
         <Box component='label' d='flex' alignItems='center' gap={2}>
           <Checkbox checked={styled} onChange={(event) => setStyled(event.currentTarget.checked)} />

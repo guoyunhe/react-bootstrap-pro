@@ -1,16 +1,16 @@
 import { BiCalendarWeek } from 'react-bootstrap-icons-pro';
-import { Box, DatePicker, FormControl, FormLabel } from 'react-bootstrap-pro';
+import { Box, DatePicker, FormLabel } from 'react-bootstrap-pro';
 
 export function DatePickerIconDemo() {
   return (
     <>
       <FormLabel htmlFor='datepicker-icon'>Select date</FormLabel>
-      <FormControl component='label' adorn w={12}>
+      <Box component='label' w={12} classNameBefore='form-control form-adorn'>
         <Box className='form-adorn-icon' aria-hidden='true'>
           <BiCalendarWeek />
         </Box>
         <DatePicker ghost id='datepicker-icon' />
-      </FormControl>
+      </Box>
     </>
   );
 }

@@ -1,0 +1,62 @@
+---
+title: Input 输入框
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { InputBasicDemo } from './demos/basic';
+import { InputStatesDemo } from './demos/states';
+
+# Input 输入框
+
+`Input` 使用 Bootstrap 的 `.form-control` 样式渲染原生 `<input>`。请设置合适的原生
+`type`，以便浏览器提供预期的键盘、校验、自动填充与输入行为。
+
+## 示例
+
+<DemoContainer>
+  <InputBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 尺寸与样式
+
+使用 `size='sm'` 或 `size='lg'` 设置 Bootstrap 尺寸。`plaintext` 应用
+`.form-control-plaintext`，`ghost` 应用无边框的 `.form-ghost` 样式，适用于带装饰元素
+的字段。
+
+<DemoContainer>
+  <InputStatesDemo />
+</DemoContainer>
+
+```tsx src='./demos/states.tsx'
+
+```
+
+## API
+
+### Input
+
+默认渲染为 `input`，不提供多态 `component` 属性。下表列出自有属性；此外还继承其余
+原生 input 属性及 [`Box`](../box/README.zh.mdx#api) 的全部工具类属性。
+
+| 属性         | 类型                   | 说明                                                  |
+| ------------ | ---------------------- | ----------------------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | 应用小型或大型 Bootstrap 输入框尺寸。                 |
+| `plaintext`  | `boolean`              | 应用 `.form-control-plaintext` 样式。                 |
+| `ghost`      | `boolean`              | 应用无边框的 `.form-ghost` 样式。                     |
+| `validation` | `'valid' \| 'invalid'` | 应用对应的校验状态类。                                |
+| `...props`   | `BoxProps<'input'>`    | 原生 input 属性（包括 `type`）及全部 Box 工具类属性。 |
+
+## 无障碍
+
+使用通过 `htmlFor` 绑定的可见 `<label>` 为输入框提供可访问名称；无法显示可见标签时，
+可使用 `aria-label`。原生输入类型保留浏览器提供的键盘、校验与自动填充行为。
+
+## 参考
+
+- [Bootstrap 6 表单控件文档](https://getbootstrap.com/docs/6.0/forms/form-control/)
+- [Input 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/input.tsx)

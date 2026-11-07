@@ -1,4 +1,4 @@
-import { Col, FormControl, FormFloating, Row } from 'react-bootstrap-pro';
+import { Col, FormFloating, Input, Row, Select } from 'react-bootstrap-pro';
 
 export function FloatingLabelsLayoutDemo() {
   return (
@@ -6,7 +6,7 @@ export function FloatingLabelsLayoutDemo() {
       <Col>
         <FormFloating>
           <label htmlFor='floating-layout-email'>Email address</label>
-          <FormControl
+          <Input
             type='email'
             id='floating-layout-email'
             placeholder='name@example.com'
@@ -17,8 +17,7 @@ export function FloatingLabelsLayoutDemo() {
       <Col>
         <FormFloating>
           <label htmlFor='floating-layout-select'>Works with selects</label>
-          <FormControl
-            component='select'
+          <Select
             id='floating-layout-select'
             defaultValue=''
             aria-label='Floating label select in grid example'
@@ -27,7 +26,7 @@ export function FloatingLabelsLayoutDemo() {
             <option value='1'>One</option>
             <option value='2'>Two</option>
             <option value='3'>Three</option>
-          </FormControl>
+          </Select>
         </FormFloating>
       </Col>
     </Row>

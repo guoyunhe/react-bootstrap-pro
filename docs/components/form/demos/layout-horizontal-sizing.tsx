@@ -1,4 +1,4 @@
-import { Box, Col, FormControl, FormLabel, Row } from 'react-bootstrap-pro';
+import { Box, Col, FormLabel, Input, Row } from 'react-bootstrap-pro';
 
 export function FormLayoutHorizontalSizingDemo() {
   return (
@@ -10,12 +10,7 @@ export function FormLayoutHorizontalSizingDemo() {
           </FormLabel>
         </Col>
         <Col span={{ sm: 10 }}>
-          <FormControl
-            type='email'
-            size='sm'
-            id='layout-label-sm'
-            placeholder='col-form-label-sm'
-          />
+          <Input type='email' size='sm' id='layout-label-sm' placeholder='col-form-label-sm' />
         </Col>
       </Row>
       <Row gutter={3} mb={3}>
@@ -25,7 +20,7 @@ export function FormLayoutHorizontalSizingDemo() {
           </FormLabel>
         </Col>
         <Col span={{ sm: 10 }}>
-          <FormControl type='email' id='layout-label-default' placeholder='col-form-label' />
+          <Input type='email' id='layout-label-default' placeholder='col-form-label' />
         </Col>
       </Row>
       <Row gutter={3}>
@@ -35,12 +30,7 @@ export function FormLayoutHorizontalSizingDemo() {
           </FormLabel>
         </Col>
         <Col span={{ sm: 10 }}>
-          <FormControl
-            type='email'
-            size='lg'
-            id='layout-label-lg'
-            placeholder='col-form-label-lg'
-          />
+          <Input type='email' size='lg' id='layout-label-lg' placeholder='col-form-label-lg' />
         </Col>
       </Row>
     </Box>

@@ -88,7 +88,7 @@ Add `disabled` to the control; the label is styled to match.
 
 ## Readonly plaintext
 
-Set `plaintext` on `FormControl` to render `.form-control-plaintext`, which
+Set `plaintext` on `Input` to render `.form-control-plaintext`, which
 keeps the floating label layout while showing the value as plain text.
 
 <DemoContainer>
@@ -153,35 +153,6 @@ for the selected element and all [`Box`](../box/README.mdx#api) props through
 Validation classes can be passed through `className`: add `is-invalid` to the
 wrapper and the control, then render feedback below the field.
 
-### FormControl
-
-Renders an `input` by default. Its own props replace the native `size` prop
-with Bootstrap control sizing; it inherits other native props for the selected
-element and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
-
-| Prop         | Type                   | Description                                                      |
-| ------------ | ---------------------- | ---------------------------------------------------------------- |
-| `size`       | `'sm' \| 'lg'`         | Applies the small or large Bootstrap form-control size.          |
-| `plaintext`  | `boolean`              | Renders the control with the `.form-control-plaintext` style.    |
-| `ghost`      | `boolean`              | Renders the control with the `.form-ghost` style.                |
-| `adorn`      | `boolean`              | Adds the input-group adornment styling.                          |
-| `adornEnd`   | `boolean`              | Adds adornment styling at the end of the control.                |
-| `validation` | `'valid' \| 'invalid'` | Applies the corresponding server-side validation class.          |
-| `component`  | `ElementType`          | Selects the rendered element; defaults to `input`.               |
-| `...props`   | `BoxProps<C>`          | Native props for the selected element and all Box utility props. |
-
-### FormLabel
-
-Renders a `label` by default. Its own `col` prop adds horizontal-form label
-styling; it inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
-
-| Prop        | Type                      | Description                                                      |
-| ----------- | ------------------------- | ---------------------------------------------------------------- |
-| `col`       | `boolean \| 'sm' \| 'lg'` | Adds `.col-form-label`, optionally sized to match the control.   |
-| `component` | `ElementType`             | Selects the rendered element; defaults to `label`.               |
-| `...props`  | `BoxProps<C>`             | Native props for the selected element and all Box utility props. |
-
 ## Accessibility
 
 Render the `<label>` before the control and bind it with `htmlFor`. A non-empty
@@ -192,5 +163,6 @@ name, so keep a visible label.
 
 - [Bootstrap 6 Floating labels documentation](https://getbootstrap.com/docs/6.0/forms/floating-labels/)
 - [FormFloating source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-floating.tsx)
-- [FormControl source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-control.tsx)
-- [FormLabel source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-label.tsx)
+- [Input documentation](../input/README.mdx)
+- [Select documentation](../select/README.mdx)
+- [Textarea documentation](../textarea/README.mdx)

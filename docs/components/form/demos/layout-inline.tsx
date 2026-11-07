@@ -3,11 +3,12 @@ import {
   Button,
   Checkbox,
   Col,
-  FormControl,
   FormField,
+  Input,
   InputGroup,
   InputGroupText,
   Row,
+  Select,
 } from 'react-bootstrap-pro';
 
 export function FormLayoutInlineDemo() {
@@ -17,21 +18,16 @@ export function FormLayoutInlineDemo() {
         <Col span={12}>
           <InputGroup>
             <InputGroupText>@</InputGroupText>
-            <FormControl id='layout-inline-username' placeholder='Username' aria-label='Username' />
+            <Input id='layout-inline-username' placeholder='Username' aria-label='Username' />
           </InputGroup>
         </Col>
         <Col span={12}>
-          <FormControl
-            component='select'
-            id='layout-inline-preference'
-            aria-label='Preference'
-            defaultValue=''
-          >
+          <Select id='layout-inline-preference' aria-label='Preference' defaultValue=''>
             <option value=''>Choose...</option>
             <option value='1'>One</option>
             <option value='2'>Two</option>
             <option value='3'>Three</option>
-          </FormControl>
+          </Select>
         </Col>
         <Col span={12}>
           <FormField>

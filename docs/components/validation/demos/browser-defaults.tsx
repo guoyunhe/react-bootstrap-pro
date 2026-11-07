@@ -3,12 +3,13 @@ import {
   Button,
   Col,
   Form,
-  FormControl,
   FormField,
   FormLabel,
+  Input,
   InputGroup,
   InputGroupText,
   Row,
+  Select,
 } from 'react-bootstrap-pro';
 
 export function ValidationBrowserDefaultsDemo() {
@@ -18,7 +19,7 @@ export function ValidationBrowserDefaultsDemo() {
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-default-name'>Name</FormLabel>
-            <FormControl id='validation-default-name' defaultValue='Mark Otto' required />
+            <Input id='validation-default-name' defaultValue='Mark Otto' required />
           </FormField>
         </Col>
         <Col span={{ md: 6 }}>
@@ -26,42 +27,37 @@ export function ValidationBrowserDefaultsDemo() {
             <FormLabel htmlFor='validation-default-donation'>Donation amount</FormLabel>
             <InputGroup>
               <InputGroupText>$</InputGroupText>
-              <FormControl
-                type='number'
-                id='validation-default-donation'
-                defaultValue={100}
-                required
-              />
+              <Input type='number' id='validation-default-donation' defaultValue={100} required />
             </InputGroup>
           </FormField>
         </Col>
       </Row>
       <FormField mb={3}>
         <FormLabel htmlFor='validation-default-address'>Address</FormLabel>
-        <FormControl id='validation-default-address' defaultValue='1234 Main St' required />
+        <Input id='validation-default-address' defaultValue='1234 Main St' required />
       </FormField>
       <Row gutter={3} mb={3}>
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-default-city'>City</FormLabel>
-            <FormControl id='validation-default-city' required />
+            <Input id='validation-default-city' required />
           </FormField>
         </Col>
         <Col span={{ md: 4 }}>
           <FormField>
             <FormLabel htmlFor='validation-default-state'>State</FormLabel>
-            <FormControl component='select' id='validation-default-state' defaultValue='' required>
+            <Select id='validation-default-state' defaultValue='' required>
               <option value='' disabled>
                 Choose…
               </option>
               <option>...</option>
-            </FormControl>
+            </Select>
           </FormField>
         </Col>
         <Col span={{ md: 2 }}>
           <FormField>
             <FormLabel htmlFor='validation-default-zip'>Zip</FormLabel>
-            <FormControl id='validation-default-zip' required />
+            <Input id='validation-default-zip' required />
           </FormField>
         </Col>
       </Row>

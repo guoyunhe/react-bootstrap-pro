@@ -1,20 +1,20 @@
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { FormControl, InputGroup, InputGroupText } from '../src';
+import { Input, InputGroup, InputGroupText, Select } from '../src';
 
 test('composes input groups with text addons and sizes', async () => {
   const screen = await render(
     <InputGroup size='lg' data-testid='input-group'>
       <InputGroupText data-testid='addon'>@</InputGroupText>
-      <FormControl type='text' aria-label='Username' />
+      <Input type='text' aria-label='Username' />
       <InputGroupText component='label' htmlFor='input-group-select' data-testid='addon-label'>
         Options
       </InputGroupText>
-      <FormControl component='select' id='input-group-select' defaultValue=''>
+      <Select id='input-group-select' defaultValue=''>
         <option value=''>Choose...</option>
         <option value='1'>One</option>
-      </FormControl>
+      </Select>
     </InputGroup>,
   );
 
@@ -24,5 +24,5 @@ test('composes input groups with text addons and sizes', async () => {
   expect(screen.getByTestId('addon-label').element().tagName).toBe('LABEL');
   expect(screen.getByTestId('addon-label').element()).toHaveAttribute('for', 'input-group-select');
   expect(group.querySelector('input')).toHaveClass('form-control');
-  expect(group.querySelector('select')).toHaveClass('form-control');
+  expect(group.querySelector('select')).toHaveClass('form-select');
 });

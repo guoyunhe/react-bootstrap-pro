@@ -1,0 +1,62 @@
+---
+title: Textarea
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { TextareaBasicDemo } from './demos/basic';
+import { TextareaStatesDemo } from './demos/states';
+
+# Textarea
+
+`Textarea` renders a native `<textarea>` with Bootstrap's `.form-control`
+styling. Use the native `rows` attribute to choose its visible line count.
+
+## Example
+
+<DemoContainer>
+  <TextareaBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## Sizes and plaintext
+
+Use `size='sm'` or `size='lg'` for Bootstrap sizing. Set `plaintext` to display
+read-only text with `.form-control-plaintext`.
+
+<DemoContainer>
+  <TextareaStatesDemo />
+</DemoContainer>
+
+```tsx src='./demos/states.tsx'
+
+```
+
+## API
+
+### Textarea
+
+Renders a `textarea` by default and does not expose a polymorphic `component`
+prop. Its own props are listed below; it inherits the remaining native textarea
+props and all [`Box`](../box/README.mdx#api) utility props.
+
+| Prop         | Type                   | Description                                                         |
+| ------------ | ---------------------- | ------------------------------------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | Applies the small or large Bootstrap textarea size.                 |
+| `plaintext`  | `boolean`              | Applies `.form-control-plaintext` styling.                          |
+| `validation` | `'valid' \| 'invalid'` | Applies the corresponding validation class.                         |
+| `...props`   | `BoxProps<'textarea'>` | Native textarea props, including `rows`, and all Box utility props. |
+
+## Accessibility
+
+Give each textarea an accessible name with a visible `<label>` bound through
+`htmlFor`, or with `aria-label` when a visible label is not possible. The
+browser preserves native text editing, selection, and form submission behavior.
+
+## See
+
+- [Bootstrap 6 textarea documentation](https://getbootstrap.com/docs/6.0/forms/floating-labels/#textareas)
+- [Textarea source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/textarea.tsx)

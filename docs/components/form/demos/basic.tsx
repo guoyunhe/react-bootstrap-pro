@@ -1,19 +1,11 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormField,
-  FormLabel,
-  FormText,
-} from 'react-bootstrap-pro';
+import { Box, Button, Checkbox, FormField, FormLabel, FormText, Input } from 'react-bootstrap-pro';
 
 export function FormBasicDemo() {
   return (
     <Box component='form' onSubmit={(event) => event.preventDefault()}>
       <FormField mb={3}>
         <FormLabel htmlFor='form-basic-email'>Email address</FormLabel>
-        <FormControl
+        <Input
           id='form-basic-email'
           type='email'
           placeholder='name@example.com'
@@ -25,7 +17,7 @@ export function FormBasicDemo() {
       </FormField>
       <FormField mb={3}>
         <FormLabel htmlFor='form-basic-password'>Password</FormLabel>
-        <FormControl id='form-basic-password' type='password' />
+        <Input id='form-basic-password' type='password' />
       </FormField>
       <FormField mb={3}>
         <Checkbox id='form-basic-check' />

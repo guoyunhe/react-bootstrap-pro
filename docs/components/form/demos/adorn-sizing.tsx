@@ -1,27 +1,27 @@
 import { BiSearch } from 'react-bootstrap-icons-pro';
-import { Box, FormControl } from 'react-bootstrap-pro';
+import { Box, Input } from 'react-bootstrap-pro';
 
 export function FormAdornSizingDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
-      <FormControl component='label' adorn size='sm'>
+      <Box component='label' classNameBefore='form-control form-adorn form-control-sm'>
         <Box className='form-adorn-icon' aria-hidden='true'>
           <BiSearch />
         </Box>
-        <FormControl ghost placeholder='Small input' aria-label='Small input' />
-      </FormControl>
-      <FormControl component='label' adorn>
+        <Input ghost placeholder='Small input' aria-label='Small input' />
+      </Box>
+      <Box component='label' classNameBefore='form-control form-adorn'>
         <Box className='form-adorn-icon' aria-hidden='true'>
           <BiSearch />
         </Box>
-        <FormControl ghost placeholder='Default input' aria-label='Default input' />
-      </FormControl>
-      <FormControl component='label' adorn size='lg'>
+        <Input ghost placeholder='Default input' aria-label='Default input' />
+      </Box>
+      <Box component='label' classNameBefore='form-control form-adorn form-control-lg'>
         <Box className='form-adorn-icon' aria-hidden='true'>
           <BiSearch />
         </Box>
-        <FormControl ghost placeholder='Large input' aria-label='Large input' />
-      </FormControl>
+        <Input ghost placeholder='Large input' aria-label='Large input' />
+      </Box>
     </Box>
   );
 }

@@ -3,18 +3,20 @@ import {
   Box,
   Checkbox,
   ChipInput,
-  FormControl,
   FormFeedback,
   FormField,
   FormFieldContent,
   FormFloating,
   FormLabel,
+  Input,
   InputGroup,
   InputGroupText,
   Radio,
   Range,
+  Select,
   Switch,
   SwitchInput,
+  Textarea,
 } from 'react-bootstrap-pro';
 
 export function ValidationSupportedDemo() {
@@ -22,8 +24,7 @@ export function ValidationSupportedDemo() {
     <Box d='flex' flexDirection='column' gap={4}>
       <FormField>
         <FormLabel htmlFor='validation-supported-textarea'>Textarea</FormLabel>
-        <FormControl
-          component='textarea'
+        <Textarea
           id='validation-supported-textarea'
           placeholder='Required example textarea'
           validation='invalid'
@@ -95,8 +96,7 @@ export function ValidationSupportedDemo() {
       </Box>
       <FormField>
         <FormLabel htmlFor='validation-supported-select'>Select</FormLabel>
-        <FormControl
-          component='select'
+        <Select
           id='validation-supported-select'
           validation='invalid'
           aria-describedby='validation-supported-select-feedback'
@@ -105,14 +105,14 @@ export function ValidationSupportedDemo() {
           <option value='1'>One</option>
           <option value='2'>Two</option>
           <option value='3'>Three</option>
-        </FormControl>
+        </Select>
         <FormFeedback id='validation-supported-select-feedback'>
           Example invalid select feedback
         </FormFeedback>
       </FormField>
       <FormField>
         <FormLabel htmlFor='validation-supported-file'>File input</FormLabel>
-        <FormControl
+        <Input
           type='file'
           id='validation-supported-file'
           validation='invalid'
@@ -138,7 +138,7 @@ export function ValidationSupportedDemo() {
       <FormField>
         <FormFloating>
           <FormLabel htmlFor='validation-supported-floating'>Email address</FormLabel>
-          <FormControl
+          <Input
             type='email'
             id='validation-supported-floating'
             placeholder='name@example.com'
@@ -153,17 +153,17 @@ export function ValidationSupportedDemo() {
       </FormField>
       <FormField>
         <FormLabel htmlFor='validation-supported-adorn'>Adorned input</FormLabel>
-        <FormControl component='label' adorn validation='invalid'>
+        <Box component='label' classNameBefore='form-control form-adorn is-invalid'>
           <Box className='form-adorn-icon' aria-hidden='true'>
             <BiSearch />
           </Box>
-          <FormControl
+          <Input
             ghost
             id='validation-supported-adorn'
             placeholder='Search...'
             aria-describedby='validation-supported-adorn-feedback'
           />
-        </FormControl>
+        </Box>
         <FormFeedback id='validation-supported-adorn-feedback'>
           Example invalid adorned input feedback
         </FormFeedback>
@@ -172,7 +172,7 @@ export function ValidationSupportedDemo() {
         <FormLabel htmlFor='validation-supported-group'>Input group</FormLabel>
         <InputGroup>
           <InputGroupText>@</InputGroupText>
-          <FormControl
+          <Input
             id='validation-supported-group'
             placeholder='Username'
             validation='invalid'

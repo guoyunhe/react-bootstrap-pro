@@ -1,11 +1,11 @@
-import { Box, FormControl, FormFloating } from 'react-bootstrap-pro';
+import { Box, FormFloating, Input } from 'react-bootstrap-pro';
 
 export function FloatingLabelsBasicDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
       <FormFloating>
         <label htmlFor='floating-basic-email'>Email address</label>
-        <FormControl
+        <Input
           type='email'
           id='floating-basic-email'
           placeholder='name@example.com'
@@ -14,7 +14,7 @@ export function FloatingLabelsBasicDemo() {
       </FormFloating>
       <FormFloating>
         <label htmlFor='floating-basic-password'>Password</label>
-        <FormControl
+        <Input
           type='password'
           id='floating-basic-password'
           placeholder='Password'
@@ -23,7 +23,7 @@ export function FloatingLabelsBasicDemo() {
       </FormFloating>
       <FormFloating>
         <label htmlFor='floating-basic-value'>Input with value</label>
-        <FormControl
+        <Input
           type='email'
           id='floating-basic-value'
           placeholder='name@example.com'

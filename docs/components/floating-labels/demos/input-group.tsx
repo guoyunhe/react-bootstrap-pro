@@ -1,4 +1,4 @@
-import { FormControl, FormFloating, InputGroup, InputGroupText } from 'react-bootstrap-pro';
+import { FormFloating, Input, InputGroup, InputGroupText } from 'react-bootstrap-pro';
 
 export function FloatingLabelsInputGroupDemo() {
   return (
@@ -6,7 +6,7 @@ export function FloatingLabelsInputGroupDemo() {
       <InputGroupText>@</InputGroupText>
       <FormFloating>
         <label htmlFor='floating-input-group'>Username</label>
-        <FormControl type='text' id='floating-input-group' placeholder='Username' />
+        <Input type='text' id='floating-input-group' placeholder='Username' />
       </FormFloating>
     </InputGroup>
   );

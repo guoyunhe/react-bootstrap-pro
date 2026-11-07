@@ -1,0 +1,60 @@
+---
+title: Textarea 文本域
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { TextareaBasicDemo } from './demos/basic';
+import { TextareaStatesDemo } from './demos/states';
+
+# Textarea 文本域
+
+`Textarea` 使用 Bootstrap 的 `.form-control` 样式渲染原生 `<textarea>`。使用原生
+`rows` 属性设置可见行数。
+
+## 示例
+
+<DemoContainer>
+  <TextareaBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 尺寸与纯文本
+
+使用 `size='sm'` 或 `size='lg'` 设置 Bootstrap 尺寸。设置 `plaintext` 可应用
+`.form-control-plaintext` 样式，以只读文本形式展示内容。
+
+<DemoContainer>
+  <TextareaStatesDemo />
+</DemoContainer>
+
+```tsx src='./demos/states.tsx'
+
+```
+
+## API
+
+### Textarea
+
+默认渲染为 `textarea`，不提供多态 `component` 属性。下表列出自有属性；此外还继承
+其余原生 textarea 属性及 [`Box`](../box/README.zh.mdx#api) 的全部工具类属性。
+
+| 属性         | 类型                   | 说明                                                     |
+| ------------ | ---------------------- | -------------------------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | 应用小型或大型 Bootstrap 文本域尺寸。                    |
+| `plaintext`  | `boolean`              | 应用 `.form-control-plaintext` 样式。                    |
+| `validation` | `'valid' \| 'invalid'` | 应用对应的校验状态类。                                   |
+| `...props`   | `BoxProps<'textarea'>` | 原生 textarea 属性（包括 `rows`）及全部 Box 工具类属性。 |
+
+## 无障碍
+
+使用通过 `htmlFor` 绑定的可见 `<label>` 为文本域提供可访问名称；无法显示可见标签时，
+可使用 `aria-label`。浏览器保留原生文本编辑、选中与表单提交行为。
+
+## 参考
+
+- [Bootstrap 6 文本域文档](https://getbootstrap.com/docs/6.0/forms/floating-labels/#textareas)
+- [Textarea 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/textarea.tsx)

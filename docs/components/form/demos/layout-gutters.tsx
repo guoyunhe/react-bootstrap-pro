@@ -3,10 +3,11 @@ import {
   Button,
   Checkbox,
   Col,
-  FormControl,
   FormField,
   FormLabel,
+  Input,
   Row,
+  Select,
 } from 'react-bootstrap-pro';
 
 export function FormLayoutGuttersDemo() {
@@ -15,34 +16,34 @@ export function FormLayoutGuttersDemo() {
       <Row gutter={3}>
         <Col span={{ md: 6 }}>
           <FormLabel htmlFor='layout-gutter-email'>Email</FormLabel>
-          <FormControl type='email' id='layout-gutter-email' />
+          <Input type='email' id='layout-gutter-email' />
         </Col>
         <Col span={{ md: 6 }}>
           <FormLabel htmlFor='layout-gutter-password'>Password</FormLabel>
-          <FormControl type='password' id='layout-gutter-password' />
+          <Input type='password' id='layout-gutter-password' />
         </Col>
         <Col span={12}>
           <FormLabel htmlFor='layout-gutter-address'>Address</FormLabel>
-          <FormControl id='layout-gutter-address' placeholder='1234 Main St' />
+          <Input id='layout-gutter-address' placeholder='1234 Main St' />
         </Col>
         <Col span={12}>
           <FormLabel htmlFor='layout-gutter-address2'>Address 2</FormLabel>
-          <FormControl id='layout-gutter-address2' placeholder='Apartment, studio, or floor' />
+          <Input id='layout-gutter-address2' placeholder='Apartment, studio, or floor' />
         </Col>
         <Col span={{ md: 6 }}>
           <FormLabel htmlFor='layout-gutter-city'>City</FormLabel>
-          <FormControl id='layout-gutter-city' />
+          <Input id='layout-gutter-city' />
         </Col>
         <Col span={{ md: 4 }}>
           <FormLabel htmlFor='layout-gutter-state'>State</FormLabel>
-          <FormControl component='select' id='layout-gutter-state' defaultValue=''>
+          <Select id='layout-gutter-state' defaultValue=''>
             <option value=''>Choose...</option>
             <option>...</option>
-          </FormControl>
+          </Select>
         </Col>
         <Col span={{ md: 2 }}>
           <FormLabel htmlFor='layout-gutter-zip'>Zip</FormLabel>
-          <FormControl id='layout-gutter-zip' />
+          <Input id='layout-gutter-zip' />
         </Col>
         <Col span={12}>
           <FormField>

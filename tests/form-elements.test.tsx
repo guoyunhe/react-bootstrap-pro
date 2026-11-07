@@ -1,36 +1,48 @@
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { FormControl } from '../src';
+import { Box, Input, Select, Textarea } from '../src';
 
-test('renders form controls with sizes and alternate elements', async () => {
+test('renders Input and Select with their dedicated native elements', async () => {
   const screen = await render(
     <>
-      <FormControl
+      <Input
         id='form-email'
         type='email'
         size='lg'
         aria-describedby='form-email-help'
         data-testid='control'
       />
-      <FormControl component='select' data-testid='select'>
+      <Select data-testid='select'>
         <option>One</option>
-      </FormControl>
+      </Select>
     </>,
   );
 
   expect(screen.getByTestId('control')).toHaveClass('form-control', 'form-control-lg');
   expect(screen.getByTestId('control').element()).toHaveAttribute('type', 'email');
   expect(screen.getByTestId('select').element().tagName).toBe('SELECT');
-  expect(screen.getByTestId('select')).toHaveClass('form-control');
+  expect(screen.getByTestId('select')).toHaveClass('form-select');
+});
+
+test('renders a textarea with textarea props and Bootstrap sizing', async () => {
+  const screen = await render(<Textarea size='sm' rows={4} data-testid='textarea' />);
+
+  expect(screen.getByTestId('textarea').element().tagName).toBe('TEXTAREA');
+  expect(screen.getByTestId('textarea').element()).toHaveAttribute('rows', '4');
+  expect(screen.getByTestId('textarea')).toHaveClass('form-control', 'form-control-sm');
 });
 
 test('renders adorned controls with ghost inputs', async () => {
   const screen = await render(
-    <FormControl component='label' adorn size='sm' data-testid='adorn'>
+    <Box
+      component='label'
+      data-testid='adorn'
+      classNameBefore='form-control form-adorn form-control-sm'
+    >
       <span className='form-adorn-icon' aria-hidden='true' />
-      <FormControl ghost placeholder='Search...' aria-label='Search' data-testid='ghost' />
-    </FormControl>,
+      <Input ghost placeholder='Search...' aria-label='Search' data-testid='ghost' />
+    </Box>,
   );
 
   const wrapper = screen.getByTestId('adorn').element();
@@ -43,9 +55,13 @@ test('renders adorned controls with ghost inputs', async () => {
 
 test('positions adornments at the end', async () => {
   const screen = await render(
-    <FormControl component='label' adornEnd data-testid='adorn'>
-      <FormControl ghost placeholder='Amount' aria-label='Amount' />
-    </FormControl>,
+    <Box
+      component='label'
+      data-testid='adorn'
+      classNameBefore='form-control form-adorn form-adorn-end'
+    >
+      <Input ghost placeholder='Amount' aria-label='Amount' />
+    </Box>,
   );
 
   expect(screen.getByTestId('adorn')).toHaveClass('form-control', 'form-adorn', 'form-adorn-end');
@@ -53,7 +69,7 @@ test('positions adornments at the end', async () => {
 
 test('renders plaintext controls without the form-control class', async () => {
   const screen = await render(
-    <FormControl plaintext readOnly data-testid='plaintext' defaultValue='name@example.com' />,
+    <Input plaintext readOnly data-testid='plaintext' defaultValue='name@example.com' />,
   );
 
   expect(screen.getByTestId('plaintext')).toHaveClass('form-control-plaintext');
@@ -61,16 +77,16 @@ test('renders plaintext controls without the form-control class', async () => {
 });
 
 test('applies a validation state', async () => {
-  const screen = await render(<FormControl aria-label='Name' validation='invalid' />);
+  const screen = await render(<Input aria-label='Name' validation='invalid' />);
 
   expect(screen.container.querySelector('input')).toHaveClass('form-control', 'is-invalid');
 });
 
 test('applies a validation state to an adorned control', async () => {
   const screen = await render(
-    <FormControl component='label' adorn validation='invalid' aria-label='Search'>
-      <FormControl ghost placeholder='Search' aria-label='Search input' />
-    </FormControl>,
+    <Box component='label' aria-label='Search' classNameBefore='form-control form-adorn is-invalid'>
+      <Input ghost placeholder='Search' aria-label='Search input' />
+    </Box>,
   );
   const wrapper = screen.container.querySelector('.form-adorn');
 

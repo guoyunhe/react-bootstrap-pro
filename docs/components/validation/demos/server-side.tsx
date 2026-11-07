@@ -1,13 +1,14 @@
 import {
   Box,
   Col,
-  FormControl,
   FormFeedback,
   FormField,
   FormLabel,
+  Input,
   InputGroup,
   InputGroupText,
   Row,
+  Select,
 } from 'react-bootstrap-pro';
 
 export function ValidationServerSideDemo() {
@@ -17,7 +18,7 @@ export function ValidationServerSideDemo() {
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-server-name'>Name</FormLabel>
-            <FormControl
+            <Input
               id='validation-server-name'
               defaultValue='Mark Otto'
               validation='valid'
@@ -34,7 +35,7 @@ export function ValidationServerSideDemo() {
             <FormLabel htmlFor='validation-server-donation'>Donation amount</FormLabel>
             <InputGroup>
               <InputGroupText>$</InputGroupText>
-              <FormControl
+              <Input
                 type='number'
                 id='validation-server-donation'
                 validation='invalid'
@@ -52,7 +53,7 @@ export function ValidationServerSideDemo() {
       </Row>
       <FormField mb={3}>
         <FormLabel htmlFor='validation-server-address'>Address</FormLabel>
-        <FormControl
+        <Input
           id='validation-server-address'
           defaultValue='1234 Main St'
           validation='valid'
@@ -69,7 +70,7 @@ export function ValidationServerSideDemo() {
         <Col span={{ md: 6 }}>
           <FormField>
             <FormLabel htmlFor='validation-server-city'>City</FormLabel>
-            <FormControl
+            <Input
               id='validation-server-city'
               validation='invalid'
               aria-describedby='validation-server-city-feedback'
@@ -80,8 +81,7 @@ export function ValidationServerSideDemo() {
         <Col span={{ md: 4 }}>
           <FormField>
             <FormLabel htmlFor='validation-server-state'>State</FormLabel>
-            <FormControl
-              component='select'
+            <Select
               id='validation-server-state'
               defaultValue=''
               validation='invalid'
@@ -91,14 +91,14 @@ export function ValidationServerSideDemo() {
                 Choose…
               </option>
               <option>...</option>
-            </FormControl>
+            </Select>
             <FormFeedback id='validation-server-state-feedback'>Please select a state</FormFeedback>
           </FormField>
         </Col>
         <Col span={{ md: 2 }}>
           <FormField>
             <FormLabel htmlFor='validation-server-zip'>Zip</FormLabel>
-            <FormControl
+            <Input
               id='validation-server-zip'
               validation='invalid'
               aria-describedby='validation-server-zip-feedback'

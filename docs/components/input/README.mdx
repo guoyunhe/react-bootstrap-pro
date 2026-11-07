@@ -1,0 +1,66 @@
+---
+title: Input
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { InputBasicDemo } from './demos/basic';
+import { InputStatesDemo } from './demos/states';
+
+# Input
+
+`Input` renders a native `<input>` with Bootstrap's `.form-control` styling.
+Choose an appropriate native `type` so browsers provide the expected keyboard,
+validation, autofill, and input behavior.
+
+## Example
+
+<DemoContainer>
+  <InputBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## Sizes and styles
+
+Use `size='sm'` or `size='lg'` for Bootstrap sizing. `plaintext` applies
+`.form-control-plaintext`, while `ghost` applies the borderless `.form-ghost`
+style used inside adorned fields.
+
+<DemoContainer>
+  <InputStatesDemo />
+</DemoContainer>
+
+```tsx src='./demos/states.tsx'
+
+```
+
+## API
+
+### Input
+
+Renders an `input` by default and does not expose a polymorphic `component`
+prop. Its own props are listed below; it inherits the remaining native input
+props and all [`Box`](../box/README.mdx#api) utility props.
+
+| Prop         | Type                   | Description                                                       |
+| ------------ | ---------------------- | ----------------------------------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | Applies the small or large Bootstrap input size.                  |
+| `plaintext`  | `boolean`              | Applies `.form-control-plaintext` styling.                        |
+| `ghost`      | `boolean`              | Applies the borderless `.form-ghost` style.                       |
+| `validation` | `'valid' \| 'invalid'` | Applies the corresponding validation class.                       |
+| `...props`   | `BoxProps<'input'>`    | Native input props, including `type`, plus all Box utility props. |
+
+## Accessibility
+
+Give each input an accessible name with a visible `<label>` bound through
+`htmlFor`, or with `aria-label` when a visible label is not possible. Native
+input types retain their browser-provided keyboard, validation, and autofill
+behavior.
+
+## See
+
+- [Bootstrap 6 form control documentation](https://getbootstrap.com/docs/6.0/forms/form-control/)
+- [Input source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/input.tsx)

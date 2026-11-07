@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Form,
-  FormControl,
-  FormFeedback,
-  FormField,
-  FormLabel,
-} from 'react-bootstrap-pro';
+import { Box, Button, Form, FormFeedback, FormField, FormLabel, Input } from 'react-bootstrap-pro';
 
 export function ValidationTooltipsDemo() {
   return (
@@ -14,7 +6,7 @@ export function ValidationTooltipsDemo() {
       <Box d='flex' flexDirection='column' gap={10}>
         <FormField>
           <FormLabel htmlFor='validation-tooltip-name'>Name</FormLabel>
-          <FormControl
+          <Input
             id='validation-tooltip-name'
             defaultValue='Mark Otto'
             required
@@ -26,7 +18,7 @@ export function ValidationTooltipsDemo() {
         </FormField>
         <FormField>
           <FormLabel htmlFor='validation-tooltip-city'>City</FormLabel>
-          <FormControl
+          <Input
             id='validation-tooltip-city'
             required
             aria-describedby='validation-tooltip-city-feedback'
@@ -37,7 +29,7 @@ export function ValidationTooltipsDemo() {
         </FormField>
         <FormField>
           <FormLabel htmlFor='validation-tooltip-zip'>Zip</FormLabel>
-          <FormControl
+          <Input
             id='validation-tooltip-zip'
             required
             aria-describedby='validation-tooltip-zip-feedback'

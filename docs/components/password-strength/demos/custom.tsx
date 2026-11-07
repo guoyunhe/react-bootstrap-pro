@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, FormControl, FormLabel, PasswordStrength } from 'react-bootstrap-pro';
+import { Box, FormLabel, Input, PasswordStrength } from 'react-bootstrap-pro';
 
 export function PasswordStrengthCustomDemo() {
   const [password, setPassword] = useState('');
@@ -7,7 +7,7 @@ export function PasswordStrengthCustomDemo() {
   return (
     <Box>
       <FormLabel htmlFor='password-custom'>Password (12 characters or more)</FormLabel>
-      <FormControl
+      <Input
         type='password'
         id='password-custom'
         placeholder='Enter password'

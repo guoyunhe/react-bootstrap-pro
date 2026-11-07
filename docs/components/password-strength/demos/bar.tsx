@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, FormControl, FormLabel, PasswordStrength } from 'react-bootstrap-pro';
+import { Box, FormLabel, Input, PasswordStrength } from 'react-bootstrap-pro';
 
 export function PasswordStrengthBarDemo() {
   const [password, setPassword] = useState('');
@@ -7,7 +7,7 @@ export function PasswordStrengthBarDemo() {
   return (
     <Box>
       <FormLabel htmlFor='password-bar'>Password</FormLabel>
-      <FormControl
+      <Input
         type='password'
         id='password-bar'
         placeholder='Enter password'

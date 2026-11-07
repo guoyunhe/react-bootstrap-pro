@@ -22,13 +22,15 @@ import { FormLayoutUtilitiesDemo } from './demos/layout-utilities';
 # Form
 
 Bootstrap's form controls extend the rebooted form styles with component
-classes. `FormField`, `FormLabel`, `FormText`, and `FormControl` build a control
-with its label and help text, while `Checkbox`, `Radio`, `Switch`, and `Range`
-render the `.check` checkbox, `.radio` radio, `.switch` track, and `.form-range`
-slider. `InputGroup` attaches add-ons to a control, `FormFloating` wraps a control and
-label into a floating-label field, and `FormControl adorn` builds an adorned
-control around a ghost input. Always set an appropriate `type` on inputs so
-browsers provide the matching keyboard, validation, and autofill behavior.
+classes. `FormField`, `FormLabel`, and `FormText` build a control with its label
+and help text; [`Input`](../input/README.mdx), [`Select`](../select/README.mdx),
+and [`Textarea`](../textarea/README.mdx) wrap their respective native elements.
+`Checkbox`, `Radio`, `Switch`, and `Range` render the `.check` checkbox, `.radio`
+radio, `.switch` track, and `.form-range` slider. `InputGroup` attaches add-ons
+to a control, `FormFloating` wraps a control and label into a floating-label
+field, and an adorned control combines a ghost `Input` with a `.form-adorn`
+wrapper. Always set an appropriate `type` on inputs so browsers provide the
+matching keyboard, validation, and autofill behavior.
 
 ## Basic example
 
@@ -40,7 +42,7 @@ browsers provide the matching keyboard, validation, and autofill behavior.
 
 ```
 
-Use `FormControl` for inputs, textareas, and selects by changing `component`.
+Use `Input`, `Textarea`, and `Select` for their respective native elements.
 `FormText` renders the `.form-text` help text and can be associated with the
 control through `aria-describedby`.
 
@@ -63,11 +65,11 @@ the group.
 
 ## Form adorn
 
-Set `adorn` on `FormControl` to render the `.form-adorn` wrapper: a
-`.form-control` element that lays out adornments beside a "ghost input". Render
-the wrapper as a `label` and put a `FormControl ghost` input inside it, so
-clicking the icon, text, or padding focuses the control without JavaScript. Add
-`adornEnd` to place the adornment on the trailing side.
+Wrap a ghost `Input` in a `Box component='label'` with
+`classNameBefore='form-control form-adorn'`. This lays out adornments beside the
+input, and clicking the icon, text, or padding focuses the control without
+JavaScript. Add `form-adorn-end` to the wrapper to place the adornment on the
+trailing side.
 
 <DemoContainer>
   <FormAdornBasicDemo />
@@ -98,7 +100,8 @@ Wrap the adorned control in a `FormField` to add a label and description text.
 
 ```
 
-Set `size` on the wrapper to resize the whole adorned control.
+Add `form-control-sm` or `form-control-lg` to the wrapper to resize the whole
+adorned control.
 
 <DemoContainer>
   <FormAdornSizingDemo />
@@ -183,7 +186,7 @@ Wrap a group of checkboxes or radios in a `fieldset` with a `legend` rendered as
 #### Horizontal form label sizing
 
 Use `col='sm'` or `col='lg'` on `FormLabel` to follow the size of
-`FormControl size='sm'` and `size='lg'`.
+`Input size='sm'` and `size='lg'`.
 
 <DemoContainer>
   <FormLayoutHorizontalSizingDemo />
@@ -243,18 +246,6 @@ Give every control an accessible name. The simplest approach is a visible
 possible. Associate help text with `aria-describedby`.
 
 ## API
-
-### FormControl
-
-| Prop        | Type           | Description                                                           |
-| ----------- | -------------- | --------------------------------------------------------------------- |
-| `size`      | `'sm' \| 'lg'` | Scales height, padding, font size, and radius.                        |
-| `plaintext` | `boolean`      | Renders `.form-control-plaintext` instead of `.form-control`.         |
-| `ghost`     | `boolean`      | Renders `.form-ghost`, a borderless control for adorned fields.       |
-| `adorn`     | `boolean`      | Adds `.form-adorn` to lay out adornments beside a ghost input.        |
-| `adornEnd`  | `boolean`      | Adds `.form-adorn-end` and `.form-adorn` to place the adornment last. |
-| `component` | `ElementType`  | Renders an `input` by default; also `textarea` or `select`.           |
-| `...props`  | `BoxProps<C>`  | Native props and all Box utility props.                               |
 
 ### FormField
 
