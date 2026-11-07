@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CloseButton,
   Dialog,
@@ -8,26 +9,38 @@ import {
 } from 'react-bootstrap-pro';
 
 export function DialogInstantDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         type='button'
         className='btn-solid theme-primary'
-        data-bs-toggle='dialog'
-        data-bs-target='#dialog-instant'
+        aria-controls='dialog-instant'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Instant dialog
       </button>
-      <Dialog id='dialog-instant' instant aria-labelledby='dialog-instant-title'>
+      <Dialog
+        show={show}
+        onShowChange={setShow}
+        id='dialog-instant'
+        instant
+        aria-labelledby='dialog-instant-title'
+      >
         <DialogHeader>
           <DialogTitle id='dialog-instant-title'>Instant dialog</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DialogHeader>
         <DialogBody>
           <p>This dialog appears and closes without a transition.</p>
         </DialogBody>
         <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
+          <button
+            type='button'
+            className='btn-solid theme-secondary'
+            onClick={() => setShow(false)}
+          >
             Close
           </button>
           <button type='button' className='btn-solid theme-primary'>

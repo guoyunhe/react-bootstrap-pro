@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { CloseButton, Dialog, DialogBody, DialogHeader, DialogTitle } from 'react-bootstrap-pro';
 
 const sizes: {
@@ -12,6 +13,7 @@ const sizes: {
 ];
 
 export function DialogSizesDemo() {
+  const [selected, setSelected] = useState<string | null>(null);
   return (
     <div className='d-flex flex-wrap gap-2'>
       {sizes.map(({ id, label, size }) => (
@@ -19,15 +21,24 @@ export function DialogSizesDemo() {
           <button
             type='button'
             className='btn-solid theme-primary'
-            data-bs-toggle='dialog'
-            data-bs-target={`#dialog-size-${id}`}
+            aria-controls={`dialog-size-${id}`}
+            aria-expanded={selected === id}
+            onClick={() => setSelected(id)}
           >
             {label}
           </button>
-          <Dialog id={`dialog-size-${id}`} size={size} aria-labelledby={`dialog-size-${id}-title`}>
+          <Dialog
+            id={`dialog-size-${id}`}
+            show={selected === id}
+            onShowChange={(show) => {
+              if (!show) setSelected(null);
+            }}
+            size={size}
+            aria-labelledby={`dialog-size-${id}-title`}
+          >
             <DialogHeader>
               <DialogTitle id={`dialog-size-${id}-title`}>{label} dialog</DialogTitle>
-              <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+              <CloseButton onClick={() => setSelected(null)} aria-label='Close' />
             </DialogHeader>
             <DialogBody>
               <p>This dialog uses the {label.toLowerCase()} width.</p>

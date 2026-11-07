@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CloseButton,
   Dialog,
@@ -8,27 +9,38 @@ import {
 } from 'react-bootstrap-pro';
 
 export function DialogNonmodalDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         type='button'
         className='btn-solid theme-primary'
-        data-bs-toggle='dialog'
-        data-bs-target='#dialog-nonmodal'
-        data-bs-modal='false'
+        aria-controls='dialog-nonmodal'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Open non-modal dialog
       </button>
-      <Dialog id='dialog-nonmodal' nonmodal aria-labelledby='dialog-nonmodal-title'>
+      <Dialog
+        show={show}
+        onShowChange={setShow}
+        id='dialog-nonmodal'
+        nonmodal
+        aria-labelledby='dialog-nonmodal-title'
+      >
         <DialogHeader>
           <DialogTitle id='dialog-nonmodal-title'>Non-modal dialog</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DialogHeader>
         <DialogBody>
           <p>This dialog does not block the page; content behind it remains interactive.</p>
         </DialogBody>
         <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
+          <button
+            type='button'
+            className='btn-solid theme-secondary'
+            onClick={() => setShow(false)}
+          >
             Close
           </button>
         </DialogFooter>

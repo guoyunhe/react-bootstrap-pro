@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CloseButton,
   Dialog,
@@ -8,57 +9,55 @@ import {
 } from 'react-bootstrap-pro';
 
 export function DialogSwappingDemo() {
+  const [show, setShow] = useState(false);
+  const [second, setSecond] = useState(false);
   return (
     <>
       <button
         type='button'
         className='btn-solid theme-primary'
-        data-bs-toggle='dialog'
-        data-bs-target='#dialog-swap-first'
+        aria-controls='dialog-swap'
+        aria-expanded={show}
+        onClick={() => {
+          setSecond(false);
+          setShow(true);
+        }}
       >
         Open first dialog
       </button>
-      <Dialog id='dialog-swap-first' aria-labelledby='dialog-swap-first-title'>
+      <Dialog
+        id='dialog-swap'
+        show={show}
+        onShowChange={setShow}
+        aria-labelledby='dialog-swap-title'
+      >
         <DialogHeader>
-          <DialogTitle id='dialog-swap-first-title'>First dialog</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+          <DialogTitle id='dialog-swap-title'>
+            {second ? 'Second dialog' : 'First dialog'}
+          </DialogTitle>
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DialogHeader>
         <DialogBody>
-          <p>Open the second dialog. The backdrop stays visible during the swap.</p>
+          <p>
+            {second
+              ? 'Swap back to the first dialog or close this one.'
+              : 'Open the second dialog. The backdrop stays visible during the swap.'}
+          </p>
         </DialogBody>
         <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
+          <button
+            type='button'
+            className='btn-solid theme-secondary'
+            onClick={() => setShow(false)}
+          >
             Close
           </button>
           <button
             type='button'
             className='btn-solid theme-primary'
-            data-bs-toggle='dialog'
-            data-bs-target='#dialog-swap-second'
+            onClick={() => setSecond(!second)}
           >
-            Go to second dialog
-          </button>
-        </DialogFooter>
-      </Dialog>
-      <Dialog id='dialog-swap-second' aria-labelledby='dialog-swap-second-title'>
-        <DialogHeader>
-          <DialogTitle id='dialog-swap-second-title'>Second dialog</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
-        </DialogHeader>
-        <DialogBody>
-          <p>Swap back to the first dialog or close this one.</p>
-        </DialogBody>
-        <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
-            Close
-          </button>
-          <button
-            type='button'
-            className='btn-solid theme-primary'
-            data-bs-toggle='dialog'
-            data-bs-target='#dialog-swap-first'
-          >
-            Back to first dialog
+            {second ? 'Back to first dialog' : 'Go to second dialog'}
           </button>
         </DialogFooter>
       </Dialog>

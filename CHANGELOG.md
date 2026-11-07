@@ -21,6 +21,7 @@
 
 ### Added
 
+- Add controlled React behavior to `Dialog` with `show`, `onShowChange`, `backdrop`, and `keyboard`.
 - Add controlled React modal behavior to `Drawer` with `show` and `onShowChange`.
 - Add `backdrop`, `keyboard`, and `scroll` options to controlled `Drawer`.
 - Add `MenuItemIcon` for menu item icon slots.

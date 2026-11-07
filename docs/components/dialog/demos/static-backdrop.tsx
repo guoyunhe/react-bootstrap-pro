@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CloseButton,
   Dialog,
@@ -8,21 +9,28 @@ import {
 } from 'react-bootstrap-pro';
 
 export function DialogStaticBackdropDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         type='button'
         className='btn-solid theme-primary'
-        data-bs-toggle='dialog'
-        data-bs-target='#dialog-static-backdrop'
-        data-bs-backdrop='static'
+        aria-controls='dialog-static-backdrop'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Open static backdrop dialog
       </button>
-      <Dialog id='dialog-static-backdrop' aria-labelledby='dialog-static-backdrop-title'>
+      <Dialog
+        show={show}
+        onShowChange={setShow}
+        backdrop='static'
+        id='dialog-static-backdrop'
+        aria-labelledby='dialog-static-backdrop-title'
+      >
         <DialogHeader>
           <DialogTitle id='dialog-static-backdrop-title'>Static backdrop</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DialogHeader>
         <DialogBody>
           <p>
@@ -30,7 +38,11 @@ export function DialogStaticBackdropDemo() {
           </p>
         </DialogBody>
         <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
+          <button
+            type='button'
+            className='btn-solid theme-secondary'
+            onClick={() => setShow(false)}
+          >
             Close
           </button>
         </DialogFooter>

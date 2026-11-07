@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CloseButton,
   Dialog,
@@ -8,26 +9,38 @@ import {
 } from 'react-bootstrap-pro';
 
 export function DialogSlideUpDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         type='button'
         className='btn-solid theme-primary'
-        data-bs-toggle='dialog'
-        data-bs-target='#dialog-slide-up'
+        aria-controls='dialog-slide-up'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Slide up dialog
       </button>
-      <Dialog id='dialog-slide-up' slide='up' aria-labelledby='dialog-slide-up-title'>
+      <Dialog
+        show={show}
+        onShowChange={setShow}
+        id='dialog-slide-up'
+        slide='up'
+        aria-labelledby='dialog-slide-up-title'
+      >
         <DialogHeader>
           <DialogTitle id='dialog-slide-up-title'>Slide up dialog</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DialogHeader>
         <DialogBody>
           <p>This dialog slides up from the bottom of the viewport.</p>
         </DialogBody>
         <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
+          <button
+            type='button'
+            className='btn-solid theme-secondary'
+            onClick={() => setShow(false)}
+          >
             Close
           </button>
           <button type='button' className='btn-solid theme-primary'>

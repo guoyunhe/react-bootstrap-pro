@@ -11,20 +11,7 @@ import {
 
 import { Box } from './box';
 import type { BoxProps } from './box';
-
-const scrollLocks = new Set<HTMLDialogElement>();
-let hadScrollLock = false;
-
-function lockScroll(dialog: HTMLDialogElement) {
-  if (!scrollLocks.size) hadScrollLock = document.documentElement.classList.contains('dialog-open');
-  scrollLocks.add(dialog);
-  document.documentElement.classList.add('dialog-open');
-}
-
-function unlockScroll(dialog: HTMLDialogElement) {
-  if (!scrollLocks.delete(dialog) || scrollLocks.size || hadScrollLock) return;
-  document.documentElement.classList.remove('dialog-open');
-}
+import { lockDialogScroll, unlockDialogScroll } from './dialog-scroll-lock';
 
 export type DrawerProps<C extends ElementType = 'dialog'> = Omit<
   BoxProps<C>,
@@ -114,9 +101,9 @@ export function Drawer<C extends ElementType = 'dialog'>({
       else dialog.show();
     }
     if (show && !scroll) {
-      lockScroll(dialog);
+      lockDialogScroll(dialog);
     } else {
-      unlockScroll(dialog);
+      unlockDialogScroll(dialog);
     }
     if (!show && dialog.open) {
       pendingCloseEvents.current += 1;
@@ -136,7 +123,7 @@ export function Drawer<C extends ElementType = 'dialog'>({
         pendingCloseEvents.current -= 1;
         return;
       }
-      unlockScroll(dialog);
+      unlockDialogScroll(dialog);
       if (show) close();
     };
     dialog.addEventListener('cancel', onCancel);
@@ -172,7 +159,7 @@ export function Drawer<C extends ElementType = 'dialog'>({
         pendingCloseEvents.current += 1;
         dialog.close();
       }
-      unlockScroll(dialog);
+      unlockDialogScroll(dialog);
     };
   }, [controlled]);
 

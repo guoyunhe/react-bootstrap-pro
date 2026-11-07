@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CloseButton,
   Dialog,
@@ -8,20 +9,27 @@ import {
 } from 'react-bootstrap-pro';
 
 export function DialogBasicDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         type='button'
         className='btn-solid theme-primary'
-        data-bs-toggle='dialog'
-        data-bs-target='#dialog-basic'
+        aria-controls='dialog-basic'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Open dialog
       </button>
-      <Dialog id='dialog-basic' aria-labelledby='dialog-basic-title'>
+      <Dialog
+        show={show}
+        onShowChange={setShow}
+        id='dialog-basic'
+        aria-labelledby='dialog-basic-title'
+      >
         <DialogHeader>
           <DialogTitle id='dialog-basic-title'>Dialog title</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DialogHeader>
         <DialogBody>
           <p>
@@ -30,7 +38,11 @@ export function DialogBasicDemo() {
           </p>
         </DialogBody>
         <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
+          <button
+            type='button'
+            className='btn-solid theme-secondary'
+            onClick={() => setShow(false)}
+          >
             Close
           </button>
           <button type='button' className='btn-solid theme-primary'>

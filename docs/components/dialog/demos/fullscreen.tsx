@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CloseButton,
   Dialog,
@@ -8,26 +9,38 @@ import {
 } from 'react-bootstrap-pro';
 
 export function DialogFullscreenDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         type='button'
         className='btn-solid theme-primary'
-        data-bs-toggle='dialog'
-        data-bs-target='#dialog-fullscreen'
+        aria-controls='dialog-fullscreen'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Fullscreen dialog
       </button>
-      <Dialog id='dialog-fullscreen' fullscreen aria-labelledby='dialog-fullscreen-title'>
+      <Dialog
+        show={show}
+        onShowChange={setShow}
+        id='dialog-fullscreen'
+        fullscreen
+        aria-labelledby='dialog-fullscreen-title'
+      >
         <DialogHeader>
           <DialogTitle id='dialog-fullscreen-title'>Fullscreen dialog</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DialogHeader>
         <DialogBody>
           <p>This dialog covers the entire viewport.</p>
         </DialogBody>
         <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
+          <button
+            type='button'
+            className='btn-solid theme-secondary'
+            onClick={() => setShow(false)}
+          >
             Close
           </button>
         </DialogFooter>

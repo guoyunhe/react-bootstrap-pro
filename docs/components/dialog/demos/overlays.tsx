@@ -1,4 +1,18 @@
 import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  useClick,
+  useDismiss,
+  useFloating,
+  useFocus,
+  useHover,
+  useInteractions,
+  useRole,
+} from '@floating-ui/react';
+import { useState } from 'react';
+import {
   CloseButton,
   Dialog,
   DialogBody,
@@ -7,26 +21,80 @@ import {
   DialogTitle,
   Menu,
   MenuItem,
+  Popover,
+  PopoverBody,
+  PopoverHeader,
   Toast,
   ToastBody,
   ToastContainer,
+  Tooltip,
+  TooltipInner,
 } from 'react-bootstrap-pro';
 
 export function DialogOverlaysDemo() {
+  const [show, setShow] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const closeDialog = (next: boolean) => {
+    setShow(next);
+    if (!next) {
+      setPopoverOpen(false);
+      setTooltipOpen(false);
+    }
+  };
+  const {
+    refs: { setReference: setTooltipReference, setFloating: setTooltipFloating },
+    context: tooltipContext,
+    floatingStyles: tooltipStyles,
+  } = useFloating({
+    open: tooltipOpen,
+    onOpenChange: setTooltipOpen,
+    placement: 'top',
+    middleware: [offset(6), flip(), shift({ padding: 8 })],
+    whileElementsMounted: autoUpdate,
+  });
+  const tooltipInteractions = useInteractions([
+    useHover(tooltipContext),
+    useFocus(tooltipContext),
+    useDismiss(tooltipContext),
+    useRole(tooltipContext, { role: 'tooltip' }),
+  ]);
+  const {
+    refs: { setReference: setPopoverReference, setFloating: setPopoverFloating },
+    context,
+    floatingStyles,
+  } = useFloating({
+    open: popoverOpen,
+    onOpenChange: setPopoverOpen,
+    placement: 'top',
+    middleware: [offset(8), flip(), shift({ padding: 8 })],
+    whileElementsMounted: autoUpdate,
+  });
+  const { getReferenceProps, getFloatingProps } = useInteractions([
+    useClick(context),
+    useDismiss(context),
+    useRole(context, { role: 'dialog' }),
+  ]);
   return (
     <>
       <button
         type='button'
         className='btn-solid theme-primary'
-        data-bs-toggle='dialog'
-        data-bs-target='#dialog-overlays'
+        aria-controls='dialog-overlays'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Open dialog
       </button>
-      <Dialog id='dialog-overlays' aria-labelledby='dialog-overlays-title'>
+      <Dialog
+        show={show}
+        onShowChange={closeDialog}
+        id='dialog-overlays'
+        aria-labelledby='dialog-overlays-title'
+      >
         <DialogHeader>
           <DialogTitle id='dialog-overlays-title'>Overlays inside dialogs</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+          <CloseButton onClick={() => closeDialog(false)} aria-label='Close' />
         </DialogHeader>
         <DialogBody>
           <p>These components work inside modal dialogs.</p>
@@ -34,23 +102,40 @@ export function DialogOverlaysDemo() {
             <button
               type='button'
               className='btn-solid theme-secondary'
-              data-bs-toggle='tooltip'
-              data-bs-title='Tooltip inside a dialog!'
-              data-bs-container='#dialog-overlays'
+              ref={setTooltipReference}
+              {...tooltipInteractions.getReferenceProps()}
             >
               Tooltip
             </button>
+            {tooltipOpen && (
+              <Tooltip
+                show
+                ref={setTooltipFloating}
+                style={tooltipStyles}
+                {...tooltipInteractions.getFloatingProps()}
+              >
+                <TooltipInner>Tooltip inside a dialog!</TooltipInner>
+              </Tooltip>
+            )}
             <button
               type='button'
               className='btn-solid theme-secondary'
-              data-bs-toggle='popover'
-              data-bs-title='Popover title'
-              data-bs-content='This popover is rendered inside the dialog.'
-              data-bs-placement='top'
-              data-bs-container='#dialog-overlays'
+              ref={setPopoverReference}
+              {...getReferenceProps()}
             >
               Popover
             </button>
+            {popoverOpen && (
+              <Popover
+                show
+                ref={setPopoverFloating}
+                style={floatingStyles}
+                {...getFloatingProps({ 'aria-labelledby': 'dialog-popover-title' })}
+              >
+                <PopoverHeader id='dialog-popover-title'>Popover title</PopoverHeader>
+                <PopoverBody>This popover is rendered inside the dialog.</PopoverBody>
+              </Popover>
+            )}
             <Menu
               trigger={
                 <button type='button' className='btn-solid theme-secondary'>
@@ -69,7 +154,11 @@ export function DialogOverlaysDemo() {
           </ToastContainer>
         </DialogBody>
         <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
+          <button
+            type='button'
+            className='btn-solid theme-secondary'
+            onClick={() => closeDialog(false)}
+          >
             Close
           </button>
         </DialogFooter>

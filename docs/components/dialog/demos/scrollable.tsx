@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CloseButton,
   Dialog,
@@ -8,20 +9,28 @@ import {
 } from 'react-bootstrap-pro';
 
 export function DialogScrollableDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         type='button'
         className='btn-solid theme-primary'
-        data-bs-toggle='dialog'
-        data-bs-target='#dialog-scrollable'
+        aria-controls='dialog-scrollable'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Launch scrollable body dialog
       </button>
-      <Dialog id='dialog-scrollable' scrollable aria-labelledby='dialog-scrollable-title'>
+      <Dialog
+        show={show}
+        onShowChange={setShow}
+        id='dialog-scrollable'
+        scrollable
+        aria-labelledby='dialog-scrollable-title'
+      >
         <DialogHeader>
           <DialogTitle id='dialog-scrollable-title'>Scrollable body</DialogTitle>
-          <CloseButton data-bs-dismiss='dialog' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DialogHeader>
         <DialogBody>
           <p>
@@ -37,7 +46,11 @@ export function DialogScrollableDemo() {
           <p>The final paragraph appears at the bottom after scrolling.</p>
         </DialogBody>
         <DialogFooter>
-          <button type='button' className='btn-solid theme-secondary' data-bs-dismiss='dialog'>
+          <button
+            type='button'
+            className='btn-solid theme-secondary'
+            onClick={() => setShow(false)}
+          >
             Close
           </button>
           <button type='button' className='btn-solid theme-primary'>
