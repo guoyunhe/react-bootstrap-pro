@@ -82,4 +82,3 @@ export function Example() {
 - [Toasts](./components/toasts/)
 - [Toggler](./components/toggler/)
 - [Tooltip](./components/tooltip/)
-- [Validation](./components/validation/)

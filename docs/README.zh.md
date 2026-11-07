@@ -82,4 +82,3 @@ export function Example() {
 - [Toasts 轻提示](./components/toasts/)
 - [Toggler 切换器](./components/toggler/)
 - [Tooltip 工具提示](./components/tooltip/)
-- [Validation 表单校验](./components/validation/)

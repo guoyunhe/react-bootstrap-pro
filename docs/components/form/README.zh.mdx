@@ -27,6 +27,11 @@ import { FormLayoutHorizontalDemo } from './demos/layout-horizontal';
 import { FormLayoutHorizontalSizingDemo } from './demos/layout-horizontal-sizing';
 import { FormLayoutInlineDemo } from './demos/layout-inline';
 import { FormLayoutUtilitiesDemo } from './demos/layout-utilities';
+import { ValidationBrowserDefaultsDemo } from './demos/validation-browser-defaults';
+import { ValidationCustomDemo } from './demos/validation-custom';
+import { ValidationServerSideDemo } from './demos/validation-server-side';
+import { ValidationSupportedDemo } from './demos/validation-supported';
+import { ValidationTooltipsDemo } from './demos/validation-tooltips';
 
 # Form 表单
 
@@ -352,13 +357,131 @@ date、time、datetime-local、month、week 类型的输入框始终显示浮动
 
 ```
 
+## 表单校验
+
+使用 Bootstrap 的表单校验样式提供可操作的反馈。`Form` 管理 `data-bs-validate`
+开关和 `aria-invalid`，`FormFeedback` 渲染反馈文本，控件通过 `validation` 属性支持
+服务端校验状态。
+
+### 工作原理
+
+- **客户端校验**基于 `data-bs-validate` 作用域内的 CSS 伪类。为 `Form` 设置
+  `validation` 可启用 `:user-invalid` 样式，用户与控件交互后才会显示。
+- 默认**只显示无效样式**。设置 `validation='valid'` 可同时显示有效样式。
+- **服务端校验**通过控件的 `validation` 属性直接渲染 `.is-valid` 或 `.is-invalid`，
+  无需用户交互。
+- `FormFeedback` 渲染 `.invalid-feedback`、`.valid-feedback` 或它们的 tooltip 变体。
+- 设置 `validation` 时，`Form` 默认启用 `noValidate`，提交时检查有效性，并在用户修正
+  已标记的控件时更新 `aria-invalid`。
+
+### 自定义样式
+
+在 `Form` 上设置 `validation`，并为每个 `FormFeedback` 添加 `id`，让控件通过
+`aria-describedby` 关联反馈文本。为必填字段添加 `required` 并提供针对性的提示。
+
+`Form` 在提交时调用 `checkValidity()`、为符合条件的控件设置 `aria-invalid`，并在存在
+无效字段时阻止提交。
+
+<DemoContainer>
+  <ValidationCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-custom.tsx'
+
+```
+
+### 浏览器默认行为
+
+如果不需要自定义反馈文本，可以不设置 `validation` 并保持 `noValidate={false}`，交由
+浏览器使用自带的提示气泡进行校验。这些提示的样式随浏览器与操作系统不同，且无法通过
+CSS 定制。
+
+<DemoContainer>
+  <ValidationBrowserDefaultsDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-browser-defaults.tsx'
+
+```
+
+### 服务端校验
+
+通过控件的 `validation` 属性标记服务端返回的有效与无效字段。可以同时渲染两种反馈
+文本，由状态决定显示哪一个。
+
+<DemoContainer>
+  <ValidationServerSideDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-server-side.tsx'
+
+```
+
+反馈元素必须是控件或其 `.form-field` 分组的兄弟节点，CSS 才会显示它。使用浮动标签时
+请传入 `d='block'`，因为反馈位于 `.form-floating` 包装之外。
+
+### 支持的控件
+
+`Input`、`Textarea`、`Select`、`Checkbox`、`Radio`、`SwitchInput`、`Range`、`ChipInput`、
+`Combobox` 与 `OtpInput` 都支持 `validation='valid' | 'invalid'`。装饰输入框可能需要在
+容器上添加校验状态类；输入组与浮动标签可使用内部控件的状态。
+
+<DemoContainer>
+  <ValidationSupportedDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-supported.tsx'
+
+```
+
+### Tooltip 提示
+
+在 `FormFeedback` 上设置 `tooltip` 可将提示渲染为 tooltip 而非行内文本。tooltip 适合
+简单的纵向表单；不建议用于复选框、单选按钮与开关，因为它们的定位并不可靠。
+
+<DemoContainer>
+  <ValidationTooltipsDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-tooltips.tsx'
+
+```
+
 ## 无障碍
 
 每个控件都需要可访问名称。最简单的方式是用 `htmlFor` 绑定可见的 `FormLabel`；
 没有可见标签时可用 `aria-label`。帮助文本通过 `aria-describedby` 关联。浮动标签的
 占位文本不能作为可访问名称，因此请保留可见标签。
 
+通过 `aria-describedby` 将反馈文本与控件关联。设置 `validation` 时，`Form` 在提交时为
+符合条件的控件设置 `aria-invalid`，并在用户修正已标记控件时持续同步。对于不依赖焦点
+变化出现的提示，可使用 `aria-live` 或状态元素；标签与反馈文本应针对具体字段。
+
 ## API
+
+### Form
+
+默认渲染为 `form`。下表列出自有属性；此外还继承原生 form 属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+| 属性         | 类型                 | 说明                                                                     |
+| ------------ | -------------------- | ------------------------------------------------------------------------ |
+| `validation` | `boolean \| 'valid'` | 启用校验处理；`true` 添加 `data-bs-validate`，`'valid'` 还显示有效样式。 |
+| `onSubmit`   | `FormEventHandler`   | 校验后调用；无效时 `event.defaultPrevented` 为 `true`。                  |
+| `onInput`    | `FormEventHandler`   | 与内部 `aria-invalid` 更新一同调用。                                     |
+| `noValidate` | `boolean`            | 原生 form 属性；提供 `validation` 时默认为 `true`。                      |
+| `...props`   | `BoxProps<'form'>`   | 其余原生 form 属性及 Box 工具类属性。                                    |
+
+### FormFeedback
+
+默认渲染为 `div`。自有属性为 `type` 与 `tooltip`；继承原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+| 属性       | 类型                   | 说明                                                           |
+| ---------- | ---------------------- | -------------------------------------------------------------- |
+| `type`     | `'valid' \| 'invalid'` | 渲染有效或无效反馈，默认为 `'invalid'`。                       |
+| `tooltip`  | `boolean`              | 渲染校验 tooltip，而非行内反馈。                               |
+| `...props` | `BoxProps<'div'>`      | 原生属性（含用于 `aria-describedby` 的 `id`）及 Box 工具属性。 |
 
 ### FormFloating
 

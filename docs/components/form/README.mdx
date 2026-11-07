@@ -27,6 +27,11 @@ import { FormLayoutHorizontalDemo } from './demos/layout-horizontal';
 import { FormLayoutHorizontalSizingDemo } from './demos/layout-horizontal-sizing';
 import { FormLayoutInlineDemo } from './demos/layout-inline';
 import { FormLayoutUtilitiesDemo } from './demos/layout-utilities';
+import { ValidationBrowserDefaultsDemo } from './demos/validation-browser-defaults';
+import { ValidationCustomDemo } from './demos/validation-custom';
+import { ValidationServerSideDemo } from './demos/validation-server-side';
+import { ValidationSupportedDemo } from './demos/validation-supported';
+import { ValidationTooltipsDemo } from './demos/validation-tooltips';
 
 # Form
 
@@ -373,6 +378,105 @@ Use `Row cols={{ lg: 'auto' }}` for a responsive inline layout. Keeping
 
 ```
 
+## Validation
+
+Provide actionable feedback with Bootstrap's form validation styles. `Form`
+manages the `data-bs-validate` opt-in and `aria-invalid`, `FormFeedback`
+renders feedback, and controls accept `validation` for server-side states.
+
+### How it works
+
+- **Client-side validation** uses CSS pseudo-classes scoped behind
+  `data-bs-validate`. Set `validation` on `Form` to opt in to `:user-invalid`
+  styling, which appears after the user interacts with a control.
+- By default, **only invalid styling is shown**. Set `validation='valid'` to
+  also style valid fields.
+- **Server-side validation** uses `validation` on controls to render
+  `.is-valid` or `.is-invalid` without requiring user interaction.
+- `FormFeedback` renders `.invalid-feedback`, `.valid-feedback`, or their
+  tooltip variants.
+- When `validation` is set, `Form` defaults to `noValidate`, checks validity
+  on submit, and updates `aria-invalid` as the user corrects marked controls.
+
+### Custom styles
+
+Set `validation` on `Form` and give each `FormFeedback` an `id` so the control
+can reference it through `aria-describedby`. Add `required` to each required
+field and provide field-specific messages.
+
+`Form` calls `checkValidity()` on submit, marks eligible controls with
+`aria-invalid`, and prevents submission while any field is invalid.
+
+<DemoContainer>
+  <ValidationCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-custom.tsx'
+
+```
+
+### Browser defaults
+
+If custom feedback is not needed, omit `validation` and keep
+`noValidate={false}`. The browser handles validation with its own tooltips,
+which vary by browser and operating system and cannot be styled with CSS.
+
+<DemoContainer>
+  <ValidationBrowserDefaultsDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-browser-defaults.tsx'
+
+```
+
+### Server-side
+
+Indicate valid and invalid fields returned by the server with the control's
+`validation` prop. Render both feedback messages and let the state determine
+which one is visible.
+
+<DemoContainer>
+  <ValidationServerSideDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-server-side.tsx'
+
+```
+
+Feedback must be a sibling of the control or its `.form-field` group for CSS
+to reveal it. For floating labels, pass `d='block'` because feedback sits
+outside the `.form-floating` wrapper.
+
+### Supported elements
+
+`Input`, `Textarea`, `Select`, `Checkbox`, `Radio`, `SwitchInput`, `Range`,
+`ChipInput`, `Combobox`, and `OtpInput` accept
+`validation='valid' | 'invalid'`. Adorned inputs may require a validation class
+on their wrapper; input groups and floating labels can use their inner control's
+state.
+
+<DemoContainer>
+  <ValidationSupportedDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-supported.tsx'
+
+```
+
+### Tooltips
+
+Set `tooltip` on `FormFeedback` to render a tooltip instead of inline text.
+Tooltips work well for simple stacked forms; avoid them for checkboxes, radios,
+and switches, where their placement is unreliable.
+
+<DemoContainer>
+  <ValidationTooltipsDemo />
+</DemoContainer>
+
+```tsx src='./demos/validation-tooltips.tsx'
+
+```
+
 ## Accessibility
 
 Give every control an accessible name. The simplest approach is a visible
@@ -380,7 +484,37 @@ Give every control an accessible name. The simplest approach is a visible
 possible. Associate help text with `aria-describedby`. A floating label's
 placeholder is not an accessible name, so keep its visible label.
 
+Associate feedback with its control through `aria-describedby`. When
+`validation` is set, `Form` sets `aria-invalid` on eligible controls on submit
+and keeps marked controls in sync as the user corrects them. Use `aria-live` or
+a status element for messages appearing without a focus change, and make
+labels and feedback specific to each field.
+
 ## API
+
+### Form
+
+Renders a `form` by default. Its own props are listed below; it inherits native
+form props and [`Box`](../box/README.mdx#api) utility props.
+
+| Prop         | Type                 | Description                                                                                         |
+| ------------ | -------------------- | --------------------------------------------------------------------------------------------------- |
+| `validation` | `boolean \| 'valid'` | Enables validation handling; `true` adds `data-bs-validate` and `'valid'` also styles valid fields. |
+| `onSubmit`   | `FormEventHandler`   | Called after validation; `event.defaultPrevented` is set when invalid.                              |
+| `onInput`    | `FormEventHandler`   | Called alongside the internal `aria-invalid` update.                                                |
+| `noValidate` | `boolean`            | Native form prop; defaults to `true` when `validation` is supplied.                                 |
+| `...props`   | `BoxProps<'form'>`   | Remaining native form props and Box utility props.                                                  |
+
+### FormFeedback
+
+Renders a `div` by default. Its own props are `type` and `tooltip`; it
+inherits native props and [`Box`](../box/README.mdx#api) utility props.
+
+| Prop       | Type                   | Description                                                             |
+| ---------- | ---------------------- | ----------------------------------------------------------------------- |
+| `type`     | `'valid' \| 'invalid'` | Renders valid or invalid feedback; defaults to `'invalid'`.             |
+| `tooltip`  | `boolean`              | Renders a validation tooltip instead of inline feedback.                |
+| `...props` | `BoxProps<'div'>`      | Native props, including `id` for `aria-describedby`, and Box utilities. |
 
 ### FormFloating
 
