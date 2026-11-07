@@ -1,5 +1,9 @@
 # Project Guidelines
 
+## Implementation
+
+- Never import Bootstrap JavaScript. Implement interactive behavior in React; third-party libraries may be used.
+
 ## Documentation
 
 - Use `docs/components/accordion/` as the structural template for component documentation.
