@@ -1,5 +1,5 @@
-import { OtpInput } from 'react-bootstrap-pro';
+import { OTPInput } from 'react-bootstrap-pro';
 
-export function OtpInputPinDemo() {
-  return <OtpInput aria-label='PIN' length={4} connected />;
+export function OTPInputPinDemo() {
+  return <OTPInput aria-label='PIN' length={4} connected />;
 }

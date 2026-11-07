@@ -4,6 +4,7 @@
 
 ### Breaking Changes
 
+- Rename `OtpInput` and its public types to `OTPInput` and `OTPInput*`.
 - Replace `FormControl` input, select, and textarea usage with dedicated
   `Input`, `Select`, and `Textarea` components. `FormControl` now defaults to
   a `div` and is intended for control wrappers.

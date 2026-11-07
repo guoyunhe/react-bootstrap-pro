@@ -1,32 +1,32 @@
 ---
-title: OtpInput
+title: OTPInput
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
-import { OtpInputBasicDemo } from './demos/basic';
-import { OtpInputConnectedDemo } from './demos/connected';
-import { OtpInputControlledDemo } from './demos/controlled';
-import { OtpInputDisabledDemo } from './demos/disabled';
-import { OtpInputFieldDemo } from './demos/field';
-import { OtpInputPinDemo } from './demos/pin';
-import { OtpInputSeparatorDemo } from './demos/separator';
-import { OtpInputSizesDemo } from './demos/sizes';
-import { OtpInputTypesDemo } from './demos/types';
-import { OtpInputValidationDemo } from './demos/validation';
+import { OTPInputBasicDemo } from './demos/basic';
+import { OTPInputConnectedDemo } from './demos/connected';
+import { OTPInputControlledDemo } from './demos/controlled';
+import { OTPInputDisabledDemo } from './demos/disabled';
+import { OTPInputFieldDemo } from './demos/field';
+import { OTPInputPinDemo } from './demos/pin';
+import { OTPInputSeparatorDemo } from './demos/separator';
+import { OTPInputSizesDemo } from './demos/sizes';
+import { OTPInputTypesDemo } from './demos/types';
+import { OTPInputValidationDemo } from './demos/validation';
 
-# OtpInput
+# OTPInput
 
-`OtpInput` renders a one-time-password field as separate digit slots on top of a
+`OTPInput` renders a one-time-password field as separate digit slots on top of a
 single real text input. Screen readers, password managers, and SMS autofill see
 one ordinary text field, while users get the familiar multi-box appearance. All
 behavior—sanitizing, overwriting, grouping, masking, and caret handling—is
 implemented in React, so no Bootstrap JavaScript plugin is required.
 
-## Overview
+## How it works
 
 <DemoContainer>
-  <OtpInputBasicDemo />
+  <OTPInputBasicDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
@@ -42,7 +42,7 @@ length (6 by default).
 Set `connected` to merge the slots into a single field with shared borders.
 
 <DemoContainer>
-  <OtpInputConnectedDemo />
+  <OTPInputConnectedDemo />
 </DemoContainer>
 
 ```tsx src='./demos/connected.tsx'
@@ -54,7 +54,7 @@ Set `connected` to merge the slots into a single field with shared borders.
 Use a smaller `length` for shorter codes.
 
 <DemoContainer>
-  <OtpInputPinDemo />
+  <OTPInputPinDemo />
 </DemoContainer>
 
 ```tsx src='./demos/pin.tsx'
@@ -68,7 +68,7 @@ handy for codes like `123-456`. The separator is never part of the value. Change
 the divider character with `separator` (`·` by default).
 
 <DemoContainer>
-  <OtpInputSeparatorDemo />
+  <OTPInputSeparatorDemo />
 </DemoContainer>
 
 ```tsx src='./demos/separator.tsx'
@@ -80,7 +80,7 @@ the divider character with `separator` (`·` by default).
 Set `size='sm'` or `size='lg'` to change the slot size.
 
 <DemoContainer>
-  <OtpInputSizesDemo />
+  <OTPInputSizesDemo />
 </DemoContainer>
 
 ```tsx src='./demos/sizes.tsx'
@@ -92,10 +92,11 @@ Set `size='sm'` or `size='lg'` to change the slot size.
 `type` accepts `'numeric'` (default), `'alphanumeric'`, or `'alpha'`, and sets the
 matching `inputmode` and `pattern`. Set `mask` to show a dot instead of each
 character while keeping a normal text input, so numeric keyboards and autofill
-still work.
+still work. This is visual masking, not a password input: the real input and
+its value remain available to the browser and assistive technology.
 
 <DemoContainer>
-  <OtpInputTypesDemo />
+  <OTPInputTypesDemo />
 </DemoContainer>
 
 ```tsx src='./demos/types.tsx'
@@ -107,7 +108,7 @@ still work.
 Set `disabled` to prevent interaction.
 
 <DemoContainer>
-  <OtpInputDisabledDemo />
+  <OTPInputDisabledDemo />
 </DemoContainer>
 
 ```tsx src='./demos/disabled.tsx'
@@ -120,7 +121,7 @@ Set `validation='valid'` or `validation='invalid'` to style the slots. Invalid
 fields also expose `aria-invalid` on the input.
 
 <DemoContainer>
-  <OtpInputValidationDemo />
+  <OTPInputValidationDemo />
 </DemoContainer>
 
 ```tsx src='./demos/validation.tsx'
@@ -133,7 +134,7 @@ Associate a `FormLabel` with the input and add help text through
 `aria-describedby`.
 
 <DemoContainer>
-  <OtpInputFieldDemo />
+  <OTPInputFieldDemo />
 </DemoContainer>
 
 ```tsx src='./demos/field.tsx'
@@ -146,7 +147,7 @@ Use `value` and `onChange` for controlled usage, and `onComplete` to react when
 every slot is filled.
 
 <DemoContainer>
-  <OtpInputControlledDemo />
+  <OTPInputControlledDemo />
 </DemoContainer>
 
 ```tsx src='./demos/controlled.tsx'
@@ -168,36 +169,36 @@ every slot is filled.
 
 ## API
 
-### OtpInput
+### OTPInput
 
 Renders a `div` by default. Its own props configure code length and accepted
 characters (`length`, `type`), display (`mask`, `groups`, `separator`,
 `connected`, `size`, `validation`), value and callbacks (`value`,
-`defaultValue`, `onChange`, `onComplete`), and input state and labeling (`id`,
-`name`, `autoComplete`, `disabled`, `readOnly`, `required`, `autoFocus`,
-`aria-label`, `aria-labelledby`, `aria-describedby`). It inherits native `div`
-props and [`Box`](../box/README.mdx#api) utility props, except `children`,
-`component`, and `onChange`.
+`defaultValue`, `onChange`, `onComplete`), and input state and labeling. It
+inherits native `div` props and [`Box`](../box/README.mdx#api) utility props,
+except `children`, `component`, and `onChange`. The explicitly listed input
+props below are forwarded to the input; other inherited props apply to the
+container.
 
-| Prop                                            | Type                                     | Description                                               |
-| ----------------------------------------------- | ---------------------------------------- | --------------------------------------------------------- |
-| `length`                                        | `number`                                 | Number of slots and maximum length. Defaults to `6`.      |
-| `type`                                          | `'numeric' \| 'alphanumeric' \| 'alpha'` | Accepted characters, also sets `inputmode` and `pattern`. |
-| `mask`                                          | `boolean`                                | Shows a dot in each filled slot.                          |
-| `groups`                                        | `readonly number[]`                      | Group sizes used to insert separators, e.g. `[3, 3]`.     |
-| `separator`                                     | `string`                                 | Separator character between groups. Defaults to `·`.      |
-| `connected`                                     | `boolean`                                | Merges the slots into a single field with shared borders. |
-| `size`                                          | `'sm' \| 'lg'`                           | Changes the slot size.                                    |
-| `validation`                                    | `'valid' \| 'invalid'`                   | Applies `.is-valid` or `.is-invalid` to the slots.        |
-| `value`                                         | `string`                                 | Controlled code.                                          |
-| `defaultValue`                                  | `string`                                 | Initial code for uncontrolled usage.                      |
-| `onChange`                                      | `(value: string) => void`                | Called with the sanitized code on every change.           |
-| `onComplete`                                    | `(value: string) => void`                | Called when every slot is filled.                         |
-| `name`                                          | `string`                                 | Form field name submitted with the code.                  |
-| `autoComplete`                                  | `string`                                 | Defaults to `one-time-code`.                              |
-| `disabled`, `readOnly`, `required`, `autoFocus` |                                          | Forwarded to the input.                                   |
-| `id`, `aria-*`                                  |                                          | Forwarded to the input.                                   |
-| `...props`                                      | `BoxProps<'div'>`                        | Box utility props for the container.                      |
+| Prop                                                | Type                                     | Description                                               |
+| --------------------------------------------------- | ---------------------------------------- | --------------------------------------------------------- |
+| `length`                                            | `number`                                 | Number of slots and maximum length. Defaults to `6`.      |
+| `type`                                              | `'numeric' \| 'alphanumeric' \| 'alpha'` | Accepted characters; defaults to `'numeric'`.             |
+| `mask`                                              | `boolean`                                | Shows a dot in each filled slot.                          |
+| `groups`                                            | `readonly number[]`                      | Group sizes used to insert separators, e.g. `[3, 3]`.     |
+| `separator`                                         | `string`                                 | Separator character between groups. Defaults to `·`.      |
+| `connected`                                         | `boolean`                                | Merges the slots into a single field with shared borders. |
+| `size`                                              | `'sm' \| 'lg'`                           | Changes the slot size.                                    |
+| `validation`                                        | `'valid' \| 'invalid'`                   | Applies `.is-valid` or `.is-invalid` to the slots.        |
+| `value`                                             | `string`                                 | Controlled code.                                          |
+| `defaultValue`                                      | `string`                                 | Initial code for uncontrolled usage.                      |
+| `onChange`                                          | `(value: string) => void`                | Called with the sanitized code on every change.           |
+| `onComplete`                                        | `(value: string) => void`                | Called when a changed value fills every slot.             |
+| `name`                                              | `string`                                 | Form field name submitted with the code.                  |
+| `autoComplete`                                      | `string`                                 | Defaults to `one-time-code`.                              |
+| `disabled`, `readOnly`, `required`, `autoFocus`     | `boolean`                                | Forwarded to the input.                                   |
+| `id`                                                | `string`                                 | Input ID, for an associated label.                        |
+| `aria-label`, `aria-labelledby`, `aria-describedby` | `string`                                 | Accessible name or description for the input.             |
 
 ## Accessibility
 
@@ -206,4 +207,10 @@ accessible name, role, and value; the visual slots are decorative and marked
 `aria-hidden`. The input sets `autocomplete='one-time-code'`, an appropriate
 `inputmode`, and a `pattern`, which supports SMS autofill and the right mobile
 keyboard. Copy, paste, and autofill are never blocked, so password managers can
-fill the code directly.
+fill the code directly. Autofill and virtual keyboard behavior depend on browser
+and platform support.
+
+## See
+
+- [Bootstrap 6 OTP input documentation](https://getbootstrap.com/docs/6.0/forms/otp-input/)
+- [OTPInput source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/otp-input.tsx)

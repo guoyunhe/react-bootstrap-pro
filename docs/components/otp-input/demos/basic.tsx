@@ -1,5 +1,5 @@
-import { OtpInput } from 'react-bootstrap-pro';
+import { OTPInput } from 'react-bootstrap-pro';
 
-export function OtpInputBasicDemo() {
-  return <OtpInput aria-label='Verification code' />;
+export function OTPInputBasicDemo() {
+  return <OTPInput aria-label='Verification code' />;
 }

@@ -14,15 +14,15 @@ import {
 import { Box } from './box';
 import type { BoxProps } from './box';
 
-export type OtpInputType = 'numeric' | 'alphanumeric' | 'alpha';
-export type OtpInputSize = 'sm' | 'lg';
-export type OtpInputValidation = 'valid' | 'invalid';
+export type OTPInputType = 'numeric' | 'alphanumeric' | 'alpha';
+export type OTPInputSize = 'sm' | 'lg';
+export type OTPInputValidation = 'valid' | 'invalid';
 
-type OtpInputOwnProps = {
+type OTPInputOwnProps = {
   /** Number of slots, which is also the maximum code length. */
   length?: number | undefined;
   /** Accepted characters. Also sets `inputmode` and `pattern`. */
-  type?: OtpInputType | undefined;
+  type?: OTPInputType | undefined;
   /** Shows a dot in each filled slot instead of the character. */
   mask?: boolean | undefined;
   /** Splits the slots into groups separated by a decorative separator. */
@@ -30,8 +30,8 @@ type OtpInputOwnProps = {
   separator?: string | undefined;
   /** Merges the slots into one field with shared borders. */
   connected?: boolean | undefined;
-  size?: OtpInputSize | undefined;
-  validation?: OtpInputValidation | undefined;
+  size?: OTPInputSize | undefined;
+  validation?: OTPInputValidation | undefined;
   value?: string | undefined;
   defaultValue?: string | undefined;
   onChange?: ((value: string) => void) | undefined;
@@ -49,7 +49,7 @@ type OtpInputOwnProps = {
   'aria-describedby'?: string | undefined;
 };
 
-export type OtpInputProps = OtpInputOwnProps &
+export type OTPInputProps = OTPInputOwnProps &
   Omit<BoxProps<'div'>, 'onChange' | 'children' | 'component'>;
 
 const TYPE_CONFIG = {
@@ -76,7 +76,7 @@ function selectSlotForTyping(event: KeyboardEvent<HTMLInputElement>) {
   }
 }
 
-export function OtpInput({
+export function OTPInput({
   length = 6,
   type = 'numeric',
   mask = false,
@@ -102,7 +102,7 @@ export function OtpInput({
   classNameBefore,
   className,
   ...props
-}: OtpInputProps) {
+}: OTPInputProps) {
   const [internalValue, setInternalValue] = useState(defaultValue);
   const [focused, setFocused] = useState(false);
   const [caret, setCaret] = useState(0);

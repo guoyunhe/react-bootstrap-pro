@@ -62,7 +62,7 @@ export function Example() {
 - [Nav](./components/nav/)
 - [NavOverflow](./components/nav-overflow/)
 - [Navbar](./components/navbar/)
-- [OtpInput](./components/otp-input/)
+- [OTPInput](./components/otp-input/)
 - [Pagination](./components/pagination/)
 - [PasswordStrength](./components/password-strength/)
 - [Placeholder](./components/placeholder/)

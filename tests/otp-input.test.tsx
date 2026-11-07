@@ -1,7 +1,7 @@
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { OtpInput } from '../src';
+import { OTPInput } from '../src';
 
 function getInput(screen: { container: HTMLElement }) {
   return screen.container.querySelector<HTMLInputElement>('input.otp-input') as HTMLInputElement;
@@ -54,7 +54,7 @@ function paste(input: HTMLInputElement, text: string) {
 }
 
 test('renders one input and one slot per character', async () => {
-  const screen = await render(<OtpInput aria-label='Verification code' data-testid='otp' />);
+  const screen = await render(<OTPInput aria-label='Verification code' data-testid='otp' />);
 
   const root = screen.getByTestId('otp').element();
   const input = getInput(screen);
@@ -74,7 +74,7 @@ test('types digits into the slots', async () => {
   const onChange = vi.fn();
   const onComplete = vi.fn();
   const screen = await render(
-    <OtpInput aria-label='Code' onChange={onChange} onComplete={onComplete} />,
+    <OTPInput aria-label='Code' onChange={onChange} onComplete={onComplete} />,
   );
   const input = getInput(screen);
 
@@ -90,7 +90,7 @@ test('types digits into the slots', async () => {
 });
 
 test('overwrites the filled slot under the caret', async () => {
-  const screen = await render(<OtpInput aria-label='Code' defaultValue='123456' />);
+  const screen = await render(<OTPInput aria-label='Code' defaultValue='123456' />);
   const input = getInput(screen);
 
   await typeCharacter(input, '9', 2);
@@ -101,7 +101,7 @@ test('overwrites the filled slot under the caret', async () => {
 test('removes the previous character on backspace', async () => {
   const onChange = vi.fn();
   const screen = await render(
-    <OtpInput aria-label='Code' defaultValue='123' onChange={onChange} />,
+    <OTPInput aria-label='Code' defaultValue='123' onChange={onChange} />,
   );
   const input = getInput(screen);
 
@@ -113,7 +113,7 @@ test('removes the previous character on backspace', async () => {
 
 test('sanitizes pasted codes', async () => {
   const onComplete = vi.fn();
-  const screen = await render(<OtpInput aria-label='Code' onComplete={onComplete} />);
+  const screen = await render(<OTPInput aria-label='Code' onComplete={onComplete} />);
   const input = getInput(screen);
 
   paste(input, '123-456');
@@ -124,7 +124,7 @@ test('sanitizes pasted codes', async () => {
 
 test('filters characters by type', async () => {
   const onChange = vi.fn();
-  const screen = await render(<OtpInput aria-label='Code' type='alpha' onChange={onChange} />);
+  const screen = await render(<OTPInput aria-label='Code' type='alpha' onChange={onChange} />);
   const input = getInput(screen);
 
   expect(input.getAttribute('inputmode')).toBe('text');
@@ -138,7 +138,7 @@ test('filters characters by type', async () => {
 });
 
 test('accepts letters and digits when alphanumeric', async () => {
-  const screen = await render(<OtpInput aria-label='Code' type='alphanumeric' defaultValue='a1' />);
+  const screen = await render(<OTPInput aria-label='Code' type='alphanumeric' defaultValue='a1' />);
   const input = getInput(screen);
 
   expect(input.getAttribute('pattern')).toBe('[A-Za-z0-9]*');
@@ -147,7 +147,7 @@ test('accepts letters and digits when alphanumeric', async () => {
 });
 
 test('masks characters while keeping the value', async () => {
-  const screen = await render(<OtpInput aria-label='Code' mask defaultValue='123' />);
+  const screen = await render(<OTPInput aria-label='Code' mask defaultValue='123' />);
   const input = getInput(screen);
 
   expect(input.value).toBe('123');
@@ -155,7 +155,7 @@ test('masks characters while keeping the value', async () => {
 });
 
 test('renders group separators', async () => {
-  const screen = await render(<OtpInput aria-label='Code' groups={[3, 3]} defaultValue='123456' />);
+  const screen = await render(<OTPInput aria-label='Code' groups={[3, 3]} defaultValue='123456' />);
 
   const separators = [...screen.container.querySelectorAll('.otp-separator')];
   expect(separators).toHaveLength(1);
@@ -165,7 +165,7 @@ test('renders group separators', async () => {
 
 test('supports a custom separator and length', async () => {
   const screen = await render(
-    <OtpInput aria-label='PIN' length={4} groups={[2, 2]} separator='-' />,
+    <OTPInput aria-label='PIN' length={4} groups={[2, 2]} separator='-' />,
   );
   const input = getInput(screen);
 
@@ -176,7 +176,7 @@ test('supports a custom separator and length', async () => {
 
 test('applies connected, size, validation and disabled states', async () => {
   const screen = await render(
-    <OtpInput
+    <OTPInput
       aria-label='Code'
       data-testid='otp'
       connected
@@ -196,7 +196,7 @@ test('applies connected, size, validation and disabled states', async () => {
 
 test('supports controlled values', async () => {
   const onChange = vi.fn();
-  const screen = await render(<OtpInput aria-label='Code' value='12' onChange={onChange} />);
+  const screen = await render(<OTPInput aria-label='Code' value='12' onChange={onChange} />);
   const input = getInput(screen);
 
   await expect.poll(() => slotTexts(screen).join('')).toBe('12');
@@ -206,11 +206,11 @@ test('supports controlled values', async () => {
   // The parent owns the value, so the field keeps the controlled value.
   await expect.poll(() => getInput(screen).value).toBe('12');
 
-  await screen.rerender(<OtpInput aria-label='Code' value='1234' onChange={onChange} />);
+  await screen.rerender(<OTPInput aria-label='Code' value='1234' onChange={onChange} />);
   await expect.poll(() => slotTexts(screen).join('')).toBe('1234');
 });
 
 test('keeps a custom autocomplete value', async () => {
-  const screen = await render(<OtpInput aria-label='Code' autoComplete='off' />);
+  const screen = await render(<OTPInput aria-label='Code' autoComplete='off' />);
   expect(getInput(screen).getAttribute('autocomplete')).toBe('off');
 });

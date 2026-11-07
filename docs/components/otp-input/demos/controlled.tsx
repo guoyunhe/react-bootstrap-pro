@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { Box, FormText, OtpInput } from 'react-bootstrap-pro';
+import { Box, FormText, OTPInput } from 'react-bootstrap-pro';
 
-export function OtpInputControlledDemo() {
+export function OTPInputControlledDemo() {
   const [code, setCode] = useState('123');
   const [complete, setComplete] = useState(false);
 
   return (
     <Box d='flex' flexDirection='column' gap={2}>
-      <OtpInput
+      <OTPInput
         aria-label='Verification code'
         value={code}
         onChange={(next) => {

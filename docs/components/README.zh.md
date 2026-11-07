@@ -29,7 +29,7 @@ order: 1
 - [Nav 导航](./nav/)
 - [NavOverflow 导航溢出](./nav-overflow/)
 - [Navbar 导航栏](./navbar/)
-- [OtpInput 一次性密码输入](./otp-input/)
+- [OTPInput 一次性密码输入](./otp-input/)
 - [Pagination 分页](./pagination/)
 - [PasswordStrength 密码强度](./password-strength/)
 - [Placeholder 占位符](./placeholder/)

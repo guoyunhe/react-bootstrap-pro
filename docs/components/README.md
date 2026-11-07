@@ -34,7 +34,7 @@ order: 1
 - [Nav](./nav/)
 - [NavOverflow](./nav-overflow/)
 - [Navbar](./navbar/)
-- [OtpInput](./otp-input/)
+- [OTPInput](./otp-input/)
 - [Pagination](./pagination/)
 - [PasswordStrength](./password-strength/)
 - [Placeholder](./placeholder/)

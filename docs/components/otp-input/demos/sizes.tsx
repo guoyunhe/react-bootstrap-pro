@@ -1,10 +1,10 @@
-import { Box, OtpInput } from 'react-bootstrap-pro';
+import { Box, OTPInput } from 'react-bootstrap-pro';
 
-export function OtpInputSizesDemo() {
+export function OTPInputSizesDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
-      <OtpInput aria-label='Small verification code' size='sm' />
-      <OtpInput aria-label='Large verification code' size='lg' />
+      <OTPInput aria-label='Small verification code' size='sm' />
+      <OTPInput aria-label='Large verification code' size='lg' />
     </Box>
   );
 }

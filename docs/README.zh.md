@@ -62,7 +62,7 @@ export function Example() {
 - [Nav 导航](./components/nav/)
 - [NavOverflow 导航溢出](./components/nav-overflow/)
 - [Navbar 导航栏](./components/navbar/)
-- [OtpInput 一次性密码输入](./components/otp-input/)
+- [OTPInput 一次性密码输入](./components/otp-input/)
 - [Pagination 分页](./components/pagination/)
 - [PasswordStrength 密码强度](./components/password-strength/)
 - [Placeholder 占位符](./components/placeholder/)

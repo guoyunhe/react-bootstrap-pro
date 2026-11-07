@@ -1,10 +1,10 @@
-import { Box, OtpInput } from 'react-bootstrap-pro';
+import { Box, OTPInput } from 'react-bootstrap-pro';
 
-export function OtpInputTypesDemo() {
+export function OTPInputTypesDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
-      <OtpInput aria-label='Alphanumeric code' type='alphanumeric' connected />
-      <OtpInput aria-label='Masked code' mask connected />
+      <OTPInput aria-label='Alphanumeric code' type='alphanumeric' connected />
+      <OTPInput aria-label='Masked code' mask connected />
     </Box>
   );
 }

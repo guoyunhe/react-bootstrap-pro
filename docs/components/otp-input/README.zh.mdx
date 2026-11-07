@@ -1,31 +1,31 @@
 ---
-title: OtpInput 一次性密码输入
+title: OTPInput 一次性密码输入
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
-import { OtpInputBasicDemo } from './demos/basic';
-import { OtpInputConnectedDemo } from './demos/connected';
-import { OtpInputControlledDemo } from './demos/controlled';
-import { OtpInputDisabledDemo } from './demos/disabled';
-import { OtpInputFieldDemo } from './demos/field';
-import { OtpInputPinDemo } from './demos/pin';
-import { OtpInputSeparatorDemo } from './demos/separator';
-import { OtpInputSizesDemo } from './demos/sizes';
-import { OtpInputTypesDemo } from './demos/types';
-import { OtpInputValidationDemo } from './demos/validation';
+import { OTPInputBasicDemo } from './demos/basic';
+import { OTPInputConnectedDemo } from './demos/connected';
+import { OTPInputControlledDemo } from './demos/controlled';
+import { OTPInputDisabledDemo } from './demos/disabled';
+import { OTPInputFieldDemo } from './demos/field';
+import { OTPInputPinDemo } from './demos/pin';
+import { OTPInputSeparatorDemo } from './demos/separator';
+import { OTPInputSizesDemo } from './demos/sizes';
+import { OTPInputTypesDemo } from './demos/types';
+import { OTPInputValidationDemo } from './demos/validation';
 
-# OtpInput 一次性密码输入
+# OTPInput 一次性密码输入
 
-`OtpInput` 用一个真实的文本输入框承载验证码，并在其上绘制独立的数字格。屏幕阅读器、
+`OTPInput` 用一个真实的文本输入框承载验证码，并在其上绘制独立的数字格。屏幕阅读器、
 密码管理器与短信自动填充都把它当作一个普通文本框，而用户看到的是熟悉的多格样式。
 字符过滤、覆盖输入、分组、掩码与光标处理全部由 React 实现，无需加载 Bootstrap
 JavaScript 插件。
 
-## 示例
+## 工作原理
 
 <DemoContainer>
-  <OtpInputBasicDemo />
+  <OTPInputBasicDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
@@ -40,7 +40,7 @@ JavaScript 插件。
 设置 `connected` 可将各格子合并为一个共享边框的整体。
 
 <DemoContainer>
-  <OtpInputConnectedDemo />
+  <OTPInputConnectedDemo />
 </DemoContainer>
 
 ```tsx src='./demos/connected.tsx'
@@ -52,7 +52,7 @@ JavaScript 插件。
 较短的验证码可使用更小的 `length`。
 
 <DemoContainer>
-  <OtpInputPinDemo />
+  <OTPInputPinDemo />
 </DemoContainer>
 
 ```tsx src='./demos/pin.tsx'
@@ -65,7 +65,7 @@ JavaScript 插件。
 不属于值的一部分，可用 `separator` 修改分隔字符（默认为 `·`）。
 
 <DemoContainer>
-  <OtpInputSeparatorDemo />
+  <OTPInputSeparatorDemo />
 </DemoContainer>
 
 ```tsx src='./demos/separator.tsx'
@@ -77,7 +77,7 @@ JavaScript 插件。
 设置 `size='sm'` 或 `size='lg'` 可改变格子大小。
 
 <DemoContainer>
-  <OtpInputSizesDemo />
+  <OTPInputSizesDemo />
 </DemoContainer>
 
 ```tsx src='./demos/sizes.tsx'
@@ -88,10 +88,11 @@ JavaScript 插件。
 
 `type` 支持 `'numeric'`（默认）、`'alphanumeric'` 与 `'alpha'`，并会同时设置对应的
 `inputmode` 与 `pattern`。设置 `mask` 可在格子中显示圆点而仍保留普通文本框，从而不影响
-数字键盘与自动填充。
+数字键盘与自动填充。这只是视觉掩码，并非密码输入框：浏览器和辅助技术仍可访问真实
+输入框及其值。
 
 <DemoContainer>
-  <OtpInputTypesDemo />
+  <OTPInputTypesDemo />
 </DemoContainer>
 
 ```tsx src='./demos/types.tsx'
@@ -103,7 +104,7 @@ JavaScript 插件。
 设置 `disabled` 可禁止交互。
 
 <DemoContainer>
-  <OtpInputDisabledDemo />
+  <OTPInputDisabledDemo />
 </DemoContainer>
 
 ```tsx src='./demos/disabled.tsx'
@@ -116,7 +117,7 @@ JavaScript 插件。
 在输入框上暴露 `aria-invalid`。
 
 <DemoContainer>
-  <OtpInputValidationDemo />
+  <OTPInputValidationDemo />
 </DemoContainer>
 
 ```tsx src='./demos/validation.tsx'
@@ -128,7 +129,7 @@ JavaScript 插件。
 用 `FormLabel` 关联输入框，并通过 `aria-describedby` 添加说明文本。
 
 <DemoContainer>
-  <OtpInputFieldDemo />
+  <OTPInputFieldDemo />
 </DemoContainer>
 
 ```tsx src='./demos/field.tsx'
@@ -140,7 +141,7 @@ JavaScript 插件。
 使用 `value` 与 `onChange` 实现受控用法，用 `onComplete` 在全部填满时做出响应。
 
 <DemoContainer>
-  <OtpInputControlledDemo />
+  <OTPInputControlledDemo />
 </DemoContainer>
 
 ```tsx src='./demos/controlled.tsx'
@@ -158,39 +159,44 @@ JavaScript 插件。
 
 ## API
 
-### OtpInput
+### OTPInput
 
 默认渲染为 `div`。自有属性用于配置验证码长度和允许字符（`length`、`type`）、
 显示方式（`mask`、`groups`、`separator`、`connected`、`size`、`validation`）、
-值与回调（`value`、`defaultValue`、`onChange`、`onComplete`），以及原生输入状态
-和标签（`id`、`name`、`autoComplete`、`disabled`、`readOnly`、`required`、
-`autoFocus`、`aria-label`、`aria-labelledby`、`aria-describedby`）。组件继承
-原生 `div` 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，但不包括
-`children`、`component` 和 `onChange`。
+值与回调（`value`、`defaultValue`、`onChange`、`onComplete`），以及输入框状态和
+标签。组件继承原生 `div` 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，
+但不包括 `children`、`component` 和 `onChange`。下表明确列出的输入框属性会传递给
+输入框，其他继承属性则作用于容器。
 
-| 属性                                            | 类型                                     | 说明                                            |
-| ----------------------------------------------- | ---------------------------------------- | ----------------------------------------------- |
-| `length`                                        | `number`                                 | 格子数量与最大长度，默认 `6`。                  |
-| `type`                                          | `'numeric' \| 'alphanumeric' \| 'alpha'` | 允许的字符，同时设置 `inputmode` 与 `pattern`。 |
-| `mask`                                          | `boolean`                                | 在填入的格子中显示圆点。                        |
-| `groups`                                        | `readonly number[]`                      | 分组大小，用于插入分隔符，如 `[3, 3]`。         |
-| `separator`                                     | `string`                                 | 分组之间的分隔字符，默认 `·`。                  |
-| `connected`                                     | `boolean`                                | 合并格子为共享边框的整体。                      |
-| `size`                                          | `'sm' \| 'lg'`                           | 改变格子大小。                                  |
-| `validation`                                    | `'valid' \| 'invalid'`                   | 为格子添加 `.is-valid` 或 `.is-invalid`。       |
-| `value`                                         | `string`                                 | 受控验证码。                                    |
-| `defaultValue`                                  | `string`                                 | 非受控用法的初始验证码。                        |
-| `onChange`                                      | `(value: string) => void`                | 每次变化时以过滤后的验证码调用。                |
-| `onComplete`                                    | `(value: string) => void`                | 全部格子填满时调用。                            |
-| `name`                                          | `string`                                 | 随表单提交的字段名。                            |
-| `autoComplete`                                  | `string`                                 | 默认为 `one-time-code`。                        |
-| `disabled`、`readOnly`、`required`、`autoFocus` |                                          | 传递给输入框。                                  |
-| `id`、`aria-*`                                  |                                          | 传递给输入框。                                  |
-| `...props`                                      | `BoxProps<'div'>`                        | 容器的 Box 工具属性。                           |
+| 属性                                                | 类型                                     | 说明                                      |
+| --------------------------------------------------- | ---------------------------------------- | ----------------------------------------- |
+| `length`                                            | `number`                                 | 格子数量与最大长度，默认 `6`。            |
+| `type`                                              | `'numeric' \| 'alphanumeric' \| 'alpha'` | 允许的字符，默认为 `'numeric'`。          |
+| `mask`                                              | `boolean`                                | 在填入的格子中显示圆点。                  |
+| `groups`                                            | `readonly number[]`                      | 分组大小，用于插入分隔符，如 `[3, 3]`。   |
+| `separator`                                         | `string`                                 | 分组之间的分隔字符，默认 `·`。            |
+| `connected`                                         | `boolean`                                | 合并格子为共享边框的整体。                |
+| `size`                                              | `'sm' \| 'lg'`                           | 改变格子大小。                            |
+| `validation`                                        | `'valid' \| 'invalid'`                   | 为格子添加 `.is-valid` 或 `.is-invalid`。 |
+| `value`                                             | `string`                                 | 受控验证码。                              |
+| `defaultValue`                                      | `string`                                 | 非受控用法的初始验证码。                  |
+| `onChange`                                          | `(value: string) => void`                | 每次变化时以过滤后的验证码调用。          |
+| `onComplete`                                        | `(value: string) => void`                | 变化后的值填满全部格子时调用。            |
+| `name`                                              | `string`                                 | 随表单提交的字段名。                      |
+| `autoComplete`                                      | `string`                                 | 默认为 `one-time-code`。                  |
+| `disabled`、`readOnly`、`required`、`autoFocus`     | `boolean`                                | 传递给输入框。                            |
+| `id`                                                | `string`                                 | 输入框 ID，用于关联标签。                 |
+| `aria-label`、`aria-labelledby`、`aria-describedby` | `string`                                 | 输入框的无障碍名称或描述。                |
 
 ## 无障碍
 
 该控件是单个文本输入框，因此辅助技术只会朗读一个可访问名称、角色与值；可见的格子是
 装饰性的并标记为 `aria-hidden`。输入框会设置 `autocomplete='one-time-code'`、合适的
 `inputmode` 与 `pattern`，从而支持短信自动填充与正确的移动端键盘。复制、粘贴与自动
-填充从不会被阻止，密码管理器可以直接填入验证码。
+填充从不会被阻止，密码管理器可以直接填入验证码。自动填充和虚拟键盘行为取决于浏览器
+和平台的支持。
+
+## 参考
+
+- [Bootstrap 6 OTP 输入框文档](https://getbootstrap.com/docs/6.0/forms/otp-input/)
+- [OTPInput 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/otp-input.tsx)

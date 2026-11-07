@@ -1,15 +1,15 @@
-import { Box, OtpInput } from 'react-bootstrap-pro';
+import { Box, OTPInput } from 'react-bootstrap-pro';
 
-export function OtpInputValidationDemo() {
+export function OTPInputValidationDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
-      <OtpInput
+      <OTPInput
         aria-label='Valid verification code'
         validation='valid'
         defaultValue='123456'
         connected
       />
-      <OtpInput
+      <OTPInput
         aria-label='Invalid verification code'
         validation='invalid'
         defaultValue='123'
