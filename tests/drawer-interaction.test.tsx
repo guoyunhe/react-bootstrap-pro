@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { expect, test } from 'vitest';
 import { render } from 'vitest-browser-react';
 
+import { DemoContainer } from '../docs/components/demo-container';
+import { DrawerComponentsDemo } from '../docs/components/drawer/demos/basic';
 import { DrawerBodyScrollingDemo } from '../docs/components/drawer/demos/body-scrolling';
 import { DrawerBodyScrollingBackdropDemo } from '../docs/components/drawer/demos/body-scrolling-backdrop';
 import { DrawerDarkDemo } from '../docs/components/drawer/demos/dark';
@@ -18,6 +20,31 @@ import { DrawerSheetDemo } from '../docs/components/drawer/demos/sheet';
 import { DrawerStaticBackdropDemo } from '../docs/components/drawer/demos/static-backdrop';
 import { DrawerTranslucentDemo } from '../docs/components/drawer/demos/translucent';
 import { Drawer } from '../src';
+
+test.each([240, 600])('static drawer remains within its demo container at %ipx', async (width) => {
+  const screen = await render(
+    <div style={{ width }}>
+      <nav data-testid='navigation' style={{ height: 48 }}>
+        Site navigation
+      </nav>
+      <DemoContainer data-testid='demo'>
+        <DrawerComponentsDemo />
+      </DemoContainer>
+    </div>,
+  );
+  const drawer = screen.getByRole('dialog', { name: 'Drawer' }).element();
+  const demo = screen.getByTestId('demo').element().getBoundingClientRect();
+  const navigation = screen.getByTestId('navigation').element().getBoundingClientRect();
+  const bounds = drawer.getBoundingClientRect();
+
+  expect(getComputedStyle(drawer).position).toBe('relative');
+  expect(drawer.matches(':modal')).toBe(false);
+  expect(bounds.left).toBeGreaterThanOrEqual(demo.left);
+  expect(bounds.right).toBeLessThanOrEqual(demo.right);
+  expect(bounds.top).toBeGreaterThanOrEqual(demo.top);
+  expect(bounds.bottom).toBeLessThanOrEqual(demo.bottom);
+  expect(bounds.top).toBeGreaterThanOrEqual(navigation.bottom);
+});
 
 test('live demo opens and closes without the Bootstrap JavaScript plugin', async () => {
   const screen = await render(<DrawerLiveDemo />);

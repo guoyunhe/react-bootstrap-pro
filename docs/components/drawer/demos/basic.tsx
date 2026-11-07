@@ -2,7 +2,20 @@ import { CloseButton, Drawer, DrawerBody, DrawerHeader, DrawerTitle } from 'reac
 
 export function DrawerComponentsDemo() {
   return (
-    <Drawer open placement='start' id='drawer-components' aria-labelledby='drawer-components-title'>
+    <Drawer
+      open
+      placement='start'
+      id='drawer-components'
+      aria-labelledby='drawer-components-title'
+      style={{
+        position: 'relative',
+        inset: 'auto',
+        width: 'min(100%, 400px)',
+        minHeight: 240,
+        maxWidth: '100%',
+        maxHeight: 'none',
+      }}
+    >
       <DrawerHeader>
         <DrawerTitle id='drawer-components-title'>Drawer</DrawerTitle>
         <CloseButton disabled aria-label='Close' />
