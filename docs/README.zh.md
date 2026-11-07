@@ -51,7 +51,6 @@ export function Example() {
 - [DatePicker 日期选择器](./components/date-picker/)
 - [Dialog 对话框](./components/dialog/)
 - [Drawer 抽屉](./components/drawer/)
-- [Floating labels 浮动标签](./components/floating-labels/)
 - [Form 表单](./components/form/)
 - [CSS Grid](./components/css-grid/)
 - [Grid 网格](./components/grid/)

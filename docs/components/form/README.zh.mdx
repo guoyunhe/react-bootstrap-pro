@@ -4,6 +4,15 @@ title: Form 表单
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
+import { FloatingLabelsAlwaysDemo } from './demos/floating-always';
+import { FloatingLabelsBasicDemo } from './demos/floating-basic';
+import { FloatingLabelsDateTimeDemo } from './demos/floating-date-time';
+import { FloatingLabelsDisabledDemo } from './demos/floating-disabled';
+import { FloatingLabelsInputGroupDemo } from './demos/floating-input-group';
+import { FloatingLabelsLayoutDemo } from './demos/floating-layout';
+import { FloatingLabelsPlaintextDemo } from './demos/floating-plaintext';
+import { FloatingLabelsSelectDemo } from './demos/floating-select';
+import { FloatingLabelsTextareaDemo } from './demos/floating-textarea';
 import { FormAdornBasicDemo } from './demos/adorn-basic';
 import { FormAdornFieldDemo } from './demos/adorn-field';
 import { FormAdornSizingDemo } from './demos/adorn-sizing';
@@ -57,6 +66,128 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 ```
 
 禁用的 fieldset 仍需要 `<legend>`，以便辅助技术说明该控件组。
+
+## 浮动标签
+
+`FormFloating` 包裹标签与控件，构建浮动标签。将标签放在控件之前，并通过
+`htmlFor` 绑定。文本控件需要非空 `placeholder`，因为纯 CSS 实现依赖
+`:placeholder-shown` 判断空值。控件未聚焦时占位文本是透明的。
+
+### 示例
+
+<DemoContainer>
+  <FloatingLabelsBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-basic.tsx'
+
+```
+
+当控件已有值时，标签会直接处于浮动位置。
+
+### 文本域
+
+文本域默认与输入框等高。若要调整高度，请覆盖容器上的
+`--bs-form-floating-height` 自定义属性，而不要使用 `rows`，这样标签在任意高度下
+都能正确浮动。
+
+<DemoContainer>
+  <FloatingLabelsTextareaDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-textarea.tsx'
+
+```
+
+### 下拉框
+
+下拉框用法相同，但标签始终处于浮动状态。浮动标签不支持带 `size` 或 `multiple` 的
+下拉框。
+
+<DemoContainer>
+  <FloatingLabelsSelectDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-select.tsx'
+
+```
+
+### 日期与时间
+
+date、time、datetime-local、month、week 类型的输入框始终显示浮动标签，且无需
+`placeholder`。
+
+<DemoContainer>
+  <FloatingLabelsDateTimeDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-date-time.tsx'
+
+```
+
+### 禁用状态
+
+为控件添加 `disabled`，标签会自动调整样式。
+
+<DemoContainer>
+  <FloatingLabelsDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-disabled.tsx'
+
+```
+
+### 只读纯文本
+
+在 `Input` 上设置 `plaintext` 会渲染 `.form-control-plaintext`，保持浮动标签
+布局的同时以纯文本展示值。
+
+<DemoContainer>
+  <FloatingLabelsPlaintextDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-plaintext.tsx'
+
+```
+
+### 输入框组
+
+浮动标签同样可以用在 `InputGroup` 中。
+
+<DemoContainer>
+  <FloatingLabelsInputGroupDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-input-group.tsx'
+
+```
+
+### 始终浮动
+
+设置 `always` 会添加 `.form-floating-always`，让标签始终浮动并始终显示占位文本。
+
+<DemoContainer>
+  <FloatingLabelsAlwaysDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-always.tsx'
+
+```
+
+### 浮动标签布局
+
+配合栅格使用时，将每个浮动标签放进列中。
+
+<DemoContainer>
+  <FloatingLabelsLayoutDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-layout.tsx'
+
+```
+
+校验样式可通过 `className` 传入：为容器和控件添加 `is-invalid`，再在字段下方渲染
+反馈信息。
 
 ## 装饰控件
 
@@ -224,9 +355,21 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 ## 无障碍
 
 每个控件都需要可访问名称。最简单的方式是用 `htmlFor` 绑定可见的 `FormLabel`；
-没有可见标签时可用 `aria-label`。帮助文本通过 `aria-describedby` 关联。
+没有可见标签时可用 `aria-label`。帮助文本通过 `aria-describedby` 关联。浮动标签的
+占位文本不能作为可访问名称，因此请保留可见标签。
 
 ## API
+
+### FormFloating
+
+默认渲染为 `div`。自有属性为 `always`；继承所选元素的原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+
+| 属性        | 类型          | 说明                                      |
+| ----------- | ------------- | ----------------------------------------- |
+| `always`    | `boolean`     | 标签始终浮动，且占位文本保持可见。        |
+| `component` | `ElementType` | 指定渲染元素，默认为 `div`。              |
+| `...props`  | `BoxProps<C>` | 所选元素的原生属性及全部 Box 工具类属性。 |
 
 ### FormField
 
@@ -250,10 +393,13 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 | `component` | `ElementType` | 默认渲染 `div`；行内帮助文本可用 `span`。 |
 | `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。           |
 
-### Checkbox
+## 参考
 
-| 属性        | 类型           | 说明                               |
-| ----------- | -------------- | ---------------------------------- |
-| `size`      | `'sm' \| 'lg'` | 调整复选框及其标签的尺寸。         |
-| `component` | `ElementType`  | 默认渲染 `input type='checkbox'`。 |
-| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。    |
+- [Bootstrap 6 表单概览](https://getbootstrap.com/docs/6.0/forms/overview/)
+- [Bootstrap 6 表单字段文档](https://getbootstrap.com/docs/6.0/forms/field/)
+- [Bootstrap 6 表单控件文档](https://getbootstrap.com/docs/6.0/forms/form-control/)
+- [Bootstrap 6 表单装饰文档](https://getbootstrap.com/docs/6.0/forms/form-adorn/)
+- [Bootstrap 6 浮动标签文档](https://getbootstrap.com/docs/6.0/forms/floating-labels/)
+- [Bootstrap 6 表单布局文档](https://getbootstrap.com/docs/6.0/forms/layout/)
+- [Bootstrap 6 表单校验文档](https://getbootstrap.com/docs/6.0/forms/validation/)
+- [FormFloating 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-floating.tsx)

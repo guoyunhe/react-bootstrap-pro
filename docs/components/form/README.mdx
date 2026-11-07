@@ -4,6 +4,15 @@ title: Form
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
+import { FloatingLabelsAlwaysDemo } from './demos/floating-always';
+import { FloatingLabelsBasicDemo } from './demos/floating-basic';
+import { FloatingLabelsDateTimeDemo } from './demos/floating-date-time';
+import { FloatingLabelsDisabledDemo } from './demos/floating-disabled';
+import { FloatingLabelsInputGroupDemo } from './demos/floating-input-group';
+import { FloatingLabelsLayoutDemo } from './demos/floating-layout';
+import { FloatingLabelsPlaintextDemo } from './demos/floating-plaintext';
+import { FloatingLabelsSelectDemo } from './demos/floating-select';
+import { FloatingLabelsTextareaDemo } from './demos/floating-textarea';
 import { FormAdornBasicDemo } from './demos/adorn-basic';
 import { FormAdornFieldDemo } from './demos/adorn-field';
 import { FormAdornSizingDemo } from './demos/adorn-sizing';
@@ -62,6 +71,131 @@ inside a disabled fieldset, including keyboard and mouse interaction.
 
 A disabled fieldset still needs a `<legend>` so assistive technologies can name
 the group.
+
+## Floating labels
+
+`FormFloating` wraps a label and a control to build a floating label. Put the
+label first and bind it to the control with `htmlFor`. Textual controls need a
+non-empty `placeholder`: the CSS-only implementation uses `:placeholder-shown`
+to detect an empty field. The placeholder stays transparent until the control
+is focused.
+
+### Example
+
+<DemoContainer>
+  <FloatingLabelsBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-basic.tsx'
+
+```
+
+When a control already has a value, the label starts in its floated position.
+
+### Textareas
+
+Textareas match the height of inputs by default. To change the height, override
+the `--bs-form-floating-height` custom property on the wrapper instead of using
+`rows`, so the label floats correctly at any height.
+
+<DemoContainer>
+  <FloatingLabelsTextareaDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-textarea.tsx'
+
+```
+
+### Selects
+
+Selects work the same way, but the label always stays floated. Selects with
+`size` or `multiple` are not supported in floating labels.
+
+<DemoContainer>
+  <FloatingLabelsSelectDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-select.tsx'
+
+```
+
+### Date and time
+
+Date, time, datetime-local, month, and week inputs always show the floated label
+and do not need a placeholder.
+
+<DemoContainer>
+  <FloatingLabelsDateTimeDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-date-time.tsx'
+
+```
+
+### Disabled
+
+Add `disabled` to the control; the label is styled to match.
+
+<DemoContainer>
+  <FloatingLabelsDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-disabled.tsx'
+
+```
+
+### Readonly plaintext
+
+Set `plaintext` on `Input` to render `.form-control-plaintext`, which keeps the
+floating label layout while showing the value as plain text.
+
+<DemoContainer>
+  <FloatingLabelsPlaintextDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-plaintext.tsx'
+
+```
+
+### Input groups
+
+Floating labels also work inside an `InputGroup`.
+
+<DemoContainer>
+  <FloatingLabelsInputGroupDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-input-group.tsx'
+
+```
+
+### Always floating
+
+Set `always` to add `.form-floating-always`, which keeps the label floated and
+shows the placeholder in every state.
+
+<DemoContainer>
+  <FloatingLabelsAlwaysDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-always.tsx'
+
+```
+
+### Floating label layout
+
+When using the grid, place each floating label inside a column.
+
+<DemoContainer>
+  <FloatingLabelsLayoutDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-layout.tsx'
+
+```
+
+Validation classes can be passed through `className`: add `is-invalid` to the
+wrapper and the control, then render feedback below the field.
 
 ## Form adorn
 
@@ -243,9 +377,22 @@ Use `Row cols={{ lg: 'auto' }}` for a responsive inline layout. Keeping
 
 Give every control an accessible name. The simplest approach is a visible
 `FormLabel` bound with `htmlFor`, or `aria-label` when no visible label is
-possible. Associate help text with `aria-describedby`.
+possible. Associate help text with `aria-describedby`. A floating label's
+placeholder is not an accessible name, so keep its visible label.
 
 ## API
+
+### FormFloating
+
+Renders a `div` by default. Its own prop is `always`; it inherits native props
+for the selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`.
+
+| Prop        | Type          | Description                                                      |
+| ----------- | ------------- | ---------------------------------------------------------------- |
+| `always`    | `boolean`     | Keeps the label floated and the placeholder visible.             |
+| `component` | `ElementType` | Selects the rendered element; defaults to `div`.                 |
+| `...props`  | `BoxProps<C>` | Native props for the selected element and all Box utility props. |
 
 ### FormField
 
@@ -269,10 +416,13 @@ possible. Associate help text with `aria-describedby`.
 | `component` | `ElementType` | Renders a `div` by default; use `span` for inline help text. |
 | `...props`  | `BoxProps<C>` | Native props and all Box utility props.                      |
 
-### Checkbox
+## See
 
-| Prop        | Type           | Description                                    |
-| ----------- | -------------- | ---------------------------------------------- |
-| `size`      | `'sm' \| 'lg'` | Scales the checkbox and its label.             |
-| `component` | `ElementType`  | Renders an `input type='checkbox'` by default. |
-| `...props`  | `BoxProps<C>`  | Native props and all Box utility props.        |
+- [Bootstrap 6 Forms overview](https://getbootstrap.com/docs/6.0/forms/overview/)
+- [Bootstrap 6 Form field documentation](https://getbootstrap.com/docs/6.0/forms/field/)
+- [Bootstrap 6 Form control documentation](https://getbootstrap.com/docs/6.0/forms/form-control/)
+- [Bootstrap 6 Form adorn documentation](https://getbootstrap.com/docs/6.0/forms/form-adorn/)
+- [Bootstrap 6 Floating labels documentation](https://getbootstrap.com/docs/6.0/forms/floating-labels/)
+- [Bootstrap 6 Form layout documentation](https://getbootstrap.com/docs/6.0/forms/layout/)
+- [Bootstrap 6 Form validation documentation](https://getbootstrap.com/docs/6.0/forms/validation/)
+- [FormFloating source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-floating.tsx)

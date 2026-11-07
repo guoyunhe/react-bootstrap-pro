@@ -24,7 +24,6 @@ order: 1
 - [DatePicker](./date-picker/)
 - [Dialog](./dialog/)
 - [Drawer](./drawer/)
-- [Floating labels](./floating-labels/)
 - [Form](./form/)
 - [Grid](./grid/)
 - [Icon link](./icon-link/)

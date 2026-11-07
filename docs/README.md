@@ -51,7 +51,6 @@ export function Example() {
 - [DatePicker](./components/date-picker/)
 - [Dialog](./components/dialog/)
 - [Drawer](./components/drawer/)
-- [Floating labels](./components/floating-labels/)
 - [Form](./components/form/)
 - [CSS Grid](./components/css-grid/)
 - [Grid](./components/grid/)
