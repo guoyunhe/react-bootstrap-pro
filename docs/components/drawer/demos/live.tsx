@@ -38,10 +38,13 @@ export function DrawerLiveDemo() {
         </DrawerHeader>
         <DrawerBody>
           <p>Place text, images, lists, and other selected content here.</p>
-          <button className='btn-solid theme-secondary' type='button' data-bs-toggle='menu'>
-            Menu
-          </button>
-          <Menu>
+          <Menu
+            trigger={
+              <button className='btn-solid theme-secondary' type='button'>
+                Menu
+              </button>
+            }
+          >
             <MenuItem href='#drawer-live'>Action</MenuItem>
             <MenuItem href='#drawer-live'>Another action</MenuItem>
             <MenuItem href='#drawer-live'>Something else here</MenuItem>

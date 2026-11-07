@@ -51,15 +51,13 @@ export function DialogOverlaysDemo() {
             >
               Popover
             </button>
-            <button
-              type='button'
-              className='btn-solid theme-secondary'
-              data-bs-toggle='menu'
-              aria-expanded='false'
+            <Menu
+              trigger={
+                <button type='button' className='btn-solid theme-secondary'>
+                  Menu
+                </button>
+              }
             >
-              Menu
-            </button>
-            <Menu>
               <MenuItem href='#dialog-overlays'>Action</MenuItem>
               <MenuItem href='#dialog-overlays'>Another action</MenuItem>
             </Menu>

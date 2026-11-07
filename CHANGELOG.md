@@ -19,6 +19,8 @@
 
 ### Added
 
+- Add `MenuItemContent` and `MenuItemDescription` for menu item text and descriptions.
+- Add Floating UI-driven interactive menus with a trigger, positioning, dismissal and keyboard navigation.
 - Add `InputGroupButton` for buttons within input groups.
 - Add the `Box` `visuallyHidden` prop for screen-reader-accessible hidden content.
 - Add the `Input` `caret` prop for Bootstrap's form-control caret styling.

@@ -3,16 +3,44 @@ title: Menu
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Menu, MenuDivider, MenuHeader, MenuItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { MenuBasicDemo } from './demos/basic';
+import { MenuTogglesDemo } from './demos/toggles';
+import { MenuDarkDemo } from './demos/dark';
+import { MenuNavbarDemo } from './demos/navbar';
+import { MenuTranslucentDemo } from './demos/translucent';
+import { MenuPlacementDemo } from './demos/placement';
+import { MenuResponsiveDemo } from './demos/responsive';
+import { MenuItemsDemo } from './demos/items';
+import { MenuItemTextDemo } from './demos/item-text';
+import { MenuActiveDemo } from './demos/active';
+import { MenuDisabledDemo } from './demos/disabled';
+import { MenuVariantsDemo } from './demos/variants';
+import { MenuIconsDemo } from './demos/icons';
+import { MenuDescriptionsDemo } from './demos/descriptions';
+import { MenuSelectedDemo } from './demos/selected';
+import { MenuHeaderDemo } from './demos/header';
+import { MenuDividersDemo } from './demos/dividers';
+import { MenuTextDemo } from './demos/text';
+import { MenuFormsDemo } from './demos/forms';
+import { MenuScrollingDemo } from './demos/scrolling';
+import { MenuScrollableDemo } from './demos/scrollable';
+import { MenuSubmenusDemo } from './demos/submenus';
+import { MenuNestedDemo } from './demos/nested';
+import { MenuOffsetDemo } from './demos/offset';
+import { MenuAutoCloseDemo } from './demos/auto-close';
 
 # Menu
 
-`Menu` provides the popup menu classes. Use the Bootstrap JavaScript bundle to
-position, toggle, and manage keyboard interaction.
+`Menu` provides Bootstrap menu styling for links, actions and other content.
+Pass a `trigger` element for interactive menus driven by Floating UI; no
+Bootstrap JavaScript is needed. The trigger must accept a ref and forward
+event handlers to its DOM element. Do not attach the Bootstrap menu plugin to
+the same trigger.
 
-## Example
+## Overview
+
+Use a button to toggle a menu. Menus open on click rather than hover.
 
 <DemoContainer>
   <MenuBasicDemo />
@@ -22,61 +50,367 @@ position, toggle, and manage keyboard interaction.
 
 ```
 
-## Translucent
+## Examples
 
-Set `translucent` to apply the translucent surface treatment.
+An anchor can also act as a toggle, though a native button is preferable. A
+split button group separates the main action from the menu toggle.
 
-## Scrollable
+<DemoContainer>
+  <MenuTogglesDemo />
+</DemoContainer>
 
-Use `scrollable` when a menu may exceed the available height.
+```tsx src='./demos/toggles.tsx'
+
+```
+
+Use `colorScheme='dark'` on an ancestor for a dark menu.
+
+<DemoContainer>
+  <MenuDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+Menus can also be used inside a navbar.
+
+<DemoContainer>
+  <MenuNavbarDemo />
+</DemoContainer>
+
+```tsx src='./demos/navbar.tsx'
+
+```
+
+Use `translucent` to blur and saturate the background. Browsers without backdrop
+filter support show the translucent background without the blur.
+
+<DemoContainer>
+  <MenuTranslucentDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent.tsx'
+
+```
+
+## Placement
+
+Set `placement` to `top`, `bottom`, `left` or `right`, optionally followed by
+`-start` or `-end`. Floating UI may flip or shift the menu to keep it in view;
+alignment respects text direction.
+
+<DemoContainer>
+  <MenuPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+### Responsive
+
+Change `placement` in React when the viewport changes. Resize the viewport to
+see the changes.
+
+<DemoContainer>
+  <MenuResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
+```
+
+Menu items can be links or buttons. The following examples use `show` and
+`position='static'` to display menus without a trigger.
+
+<DemoContainer>
+  <MenuItemsDemo />
+</DemoContainer>
+
+```tsx src='./demos/items.tsx'
+
+```
+
+`MenuText` supplies a non-interactive item.
+
+<DemoContainer>
+  <MenuItemTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/item-text.tsx'
+
+```
+
+### Active
+
+`active` changes styling; set `aria-current` separately when appropriate.
+
+<DemoContainer>
+  <MenuActiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/active.tsx'
+
+```
+
+### Disabled
+
+For unavailable links, remove `href` as well as setting `disabled`. The prop
+sets styling, `aria-disabled` and `tabIndex`, but does not prevent activation
+or add a native `disabled` attribute to a button.
+
+<DemoContainer>
+  <MenuDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+### Variants
+
+Use `theme` for contextual colors in regular and active items.
+
+<DemoContainer>
+  <MenuVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+### Icons
+
+Add `.menu-item-icon` to an icon; decorative icons are hidden from assistive
+technology.
+
+<DemoContainer>
+  <MenuIconsDemo />
+</DemoContainer>
+
+```tsx src='./demos/icons.tsx'
+
+```
+
+### Descriptions
+
+Use `MenuItemContent` and `MenuItemDescription` for secondary text.
+
+<DemoContainer>
+  <MenuDescriptionsDemo />
+</DemoContainer>
+
+```tsx src='./demos/descriptions.tsx'
+
+```
+
+### Selected
+
+`.selected` and `.menu-item-check` style a choice; the application must manage
+and expose selection. These examples use React state and `aria-pressed`.
+
+<DemoContainer>
+  <MenuSelectedDemo />
+</DemoContainer>
+
+```tsx src='./demos/selected.tsx'
+
+```
+
+## Menu content
+
+Use `MenuHeader` to label a section.
+
+<DemoContainer>
+  <MenuHeaderDemo />
+</DemoContainer>
+
+```tsx src='./demos/header.tsx'
+
+```
+
+### Dividers
+
+Use `MenuDivider` to separate groups.
+
+<DemoContainer>
+  <MenuDividersDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers.tsx'
+
+```
+
+### Text
+
+Freeform content can be styled and constrained with utilities and CSS variables.
+
+<DemoContainer>
+  <MenuTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/text.tsx'
+
+```
+
+### Forms
+
+Menus can contain native form controls. This demonstration prevents form
+submission and does not sign in.
+
+<DemoContainer>
+  <MenuFormsDemo />
+</DemoContainer>
+
+```tsx src='./demos/forms.tsx'
+
+```
+
+Set CSS variables to constrain height and allow scrolling.
+
+<DemoContainer>
+  <MenuScrollingDemo />
+</DemoContainer>
+
+```tsx src='./demos/scrolling.tsx'
+
+```
+
+Alternatively, `scrollable` uses Bootstrap's `80dvh` maximum height.
+
+<DemoContainer>
+  <MenuScrollableDemo />
+</DemoContainer>
+
+```tsx src='./demos/scrollable.tsx'
+
+```
+
+### Submenus
+
+Nest a `Menu` in a `.submenu` wrapper. Click or use the arrow keys to open it;
+Floating UI adjusts its position near viewport edges. These examples do not
+implement hover activation or a stacked mobile layout.
+
+<DemoContainer>
+  <MenuSubmenusDemo />
+</DemoContainer>
+
+```tsx src='./demos/submenus.tsx'
+
+```
+
+### Nested
+
+Submenus can have multiple levels.
+
+<DemoContainer>
+  <MenuNestedDemo />
+</DemoContainer>
+
+```tsx src='./demos/nested.tsx'
+
+```
+
+Use `offset` to change the gap between a trigger and its menu. Each menu is
+positioned relative to its own trigger.
+
+<DemoContainer>
+  <MenuOffsetDemo />
+</DemoContainer>
+
+```tsx src='./demos/offset.tsx'
+
+```
+
+### Auto close behavior
+
+Set `autoClose` to `true`, `'inside'`, `'outside'`, or `false` to control
+dismissal on item or outside clicks. Escape closes the menu and returns focus
+to its trigger; Tab closes it as focus moves away.
+
+<DemoContainer>
+  <MenuAutoCloseDemo />
+</DemoContainer>
+
+```tsx src='./demos/auto-close.tsx'
+
+```
+
+## Accessibility
+
+Use native controls and keep a toggle's `aria-expanded` in sync. Bootstrap
+menus are generic containers, not automatically ARIA `menu` widgets: only add
+menu roles when the content and full keyboard behavior satisfy that pattern.
+Interactive menus support arrow-key navigation, Home, End, Escape and submenu
+arrow keys. Menu contents are not focus-trapped, so Tab moves normally.
+Do not communicate state through color alone.
+
+## CSS
+
+Bootstrap exposes [local CSS variables](https://getbootstrap.com/docs/6.0/components/menu/#variables)
+for menu and item appearance, positioning and transitions. Reduced-motion
+preferences are handled by Bootstrap's transition styles.
+
+## Usage
+
+With `trigger`, omit `show` for internal state, or pass `show` and
+`onShowChange` to control it. Without `trigger`, `show` only controls the
+Bootstrap class and positioning and interactions remain the caller's responsibility.
 
 ## API
 
 ### Menu
 
-Renders a `div` by default. Its own props are `scrollable?: boolean`,
-`translucent?: boolean`, and `show?: boolean`; it inherits native props for the
-selected element and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+Renders `div` by default. Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) props, including `component`.
 
-| Prop          | Type          | Description                                        |
-| ------------- | ------------- | -------------------------------------------------- |
-| `show`        | `boolean`     | Adds `.show` to display the menu.                  |
-| `scrollable`  | `boolean`     | Limits menu height and enables vertical scrolling. |
-| `translucent` | `boolean`     | Uses a translucent menu surface.                   |
-| `component`   | `ElementType` | Changes the root element.                          |
-| `...props`    | `BoxProps<C>` | Native props and all Box utility props.            |
-
-`MenuItem`, `MenuHeader`, `MenuDivider`, and `MenuText` provide menu structure.
+| Prop           | Type                               | Description                                                    |
+| -------------- | ---------------------------------- | -------------------------------------------------------------- |
+| `trigger`      | `ReactElement`                     | Ref-capable trigger; enables interaction and positioning.      |
+| `show`         | `boolean`                          | Controls visibility; without a trigger only adds `.show`.      |
+| `onShowChange` | `(show: boolean) => void`          | Receives requested visibility changes.                         |
+| `placement`    | `MenuPlacement`                    | Floating UI placement; defaults to `bottom-start`.             |
+| `offset`       | `number`                           | Distance from trigger in pixels; defaults to `2`.              |
+| `autoClose`    | `boolean \| 'inside' \| 'outside'` | Controls item and outside click dismissal; defaults to `true`. |
+| `scrollable`   | `boolean`                          | Enables scrolling with an `80dvh` maximum height.              |
+| `translucent`  | `boolean`                          | Applies a translucent surface.                                 |
 
 ### MenuItem
 
-Renders an `a` by default. Its own props are `active?: boolean` and
-`disabled?: boolean`; when disabled, it sets `aria-disabled` and removes the
-item from sequential keyboard focus. It inherits native props and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders `a` by default. Inherits selected-element native props and
+[`Box`](../box/README.mdx#api) props, including `component` and `theme`.
+
+| Prop       | Type      | Description                                                                               |
+| ---------- | --------- | ----------------------------------------------------------------------------------------- |
+| `active`   | `boolean` | Applies active styling, without setting `aria-current`.                                   |
+| `disabled` | `boolean` | Adds disabled styling, `aria-disabled` and `tabIndex={-1}`; does not suppress activation. |
 
 ### MenuDivider
 
-Renders an `hr` by default and has no own props. It defaults to
-`role="separator"` and inherits native props and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders `hr` by default, with `role='separator'` unless overridden. It has no
+own props and inherits native props and [`Box`](../box/README.mdx#api) props.
+
+### MenuItemContent
+
+Renders `span` by default. It has no own props and inherits selected-element
+native props and [`Box`](../box/README.mdx#api) props, including `component`.
+
+### MenuItemDescription
+
+Renders `small` by default. It has no own props and inherits selected-element
+native props and [`Box`](../box/README.mdx#api) props, including `component`.
 
 ### MenuHeader
 
-Renders an `h6` by default and has no own props. It inherits native heading
-props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders `h6` by default. It has no own props and inherits selected-element
+native props and [`Box`](../box/README.mdx#api) props.
 
 ### MenuText
 
-Renders a `span` by default and has no own props. It inherits native `span`
-props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
-
-## Accessibility
-
-Use a button as the toggle when possible and keep its `aria-expanded` value in
-sync with the menu. Ensure the menu items have meaningful link or button
-semantics.
+Renders `span` by default. It has no own props and inherits selected-element
+native props and [`Box`](../box/README.mdx#api) props.
 
 ## See
 

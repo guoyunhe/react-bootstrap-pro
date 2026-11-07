@@ -3,57 +3,403 @@ title: Menu 菜单
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Menu, MenuDivider, MenuHeader, MenuItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { MenuBasicDemo } from './demos/basic';
+import { MenuTogglesDemo } from './demos/toggles';
+import { MenuDarkDemo } from './demos/dark';
+import { MenuNavbarDemo } from './demos/navbar';
+import { MenuTranslucentDemo } from './demos/translucent';
+import { MenuPlacementDemo } from './demos/placement';
+import { MenuResponsiveDemo } from './demos/responsive';
+import { MenuItemsDemo } from './demos/items';
+import { MenuItemTextDemo } from './demos/item-text';
+import { MenuActiveDemo } from './demos/active';
+import { MenuDisabledDemo } from './demos/disabled';
+import { MenuVariantsDemo } from './demos/variants';
+import { MenuIconsDemo } from './demos/icons';
+import { MenuDescriptionsDemo } from './demos/descriptions';
+import { MenuSelectedDemo } from './demos/selected';
+import { MenuHeaderDemo } from './demos/header';
+import { MenuDividersDemo } from './demos/dividers';
+import { MenuTextDemo } from './demos/text';
+import { MenuFormsDemo } from './demos/forms';
+import { MenuScrollingDemo } from './demos/scrolling';
+import { MenuScrollableDemo } from './demos/scrollable';
+import { MenuSubmenusDemo } from './demos/submenus';
+import { MenuNestedDemo } from './demos/nested';
+import { MenuOffsetDemo } from './demos/offset';
+import { MenuAutoCloseDemo } from './demos/auto-close';
 
 # Menu 菜单
 
-`Menu` 提供弹出菜单样式。定位、切换和键盘交互需要 Bootstrap JavaScript bundle。
+`Menu` 为链接、操作和其他内容提供 Bootstrap 菜单样式。传入 `trigger` 元素即可使用
+Floating UI 驱动的交互菜单，无需 Bootstrap JavaScript。触发器必须支持 ref 并将事件
+处理器传递给 DOM 元素。不要在同一触发器上同时使用 Bootstrap 菜单插件。
+
+## 概述
+
+使用按钮切换菜单。菜单通过点击而非悬停打开。
 
 <DemoContainer>
-  <Menu show>
-    <MenuHeader>操作</MenuHeader>
-    <MenuItem href='/edit'>编辑</MenuItem>
-    <MenuDivider />
-    <MenuItem href='/archive'>归档</MenuItem>
-  </Menu>
+  <MenuBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 示例
+
+也可以使用链接作为触发器，但优先使用原生按钮。分段按钮组将主操作与菜单切换分开。
+
+<DemoContainer>
+  <MenuTogglesDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggles.tsx'
+
+```
+
+在祖先元素上设置 `colorScheme='dark'` 可使用深色菜单。
+
+<DemoContainer>
+  <MenuDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+菜单也可用于导航栏。
+
+<DemoContainer>
+  <MenuNavbarDemo />
+</DemoContainer>
+
+```tsx src='./demos/navbar.tsx'
+
+```
+
+使用 `translucent` 模糊背景并提高饱和度。不支持背景滤镜的浏览器仍会显示半透明背景，
+但不会显示模糊效果。
+
+<DemoContainer>
+  <MenuTranslucentDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent.tsx'
+
+```
+
+## 位置
+
+将 `placement` 设置为 `top`、`bottom`、`left` 或 `right`，可附加 `-start` 或
+`-end` 对齐方式。Floating UI 可能翻转或移动菜单以避免溢出视口；对齐方式适应文字方向。
+
+<DemoContainer>
+  <MenuPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+### 响应式位置
+
+在 React 中根据视口宽度改变 `placement`。调整视口宽度可观察变化。
+
+<DemoContainer>
+  <MenuResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
+```
+
+菜单项可以是链接或按钮。以下示例使用 `show` 和 `position='static'`，无需触发器即可
+显示菜单。
+
+<DemoContainer>
+  <MenuItemsDemo />
+</DemoContainer>
+
+```tsx src='./demos/items.tsx'
+
+```
+
+`MenuText` 提供非交互式条目。
+
+<DemoContainer>
+  <MenuItemTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/item-text.tsx'
+
+```
+
+### 激活状态
+
+`active` 只改变样式；需要时应单独设置 `aria-current`。
+
+<DemoContainer>
+  <MenuActiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/active.tsx'
+
+```
+
+### 禁用状态
+
+对于不可用的链接，除了设置 `disabled`，还应移除 `href`。该属性设置样式、
+`aria-disabled` 和 `tabIndex`，但不会阻止激活，也不会给按钮添加原生 `disabled` 属性。
+
+<DemoContainer>
+  <MenuDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+### 变体
+
+使用 `theme` 为普通和激活条目设置语义颜色。
+
+<DemoContainer>
+  <MenuVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+### 图标
+
+为图标添加 `.menu-item-icon`；装饰性图标对辅助技术隐藏。
+
+<DemoContainer>
+  <MenuIconsDemo />
+</DemoContainer>
+
+```tsx src='./demos/icons.tsx'
+
+```
+
+### 描述
+
+使用 `MenuItemContent` 和 `MenuItemDescription` 显示次要文字。
+
+<DemoContainer>
+  <MenuDescriptionsDemo />
+</DemoContainer>
+
+```tsx src='./demos/descriptions.tsx'
+
+```
+
+### 选中状态
+
+`.selected` 和 `.menu-item-check` 为选项设置样式；应用需要管理并暴露选中状态。本示例
+使用 React 状态和 `aria-pressed`。
+
+<DemoContainer>
+  <MenuSelectedDemo />
+</DemoContainer>
+
+```tsx src='./demos/selected.tsx'
+
+```
+
+## 菜单内容
+
+使用 `MenuHeader` 标记一个分组。
+
+<DemoContainer>
+  <MenuHeaderDemo />
+</DemoContainer>
+
+```tsx src='./demos/header.tsx'
+
+```
+
+### 分隔线
+
+使用 `MenuDivider` 分隔不同分组。
+
+<DemoContainer>
+  <MenuDividersDemo />
+</DemoContainer>
+
+```tsx src='./demos/dividers.tsx'
+
+```
+
+### 文本
+
+可通过工具类和 CSS 变量设置自由文本的样式和尺寸。
+
+<DemoContainer>
+  <MenuTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/text.tsx'
+
+```
+
+### 表单
+
+菜单中可以包含原生表单控件。此示例阻止表单提交，不会执行登录。
+
+<DemoContainer>
+  <MenuFormsDemo />
+</DemoContainer>
+
+```tsx src='./demos/forms.tsx'
+
+```
+
+设置 CSS 变量可限制高度并启用滚动。
+
+<DemoContainer>
+  <MenuScrollingDemo />
+</DemoContainer>
+
+```tsx src='./demos/scrolling.tsx'
+
+```
+
+也可以使用 `scrollable`，应用 Bootstrap 的 `80dvh` 最大高度。
+
+<DemoContainer>
+  <MenuScrollableDemo />
+</DemoContainer>
+
+```tsx src='./demos/scrollable.tsx'
+
+```
+
+### 子菜单
+
+在 `.submenu` 容器中嵌套 `Menu`。点击或使用方向键打开子菜单；Floating UI 会在视口
+边缘调整位置。这些示例不提供悬停激活或移动端层叠布局。
+
+<DemoContainer>
+  <MenuSubmenusDemo />
+</DemoContainer>
+
+```tsx src='./demos/submenus.tsx'
+
+```
+
+### 多层嵌套
+
+子菜单可嵌套多个层级。
+
+<DemoContainer>
+  <MenuNestedDemo />
+</DemoContainer>
+
+```tsx src='./demos/nested.tsx'
+
+```
+
+使用 `offset` 调整触发器与菜单的距离。每个菜单相对于自己的触发器定位。
+
+<DemoContainer>
+  <MenuOffsetDemo />
+</DemoContainer>
+
+```tsx src='./demos/offset.tsx'
+
+```
+
+### 自动关闭行为
+
+将 `autoClose` 设置为 `true`、`'inside'`、`'outside'` 或 `false`，控制点击菜单项或
+外部时的关闭行为。按 Escape 关闭菜单并将焦点返回触发器；Tab 移动焦点时也会关闭菜单。
+
+<DemoContainer>
+  <MenuAutoCloseDemo />
+</DemoContainer>
+
+```tsx src='./demos/auto-close.tsx'
+
+```
+
+## 无障碍
+
+使用原生控件，并保持触发器的 `aria-expanded` 与菜单状态同步。Bootstrap 菜单是通用
+容器，不会自动成为 ARIA `menu` 控件；仅在内容和完整键盘行为满足该模式时添加 menu
+角色。交互菜单支持方向键导航、Home、End、Escape 和子菜单方向键。菜单不限制焦点，
+Tab 可正常移动。不要仅通过颜色传达状态。
+
+## CSS
+
+Bootstrap 提供控制菜单和条目外观、位置及过渡的
+[局部 CSS 变量](https://getbootstrap.com/docs/6.0/components/menu/#variables)。
+Bootstrap 的过渡样式支持减少动态效果偏好。
+
+## 用法
+
+传入 `trigger` 时，省略 `show` 可使用内部状态，也可同时传入 `show` 和
+`onShowChange` 进行受控管理。不传 `trigger` 时，`show` 仅控制 Bootstrap 类名，
+定位和交互仍需由调用方处理。
 
 ## API
 
 ### Menu
 
-默认渲染为 `div`。自有属性为 `scrollable?: boolean`、`translucent?: boolean` 和
-`show?: boolean`；继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `div`。继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 属性，
+包括 `component`。
 
-| 属性          | 类型          | 说明                            |
-| ------------- | ------------- | ------------------------------- |
-| `show`        | `boolean`     | 添加 `.show` 以显示菜单。       |
-| `scrollable`  | `boolean`     | 限制菜单高度并启用纵向滚动。    |
-| `translucent` | `boolean`     | 使用半透明菜单表面。            |
-| `component`   | `ElementType` | 更换根元素。                    |
-| `...props`    | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
-
-`MenuItem`、`MenuHeader`、`MenuDivider` 和 `MenuText` 提供菜单结构。
+| 属性           | 类型                               | 说明                                      |
+| -------------- | ---------------------------------- | ----------------------------------------- |
+| `trigger`      | `ReactElement`                     | 支持 ref 的触发器；启用交互和定位。       |
+| `show`         | `boolean`                          | 控制显示；无触发器时仅添加 `.show`。      |
+| `onShowChange` | `(show: boolean) => void`          | 接收状态变更请求。                        |
+| `placement`    | `MenuPlacement`                    | Floating UI 位置，默认为 `bottom-start`。 |
+| `offset`       | `number`                           | 与触发器的距离（像素），默认为 `2`。      |
+| `autoClose`    | `boolean \| 'inside' \| 'outside'` | 控制点击条目或外部时关闭，默认为 `true`。 |
+| `scrollable`   | `boolean`                          | 启用滚动并将最大高度设为 `80dvh`。        |
+| `translucent`  | `boolean`                          | 应用半透明表面。                          |
 
 ### MenuItem
 
-默认渲染为 `a`。自有属性为 `active?: boolean` 和 `disabled?: boolean`；禁用时设置
-`aria-disabled` 并从顺序键盘焦点中移除。继承原生属性及通过 `BoxProps<C>` 继承的
-全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `a`。继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 属性，
+包括 `component` 和 `theme`。
+
+| 属性       | 类型      | 说明                                                             |
+| ---------- | --------- | ---------------------------------------------------------------- |
+| `active`   | `boolean` | 应用激活样式，但不设置 `aria-current`。                          |
+| `disabled` | `boolean` | 添加禁用样式、`aria-disabled` 和 `tabIndex={-1}`；不会阻止激活。 |
 
 ### MenuDivider
 
-默认渲染为 `hr`，没有自有属性；默认设置 `role="separator"`。继承原生属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `hr`，除非覆盖，否则设置 `role='separator'`。没有自有属性，继承原生属性
+及 [`Box`](../box/README.zh.mdx#api) 属性。
+
+### MenuItemContent
+
+默认渲染为 `span`。没有自有属性，继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 属性，包括 `component`。
+
+### MenuItemDescription
+
+默认渲染为 `small`。没有自有属性，继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 属性，包括 `component`。
 
 ### MenuHeader
 
-默认渲染为 `h6`，没有自有属性。继承原生标题属性及通过 `BoxProps<C>` 继承的全部
+默认渲染为 `h6`。没有自有属性，继承所选元素的原生属性及
 [`Box`](../box/README.zh.mdx#api) 属性。
 
 ### MenuText
 
-默认渲染为 `span`，没有自有属性。继承原生 `span` 属性及通过 `BoxProps<C>` 继承的
-全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `span`。没有自有属性，继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 属性。
+
+## 参考
+
+- [Bootstrap 6 Menu 文档](https://getbootstrap.com/docs/6.0/components/menu/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/menu.tsx)

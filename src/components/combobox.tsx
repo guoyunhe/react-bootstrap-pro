@@ -11,7 +11,7 @@ import type { ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 import { Input } from './input';
-import { Menu, MenuHeader } from './menu';
+import { Menu, MenuHeader, MenuItemContent, MenuItemDescription } from './menu';
 
 export type ComboboxOption = {
   value: string;
@@ -318,12 +318,10 @@ export function Combobox({
         {option.description === undefined ? (
           option.label
         ) : (
-          <Box component='span' classNameBefore='menu-item-content'>
+          <MenuItemContent>
             <Box component='span'>{option.label}</Box>
-            <Box component='small' classNameBefore='menu-item-description'>
-              {option.description}
-            </Box>
-          </Box>
+            <MenuItemDescription>{option.description}</MenuItemDescription>
+          </MenuItemContent>
         )}
         {check && <BiCheck className='menu-item-check' size={16} aria-hidden='true' />}
       </Box>
