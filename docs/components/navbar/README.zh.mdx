@@ -3,69 +3,357 @@ title: Navbar 导航栏
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarNav,
-  NavItem,
-  NavLink,
-  NavbarToggler,
-} from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { NavbarBasicDemo } from './demos/basic';
+import { NavbarBrandTextDemo } from './demos/brand-text';
+import { NavbarBrandImageDemo } from './demos/brand-image';
+import { NavbarBrandImageTextDemo } from './demos/brand-image-text';
+import { NavbarNavDemo } from './demos/nav';
+import { NavbarNavLinksDemo } from './demos/nav-links';
+import { NavbarNavMenuDemo } from './demos/nav-menu';
+import { NavbarFormSearchDemo } from './demos/form-search';
+import { NavbarFormBrandDemo } from './demos/form-brand';
+import { NavbarFormInputGroupDemo } from './demos/form-input-group';
+import { NavbarFormButtonsDemo } from './demos/form-buttons';
+import { NavbarTextDemo } from './demos/text';
+import { NavbarTextNavDemo } from './demos/text-nav';
+import { NavbarDarkDemo } from './demos/dark';
+import { NavbarTranslucentDemo } from './demos/translucent';
+import { NavbarColorsDemo } from './demos/colors';
+import { NavbarOuterContainerDemo } from './demos/container-outer';
+import { NavbarResponsiveContainerDemo } from './demos/container-responsive';
+import { NavbarPlacementDemo } from './demos/placement';
+import { NavbarDrawerStartDemo } from './demos/drawer-start';
+import { NavbarDrawerTopDemo } from './demos/drawer-top';
+import { NavbarTogglerHiddenBrandDemo } from './demos/toggler-hidden-brand';
+import { NavbarTogglerRightDemo } from './demos/toggler-right';
+import { NavbarTogglerLeftDemo } from './demos/toggler-left';
+import { NavbarExternalContentDemo } from './demos/external-content';
 
 # Navbar 导航栏
 
-`Navbar` 提供响应式站点导航外壳。可组合品牌、导航和切换按钮；响应式画布外导航
-需要 Bootstrap drawer 插件。
+`Navbar` 提供响应式导航外壳，可以组合品牌、导航、表单、文本以及关联
+[Drawer](../drawer/README.zh.mdx) 的切换按钮。
+
+## 示例
 
 <DemoContainer>
-  <Navbar expand='md'>
-    <NavbarBrand href='/'>Acme</NavbarBrand>
-    <NavbarToggler aria-controls='primary-nav' />
-    <NavbarNav id='primary-nav'>
-      <NavItem>
-        <NavLink href='/' active>
-          首页
-        </NavLink>
-      </NavItem>
-    </NavbarNav>
-  </Navbar>
+  <NavbarBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 工作原理
+
+当**导航栏容器**达到指定宽度时，`expand` 将抽屉变为内联导航，而不是依据视口宽度。
+不带值的 `expand` 始终展开；省略时始终显示切换按钮。Bootstrap drawer 插件负责打开、
+关闭和焦点管理，`NavbarToggler` 只渲染标记。
+
+交互示例通过[此辅助函数](./use-drawer-cleanup.ts)加载 Bootstrap JavaScript bundle，并在
+卸载时销毁实例。应用中使用 `data-bs-toggle='drawer'` 前应加载 Bootstrap drawer
+JavaScript 或 bundle，并在移除元素时销毁实例。没有 JavaScript 时切换按钮无法打开抽屉，
+应提供其他导航方式。达到展开断点时，Bootstrap CSS 会以内联方式显示抽屉内容。
+
+## 支持的内容
+
+### 品牌
+
+指向目标地址时使用链接，不需要链接时可使用其他元素展示品牌。
+
+#### 文本
+
+<DemoContainer>
+  <NavbarBrandTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/brand-text.tsx'
+
+```
+
+#### 图片
+
+仅包含图片的品牌应提供合适的替代文本。
+
+<DemoContainer>
+  <NavbarBrandImageDemo />
+</DemoContainer>
+
+```tsx src='./demos/brand-image.tsx'
+
+```
+
+#### 图片和文本
+
+如果图片重复了旁边的品牌文字，可以使用空的 `alt`。
+
+<DemoContainer>
+  <NavbarBrandImageTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/brand-image-text.tsx'
+
+```
+
+### 导航
+
+`NavbarNav` 和 `NavLink` 提供导航样式；`active` 标识当前页面。禁用的 `NavLink`
+若仍有 `href` 不会阻止导航，因此示例省略其地址。
+
+<DemoContainer>
+  <NavbarNavDemo />
+</DemoContainer>
+
+```tsx src='./demos/nav.tsx'
+
+```
+
+不需要列表时可直接使用链接。
+
+<DemoContainer>
+  <NavbarNavLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/nav-links.tsx'
+
+```
+
+菜单使用 React [Menu](../menu/README.zh.mdx) 组件和按钮触发器。
+
+<DemoContainer>
+  <NavbarNavMenuDemo />
+</DemoContainer>
+
+```tsx src='./demos/nav-menu.tsx'
+
+```
+
+### 表单
+
+<DemoContainer>
+  <NavbarFormSearchDemo />
+</DemoContainer>
+
+```tsx src='./demos/form-search.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarFormBrandDemo />
+</DemoContainer>
+
+```tsx src='./demos/form-brand.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarFormInputGroupDemo />
+</DemoContainer>
+
+```tsx src='./demos/form-input-group.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarFormButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/form-buttons.tsx'
+
+```
+
+示例表单会阻止提交；实际使用时请连接应用的搜索或表单处理逻辑。
+
+### 文本
+
+<DemoContainer>
+  <NavbarTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/text.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarTextNavDemo />
+</DemoContainer>
+
+```tsx src='./demos/text-nav.tsx'
+
+```
+
+## 深色导航栏
+
+设置 `data-bs-theme='dark'` 以使用深色配色方案。
+
+<DemoContainer>
+  <NavbarDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+## 半透明导航栏
+
+使用 Bootstrap 的 `navbar-translucent` 类模糊背景。
+
+<DemoContainer>
+  <NavbarTranslucentDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent.tsx'
+
+```
+
+## 配色方案
+
+将颜色模式与背景工具类组合使用。
+
+<DemoContainer>
+  <NavbarColorsDemo />
+</DemoContainer>
+
+```tsx src='./demos/colors.tsx'
+
+```
+
+## 容器
+
+可以使用外层容器，也可以在导航栏内使用响应式容器。
+
+<DemoContainer>
+  <NavbarOuterContainerDemo />
+</DemoContainer>
+
+```tsx src='./demos/container-outer.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarResponsiveContainerDemo />
+</DemoContainer>
+
+```tsx src='./demos/container-responsive.tsx'
+
+```
+
+## 定位
+
+默认导航栏处于正常文档流。Box 的 `fixedTop`、`fixedBottom`、`stickyTop` 和
+`stickyBottom` 工具提供其他定位方式。固定导航栏会脱离文档流，可能需要增加间距以避免遮挡内容。
+
+<DemoContainer>
+  <NavbarPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+## 响应式行为
+
+### 抽屉
+
+将 `Drawer` 的 `placement` 设置为 `start`、`end`、`top` 或 `bottom`。
+`start` 和 `end` 随文本方向变化。以下示例在容器达到 `md` 宽度时展开。
+
+<DemoContainer>
+  <NavbarDrawerStartDemo />
+</DemoContainer>
+
+```tsx src='./demos/drawer-start.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarDrawerTopDemo />
+</DemoContainer>
+
+```tsx src='./demos/drawer-top.tsx'
+
+```
+
+### 切换按钮
+
+不设置 `expand` 时切换按钮始终可见。将品牌放在按钮之前或之后可改变两者的位置。
+
+<DemoContainer>
+  <NavbarTogglerHiddenBrandDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggler-hidden-brand.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarTogglerRightDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggler-right.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarTogglerLeftDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggler-left.tsx'
+
+```
+
+### 外部内容
+
+目标抽屉也可以位于导航栏之外。
+
+<DemoContainer>
+  <NavbarExternalContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/external-content.tsx'
+
+```
+
+## 无障碍
+
+存在多个导航区域时，使用有名称的 `nav` 地标。如果根元素不是 `nav`，请设置
+`role='navigation'`。用 `aria-controls` 将切换按钮关联到具有唯一 ID 的抽屉，
+为按钮提供无障碍名称并为抽屉设置标签。使用 `aria-current='page'` 标记当前页面。
+
+Bootstrap drawer 插件在折叠状态使用原生模态 `dialog`，包括焦点管理和 Escape 关闭。
+插件不会更新切换按钮上的 `aria-expanded`；如果应用设置该属性，应通过抽屉的 shown
+和 hidden 事件同步状态。行为和降级方案详见 [Drawer 文档](../drawer/README.zh.mdx)。
 
 ## API
 
+所有组件均接受所选元素的原生属性，并通过 `BoxProps<C>` 继承
+[`Box`](../box/README.zh.mdx#api) 工具类属性；`component` 可更换默认元素。
+
 ### Navbar
 
-默认渲染为 `nav`。自有属性为 `expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`；
-继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
-
-| 属性        | 类型                                               | 说明                            |
-| ----------- | -------------------------------------------------- | ------------------------------- |
-| `expand`    | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 设置响应式展开断点。            |
-| `component` | `ElementType`                                      | 更换导航栏根元素。              |
-| `...props`  | `BoxProps<C>`                                      | 原生属性及所有 Box 工具类属性。 |
-
-`NavbarBrand`、`NavbarToggler`、`NavbarNav` 和 `NavbarText` 覆盖常见导航栏区域。
-请通过插件属性将切换按钮关联到受控元素。
+默认渲染为 `nav`。自有属性为 `expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`：
+`true` 始终展开，断点值在对应容器宽度下展开。
 
 ### NavbarBrand
 
-默认渲染为 `a`，没有自有属性。继承原生链接属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `a`，没有自有属性。
 
 ### NavbarToggler
 
-默认渲染为 `button`，没有自有属性。默认 `type="button"`、无障碍标签为
-`Toggle navigation`；未提供子元素时会渲染切换图标。继承原生按钮属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `button`，没有自有属性。组件添加 `btn-icon` 和 `navbar-toggler`，
+默认设置 `type='button'` 和 `aria-label='Toggle navigation'`，未提供子元素时渲染装饰性图标。
+可通过子元素或无障碍标签覆盖默认值；组件本身不管理抽屉状态。
 
 ### NavbarNav
 
-默认渲染为 `ul`，没有自有属性。继承原生列表属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `ul`，没有自有属性，添加 `nav` 和 `navbar-nav`。
 
 ### NavbarText
 
-默认渲染为 `span`，没有自有属性。继承原生 `span` 属性及通过 `BoxProps<C>` 继承的
-全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `span`，没有自有属性。
+
+## 参考
+
+- [Bootstrap 6 Navbar 文档](https://getbootstrap.com/docs/6.0/components/navbar/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/navbar.tsx)

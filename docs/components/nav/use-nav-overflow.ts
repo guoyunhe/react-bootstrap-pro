@@ -1,3 +1,4 @@
+import { NavOverflow as BootstrapNavOverflow } from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useEffect, useRef } from 'react';
 
 export function useNavOverflow() {
@@ -7,17 +8,10 @@ export function useNavOverflow() {
     const element = ref.current?.querySelector('.nav-overflow');
     if (!element) return;
 
-    const controller = new AbortController();
-    let instance: { dispose: () => void } | undefined;
-    void import('bootstrap/js/dist/nav-overflow.js').then(({ default: BootstrapNavOverflow }) => {
-      if (!controller.signal.aborted) {
-        instance = BootstrapNavOverflow.getOrCreateInstance(element);
-      }
-    });
+    const instance = BootstrapNavOverflow.getOrCreateInstance(element);
 
     return () => {
-      controller.abort();
-      instance?.dispose();
+      instance.dispose();
     };
   }, []);
 

@@ -3,27 +3,37 @@ title: Navbar
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import {
-  CloseButton,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerTitle,
-  Navbar,
-  NavbarBrand,
-  NavbarNav,
-  NavItem,
-  NavLink,
-  NavbarToggler,
-} from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { NavbarBasicDemo } from './demos/basic';
+import { NavbarBrandTextDemo } from './demos/brand-text';
+import { NavbarBrandImageDemo } from './demos/brand-image';
+import { NavbarBrandImageTextDemo } from './demos/brand-image-text';
+import { NavbarNavDemo } from './demos/nav';
+import { NavbarNavLinksDemo } from './demos/nav-links';
+import { NavbarNavMenuDemo } from './demos/nav-menu';
+import { NavbarFormSearchDemo } from './demos/form-search';
+import { NavbarFormBrandDemo } from './demos/form-brand';
+import { NavbarFormInputGroupDemo } from './demos/form-input-group';
+import { NavbarFormButtonsDemo } from './demos/form-buttons';
+import { NavbarTextDemo } from './demos/text';
+import { NavbarTextNavDemo } from './demos/text-nav';
+import { NavbarDarkDemo } from './demos/dark';
+import { NavbarTranslucentDemo } from './demos/translucent';
+import { NavbarColorsDemo } from './demos/colors';
+import { NavbarOuterContainerDemo } from './demos/container-outer';
+import { NavbarResponsiveContainerDemo } from './demos/container-responsive';
+import { NavbarPlacementDemo } from './demos/placement';
+import { NavbarDrawerStartDemo } from './demos/drawer-start';
+import { NavbarDrawerTopDemo } from './demos/drawer-top';
+import { NavbarTogglerHiddenBrandDemo } from './demos/toggler-hidden-brand';
+import { NavbarTogglerRightDemo } from './demos/toggler-right';
+import { NavbarTogglerLeftDemo } from './demos/toggler-left';
+import { NavbarExternalContentDemo } from './demos/external-content';
 
 # Navbar
 
-`Navbar` provides a responsive site-navigation shell. Compose the brand, nav,
-and toggler subcomponents; use the Bootstrap drawer plugin for responsive
-off-canvas navigation.
+`Navbar` provides a responsive navigation shell. Compose it with a brand,
+navigation, form, text, and a toggler linked to a [Drawer](../drawer/README.mdx).
 
 ## Example
 
@@ -35,59 +45,327 @@ off-canvas navigation.
 
 ```
 
-## Responsive behavior
+## How it works
 
-Set `expand` to the breakpoint at which the navbar content expands. At smaller
-widths, connect `NavbarToggler` to the navigation drawer with the matching
-target ID and Bootstrap's drawer data attributes.
+`expand` changes a drawer to inline navigation once the **navbar container**
+reaches the specified width, not the viewport width. `expand` without a value
+always expands; omit it to keep the toggler visible. The Bootstrap drawer
+plugin handles opening, closing and focus; `NavbarToggler` only renders markup.
 
-## API
+The interactive examples load the Bootstrap JavaScript bundle and dispose drawer
+instances on unmount using [this helper](./use-drawer-cleanup.ts). In an
+application, load Bootstrap's drawer JavaScript or bundle before using
+`data-bs-toggle='drawer'`, and dispose instances when removing their elements.
+Without that JavaScript the toggler does not open the drawer. Provide an
+alternative navigation path if JavaScript is unavailable. At the expanded
+breakpoint Bootstrap CSS displays the drawer contents inline.
 
-### Navbar
+## Supported content
 
-Renders a `nav` by default. Its own prop is
-`expand?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`; it inherits native props
-for the selected element and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+### Brand
 
-| Prop        | Type                                               | Description                               |
-| ----------- | -------------------------------------------------- | ----------------------------------------- |
-| `expand`    | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Selects the responsive expand breakpoint. |
-| `component` | `ElementType`                                      | Changes the navbar root element.          |
-| `...props`  | `BoxProps<C>`                                      | Native props and all Box utility props.   |
+Use an anchor for a destination or another element for non-link branding.
 
-`NavbarBrand`, `NavbarToggler`, `NavbarNav`, and `NavbarText` cover common
-navbar sections. Connect the toggler to its controlled element with plugin
-attributes. The example uses a drawer element as the responsive controlled
-region, matching the Bootstrap 6 navbar pattern.
+#### Text
 
-### NavbarBrand
+<DemoContainer>
+  <NavbarBrandTextDemo />
+</DemoContainer>
 
-Renders an `a` by default and has no own props. It inherits native anchor props
-and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+```tsx src='./demos/brand-text.tsx'
 
-### NavbarToggler
+```
 
-Renders a `button` by default and has no own props. It defaults to
-`type="button"`, an accessible label of “Toggle navigation”, and a toggler icon
-when no children are provided. It inherits native button props and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+#### Image
 
-### NavbarNav
+Give an image-only brand an appropriate text alternative.
 
-Renders a `ul` by default and has no own props. It inherits native list props
-and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+<DemoContainer>
+  <NavbarBrandImageDemo />
+</DemoContainer>
 
-### NavbarText
+```tsx src='./demos/brand-image.tsx'
 
-Renders a `span` by default and has no own props. It inherits native `span`
-props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+```
+
+#### Image and text
+
+An icon or image that repeats the adjacent brand text can use an empty `alt`.
+
+<DemoContainer>
+  <NavbarBrandImageTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/brand-image-text.tsx'
+
+```
+
+### Nav
+
+`NavbarNav` and `NavLink` supply navigation styles; `active` marks the current
+page. A disabled `NavLink` does not prevent navigation if it still has an
+`href`, so the examples omit it.
+
+<DemoContainer>
+  <NavbarNavDemo />
+</DemoContainer>
+
+```tsx src='./demos/nav.tsx'
+
+```
+
+Use direct links instead of list items when a list is not needed.
+
+<DemoContainer>
+  <NavbarNavLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/nav-links.tsx'
+
+```
+
+Menus use the React [Menu](../menu/README.mdx) component and a button trigger.
+
+<DemoContainer>
+  <NavbarNavMenuDemo />
+</DemoContainer>
+
+```tsx src='./demos/nav-menu.tsx'
+
+```
+
+### Forms
+
+<DemoContainer>
+  <NavbarFormSearchDemo />
+</DemoContainer>
+
+```tsx src='./demos/form-search.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarFormBrandDemo />
+</DemoContainer>
+
+```tsx src='./demos/form-brand.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarFormInputGroupDemo />
+</DemoContainer>
+
+```tsx src='./demos/form-input-group.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarFormButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/form-buttons.tsx'
+
+```
+
+The example forms prevent submission; connect them to your application's
+search or form handling when using them in practice.
+
+### Text
+
+<DemoContainer>
+  <NavbarTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/text.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarTextNavDemo />
+</DemoContainer>
+
+```tsx src='./demos/text-nav.tsx'
+
+```
+
+## Dark navbar
+
+Set `data-bs-theme='dark'` to use the dark color scheme.
+
+<DemoContainer>
+  <NavbarDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+## Translucent navbar
+
+Use Bootstrap's `navbar-translucent` class for a blurred backdrop.
+
+<DemoContainer>
+  <NavbarTranslucentDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent.tsx'
+
+```
+
+## Color schemes
+
+Combine color modes with background utilities.
+
+<DemoContainer>
+  <NavbarColorsDemo />
+</DemoContainer>
+
+```tsx src='./demos/colors.tsx'
+
+```
+
+## Containers
+
+Use an outer container, or a responsive container inside the navbar.
+
+<DemoContainer>
+  <NavbarOuterContainerDemo />
+</DemoContainer>
+
+```tsx src='./demos/container-outer.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarResponsiveContainerDemo />
+</DemoContainer>
+
+```tsx src='./demos/container-responsive.tsx'
+
+```
+
+## Placement
+
+The default navbar participates in normal flow. Box's `fixedTop`, `fixedBottom`,
+`stickyTop`, and `stickyBottom` utilities provide other placements. Fixed
+navbars leave normal flow and may require spacing to prevent content overlap.
+
+<DemoContainer>
+  <NavbarPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+## Responsive behaviors
+
+### Drawer
+
+Set `placement` on `Drawer` to `start`, `end`, `top`, or `bottom`. `start` and
+`end` follow text direction. These examples expand at the `md` container width.
+
+<DemoContainer>
+  <NavbarDrawerStartDemo />
+</DemoContainer>
+
+```tsx src='./demos/drawer-start.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarDrawerTopDemo />
+</DemoContainer>
+
+```tsx src='./demos/drawer-top.tsx'
+
+```
+
+### Toggler
+
+Without `expand`, the toggler remains visible. Arrange the brand before or after
+the toggler to change their placement.
+
+<DemoContainer>
+  <NavbarTogglerHiddenBrandDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggler-hidden-brand.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarTogglerRightDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggler-right.tsx'
+
+```
+
+<DemoContainer>
+  <NavbarTogglerLeftDemo />
+</DemoContainer>
+
+```tsx src='./demos/toggler-left.tsx'
+
+```
+
+### External content
+
+The target drawer can also sit outside the navbar.
+
+<DemoContainer>
+  <NavbarExternalContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/external-content.tsx'
+
+```
 
 ## Accessibility
 
-Use a `<nav>` landmark, name the toggler with `aria-label`, and connect it to
-the controlled navigation with `aria-controls`. Expose the current link with
-`aria-current`.
+Use a named `nav` landmark when multiple navigation regions exist. If the root
+is not a `nav`, provide `role='navigation'`. Connect each toggler to a uniquely
+identified drawer with `aria-controls`, give it an accessible name, and label
+the drawer. Mark the current page with `aria-current='page'`.
+
+Bootstrap's drawer plugin uses a native modal `dialog` for the collapsed
+state, including focus management and Escape dismissal. It does not update
+`aria-expanded` on the toggler; if your application supplies that attribute,
+keep it synchronized with the drawer's shown and hidden events. See the
+[Drawer documentation](../drawer/README.mdx) for behavior and fallbacks.
+
+## API
+
+All components accept native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props through `BoxProps<C>`;
+`component` changes the default element.
+
+### Navbar
+
+Renders `nav` by default. Its own prop is `expand?: boolean | 'sm' | 'md' |
+'lg' | 'xl' | '2xl'`: `true` always expands, while a breakpoint expands at the
+corresponding container width.
+
+### NavbarBrand
+
+Renders `a` by default and has no own props.
+
+### NavbarToggler
+
+Renders `button` by default and has no own props. It applies `btn-icon` and
+`navbar-toggler`, defaults to `type='button'` and `aria-label='Toggle navigation'`,
+and renders a decorative icon when children are omitted. Supply children or
+an accessible label to override those defaults. It does not manage drawer state.
+
+### NavbarNav
+
+Renders `ul` by default and has no own props. It adds `nav` and `navbar-nav`.
+
+### NavbarText
+
+Renders `span` by default and has no own props.
 
 ## See
 

@@ -43,6 +43,7 @@
 
 ### Fixed
 
+- Match Bootstrap 6's icon-button styling for `NavbarToggler`.
 - Align wrapped `MenuItemIcon` children with directly rendered menu icons.
 - Generate Bootstrap 6 container-query classes for responsive `ListGroup` layouts.
 - Apply Bootstrap's color control styling automatically to standard color `Input` elements.

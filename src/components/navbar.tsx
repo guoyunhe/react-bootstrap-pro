@@ -60,7 +60,7 @@ export function NavbarToggler<C extends ElementType = 'button'>({
     <Box<C>
       {...(props as BoxProps<C>)}
       component={component ?? ('button' as C)}
-      classNameBefore={clsx('navbar-toggler', props.classNameBefore)}
+      classNameBefore={clsx('btn-icon', 'navbar-toggler', props.classNameBefore)}
       className={className}
       type={type ?? 'button'}
       aria-label={props['aria-label'] ?? 'Toggle navigation'}
