@@ -5,7 +5,9 @@ export function ImageAlignMarginDemo() {
     <Image
       src='https://placehold.co/200x200'
       alt='Centered placeholder image'
-      className='rounded mx-auto d-block'
+      rounded
+      mx='auto'
+      d='block'
     />
   );
 }

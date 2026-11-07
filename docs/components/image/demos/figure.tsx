@@ -7,7 +7,7 @@ export function ImageFigureDemo() {
         fluid
         src='https://placehold.co/400x300'
         alt='Rectangular placeholder image'
-        className='rounded-3'
+        rounded={3}
       />
       <FigureCaption>A caption for the above image.</FigureCaption>
     </Figure>

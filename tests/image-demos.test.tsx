@@ -31,11 +31,14 @@ test('image documentation demos render the upstream variants', async () => {
   expect(examples[2]).toHaveClass('d-flow-root');
   expect(examples[2]?.querySelector('.float-start')).not.toBeNull();
   expect(examples[2]?.querySelector('.float-end')).not.toBeNull();
-  expect(examples[3]).toHaveClass('mx-auto', 'd-block');
+  expect(examples[2]?.querySelectorAll('img.rounded')).toHaveLength(2);
+  expect(examples[3]).toHaveClass('rounded', 'mx-auto', 'd-block');
   expect(examples[4]).toHaveClass('text-center');
-  expect(examples[5]?.querySelector('img.img-fluid')).not.toBeNull();
+  expect(examples[4]?.querySelector('img.rounded')).not.toBeNull();
+  expect(examples[5]?.querySelector('img.img-fluid.rounded-3')).not.toBeNull();
   expect(examples[5]?.querySelector('figcaption.figure-caption')).not.toBeNull();
   expect(examples[6]).toHaveClass('figure', 'align-items-end');
+  expect(examples[6]?.querySelector('img.img-fluid.rounded-3')).not.toBeNull();
   expect(examples[7]?.tagName).toBe('PICTURE');
   expect(examples[7]?.querySelector('source')).toHaveAttribute('media', '(min-width: 768px)');
   expect(examples[7]?.querySelector('img')).toHaveClass('img-fluid', 'img-thumbnail');

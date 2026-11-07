@@ -1,18 +1,15 @@
-import { Image } from 'react-bootstrap-pro';
+import { Box, Image } from 'react-bootstrap-pro';
 
 export function ImageAlignFloatDemo() {
   return (
-    <div className='d-flow-root'>
+    <Box d='flow-root'>
       <Image
         src='https://placehold.co/200x200'
         alt='Left placeholder image'
-        className='rounded float-start'
+        rounded
+        float='start'
       />
-      <Image
-        src='https://placehold.co/200x200'
-        alt='Right placeholder image'
-        className='rounded float-end'
-      />
-    </div>
+      <Image src='https://placehold.co/200x200' alt='Right placeholder image' rounded float='end' />
+    </Box>
   );
 }
