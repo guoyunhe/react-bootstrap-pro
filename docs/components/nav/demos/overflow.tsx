@@ -1,11 +1,8 @@
 import { Nav, NavItem, NavLink, NavOverflow } from 'react-bootstrap-pro';
 
-import { useNavOverflow } from '../use-nav-overflow';
-
 export function NavOverflowDemo() {
-  const ref = useNavOverflow();
   return (
-    <div ref={ref}>
+    <>
       <NavOverflow style={{ maxWidth: 400 }}>
         <Nav variant='pills'>
           <NavItem>
@@ -30,6 +27,6 @@ export function NavOverflowDemo() {
           </NavItem>
         </Nav>
       </NavOverflow>
-    </div>
+    </>
   );
 }

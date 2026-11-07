@@ -1,11 +1,8 @@
 import { Nav, NavItem, NavLink, NavOverflow } from 'react-bootstrap-pro';
 
-import { useNavOverflow } from '../use-nav-overflow';
-
 export function NavOverflowUnderlineDemo() {
-  const ref = useNavOverflow();
   return (
-    <div ref={ref}>
+    <>
       <NavOverflow style={{ maxWidth: 400 }}>
         <Nav variant='underline'>
           <NavItem>
@@ -27,6 +24,6 @@ export function NavOverflowUnderlineDemo() {
           </NavItem>
         </Nav>
       </NavOverflow>
-    </div>
+    </>
   );
 }

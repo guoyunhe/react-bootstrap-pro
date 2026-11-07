@@ -133,11 +133,17 @@ test('external drawer and multiple instances have unique targets and clean up on
   expect(document.documentElement).not.toHaveClass('dialog-open');
 });
 
-test('navbar and nav overflow examples share one Bootstrap data API', async () => {
+test('React nav overflow coexists with bundle-backed navbar demos', async () => {
   const screen = await render(<NavOverflowDemo />);
   const toggle = screen.getByRole('button', { name: 'More' });
   await expect.element(toggle).toBeVisible();
+  const wrapper = toggle.element().closest('.nav-overflow')!;
+  expect(wrapper.querySelectorAll('.nav-overflow-toggle')).toHaveLength(1);
+  expect(wrapper).not.toHaveAttribute('data-bs-toggle');
   await toggle.click();
   await expect.element(screen.getByRole('link', { name: 'Settings' })).toBeVisible();
   expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await toggle.click();
+  expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  expect(wrapper.querySelectorAll('.nav-overflow-toggle')).toHaveLength(1);
 });

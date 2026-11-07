@@ -221,19 +221,26 @@ import { NavOverflowCollapseDemo } from './demos/overflow-collapse';
 
 ## 溢出导航
 
-`NavOverflow` 为 Bootstrap 的 Priority+ 插件提供结构。插件测量容器，隐藏放不下的条目，
-并将其链接克隆到 More 菜单。它通过 `ResizeObserver` 观察容器尺寸；不支持时退回监听
-窗口尺寸变化。生成的菜单使用 Bootstrap JavaScript Menu 插件，而非本库的 React `Menu`。
+`NavOverflow` 是 React 实现的 Priority+ 导航。传入一个 `Nav` 或 `NavbarNav`，
+其直接子项为包含 `NavLink` 的 `NavItem`。组件使用 `ResizeObserver` 测量容器和条目宽度
+（不可用时监听窗口尺寸变化），将放不下的条目放入基于 Floating UI 的 React `Menu`，
+不需要 Bootstrap JavaScript。默认触发器支持方向键、Escape、外部点击关闭和焦点返回；
+请提供有名称的导航地标。
 
-示例通过[此辅助函数](./use-nav-overflow.ts)在挂载后初始化 Bootstrap 插件并在卸载时销毁。
-只有加载插件并且 Bootstrap 的 `DOMContentLoaded` 处理器找到容器时，`data-bs-toggle`
-才会触发数据 API；之后挂载的 React 内容需要显式初始化。Bootstrap 默认 CSS 会隐藏
-未初始化的导航，因此没有 JavaScript 时，除非应用提供降级方案（例如不使用
-`NavOverflow` 而直接渲染 `Nav`），否则导航和溢出菜单都无法使用。
+原始条目始终挂载，溢出时在原处隐藏，因此调整尺寸不会丢失其状态。打开菜单时会单独
+渲染溢出条目的 React 副本，保留其 React 事件处理器和属性；副本内部状态相互独立，
+关闭菜单后丢弃。请将共享状态提升到条目之外。避免在条目中使用 ID、嵌套交互菜单或
+带挂载副作用的组件：副本和原始条目可能同时存在。测量及菜单链接行为要求直接使用
+`NavItem` 和 `NavLink`。禁用的菜单链接无法激活；原始禁用链接也应移除 `href`。
 
-插件克隆的是 DOM 节点，而不是 React 事件处理器或组件状态。溢出项应使用普通链接，
-不要依赖克隆节点上的 React 事件处理器。动态更改列表时必须管理插件实例及其生命周期。
-Bootstrap 的菜单移动逻辑依赖其自身的菜单结构，不能与 React 控制的 `Menu` 互换。
+服务端渲染或无 JavaScript 时导航换行并保持可见；水合后才开始测量溢出。此优先级
+布局为横向布局；如果保留条目和触发器超出可用宽度，仍可能溢出。`threshold` 的最少
+可见数量也可能超出可用宽度。
+
+**迁移：**删除 `useNavOverflow`、Bootstrap 插件初始化和
+`data-bs-toggle='nav-overflow'`，将插件数据属性改为下列 React 属性。不支持 HTML 字符串
+`moreIcon`、插件事件、`menuStrategy` 和 Bootstrap 菜单移动；请改用 React 图标节点和
+React 事件处理器。不要在此容器上初始化 Bootstrap 插件。
 
 <DemoContainer>
   <NavOverflowDemo />
@@ -297,7 +304,7 @@ Bootstrap 的 `nav-overflow-keep` 类可防止条目被折叠。
 
 ### 自定义触发器
 
-通过容器上的数据属性设置插件选项。此示例自定义标签、图标位置和最少可见条目数。
+通过 React 属性自定义标签、图标位置和最少可见条目数。
 
 <DemoContainer>
   <NavOverflowOptionsDemo />
@@ -309,8 +316,8 @@ Bootstrap 的 `nav-overflow-keep` 类可防止条目被折叠。
 
 ### 低于容器宽度时折叠
 
-插件的 `data-bs-collapse-below` 接受断点名称或像素值。其他插件选项包括
-`moreText`、`moreIcon`、`iconPlacement` 和 `threshold`；配置和事件详见 Bootstrap 文档。
+`collapseBelow` 接受像素值或 Bootstrap 断点名称，后者通过 `--bs-breakpoint-*` 解析。
+容器宽度低于该值时，所有非保留条目都会折叠。
 
 <DemoContainer>
   <NavOverflowCollapseDemo />
@@ -358,12 +365,21 @@ Bootstrap 的 `nav-overflow-keep` 类可防止条目被折叠。
 
 ### NavOverflow
 
-默认渲染为 `div`，没有自有属性。`data-bs-toggle` 默认为 `nav-overflow`；
-组件本身不会初始化插件。
+默认渲染为 `div`，继承原生及 `Box` 属性。自有属性如下：
+
+| 属性            | 类型               | 默认值              | 说明                                            |
+| --------------- | ------------------ | ------------------- | ----------------------------------------------- |
+| `moreText`      | `string`           | `'More'`            | 触发器文本；空字符串显示纯图标，名称为 “More”。 |
+| `moreLabel`     | `string`           | 触发器文本或 `More` | 触发器的无障碍名称，也适用于纯图标触发器。      |
+| `moreIcon`      | `ReactNode`        | 三点图标            | 触发器图标；使用 React 节点而非 HTML 字符串。   |
+| `iconPlacement` | `'start' \| 'end'` | `'start'`           | 图标位置。                                      |
+| `menuPlacement` | `MenuPlacement`    | `'bottom-end'`      | Floating UI 定位。                              |
+| `collapseBelow` | `number \| string` | `0`                 | 容器像素宽度或 Bootstrap 断点名称。             |
+| `threshold`     | `number`           | `0`                 | 溢出时的最少可见条目数；可能超出可用宽度。      |
 
 ### NavOverflowItem
 
-默认渲染为 `li`，没有自有属性。为自定义 Bootstrap 溢出结构添加
+默认渲染为 `li`，没有自有属性。为自定义溢出结构添加
 `nav-overflow-item`；同时需要 `nav-item` 类时可使用 `component={NavItem}`。
 
 ### NavOverflowIcon

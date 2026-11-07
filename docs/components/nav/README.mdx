@@ -223,25 +223,32 @@ React `Menu` component, not Bootstrap's menu data API.
 
 ## Overflow
 
-`NavOverflow` provides markup for Bootstrap's Priority+ plugin. The plugin
-measures the wrapper and hides items that do not fit, cloning their links into
-a More menu. It observes container size with `ResizeObserver`, falling back to
-window resize events when unavailable. The generated menu uses Bootstrap's
-JavaScript Menu plugin, not this library's React `Menu`.
+`NavOverflow` is a React Priority+ navigation. Pass one `Nav` or `NavbarNav`
+containing direct `NavItem` children with `NavLink` links. It measures the
+container and item widths with `ResizeObserver` (or window resize when unavailable)
+and renders a Floating UI-backed React `Menu` for items that do not fit. No
+Bootstrap JavaScript is needed. The default toggle supports arrow keys, Escape,
+outside dismissal and focus return; provide a named navigation landmark.
 
-The examples initialize the Bootstrap plugin after mounting and dispose it on
-unmount using [this helper](./use-nav-overflow.ts). `data-bs-toggle` alone only
-enables Bootstrap's data API when the plugin is loaded and its `DOMContentLoaded`
-handler sees the wrapper; React content mounted later needs explicit
-initialization. Bootstrap's default CSS hides an uninitialized nav, so without
-JavaScript there is no usable navigation or overflow menu unless the application
-provides a fallback (for example, render a plain `Nav` without `NavOverflow`).
+Original items remain mounted, hidden in place when overflowed, so their state
+survives resizing. The open menu renders separate React copies of overflowed
+items, preserving their React handlers and props; state inside a menu copy is
+independent and is discarded on close. Lift shared state above the items. Avoid
+IDs inside items, nested interactive menus, or components with mounting side
+effects: copies can exist alongside originals. Direct `NavItem` and `NavLink`
+children are required for measurement and menu link behavior. Disabled menu
+links cannot be activated; also remove `href` from disabled original links.
 
-The plugin clones DOM nodes, not React handlers or component state. Use normal
-links for overflowed items; do not rely on React event handlers on the clones.
-Avoid dynamically changing the list without managing the plugin instance and
-its lifecycle. Bootstrap's menu relocation assumes its own menu markup and is
-not interchangeable with a React-controlled `Menu`.
+Server-rendered or no-JavaScript navigation wraps and remains visible; overflow
+measurement starts after hydration. The priority layout is horizontal; if kept
+items and the toggle exceed the available width, they may still overflow. The
+`threshold` minimum can also exceed the available width.
+
+**Migration:** remove `useNavOverflow`, Bootstrap plugin initialization and
+`data-bs-toggle='nav-overflow'`. Replace the plugin's data attributes with the
+React props below; HTML-string `moreIcon`, plugin events, `menuStrategy`, and
+Bootstrap menu relocation are not supported. Use a React icon node and React
+handlers instead. Do not initialize the Bootstrap plugin on this wrapper.
 
 <DemoContainer>
   <NavOverflowDemo />
@@ -305,8 +312,8 @@ Bootstrap's `nav-overflow-keep` class excludes an item from collapsing.
 
 ### Customize the toggle
 
-Set plugin options with data attributes on the wrapper. Here the label, icon
-placement, and minimum visible item count are customized.
+Use React props to customize the label, icon placement, and minimum visible
+item count.
 
 <DemoContainer>
   <NavOverflowOptionsDemo />
@@ -318,9 +325,8 @@ placement, and minimum visible item count are customized.
 
 ### Collapse below a container width
 
-The plugin accepts `data-bs-collapse-below` as a breakpoint name or pixel value.
-Other plugin options include `moreText`, `moreIcon`, `iconPlacement`, and
-`threshold`; see the Bootstrap reference for configuration and events.
+`collapseBelow` accepts a pixel value or a Bootstrap breakpoint name, resolved
+from `--bs-breakpoint-*`. Below that container width all non-kept items collapse.
 
 <DemoContainer>
   <NavOverflowCollapseDemo />
@@ -373,13 +379,22 @@ Renders `a` by default. Its own props are `active?: boolean` and
 
 ### NavOverflow
 
-Renders `div` by default and has no own props. It defaults
-`data-bs-toggle` to `nav-overflow`; this does not initialize the plugin itself.
+Renders `div` by default, inheriting native and `Box` props. Its own props are:
+
+| Prop            | Type               | Default               | Description                                                              |
+| --------------- | ------------------ | --------------------- | ------------------------------------------------------------------------ |
+| `moreText`      | `string`           | `'More'`              | Toggle label; an empty string uses an icon-only toggle named “More”.     |
+| `moreLabel`     | `string`           | toggle text or `More` | Accessible toggle name, including for icon-only toggles.                 |
+| `moreIcon`      | `ReactNode`        | three dots icon       | Toggle icon; use a React node, not an HTML string.                       |
+| `iconPlacement` | `'start' \| 'end'` | `'start'`             | Icon position.                                                           |
+| `menuPlacement` | `MenuPlacement`    | `'bottom-end'`        | Floating UI placement.                                                   |
+| `collapseBelow` | `number \| string` | `0`                   | Container pixel width or Bootstrap breakpoint name.                      |
+| `threshold`     | `number`           | `0`                   | Minimum visible item count when overflowing; may exceed available space. |
 
 ### NavOverflowItem
 
 Renders `li` by default and has no own props. Adds `nav-overflow-item` for
-custom Bootstrap overflow markup; use `component={NavItem}` when a `nav-item`
+custom overflow markup; use `component={NavItem}` when a `nav-item`
 class is also needed.
 
 ### NavOverflowIcon

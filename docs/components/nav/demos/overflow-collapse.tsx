@@ -1,12 +1,9 @@
 import { Nav, NavItem, NavLink, NavOverflow } from 'react-bootstrap-pro';
 
-import { useNavOverflow } from '../use-nav-overflow';
-
 export function NavOverflowCollapseDemo() {
-  const ref = useNavOverflow();
   return (
-    <div ref={ref}>
-      <NavOverflow data-bs-collapse-below='md' style={{ maxWidth: 400 }}>
+    <>
+      <NavOverflow collapseBelow='md' style={{ maxWidth: 400 }}>
         <Nav variant='pills'>
           <NavItem>
             <NavLink href='#'>Home</NavLink>
@@ -19,6 +16,6 @@ export function NavOverflowCollapseDemo() {
           </NavItem>
         </Nav>
       </NavOverflow>
-    </div>
+    </>
   );
 }

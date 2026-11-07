@@ -1,17 +1,9 @@
 import { Nav, NavItem, NavLink, NavOverflow } from 'react-bootstrap-pro';
 
-import { useNavOverflow } from '../use-nav-overflow';
-
 export function NavOverflowOptionsDemo() {
-  const ref = useNavOverflow();
   return (
-    <div ref={ref}>
-      <NavOverflow
-        data-bs-more-text='See all'
-        data-bs-icon-placement='end'
-        data-bs-threshold='2'
-        style={{ maxWidth: 300 }}
-      >
+    <>
+      <NavOverflow moreText='See all' iconPlacement='end' threshold={2} style={{ maxWidth: 300 }}>
         <Nav variant='pills'>
           <NavItem>
             <NavLink href='#' active>
@@ -32,6 +24,6 @@ export function NavOverflowOptionsDemo() {
           </NavItem>
         </Nav>
       </NavOverflow>
-    </div>
+    </>
   );
 }

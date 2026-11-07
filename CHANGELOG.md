@@ -4,6 +4,8 @@
 
 ### Breaking Changes
 
+- Replace Bootstrap NavOverflow JavaScript integration with a React implementation; use React props instead of plugin data options and remove plugin initialization. Overflow menu copies have independent state.
+
 - Rename `OtpInput` and its public types to `OTPInput` and `OTPInput*`.
 - Replace `FormControl` input, select, and textarea usage with dedicated
   `Input`, `Select`, and `Textarea` components. `FormControl` now defaults to

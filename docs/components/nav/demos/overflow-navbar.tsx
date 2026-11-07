@@ -1,11 +1,8 @@
 import { Navbar, NavbarBrand, NavbarNav, NavItem, NavLink, NavOverflow } from 'react-bootstrap-pro';
 
-import { useNavOverflow } from '../use-nav-overflow';
-
 export function NavOverflowNavbarDemo() {
-  const ref = useNavOverflow();
   return (
-    <div ref={ref} style={{ maxWidth: 450 }}>
+    <div style={{ maxWidth: 450 }}>
       <Navbar expand bg='1' aria-label='Example navbar'>
         <NavbarBrand href='#'>Brand</NavbarBrand>
         <NavOverflow>
