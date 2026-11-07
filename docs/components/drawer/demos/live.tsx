@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   CloseButton,
   Drawer,
@@ -9,32 +10,43 @@ import {
 } from 'react-bootstrap-pro';
 
 export function DrawerLiveDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <div className='d-flex flex-wrap gap-2'>
         <a
           className='btn-solid theme-primary'
-          data-bs-toggle='drawer'
           href='#drawer-live'
+          onClick={(event) => {
+            event.preventDefault();
+            setShow(true);
+          }}
           role='button'
           aria-controls='drawer-live'
+          aria-expanded={show}
         >
           Link with href
         </a>
         <button
           className='btn-solid theme-primary'
           type='button'
-          data-bs-toggle='drawer'
-          data-bs-target='#drawer-live'
           aria-controls='drawer-live'
+          aria-expanded={show}
+          onClick={() => setShow(true)}
         >
-          Button with data-bs-target
+          Open drawer
         </button>
       </div>
-      <Drawer id='drawer-live' placement='start' aria-labelledby='drawer-live-title'>
+      <Drawer
+        show={show}
+        onShowChange={setShow}
+        id='drawer-live'
+        placement='start'
+        aria-labelledby='drawer-live-title'
+      >
         <DrawerHeader>
           <DrawerTitle id='drawer-live-title'>Drawer</DrawerTitle>
-          <CloseButton data-bs-dismiss='drawer' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DrawerHeader>
         <DrawerBody>
           <p>Place text, images, lists, and other selected content here.</p>

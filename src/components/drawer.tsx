@@ -12,6 +12,20 @@ import {
 import { Box } from './box';
 import type { BoxProps } from './box';
 
+const scrollLocks = new Set<HTMLDialogElement>();
+let hadScrollLock = false;
+
+function lockScroll(dialog: HTMLDialogElement) {
+  if (!scrollLocks.size) hadScrollLock = document.documentElement.classList.contains('dialog-open');
+  scrollLocks.add(dialog);
+  document.documentElement.classList.add('dialog-open');
+}
+
+function unlockScroll(dialog: HTMLDialogElement) {
+  if (!scrollLocks.delete(dialog) || scrollLocks.size || hadScrollLock) return;
+  document.documentElement.classList.remove('dialog-open');
+}
+
 export type DrawerProps<C extends ElementType = 'dialog'> = Omit<
   BoxProps<C>,
   keyof {
@@ -22,6 +36,9 @@ export type DrawerProps<C extends ElementType = 'dialog'> = Omit<
     translucent?: boolean | undefined;
     show?: boolean | undefined;
     onShowChange?: ((show: boolean) => void) | undefined;
+    backdrop?: boolean | 'static' | undefined;
+    keyboard?: boolean | undefined;
+    scroll?: boolean | undefined;
   }
 > & {
   fullscreen?: boolean | undefined;
@@ -31,6 +48,9 @@ export type DrawerProps<C extends ElementType = 'dialog'> = Omit<
   translucent?: boolean | undefined;
   show?: boolean | undefined;
   onShowChange?: ((show: boolean) => void) | undefined;
+  backdrop?: boolean | 'static' | undefined;
+  keyboard?: boolean | undefined;
+  scroll?: boolean | undefined;
 };
 
 export function Drawer<C extends ElementType = 'dialog'>({
@@ -43,6 +63,9 @@ export function Drawer<C extends ElementType = 'dialog'>({
   translucent,
   show,
   onShowChange,
+  backdrop = true,
+  keyboard = true,
+  scroll = false,
   ref: forwardedRef,
   onClick,
   ...props
@@ -58,37 +81,62 @@ export function Drawer<C extends ElementType = 'dialog'>({
 
   useEffect(() => {
     const dialog = drawerRef.current;
+    if (!controlled || backdrop !== false || !(dialog instanceof HTMLDialogElement)) return;
+    const properties = ['--bs-drawer-backdrop-bg', '--bs-drawer-backdrop-blur'] as const;
+    const previous = properties.map((property) => ({
+      value: dialog.style.getPropertyValue(property),
+      priority: dialog.style.getPropertyPriority(property),
+    }));
+    dialog.style.setProperty(properties[0], 'transparent');
+    dialog.style.setProperty(properties[1], '0px');
+    return () => {
+      properties.forEach((property, index) => {
+        const saved = previous[index]!;
+        if (saved.value) dialog.style.setProperty(property, saved.value, saved.priority);
+        else dialog.style.removeProperty(property);
+      });
+    };
+  }, [controlled, backdrop]);
+
+  useEffect(() => {
+    const dialog = drawerRef.current;
     if (show === undefined || !dialog) return;
     if (!(dialog instanceof HTMLDialogElement)) {
       throw new TypeError('A controlled Drawer must render a native dialog element.');
     }
-    if (show && !dialog.open) {
-      dialog.showModal();
-      document.documentElement.classList.add('dialog-open');
-    } else if (!show && dialog.open) {
+    const modal = backdrop !== false || !scroll;
+    if (show && dialog.open && dialog.matches(':modal') !== modal) {
       pendingCloseEvents.current += 1;
       dialog.close();
-      if (!document.querySelector('dialog[open]:modal')) {
-        document.documentElement.classList.remove('dialog-open');
-      }
     }
-  }, [show]);
+    if (show && !dialog.open) {
+      if (modal) dialog.showModal();
+      else dialog.show();
+    }
+    if (show && !scroll) {
+      lockScroll(dialog);
+    } else {
+      unlockScroll(dialog);
+    }
+    if (!show && dialog.open) {
+      pendingCloseEvents.current += 1;
+      dialog.close();
+    }
+  }, [show, scroll, backdrop]);
 
   useEffect(() => {
     const dialog = drawerRef.current;
     if (show === undefined || !(dialog instanceof HTMLDialogElement)) return;
     const onCancel = (event: Event) => {
       event.preventDefault();
-      close();
+      if (keyboard) close();
     };
     const onNativeClose = () => {
-      if (!document.querySelector('dialog[open]:modal')) {
-        document.documentElement.classList.remove('dialog-open');
-      }
       if (pendingCloseEvents.current) {
         pendingCloseEvents.current -= 1;
         return;
       }
+      unlockScroll(dialog);
       if (show) close();
     };
     dialog.addEventListener('cancel', onCancel);
@@ -97,7 +145,7 @@ export function Drawer<C extends ElementType = 'dialog'>({
       dialog.removeEventListener('cancel', onCancel);
       dialog.removeEventListener('close', onNativeClose);
     };
-  }, [show, close]);
+  }, [show, close, keyboard]);
 
   useEffect(() => {
     const dialog = drawerRef.current;
@@ -124,9 +172,7 @@ export function Drawer<C extends ElementType = 'dialog'>({
         pendingCloseEvents.current += 1;
         dialog.close();
       }
-      if (!document.querySelector('dialog[open]:modal')) {
-        document.documentElement.classList.remove('dialog-open');
-      }
+      unlockScroll(dialog);
     };
   }, [controlled]);
 
@@ -136,7 +182,13 @@ export function Drawer<C extends ElementType = 'dialog'>({
       ref={drawerRef}
       onClick={(event: MouseEvent<HTMLElement>) => {
         if (typeof onClick === 'function') onClick(event);
-        if (event.defaultPrevented || !show || event.target !== event.currentTarget) return;
+        if (
+          event.defaultPrevented ||
+          !show ||
+          backdrop !== true ||
+          event.target !== event.currentTarget
+        )
+          return;
         const bounds = event.currentTarget.getBoundingClientRect();
         if (
           event.clientX < bounds.left ||

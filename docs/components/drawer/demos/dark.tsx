@@ -1,18 +1,22 @@
+import { useState } from 'react';
 import { CloseButton, Drawer, DrawerBody, DrawerHeader, DrawerTitle } from 'react-bootstrap-pro';
 
 export function DrawerDarkDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         className='btn-solid theme-primary'
         type='button'
-        data-bs-toggle='drawer'
-        data-bs-target='#drawer-dark'
         aria-controls='drawer-dark'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Open dark drawer
       </button>
       <Drawer
+        show={show}
+        onShowChange={setShow}
         id='drawer-dark'
         placement='start'
         data-bs-theme='dark'
@@ -20,7 +24,7 @@ export function DrawerDarkDemo() {
       >
         <DrawerHeader>
           <DrawerTitle id='drawer-dark-title'>Dark drawer</DrawerTitle>
-          <CloseButton data-bs-dismiss='drawer' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DrawerHeader>
         <DrawerBody>
           <p>Place drawer content here.</p>

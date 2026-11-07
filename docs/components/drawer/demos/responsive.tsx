@@ -1,14 +1,16 @@
+import { useState } from 'react';
 import { CloseButton, Drawer, DrawerBody, DrawerHeader, DrawerTitle } from 'react-bootstrap-pro';
 
 export function DrawerResponsiveDemo() {
+  const [show, setShow] = useState(false);
   return (
     <nav className='navbar'>
       <button
         className='btn-solid theme-primary lg:d-none'
         type='button'
-        data-bs-toggle='drawer'
-        data-bs-target='#drawer-responsive'
         aria-controls='drawer-responsive'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Toggle drawer
       </button>
@@ -16,6 +18,8 @@ export function DrawerResponsiveDemo() {
         Resize the browser to show the drawer toggle.
       </div>
       <Drawer
+        show={show}
+        onShowChange={setShow}
         id='drawer-responsive'
         className='lg:drawer'
         placement='end'
@@ -23,7 +27,7 @@ export function DrawerResponsiveDemo() {
       >
         <DrawerHeader>
           <DrawerTitle id='drawer-responsive-title'>Responsive drawer</DrawerTitle>
-          <CloseButton data-bs-dismiss='drawer' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DrawerHeader>
         <DrawerBody>
           <p>This drawer collapses into regular inline content at the lg breakpoint.</p>

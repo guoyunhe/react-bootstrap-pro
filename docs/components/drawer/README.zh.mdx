@@ -3,7 +3,6 @@ title: Drawer 抽屉
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { DemoContainer } from '../demo-container';
 import { DrawerComponentsDemo } from './demos/basic';
 import { DrawerLiveDemo } from './demos/live';
@@ -28,26 +27,23 @@ import { DrawerFooterDemo } from './demos/footer';
 
 `Drawer` 默认渲染带有 Bootstrap 抽屉类名的原生 `<dialog>`。它与
 [`Dialog`](../dialog/README.zh.mdx#how-it-works) 使用相同的原生对话框行为，并通过
-Bootstrap JavaScript 插件实现以下 data API 示例的滑动手势和过渡动画。也可以通过
-`show` 和 `onShowChange` 使用 React 控制原生模态抽屉，无需插件。受控模式支持
-Escape、点击背景关闭，并在所在导航栏展开时关闭；不实现插件的滑动手势、数据属性
-或非模态选项。不要在 React 受控抽屉上初始化 Bootstrap 插件。
+React 状态控制交互示例。通过 `show` 和 `onShowChange` 控制抽屉。Escape、点击背景
+以及所在导航栏展开时会请求关闭；不实现插件数据属性或滑动关闭手势。
 
 默认位置为 `end`；可设置 `start`、`top` 或 `bottom`。`start` 和 `end` 会根据文本方向
 分别指向逻辑起始端和末端。模态抽屉通过 `showModal()` 打开，进入浏览器顶层、显示背景并
 限制焦点。单独设置 `open` 属性会打开非模态对话框。
 
-插件的 data API 同一时间只显示一个抽屉。在支持触摸的设备上，插件会根据抽屉方向添加
-滑动关闭手势。抽屉动画使用 `transform`；如需额外边距或位移，请将抽屉包在其他元素中，
+抽屉动画使用 `transform`；如需额外边距或位移，请将抽屉包在其他元素中，
 不要直接对抽屉应用 `margin` 或 `translate`。响应式抽屉放在 navbar 中时，navbar 切换为
-内联布局后，插件会关闭仍打开的抽屉。
+内联布局后，React 会关闭仍打开的抽屉。
 
 ## 示例
 
 ### Drawer 组件
 
 使用 `DrawerHeader`、`DrawerTitle` 和 `DrawerBody` 组织面板结构。建议始终包含关闭按钮
-或其他明确的关闭操作。
+或其他明确的关闭操作。此静态示例中的关闭按钮已禁用。
 
 <DemoContainer>
   <DrawerComponentsDemo />
@@ -59,8 +55,7 @@ Escape、点击背景关闭，并在所在导航栏展开时关闭；不实现�
 
 ### 交互示例
 
-可以使用带有 `href` 的链接或带有 `data-bs-target` 的按钮打开抽屉，两者都需要设置
-`data-bs-toggle='drawer'`。
+使用链接或按钮更新控制抽屉的 React 状态。
 
 <DemoContainer>
   <DrawerLiveDemo />
@@ -73,8 +68,7 @@ Escape、点击背景关闭，并在所在导航栏展开时关闭；不实现�
 ### 无需 JavaScript
 
 浏览器支持时，可以通过原生 Invoker Commands API 打开和关闭抽屉，无需 Bootstrap
-JavaScript。该 API 尚未被所有浏览器支持；需要插件选项、滑动手势或动画关闭时，请使用
-data API。
+JavaScript。该 API 尚未被所有浏览器支持；可使用 React 受控示例作为回退方案。
 
 <DemoContainer>
   <DrawerWithoutJavaScriptDemo />
@@ -86,7 +80,7 @@ data API。
 
 ### 保持页面可滚动
 
-在抽屉上设置 `data-bs-scroll='true'` 和 `data-bs-backdrop='false'`，可保持页面滚动并
+在抽屉上设置 `scroll` 和 `backdrop={false}`，可保持页面滚动并
 以非模态方式打开抽屉。焦点不会被限制，页面其他区域仍可交互。
 
 <DemoContainer>
@@ -99,7 +93,7 @@ data API。
 
 ### 保持页面滚动并显示背景
 
-只设置 `data-bs-scroll='true'` 可在保留背景的同时允许页面滚动。由于背景仍启用，抽屉
+设置 `scroll` 可在保留背景的同时允许页面滚动。由于背景仍启用，抽屉
 仍是模态的，并会继续限制焦点。
 
 <DemoContainer>
@@ -112,8 +106,8 @@ data API。
 
 ### 静态背景
 
-在抽屉上设置 `data-bs-backdrop='static'`，可阻止点击抽屉外部时关闭。除非同时设置
-`data-bs-keyboard='false'`，关闭按钮和 Escape 键仍然有效。
+在抽屉上设置 `backdrop='static'`，可阻止点击抽屉外部时关闭。除非同时设置
+`keyboard={false}`，关闭按钮和 Escape 键仍然有效。
 
 <DemoContainer>
   <DrawerStaticBackdropDemo />
@@ -125,7 +119,7 @@ data API。
 
 ## 即时显示
 
-抽屉默认会滑入和滑出。设置 `instant` 可禁用过渡动画；系统的减少动态效果偏好也会禁用动画。
+抽屉默认使用 CSS 过渡动画。设置 `instant` 可禁用过渡动画；系统的减少动态效果偏好也会禁用动画。
 
 <DemoContainer>
   <DrawerInstantDemo />
@@ -176,7 +170,7 @@ data API。
 
 响应式抽屉类会在对应断点以下显示为抽屉，在该断点及以上将内容作为普通内联内容显示。
 可使用响应式显示工具类，在抽屉变为内联布局时隐藏触发按钮。调整窗口进入内联布局时，
-若抽屉位于 `.navbar` 中，插件会监听 navbar 尺寸变化并关闭仍打开的抽屉。
+若抽屉位于 `.navbar` 中，React 会监听 navbar 尺寸变化并关闭仍打开的抽屉。
 
 | 类名         | 抽屉布局范围  | 内联布局起始值 |
 | ------------ | ------------- | -------------- |
@@ -257,9 +251,9 @@ data API。
 `Drawer` 使用原生 `<dialog>` 元素。为每个抽屉提供可见的 `DrawerTitle`，并通过
 `aria-labelledby` 指向标题 ID。关闭按钮应有可访问名称，也可以提供其他明确的关闭操作。
 
-Bootstrap 插件使用 `showModal()` 打开模态抽屉，由浏览器管理焦点并阻止页面其他内容交互。
-设置 `data-bs-scroll='true'` 和 `data-bs-backdrop='false'` 时，插件会改用 `show()`；
-此时不会限制焦点，页面仍可交互。可通过 `data-bs-keyboard='false'` 禁用原生 Escape
+React 使用 `showModal()` 打开模态抽屉，由浏览器管理焦点并阻止页面其他内容交互。
+设置 `scroll` 和 `backdrop={false}` 时，会改用 `show()`；
+此时不会限制焦点，页面仍可交互。可通过 `keyboard={false}` 禁用原生 Escape
 关闭行为。
 
 ## CSS
@@ -292,54 +286,12 @@ Bootstrap 插件使用 `showModal()` 打开模态抽屉，由浏览器管理焦�
 宽视口下的 sheet 使用 `--bs-drawer-sheet-width`，默认回退值为 `760px`。Bootstrap Sass
 token map 分别配置抽屉面板和原生 `::backdrop`。
 
-## JavaScript 行为
+## React 行为
 
-React 组件提供标记和类名；Bootstrap JavaScript bundle 负责显示状态、模态行为、滑动手势
-和关闭操作。本文示例导入了 bundle；应用中只需加载一次，也可以直接使用原生
-`<dialog>` API。
-
-### Data attributes
-
-| 属性                         | 位置       | 说明                           |
-| ---------------------------- | ---------- | ------------------------------ |
-| `data-bs-toggle='drawer'`    | 触发器     | 打开或切换抽屉。               |
-| `data-bs-target='#myDrawer'` | 触发器     | 指定要控制的抽屉。             |
-| `href='#myDrawer'`           | 链接触发器 | 作为目标选择器的替代写法。     |
-| `data-bs-dismiss='drawer'`   | 关闭按钮   | 关闭当前抽屉或明确指定的抽屉。 |
-| `data-bs-backdrop='static'`  | 抽屉       | 点击背景时不关闭。             |
-| `data-bs-backdrop='false'`   | 抽屉       | 隐藏背景。                     |
-| `data-bs-keyboard='false'`   | 抽屉       | 禁止使用 Escape 关闭。         |
-| `data-bs-scroll='true'`      | 抽屉       | 抽屉打开时允许页面滚动。       |
-
-### JavaScript API
-
-插件选项不是 React 属性。可以在抽屉上设置 data attributes，或传入 Bootstrap
-`Drawer` 构造函数。
-
-| 选项       | 类型                  | 默认值  | 说明                                                      |
-| ---------- | --------------------- | ------- | --------------------------------------------------------- |
-| `backdrop` | `boolean \| 'static'` | `true`  | 显示背景、设置为静态背景，或隐藏背景。                    |
-| `keyboard` | `boolean`             | `true`  | 按下 Escape 时关闭抽屉。                                  |
-| `scroll`   | `boolean`             | `false` | 允许页面滚动；搭配 `backdrop: false` 时以非模态方式打开。 |
-
-若 `scroll` 为 `true` 且保留背景，抽屉仍为模态并限制焦点，但页面可以滚动。
-
-```js
-const drawer = new bootstrap.Drawer('#myDrawer', { scroll: true, backdrop: false });
-await drawer.show();
-await drawer.hide();
-```
-
-插件还提供 `toggle`、`dispose`、`getInstance` 和 `getOrCreateInstance`。显示和隐藏方法
-会返回 Promise，并在过渡结束后完成。
-
-| 事件                      | 说明                                   |
-| ------------------------- | -------------------------------------- |
-| `show.bs.drawer`          | 开始打开时触发。                       |
-| `shown.bs.drawer`         | 抽屉显示完成后触发。                   |
-| `hide.bs.drawer`          | 开始关闭时触发。                       |
-| `hidden.bs.drawer`        | 抽屉隐藏后触发。                       |
-| `hidePrevented.bs.drawer` | 静态背景或禁用键盘操作阻止关闭时触发。 |
+`show` 是受控状态；请在 `onShowChange` 中更新状态，并为关闭按钮设置点击处理函数。
+默认显示模态背景并锁定页面滚动；`scroll` 允许滚动，`backdrop={false}` 隐藏背景。
+两者同时设置时使用非模态对话框；只隐藏背景时仍是模态对话框。组件不实现插件的
+事件、data API 或滑动手势。原生 Invoker Commands 示例不使用这些受控选项。
 
 ## API
 
@@ -355,7 +307,10 @@ await drawer.hide();
 | `sheet`        | `boolean`                               | `false` | 应用底部 sheet 样式。                                  |
 | `translucent`  | `boolean`                               | `false` | 模糊并增强面板后方内容的色彩饱和度。                   |
 | `instant`      | `boolean`                               | `false` | 禁用抽屉过渡动画。                                     |
-| `show`         | `boolean`                               | —       | 提供时控制原生模态对话框。                             |
+| `backdrop`     | `boolean \| 'static'`                   | `true`  | 背景显示及点击关闭行为。                               |
+| `keyboard`     | `boolean`                               | `true`  | 是否允许 Escape 请求关闭。                             |
+| `scroll`       | `boolean`                               | `false` | 允许页面滚动。                                         |
+| `show`         | `boolean`                               | —       | 提供时控制原生对话框。                                 |
 | `onShowChange` | `(show: boolean) => void`               | —       | Escape、点击背景、原生关闭或导航栏展开时请求更新状态。 |
 
 继承所选元素的原生属性及全部 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括

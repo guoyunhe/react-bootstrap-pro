@@ -3,7 +3,6 @@ title: Drawer
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { DemoContainer } from '../demo-container';
 import { DrawerComponentsDemo } from './demos/basic';
 import { DrawerLiveDemo } from './demos/live';
@@ -28,13 +27,10 @@ import { DrawerFooterDemo } from './demos/footer';
 
 `Drawer` renders a native `<dialog>` with Bootstrap drawer classes. It builds on
 the same native dialog behavior as [`Dialog`](../dialog/README.mdx#how-it-works)
-and uses Bootstrap's JavaScript plugin for its data API, swipe gestures, and
-transitions for the data-API examples below. Alternatively, pass `show` and
-`onShowChange` to control a native modal drawer with React, without the plugin.
-The controlled mode closes on Escape or backdrop click and closes an open
-drawer when its containing navbar expands. It does not implement the plugin's
-swipe gestures, data attributes, or nonmodal options. Do not initialize the
-Bootstrap plugin on a React-controlled drawer.
+and uses React state for interactive examples. Pass `show` and `onShowChange`
+to control it. Escape and backdrop clicks request closure, as does expansion
+of a containing navbar. Bootstrap plugin data attributes and swipe gestures are
+not implemented.
 
 The default placement is `end`; use `start`, `top`, or `bottom` to select
 another viewport edge. `start` and `end` follow the document's text direction.
@@ -42,18 +38,18 @@ Modal drawers open with `showModal()`, which places them in the top layer,
 displays a backdrop, and traps focus. The `open` attribute alone opens a
 non-modal dialog.
 
-The plugin allows only one data-API drawer at a time. On touch devices, it adds
-a swipe-to-dismiss gesture that follows the drawer placement. Do not apply
+Do not apply
 `margin` or `translate` directly to a drawer when it is animated; wrap it if
 additional spacing or movement is needed. When a responsive drawer is inside a
-navbar, the plugin closes it as the navbar changes to its inline layout.
+navbar, React closes it as the navbar changes to its inline layout.
 
 ## Examples
 
 ### Drawer components
 
 Use `DrawerHeader`, `DrawerTitle`, and `DrawerBody` to structure the panel. Add
-a close button or another explicit dismiss action whenever possible.
+a close button or another explicit dismiss action whenever possible. This
+static illustration has a disabled close button.
 
 <DemoContainer>
   <DrawerComponentsDemo />
@@ -65,8 +61,7 @@ a close button or another explicit dismiss action whenever possible.
 
 ### Live demo
 
-Use a link with `href` or a button with `data-bs-target` to open a drawer. Both
-need `data-bs-toggle='drawer'`.
+Use a link or button to update the React state controlling the drawer.
 
 <DemoContainer>
   <DrawerLiveDemo />
@@ -79,8 +74,8 @@ need `data-bs-toggle='drawer'`.
 ### Without JavaScript
 
 Supported browsers can use the native Invoker Commands API to open and close a
-drawer without Bootstrap JavaScript. Browser support is limited; use the data
-API when you need plugin options, swipe gestures, or animated dismissal.
+drawer without JavaScript. Browser support is limited; use the React-controlled
+example as a fallback.
 
 <DemoContainer>
   <DrawerWithoutJavaScriptDemo />
@@ -92,7 +87,7 @@ API when you need plugin options, swipe gestures, or animated dismissal.
 
 ### Body scrolling
 
-Set `data-bs-scroll='true'` and `data-bs-backdrop='false'` on the drawer to keep
+Set `scroll` and `backdrop={false}` on the drawer to keep
 the page scrollable and open a non-modal drawer. Focus is not trapped, so the
 rest of the page remains interactive.
 
@@ -106,7 +101,7 @@ rest of the page remains interactive.
 
 ### Body scrolling and backdrop
 
-Set only `data-bs-scroll='true'` to keep page scrolling enabled while retaining
+Set `scroll` to keep page scrolling enabled while retaining
 the backdrop. Because the backdrop is present, the drawer remains modal and
 continues to trap focus.
 
@@ -120,9 +115,9 @@ continues to trap focus.
 
 ### Static backdrop
 
-Set `data-bs-backdrop='static'` on the drawer to prevent a click outside from
+Set `backdrop='static'` on the drawer to prevent a click outside from
 dismissing it. The close button and Escape key continue to work unless
-`data-bs-keyboard='false'` is also set.
+`keyboard={false}` is also set.
 
 <DemoContainer>
   <DrawerStaticBackdropDemo />
@@ -134,7 +129,7 @@ dismissing it. The close button and Escape key continue to work unless
 
 ## Instant drawer
 
-Drawers slide in and out by default. Set `instant` to disable the transitions.
+Drawers use CSS transitions by default. Set `instant` to disable the transitions.
 Reduced-motion preferences also disable the animation.
 
 <DemoContainer>
@@ -189,7 +184,7 @@ flattens the bottom corners. On wide viewports, its width is capped by
 Responsive drawer classes show a drawer below their breakpoint and display its
 contents inline at and above that breakpoint. Use a responsive display utility
 to hide the toggle when the drawer is inline. When the drawer is inside a
-`.navbar`, the plugin observes the navbar and closes an open drawer as it
+`.navbar`, React observes the navbar and closes an open drawer as it
 changes to the inline layout.
 
 | Class        | Drawer layout below | Inline layout from |
@@ -273,11 +268,11 @@ Add an optional `DrawerFooter` for actions at the bottom of the panel:
 `DrawerTitle` and point `aria-labelledby` to its `id`. Include a close button
 with an accessible name or another clear dismiss action.
 
-The Bootstrap plugin opens modal drawers with `showModal()`, which provides
+React opens modal drawers with `showModal()`, which provides
 native focus management and makes the rest of the page inert. With
-`data-bs-scroll='true'` and `data-bs-backdrop='false'`, the plugin uses `show()`;
+`scroll` and `backdrop={false}`, it uses `show()`;
 focus is not trapped and the page remains interactive. The native Escape key
-behavior can be disabled with `data-bs-keyboard='false'`.
+behavior can be disabled with `keyboard={false}`.
 
 ## CSS
 
@@ -310,57 +305,14 @@ The sheet uses `--bs-drawer-sheet-width` with a `760px` fallback on wide
 viewports. Bootstrap's Sass token maps configure the drawer and its native
 `::backdrop` separately.
 
-## JavaScript behavior
+## React behavior
 
-The React components provide markup and classes; Bootstrap's JavaScript bundle
-controls visibility, modal behavior, swipe gestures, and dismissal. The bundle
-is imported for these examples. In an application, load it once or use the
-native `<dialog>` API directly.
-
-### Data attributes
-
-| Attribute                    | Applied to     | Description                                       |
-| ---------------------------- | -------------- | ------------------------------------------------- |
-| `data-bs-toggle='drawer'`    | Trigger        | Opens or toggles a drawer.                        |
-| `data-bs-target='#myDrawer'` | Trigger        | Selects the drawer to control.                    |
-| `href='#myDrawer'`           | Link trigger   | Alternative target selector.                      |
-| `data-bs-dismiss='drawer'`   | Dismiss button | Closes the current or explicitly targeted drawer. |
-| `data-bs-backdrop='static'`  | Drawer         | Prevents dismissal from a backdrop click.         |
-| `data-bs-backdrop='false'`   | Drawer         | Hides the backdrop.                               |
-| `data-bs-keyboard='false'`   | Drawer         | Prevents dismissal with Escape.                   |
-| `data-bs-scroll='true'`      | Drawer         | Allows body scrolling while the drawer is open.   |
-
-### JavaScript API
-
-The plugin options are not React props. Options can be set on the drawer with
-data attributes or passed to the Bootstrap `Drawer` constructor.
-
-| Option     | Type                  | Default | Description                                                             |
-| ---------- | --------------------- | ------- | ----------------------------------------------------------------------- |
-| `backdrop` | `boolean \| 'static'` | `true`  | Show a backdrop, keep it static, or hide it.                            |
-| `keyboard` | `boolean`             | `true`  | Close the drawer when Escape is pressed.                                |
-| `scroll`   | `boolean`             | `false` | Allow body scrolling; with `backdrop: false`, opens a non-modal drawer. |
-
-When `scroll` is true and the backdrop remains enabled, the drawer is still
-modal and traps focus, while the page can scroll.
-
-```js
-const drawer = new bootstrap.Drawer('#myDrawer', { scroll: true, backdrop: false });
-await drawer.show();
-await drawer.hide();
-```
-
-The plugin also provides `toggle`, `dispose`, `getInstance`, and
-`getOrCreateInstance`. Show and hide methods return promises that resolve after
-the transition finishes.
-
-| Event                     | Description                                                      |
-| ------------------------- | ---------------------------------------------------------------- |
-| `show.bs.drawer`          | Fires when opening begins.                                       |
-| `shown.bs.drawer`         | Fires after the drawer is visible.                               |
-| `hide.bs.drawer`          | Fires when closing begins.                                       |
-| `hidden.bs.drawer`        | Fires after the drawer is hidden.                                |
-| `hidePrevented.bs.drawer` | Fires when a static backdrop or disabled keyboard blocks hiding. |
+`show` is controlled state; update it in `onShowChange` and provide an explicit
+click handler for close buttons. By default the drawer is modal and locks page
+scrolling. `scroll` permits scrolling, and `backdrop={false}` hides the backdrop.
+Together these open a non-modal dialog; hiding the backdrop alone remains modal.
+Plugin events, data APIs and swipe gestures are not implemented. The native
+Invoker Commands example does not use these controlled options.
 
 ## API
 
@@ -376,7 +328,10 @@ when doing so, the replacement must support the dialog behavior you use.
 | `sheet`        | `boolean`                               | `false` | Applies the bottom-sheet presentation.                                                |
 | `translucent`  | `boolean`                               | `false` | Blurs and saturates content behind the panel.                                         |
 | `instant`      | `boolean`                               | `false` | Disables drawer transitions.                                                          |
-| `show`         | `boolean`                               | —       | Controls the native modal dialog when provided.                                       |
+| `backdrop`     | `boolean \| 'static'`                   | `true`  | Controls backdrop visibility and dismissal.                                           |
+| `keyboard`     | `boolean`                               | `true`  | Allow Escape to request closure.                                                      |
+| `scroll`       | `boolean`                               | `false` | Allow page scrolling.                                                                 |
+| `show`         | `boolean`                               | —       | Controls the native dialog when provided.                                             |
 | `onShowChange` | `(show: boolean) => void`               | —       | Requests a state change on Escape, backdrop click, native close, or navbar expansion. |
 
 Inherits native props for the selected element and all [`Box`](../box/README.mdx#api)

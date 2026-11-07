@@ -1,27 +1,31 @@
+import { useState } from 'react';
 import { CloseButton, Drawer, DrawerBody, DrawerHeader, DrawerTitle } from 'react-bootstrap-pro';
 
 export function DrawerBodyScrollingDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         className='btn-solid theme-primary'
         type='button'
-        data-bs-toggle='drawer'
-        data-bs-target='#drawer-body-scrolling'
         aria-controls='drawer-body-scrolling'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Enable body scrolling
       </button>
       <Drawer
+        show={show}
+        onShowChange={setShow}
         id='drawer-body-scrolling'
         placement='start'
-        data-bs-scroll='true'
-        data-bs-backdrop='false'
+        scroll
+        backdrop={false}
         aria-labelledby='drawer-body-scrolling-title'
       >
         <DrawerHeader>
           <DrawerTitle id='drawer-body-scrolling-title'>Drawer with body scrolling</DrawerTitle>
-          <CloseButton data-bs-dismiss='drawer' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DrawerHeader>
         <DrawerBody>
           <p>Try scrolling the page behind this non-modal drawer.</p>

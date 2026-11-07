@@ -1,26 +1,30 @@
+import { useState } from 'react';
 import { CloseButton, Drawer, DrawerBody, DrawerHeader, DrawerTitle } from 'react-bootstrap-pro';
 
 export function DrawerStaticBackdropDemo() {
+  const [show, setShow] = useState(false);
   return (
     <>
       <button
         className='btn-solid theme-primary'
         type='button'
-        data-bs-toggle='drawer'
-        data-bs-target='#drawer-static-backdrop'
         aria-controls='drawer-static-backdrop'
+        aria-expanded={show}
+        onClick={() => setShow(true)}
       >
         Toggle static drawer
       </button>
       <Drawer
+        show={show}
+        onShowChange={setShow}
         id='drawer-static-backdrop'
         placement='start'
-        data-bs-backdrop='static'
+        backdrop='static'
         aria-labelledby='drawer-static-backdrop-title'
       >
         <DrawerHeader>
           <DrawerTitle id='drawer-static-backdrop-title'>Static backdrop</DrawerTitle>
-          <CloseButton data-bs-dismiss='drawer' aria-label='Close' />
+          <CloseButton onClick={() => setShow(false)} aria-label='Close' />
         </DrawerHeader>
         <DrawerBody>
           <p>This drawer does not close when you click outside it.</p>
