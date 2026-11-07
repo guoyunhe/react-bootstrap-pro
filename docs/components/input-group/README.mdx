@@ -5,23 +5,29 @@ title: InputGroup
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { InputGroupBasicDemo } from './demos/basic';
-import { InputGroupButtonsDemo } from './demos/buttons';
-import { InputGroupCheckRadioDemo } from './demos/check-radio';
-import { InputGroupElementsDemo } from './demos/elements';
 import { InputGroupFieldDemo } from './demos/field';
+import { InputGroupButtonsDemo } from './demos/buttons';
+import { InputGroupTextareaDemo } from './demos/textarea';
+import { InputGroupSelectDemo } from './demos/select';
+import { InputGroupFileDemo } from './demos/file';
+import { InputGroupCheckRadioDemo } from './demos/check-radio';
 import { InputGroupMultipleDemo } from './demos/multiple';
+import { InputGroupAddonsDemo } from './demos/addons';
+import { InputGroupButtonAddonsDemo } from './demos/button-addons';
+import { InputGroupMenusDemo } from './demos/menus';
+import { InputGroupSegmentedDemo } from './demos/segmented';
+import { InputGroupBorderRadiusDemo } from './demos/border-radius';
 import { InputGroupSizingDemo } from './demos/sizing';
 
 # InputGroup
 
-`InputGroup` attaches add-ons to a textual control, and `InputGroupText` renders
-the matching `.input-group-text` addon. Add-ons can be text, icons, checkboxes,
-radios, or buttons. Keep labels outside the group and pair it with `FormField`
-for labels, help text, and validation styles.
+`InputGroup` attaches text, buttons or other add-ons to a control.
+`InputGroupText` renders a styled text add-on.
 
-## Basic example
+## Examples
 
-Place one add-on on either side of the control, or one on each side.
+Place an add-on on either side of the control. Keep visible labels outside the
+group, except when an `InputGroupText` is itself a label for a select or file input.
 
 <DemoContainer>
   <InputGroupBasicDemo />
@@ -31,12 +37,9 @@ Place one add-on on either side of the control, or one on each side.
 
 ```
 
-Describe the control with `aria-describedby` pointing at the addon's `id` when
-the addon carries meaning, such as an `@` prefix.
-
 ## With form field
 
-Wrap the input group in a `FormField` to pair it with a label and description.
+Use [`FormField`](../form/) to group a label, input group and help text.
 
 <DemoContainer>
   <InputGroupFieldDemo />
@@ -46,10 +49,9 @@ Wrap the input group in a `FormField` to pair it with a label and description.
 
 ```
 
-## Buttons
+### Buttons
 
-Add `className='input-group-btn'` to `Button` so the button stacks above the
-control border and raises its `z-index` on focus.
+Use `InputGroupButton` so Bootstrap handles border stacking and focus.
 
 <DemoContainer>
   <InputGroupButtonsDemo />
@@ -59,23 +61,45 @@ control border and raises its `z-index` on focus.
 
 ```
 
-## Textareas, selects, and file inputs
+### Textarea
 
-Input groups adapt to the height of textareas, and they work with selects and
-file inputs as well. Render a `label` addon with
-`InputGroupText component='label'` and bind it with `htmlFor`.
+The group adapts to the textarea's height.
 
 <DemoContainer>
-  <InputGroupElementsDemo />
+  <InputGroupTextareaDemo />
 </DemoContainer>
 
-```tsx src='./demos/elements.tsx'
+```tsx src='./demos/textarea.tsx'
 
 ```
 
-## Checkboxes and radios
+### Select
 
-Place a `Checkbox` or `Radio` inside an `InputGroupText` rendered as a `div`.
+Use a label add-on or a button on either side.
+
+<DemoContainer>
+  <InputGroupSelectDemo />
+</DemoContainer>
+
+```tsx src='./demos/select.tsx'
+
+```
+
+### File input
+
+Use a label add-on or a button alongside a native file input.
+
+<DemoContainer>
+  <InputGroupFileDemo />
+</DemoContainer>
+
+```tsx src='./demos/file.tsx'
+
+```
+
+### Checkboxes and radios
+
+Place `Checkbox` or `Radio` in an `InputGroupText` rendered as a `div`.
 
 <DemoContainer>
   <InputGroupCheckRadioDemo />
@@ -85,10 +109,10 @@ Place a `Checkbox` or `Radio` inside an `InputGroupText` rendered as a `div`.
 
 ```
 
-## Multiple inputs and addons
+### Multiple inputs
 
-Multiple controls and add-ons are supported, including controls separated by
-add-ons.
+Multiple inputs are supported visually, but Bootstrap's input-group validation
+styles are intended for groups with a single input.
 
 <DemoContainer>
   <InputGroupMultipleDemo />
@@ -98,18 +122,70 @@ add-ons.
 
 ```
 
-Validation styles are only available for groups with a single control.
+### Multiple addons
+
+Multiple text add-ons can be placed before or after a control.
+
+<DemoContainer>
+  <InputGroupAddonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/addons.tsx'
+
+```
+
+### Button addons
+
+Buttons can also appear on either side, or in pairs.
+
+<DemoContainer>
+  <InputGroupButtonAddonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/button-addons.tsx'
+
+```
+
+For menus, manage visibility and interaction in React; `Menu` and `InputGroup`
+do not initialize Bootstrap's JavaScript plugin.
+
+<DemoContainer>
+  <InputGroupMenusDemo />
+</DemoContainer>
+
+```tsx src='./demos/menus.tsx'
+
+```
+
+### Segmented buttons
+
+Combine an action and a separate menu toggle on either side.
+
+<DemoContainer>
+  <InputGroupSegmentedDemo />
+</DemoContainer>
+
+```tsx src='./demos/segmented.tsx'
+
+```
 
 ## Border radius
 
-The group removes inner border radii automatically. When you insert an extra
-element that should not take part in that logic, add `className='input-group-ignore'`
-to it.
+Use `.input-group-ignore` on an extra element that should not affect the
+group's border-radius calculation.
+
+<DemoContainer>
+  <InputGroupBorderRadiusDemo />
+</DemoContainer>
+
+```tsx src='./demos/border-radius.tsx'
+
+```
 
 ## Sizing
 
-Set `size='sm'` or `size='lg'` on `InputGroup` to resize the whole group. Do not
-set sizes on the individual add-ons or controls.
+Set `size='sm'` or `size='lg'` on `InputGroup` to resize its contents.
+Bootstrap does not support sizing individual group elements independently.
 
 <DemoContainer>
   <InputGroupSizingDemo />
@@ -119,25 +195,44 @@ set sizes on the individual add-ons or controls.
 
 ```
 
+## CSS
+
+Bootstrap exposes local CSS variables for add-on padding, color, background,
+border and sizing. See the [upstream variables](https://getbootstrap.com/docs/6.0/forms/input-group/#css).
+
 ## API
 
 ### InputGroup
 
-| Prop        | Type           | Description                              |
-| ----------- | -------------- | ---------------------------------------- |
-| `size`      | `'sm' \| 'lg'` | Scales the add-ons and control together. |
-| `component` | `ElementType`  | Renders a `div` by default.              |
-| `...props`  | `BoxProps<C>`  | Native props and all Box utility props.  |
+Renders a `div` by default. Its own prop is listed below; it inherits native
+props for the selected element and [`Box`](../box/README.mdx#api) utility props,
+including `component`.
+
+| Prop   | Type           | Description                              |
+| ------ | -------------- | ---------------------------------------- |
+| `size` | `'sm' \| 'lg'` | Scales the group's controls and add-ons. |
 
 ### InputGroupText
 
-| Prop        | Type          | Description                                                  |
-| ----------- | ------------- | ------------------------------------------------------------ |
-| `component` | `ElementType` | Renders a `span` by default; use `div` or `label` as needed. |
-| `...props`  | `BoxProps<C>` | Native props and all Box utility props.                      |
+Renders a `span` by default and has no additional props. It inherits native
+props for the selected element and [`Box`](../box/README.mdx#api) utility props,
+including `component`; use `label` or `div` when appropriate.
+
+### InputGroupButton
+
+Renders a `button` by default and adds `.input-group-btn`. It has no additional
+props and inherits [`Button`](../button/README.mdx#api) props, including native
+props for the selected element and `component`.
 
 ## Accessibility
 
-Give the group's control an accessible name: keep the label outside the group,
-or use `aria-label` when no visible label fits. Reference text add-ons with
-`aria-describedby`.
+Give each control an accessible name with a label or `aria-label`. Associate
+meaningful add-ons and help text with `aria-describedby`; each checkbox,
+radio and menu button also needs its own accessible name.
+
+## See
+
+- [Bootstrap 6 input group documentation](https://getbootstrap.com/docs/6.0/forms/input-group/)
+- [InputGroup source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/input-group.tsx)
+- [InputGroupText source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/input-group-text.tsx)
+- [InputGroupButton source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/input-group-button.tsx)

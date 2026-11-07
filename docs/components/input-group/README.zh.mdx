@@ -5,22 +5,28 @@ title: InputGroup 输入框组
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { InputGroupBasicDemo } from './demos/basic';
-import { InputGroupButtonsDemo } from './demos/buttons';
-import { InputGroupCheckRadioDemo } from './demos/check-radio';
-import { InputGroupElementsDemo } from './demos/elements';
 import { InputGroupFieldDemo } from './demos/field';
+import { InputGroupButtonsDemo } from './demos/buttons';
+import { InputGroupTextareaDemo } from './demos/textarea';
+import { InputGroupSelectDemo } from './demos/select';
+import { InputGroupFileDemo } from './demos/file';
+import { InputGroupCheckRadioDemo } from './demos/check-radio';
 import { InputGroupMultipleDemo } from './demos/multiple';
+import { InputGroupAddonsDemo } from './demos/addons';
+import { InputGroupButtonAddonsDemo } from './demos/button-addons';
+import { InputGroupMenusDemo } from './demos/menus';
+import { InputGroupSegmentedDemo } from './demos/segmented';
+import { InputGroupBorderRadiusDemo } from './demos/border-radius';
 import { InputGroupSizingDemo } from './demos/sizing';
 
 # InputGroup 输入框组
 
-`InputGroup` 为文本控件挂载附加内容，`InputGroupText` 渲染对应的
-`.input-group-text` 附加块。附加块可以是文本、图标、复选框、单选按钮或按钮。
-标签应放在输入框组之外，并配合 `FormField` 获得标签、帮助文本与校验样式。
+`InputGroup` 为控件附加文本、按钮或其他内容，`InputGroupText` 渲染带样式的文本附加块。
 
-## 基础示例
+## 示例
 
-可在控件一侧放置一个附加块，或两侧各放一个。
+可在控件任意一侧放置附加块。可见标签通常放在组外，但 `InputGroupText` 也可作为
+下拉框或文件输入框的标签。
 
 <DemoContainer>
   <InputGroupBasicDemo />
@@ -30,11 +36,9 @@ import { InputGroupSizingDemo } from './demos/sizing';
 
 ```
 
-当附加块带有语义（例如 `@` 前缀）时，用 `aria-describedby` 指向附加块的 `id`。
+## 配合表单字段
 
-## 配合 FormField
-
-将输入框组放入 `FormField`，即可与标签和描述文本组合。
+使用 [`FormField`](../form/) 组合标签、输入框组和说明文字。
 
 <DemoContainer>
   <InputGroupFieldDemo />
@@ -44,10 +48,9 @@ import { InputGroupSizingDemo } from './demos/sizing';
 
 ```
 
-## 按钮
+### 按钮
 
-为 `Button` 添加 `className='input-group-btn'`，按钮才能正确叠放在控件边框之上，
-并在聚焦时提升 `z-index`。
+使用 `InputGroupButton`，使 Bootstrap 正确处理边框叠放和焦点。
 
 <DemoContainer>
   <InputGroupButtonsDemo />
@@ -57,22 +60,45 @@ import { InputGroupSizingDemo } from './demos/sizing';
 
 ```
 
-## 文本域、下拉框与文件输入
+### 文本域
 
-输入框组会自适应文本域的高度，同样适用于下拉框和文件输入。用
-`InputGroupText component='label'` 渲染 `label` 附加块，并通过 `htmlFor` 绑定。
+输入框组会适应文本域的高度。
 
 <DemoContainer>
-  <InputGroupElementsDemo />
+  <InputGroupTextareaDemo />
 </DemoContainer>
 
-```tsx src='./demos/elements.tsx'
+```tsx src='./demos/textarea.tsx'
 
 ```
 
-## 复选框与单选按钮
+### 下拉框
 
-将 `Checkbox` 或 `Radio` 放入渲染为 `div` 的 `InputGroupText` 中。
+在任意一侧使用标签附加块或按钮。
+
+<DemoContainer>
+  <InputGroupSelectDemo />
+</DemoContainer>
+
+```tsx src='./demos/select.tsx'
+
+```
+
+### 文件输入
+
+在原生文件输入框旁使用标签附加块或按钮。
+
+<DemoContainer>
+  <InputGroupFileDemo />
+</DemoContainer>
+
+```tsx src='./demos/file.tsx'
+
+```
+
+### 复选框与单选按钮
+
+将 `Checkbox` 或 `Radio` 放入渲染为 `div` 的 `InputGroupText`。
 
 <DemoContainer>
   <InputGroupCheckRadioDemo />
@@ -82,9 +108,9 @@ import { InputGroupSizingDemo } from './demos/sizing';
 
 ```
 
-## 多个输入框与附加块
+### 多个输入框
 
-支持多个控件与附加块，也支持用附加块分隔多个控件。
+视觉上支持多个输入框，但 Bootstrap 的输入框组校验样式适用于只有一个输入框的组。
 
 <DemoContainer>
   <InputGroupMultipleDemo />
@@ -94,17 +120,69 @@ import { InputGroupSizingDemo } from './demos/sizing';
 
 ```
 
-校验样式仅适用于只包含单个控件的输入框组。
+### 多个附加块
+
+可在控件前后放置多个文本附加块。
+
+<DemoContainer>
+  <InputGroupAddonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/addons.tsx'
+
+```
+
+### 按钮附加块
+
+按钮也可以放在任意一侧，或成对使用。
+
+<DemoContainer>
+  <InputGroupButtonAddonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/button-addons.tsx'
+
+```
+
+菜单的显示和交互由 React 管理；`Menu` 和 `InputGroup` 不会初始化 Bootstrap 的
+JavaScript 插件。
+
+<DemoContainer>
+  <InputGroupMenusDemo />
+</DemoContainer>
+
+```tsx src='./demos/menus.tsx'
+
+```
+
+### 分段按钮
+
+在任意一侧组合操作按钮与独立的菜单切换按钮。
+
+<DemoContainer>
+  <InputGroupSegmentedDemo />
+</DemoContainer>
+
+```tsx src='./demos/segmented.tsx'
+
+```
 
 ## 圆角
 
-输入框组会自动移除内部圆角。若插入的多余元素不应参与该逻辑，为其添加
-`className='input-group-ignore'`。
+为不应影响输入框组圆角计算的额外元素添加 `.input-group-ignore`。
+
+<DemoContainer>
+  <InputGroupBorderRadiusDemo />
+</DemoContainer>
+
+```tsx src='./demos/border-radius.tsx'
+
+```
 
 ## 尺寸
 
-在 `InputGroup` 上设置 `size='sm'` 或 `size='lg'`，整个输入框组会一起缩放。
-不要在单个附加块或控件上设置尺寸。
+在 `InputGroup` 上设置 `size='sm'` 或 `size='lg'`，即可调整组内元素的尺寸。
+Bootstrap 不支持单独设置组内元素的尺寸。
 
 <DemoContainer>
   <InputGroupSizingDemo />
@@ -114,24 +192,41 @@ import { InputGroupSizingDemo } from './demos/sizing';
 
 ```
 
+## CSS
+
+Bootstrap 为附加块的内边距、颜色、背景、边框和尺寸提供局部 CSS 变量。详见
+[上游变量文档](https://getbootstrap.com/docs/6.0/forms/input-group/#css)。
+
 ## API
 
 ### InputGroup
 
-| 属性        | 类型           | 说明                            |
-| ----------- | -------------- | ------------------------------- |
-| `size`      | `'sm' \| 'lg'` | 同时缩放附加块与控件。          |
-| `component` | `ElementType`  | 默认渲染 `div`。                |
-| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。 |
+默认渲染为 `div`，下表列出自有属性。此外继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
+
+| 属性   | 类型           | 说明                       |
+| ------ | -------------- | -------------------------- |
+| `size` | `'sm' \| 'lg'` | 同时调整组内控件和附加块。 |
 
 ### InputGroupText
 
-| 属性        | 类型          | 说明                                           |
-| ----------- | ------------- | ---------------------------------------------- |
-| `component` | `ElementType` | 默认渲染 `span`；可按需使用 `div` 或 `label`。 |
-| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。                |
+默认渲染为 `span`，没有额外属性。继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`；可按需使用 `label`
+或 `div`。
+
+### InputGroupButton
+
+默认渲染为 `button` 并添加 `.input-group-btn`。没有额外属性，继承
+[`Button`](../button/README.zh.mdx#api) 的属性，包括所选元素的原生属性和 `component`。
 
 ## 无障碍
 
-为输入框组中的控件提供可访问名称：标签放在组外，或使用 `aria-label`。文本附加块
-通过 `aria-describedby` 关联到控件。
+使用标签或 `aria-label` 为每个控件提供无障碍名称。通过 `aria-describedby` 关联有
+意义的附加块和说明文字；每个复选框、单选按钮和菜单按钮也需要各自的无障碍名称。
+
+## 参考
+
+- [Bootstrap 6 输入框组文档](https://getbootstrap.com/docs/6.0/forms/input-group/)
+- [InputGroup 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/input-group.tsx)
+- [InputGroupText 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/input-group-text.tsx)
+- [InputGroupButton 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/input-group-button.tsx)

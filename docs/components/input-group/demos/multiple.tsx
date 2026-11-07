@@ -18,11 +18,6 @@ export function InputGroupMultipleDemo() {
         <InputGroupText>@</InputGroupText>
         <Input type='text' placeholder='Server' aria-label='Server' />
       </InputGroup>
-      <InputGroup>
-        <InputGroupText>$</InputGroupText>
-        <InputGroupText>0.00</InputGroupText>
-        <Input type='text' aria-label='Dollar amount' />
-      </InputGroup>
     </Box>
   );
 }

@@ -38,6 +38,7 @@ export * from './icon-link';
 export * from './image';
 export * from './icon-button';
 export * from './input-group';
+export * from './input-group-button';
 export * from './input-group-text';
 export * from './list-group';
 export * from './menu';

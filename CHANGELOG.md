@@ -19,6 +19,7 @@
 
 ### Added
 
+- Add `InputGroupButton` for buttons within input groups.
 - Add the `Box` `visuallyHidden` prop for screen-reader-accessible hidden content.
 - Add the `Input` `caret` prop for Bootstrap's form-control caret styling.
 - Add `FormAdornIcon` for icons in adorned form controls.
