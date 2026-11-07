@@ -5,22 +5,88 @@ title: IconLink 图标链接
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { IconLinkBasicDemo } from './demos/basic';
+import { IconLinkTrailingDemo } from './demos/trailing';
+import { IconLinkHoverDemo } from './demos/hover';
+import { IconLinkCustomTransformDemo } from './demos/custom-transform';
+import { IconLinkCustomColorDemo } from './demos/custom-color';
+import { IconLinkUtilitiesDemo } from './demos/link-utilities';
 
 # IconLink 图标链接
 
-`IconLink` 渲染带有 Bootstrap `.icon-link` 辅助类的链接，可对齐图标和文本、按文本字号缩放图标，
-并应用链接样式。
+`IconLink` 渲染带有 Bootstrap `.icon-link` 辅助类的链接，使用行内 Flex 布局对齐文本
+和图标，并设置下划线样式。Bootstrap 将带有 `.bi` 类的直接子图标设置为 `1em` 并使用
+链接颜色。也可使用其他图标或图片，但可能需要自行设置尺寸和样式。
+
+## 示例
 
 <DemoContainer>
   <IconLinkBasicDemo />
 </DemoContainer>
 
+```tsx src='./demos/basic.tsx'
+
+```
+
+也可以将图标放在文本后面：
+
+<DemoContainer>
+  <IconLinkTrailingDemo />
+</DemoContainer>
+
+```tsx src='./demos/trailing.tsx'
+
+```
+
 ## 悬停效果
 
-设置 `hover` 可添加 `.icon-link-hover`，使图标在鼠标悬停时移动。可使用 Bootstrap 的
-`--bs-icon-link-*` CSS 变量自定义样式。
+设置 `hover` 可添加 `.icon-link-hover`，使直接子元素中带 `.bi` 类的图标在悬停或
+键盘可见焦点状态下移动。
 
-## 属性
+<DemoContainer>
+  <IconLinkHoverDemo />
+</DemoContainer>
+
+```tsx src='./demos/hover.tsx'
+
+```
+
+## CSS
+
+### 变量
+
+覆盖 `--bs-icon-link-transform` 可更改悬停或焦点状态下的变换效果。
+
+<DemoContainer>
+  <IconLinkCustomTransformDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-transform.tsx'
+
+```
+
+下划线颜色由 `--bs-link-color` 推导；修改该变量会同时更新链接文字和下划线颜色。
+
+<DemoContainer>
+  <IconLinkCustomColorDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-color.tsx'
+
+```
+
+### 链接工具类
+
+可以使用 Bootstrap 链接工具类自定义下划线颜色和偏移。
+
+<DemoContainer>
+  <IconLinkUtilitiesDemo />
+</DemoContainer>
+
+```tsx src='./demos/link-utilities.tsx'
+
+```
+
+## API
 
 ### IconLink
 
@@ -28,17 +94,17 @@ import { IconLinkBasicDemo } from './demos/basic';
 锚点属性及全部 [`Box`](../box/README.zh.mdx#api) 工具类属性；`component`
 可更换渲染元素。
 
-| 属性        | 类型          | 说明                               |
-| ----------- | ------------- | ---------------------------------- |
-| `hover`     | `boolean`     | 添加 `.icon-link-hover` 悬停效果。 |
-| `component` | `ElementType` | 更换渲染元素，默认为 `a`。         |
-| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。    |
+| 属性    | 类型      | 说明                                         |
+| ------- | --------- | -------------------------------------------- |
+| `hover` | `boolean` | 添加 `.icon-link-hover` 悬停和焦点变换效果。 |
 
 ## 无障碍
 
-装饰性图标应设置 `aria-hidden='true'`。传递信息的图标应提供无障碍名称；链接文本应清楚描述目标或操作。
+装饰性图标应设置 `aria-hidden='true'`。传递信息的图标应提供无障碍名称，例如在 SVG
+上设置 `role='img'` 和 `aria-label`。链接文本应清楚描述目标或操作。Bootstrap 会根据
+`prefers-reduced-motion` 禁用图标的过渡动画，但焦点或悬停变换仍可能生效。
 
 ## 参考
 
-- [Bootstrap 6 Icon link 文档](https://getbootstrap.com/docs/6.0/helpers/icon-link/)
+- [Bootstrap 6 图标链接文档](https://getbootstrap.com/docs/6.0/helpers/icon-link/)
 - [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/icon-link.tsx)

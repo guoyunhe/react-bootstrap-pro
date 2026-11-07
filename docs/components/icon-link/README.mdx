@@ -5,11 +5,18 @@ title: IconLink
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { IconLinkBasicDemo } from './demos/basic';
+import { IconLinkTrailingDemo } from './demos/trailing';
+import { IconLinkHoverDemo } from './demos/hover';
+import { IconLinkCustomTransformDemo } from './demos/custom-transform';
+import { IconLinkCustomColorDemo } from './demos/custom-color';
+import { IconLinkUtilitiesDemo } from './demos/link-utilities';
 
 # IconLink
 
-`IconLink` renders an anchor with Bootstrap's `.icon-link` helper, which aligns
-an icon and text, sizes the icon to the text, and applies link styling.
+`IconLink` renders an anchor with Bootstrap's `.icon-link` helper, which uses
+inline flex layout to align text and icons and adds underline styling. Bootstrap
+sizes direct child icons with the `.bi` class to `1em` and uses the link color.
+Other icons or images can be used, but may need their own sizing and styling.
 
 ## Example
 
@@ -21,10 +28,65 @@ an icon and text, sizes the icon to the text, and applies link styling.
 
 ```
 
-## Hover variant
+Place the icon after the text instead:
 
-Set `hover` to add `.icon-link-hover`, which moves the icon on hover. The helper
-can be customized with Bootstrap's `--bs-icon-link-*` CSS variables.
+<DemoContainer>
+  <IconLinkTrailingDemo />
+</DemoContainer>
+
+```tsx src='./demos/trailing.tsx'
+
+```
+
+## Style on hover
+
+Set `hover` to add `.icon-link-hover`, which moves a direct child `.bi` icon on
+hover or keyboard-visible focus.
+
+<DemoContainer>
+  <IconLinkHoverDemo />
+</DemoContainer>
+
+```tsx src='./demos/hover.tsx'
+
+```
+
+## CSS
+
+### Variables
+
+Override `--bs-icon-link-transform` to change the hover or focus transform.
+
+<DemoContainer>
+  <IconLinkCustomTransformDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-transform.tsx'
+
+```
+
+The underline color is derived from `--bs-link-color`; changing it updates both
+the link text and underline.
+
+<DemoContainer>
+  <IconLinkCustomColorDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-color.tsx'
+
+```
+
+### Link utilities
+
+Bootstrap's link utilities can customize underline color and offset.
+
+<DemoContainer>
+  <IconLinkUtilitiesDemo />
+</DemoContainer>
+
+```tsx src='./demos/link-utilities.tsx'
+
+```
 
 ## API
 
@@ -35,17 +97,17 @@ hover modifier class. It inherits native anchor props and all
 [`Box`](../box/README.mdx#api) utility props; `component` can change the
 rendered element.
 
-| Prop        | Type          | Description                                        |
-| ----------- | ------------- | -------------------------------------------------- |
-| `hover`     | `boolean`     | Adds `.icon-link-hover` to move the icon on hover. |
-| `component` | `ElementType` | Changes the rendered element; defaults to `a`.     |
-| `...props`  | `BoxProps<C>` | Native props and all Box utility props.            |
+| Prop    | Type      | Description                                              |
+| ------- | --------- | -------------------------------------------------------- |
+| `hover` | `boolean` | Adds `.icon-link-hover` for hover and focus transitions. |
 
 ## Accessibility
 
 Hide decorative icons with `aria-hidden='true'`. For icons that convey
-information, provide an accessible name. The link text should describe its
-destination or action.
+information, provide an accessible name, such as `role='img'` and `aria-label`
+on an SVG. The link text should describe its destination or action. Bootstrap
+respects `prefers-reduced-motion` by disabling the icon's transition; the
+focus or hover transform can still apply.
 
 ## See
 
