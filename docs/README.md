@@ -60,7 +60,6 @@ export function Example() {
 - [ListGroup](./components/list-group/)
 - [Menu](./components/menu/)
 - [Nav](./components/nav/)
-- [NavOverflow](./components/nav-overflow/)
 - [Navbar](./components/navbar/)
 - [OTPInput](./components/otp-input/)
 - [Pagination](./components/pagination/)

@@ -60,7 +60,6 @@ export function Example() {
 - [ListGroup 列表组](./components/list-group/)
 - [Menu 菜单](./components/menu/)
 - [Nav 导航](./components/nav/)
-- [NavOverflow 导航溢出](./components/nav-overflow/)
 - [Navbar 导航栏](./components/navbar/)
 - [OTPInput 一次性密码输入](./components/otp-input/)
 - [Pagination 分页](./components/pagination/)

@@ -3,54 +3,377 @@ title: Nav 导航
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Nav, NavItem, NavLink } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { NavBasicDemo } from './demos/basic';
+import { NavElementDemo } from './demos/nav-element';
+import { NavMenuDemo } from './demos/menu';
+import { NavTabsDemo } from './demos/tabs';
+import { NavPillsDemo } from './demos/pills';
+import { NavPillsVerticalDemo } from './demos/pills-vertical';
+import { NavUnderlineDemo } from './demos/underline';
+import { NavCenteredDemo } from './demos/centered';
+import { NavEndDemo } from './demos/end';
+import { NavVerticalDemo } from './demos/vertical';
+import { NavVerticalElementDemo } from './demos/vertical-nav';
+import { NavFillDemo } from './demos/fill';
+import { NavFillElementDemo } from './demos/fill-nav';
+import { NavJustifiedDemo } from './demos/justified';
+import { NavJustifiedElementDemo } from './demos/justified-nav';
+import { NavResponsiveDemo } from './demos/responsive';
+import { NavTabsMenuDemo } from './demos/tabs-menu';
+import { NavPillsMenuDemo } from './demos/pills-menu';
+import { NavOverflowDemo } from './demos/overflow';
+import { NavOverflowTabsDemo } from './demos/overflow-tabs';
+import { NavOverflowUnderlineDemo } from './demos/overflow-underline';
+import { NavOverflowKeepDemo } from './demos/overflow-keep';
+import { NavOverflowDisabledDemo } from './demos/overflow-disabled';
+import { NavOverflowNavbarDemo } from './demos/overflow-navbar';
+import { NavOverflowOptionsDemo } from './demos/overflow-options';
+import { NavOverflowCollapseDemo } from './demos/overflow-collapse';
 
 # Nav 导航
 
-`Nav` 提供通用导航结构，支持标签、胶囊和下划线样式。当前页面链接应设置
-`aria-current="page"`。
+`Nav`、`NavItem` 和 `NavLink` 提供导航结构，支持标签、胶囊和下划线样式。
+它们本身不会切换标签面板。
+
+## 基础导航
 
 <DemoContainer>
-  <Nav variant='pills'>
-    <NavItem>
-      <NavLink href='/home' active>
-        首页
-      </NavLink>
-    </NavItem>
-    <NavItem>
-      <NavLink href='/profile'>个人资料</NavLink>
-    </NavItem>
-  </Nav>
+  <NavBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+使用 `component='nav'` 渲染不含列表项的导航地标。
+
+<DemoContainer>
+  <NavElementDemo />
+</DemoContainer>
+
+```tsx src='./demos/nav-element.tsx'
+
+```
+
+也可以使用按钮触发 React [Menu](../menu/README.zh.mdx)。
+
+<DemoContainer>
+  <NavMenuDemo />
+</DemoContainer>
+
+```tsx src='./demos/menu.tsx'
+
+```
+
+## 标签页行为
+
+要实现可切换的标签面板，请使用 [Tab](../tab/README.zh.mdx)，而不是仅使用标签样式的导航链接。
+
+## 可用样式
+
+### 标签
+
+<DemoContainer>
+  <NavTabsDemo />
+</DemoContainer>
+
+```tsx src='./demos/tabs.tsx'
+
+```
+
+### 胶囊
+
+<DemoContainer>
+  <NavPillsDemo />
+</DemoContainer>
+
+```tsx src='./demos/pills.tsx'
+
+```
+
+胶囊导航还支持 `orientation='vertical'`。
+
+<DemoContainer>
+  <NavPillsVerticalDemo />
+</DemoContainer>
+
+```tsx src='./demos/pills-vertical.tsx'
+
+```
+
+### 下划线
+
+<DemoContainer>
+  <NavUnderlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/underline.tsx'
+
+```
+
+## 对齐
+
+### 水平对齐
+
+<DemoContainer>
+  <NavCenteredDemo />
+</DemoContainer>
+
+```tsx src='./demos/centered.tsx'
+
+```
+
+<DemoContainer>
+  <NavEndDemo />
+</DemoContainer>
+
+```tsx src='./demos/end.tsx'
+
+```
+
+### 垂直对齐
+
+使用 `flexDirection` 可纵向排列任意样式，包括 `nav` 元素。
+
+<DemoContainer>
+  <NavVerticalDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical.tsx'
+
+```
+
+<DemoContainer>
+  <NavVerticalElementDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical-nav.tsx'
+
+```
+
+### 填充与等宽
+
+`fill` 按比例分配空间，`justified` 使各项等宽。两者均适用于列表或直接链接。
+
+<DemoContainer>
+  <NavFillDemo />
+</DemoContainer>
+
+```tsx src='./demos/fill.tsx'
+
+```
+
+<DemoContainer>
+  <NavFillElementDemo />
+</DemoContainer>
+
+```tsx src='./demos/fill-nav.tsx'
+
+```
+
+<DemoContainer>
+  <NavJustifiedDemo />
+</DemoContainer>
+
+```tsx src='./demos/justified.tsx'
+
+```
+
+<DemoContainer>
+  <NavJustifiedElementDemo />
+</DemoContainer>
+
+```tsx src='./demos/justified-nav.tsx'
+
+```
+
+## 响应式 flex 工具
+
+<DemoContainer>
+  <NavResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
+```
+
+## 菜单
+
+使用按钮作为触发器，也可以将其放入列表项。这些菜单使用 React `Menu` 组件，
+而非 Bootstrap 的菜单数据 API。
+
+<DemoContainer>
+  <NavTabsMenuDemo />
+</DemoContainer>
+
+```tsx src='./demos/tabs-menu.tsx'
+
+```
+
+<DemoContainer>
+  <NavPillsMenuDemo />
+</DemoContainer>
+
+```tsx src='./demos/pills-menu.tsx'
+
+```
+
+## 溢出导航
+
+`NavOverflow` 为 Bootstrap 的 Priority+ 插件提供结构。插件测量容器，隐藏放不下的条目，
+并将其链接克隆到 More 菜单。它通过 `ResizeObserver` 观察容器尺寸；不支持时退回监听
+窗口尺寸变化。生成的菜单使用 Bootstrap JavaScript Menu 插件，而非本库的 React `Menu`。
+
+示例通过[此辅助函数](./use-nav-overflow.ts)在挂载后初始化 Bootstrap 插件并在卸载时销毁。
+只有加载插件并且 Bootstrap 的 `DOMContentLoaded` 处理器找到容器时，`data-bs-toggle`
+才会触发数据 API；之后挂载的 React 内容需要显式初始化。Bootstrap 默认 CSS 会隐藏
+未初始化的导航，因此没有 JavaScript 时，除非应用提供降级方案（例如不使用
+`NavOverflow` 而直接渲染 `Nav`），否则导航和溢出菜单都无法使用。
+
+插件克隆的是 DOM 节点，而不是 React 事件处理器或组件状态。溢出项应使用普通链接，
+不要依赖克隆节点上的 React 事件处理器。动态更改列表时必须管理插件实例及其生命周期。
+Bootstrap 的菜单移动逻辑依赖其自身的菜单结构，不能与 React 控制的 `Menu` 互换。
+
+<DemoContainer>
+  <NavOverflowDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow.tsx'
+
+```
+
+### 标签样式
+
+<DemoContainer>
+  <NavOverflowTabsDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-tabs.tsx'
+
+```
+
+### 下划线样式
+
+<DemoContainer>
+  <NavOverflowUnderlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-underline.tsx'
+
+```
+
+### 保持条目可见
+
+Bootstrap 的 `nav-overflow-keep` 类可防止条目被折叠。
+
+<DemoContainer>
+  <NavOverflowKeepDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-keep.tsx'
+
+```
+
+### 禁用条目
+
+<DemoContainer>
+  <NavOverflowDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-disabled.tsx'
+
+```
+
+### 在导航栏中使用
+
+<DemoContainer>
+  <NavOverflowNavbarDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-navbar.tsx'
+
+```
+
+### 自定义触发器
+
+通过容器上的数据属性设置插件选项。此示例自定义标签、图标位置和最少可见条目数。
+
+<DemoContainer>
+  <NavOverflowOptionsDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-options.tsx'
+
+```
+
+### 低于容器宽度时折叠
+
+插件的 `data-bs-collapse-below` 接受断点名称或像素值。其他插件选项包括
+`moreText`、`moreIcon`、`iconPlacement` 和 `threshold`；配置和事件详见 Bootstrap 文档。
+
+<DemoContainer>
+  <NavOverflowCollapseDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-collapse.tsx'
+
+```
+
+## 无障碍
+
+适当时将列表导航包裹在有名称的 `nav` 地标中，不要在列表本身设置
+`role='navigation'`。激活链接的 `aria-current` 默认为 `page`，可以覆盖。标签样式的
+导航并不是标签页界面；除非实现完整的标签交互模式，否则不要添加标签角色。
+
+`disabled` 只设置样式、`aria-disabled` 和 `tabIndex={-1}`，不会阻止带 `href` 的链接
+被激活，也不会给按钮设置原生 `disabled` 属性。应移除目标地址或自行阻止激活；
+按钮应使用原生按钮或自行设置原生 `disabled` 的自定义组件：`NavLink` 会消费自身的
+`disabled` 属性，不会将其透传。
 
 ## API
 
+所有组件均接受所选元素的原生属性，并通过 `BoxProps<C>` 继承
+[`Box`](../box/README.zh.mdx#api) 工具类属性；`component` 可更换默认元素。
+
 ### Nav
 
-默认渲染为 `ul`。自有属性为 `fill?: boolean`、`justified?: boolean`、
-`orientation?: 'horizontal' | 'vertical'` 和
-`variant?: 'tabs' | 'pills' | 'underline'`；继承所选元素的原生属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `ul`。自有属性如下：
 
-| 属性          | 类型                               | 说明                            |
-| ------------- | ---------------------------------- | ------------------------------- |
-| `variant`     | `'tabs' \| 'pills' \| 'underline'` | 选择导航样式。                  |
-| `orientation` | `'horizontal' \| 'vertical'`       | 胶囊导航支持纵向排列。          |
-| `fill`        | `boolean`                          | 让链接平分可用宽度。            |
-| `justified`   | `boolean`                          | 为链接设置相同宽度。            |
-| `component`   | `ElementType`                      | 更换根元素。                    |
-| `...props`    | `BoxProps<C>`                      | 原生属性及所有 Box 工具类属性。 |
-
-`NavItem` 和 `NavLink` 分别渲染对应的条目和链接类名。
+| 属性          | 类型                               | 说明                                    |
+| ------------- | ---------------------------------- | --------------------------------------- |
+| `variant`     | `'tabs' \| 'pills' \| 'underline'` | 导航样式。                              |
+| `orientation` | `'horizontal' \| 'vertical'`       | `vertical` 仅为胶囊导航添加纵向修饰类。 |
+| `fill`        | `boolean`                          | 按比例分配空间。                        |
+| `justified`   | `boolean`                          | 使各项等宽。                            |
 
 ### NavItem
 
-默认渲染为 `li`，没有自有属性。继承原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `li`，没有自有属性。
 
 ### NavLink
 
-默认渲染为 `a`。自有属性为 `active?: boolean` 和 `disabled?: boolean`；激活链接默认
-设置 `aria-current="page"`，禁用链接设置 `aria-disabled` 并设为 `tabIndex={-1}`。
-继承原生属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `a`。自有属性为 `active?: boolean` 和 `disabled?: boolean`；
+其行为详见无障碍说明。
+
+### NavOverflow
+
+默认渲染为 `div`，没有自有属性。`data-bs-toggle` 默认为 `nav-overflow`；
+组件本身不会初始化插件。
+
+### NavOverflowItem
+
+默认渲染为 `li`，没有自有属性。为自定义 Bootstrap 溢出结构添加
+`nav-overflow-item`；同时需要 `nav-item` 类时可使用 `component={NavItem}`。
+
+### NavOverflowIcon
+
+默认渲染为 `span`，没有自有属性。添加 `nav-overflow-icon`，并默认设置
+`aria-hidden` 为 `true`。
+
+## 参考
+
+- [Bootstrap 6 Nav 文档](https://getbootstrap.com/docs/6.0/components/nav/)
+- [Bootstrap 6 Nav overflow 文档](https://getbootstrap.com/docs/6.0/components/nav-overflow/)
+- [Nav 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/nav.tsx)
+- [NavOverflow 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/nav-overflow.tsx)

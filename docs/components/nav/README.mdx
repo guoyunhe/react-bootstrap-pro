@@ -3,16 +3,40 @@ title: Nav
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Nav, NavItem, NavLink } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { NavBasicDemo } from './demos/basic';
+import { NavElementDemo } from './demos/nav-element';
+import { NavMenuDemo } from './demos/menu';
+import { NavTabsDemo } from './demos/tabs';
+import { NavPillsDemo } from './demos/pills';
+import { NavPillsVerticalDemo } from './demos/pills-vertical';
+import { NavUnderlineDemo } from './demos/underline';
+import { NavCenteredDemo } from './demos/centered';
+import { NavEndDemo } from './demos/end';
+import { NavVerticalDemo } from './demos/vertical';
+import { NavVerticalElementDemo } from './demos/vertical-nav';
+import { NavFillDemo } from './demos/fill';
+import { NavFillElementDemo } from './demos/fill-nav';
+import { NavJustifiedDemo } from './demos/justified';
+import { NavJustifiedElementDemo } from './demos/justified-nav';
+import { NavResponsiveDemo } from './demos/responsive';
+import { NavTabsMenuDemo } from './demos/tabs-menu';
+import { NavPillsMenuDemo } from './demos/pills-menu';
+import { NavOverflowDemo } from './demos/overflow';
+import { NavOverflowTabsDemo } from './demos/overflow-tabs';
+import { NavOverflowUnderlineDemo } from './demos/overflow-underline';
+import { NavOverflowKeepDemo } from './demos/overflow-keep';
+import { NavOverflowDisabledDemo } from './demos/overflow-disabled';
+import { NavOverflowNavbarDemo } from './demos/overflow-navbar';
+import { NavOverflowOptionsDemo } from './demos/overflow-options';
+import { NavOverflowCollapseDemo } from './demos/overflow-collapse';
 
 # Nav
 
-`Nav` provides shared navigation markup and supports tabs, pills, and underline
-styles. Use `aria-current="page"` for the current page link.
+`Nav`, `NavItem`, and `NavLink` provide navigation markup with optional tabs,
+pills, and underline styles. They do not switch tab panels themselves.
 
-## Example
+## Base nav
 
 <DemoContainer>
   <NavBasicDemo />
@@ -22,52 +46,350 @@ styles. Use `aria-current="page"` for the current page link.
 
 ```
 
-## Styles and layout
+Use `component='nav'` for a navigation landmark without list items.
 
-`variant` accepts `tabs`, `pills`, or `underline`. Use `orientation='vertical'`
-for a vertical pill navigation; `fill` and `justified` distribute links across
-the available width.
+<DemoContainer>
+  <NavElementDemo />
+</DemoContainer>
 
-## API
+```tsx src='./demos/nav-element.tsx'
 
-### Nav
+```
 
-Renders a `ul` by default. Its own props are `fill?: boolean`,
-`justified?: boolean`, `orientation?: 'horizontal' | 'vertical'`, and
-`variant?: 'tabs' | 'pills' | 'underline'`; it inherits native props for the
-selected element and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+Buttons can also trigger a React [Menu](../menu/README.mdx).
 
-| Prop          | Type                               | Description                               |
-| ------------- | ---------------------------------- | ----------------------------------------- |
-| `variant`     | `'tabs' \| 'pills' \| 'underline'` | Selects the navigation style.             |
-| `orientation` | `'horizontal' \| 'vertical'`       | Vertical layout is available for pills.   |
-| `fill`        | `boolean`                          | Distributes links across available width. |
-| `justified`   | `boolean`                          | Gives links equal widths.                 |
-| `component`   | `ElementType`                      | Changes the root element.                 |
-| `...props`    | `BoxProps<C>`                      | Native props and all Box utility props.   |
+<DemoContainer>
+  <NavMenuDemo />
+</DemoContainer>
 
-`NavItem` and `NavLink` render the corresponding item and link classes.
+```tsx src='./demos/menu.tsx'
 
-### NavItem
+```
 
-Renders an `li` by default and has no own props. It inherits native props and
-all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+## Tab behavior
 
-### NavLink
+For interactive tab panels, use [Tab](../tab/README.mdx) rather than navigation
+links styled as tabs.
 
-Renders an `a` by default. Its own props are `active?: boolean` and
-`disabled?: boolean`; active links default `aria-current` to `page`, and
-disabled links receive `aria-disabled` and `tabIndex={-1}`. It inherits native
-props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+## Available styles
+
+### Tabs
+
+<DemoContainer>
+  <NavTabsDemo />
+</DemoContainer>
+
+```tsx src='./demos/tabs.tsx'
+
+```
+
+### Pills
+
+<DemoContainer>
+  <NavPillsDemo />
+</DemoContainer>
+
+```tsx src='./demos/pills.tsx'
+
+```
+
+Pills also support `orientation='vertical'`.
+
+<DemoContainer>
+  <NavPillsVerticalDemo />
+</DemoContainer>
+
+```tsx src='./demos/pills-vertical.tsx'
+
+```
+
+### Underline
+
+<DemoContainer>
+  <NavUnderlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/underline.tsx'
+
+```
+
+## Alignment
+
+### Horizontal
+
+<DemoContainer>
+  <NavCenteredDemo />
+</DemoContainer>
+
+```tsx src='./demos/centered.tsx'
+
+```
+
+<DemoContainer>
+  <NavEndDemo />
+</DemoContainer>
+
+```tsx src='./demos/end.tsx'
+
+```
+
+### Vertical
+
+Use `flexDirection` to stack any variant, including a `nav` element.
+
+<DemoContainer>
+  <NavVerticalDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical.tsx'
+
+```
+
+<DemoContainer>
+  <NavVerticalElementDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical-nav.tsx'
+
+```
+
+### Fill and justify
+
+`fill` distributes space proportionally; `justified` makes items equal width.
+Both work with lists or direct links.
+
+<DemoContainer>
+  <NavFillDemo />
+</DemoContainer>
+
+```tsx src='./demos/fill.tsx'
+
+```
+
+<DemoContainer>
+  <NavFillElementDemo />
+</DemoContainer>
+
+```tsx src='./demos/fill-nav.tsx'
+
+```
+
+<DemoContainer>
+  <NavJustifiedDemo />
+</DemoContainer>
+
+```tsx src='./demos/justified.tsx'
+
+```
+
+<DemoContainer>
+  <NavJustifiedElementDemo />
+</DemoContainer>
+
+```tsx src='./demos/justified-nav.tsx'
+
+```
+
+## Responsive flex utilities
+
+<DemoContainer>
+  <NavResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
+```
+
+## Menus
+
+Use a button as the trigger, including inside list items. These menus use the
+React `Menu` component, not Bootstrap's menu data API.
+
+<DemoContainer>
+  <NavTabsMenuDemo />
+</DemoContainer>
+
+```tsx src='./demos/tabs-menu.tsx'
+
+```
+
+<DemoContainer>
+  <NavPillsMenuDemo />
+</DemoContainer>
+
+```tsx src='./demos/pills-menu.tsx'
+
+```
+
+## Overflow
+
+`NavOverflow` provides markup for Bootstrap's Priority+ plugin. The plugin
+measures the wrapper and hides items that do not fit, cloning their links into
+a More menu. It observes container size with `ResizeObserver`, falling back to
+window resize events when unavailable. The generated menu uses Bootstrap's
+JavaScript Menu plugin, not this library's React `Menu`.
+
+The examples initialize the Bootstrap plugin after mounting and dispose it on
+unmount using [this helper](./use-nav-overflow.ts). `data-bs-toggle` alone only
+enables Bootstrap's data API when the plugin is loaded and its `DOMContentLoaded`
+handler sees the wrapper; React content mounted later needs explicit
+initialization. Bootstrap's default CSS hides an uninitialized nav, so without
+JavaScript there is no usable navigation or overflow menu unless the application
+provides a fallback (for example, render a plain `Nav` without `NavOverflow`).
+
+The plugin clones DOM nodes, not React handlers or component state. Use normal
+links for overflowed items; do not rely on React event handlers on the clones.
+Avoid dynamically changing the list without managing the plugin instance and
+its lifecycle. Bootstrap's menu relocation assumes its own menu markup and is
+not interchangeable with a React-controlled `Menu`.
+
+<DemoContainer>
+  <NavOverflowDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow.tsx'
+
+```
+
+### With tabs
+
+<DemoContainer>
+  <NavOverflowTabsDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-tabs.tsx'
+
+```
+
+### With underline
+
+<DemoContainer>
+  <NavOverflowUnderlineDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-underline.tsx'
+
+```
+
+### Keep items visible
+
+Bootstrap's `nav-overflow-keep` class excludes an item from collapsing.
+
+<DemoContainer>
+  <NavOverflowKeepDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-keep.tsx'
+
+```
+
+### Disabled items
+
+<DemoContainer>
+  <NavOverflowDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-disabled.tsx'
+
+```
+
+### In a navbar
+
+<DemoContainer>
+  <NavOverflowNavbarDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-navbar.tsx'
+
+```
+
+### Customize the toggle
+
+Set plugin options with data attributes on the wrapper. Here the label, icon
+placement, and minimum visible item count are customized.
+
+<DemoContainer>
+  <NavOverflowOptionsDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-options.tsx'
+
+```
+
+### Collapse below a container width
+
+The plugin accepts `data-bs-collapse-below` as a breakpoint name or pixel value.
+Other plugin options include `moreText`, `moreIcon`, `iconPlacement`, and
+`threshold`; see the Bootstrap reference for configuration and events.
+
+<DemoContainer>
+  <NavOverflowCollapseDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow-collapse.tsx'
+
+```
 
 ## Accessibility
 
-Use `aria-current='page'` for the current page, or `aria-current='true'` for
-the current item in a set. Use the tab component when links should switch
-panels instead of navigating.
+Wrap list navigation in a named `nav` landmark when appropriate; do not put
+`role='navigation'` on the list itself. An active link defaults to
+`aria-current='page'`, which can be overridden. Navigation styled as tabs is
+not a tab interface: do not add tab roles unless implementing the full tab
+interaction pattern.
+
+`disabled` supplies styling, `aria-disabled`, and `tabIndex={-1}`, but does
+not prevent activation of an anchor with `href` or set the native `disabled`
+attribute on a button. Remove the destination or implement appropriate
+activation prevention. For buttons, use a native button or a custom component
+that sets its native `disabled` attribute: `NavLink` consumes its own
+`disabled` prop rather than forwarding it.
+
+## API
+
+All components accept native props for their selected element and
+[`Box`](../box/README.mdx#api) utility props through `BoxProps<C>`;
+`component` changes the default element.
+
+### Nav
+
+Renders `ul` by default. Its own props are:
+
+| Prop          | Type                               | Description                                           |
+| ------------- | ---------------------------------- | ----------------------------------------------------- |
+| `variant`     | `'tabs' \| 'pills' \| 'underline'` | Navigation style.                                     |
+| `orientation` | `'horizontal' \| 'vertical'`       | `vertical` adds the vertical modifier only for pills. |
+| `fill`        | `boolean`                          | Distributes space proportionally.                     |
+| `justified`   | `boolean`                          | Gives items equal width.                              |
+
+### NavItem
+
+Renders `li` by default and has no own props.
+
+### NavLink
+
+Renders `a` by default. Its own props are `active?: boolean` and
+`disabled?: boolean`; see the accessibility notes for their behavior.
+
+### NavOverflow
+
+Renders `div` by default and has no own props. It defaults
+`data-bs-toggle` to `nav-overflow`; this does not initialize the plugin itself.
+
+### NavOverflowItem
+
+Renders `li` by default and has no own props. Adds `nav-overflow-item` for
+custom Bootstrap overflow markup; use `component={NavItem}` when a `nav-item`
+class is also needed.
+
+### NavOverflowIcon
+
+Renders `span` by default and has no own props. Adds `nav-overflow-icon` and
+defaults `aria-hidden` to `true`.
 
 ## See
 
 - [Bootstrap 6 Nav documentation](https://getbootstrap.com/docs/6.0/components/nav/)
-- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/nav.tsx)
+- [Bootstrap 6 Nav overflow documentation](https://getbootstrap.com/docs/6.0/components/nav-overflow/)
+- [Nav source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/nav.tsx)
+- [NavOverflow source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/nav-overflow.tsx)

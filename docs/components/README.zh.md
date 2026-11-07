@@ -27,7 +27,6 @@ order: 1
 - [ListGroup 列表组](./list-group/)
 - [Menu 菜单](./menu/)
 - [Nav 导航](./nav/)
-- [NavOverflow 导航溢出](./nav-overflow/)
 - [Navbar 导航栏](./navbar/)
 - [OTPInput 一次性密码输入](./otp-input/)
 - [Pagination 分页](./pagination/)

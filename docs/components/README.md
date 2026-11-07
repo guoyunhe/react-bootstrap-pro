@@ -32,7 +32,6 @@ order: 1
 - [ListGroup](./list-group/)
 - [Menu](./menu/)
 - [Nav](./nav/)
-- [NavOverflow](./nav-overflow/)
 - [Navbar](./navbar/)
 - [OTPInput](./otp-input/)
 - [Pagination](./pagination/)

@@ -2,14 +2,20 @@ import { Nav, NavItem, NavLink } from 'react-bootstrap-pro';
 
 export function NavBasicDemo() {
   return (
-    <Nav variant='pills'>
+    <Nav>
       <NavItem>
-        <NavLink href='/home' active>
-          Home
+        <NavLink href='#' active>
+          Active
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href='/profile'>Profile</NavLink>
+        <NavLink href='#'>Link</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink href='#'>Link</NavLink>
+      </NavItem>
+      <NavItem>
+        <NavLink disabled>Disabled</NavLink>
       </NavItem>
     </Nav>
   );

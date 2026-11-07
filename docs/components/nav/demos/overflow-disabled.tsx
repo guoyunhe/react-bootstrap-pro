@@ -1,0 +1,32 @@
+import { Nav, NavItem, NavLink, NavOverflow } from 'react-bootstrap-pro';
+
+import { useNavOverflow } from '../use-nav-overflow';
+
+export function NavOverflowDisabledDemo() {
+  const ref = useNavOverflow();
+  return (
+    <div ref={ref}>
+      <NavOverflow style={{ maxWidth: 300 }}>
+        <Nav variant='pills'>
+          <NavItem>
+            <NavLink href='#' active>
+              Active
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href='#'>Link</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href='#'>Another link</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink disabled>Disabled</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href='#'>More content</NavLink>
+          </NavItem>
+        </Nav>
+      </NavOverflow>
+    </div>
+  );
+}
