@@ -4,7 +4,7 @@ export function InputHelpInlineDemo() {
   return (
     <Row gutter={3} alignItems='center'>
       <Col span='auto'>
-        <FormLabel htmlFor='input-password-inline' className='col-form-label'>
+        <FormLabel htmlFor='input-password-inline' col>
           Password
         </FormLabel>
       </Col>

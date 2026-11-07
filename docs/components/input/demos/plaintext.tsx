@@ -4,17 +4,17 @@ export function InputPlaintextDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
       <Row>
-        <FormLabel htmlFor='input-plaintext-email' className='sm:col-2 col-form-label'>
+        <Col component={FormLabel} span={{ sm: 2 }} htmlFor='input-plaintext-email' col>
           Email
-        </FormLabel>
+        </Col>
         <Col span={{ sm: 10 }}>
           <Input id='input-plaintext-email' plaintext readOnly defaultValue='email@example.com' />
         </Col>
       </Row>
       <Row>
-        <FormLabel htmlFor='input-plaintext-password' className='sm:col-2 col-form-label'>
+        <Col component={FormLabel} span={{ sm: 2 }} htmlFor='input-plaintext-password' col>
           Password
-        </FormLabel>
+        </Col>
         <Col span={{ sm: 10 }}>
           <Input id='input-plaintext-password' type='password' />
         </Col>

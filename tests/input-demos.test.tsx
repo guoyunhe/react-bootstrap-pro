@@ -7,6 +7,7 @@ import { InputDatalistCaretDemo } from '../docs/components/input/demos/datalist-
 import { InputFieldDemo } from '../docs/components/input/demos/field';
 import { InputFileDemo } from '../docs/components/input/demos/file';
 import { InputGhostDemo } from '../docs/components/input/demos/ghost';
+import { InputHelpInlineDemo } from '../docs/components/input/demos/help-inline';
 import { InputPlaintextDemo } from '../docs/components/input/demos/plaintext';
 import { InputSizesDemo } from '../docs/components/input/demos/sizes';
 
@@ -16,6 +17,7 @@ test('Input documentation demos preserve native behavior and Bootstrap classes',
       <InputFieldDemo />
       <InputSizesDemo />
       <InputPlaintextDemo />
+      <InputHelpInlineDemo />
       <InputColorSizesDemo />
       <InputDatalistCaretDemo />
       <InputFileDemo />
@@ -30,6 +32,12 @@ test('Input documentation demos preserve native behavior and Bootstrap classes',
   expect(screen.getByLabelText('Large input')).toHaveClass('form-control-lg');
   expect(screen.getByLabelText('Email')).toHaveClass('form-control-plaintext');
   expect(screen.getByLabelText('Email')).toHaveAttribute('readonly');
+  const plaintextLabel = screen.container.querySelector("label[for='input-plaintext-email']");
+  const passwordLabel = screen.container.querySelector("label[for='input-plaintext-password']");
+  const inlineLabel = screen.container.querySelector("label[for='input-password-inline']");
+  expect(plaintextLabel).toHaveClass('form-label', 'col-form-label', 'sm:col-2');
+  expect(passwordLabel).toHaveClass('form-label', 'col-form-label', 'sm:col-2');
+  expect(inlineLabel).toHaveClass('form-label', 'col-form-label');
   expect(screen.getByLabelText('Large color picker')).toHaveClass(
     'form-control-color',
     'form-control-lg',
