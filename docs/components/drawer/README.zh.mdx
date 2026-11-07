@@ -28,7 +28,10 @@ import { DrawerFooterDemo } from './demos/footer';
 
 `Drawer` 默认渲染带有 Bootstrap 抽屉类名的原生 `<dialog>`。它与
 [`Dialog`](../dialog/README.zh.mdx#how-it-works) 使用相同的原生对话框行为，并通过
-Bootstrap JavaScript 插件实现 data API、滑动手势和过渡动画。React 组件本身不管理打开状态。
+Bootstrap JavaScript 插件实现以下 data API 示例的滑动手势和过渡动画。也可以通过
+`show` 和 `onShowChange` 使用 React 控制原生模态抽屉，无需插件。受控模式支持
+Escape、点击背景关闭，并在所在导航栏展开时关闭；不实现插件的滑动手势、数据属性
+或非模态选项。不要在 React 受控抽屉上初始化 Bootstrap 插件。
 
 默认位置为 `end`；可设置 `start`、`top` 或 `bottom`。`start` 和 `end` 会根据文本方向
 分别指向逻辑起始端和末端。模态抽屉通过 `showModal()` 打开，进入浏览器顶层、显示背景并
@@ -345,13 +348,15 @@ await drawer.hide();
 默认渲染原生 `<dialog>`。`component` 可以覆盖默认元素；替换后的元素需要支持所使用的
 对话框行为。
 
-| 属性          | 类型                                    | 默认值  | 说明                                                |
-| ------------- | --------------------------------------- | ------- | --------------------------------------------------- |
-| `placement`   | `'start' \| 'end' \| 'top' \| 'bottom'` | `'end'` | 选择视口边缘。`start` 和 `end` 会根据文本方向调整。 |
-| `fullscreen`  | `boolean`                               | `false` | 扩展面板以填满可用视口区域。                        |
-| `sheet`       | `boolean`                               | `false` | 应用底部 sheet 样式。                               |
-| `translucent` | `boolean`                               | `false` | 模糊并增强面板后方内容的色彩饱和度。                |
-| `instant`     | `boolean`                               | `false` | 禁用抽屉过渡动画。                                  |
+| 属性           | 类型                                    | 默认值  | 说明                                                   |
+| -------------- | --------------------------------------- | ------- | ------------------------------------------------------ |
+| `placement`    | `'start' \| 'end' \| 'top' \| 'bottom'` | `'end'` | 选择视口边缘。`start` 和 `end` 会根据文本方向调整。    |
+| `fullscreen`   | `boolean`                               | `false` | 扩展面板以填满可用视口区域。                           |
+| `sheet`        | `boolean`                               | `false` | 应用底部 sheet 样式。                                  |
+| `translucent`  | `boolean`                               | `false` | 模糊并增强面板后方内容的色彩饱和度。                   |
+| `instant`      | `boolean`                               | `false` | 禁用抽屉过渡动画。                                     |
+| `show`         | `boolean`                               | —       | 提供时控制原生模态对话框。                             |
+| `onShowChange` | `(show: boolean) => void`               | —       | Escape、点击背景、原生关闭或导航栏展开时请求更新状态。 |
 
 继承所选元素的原生属性及全部 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括
 `component` 和 `className`。

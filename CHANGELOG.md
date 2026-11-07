@@ -21,6 +21,7 @@
 
 ### Added
 
+- Add controlled React modal behavior to `Drawer` with `show` and `onShowChange`.
 - Add `MenuItemIcon` for menu item icon slots.
 - Add `MenuItemContent` and `MenuItemDescription` for menu item text and descriptions.
 - Add Floating UI-driven interactive menus with a trigger, positioning, dismissal and keyboard navigation.

@@ -48,13 +48,10 @@ import { NavbarExternalContentDemo } from './demos/external-content';
 ## 工作原理
 
 当**导航栏容器**达到指定宽度时，`expand` 将抽屉变为内联导航，而不是依据视口宽度。
-不带值的 `expand` 始终展开；省略时始终显示切换按钮。Bootstrap drawer 插件负责打开、
-关闭和焦点管理，`NavbarToggler` 只渲染标记。
-
-交互示例通过[此辅助函数](./use-drawer-cleanup.ts)加载 Bootstrap JavaScript bundle，并在
-卸载时销毁实例。应用中使用 `data-bs-toggle='drawer'` 前应加载 Bootstrap drawer
-JavaScript 或 bundle，并在移除元素时销毁实例。没有 JavaScript 时切换按钮无法打开抽屉，
-应提供其他导航方式。达到展开断点时，Bootstrap CSS 会以内联方式显示抽屉内容。
+不带值的 `expand` 始终展开；省略时始终显示切换按钮。示例通过 React 状态及
+`Drawer` 的 `show`、`onShowChange` 属性控制抽屉；`NavbarToggler` 只渲染标记，
+不需要 Bootstrap JavaScript。达到展开断点时，Bootstrap CSS 会以内联方式显示抽屉内容。
+没有 JavaScript 时切换按钮无法打开抽屉，应提供其他导航方式。
 
 ## 支持的内容
 
@@ -321,9 +318,9 @@ JavaScript 或 bundle，并在移除元素时销毁实例。没有 JavaScript �
 `role='navigation'`。用 `aria-controls` 将切换按钮关联到具有唯一 ID 的抽屉，
 为按钮提供无障碍名称并为抽屉设置标签。使用 `aria-current='page'` 标记当前页面。
 
-Bootstrap drawer 插件在折叠状态使用原生模态 `dialog`，包括焦点管理和 Escape 关闭。
-插件不会更新切换按钮上的 `aria-expanded`；如果应用设置该属性，应通过抽屉的 shown
-和 hidden 事件同步状态。行为和降级方案详见 [Drawer 文档](../drawer/README.zh.mdx)。
+受控抽屉使用原生模态 `dialog`，包括浏览器焦点管理和 Escape 关闭。应如示例所示，
+将切换按钮的 `aria-expanded` 与 React 状态同步。行为和降级方案详见
+[Drawer 文档](../drawer/README.zh.mdx)。
 
 ## API
 

@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import {
   CloseButton,
   Container,
@@ -13,21 +13,19 @@ import {
   NavLink,
 } from 'react-bootstrap-pro';
 
-import { useDrawerCleanup } from '../use-drawer-cleanup';
-
 export function NavbarNavLinksDemo() {
   const id = useId();
-  const ref = useDrawerCleanup();
+  const [show, setShow] = useState(false);
   return (
-    <div ref={ref}>
+    <div>
       <Navbar expand='sm' bg='1' fg='2' aria-label='Direct links navigation'>
         <Container fluid>
           <NavbarBrand href='#'>Navbar</NavbarBrand>
-          <NavbarToggler aria-controls={id} data-bs-toggle='drawer' data-bs-target={`#${id}`} />
-          <Drawer id={id} aria-labelledby={`${id}-title`}>
+          <NavbarToggler aria-controls={id} aria-expanded={show} onClick={() => setShow(true)} />
+          <Drawer show={show} onShowChange={setShow} id={id} aria-labelledby={`${id}-title`}>
             <DrawerHeader>
               <DrawerTitle id={`${id}-title`}>Menu</DrawerTitle>
-              <CloseButton data-bs-dismiss='drawer' />
+              <CloseButton onClick={() => setShow(false)} />
             </DrawerHeader>
             <DrawerBody>
               <NavbarNav component='div' className='nav-pills'>

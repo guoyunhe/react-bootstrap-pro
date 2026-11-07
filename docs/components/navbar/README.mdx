@@ -49,16 +49,12 @@ navigation, form, text, and a toggler linked to a [Drawer](../drawer/README.mdx)
 
 `expand` changes a drawer to inline navigation once the **navbar container**
 reaches the specified width, not the viewport width. `expand` without a value
-always expands; omit it to keep the toggler visible. The Bootstrap drawer
-plugin handles opening, closing and focus; `NavbarToggler` only renders markup.
-
-The interactive examples load the Bootstrap JavaScript bundle and dispose drawer
-instances on unmount using [this helper](./use-drawer-cleanup.ts). In an
-application, load Bootstrap's drawer JavaScript or bundle before using
-`data-bs-toggle='drawer'`, and dispose instances when removing their elements.
-Without that JavaScript the toggler does not open the drawer. Provide an
-alternative navigation path if JavaScript is unavailable. At the expanded
-breakpoint Bootstrap CSS displays the drawer contents inline.
+always expands; omit it to keep the toggler visible. The examples manage
+`Drawer` with React state and its `show` and `onShowChange` props;
+`NavbarToggler` itself only renders markup. No Bootstrap JavaScript is needed.
+At the expanded breakpoint Bootstrap CSS displays the drawer contents inline.
+Without JavaScript the toggler cannot open the drawer, so provide an alternative
+navigation path.
 
 ## Supported content
 
@@ -330,10 +326,9 @@ is not a `nav`, provide `role='navigation'`. Connect each toggler to a uniquely
 identified drawer with `aria-controls`, give it an accessible name, and label
 the drawer. Mark the current page with `aria-current='page'`.
 
-Bootstrap's drawer plugin uses a native modal `dialog` for the collapsed
-state, including focus management and Escape dismissal. It does not update
-`aria-expanded` on the toggler; if your application supplies that attribute,
-keep it synchronized with the drawer's shown and hidden events. See the
+The controlled drawer uses a native modal `dialog`, including browser focus
+management and Escape dismissal. Keep the toggler's `aria-expanded` synchronized
+with React state, as in the examples. See the
 [Drawer documentation](../drawer/README.mdx) for behavior and fallbacks.
 
 ## API

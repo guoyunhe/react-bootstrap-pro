@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import {
   CloseButton,
   Container,
@@ -14,20 +14,18 @@ import {
   NavLink,
 } from 'react-bootstrap-pro';
 
-import { useDrawerCleanup } from '../use-drawer-cleanup';
-
 export function NavbarTogglerHiddenBrandDemo() {
   const id = useId();
-  const ref = useDrawerCleanup();
+  const [show, setShow] = useState(false);
   return (
-    <div ref={ref}>
+    <div>
       <Navbar bg='1' fg='2'>
         <Container fluid>
-          <NavbarToggler aria-controls={id} data-bs-toggle='drawer' data-bs-target={`#${id}`} />
-          <Drawer id={id} aria-labelledby={`${id}-title`}>
+          <NavbarToggler aria-controls={id} aria-expanded={show} onClick={() => setShow(true)} />
+          <Drawer show={show} onShowChange={setShow} id={id} aria-labelledby={`${id}-title`}>
             <DrawerHeader>
               <DrawerTitle id={`${id}-title`}>Hidden brand</DrawerTitle>
-              <CloseButton data-bs-dismiss='drawer' />
+              <CloseButton onClick={() => setShow(false)} />
             </DrawerHeader>
             <DrawerBody>
               <NavbarBrand href='#'>Hidden brand</NavbarBrand>

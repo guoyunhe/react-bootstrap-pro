@@ -29,7 +29,12 @@ import { DrawerFooterDemo } from './demos/footer';
 `Drawer` renders a native `<dialog>` with Bootstrap drawer classes. It builds on
 the same native dialog behavior as [`Dialog`](../dialog/README.mdx#how-it-works)
 and uses Bootstrap's JavaScript plugin for its data API, swipe gestures, and
-transitions. The React component does not manage open state.
+transitions for the data-API examples below. Alternatively, pass `show` and
+`onShowChange` to control a native modal drawer with React, without the plugin.
+The controlled mode closes on Escape or backdrop click and closes an open
+drawer when its containing navbar expands. It does not implement the plugin's
+swipe gestures, data attributes, or nonmodal options. Do not initialize the
+Bootstrap plugin on a React-controlled drawer.
 
 The default placement is `end`; use `start`, `top`, or `bottom` to select
 another viewport edge. `start` and `end` follow the document's text direction.
@@ -364,13 +369,15 @@ the transition finishes.
 Renders a native `<dialog>` by default. `component` can override the element;
 when doing so, the replacement must support the dialog behavior you use.
 
-| Prop          | Type                                    | Default | Description                                                             |
-| ------------- | --------------------------------------- | ------- | ----------------------------------------------------------------------- |
-| `placement`   | `'start' \| 'end' \| 'top' \| 'bottom'` | `'end'` | Selects the viewport edge. `start` and `end` follow the text direction. |
-| `fullscreen`  | `boolean`                               | `false` | Expands the panel to the available viewport area.                       |
-| `sheet`       | `boolean`                               | `false` | Applies the bottom-sheet presentation.                                  |
-| `translucent` | `boolean`                               | `false` | Blurs and saturates content behind the panel.                           |
-| `instant`     | `boolean`                               | `false` | Disables drawer transitions.                                            |
+| Prop           | Type                                    | Default | Description                                                                           |
+| -------------- | --------------------------------------- | ------- | ------------------------------------------------------------------------------------- |
+| `placement`    | `'start' \| 'end' \| 'top' \| 'bottom'` | `'end'` | Selects the viewport edge. `start` and `end` follow the text direction.               |
+| `fullscreen`   | `boolean`                               | `false` | Expands the panel to the available viewport area.                                     |
+| `sheet`        | `boolean`                               | `false` | Applies the bottom-sheet presentation.                                                |
+| `translucent`  | `boolean`                               | `false` | Blurs and saturates content behind the panel.                                         |
+| `instant`      | `boolean`                               | `false` | Disables drawer transitions.                                                          |
+| `show`         | `boolean`                               | —       | Controls the native modal dialog when provided.                                       |
+| `onShowChange` | `(show: boolean) => void`               | —       | Requests a state change on Escape, backdrop click, native close, or navbar expansion. |
 
 Inherits native props for the selected element and all [`Box`](../box/README.mdx#api)
 utility props, including `component` and `className`.

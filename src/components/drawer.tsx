@@ -1,5 +1,13 @@
 import clsx from 'clsx';
-import type { ElementType } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  type ComponentRef,
+  type ElementType,
+  type MouseEvent,
+} from 'react';
 
 import { Box } from './box';
 import type { BoxProps } from './box';
@@ -12,6 +20,8 @@ export type DrawerProps<C extends ElementType = 'dialog'> = Omit<
     placement?: 'start' | 'end' | 'top' | 'bottom' | undefined;
     sheet?: boolean | undefined;
     translucent?: boolean | undefined;
+    show?: boolean | undefined;
+    onShowChange?: ((show: boolean) => void) | undefined;
   }
 > & {
   fullscreen?: boolean | undefined;
@@ -19,6 +29,8 @@ export type DrawerProps<C extends ElementType = 'dialog'> = Omit<
   placement?: 'start' | 'end' | 'top' | 'bottom' | undefined;
   sheet?: boolean | undefined;
   translucent?: boolean | undefined;
+  show?: boolean | undefined;
+  onShowChange?: ((show: boolean) => void) | undefined;
 };
 
 export function Drawer<C extends ElementType = 'dialog'>({
@@ -29,11 +41,111 @@ export function Drawer<C extends ElementType = 'dialog'>({
   placement = 'end',
   sheet,
   translucent,
+  show,
+  onShowChange,
+  ref: forwardedRef,
+  onClick,
   ...props
 }: DrawerProps<C>) {
+  const drawerRef = useRef<ComponentRef<C>>(null);
+  const pendingCloseEvents = useRef(0);
+  const controlled = show !== undefined;
+  useImperativeHandle(forwardedRef, () => drawerRef.current!);
+
+  const close = useCallback(() => {
+    onShowChange?.(false);
+  }, [onShowChange]);
+
+  useEffect(() => {
+    const dialog = drawerRef.current;
+    if (show === undefined || !dialog) return;
+    if (!(dialog instanceof HTMLDialogElement)) {
+      throw new TypeError('A controlled Drawer must render a native dialog element.');
+    }
+    if (show && !dialog.open) {
+      dialog.showModal();
+      document.documentElement.classList.add('dialog-open');
+    } else if (!show && dialog.open) {
+      pendingCloseEvents.current += 1;
+      dialog.close();
+      if (!document.querySelector('dialog[open]:modal')) {
+        document.documentElement.classList.remove('dialog-open');
+      }
+    }
+  }, [show]);
+
+  useEffect(() => {
+    const dialog = drawerRef.current;
+    if (show === undefined || !(dialog instanceof HTMLDialogElement)) return;
+    const onCancel = (event: Event) => {
+      event.preventDefault();
+      close();
+    };
+    const onNativeClose = () => {
+      if (!document.querySelector('dialog[open]:modal')) {
+        document.documentElement.classList.remove('dialog-open');
+      }
+      if (pendingCloseEvents.current) {
+        pendingCloseEvents.current -= 1;
+        return;
+      }
+      if (show) close();
+    };
+    dialog.addEventListener('cancel', onCancel);
+    dialog.addEventListener('close', onNativeClose);
+    return () => {
+      dialog.removeEventListener('cancel', onCancel);
+      dialog.removeEventListener('close', onNativeClose);
+    };
+  }, [show, close]);
+
+  useEffect(() => {
+    const dialog = drawerRef.current;
+    if (!controlled || !(dialog instanceof HTMLDialogElement)) return;
+    const navbar = dialog.closest('.navbar');
+    if (!navbar) return;
+    const update = () => {
+      if (dialog.open && getComputedStyle(dialog).position !== 'fixed') close();
+    };
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(update);
+    observer?.observe(navbar);
+    window.addEventListener('resize', update);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', update);
+    };
+  }, [controlled, close]);
+
+  useEffect(() => {
+    const dialog = drawerRef.current;
+    if (!controlled || !(dialog instanceof HTMLDialogElement)) return;
+    return () => {
+      if (dialog.open) {
+        pendingCloseEvents.current += 1;
+        dialog.close();
+      }
+      if (!document.querySelector('dialog[open]:modal')) {
+        document.documentElement.classList.remove('dialog-open');
+      }
+    };
+  }, [controlled]);
+
   return (
     <Box<C>
       {...(props as BoxProps<C>)}
+      ref={drawerRef}
+      onClick={(event: MouseEvent<HTMLElement>) => {
+        if (typeof onClick === 'function') onClick(event);
+        if (event.defaultPrevented || !show || event.target !== event.currentTarget) return;
+        const bounds = event.currentTarget.getBoundingClientRect();
+        if (
+          event.clientX < bounds.left ||
+          event.clientX > bounds.right ||
+          event.clientY < bounds.top ||
+          event.clientY > bounds.bottom
+        )
+          close();
+      }}
       component={component ?? ('dialog' as C)}
       classNameBefore={clsx(
         'drawer',

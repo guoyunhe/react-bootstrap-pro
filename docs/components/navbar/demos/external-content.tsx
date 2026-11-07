@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import {
   CloseButton,
   Container,
@@ -10,23 +10,28 @@ import {
   NavbarToggler,
 } from 'react-bootstrap-pro';
 
-import { useDrawerCleanup } from '../use-drawer-cleanup';
-
 export function NavbarExternalContentDemo() {
   const id = useId();
-  const ref = useDrawerCleanup();
+  const [show, setShow] = useState(false);
   return (
-    <div ref={ref}>
-      <Drawer id={id} placement='top' data-bs-theme='dark' aria-labelledby={`${id}-title`}>
+    <div>
+      <Drawer
+        show={show}
+        onShowChange={setShow}
+        id={id}
+        placement='top'
+        data-bs-theme='dark'
+        aria-labelledby={`${id}-title`}
+      >
         <DrawerHeader>
           <DrawerTitle id={`${id}-title`}>Collapsed content</DrawerTitle>
-          <CloseButton data-bs-dismiss='drawer' />
+          <CloseButton onClick={() => setShow(false)} />
         </DrawerHeader>
         <DrawerBody>Toggleable via the navbar toggler.</DrawerBody>
       </Drawer>
       <Navbar bg='body' data-bs-theme='dark'>
         <Container fluid>
-          <NavbarToggler aria-controls={id} data-bs-toggle='drawer' data-bs-target={`#${id}`} />
+          <NavbarToggler aria-controls={id} aria-expanded={show} onClick={() => setShow(true)} />
         </Container>
       </Navbar>
     </div>
