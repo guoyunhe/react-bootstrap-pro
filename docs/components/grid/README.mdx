@@ -3,150 +3,289 @@ title: Grid
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Col, Container, Row } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { GridBasicDemo } from './demos/basic';
+import { GridEqualWidthDemo } from './demos/equal-width';
+import { GridColumnWidthDemo } from './demos/column-width';
+import { GridVariableWidthDemo } from './demos/variable-width';
+import { GridAllBreakpointsDemo } from './demos/all-breakpoints';
+import { GridStackedDemo } from './demos/stacked';
+import { GridMixMatchDemo } from './demos/mix-match';
+import { GridRowColsTwoDemo } from './demos/row-cols-two';
+import { GridRowColsThreeDemo } from './demos/row-cols-three';
+import { GridRowColsAutoDemo } from './demos/row-cols-auto';
+import { GridRowColsFourDemo } from './demos/row-cols-four';
+import { GridRowColsOverrideDemo } from './demos/row-cols-override';
+import { GridRowColsResponsiveDemo } from './demos/row-cols-responsive';
+import { GridNestingDemo } from './demos/nesting';
 import { ColumnFeaturesDemo } from './demos/column-features';
-import { GridLayoutsDemo } from './demos/grid-layouts';
 
 # Grid
 
-`Row` and `Col` compose Bootstrap 6's responsive, flexbox-based grid. The grid
-uses 12 columns per row; place columns inside a row and rows inside a
-[`Container`](../container/). Import Bootstrap's stylesheet once in your
-application before using these components.
+`Row` and `Col` compose Bootstrap 6's responsive flexbox grid. Import Bootstrap's
+stylesheet once in your application.
 
 ## Example
 
-The basic grid uses rows and columns that share the available width.
-
-## Responsive layout
-
-Use `Row`'s `cols` prop to set the number of equal-width columns, or set each
-`Col`'s `span` to control how many of the 12 grid columns it occupies. Values
-can be a single number for all viewports or an object keyed by breakpoint.
+Place columns inside a row and rows inside a [`Container`](../container/). This
+example has three equal-width columns at every viewport.
 
 <DemoContainer>
-  <Container fluid>
-    <GridLayoutsDemo />
-  </Container>
+  <GridBasicDemo />
 </DemoContainer>
 
-```tsx src='./demos/grid-layouts.tsx'
+```tsx src='./demos/basic.tsx'
 
 ```
 
-The breakpoint keys are `xs`, `sm`, `md`, `lg`, `xl`, and `2xl`. `xs` maps to
-the unprefixed class, while later breakpoints use Bootstrap 6's `sm:`, `md:`,
-`lg:`, `xl:`, or `2xl:` prefix.
+## How it works
 
-## Columns
+Rows use negative margins to balance the horizontal gutter padding on their
+columns. The grid has 12 columns per row; numbered spans use proportions of
+that width. Columns wrap when their widths exceed the available space.
+Breakpoints use minimum widths, so a value applies at its breakpoint and above
+until overridden. Use [`Container`](../container/) for responsive widths or
+`fluid` for full width.
 
-`Col` renders `.col` by default. Use `span='auto'` for content-sized columns,
-and set `offset` or `order` to position or reorder a column at selected
-breakpoints. Columns wrap when their combined widths exceed 12 grid columns.
+## Grid options
+
+Responsive props accept a single value or an object keyed by `xs`, `sm`, `md`,
+`lg`, `xl`, and `2xl`. `xs` generates an unprefixed class; other breakpoints
+generate classes such as `md:col-6`.
+
+| Breakpoint | Minimum width |
+| ---------- | ------------- |
+| `xs`       | 0             |
+| `sm`       | 576px         |
+| `md`       | 768px         |
+| `lg`       | 1024px        |
+| `xl`       | 1280px        |
+| `2xl`      | 1536px        |
+
+These are Bootstrap's defaults and can differ in a customized stylesheet.
+
+## Auto-layout columns
+
+### Equal width
+
+Columns without a `span` share the row equally.
 
 <DemoContainer>
-  <Container fluid>
-    <ColumnFeaturesDemo />
-  </Container>
+  <GridEqualWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/equal-width.tsx'
+
+```
+
+### Setting one column width
+
+Give one column a numbered `span`; its siblings share the remaining space.
+
+<DemoContainer>
+  <GridColumnWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/column-width.tsx'
+
+```
+
+### Variable width content
+
+Use `span='auto'` or a responsive `auto` value to size a column to its content.
+
+<DemoContainer>
+  <GridVariableWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/variable-width.tsx'
+
+```
+
+## Responsive classes
+
+### All breakpoints
+
+Use a single `span` value to apply a width at every breakpoint.
+
+<DemoContainer>
+  <GridAllBreakpointsDemo />
+</DemoContainer>
+
+```tsx src='./demos/all-breakpoints.tsx'
+
+```
+
+### Stacked to horizontal
+
+Specify only `sm` to stack columns below that breakpoint. Use `true` for an
+equal-width column beginning at a breakpoint.
+
+<DemoContainer>
+  <GridStackedDemo />
+</DemoContainer>
+
+```tsx src='./demos/stacked.tsx'
+
+```
+
+### Mix and match
+
+Combine breakpoint values to change column widths as the viewport grows.
+
+<DemoContainer>
+  <GridMixMatchDemo />
+</DemoContainer>
+
+```tsx src='./demos/mix-match.tsx'
+
+```
+
+### Row columns
+
+Set `cols` on a row to control the number of equal-width columns. A value of
+`'auto'` sizes them to their content.
+
+<DemoContainer>
+  <GridRowColsTwoDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-two.tsx'
+
+```
+
+<DemoContainer>
+  <GridRowColsThreeDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-three.tsx'
+
+```
+
+<DemoContainer>
+  <GridRowColsAutoDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-auto.tsx'
+
+```
+
+<DemoContainer>
+  <GridRowColsFourDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-four.tsx'
+
+```
+
+An individual `span` can override the row's column width.
+
+<DemoContainer>
+  <GridRowColsOverrideDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-override.tsx'
+
+```
+
+Use breakpoint values to change the number of columns responsively.
+
+<DemoContainer>
+  <GridRowColsResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-responsive.tsx'
+
+```
+
+## Nesting
+
+Place a new `Row` and its columns inside an existing `Col`. Nested column spans
+should add up to 12 or fewer.
+
+<DemoContainer>
+  <GridNestingDemo />
+</DemoContainer>
+
+```tsx src='./demos/nesting.tsx'
+
+```
+
+## Alignment, wrapping and reordering
+
+Use `alignItems` and `justifyContent` on a row, or `alignSelf` on a column.
+Columns wrap when their widths exceed 12. A full-width element can force a
+break; responsive display utilities can make it conditional. Use `order` to
+change visual order and `offset` to add space before a column. Set an offset
+to `0` at a later breakpoint to reset it; margin utilities such as `ms-auto`
+can also distribute space.
+
+<DemoContainer>
+  <ColumnFeaturesDemo />
 </DemoContainer>
 
 ```tsx src='./demos/column-features.tsx'
 
 ```
 
-## Alignment
-
-Set `alignItems` on a row to vertically align all its columns, and
-`justifyContent` to distribute columns horizontally. Set `alignSelf` on an
-individual column to override the row's vertical alignment. All three props
-accept responsive values. `alignItems` and `alignSelf` support `start`,
-`center`, `end`, `baseline`, and `stretch`; `alignSelf` also supports `auto`.
-`justifyContent` supports `start`, `center`, `end`, `around`, `between`, and
-`evenly`.
-
-## Column wrapping and breaks
-
-Columns wrap naturally when their widths exceed the 12-column row. To start a
-new line at a specific point, add a full-width element. Use responsive display
-utilities to make the break conditional:
-
-```tsx
-<Row>
-  <Col span={{ xs: 6, sm: 3 }}>First column</Col>
-  <Col span={{ xs: 6, sm: 3 }}>Second column</Col>
-  <Box w={100} d={{ xs: 'none', md: 'block' }} aria-hidden='true' />
-  <Col span={{ xs: 6, sm: 3 }}>Third column</Col>
-  <Col span={{ xs: 6, sm: 3 }}>Fourth column</Col>
-</Row>
-```
-
-## Reordering
-
-Use `order` to change the visual order at selected breakpoints. Available
-utilities include numbers `1` through `5`, `first`, and `last`. Visual order
-does not change DOM order, so keep the source order meaningful for keyboard and
-screen-reader users.
-
-## Offsetting
-
-Use `offset` to move a column to the right by a number of grid columns. Set a
-responsive offset to `0` to reset it at a later breakpoint. For flexible
-spacing, Bootstrap margin utilities such as `ms-auto` can be passed through
-`className`.
-
-## Standalone columns
-
-`Col` can also be used outside a `Row` to apply a responsive width. In that
-case, Bootstrap does not apply the row's gutter padding.
+`Col` can also be used outside a `Row` as a width utility, without the row's
+gutter padding. See the [upstream columns documentation](https://getbootstrap.com/docs/6.0/layout/columns/)
+for additional alignment, wrapping and offset examples.
 
 ## Gutters
 
-Rows use Bootstrap's gutter utilities for horizontal and vertical spacing.
-`gutter` sets both directions, while `gutterX` and `gutterY` control them
-independently. Values from `0` to `5` use Bootstrap's predefined spacing scale;
-responsive values can use the same breakpoint object as column sizes.
+`gutter`, `gutterX`, and `gutterY` set both directions, horizontal spacing, and
+vertical spacing respectively. Bootstrap's default spacing scale is `0`–`5`;
+these props also accept breakpoint objects. Large gutters can overflow their
+container: adjust its padding or use an overflow wrapper. See the
+[upstream gutters documentation](https://getbootstrap.com/docs/6.0/layout/gutters/).
 
 ## API
 
 ### Row
 
-| Prop             | Type                                 | Default | Description                                                                                       |
-| ---------------- | ------------------------------------ | ------- | ------------------------------------------------------------------------------------------------- |
-| `alignItems`     | `GridResponsive<GridAlignItems>`     | —       | Sets responsive vertical alignment for the row's columns.                                         |
-| `cols`           | `GridResponsive<number \| 'auto'>`   | —       | Sets `.row-cols-*`; a number applies at all sizes, or a breakpoint object sets responsive counts. |
-| `gutter`         | `GridResponsive<number>`             | —       | Sets horizontal and vertical gutters using `.g-*` classes.                                        |
-| `gutterX`        | `GridResponsive<number>`             | —       | Sets horizontal gutters using `.gx-*` classes.                                                    |
-| `gutterY`        | `GridResponsive<number>`             | —       | Sets vertical gutters using `.gy-*` classes.                                                      |
-| `justifyContent` | `GridResponsive<GridJustifyContent>` | —       | Sets responsive horizontal distribution of columns.                                               |
-| `component`      | `C extends ElementType`              | `'div'` | Native element or React component to render.                                                      |
-| `className`      | `string`                             | —       | Additional class names.                                                                           |
-| `...props`       | `BoxProps<C>`                        | —       | Native props of the selected component, plus every [`Box`](../box/) utility prop.                 |
+Renders a `div` by default. Its own props are listed below; it also inherits
+native props for the selected element and [`Box`](../box/README.mdx#api)
+utility props, including `component`.
+
+| Prop             | Type                                 | Description                                  |
+| ---------------- | ------------------------------------ | -------------------------------------------- |
+| `alignItems`     | `GridResponsive<GridAlignItems>`     | Sets vertical column alignment.              |
+| `cols`           | `GridResponsive<number \| 'auto'>`   | Sets the number or natural width of columns. |
+| `gutter`         | `GridResponsive<number>`             | Sets horizontal and vertical gutters.        |
+| `gutterX`        | `GridResponsive<number>`             | Sets horizontal gutters.                     |
+| `gutterY`        | `GridResponsive<number>`             | Sets vertical gutters.                       |
+| `justifyContent` | `GridResponsive<GridJustifyContent>` | Sets horizontal column distribution.         |
 
 ### Col
 
-| Prop        | Type                                          | Default | Description                                                   |
-| ----------- | --------------------------------------------- | ------- | ------------------------------------------------------------- |
-| `alignSelf` | `GridResponsive<GridAlignSelf>`               | —       | Overrides the row's vertical alignment for this column.       |
-| `span`      | `GridResponsive<number \| 'auto'>`            | `.col`  | Sets the column width with `.col-*`; `auto` sizes to content. |
-| `offset`    | `GridResponsive<number>`                      | —       | Adds `.offset-*` to move the column to the right.             |
-| `order`     | `GridResponsive<number \| 'first' \| 'last'>` | —       | Sets the visual order with `.order-*` classes.                |
-| `component` | `C extends ElementType`                       | `'div'` | Native element or React component to render.                  |
-| `className` | `string`                                      | —       | Additional class names.                                       |
-| `...props`  | `BoxProps<C>`                                 | —       | Native props plus every [`Box`](../box/) utility prop.        |
+Renders a `div` by default. Its own props are listed below; it also inherits
+native props for the selected element and [`Box`](../box/README.mdx#api)
+utility props, including `component`.
 
-`Row` and `Col` extend `BoxProps`, so [`Box`](../box/) utility props such as
-`bg`, `fg`, `theme`, and `colorScheme` are available on both components.
+| Prop        | Type                                          | Description                                                               |
+| ----------- | --------------------------------------------- | ------------------------------------------------------------------------- |
+| `alignSelf` | `GridResponsive<GridAlignSelf>`               | Overrides row alignment for this column.                                  |
+| `span`      | `GridResponsive<number \| 'auto' \| true>`    | Sets width; `auto` fits content, `true` shares space. Defaults to `.col`. |
+| `offset`    | `GridResponsive<number>`                      | Adds a column offset.                                                     |
+| `order`     | `GridResponsive<number \| 'first' \| 'last'>` | Sets visual order.                                                        |
 
-`GridResponsive<T>` accepts either a value applied at every breakpoint or an
-object with `xs`, `sm`, `md`, `lg`, `xl`, and `2xl` keys.
+`GridResponsive<T>` is a value or an object with breakpoint keys.
+`GridAlignItems` accepts `'start'`, `'center'`, `'end'`, `'baseline'`, or
+`'stretch'`; `GridAlignSelf` also accepts `'auto'`. `GridJustifyContent` accepts
+`'start'`, `'center'`, `'end'`, `'around'`, `'between'`, or `'evenly'`.
+Bootstrap's default order utilities support `1`–`5`, `first`, and `last`.
+Numeric props generate class names; available classes depend on the Bootstrap
+stylesheet and its configuration.
 
 ## Accessibility
 
-Use a meaningful DOM order and do not rely on visual column reordering to
-communicate sequence. Prefer semantic elements for content placed in columns.
+Use meaningful DOM order and semantic elements. Visual `order` does not change
+keyboard or screen-reader order.
 
 ## See
 
-- [Bootstrap 6 Grid documentation](https://getbootstrap.com/docs/6.0/layout/grid/)
-- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/grid.tsx)
+- [Bootstrap 6 grid documentation](https://getbootstrap.com/docs/6.0/layout/grid/)
+- [Bootstrap 6 columns documentation](https://getbootstrap.com/docs/6.0/layout/columns/)
+- [Bootstrap 6 gutters documentation](https://getbootstrap.com/docs/6.0/layout/gutters/)
+- [Grid source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/grid.tsx)

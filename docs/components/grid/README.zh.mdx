@@ -3,187 +3,273 @@ title: Grid 网格
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Col, Container, Row } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { GridBasicDemo } from './demos/basic';
+import { GridEqualWidthDemo } from './demos/equal-width';
+import { GridColumnWidthDemo } from './demos/column-width';
+import { GridVariableWidthDemo } from './demos/variable-width';
+import { GridAllBreakpointsDemo } from './demos/all-breakpoints';
+import { GridStackedDemo } from './demos/stacked';
+import { GridMixMatchDemo } from './demos/mix-match';
+import { GridRowColsTwoDemo } from './demos/row-cols-two';
+import { GridRowColsThreeDemo } from './demos/row-cols-three';
+import { GridRowColsAutoDemo } from './demos/row-cols-auto';
+import { GridRowColsFourDemo } from './demos/row-cols-four';
+import { GridRowColsOverrideDemo } from './demos/row-cols-override';
+import { GridRowColsResponsiveDemo } from './demos/row-cols-responsive';
+import { GridNestingDemo } from './demos/nesting';
 import { ColumnFeaturesDemo } from './demos/column-features';
-import { GridLayoutsDemo } from './demos/grid-layouts';
 
 # Grid 网格
 
-`Row` 和 `Col` 组合使用 Bootstrap 6 的响应式 Flexbox 网格。每行包含 12 个网格
-列；将列放入行中，并将行放入 [`Container`](../container/) 中。使用组件前，需要在
-应用中引入一次 Bootstrap 样式表。
+`Row` 和 `Col` 组合使用 Bootstrap 6 的响应式 Flexbox 网格。使用前请在应用中引入
+一次 Bootstrap 样式表。
 
-## 响应式布局
+## 示例
 
-使用 `Row` 的 `cols` 属性设置等宽列的数量，或通过 `Col` 的 `span` 属性设置其
-占据的网格列数。属性值可以是应用于所有视口的单个数字，也可以是按断点设置的对象。
+将列放入行中，并将行放入 [`Container`](../container/) 中。此示例在所有视口中
+显示三个等宽列。
 
 <DemoContainer>
-  <Container fluid>
-    <GridLayoutsDemo />
-  </Container>
+  <GridBasicDemo />
 </DemoContainer>
 
-```tsx src='./demos/grid-layouts.tsx'
-<Row cols={{ xs: 1, sm: 2, md: 4 }} gutter={3}>
-  <Col>第一列</Col>
-  <Col>第二列</Col>
-  <Col>第三列</Col>
-  <Col>第四列</Col>
-</Row>
+```tsx src='./demos/basic.tsx'
 
-<Row gutter={3}>
-  <Col span={{ xs: 12, md: 8 }}>主要内容</Col>
-  <Col span={{ xs: 12, md: 4 }}>侧边栏</Col>
-</Row>
 ```
 
-断点键包括 `xs`、`sm`、`md`、`lg`、`xl` 和 `2xl`。`xs` 对应无前缀的类名，其他断点
-则使用 Bootstrap 6 的 `sm:`、`md:`、`lg:`、`xl:` 或 `2xl:` 前缀。
+## 工作原理
 
-## 列
+行使用负外边距抵消列的水平 gutter 内边距。网格每行有 12 个网格列；数字跨度表示
+其占用的宽度比例。列宽之和超过可用空间时会换行。断点基于最小宽度，属性值从该断点
+开始生效，直到被覆盖。使用 [`Container`](../container/) 设置响应式宽度，或使用
+`fluid` 设置全宽。
 
-`Col` 默认渲染为 `.col`。使用 `span='auto'` 可让列宽度适应内容；设置 `offset` 或
-`order` 可在指定断点调整列的位置或顺序。列宽之和超过一行的 12 个网格列时，会自动换行。
+## 网格选项
+
+响应式属性接受单个值，或以 `xs`、`sm`、`md`、`lg`、`xl`、`2xl` 为键的对象。
+`xs` 生成无前缀的类，其他断点生成 `md:col-6` 等类。
+
+| 断点  | 最小宽度 |
+| ----- | -------- |
+| `xs`  | 0        |
+| `sm`  | 576px    |
+| `md`  | 768px    |
+| `lg`  | 1024px   |
+| `xl`  | 1280px   |
+| `2xl` | 1536px   |
+
+这些是 Bootstrap 的默认值，自定义样式表可能不同。
+
+## 自动布局列
+
+### 等宽
+
+不设置 `span` 的列会均分行的宽度。
 
 <DemoContainer>
-  <Container fluid>
-    <ColumnFeaturesDemo />
-  </Container>
+  <GridEqualWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/equal-width.tsx'
+
+```
+
+### 设置单列宽度
+
+为一列设置数字 `span`，其余列均分剩余空间。
+
+<DemoContainer>
+  <GridColumnWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/column-width.tsx'
+
+```
+
+### 根据内容调整宽度
+
+使用 `span='auto'` 或响应式 `auto` 值，使列宽适应内容。
+
+<DemoContainer>
+  <GridVariableWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/variable-width.tsx'
+
+```
+
+## 响应式类
+
+### 所有断点
+
+使用单个 `span` 值，在所有断点应用相同宽度。
+
+<DemoContainer>
+  <GridAllBreakpointsDemo />
+</DemoContainer>
+
+```tsx src='./demos/all-breakpoints.tsx'
+
+```
+
+### 从堆叠到水平排列
+
+只设置 `sm`，使列在该断点以下堆叠。使用 `true` 从指定断点开始设置等宽列。
+
+<DemoContainer>
+  <GridStackedDemo />
+</DemoContainer>
+
+```tsx src='./demos/stacked.tsx'
+
+```
+
+### 混合使用
+
+组合不同断点的值，随视口增大调整列宽。
+
+<DemoContainer>
+  <GridMixMatchDemo />
+</DemoContainer>
+
+```tsx src='./demos/mix-match.tsx'
+
+```
+
+### 行列数
+
+在行上设置 `cols` 可控制等宽列的数量。值为 `'auto'` 时列宽适应内容。
+
+<DemoContainer>
+  <GridRowColsTwoDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-two.tsx'
+
+```
+
+<DemoContainer>
+  <GridRowColsThreeDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-three.tsx'
+
+```
+
+<DemoContainer>
+  <GridRowColsAutoDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-auto.tsx'
+
+```
+
+<DemoContainer>
+  <GridRowColsFourDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-four.tsx'
+
+```
+
+单列的 `span` 可以覆盖行设置的列宽。
+
+<DemoContainer>
+  <GridRowColsOverrideDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-override.tsx'
+
+```
+
+使用断点值可响应式调整列数。
+
+<DemoContainer>
+  <GridRowColsResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/row-cols-responsive.tsx'
+
+```
+
+## 嵌套
+
+在已有的 `Col` 内放入新的 `Row` 和列。嵌套列的跨度之和应不超过 12。
+
+<DemoContainer>
+  <GridNestingDemo />
+</DemoContainer>
+
+```tsx src='./demos/nesting.tsx'
+
+```
+
+## 对齐、换行与排序
+
+使用行的 `alignItems` 和 `justifyContent`，或列的 `alignSelf` 设置对齐。列宽之和
+超过 12 时会换行；全宽元素可强制换行，响应式显示工具类可控制其生效断点。使用
+`order` 改变视觉顺序，使用 `offset` 在列前添加间距。可在后续断点将偏移设为 `0`
+以重置，也可使用 `ms-auto` 等 margin 工具类分配空间。
+
+<DemoContainer>
+  <ColumnFeaturesDemo />
 </DemoContainer>
 
 ```tsx src='./demos/column-features.tsx'
-<Row>
-  <Col span='auto'>自然宽度</Col>
-  <Col span={{ xs: 12, md: 6 }} offset={{ md: 3 }}>
-    从中等断点开始居中
-  </Col>
-  <Col order={{ xs: 'last', md: 'first' }}>响应式顺序</Col>
-</Row>
+
 ```
 
-## 对齐
-
-在行上设置 `alignItems` 可垂直对齐所有列，设置 `justifyContent` 可水平分布列。在单独
-的列上设置 `alignSelf` 可覆盖行的垂直对齐方式。这些属性都支持响应式值。
-`alignItems` 和 `alignSelf` 支持 `start`、`center`、`end`、`baseline` 和 `stretch`；
-`alignSelf` 还支持 `auto`。`justifyContent` 支持 `start`、`center`、`end`、`around`、
-`between` 和 `evenly`。
-
-```tsx
-<Row
-  alignItems={{ xs: 'start', md: 'center' }}
-  justifyContent='between'
-  style={{ minHeight: '8rem' }}
->
-  <Col>跟随行对齐</Col>
-  <Col alignSelf='end'>单独对齐</Col>
-</Row>
-```
-
-## 列换行与断列
-
-列宽之和超过 12 列时会自动换行。如需在指定位置开始新行，可插入一个全宽元素；还可以
-使用响应式显示工具类控制断点：
-
-```tsx
-<Row>
-  <Col span={{ xs: 6, sm: 3 }}>第一列</Col>
-  <Col span={{ xs: 6, sm: 3 }}>第二列</Col>
-  <Box w={100} d={{ xs: 'none', md: 'block' }} aria-hidden='true' />
-  <Col span={{ xs: 6, sm: 3 }}>第三列</Col>
-  <Col span={{ xs: 6, sm: 3 }}>第四列</Col>
-</Row>
-```
-
-## 调整顺序
-
-使用 `order` 在指定断点更改列的视觉顺序。支持 `1` 至 `5`、`first` 和 `last`。视觉顺序
-不会改变 DOM 顺序，因此请保留适用于键盘和屏幕阅读器的合理源代码顺序。
-
-```tsx
-<Row>
-  <Col order={{ xs: 'last', md: 'first' }}>DOM 中的第一列</Col>
-  <Col>DOM 中的第二列</Col>
-  <Col order={{ xs: 1, md: 5 }}>DOM 中的第三列</Col>
-</Row>
-```
-
-## 偏移
-
-使用 `offset` 按网格列数将列向右移动。后续断点可将偏移设为 `0` 以重置。需要灵活间距时，
-可通过 `className` 添加 `ms-auto` 等 Bootstrap margin 工具类。
-
-```tsx
-<Row>
-  <Col span={{ sm: 5, md: 6 }}>第一列</Col>
-  <Col span={{ sm: 5, md: 6 }} offset={{ sm: 2, md: 0 }}>
-    响应式偏移
-  </Col>
-</Row>
-<Row>
-  <Col span='auto'>自然宽度</Col>
-  <Col span='auto' className='ms-auto'>推到末尾</Col>
-</Row>
-```
-
-## 独立列
-
-`Col` 也可以在 `Row` 外部使用，以设置响应式宽度。此时 Bootstrap 不会应用行提供的
-gutter 内边距。
-
-```tsx
-<Col span={{ xs: 6, md: 3 }} className='border' p={3}>
-  独立列
-</Col>
-```
+`Col` 也可在 `Row` 外作为宽度工具使用，此时没有行提供的 gutter 内边距。更多对齐、
+换行和偏移示例请参阅[上游列文档](https://getbootstrap.com/docs/6.0/layout/columns/)。
 
 ## 间距
 
-行使用 Bootstrap gutter 工具类控制列之间的水平和垂直间距。`gutter` 同时设置两个
-方向，`gutterX` 和 `gutterY` 则分别控制。`0` 到 `5` 使用 Bootstrap 预设间距；
-也可以像列宽一样按断点设置响应式间距。
-
-```tsx
-<Row gutter={{ xs: 2, md: 4 }} gutterY={3}>
-  <Col>第一列</Col>
-  <Col>第二列</Col>
-</Row>
-```
+`gutter`、`gutterX` 和 `gutterY` 分别设置双向、水平和垂直间距。Bootstrap 默认
+间距级别为 `0`–`5`；这些属性也接受断点对象。较大的 gutter 可能溢出容器，可以调整
+容器内边距或使用控制溢出的外层容器。详见[上游间距文档](https://getbootstrap.com/docs/6.0/layout/gutters/)。
 
 ## API
 
 ### Row
 
-| 属性             | 类型                                 | 默认值  | 说明                                                                       |
-| ---------------- | ------------------------------------ | ------- | -------------------------------------------------------------------------- |
-| `alignItems`     | `GridResponsive<GridAlignItems>`     | —       | 设置行内列的响应式垂直对齐方式。                                           |
-| `cols`           | `GridResponsive<number \| 'auto'>`   | —       | 设置 `.row-cols-*`；数字应用于所有尺寸，也可以使用断点对象设置响应式列数。 |
-| `gutter`         | `GridResponsive<number>`             | —       | 使用 `.g-*` 类同时设置水平和垂直间距。                                     |
-| `gutterX`        | `GridResponsive<number>`             | —       | 使用 `.gx-*` 类设置水平间距。                                              |
-| `gutterY`        | `GridResponsive<number>`             | —       | 使用 `.gy-*` 类设置垂直间距。                                              |
-| `justifyContent` | `GridResponsive<GridJustifyContent>` | —       | 设置列的响应式水平分布方式。                                               |
-| `component`      | `C extends ElementType`              | `'div'` | 渲染的原生元素或 React 组件。                                              |
-| `className`      | `string`                             | —       | 额外的类名。                                                               |
-| `...props`       | `BoxProps<C>`                        | —       | 所选组件的原生属性，以及全部 [`Box`](../box/) 工具类属性。                 |
+默认渲染为 `div`。下表列出自有属性；此外继承所选元素的原生属性和
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
+
+| 属性             | 类型                                 | 说明                   |
+| ---------------- | ------------------------------------ | ---------------------- |
+| `alignItems`     | `GridResponsive<GridAlignItems>`     | 设置列的垂直对齐方式。 |
+| `cols`           | `GridResponsive<number \| 'auto'>`   | 设置列数或自然宽度。   |
+| `gutter`         | `GridResponsive<number>`             | 设置水平和垂直间距。   |
+| `gutterX`        | `GridResponsive<number>`             | 设置水平间距。         |
+| `gutterY`        | `GridResponsive<number>`             | 设置垂直间距。         |
+| `justifyContent` | `GridResponsive<GridJustifyContent>` | 设置列的水平分布方式。 |
 
 ### Col
 
-| 属性        | 类型                                          | 默认值  | 说明                                                       |
-| ----------- | --------------------------------------------- | ------- | ---------------------------------------------------------- |
-| `alignSelf` | `GridResponsive<GridAlignSelf>`               | —       | 覆盖行对该列设置的垂直对齐方式。                           |
-| `span`      | `GridResponsive<number \| 'auto'>`            | `.col`  | 使用 `.col-*` 设置列宽；`auto` 会根据内容调整宽度。        |
-| `offset`    | `GridResponsive<number>`                      | —       | 添加 `.offset-*`，将列向右偏移。                           |
-| `order`     | `GridResponsive<number \| 'first' \| 'last'>` | —       | 使用 `.order-*` 类设置视觉顺序。                           |
-| `component` | `C extends ElementType`                       | `'div'` | 渲染的原生元素或 React 组件。                              |
-| `className` | `string`                                      | —       | 额外的类名。                                               |
-| `...props`  | `BoxProps<C>`                                 | —       | 所选组件的原生属性，以及全部 [`Box`](../box/) 工具类属性。 |
+默认渲染为 `div`。下表列出自有属性；此外继承所选元素的原生属性和
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
 
-`Row` 和 `Col` 都继承 `BoxProps`，因此可以直接使用 `bg`、`fg`、`theme`、
-`colorScheme` 等 [`Box`](../box/) 工具类属性。
+| 属性        | 类型                                          | 说明                                                          |
+| ----------- | --------------------------------------------- | ------------------------------------------------------------- |
+| `alignSelf` | `GridResponsive<GridAlignSelf>`               | 覆盖行对该列的对齐方式。                                      |
+| `span`      | `GridResponsive<number \| 'auto' \| true>`    | 设置宽度；`auto` 适应内容，`true` 均分空间。默认使用 `.col`。 |
+| `offset`    | `GridResponsive<number>`                      | 添加列偏移。                                                  |
+| `order`     | `GridResponsive<number \| 'first' \| 'last'>` | 设置视觉顺序。                                                |
 
-`GridResponsive<T>` 接受应用于所有断点的单个值，或包含 `xs`、`sm`、`md`、`lg`、
-`xl` 和 `2xl` 键的对象。更多布局说明请参阅 Bootstrap
-[网格文档](https://getbootstrap.com/docs/6.0/layout/grid/)和
-[列文档](https://getbootstrap.com/docs/6.0/layout/columns/)。
+`GridResponsive<T>` 是单个值或包含断点键的对象。`GridAlignItems` 接受 `'start'`、
+`'center'`、`'end'`、`'baseline'` 或 `'stretch'`；`GridAlignSelf` 还接受 `'auto'`。
+`GridJustifyContent` 接受 `'start'`、`'center'`、`'end'`、`'around'`、`'between'`
+或 `'evenly'`。Bootstrap 默认排序工具类支持 `1`–`5`、`first` 和 `last`。数字属性
+会生成类名；可用类取决于 Bootstrap 样式表及其配置。
+
+## 无障碍
+
+使用合理的 DOM 顺序和语义化元素。视觉上的 `order` 不会改变键盘或屏幕阅读器的顺序。
+
+## 参考
+
+- [Bootstrap 6 网格文档](https://getbootstrap.com/docs/6.0/layout/grid/)
+- [Bootstrap 6 列文档](https://getbootstrap.com/docs/6.0/layout/columns/)
+- [Bootstrap 6 间距文档](https://getbootstrap.com/docs/6.0/layout/gutters/)
+- [Grid 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/grid.tsx)
