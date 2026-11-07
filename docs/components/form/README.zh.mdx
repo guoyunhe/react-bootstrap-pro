@@ -461,60 +461,67 @@ CSS 定制。
 
 ### Form
 
-默认渲染为 `form`。下表列出自有属性；此外还继承原生 form 属性及
-[`Box`](../box/README.zh.mdx#api) 工具类属性。
+默认渲染为 `form`。
 
-| 属性         | 类型                 | 说明                                                                     |
-| ------------ | -------------------- | ------------------------------------------------------------------------ |
-| `validation` | `boolean \| 'valid'` | 启用校验处理；`true` 添加 `data-bs-validate`，`'valid'` 还显示有效样式。 |
-| `onSubmit`   | `FormEventHandler`   | 校验后调用；无效时 `event.defaultPrevented` 为 `true`。                  |
-| `onInput`    | `FormEventHandler`   | 与内部 `aria-invalid` 更新一同调用。                                     |
-| `noValidate` | `boolean`            | 原生 form 属性；提供 `validation` 时默认为 `true`。                      |
-| `...props`   | `BoxProps<'form'>`   | 其余原生 form 属性及 Box 工具类属性。                                    |
+| 属性         | 类型                                | 说明                                                                     |
+| ------------ | ----------------------------------- | ------------------------------------------------------------------------ |
+| `validation` | `boolean \| 'valid'`                | 启用校验处理；`true` 添加 `data-bs-validate`，`'valid'` 还显示有效样式。 |
+| `onSubmit`   | `FormEventHandler<HTMLFormElement>` | 校验后调用；无效时 `event.defaultPrevented` 为 `true`。                  |
+| `onInput`    | `FormEventHandler<HTMLFormElement>` | 与内部 `aria-invalid` 更新一同调用。                                     |
+
+继承原生 form 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。提供
+`validation` 时，原生 `noValidate` 属性默认为 `true`。传入 `validation={false}`
+仍会启用提交检查并使 `noValidate` 默认为 `true`，但不会添加 `data-bs-validate`。
 
 ### FormFeedback
 
-默认渲染为 `div`。自有属性为 `type` 与 `tooltip`；继承原生属性及
-[`Box`](../box/README.zh.mdx#api) 工具类属性。
+默认渲染为 `div`。
 
-| 属性       | 类型                   | 说明                                                           |
-| ---------- | ---------------------- | -------------------------------------------------------------- |
-| `type`     | `'valid' \| 'invalid'` | 渲染有效或无效反馈，默认为 `'invalid'`。                       |
-| `tooltip`  | `boolean`              | 渲染校验 tooltip，而非行内反馈。                               |
-| `...props` | `BoxProps<'div'>`      | 原生属性（含用于 `aria-describedby` 的 `id`）及 Box 工具属性。 |
+| 属性      | 类型                   | 说明                                     |
+| --------- | ---------------------- | ---------------------------------------- |
+| `type`    | `'valid' \| 'invalid'` | 渲染有效或无效反馈，默认为 `'invalid'`。 |
+| `tooltip` | `boolean`              | 渲染校验 tooltip，而非行内反馈。         |
+
+继承原生 `div` 属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括用于
+`aria-describedby` 的 `id`。继承的 `component` 属性类型限定为 `'div'`。
 
 ### FormFloating
 
-默认渲染为 `div`。自有属性为 `always`；继承所选元素的原生属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `div`。
 
-| 属性        | 类型          | 说明                                      |
-| ----------- | ------------- | ----------------------------------------- |
-| `always`    | `boolean`     | 标签始终浮动，且占位文本保持可见。        |
-| `component` | `ElementType` | 指定渲染元素，默认为 `div`。              |
-| `...props`  | `BoxProps<C>` | 所选元素的原生属性及全部 Box 工具类属性。 |
+| 属性     | 类型      | 说明                               |
+| -------- | --------- | ---------------------------------- |
+| `always` | `boolean` | 标签始终浮动，且占位文本保持可见。 |
+
+继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括用于
+选择渲染元素的 `component`。
 
 ### FormField
 
-| 属性        | 类型          | 说明                            |
-| ----------- | ------------- | ------------------------------- |
-| `component` | `ElementType` | 默认渲染 `div`。                |
-| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。 |
+默认渲染为 `div`，没有额外属性。继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括用于选择渲染元素的 `component`。
+
+### FormFieldContent
+
+默认渲染为 `div`，没有额外属性。继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括用于选择渲染元素的 `component`。
 
 ### FormLabel
 
-| 属性        | 类型                      | 说明                                                              |
-| ----------- | ------------------------- | ----------------------------------------------------------------- |
-| `col`       | `boolean \| 'sm' \| 'lg'` | 水平表单中渲染 `.col-form-label`；`'sm'` 与 `'lg'` 匹配控件尺寸。 |
-| `component` | `ElementType`             | 默认渲染 `label`。                                                |
-| `...props`  | `BoxProps<C>`             | 原生属性及所有 Box 工具类属性。                                   |
+默认渲染为 `label`。
+
+| 属性  | 类型                      | 说明                                                              |
+| ----- | ------------------------- | ----------------------------------------------------------------- |
+| `col` | `boolean \| 'sm' \| 'lg'` | 水平表单中渲染 `.col-form-label`；`'sm'` 与 `'lg'` 匹配控件尺寸。 |
+
+继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括用于
+选择渲染元素的 `component`。
 
 ### FormText
 
-| 属性        | 类型          | 说明                                      |
-| ----------- | ------------- | ----------------------------------------- |
-| `component` | `ElementType` | 默认渲染 `div`；行内帮助文本可用 `span`。 |
-| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。           |
+默认渲染为 `div`，没有额外属性。继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`；行内帮助文本可用
+`span`。
 
 ## 参考
 
@@ -525,4 +532,10 @@ CSS 定制。
 - [Bootstrap 6 浮动标签文档](https://getbootstrap.com/docs/6.0/forms/floating-labels/)
 - [Bootstrap 6 表单布局文档](https://getbootstrap.com/docs/6.0/forms/layout/)
 - [Bootstrap 6 表单校验文档](https://getbootstrap.com/docs/6.0/forms/validation/)
+- [Form 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form.tsx)
+- [FormFeedback 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-feedback.tsx)
+- [FormField 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-field.tsx)
+- [FormFieldContent 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-field-content.tsx)
 - [FormFloating 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-floating.tsx)
+- [FormLabel 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-label.tsx)
+- [FormText 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-text.tsx)

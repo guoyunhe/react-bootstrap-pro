@@ -494,61 +494,73 @@ labels and feedback specific to each field.
 
 ### Form
 
-Renders a `form` by default. Its own props are listed below; it inherits native
-form props and [`Box`](../box/README.mdx#api) utility props.
+Renders a `form` by default.
 
-| Prop         | Type                 | Description                                                                                         |
-| ------------ | -------------------- | --------------------------------------------------------------------------------------------------- |
-| `validation` | `boolean \| 'valid'` | Enables validation handling; `true` adds `data-bs-validate` and `'valid'` also styles valid fields. |
-| `onSubmit`   | `FormEventHandler`   | Called after validation; `event.defaultPrevented` is set when invalid.                              |
-| `onInput`    | `FormEventHandler`   | Called alongside the internal `aria-invalid` update.                                                |
-| `noValidate` | `boolean`            | Native form prop; defaults to `true` when `validation` is supplied.                                 |
-| `...props`   | `BoxProps<'form'>`   | Remaining native form props and Box utility props.                                                  |
+| Prop         | Type                                | Description                                                                                         |
+| ------------ | ----------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `validation` | `boolean \| 'valid'`                | Enables validation handling; `true` adds `data-bs-validate` and `'valid'` also styles valid fields. |
+| `onSubmit`   | `FormEventHandler<HTMLFormElement>` | Called after validation; `event.defaultPrevented` is set when invalid.                              |
+| `onInput`    | `FormEventHandler<HTMLFormElement>` | Called alongside the internal `aria-invalid` update.                                                |
+
+Inherits native form props and [`Box`](../box/README.mdx#api) utility props.
+The native `noValidate` prop defaults to `true` when `validation` is supplied.
+Passing `validation={false}` still enables the submit check and defaults
+`noValidate` to `true`, but does not add `data-bs-validate`.
 
 ### FormFeedback
 
-Renders a `div` by default. Its own props are `type` and `tooltip`; it
-inherits native props and [`Box`](../box/README.mdx#api) utility props.
+Renders a `div` by default.
 
-| Prop       | Type                   | Description                                                             |
-| ---------- | ---------------------- | ----------------------------------------------------------------------- |
-| `type`     | `'valid' \| 'invalid'` | Renders valid or invalid feedback; defaults to `'invalid'`.             |
-| `tooltip`  | `boolean`              | Renders a validation tooltip instead of inline feedback.                |
-| `...props` | `BoxProps<'div'>`      | Native props, including `id` for `aria-describedby`, and Box utilities. |
+| Prop      | Type                   | Description                                                 |
+| --------- | ---------------------- | ----------------------------------------------------------- |
+| `type`    | `'valid' \| 'invalid'` | Renders valid or invalid feedback; defaults to `'invalid'`. |
+| `tooltip` | `boolean`              | Renders a validation tooltip instead of inline feedback.    |
+
+Inherits native `div` props and [`Box`](../box/README.mdx#api) utility props,
+including `id` for `aria-describedby`. Its inherited `component` prop is typed
+as `'div'`.
 
 ### FormFloating
 
-Renders a `div` by default. Its own prop is `always`; it inherits native props
-for the selected element and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+Renders a `div` by default.
 
-| Prop        | Type          | Description                                                      |
-| ----------- | ------------- | ---------------------------------------------------------------- |
-| `always`    | `boolean`     | Keeps the label floated and the placeholder visible.             |
-| `component` | `ElementType` | Selects the rendered element; defaults to `div`.                 |
-| `...props`  | `BoxProps<C>` | Native props for the selected element and all Box utility props. |
+| Prop     | Type      | Description                                          |
+| -------- | --------- | ---------------------------------------------------- |
+| `always` | `boolean` | Keeps the label floated and the placeholder visible. |
+
+Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props, including `component` to select
+the element.
 
 ### FormField
 
-| Prop        | Type          | Description                             |
-| ----------- | ------------- | --------------------------------------- |
-| `component` | `ElementType` | Renders a `div` by default.             |
-| `...props`  | `BoxProps<C>` | Native props and all Box utility props. |
+Renders a `div` by default and has no additional props. Inherits native props
+for the selected element and [`Box`](../box/README.mdx#api) utility props,
+including `component` to select the element.
+
+### FormFieldContent
+
+Renders a `div` by default and has no additional props. Inherits native props
+for the selected element and [`Box`](../box/README.mdx#api) utility props,
+including `component` to select the element.
 
 ### FormLabel
 
-| Prop        | Type                      | Description                                                                               |
-| ----------- | ------------------------- | ----------------------------------------------------------------------------------------- |
-| `col`       | `boolean \| 'sm' \| 'lg'` | Renders `.col-form-label` for horizontal forms; `'sm'` and `'lg'` match the control size. |
-| `component` | `ElementType`             | Renders a `label` by default.                                                             |
-| `...props`  | `BoxProps<C>`             | Native props and all Box utility props.                                                   |
+Renders a `label` by default.
+
+| Prop  | Type                      | Description                                                                               |
+| ----- | ------------------------- | ----------------------------------------------------------------------------------------- |
+| `col` | `boolean \| 'sm' \| 'lg'` | Renders `.col-form-label` for horizontal forms; `'sm'` and `'lg'` match the control size. |
+
+Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props, including `component` to select
+the element.
 
 ### FormText
 
-| Prop        | Type          | Description                                                  |
-| ----------- | ------------- | ------------------------------------------------------------ |
-| `component` | `ElementType` | Renders a `div` by default; use `span` for inline help text. |
-| `...props`  | `BoxProps<C>` | Native props and all Box utility props.                      |
+Renders a `div` by default and has no additional props. Inherits native props
+for the selected element and [`Box`](../box/README.mdx#api) utility props,
+including `component`; use `span` for inline help text.
 
 ## See
 
@@ -559,4 +571,10 @@ for the selected element and all [`Box`](../box/README.mdx#api) props through
 - [Bootstrap 6 Floating labels documentation](https://getbootstrap.com/docs/6.0/forms/floating-labels/)
 - [Bootstrap 6 Form layout documentation](https://getbootstrap.com/docs/6.0/forms/layout/)
 - [Bootstrap 6 Form validation documentation](https://getbootstrap.com/docs/6.0/forms/validation/)
+- [Form source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form.tsx)
+- [FormFeedback source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-feedback.tsx)
+- [FormField source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-field.tsx)
+- [FormFieldContent source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-field-content.tsx)
 - [FormFloating source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-floating.tsx)
+- [FormLabel source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-label.tsx)
+- [FormText source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-text.tsx)
