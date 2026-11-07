@@ -33,7 +33,7 @@ export function ListGroup<C extends ElementType = 'ul'>({
         'list-group',
         flush && 'list-group-flush',
         horizontal &&
-          (horizontal === true ? 'list-group-horizontal' : `list-group-horizontal-${horizontal}`),
+          (horizontal === true ? 'list-group-horizontal' : `${horizontal}:list-group-horizontal`),
         numbered && 'list-group-numbered',
         props.classNameBefore,
       )}

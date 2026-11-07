@@ -3,43 +3,261 @@ title: ListGroup 列表组
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { ListGroup, ListGroupItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ListGroupBasicDemo } from './demos/basic';
+import { ListGroupActiveDemo } from './demos/active';
+import { ListGroupLinksDemo } from './demos/links';
+import { ListGroupButtonsDemo } from './demos/buttons';
+import { ListGroupFlushDemo } from './demos/flush';
+import { ListGroupNumberedDemo } from './demos/numbered';
+import { ListGroupNumberedContentDemo } from './demos/numbered-content';
+import { ListGroupHorizontalDemo } from './demos/horizontal';
+import { ListGroupHorizontalResizeDemo } from './demos/horizontal-resize';
+import { ListGroupVariantsDemo } from './demos/variants';
+import { ListGroupVariantLinksDemo } from './demos/variant-links';
+import { ListGroupBadgesDemo } from './demos/badges';
+import { ListGroupCustomContentDemo } from './demos/custom-content';
+import { ListGroupCheckboxesDemo } from './demos/checkboxes';
+import { ListGroupRadiosDemo } from './demos/radios';
+import { ListGroupStretchedCheckboxesDemo } from './demos/stretched-checkboxes';
 
 # ListGroup 列表组
 
-`ListGroup` 默认渲染语义化列表。链接或按钮应使用操作项，并通过 `active`
-标识当前选择。
+`ListGroup` 将相关条目组织为列表或其他容器，使用 `ListGroupItem` 渲染各条目。
+
+## 基本示例
+
+默认元素组成无序列表。
 
 <DemoContainer>
-  <ListGroup>
-    <ListGroupItem active>当前条目</ListGroupItem>
-    <ListGroupItem action component='a' href='/next'>
-      下一条
-    </ListGroupItem>
-  </ListGroup>
+  <ListGroupBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 激活条目
+
+使用 `active` 设置视觉样式，并用 `aria-current` 标识当前条目。
+
+<DemoContainer>
+  <ListGroupActiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/active.tsx'
+
+```
+
+## 链接与按钮
+
+为原生链接或按钮设置 `action` 以启用交互样式；不要使用标准按钮类。对于不可用的
+链接，移除 `href`、添加 `disabled` 类并设置 `aria-disabled`。仅设置类或
+`aria-disabled` 并不能阻止带有 `href` 的链接被键盘激活。
+
+<DemoContainer>
+  <ListGroupLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/links.tsx'
+
+```
+
+原生按钮支持 `disabled` 属性。
+
+<DemoContainer>
+  <ListGroupButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/buttons.tsx'
+
+```
+
+## 无外边框
+
+使用 `flush` 移除外侧边框和圆角，让内容延伸至容器边缘。
+
+<DemoContainer>
+  <ListGroupFlushDemo />
+</DemoContainer>
+
+```tsx src='./demos/flush.tsx'
+
+```
+
+## 编号
+
+将 `numbered` 与 `component='ol'` 一起使用以保留有序列表语义。Bootstrap 使用 CSS
+计数器生成可见编号，并支持嵌套计数器。
+
+<DemoContainer>
+  <ListGroupNumberedDemo />
+</DemoContainer>
+
+```tsx src='./demos/numbered.tsx'
+
+```
+
+编号条目也可以包含自定义内容和徽章。
+
+<DemoContainer>
+  <ListGroupNumberedContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/numbered-content.tsx'
+
+```
+
+## 横向排列
+
+使用 `horizontal` 在所有尺寸下横向排列，或指定 `sm` 至 `2xl` 断点以根据容器宽度
+切换。响应式变体需要在父元素上设置 `containerQuery='inline'`。浏览器不支持容器查询
+或没有匹配容器时，列表保持纵向。不要同时使用横向排列与 `flush`。为条目设置
+`flex='fill'` 可使其等宽。
+
+<DemoContainer>
+  <ListGroupHorizontalDemo />
+</DemoContainer>
+
+```tsx src='./demos/horizontal.tsx'
+
+```
+
+调整此容器的宽度可观察 `md` 布局切换。拖拽手柄取决于浏览器支持情况；调整外围视口
+的大小也会改变容器宽度。
+
+<DemoContainer>
+  <ListGroupHorizontalResizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/horizontal-resize.tsx'
+
+```
+
+## 变体
+
+为条目设置 `theme` 以使用对应的语义颜色。
+
+<DemoContainer>
+  <ListGroupVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+### 链接和按钮的变体
+
+主题也适用于操作项及其悬停和激活状态。
+
+<DemoContainer>
+  <ListGroupVariantLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/variant-links.tsx'
+
+```
+
+不要仅通过颜色传达含义，应包含文字或其他无障碍提示。
+
+## 徽章
+
+使用 flex 工具类对齐徽章与列表内容。
+
+<DemoContainer>
+  <ListGroupBadgesDemo />
+</DemoContainer>
+
+```tsx src='./demos/badges.tsx'
+
+```
+
+## 自定义内容
+
+操作项可以包含标题、描述及其他内容。
+
+<DemoContainer>
+  <ListGroupCustomContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-content.tsx'
+
+```
+
+## 复选框与单选按钮
+
+为每个控件关联标签；没有可见标签时应提供无障碍名称。
+
+<DemoContainer>
+  <ListGroupCheckboxesDemo />
+</DemoContainer>
+
+```tsx src='./demos/checkboxes.tsx'
+
+```
+
+具有相同 `name` 的单选按钮构成原生互斥组。
+
+<DemoContainer>
+  <ListGroupRadiosDemo />
+</DemoContainer>
+
+```tsx src='./demos/radios.tsx'
+
+```
+
+在标签上使用 `.stretched-link`，使其可点击区域扩展至整个定位条目。
+
+<DemoContainer>
+  <ListGroupStretchedCheckboxesDemo />
+</DemoContainer>
+
+```tsx src='./demos/stretched-checkboxes.tsx'
+
+```
+
+## CSS
+
+列表组提供控制颜色、边框、内边距和状态的局部 CSS 变量，详见
+[Bootstrap 变量文档](https://getbootstrap.com/docs/6.0/components/list-group/#variables)。
+
+## JavaScript 行为
+
+`ListGroup` 不管理选中状态或切换内容。选项卡面板请参见
+[Tab 文档](../tab/README.zh.mdx)和
+[Bootstrap 列表组选项卡](https://getbootstrap.com/docs/6.0/components/tab/#list-groups)；
+应使用同时处理焦点和键盘交互的选项卡实现。
 
 ## API
 
 ### ListGroup
 
-默认渲染为 `ul`。自有属性为 `flush?: boolean`、
-`horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'` 和
-`numbered?: boolean`；继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `ul`。继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 属性，
+包括 `component`。
 
-| 属性         | 类型                                               | 说明                            |
-| ------------ | -------------------------------------------------- | ------------------------------- |
-| `flush`      | `boolean`                                          | 移除外侧边框和圆角。            |
-| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 设置横向排列。                  |
-| `numbered`   | `boolean`                                          | 为列表项添加嵌套计数器。        |
-| `component`  | `ElementType`                                      | 更换根元素。                    |
-| `...props`   | `BoxProps<C>`                                      | 原生属性及所有 Box 工具类属性。 |
-
-`ListGroupItem` 支持 `action` 和 `active` 修饰属性。
+| 属性         | 类型                                               | 说明                       |
+| ------------ | -------------------------------------------------- | -------------------------- |
+| `flush`      | `boolean`                                          | 移除外侧边框和圆角。       |
+| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 横向排列，可指定容器断点。 |
+| `numbered`   | `boolean`                                          | 启用 CSS 计数器。          |
 
 ### ListGroupItem
 
-默认渲染为 `li`。自有属性为 `action?: boolean` 和 `active?: boolean`；继承所选元素
-的原生属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `li`。继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 属性，
+包括 `component` 和 `theme`。
+
+| 属性     | 类型      | 说明                                             |
+| -------- | --------- | ------------------------------------------------ |
+| `action` | `boolean` | 添加交互用的悬停和焦点样式。                     |
+| `active` | `boolean` | 应用激活样式；不会设置 ARIA 状态或管理选中状态。 |
+
+## 无障碍
+
+列表应保留 `ul`/`li` 或 `ol`/`li` 语义，操作应使用原生链接和按钮。按需设置
+`aria-current`。禁用按钮使用原生 `disabled`；禁用链接需要额外处理。样式不能代替
+控件标签和非颜色提示。
+
+## 参考
+
+- [Bootstrap 6 列表组文档](https://getbootstrap.com/docs/6.0/components/list-group/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/list-group.tsx)

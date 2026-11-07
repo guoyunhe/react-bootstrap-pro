@@ -3,16 +3,32 @@ title: ListGroup
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { ListGroup, ListGroupItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { ListGroupBasicDemo } from './demos/basic';
+import { ListGroupActiveDemo } from './demos/active';
+import { ListGroupLinksDemo } from './demos/links';
+import { ListGroupButtonsDemo } from './demos/buttons';
+import { ListGroupFlushDemo } from './demos/flush';
+import { ListGroupNumberedDemo } from './demos/numbered';
+import { ListGroupNumberedContentDemo } from './demos/numbered-content';
+import { ListGroupHorizontalDemo } from './demos/horizontal';
+import { ListGroupHorizontalResizeDemo } from './demos/horizontal-resize';
+import { ListGroupVariantsDemo } from './demos/variants';
+import { ListGroupVariantLinksDemo } from './demos/variant-links';
+import { ListGroupBadgesDemo } from './demos/badges';
+import { ListGroupCustomContentDemo } from './demos/custom-content';
+import { ListGroupCheckboxesDemo } from './demos/checkboxes';
+import { ListGroupRadiosDemo } from './demos/radios';
+import { ListGroupStretchedCheckboxesDemo } from './demos/stretched-checkboxes';
 
 # ListGroup
 
-`ListGroup` renders a semantic list by default. Use action items for links or
-buttons, and use `active` to identify the current selection.
+`ListGroup` groups related items in a list or other container. Use
+`ListGroupItem` for each item.
 
-## Example
+## Basic example
+
+The default elements form an unordered list.
 
 <DemoContainer>
   <ListGroupBasicDemo />
@@ -22,45 +38,230 @@ buttons, and use `active` to identify the current selection.
 
 ```
 
-## Flush and numbered
+## Active items
 
-Use `flush` to remove the outer border and rounding, or `numbered` to show CSS
-counters.
+Use `active` for visual styling and `aria-current` to identify the current item.
+
+<DemoContainer>
+  <ListGroupActiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/active.tsx'
+
+```
+
+## Links and buttons
+
+Use `action` with a native link or button for interactive styling; do not use
+standard button classes. For an unavailable link, remove `href`, add the
+`disabled` class and set `aria-disabled`. A class or `aria-disabled` alone does
+not prevent keyboard activation of a link that retains an `href`.
+
+<DemoContainer>
+  <ListGroupLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/links.tsx'
+
+```
+
+Native buttons support the `disabled` attribute.
+
+<DemoContainer>
+  <ListGroupButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/buttons.tsx'
+
+```
+
+## Flush
+
+Use `flush` to remove outer borders and rounding for edge-to-edge content.
+
+<DemoContainer>
+  <ListGroupFlushDemo />
+</DemoContainer>
+
+```tsx src='./demos/flush.tsx'
+
+```
+
+## Numbered
+
+Use `numbered` with `component='ol'` for ordered-list semantics. Bootstrap
+generates the visible numbers with CSS counters, including nested counters.
+
+<DemoContainer>
+  <ListGroupNumberedDemo />
+</DemoContainer>
+
+```tsx src='./demos/numbered.tsx'
+
+```
+
+Numbered items can contain custom content and badges.
+
+<DemoContainer>
+  <ListGroupNumberedContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/numbered-content.tsx'
+
+```
 
 ## Horizontal
 
-Set `horizontal` to display items in a row, or provide a breakpoint to switch
-the layout responsively.
+Use `horizontal` for a row at all sizes, or a breakpoint from `sm` to `2xl`
+to switch at that container width. Responsive variants require a parent with
+`containerQuery='inline'`. Without container-query support or a matching
+container, the list remains vertical. Do not combine horizontal and flush.
+Use `flex='fill'` on items for equal widths.
+
+<DemoContainer>
+  <ListGroupHorizontalDemo />
+</DemoContainer>
+
+```tsx src='./demos/horizontal.tsx'
+
+```
+
+Resize this container to see the `md` layout change. The resize handle depends
+on browser support; resizing the surrounding viewport also changes its width.
+
+<DemoContainer>
+  <ListGroupHorizontalResizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/horizontal-resize.tsx'
+
+```
+
+## Variants
+
+Set `theme` on an item for contextual colors.
+
+<DemoContainer>
+  <ListGroupVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+### For links and buttons
+
+Themes also work with action items and their hover and active states.
+
+<DemoContainer>
+  <ListGroupVariantLinksDemo />
+</DemoContainer>
+
+```tsx src='./demos/variant-links.tsx'
+
+```
+
+Do not convey meaning by color alone: include text or another accessible cue.
+
+## With badges
+
+Use flex utilities to align badges with list content.
+
+<DemoContainer>
+  <ListGroupBadgesDemo />
+</DemoContainer>
+
+```tsx src='./demos/badges.tsx'
+
+```
+
+## Custom content
+
+Action items can contain headings, descriptions and other content.
+
+<DemoContainer>
+  <ListGroupCustomContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-content.tsx'
+
+```
+
+## Checkboxes and radios
+
+Associate each control with a label, or provide an accessible name when a
+visible label is unavailable.
+
+<DemoContainer>
+  <ListGroupCheckboxesDemo />
+</DemoContainer>
+
+```tsx src='./demos/checkboxes.tsx'
+
+```
+
+Radios sharing a `name` form a native exclusive group.
+
+<DemoContainer>
+  <ListGroupRadiosDemo />
+</DemoContainer>
+
+```tsx src='./demos/radios.tsx'
+
+```
+
+Use `.stretched-link` on the label to extend its clickable area across the
+positioned item.
+
+<DemoContainer>
+  <ListGroupStretchedCheckboxesDemo />
+</DemoContainer>
+
+```tsx src='./demos/stretched-checkboxes.tsx'
+
+```
+
+## CSS
+
+List groups expose local CSS variables for colors, borders, padding and states.
+See the [Bootstrap variables](https://getbootstrap.com/docs/6.0/components/list-group/#variables).
+
+## JavaScript behavior
+
+`ListGroup` does not manage selection or switch content. For tabbed panels, see
+the [Tab documentation](../tab/README.mdx) and the
+[Bootstrap list-group tabs](https://getbootstrap.com/docs/6.0/components/tab/#list-groups);
+use a tab implementation that also handles focus and keyboard interaction.
 
 ## API
 
 ### ListGroup
 
-Renders a `ul` by default. Its own props are `flush?: boolean`,
-`horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'`, and
-`numbered?: boolean`; it inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders `ul` by default. Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) props, including `component`.
 
-| Prop         | Type                                               | Description                             |
-| ------------ | -------------------------------------------------- | --------------------------------------- |
-| `flush`      | `boolean`                                          | Removes the outer border and rounding.  |
-| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Lays items out horizontally.            |
-| `numbered`   | `boolean`                                          | Adds nested counters to list items.     |
-| `component`  | `ElementType`                                      | Changes the root element.               |
-| `...props`   | `BoxProps<C>`                                      | Native props and all Box utility props. |
-
-`ListGroupItem` accepts `action` and `active` modifiers.
+| Prop         | Type                                               | Description                                                     |
+| ------------ | -------------------------------------------------- | --------------------------------------------------------------- |
+| `flush`      | `boolean`                                          | Removes outer borders and rounding.                             |
+| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Uses horizontal layout, optionally from a container breakpoint. |
+| `numbered`   | `boolean`                                          | Enables CSS counters.                                           |
 
 ### ListGroupItem
 
-Renders an `li` by default. Its own props are `action?: boolean` and
-`active?: boolean`; it inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders `li` by default. Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) props, including `component` and `theme`.
+
+| Prop     | Type      | Description                                                          |
+| -------- | --------- | -------------------------------------------------------------------- |
+| `action` | `boolean` | Adds interactive hover and focus styling.                            |
+| `active` | `boolean` | Applies active styling; does not set ARIA state or manage selection. |
 
 ## Accessibility
 
-Use native list semantics for static items. For links and buttons, preserve
-their native interaction and use `active` to identify the current selection.
+Preserve `ul`/`li` or `ol`/`li` semantics for lists, and use native links and
+buttons for actions. Set `aria-current` where appropriate. Disabled buttons use
+native `disabled`; disabled links require additional handling. Control labels
+and non-color cues remain necessary regardless of styling.
 
 ## See
 

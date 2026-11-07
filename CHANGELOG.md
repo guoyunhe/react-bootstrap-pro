@@ -40,6 +40,7 @@
 
 ### Fixed
 
+- Generate Bootstrap 6 container-query classes for responsive `ListGroup` layouts.
 - Apply Bootstrap's color control styling automatically to standard color `Input` elements.
 - Style `Select` with Bootstrap 6 form control and size classes.
 
