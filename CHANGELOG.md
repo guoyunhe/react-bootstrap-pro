@@ -34,6 +34,10 @@
 - Add the CSS Grid `gridGap` prop for setting `--bs-gap`.
 - Add the DatePicker `w` prop for setting trigger and inline calendar width.
 
+### Fixed
+
+- Style `Select` with Bootstrap 6 form control and size classes.
+
 ## [0.3.0] - 2026-11-04
 
 ### Breaking Changes

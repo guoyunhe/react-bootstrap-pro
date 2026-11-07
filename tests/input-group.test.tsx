@@ -24,5 +24,5 @@ test('composes input groups with text addons and sizes', async () => {
   expect(screen.getByTestId('addon-label').element().tagName).toBe('LABEL');
   expect(screen.getByTestId('addon-label').element()).toHaveAttribute('for', 'input-group-select');
   expect(group.querySelector('input')).toHaveClass('form-control');
-  expect(group.querySelector('select')).toHaveClass('form-select');
+  expect(group.querySelector('select')).toHaveClass('form-control');
 });

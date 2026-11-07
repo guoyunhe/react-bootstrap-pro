@@ -22,7 +22,7 @@ test('renders Input and Select with their dedicated native elements', async () =
   expect(screen.getByTestId('control')).toHaveClass('form-control', 'form-control-lg');
   expect(screen.getByTestId('control').element()).toHaveAttribute('type', 'email');
   expect(screen.getByTestId('select').element().tagName).toBe('SELECT');
-  expect(screen.getByTestId('select')).toHaveClass('form-select');
+  expect(screen.getByTestId('select')).toHaveClass('form-control');
 });
 
 test('renders a textarea with textarea props and Bootstrap sizing', async () => {

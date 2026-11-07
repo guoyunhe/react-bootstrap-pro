@@ -17,9 +17,9 @@ export function Select({ className, classNameBefore, size, validation, ...props 
       {...props}
       component='select'
       classNameBefore={getControlClassName(
-        'form-select',
+        'form-control',
         size,
-        'form-select',
+        'form-control',
         validation,
         classNameBefore,
       )}

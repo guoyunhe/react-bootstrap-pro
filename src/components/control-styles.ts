@@ -7,7 +7,7 @@ export type ControlSize = 'sm' | 'lg';
 export function getControlClassName(
   baseClass: string,
   size: ControlSize | undefined,
-  sizePrefix: 'form-control' | 'form-select',
+  sizePrefix: 'form-control',
   validation: ValidationState | undefined,
   classNameBefore: string | undefined,
 ) {

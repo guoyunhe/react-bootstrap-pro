@@ -5,13 +5,14 @@ title: Select
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { SelectBasicDemo } from './demos/basic';
-import { SelectStatesDemo } from './demos/states';
+import { SelectMultipleDemo } from './demos/multiple';
+import { SelectNativeSizeDemo } from './demos/native-size';
 
 # Select
 
-`Select` renders a native `<select>` with Bootstrap's `.form-select` styling.
-Options, selection, keyboard interaction, and disabled behavior remain native
-browser features.
+`Select` renders a native `<select>` with Bootstrap 6's `.form-control` styling.
+Styling is limited by the browser: options and their popovers cannot be styled
+consistently. Selection and keyboard interaction remain native browser features.
 
 ## Example
 
@@ -23,17 +24,30 @@ browser features.
 
 ```
 
-## Sizes and disabled state
+## Multiple
 
-Use `size='sm'` or `size='lg'` to apply Bootstrap select sizing. The native
-`disabled` attribute prevents interaction and excludes the select from form
-submission.
+The native `multiple` attribute allows more than one option to be selected.
 
 <DemoContainer>
-  <SelectStatesDemo />
+  <SelectMultipleDemo />
 </DemoContainer>
 
-```tsx src='./demos/states.tsx'
+```tsx src='./demos/multiple.tsx'
+
+```
+
+## Native size
+
+The native `size` attribute sets the number of visible options. `Select` reserves
+its `size` prop for Bootstrap's `'sm'` and `'lg'` styles, so use a
+[`Box`](../box/README.mdx#api) rendered as a `select` with `.form-control`
+when a native numeric `size` is needed.
+
+<DemoContainer>
+  <SelectNativeSizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/native-size.tsx'
 
 ```
 
@@ -44,22 +58,23 @@ submission.
 Renders a `select` by default and does not expose a polymorphic `component`
 prop. Its own props are listed below; it inherits the remaining native select
 props and all [`Box`](../box/README.mdx#api) utility props. Its `size` prop is
-reserved for Bootstrap sizing; use the other native select attributes for
-selection behavior.
+reserved for Bootstrap sizing and cannot set the native number of visible
+options. The native `disabled` attribute prevents interaction and excludes the
+select from form submission.
 
 | Prop         | Type                   | Description                                       |
 | ------------ | ---------------------- | ------------------------------------------------- |
 | `size`       | `'sm' \| 'lg'`         | Applies the small or large Bootstrap select size. |
 | `validation` | `'valid' \| 'invalid'` | Applies the corresponding validation class.       |
-| `...props`   | `BoxProps<'select'>`   | Native select props and all Box utility props.    |
 
 ## Accessibility
 
 Give each select an accessible name with a visible `<label>` bound through
 `htmlFor`, or with `aria-label` when a visible label is not possible. Keep an
 empty first option when a placeholder-like choice is needed.
+Multi-select keyboard interactions depend on the browser and operating system.
 
 ## See
 
-- [Bootstrap 6 select documentation](https://getbootstrap.com/docs/6.0/forms/select/)
+- [Bootstrap 6 select documentation](https://getbootstrap.com/docs/6.0/forms/form-control/#select)
 - [Select source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/select.tsx)

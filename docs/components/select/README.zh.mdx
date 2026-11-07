@@ -5,12 +5,13 @@ title: Select 下拉选择框
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { SelectBasicDemo } from './demos/basic';
-import { SelectStatesDemo } from './demos/states';
+import { SelectMultipleDemo } from './demos/multiple';
+import { SelectNativeSizeDemo } from './demos/native-size';
 
 # Select 下拉选择框
 
-`Select` 使用 Bootstrap 的 `.form-select` 样式渲染原生 `<select>`。选项、选择状态、
-键盘交互和禁用行为仍由浏览器原生实现。
+`Select` 使用 Bootstrap 6 的 `.form-control` 样式渲染原生 `<select>`。样式受浏览器
+限制：选项及其弹出菜单无法统一设置样式。选择和键盘交互仍由浏览器原生实现。
 
 ## 示例
 
@@ -22,16 +23,29 @@ import { SelectStatesDemo } from './demos/states';
 
 ```
 
-## 尺寸与禁用状态
+## 多选
 
-使用 `size='sm'` 或 `size='lg'` 设置 Bootstrap 下拉框尺寸。原生 `disabled` 属性会
-阻止交互，并使该下拉框不参与表单提交。
+原生 `multiple` 属性允许选择多个选项。
 
 <DemoContainer>
-  <SelectStatesDemo />
+  <SelectMultipleDemo />
 </DemoContainer>
 
-```tsx src='./demos/states.tsx'
+```tsx src='./demos/multiple.tsx'
+
+```
+
+## 原生显示行数
+
+原生 `size` 属性设置可见选项的数量。`Select` 的 `size` 属性用于 Bootstrap 的
+`'sm'` 和 `'lg'` 样式；需要数字类型的原生 `size` 时，可使用渲染为 `select` 且带有
+`.form-control` 类的 [`Box`](../box/README.zh.mdx#api)。
+
+<DemoContainer>
+  <SelectNativeSizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/native-size.tsx'
 
 ```
 
@@ -41,20 +55,21 @@ import { SelectStatesDemo } from './demos/states';
 
 默认渲染为 `select`，不提供多态 `component` 属性。下表列出自有属性；此外还继承其余
 原生 select 属性及 [`Box`](../box/README.zh.mdx#api) 的全部工具类属性。`size` 属性
-用于 Bootstrap 尺寸；选择行为可通过其他原生 select 属性设置。
+用于 Bootstrap 尺寸，不能设置原生可见选项数量。原生 `disabled` 属性会阻止交互，
+并使该下拉框不参与表单提交。
 
-| 属性         | 类型                   | 说明                                    |
-| ------------ | ---------------------- | --------------------------------------- |
-| `size`       | `'sm' \| 'lg'`         | 应用小型或大型 Bootstrap 下拉框尺寸。   |
-| `validation` | `'valid' \| 'invalid'` | 应用对应的校验状态类。                  |
-| `...props`   | `BoxProps<'select'>`   | 原生 select 属性及全部 Box 工具类属性。 |
+| 属性         | 类型                   | 说明                                  |
+| ------------ | ---------------------- | ------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | 应用小型或大型 Bootstrap 下拉框尺寸。 |
+| `validation` | `'valid' \| 'invalid'` | 应用对应的校验状态类。                |
 
 ## 无障碍
 
 使用通过 `htmlFor` 绑定的可见 `<label>` 为下拉框提供可访问名称；无法显示可见标签时，
 可使用 `aria-label`。若需要类似占位文本的选项，请将值为空的选项放在首位。
+多选框的键盘交互取决于浏览器和操作系统。
 
 ## 参考
 
-- [Bootstrap 6 下拉框文档](https://getbootstrap.com/docs/6.0/forms/select/)
+- [Bootstrap 6 下拉框文档](https://getbootstrap.com/docs/6.0/forms/form-control/#select)
 - [Select 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/select.tsx)
