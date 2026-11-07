@@ -176,7 +176,7 @@ Floating UI 驱动的交互菜单，无需 Bootstrap JavaScript。触发器必�
 
 ### 图标
 
-为图标添加 `.menu-item-icon`；装饰性图标对辅助技术隐藏。
+将图标作为 `MenuItemIcon` 的子元素传入；为装饰性图标设置 `aria-hidden='true'`。
 
 <DemoContainer>
   <MenuIconsDemo />
@@ -383,6 +383,13 @@ Bootstrap 的过渡样式支持减少动态效果偏好。
 
 默认渲染为 `span`。没有自有属性，继承所选元素的原生属性及
 [`Box`](../box/README.zh.mdx#api) 属性，包括 `component`。
+
+### MenuItemIcon
+
+默认渲染为 `span`。没有自有属性，继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 属性，包括 `component`。将 `component` 设为图标
+组件可直接将图标槽样式应用于 SVG。默认的 span 使用 flex 布局，使子图标与文字对齐。
+装饰性图标应设置 `aria-hidden='true'`。
 
 ### MenuItemDescription
 

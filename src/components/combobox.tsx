@@ -11,7 +11,7 @@ import type { ValidationState } from '../types';
 import { Box } from './box';
 import type { BoxProps } from './box';
 import { Input } from './input';
-import { Menu, MenuHeader, MenuItemContent, MenuItemDescription } from './menu';
+import { Menu, MenuHeader, MenuItemContent, MenuItemDescription, MenuItemIcon } from './menu';
 
 export type ComboboxOption = {
   value: string;
@@ -310,11 +310,7 @@ export function Combobox({
         disabled={option.disabled}
         onClick={() => selectOption(option)}
       >
-        {option.icon && (
-          <Box component='span' classNameBefore='menu-item-icon' aria-hidden='true'>
-            {option.icon}
-          </Box>
-        )}
+        {option.icon && <MenuItemIcon aria-hidden='true'>{option.icon}</MenuItemIcon>}
         {option.description === undefined ? (
           option.label
         ) : (

@@ -19,6 +19,7 @@
 
 ### Added
 
+- Add `MenuItemIcon` for menu item icon slots.
 - Add `MenuItemContent` and `MenuItemDescription` for menu item text and descriptions.
 - Add Floating UI-driven interactive menus with a trigger, positioning, dismissal and keyboard navigation.
 - Add `InputGroupButton` for buttons within input groups.
@@ -42,6 +43,7 @@
 
 ### Fixed
 
+- Align wrapped `MenuItemIcon` children with directly rendered menu icons.
 - Generate Bootstrap 6 container-query classes for responsive `ListGroup` layouts.
 - Apply Bootstrap's color control styling automatically to standard color `Input` elements.
 - Style `Select` with Bootstrap 6 form control and size classes.

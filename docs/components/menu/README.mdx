@@ -182,8 +182,8 @@ Use `theme` for contextual colors in regular and active items.
 
 ### Icons
 
-Add `.menu-item-icon` to an icon; decorative icons are hidden from assistive
-technology.
+Pass an icon as a child of `MenuItemIcon`; mark decorative icons
+`aria-hidden='true'`.
 
 <DemoContainer>
   <MenuIconsDemo />
@@ -396,6 +396,14 @@ own props and inherits native props and [`Box`](../box/README.mdx#api) props.
 
 Renders `span` by default. It has no own props and inherits selected-element
 native props and [`Box`](../box/README.mdx#api) props, including `component`.
+
+### MenuItemIcon
+
+Renders `span` by default. It has no own props and inherits selected-element
+native props and [`Box`](../box/README.mdx#api) props, including `component`.
+Set `component` to an icon to apply the slot styling directly to its SVG.
+The default span uses flex layout to align child icons with the text.
+Decorative icons should use `aria-hidden='true'`.
 
 ### MenuItemDescription
 

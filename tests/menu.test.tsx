@@ -1,9 +1,106 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { useState } from 'react';
+import { BiClipboard } from 'react-bootstrap-icons-pro';
 import { expect, test, vi } from 'vitest';
 import { render } from 'vitest-browser-react';
 
-import { Button, Combobox, Menu, MenuItem, MenuItemContent, MenuItemDescription } from '../src';
+import { MenuIconsDemo } from '../docs/components/menu/demos/icons';
+import {
+  Button,
+  Combobox,
+  Menu,
+  MenuItem,
+  MenuItemContent,
+  MenuItemDescription,
+  MenuItemIcon,
+} from '../src';
+
+test('menu icon demo renders decorative child icons at the intended size', async () => {
+  const screen = await render(<MenuIconsDemo />);
+  for (const name of ['Copy', 'Cut', 'Delete']) {
+    const button = screen.getByRole('button', { name }).element();
+    const wrapper = button.querySelector<HTMLElement>('.menu-item-icon');
+    const icon = wrapper?.querySelector('svg');
+    expect(wrapper?.tagName).toBe('SPAN');
+    expect(wrapper).toHaveAttribute('aria-hidden', 'true');
+    expect(icon).toBeTruthy();
+    expect(getComputedStyle(wrapper!).width).toBe('16px');
+    expect(getComputedStyle(icon!).width).toBe('16px');
+  }
+});
+
+test('wrapped menu icons align like direct SVG icons for single and multi-line items', async () => {
+  const screen = await render(
+    <Menu show position='static'>
+      {[false, true].map((withDescription) => (
+        <div key={String(withDescription)}>
+          <MenuItem component='button' data-testid={`direct-${withDescription}`}>
+            <MenuItemIcon component={BiClipboard} aria-hidden='true' />
+            <MenuItemContent>
+              Label
+              {withDescription && <MenuItemDescription>Description</MenuItemDescription>}
+            </MenuItemContent>
+          </MenuItem>
+          <MenuItem component='button' data-testid={`wrapped-${withDescription}`}>
+            <MenuItemIcon aria-hidden='true'>
+              <BiClipboard size='1rem' />
+            </MenuItemIcon>
+            <MenuItemContent>
+              Label
+              {withDescription && <MenuItemDescription>Description</MenuItemDescription>}
+            </MenuItemContent>
+          </MenuItem>
+        </div>
+      ))}
+    </Menu>,
+  );
+  for (const withDescription of [false, true]) {
+    const direct = screen.getByTestId(`direct-${withDescription}`).element();
+    const wrapped = screen.getByTestId(`wrapped-${withDescription}`).element();
+    const directIcon = direct.querySelector('svg')!;
+    const wrappedIcon = wrapped.querySelector('svg')!;
+    const directOffset =
+      directIcon.getBoundingClientRect().top - direct.getBoundingClientRect().top;
+    const wrappedOffset =
+      wrappedIcon.getBoundingClientRect().top - wrapped.getBoundingClientRect().top;
+    expect(Math.abs(wrappedOffset - directOffset)).toBeLessThan(1);
+    expect(wrappedIcon.getBoundingClientRect().height).toBeCloseTo(
+      directIcon.getBoundingClientRect().height,
+      1,
+    );
+  }
+});
+
+test('menu item icons support default and SVG elements with Box props', async () => {
+  const screen = await render(
+    <Menu show position='static'>
+      <MenuItem component='button'>
+        <MenuItemIcon
+          data-testid='wrapper'
+          className='custom'
+          classNameBefore='before'
+          aria-hidden='true'
+        >
+          Icon
+        </MenuItemIcon>
+        <MenuItemIcon component={BiClipboard} data-testid='svg' fg='3' aria-hidden='true' />
+        <MenuItemIcon d='inline-flex' data-testid='custom-display' aria-hidden='true' />
+        Copy
+      </MenuItem>
+    </Menu>,
+  );
+  const wrapper = screen.getByTestId('wrapper').element();
+  const svg = screen.getByTestId('svg').element();
+  expect(wrapper.tagName).toBe('SPAN');
+  expect(wrapper).toHaveClass('menu-item-icon', 'before', 'custom');
+  expect(svg.tagName.toLowerCase()).toBe('svg');
+  expect(svg).toHaveClass('menu-item-icon', 'fg-3');
+  expect(svg).toHaveAttribute('aria-hidden', 'true');
+  expect(screen.getByTestId('custom-display')).toHaveClass('d-inline-flex');
+  expect(screen.getByTestId('custom-display')).not.toHaveClass('d-flex');
+  expect(getComputedStyle(svg).width).toBe('16px');
+  expect(screen.getByRole('button', { name: 'Copy' })).toBeVisible();
+});
 
 test('menu item content components preserve elements, classes and Box props', async () => {
   const screen = await render(
@@ -41,13 +138,15 @@ test('combobox option descriptions retain menu item markup', async () => {
   const screen = await render(
     <Combobox
       aria-label='Choices'
-      options={[{ value: 'a', label: 'Option', description: 'Details' }]}
+      options={[{ value: 'a', label: 'Option', description: 'Details', icon: <BiClipboard /> }]}
     />,
   );
   await screen.getByRole('button', { name: 'Choices' }).click();
   const option = screen.getByRole('option', { name: 'Option Details' }).element();
   expect(option.querySelector('.menu-item-content')?.tagName).toBe('SPAN');
   expect(option.querySelector('.menu-item-description')?.tagName).toBe('SMALL');
+  expect(option.querySelector('.menu-item-icon')?.tagName).toBe('SPAN');
+  expect(option.querySelector('.menu-item-icon')).toHaveAttribute('aria-hidden', 'true');
 });
 
 test('menu waits for its position before showing and leaves transforms to the opening animation', async () => {

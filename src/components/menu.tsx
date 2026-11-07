@@ -347,6 +347,24 @@ export function MenuItem<C extends ElementType = 'a'>({
   );
 }
 
+export type MenuItemIconProps<C extends ElementType = 'span'> = BoxProps<C>;
+
+export function MenuItemIcon<C extends ElementType = 'span'>({
+  component,
+  className,
+  ...props
+}: MenuItemIconProps<C>) {
+  return (
+    <Box<C>
+      {...(props as BoxProps<C>)}
+      component={component ?? ('span' as C)}
+      d={props.d ?? (component === undefined || component === 'span' ? 'flex' : undefined)}
+      classNameBefore={clsx('menu-item-icon', props.classNameBefore)}
+      className={className}
+    />
+  );
+}
+
 export type MenuItemContentProps<C extends ElementType = 'span'> = BoxProps<C>;
 
 export function MenuItemContent<C extends ElementType = 'span'>({
