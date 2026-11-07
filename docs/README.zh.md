@@ -55,7 +55,7 @@ export function Example() {
 - [CSS Grid](./components/css-grid/)
 - [Grid 网格](./components/grid/)
 - [IconLink 图标链接](./components/icon-link/)
-- [Images 图片](./components/image/)
+- [Image 图片](./components/image/)
 - [InputGroup 输入组](./components/input-group/)
 - [ListGroup 列表组](./components/list-group/)
 - [Menu 菜单](./components/menu/)

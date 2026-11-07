@@ -1,73 +1,152 @@
 ---
-title: Images 图片
+title: Image 图片
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Figure, FigureCaption, Image } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ImageResponsiveDemo } from './demos/responsive';
+import { ImageThumbnailDemo } from './demos/thumbnail';
+import { ImageAlignFloatDemo } from './demos/align-float';
+import { ImageAlignMarginDemo } from './demos/align-margin';
+import { ImageAlignTextDemo } from './demos/align-text';
+import { ImageFigureDemo } from './demos/figure';
+import { ImageFigureAlignedDemo } from './demos/figure-aligned';
+import { ImagePictureDemo } from './demos/picture';
 
-# Images 图片
+# Image 图片
 
-`Image` 提供 Bootstrap 响应式图片和缩略图样式；`Figure` 与 `FigureCaption`
-用于语义化图片及其说明文字。
+`Image` 提供 Bootstrap 响应式图片和缩略图样式；`Figure` 与 `FigureCaption` 提供
+语义化图片及其说明文字样式。
+
+## 响应式图片
+
+使用 `fluid` 应用 `.img-fluid`，设置 `max-width: 100%` 和 `height: auto`，
+使图片适应父元素宽度。
 
 <DemoContainer>
-  <Figure>
-    <Image
-      fluid
-      src='https://placehold.co/600x400'
-      alt='带有说明文字的风景占位图'
-      className='rounded-3'
-    />
-    <FigureCaption>图片说明文字。</FigureCaption>
-  </Figure>
+  <ImageResponsiveDemo />
 </DemoContainer>
 
-## 响应式图片与缩略图
+```tsx src='./demos/responsive.tsx'
 
-设置 `fluid` 会应用 `.img-fluid`（`max-width: 100%; height: auto`），设置
-`thumbnail` 会应用 `.img-thumbnail`。两者可以同时使用。可通过 `className`
-传入 `float-start`、`mx-auto`、`text-center` 等对齐工具类。
+```
+
+## 缩略图
+
+使用 `thumbnail` 应用 `.img-thumbnail`，为图片添加内边距和圆角边框。它可以与
+`fluid` 同时使用。
+
+<DemoContainer>
+  <ImageThumbnailDemo />
+</DemoContainer>
+
+```tsx src='./demos/thumbnail.tsx'
+
+```
+
+## 图片对齐
+
+使用浮动工具类将图片分别对齐到两侧。外层容器清除浮动，使后续内容保持在图片下方。
+
+<DemoContainer>
+  <ImageAlignFloatDemo />
+</DemoContainer>
+
+```tsx src='./demos/align-float.tsx'
+
+```
+
+使用 `mx-auto` 居中块级图片：
+
+<DemoContainer>
+  <ImageAlignMarginDemo />
+</DemoContainer>
+
+```tsx src='./demos/align-margin.tsx'
+
+```
+
+也可以在父元素上使用 `text-center` 居中行内图片：
+
+<DemoContainer>
+  <ImageAlignTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/align-text.tsx'
+
+```
 
 ## 图片与说明
 
-`Figure` 和 `FigureCaption` 用于组合图片及可选说明。Figure 中的图片不会自动变为响应式，
-请给 `Image` 添加 `fluid`。可在 `Figure` 上使用 flex 工具类调整说明文字的位置。
+使用 `Figure` 和 `FigureCaption` 为内容添加可选说明。Figure 中的图片不会自动设置
+响应式尺寸；请给 `Image` 添加 `fluid`。
 
-需要根据屏幕尺寸选择图片时，可直接组合原生 `<picture>` 和 `<source>`，并将
-`fluid` 或 `thumbnail` 加到内部的 `Image`，而不是 `<picture>`。
+<DemoContainer>
+  <ImageFigureDemo />
+</DemoContainer>
 
-## 属性
+```tsx src='./demos/figure.tsx'
 
-| 组件     | 属性        | 类型          | 说明                               |
-| -------- | ----------- | ------------- | ---------------------------------- |
-| `Image`  | `fluid`     | `boolean`     | 应用 `.img-fluid` 响应式尺寸样式。 |
-| `Image`  | `thumbnail` | `boolean`     | 应用 `.img-thumbnail` 缩略图样式。 |
-| 所有组件 | `component` | `ElementType` | 更换渲染元素。                     |
-| 所有组件 | `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。    |
+```
+
+Bootstrap 的 figure 是 Flex 容器，可使用对齐工具类更改说明文字的对齐方式。
+
+<DemoContainer>
+  <ImageFigureAlignedDemo />
+</DemoContainer>
+
+```tsx src='./demos/figure-aligned.tsx'
+
+```
+
+## Picture
+
+使用原生 `picture` 和 `source` 元素提供备选图片源。将 `fluid` 和 `thumbnail` 加到
+内部 `Image`，而不是 `picture`。浏览器选择第一个匹配且受支持的图片源；没有匹配项时
+回退到 `Image` 的图片源。
+
+<DemoContainer>
+  <ImagePictureDemo />
+</DemoContainer>
+
+```tsx src='./demos/picture.tsx'
+
+```
+
+## CSS
+
+Bootstrap 为缩略图的内边距、背景、边框和阴影，以及 figure 的间距和说明文字样式提供
+局部 CSS 变量。完整列表请参阅[上游 CSS 变量文档](https://getbootstrap.com/docs/6.0/content/images/#css)。
+
+## API
 
 ### Image
 
-默认渲染为 `img`。自有属性为 `fluid?: boolean` 和 `thumbnail?: boolean`；继承所选
-元素的原生属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api)
-属性。
+默认渲染为 `img`，下表列出自有属性。此外继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
+
+| 属性        | 类型      | 说明                             |
+| ----------- | --------- | -------------------------------- |
+| `fluid`     | `boolean` | 应用 `.img-fluid` 响应式样式。   |
+| `thumbnail` | `boolean` | 应用 `.img-thumbnail` 边框样式。 |
 
 ### Figure
 
-默认渲染为 `figure`，没有自有属性。继承原生 `figure` 属性及通过 `BoxProps<C>`
-继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `figure`，没有额外属性。继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
 
 ### FigureCaption
 
-默认渲染为 `figcaption`，没有自有属性。继承原生 `figcaption` 属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `figcaption`，没有额外属性。继承所选元素的原生属性及
+[`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
 
 ## 无障碍
 
-信息性图片应提供有意义的 `alt` 文本；装饰性图片应使用 `alt=""`。图片说明文字应与替代文本互补，
-不要重复传达相同内容。
+信息性图片应提供有意义的 `alt` 文本，装饰性图片应使用 `alt=''`。说明文字可以补充
+上下文，但不能取代 `alt` 文本。对于 `picture`，无论浏览器选择哪个图片源，都使用
+`Image` 提供的替代文本。
 
 ## 参考
 
 - [Bootstrap 6 图片文档](https://getbootstrap.com/docs/6.0/content/images/)
-- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/image.tsx)
+- [Image 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/image.tsx)

@@ -1,75 +1,160 @@
 ---
-title: Images
+title: Image
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Figure, FigureCaption, Image } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
-import { ImagesBasicDemo } from './demos/basic';
+import { ImageResponsiveDemo } from './demos/responsive';
+import { ImageThumbnailDemo } from './demos/thumbnail';
+import { ImageAlignFloatDemo } from './demos/align-float';
+import { ImageAlignMarginDemo } from './demos/align-margin';
+import { ImageAlignTextDemo } from './demos/align-text';
+import { ImageFigureDemo } from './demos/figure';
+import { ImageFigureAlignedDemo } from './demos/figure-aligned';
+import { ImagePictureDemo } from './demos/picture';
 
-# Images
+# Image
 
-`Image` adds Bootstrap's responsive and thumbnail image classes. `Figure` and
-`FigureCaption` provide semantic figure markup with Bootstrap's baseline styles.
+`Image` adds Bootstrap's responsive and thumbnail image styles. `Figure` and
+`FigureCaption` provide semantic figure markup and caption styling.
 
-## Example
+## Responsive images
+
+Use `fluid` to apply `.img-fluid`, which sets `max-width: 100%` and
+`height: auto` so the image fits its parent.
 
 <DemoContainer>
-  <ImagesBasicDemo />
+  <ImageResponsiveDemo />
 </DemoContainer>
 
-```tsx src='./demos/basic.tsx'
+```tsx src='./demos/responsive.tsx'
 
 ```
 
-## Responsive images and thumbnails
+## Image thumbnails
 
-Use `fluid` to apply `.img-fluid` (`max-width: 100%; height: auto`) and
-`thumbnail` to apply `.img-thumbnail`. Both options can be combined. Alignment
-utilities such as `float-start`, `mx-auto`, and `text-center` can be passed
-through `className`.
+Use `thumbnail` to apply `.img-thumbnail` for a padded, rounded border. It can
+be combined with `fluid`.
+
+<DemoContainer>
+  <ImageThumbnailDemo />
+</DemoContainer>
+
+```tsx src='./demos/thumbnail.tsx'
+
+```
+
+## Aligning images
+
+Use float utilities to align images at either side. The wrapper clears the
+floats so that subsequent content stays below them.
+
+<DemoContainer>
+  <ImageAlignFloatDemo />
+</DemoContainer>
+
+```tsx src='./demos/align-float.tsx'
+
+```
+
+Center a block-level image with `mx-auto`:
+
+<DemoContainer>
+  <ImageAlignMarginDemo />
+</DemoContainer>
+
+```tsx src='./demos/align-margin.tsx'
+
+```
+
+Or center an inline image with `text-center` on its parent:
+
+<DemoContainer>
+  <ImageAlignTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/align-text.tsx'
+
+```
 
 ## Figures
 
-Use `Figure` and `FigureCaption` for an image with an optional caption. Images
-inside figures are not automatically responsive; add `fluid` to the `Image`.
-Use flex utilities on `Figure` to change the caption alignment.
+Use `Figure` and `FigureCaption` for content with an optional caption. Images
+in a figure have no automatic responsive size; add `fluid` to the `Image`.
 
-For responsive art direction, use the native `<picture>` and `<source>` elements
-and apply `fluid` or `thumbnail` to the nested `Image`, not to `<picture>`.
+<DemoContainer>
+  <ImageFigureDemo />
+</DemoContainer>
+
+```tsx src='./demos/figure.tsx'
+
+```
+
+Bootstrap figures are flex containers. Use alignment utilities to change the
+caption's alignment.
+
+<DemoContainer>
+  <ImageFigureAlignedDemo />
+</DemoContainer>
+
+```tsx src='./demos/figure-aligned.tsx'
+
+```
+
+## Picture
+
+Use native `picture` and `source` elements for alternative image sources. Put
+`fluid` and `thumbnail` on the nested `Image`, not on `picture`. The browser
+chooses the first matching supported source and falls back to the `Image` source.
+
+<DemoContainer>
+  <ImagePictureDemo />
+</DemoContainer>
+
+```tsx src='./demos/picture.tsx'
+
+```
+
+## CSS
+
+Bootstrap exposes local CSS variables for thumbnail padding, background,
+border and shadow, and for figure spacing and caption styling. See the
+[upstream CSS variables](https://getbootstrap.com/docs/6.0/content/images/#css)
+for the complete list.
 
 ## API
 
 ### Image
 
-Renders an `img` by default. Its own props are `fluid?: boolean` and
-`thumbnail?: boolean`; it inherits native props for the selected element and
-all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders an `img` by default. Its own props are listed below. It inherits native
+props for the selected element and [`Box`](../box/README.mdx#api) utility props,
+including `component`.
 
-| Component      | Prop        | Type          | Description                                        |
-| -------------- | ----------- | ------------- | -------------------------------------------------- |
-| `Image`        | `fluid`     | `boolean`     | Applies `.img-fluid` for responsive sizing.        |
-| `Image`        | `thumbnail` | `boolean`     | Applies `.img-thumbnail` for a bordered thumbnail. |
-| All components | `component` | `ElementType` | Changes the rendered element.                      |
-| All components | `...props`  | `BoxProps<C>` | Native props and all Box utility props.            |
+| Prop        | Type      | Description                                |
+| ----------- | --------- | ------------------------------------------ |
+| `fluid`     | `boolean` | Applies responsive `.img-fluid` styling.   |
+| `thumbnail` | `boolean` | Applies bordered `.img-thumbnail` styling. |
 
 ### Figure
 
-Renders a `figure` by default and has no own props. It inherits native figure
-props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders a `figure` by default and has no additional props. It inherits native
+props for the selected element and [`Box`](../box/README.mdx#api) utility props,
+including `component`.
 
 ### FigureCaption
 
-Renders a `figcaption` by default and has no own props. It inherits native
-figcaption props and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+Renders a `figcaption` by default and has no additional props. It inherits
+native props for the selected element and [`Box`](../box/README.mdx#api)
+utility props, including `component`.
 
 ## Accessibility
 
-Provide meaningful `alt` text for informative images. Use `alt=""` for
-decorative images, and keep captions distinct from alternative text.
+Provide meaningful `alt` text for informative images and use `alt=''` for
+decorative images. A caption can add context but does not replace alternative
+text. For `picture`, the `Image` provides the alternative text for whichever
+source the browser selects.
 
 ## See
 
-- [Bootstrap 6 Images documentation](https://getbootstrap.com/docs/6.0/content/images/)
-- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/image.tsx)
+- [Bootstrap 6 images documentation](https://getbootstrap.com/docs/6.0/content/images/)
+- [Image source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/image.tsx)

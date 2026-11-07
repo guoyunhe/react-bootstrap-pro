@@ -23,7 +23,7 @@ order: 1
 - [Drawer 抽屉](./drawer/)
 - [Grid 网格](./grid/)
 - [IconLink 图标链接](./icon-link/)
-- [Images 图片](./image/)
+- [Image 图片](./image/)
 - [ListGroup 列表组](./list-group/)
 - [Menu 菜单](./menu/)
 - [Nav 导航](./nav/)

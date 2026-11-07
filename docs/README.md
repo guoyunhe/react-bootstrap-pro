@@ -55,7 +55,7 @@ export function Example() {
 - [CSS Grid](./components/css-grid/)
 - [Grid](./components/grid/)
 - [IconLink](./components/icon-link/)
-- [Images](./components/image/)
+- [Image](./components/image/)
 - [InputGroup](./components/input-group/)
 - [ListGroup](./components/list-group/)
 - [Menu](./components/menu/)

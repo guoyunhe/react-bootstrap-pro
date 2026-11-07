@@ -27,7 +27,7 @@ order: 1
 - [Form](./form/)
 - [Grid](./grid/)
 - [IconLink](./icon-link/)
-- [Images](./image/)
+- [Image](./image/)
 - [InputGroup](./input-group/)
 - [ListGroup](./list-group/)
 - [Menu](./menu/)
