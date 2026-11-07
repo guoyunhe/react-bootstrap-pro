@@ -1,16 +1,23 @@
 import { BiSearch } from 'react-bootstrap-icons-pro';
-import { Box, FormField, FormLabel, FormText, Input } from 'react-bootstrap-pro';
+import {
+  FormAdornIcon,
+  FormControl,
+  FormField,
+  FormLabel,
+  FormText,
+  Input,
+} from 'react-bootstrap-pro';
 
 export function FormAdornFieldDemo() {
   return (
     <FormField>
       <FormLabel htmlFor='form-adorn-field'>Search</FormLabel>
-      <Box component='label' classNameBefore='form-control form-adorn'>
-        <Box className='form-adorn-icon' aria-hidden='true'>
+      <FormControl component='label' adorn>
+        <FormAdornIcon aria-hidden='true'>
           <BiSearch />
-        </Box>
+        </FormAdornIcon>
         <Input ghost type='search' id='form-adorn-field' placeholder='Search...' />
-      </Box>
+      </FormControl>
       <FormText component='small'>Search across all pages and posts.</FormText>
     </FormField>
   );

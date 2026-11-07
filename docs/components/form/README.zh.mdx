@@ -40,8 +40,8 @@ Bootstrap 表单控件在 Reboot 表单样式之上提供组件类。`FormField`
 [`Select`](../select/README.zh.mdx) 和 [`Textarea`](../textarea/README.zh.mdx) 分别封装
 对应的原生元素。`Checkbox`、`Radio`、`Switch` 和 `Range` 分别渲染 `.check` 复选框、
 `.radio` 单选按钮、`.switch` 开关与 `.form-range` 滑块；`InputGroup` 为控件挂载附加
-内容，`FormFloating` 将控件与标签包装为浮动标签字段，带装饰控件则由 ghost `Input`
-与 `.form-adorn` 容器组合而成。请始终为输入框设置合适的 `type`，以便浏览器提供对应
+内容，`FormFloating` 将控件与标签包装为浮动标签字段，`FormControl` 可包装 ghost
+`Input` 和装饰元素。请始终为输入框设置合适的 `type`，以便浏览器提供对应
 的键盘、校验与自动填充行为。
 
 ## 基础示例
@@ -196,10 +196,9 @@ date、time、datetime-local、month、week 类型的输入框始终显示浮动
 
 ## 装饰控件
 
-将 ghost `Input` 放入带有
-`classNameBefore='form-control form-adorn'` 的 `Box component='label'`，即可让装饰元素
-与输入框并排；点击图标、文字或内边距即可聚焦控件，无需 JavaScript。在容器上添加
-`form-adorn-end` 可将装饰元素放到末尾。
+将 ghost `Input` 放入 `FormControl component='label' adorn`，即可让装饰元素与输入框
+并排；点击图标、文字或内边距即可聚焦控件，无需 JavaScript。使用 `adornEnd` 代替
+`adorn` 可将装饰元素放到末尾。
 
 <DemoContainer>
   <FormAdornBasicDemo />
@@ -209,8 +208,9 @@ date、time、datetime-local、month、week 类型的输入框始终显示浮动
 
 ```
 
-图标使用 `.form-adorn-icon`，货币符号、域名后缀等文字使用 `.form-adorn-text`。
-两者都是装饰性的，需要标记 `aria-hidden='true'`。
+图标使用 `FormAdornIcon` 包裹，货币符号、域名后缀等文字使用 `FormAdornText` 包裹。
+这些示例中的两者都是装饰性的，需要标记 `aria-hidden='true'`。两个组件都不会自动
+隐藏其内容；有意义的装饰文字应包含在控件的无障碍名称或描述中。
 
 <DemoContainer>
   <FormAdornTextDemo />
@@ -230,7 +230,7 @@ date、time、datetime-local、month、week 类型的输入框始终显示浮动
 
 ```
 
-在容器上添加 `form-control-sm` 或 `form-control-lg` 可整体调整带装饰控件的尺寸。
+在 `FormControl` 上设置 `size='sm'` 或 `size='lg'`，可整体调整带装饰控件的尺寸。
 
 <DemoContainer>
   <FormAdornSizingDemo />
@@ -422,9 +422,10 @@ CSS 定制。
 
 ### 支持的控件
 
-`Input`、`Textarea`、`Select`、`Checkbox`、`Radio`、`SwitchInput`、`Range`、`ChipInput`、
-`Combobox` 与 `OtpInput` 都支持 `validation='valid' | 'invalid'`。装饰输入框可能需要在
-容器上添加校验状态类；输入组与浮动标签可使用内部控件的状态。
+`FormControl`、`Input`、`Textarea`、`Select`、`Checkbox`、`Radio`、`SwitchInput`、
+`Range`、`ChipInput`、`Combobox` 与 `OtpInput` 都支持 `validation='valid' | 'invalid'`。
+为装饰输入框的 `FormControl` 设置 `validation` 可调整容器样式；输入组与浮动标签可
+使用内部控件的状态。
 
 <DemoContainer>
   <ValidationSupportedDemo />
@@ -458,6 +459,32 @@ CSS 定制。
 变化出现的提示，可使用 `aria-live` 或状态元素；标签与反馈文本应针对具体字段。
 
 ## API
+
+### FormControl
+
+默认渲染为 `div`。
+
+| 属性         | 类型                   | 说明                                              |
+| ------------ | ---------------------- | ------------------------------------------------- |
+| `adorn`      | `boolean`              | 添加 `.form-adorn`，排列装饰元素和 ghost 输入框。 |
+| `adornEnd`   | `boolean`              | 添加 `.form-adorn` 并将装饰元素放在末尾。         |
+| `size`       | `'sm' \| 'lg'`         | 为容器应用小型或大型表单控件尺寸。                |
+| `validation` | `'valid' \| 'invalid'` | 为容器应用对应的校验状态类。                      |
+
+继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括用于
+选择渲染元素的 `component`。容器内包含 ghost 输入框时，可使用 `component='label'`。
+
+### FormAdornIcon
+
+默认渲染为 `div` 并添加 `.form-adorn-icon`，没有额外属性。继承所选元素的原生属性
+及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括用于选择渲染元素的 `component`。
+装饰性图标应设置 `aria-hidden='true'`。
+
+### FormAdornText
+
+默认渲染为 `span` 并添加 `.form-adorn-text`，没有额外属性。继承所选元素的原生属性
+及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括用于选择渲染元素的 `component`。
+装饰性文字应设置 `aria-hidden='true'`。
 
 ### Form
 
@@ -533,6 +560,9 @@ CSS 定制。
 - [Bootstrap 6 表单布局文档](https://getbootstrap.com/docs/6.0/forms/layout/)
 - [Bootstrap 6 表单校验文档](https://getbootstrap.com/docs/6.0/forms/validation/)
 - [Form 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form.tsx)
+- [FormAdornIcon 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-adorn-icon.tsx)
+- [FormAdornText 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-adorn-text.tsx)
+- [FormControl 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-control.tsx)
 - [FormFeedback 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-feedback.tsx)
 - [FormField 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-field.tsx)
 - [FormFieldContent 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-field-content.tsx)

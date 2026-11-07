@@ -4,8 +4,9 @@
 
 ### Breaking Changes
 
-- Replace the polymorphic `FormControl` with dedicated `Input`, `Select`, and
-  `Textarea` components; remove the `FormControl` export.
+- Replace `FormControl` input, select, and textarea usage with dedicated
+  `Input`, `Select`, and `Textarea` components. `FormControl` now defaults to
+  a `div` and is intended for control wrappers.
 - Rename the Box `display` prop to `d`; the old prop is removed.
 - Replace Carousel's `fade` and `slide` boolean props with an `effect` prop
   accepting `'slide'` or `'fade'`; the default is `'slide'`.
@@ -17,6 +18,9 @@
 
 ### Added
 
+- Add `FormAdornIcon` for icons in adorned form controls.
+- Add `FormAdornText` for text in adorned form controls.
+- Add `FormControl` support for adorned control wrappers.
 - Add the `AlertLink` component for links styled within alerts.
 - Add the Carousel `ends` prop for configuring end-of-carousel behavior.
 - Add the CarouselItem `interval` prop for configuring individual slide durations.

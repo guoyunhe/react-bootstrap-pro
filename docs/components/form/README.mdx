@@ -42,8 +42,8 @@ and [`Textarea`](../textarea/README.mdx) wrap their respective native elements.
 `Checkbox`, `Radio`, `Switch`, and `Range` render the `.check` checkbox, `.radio`
 radio, `.switch` track, and `.form-range` slider. `InputGroup` attaches add-ons
 to a control, `FormFloating` wraps a control and label into a floating-label
-field, and an adorned control combines a ghost `Input` with a `.form-adorn`
-wrapper. Always set an appropriate `type` on inputs so browsers provide the
+field, and `FormControl` can wrap a ghost `Input` with adornments. Always set an
+appropriate `type` on inputs so browsers provide the
 matching keyboard, validation, and autofill behavior.
 
 ## Basic example
@@ -204,11 +204,10 @@ wrapper and the control, then render feedback below the field.
 
 ## Form adorn
 
-Wrap a ghost `Input` in a `Box component='label'` with
-`classNameBefore='form-control form-adorn'`. This lays out adornments beside the
-input, and clicking the icon, text, or padding focuses the control without
-JavaScript. Add `form-adorn-end` to the wrapper to place the adornment on the
-trailing side.
+Wrap a ghost `Input` in a `FormControl component='label' adorn`. This lays out
+adornments beside the input, and clicking the icon, text, or padding focuses
+the control without JavaScript. Use `adornEnd` instead of `adorn` to place the
+adornment on the trailing side.
 
 <DemoContainer>
   <FormAdornBasicDemo />
@@ -218,8 +217,10 @@ trailing side.
 
 ```
 
-Icons use `.form-adorn-icon`; text such as currency symbols or domain suffixes
-uses `.form-adorn-text`. Both are decorative, so mark them `aria-hidden='true'`.
+Wrap icons in `FormAdornIcon` and text such as currency symbols or domain suffixes
+in `FormAdornText`. Both are decorative in these examples, so mark them
+`aria-hidden='true'`. Neither component hides its content automatically; include
+meaningful adornment text in the control's accessible name or description.
 
 <DemoContainer>
   <FormAdornTextDemo />
@@ -239,8 +240,8 @@ Wrap the adorned control in a `FormField` to add a label and description text.
 
 ```
 
-Add `form-control-sm` or `form-control-lg` to the wrapper to resize the whole
-adorned control.
+Set `size='sm'` or `size='lg'` on `FormControl` to resize the whole adorned
+control.
 
 <DemoContainer>
   <FormAdornSizingDemo />
@@ -449,11 +450,11 @@ outside the `.form-floating` wrapper.
 
 ### Supported elements
 
-`Input`, `Textarea`, `Select`, `Checkbox`, `Radio`, `SwitchInput`, `Range`,
+`FormControl`, `Input`, `Textarea`, `Select`, `Checkbox`, `Radio`, `SwitchInput`, `Range`,
 `ChipInput`, `Combobox`, and `OtpInput` accept
-`validation='valid' | 'invalid'`. Adorned inputs may require a validation class
-on their wrapper; input groups and floating labels can use their inner control's
-state.
+`validation='valid' | 'invalid'`. For an adorned input, set `validation` on
+`FormControl` to style its wrapper; input groups and floating labels can use
+their inner control's state.
 
 <DemoContainer>
   <ValidationSupportedDemo />
@@ -491,6 +492,35 @@ a status element for messages appearing without a focus change, and make
 labels and feedback specific to each field.
 
 ## API
+
+### FormControl
+
+Renders a `div` by default.
+
+| Prop         | Type                   | Description                                                       |
+| ------------ | ---------------------- | ----------------------------------------------------------------- |
+| `adorn`      | `boolean`              | Adds `.form-adorn` to arrange adornments and a ghost input.       |
+| `adornEnd`   | `boolean`              | Adds `.form-adorn` and places the adornment on the trailing side. |
+| `size`       | `'sm' \| 'lg'`         | Applies the small or large form-control size to the wrapper.      |
+| `validation` | `'valid' \| 'invalid'` | Applies the matching validation class to the wrapper.             |
+
+Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props, including `component` to select
+the element. Use `component='label'` for a ghost input inside the wrapper.
+
+### FormAdornIcon
+
+Renders a `div` by default and adds `.form-adorn-icon`. It has no additional
+props. Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props, including `component` to select
+the element. Use `aria-hidden='true'` for decorative icons.
+
+### FormAdornText
+
+Renders a `span` by default and adds `.form-adorn-text`. It has no additional
+props. Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props, including `component` to select
+the element. Use `aria-hidden='true'` for decorative text.
 
 ### Form
 
@@ -572,6 +602,9 @@ including `component`; use `span` for inline help text.
 - [Bootstrap 6 Form layout documentation](https://getbootstrap.com/docs/6.0/forms/layout/)
 - [Bootstrap 6 Form validation documentation](https://getbootstrap.com/docs/6.0/forms/validation/)
 - [Form source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form.tsx)
+- [FormAdornIcon source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-adorn-icon.tsx)
+- [FormAdornText source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-adorn-text.tsx)
+- [FormControl source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-control.tsx)
 - [FormFeedback source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-feedback.tsx)
 - [FormField source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-field.tsx)
 - [FormFieldContent source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/form-field-content.tsx)

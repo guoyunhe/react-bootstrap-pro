@@ -1,0 +1,22 @@
+import clsx from 'clsx';
+import type { ElementType } from 'react';
+
+import { Box } from './box';
+import type { BoxProps } from './box';
+
+export type FormAdornTextProps<C extends ElementType = 'span'> = BoxProps<C>;
+
+export function FormAdornText<C extends ElementType = 'span'>({
+  component,
+  className,
+  ...props
+}: FormAdornTextProps<C>) {
+  return (
+    <Box<C>
+      {...(props as BoxProps<C>)}
+      component={component ?? ('span' as C)}
+      classNameBefore={clsx('form-adorn-text', props.classNameBefore)}
+      className={className}
+    />
+  );
+}

@@ -3,6 +3,8 @@ import {
   Box,
   Checkbox,
   ChipInput,
+  FormAdornIcon,
+  FormControl,
   FormFeedback,
   FormField,
   FormFieldContent,
@@ -153,17 +155,17 @@ export function ValidationSupportedDemo() {
       </FormField>
       <FormField>
         <FormLabel htmlFor='validation-supported-adorn'>Adorned input</FormLabel>
-        <Box component='label' classNameBefore='form-control form-adorn is-invalid'>
-          <Box className='form-adorn-icon' aria-hidden='true'>
+        <FormControl component='label' adorn validation='invalid'>
+          <FormAdornIcon aria-hidden='true'>
             <BiSearch />
-          </Box>
+          </FormAdornIcon>
           <Input
             ghost
             id='validation-supported-adorn'
             placeholder='Search...'
             aria-describedby='validation-supported-adorn-feedback'
           />
-        </Box>
+        </FormControl>
         <FormFeedback id='validation-supported-adorn-feedback'>
           Example invalid adorned input feedback
         </FormFeedback>
