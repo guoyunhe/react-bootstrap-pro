@@ -74,6 +74,7 @@ type OwnProps<C extends ElementType> = {
   themeReset?: boolean | undefined;
   focusRing?: boolean | undefined;
   hoverLift?: boolean | undefined;
+  visuallyHidden?: boolean | undefined;
   colorScheme?: ColorScheme | undefined;
   fg?: Fg | undefined;
   fgv?: 'emphasis' | 'contrast' | undefined;
@@ -337,6 +338,7 @@ export function Box<C extends ElementType = 'div'>({
   themeReset,
   focusRing,
   hoverLift,
+  visuallyHidden,
   colorScheme,
   fg,
   fgv,
@@ -478,6 +480,7 @@ export function Box<C extends ElementType = 'div'>({
     themeReset && 'theme-reset',
     focusRing && 'focus-ring',
     hoverLift && 'hover-lift',
+    visuallyHidden && 'visually-hidden',
     colorScheme && `color-scheme-${colorScheme}`,
     fg && (fgv && isThemeColor(fg) ? `fg-${fgv}-${fg}` : `fg-${fg}`),
     fgo && `fg-${fgo}`,

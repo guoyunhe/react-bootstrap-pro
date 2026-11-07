@@ -291,6 +291,7 @@ Bootstrap 工具类属性均链接到对应的 Bootstrap 6 文档。未添加链
 | `flexWrap`                | `'wrap' \| 'nowrap' \| 'wrap-reverse'`                                                                                                                                                   | —       | 添加响应式 `.flex-*` 换行类。 参阅 [Bootstrap flex 文档](https://getbootstrap.com/docs/6.0/utilities/flex/)。                                                      |
 | `float`                   | `'start' \| 'end' \| 'none'`                                                                                                                                                             | —       | 添加响应式 `.float-{value}` 类。 参阅 [Bootstrap float 文档](https://getbootstrap.com/docs/6.0/utilities/float/)。                                                 |
 | `focusRing`               | `boolean`                                                                                                                                                                                | `false` | 在可见焦点状态应用 `.focus-ring`。 参阅 [Bootstrap focus-ring helper 文档](https://getbootstrap.com/docs/6.0/helpers/focus-ring/)。                                |
+| `visuallyHidden`          | `boolean`                                                                                                                                                                                | `false` | 应用 `.visually-hidden`；内容仍可被辅助技术访问。                                                                                                                  |
 | `fixedBottom`             | `boolean`                                                                                                                                                                                | `false` | 添加 `.fixed-bottom`。 参阅 [Bootstrap position 文档](https://getbootstrap.com/docs/6.0/utilities/position/)。                                                     |
 | `fixedTop`                | `boolean`                                                                                                                                                                                | `false` | 添加 `.fixed-top`。 参阅 [Bootstrap position 文档](https://getbootstrap.com/docs/6.0/utilities/position/)。                                                        |
 | `fontFamily`              | `'monospace' \| 'body'`                                                                                                                                                                  | —       | 添加 `.font-*`。 参阅 [Bootstrap font-family 文档](https://getbootstrap.com/docs/6.0/utilities/font-family/)。                                                     |
@@ -392,3 +393,8 @@ Box 工具类类型都从包的入口导出。为简洁起见，数字值统一�
 类型仍限制为 Bootstrap 对应工具类支持的值。所有 Utilities 侧栏中会生成 CSS 类的页面都已
 提供对应属性；`api` 页面是 Sass API 说明，并非工具类。更多用法请参阅 Bootstrap
 [Utilities 文档](https://getbootstrap.com/docs/6.0/utilities/)。
+
+## 无障碍
+
+使用 `visuallyHidden` 在视觉上隐藏内容，同时让辅助技术仍可访问。该属性不会阻止键盘
+聚焦；对于需要在聚焦时显示的可聚焦控件，请勿使用它。

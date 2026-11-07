@@ -270,6 +270,7 @@ Bootstrap utility props link to their corresponding Bootstrap 6 docs. Unlinked p
 | `flexWrap`                | `'wrap' \| 'nowrap' \| 'wrap-reverse'`                                                                                                                                                   | —       | Applies responsive `.flex-*` wrap classes. See [Bootstrap flex utilities](https://getbootstrap.com/docs/6.0/utilities/flex/).                                                                  |
 | `float`                   | `'start' \| 'end' \| 'none'`                                                                                                                                                             | —       | Applies responsive `.float-{value}` classes. See [Bootstrap float utilities](https://getbootstrap.com/docs/6.0/utilities/float/).                                                              |
 | `focusRing`               | `boolean`                                                                                                                                                                                | `false` | Applies `.focus-ring` to visible focus states. See [Bootstrap focus-ring helper utilities](https://getbootstrap.com/docs/6.0/helpers/focus-ring/).                                             |
+| `visuallyHidden`          | `boolean`                                                                                                                                                                                | `false` | Applies `.visually-hidden`; content remains available to assistive technology.                                                                                                                 |
 | `fixedBottom`             | `boolean`                                                                                                                                                                                | `false` | Applies `.fixed-bottom`. See [Bootstrap position utilities](https://getbootstrap.com/docs/6.0/utilities/position/).                                                                            |
 | `fixedTop`                | `boolean`                                                                                                                                                                                | `false` | Applies `.fixed-top`. See [Bootstrap position utilities](https://getbootstrap.com/docs/6.0/utilities/position/).                                                                               |
 | `fontFamily`              | `'monospace' \| 'body'`                                                                                                                                                                  | —       | Applies `.font-*`. See [Bootstrap font-family utilities](https://getbootstrap.com/docs/6.0/utilities/font-family/).                                                                            |
@@ -375,6 +376,10 @@ class-producing utility page in Bootstrap's Utilities sidebar; `api` is
 documentation about Sass rather than a class utility.
 
 ## Accessibility
+
+Use `visuallyHidden` to hide content visually while keeping it available to
+assistive technology. This does not prevent keyboard focus; avoid using it for
+focusable controls that must become visible on focus.
 
 Choose an element whose semantics match its content. `Box` only renders an
 element with utility classes; it does not add interactive behavior or ARIA

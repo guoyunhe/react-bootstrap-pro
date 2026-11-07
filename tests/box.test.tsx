@@ -97,6 +97,24 @@ test('applies the hover lift helper', async () => {
   expect(screen.getByTestId('hover-lift')).toHaveClass('hover-lift');
 });
 
+test('applies visually hidden without forwarding its prop', async () => {
+  const screen = await render(
+    <>
+      <Box component='span' visuallyHidden data-testid='hidden'>
+        Accessible text
+      </Box>
+      <Box visuallyHidden={false} data-testid='visible'>
+        Visible text
+      </Box>
+    </>,
+  );
+  const hidden = screen.getByTestId('hidden').element();
+  expect(hidden).toHaveClass('visually-hidden');
+  expect(hidden).toHaveTextContent('Accessible text');
+  expect(hidden).not.toHaveAttribute('visuallyHidden');
+  expect(screen.getByTestId('visible')).not.toHaveClass('visually-hidden');
+});
+
 test('applies foreground utilities', async () => {
   const screen = await render(
     <>

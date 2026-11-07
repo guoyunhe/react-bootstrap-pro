@@ -9,7 +9,7 @@ export function InputPlaintextInlineDemo() {
       onSubmit={(event: FormEvent<HTMLFormElement>) => event.preventDefault()}
     >
       <Col span='auto'>
-        <FormLabel htmlFor='input-plaintext-inline-email' className='visually-hidden'>
+        <FormLabel htmlFor='input-plaintext-inline-email' visuallyHidden>
           Email
         </FormLabel>
         <Input
@@ -20,7 +20,7 @@ export function InputPlaintextInlineDemo() {
         />
       </Col>
       <Col span='auto'>
-        <FormLabel htmlFor='input-plaintext-inline-password' className='visually-hidden'>
+        <FormLabel htmlFor='input-plaintext-inline-password' visuallyHidden>
           Password
         </FormLabel>
         <Input id='input-plaintext-inline-password' type='password' placeholder='Password' />

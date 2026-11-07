@@ -19,6 +19,7 @@
 
 ### Added
 
+- Add the `Box` `visuallyHidden` prop for screen-reader-accessible hidden content.
 - Add the `Input` `caret` prop for Bootstrap's form-control caret styling.
 - Add `FormAdornIcon` for icons in adorned form controls.
 - Add `FormAdornText` for text in adorned form controls.
