@@ -4,6 +4,8 @@
 
 ### Breaking Changes
 
+- Replace Bootstrap Carousel JavaScript integration with React-managed interaction.
+
 - Replace Bootstrap NavOverflow JavaScript integration with a React implementation; use React props instead of plugin data options and remove plugin initialization. Overflow menu copies have independent state.
 
 - Rename `OtpInput` and its public types to `OTPInput` and `OTPInput*`.

@@ -3,7 +3,6 @@ title: Carousel
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { DemoContainer } from '../demo-container';
 import { CarouselTopControlsDemo } from './demos/top-controls';
 import { CarouselBottomControlsDemo } from './demos/bottom-controls';
@@ -26,7 +25,7 @@ import { CarouselDarkDemo } from './demos/dark';
 ## How it works
 
 `Carousel` uses CSS scroll snapping, so sliding, touch dragging, momentum, and
-keyboard scrolling come from the browser. Bootstrap JavaScript manages autoplay,
+keyboard scrolling come from the browser. React manages autoplay,
 previous/next controls, indicators, and active-slide syncing.
 
 Because slides live in a real scroll container, a carousel can show multiple
@@ -180,6 +179,8 @@ Set the `autoplay` prop to start cycling on page load. Autoplay pauses on
 hover and while the page is hidden. When a visitor takes control, autoplay
 stops. Avoid autoplay where possible; if used, provide a discoverable control
 to pause and resume. Hover- or focus-only pauses are not sufficient.
+Changing `autoplay` after mount starts or stops playback; manual controls can
+also pause it without changing the prop.
 
 The play/pause button toggles autoplay and updates its accessible name. The
 active indicator also shows a progress fill for the current slide's interval;
@@ -196,7 +197,7 @@ this is disabled under reduced motion.
 ### Individual intervals
 
 Set the `interval` prop on a slide to customize how long it remains visible,
-in milliseconds.
+in in milliseconds (default: 5000).
 The indicator progress fill follows each slide's interval.
 
 <DemoContainer>
@@ -214,8 +215,9 @@ Use the `ends` prop to choose what happens at the first and last slide:
 
 ### Loop (default)
 
-`loop` scrolls seamlessly past the ends for a single-slide carousel. Multi-item,
-peek, centered, and variable-width layouts fall back to `wrap`.
+`loop` scrolls seamlessly past the ends for a single-slide sliding carousel.
+Fade, reduced-motion, multi-item, peek, centered, and variable-width layouts
+fall back to `wrap`.
 
 <DemoContainer>
   <CarouselEndLoopDemo />
@@ -344,8 +346,8 @@ Accepts native props for the selected element,
 | `pauseLabel` | `string` | `'Pause'` | Accessible label while the carousel is playing. |
 | `playLabel`  | `string` | `'Play'`  | Accessible label while the carousel is paused.  |
 
-Renders a `button` by default, with both play and pause icons. Bootstrap's
-carousel plugin toggles the icons and accessible name using the label props.
+Renders a `button` by default, with both play and pause icons. React toggles
+the icons and accessible name using the playback state and label props.
 The target carousel is resolved automatically when this control is nested
 inside a `Carousel`. The inherited `component` prop can change the root element.
 Accepts native props for the selected element,

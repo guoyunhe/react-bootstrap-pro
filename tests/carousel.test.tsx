@@ -100,7 +100,7 @@ test('uses an externally provided id for nested controls', async () => {
 
   expect(screen.getByTestId('carousel')).toHaveAttribute('id', 'external-carousel');
   expect(screen.getByRole('button', { name: 'Next' })).toHaveAttribute('data-bs-target', target);
-  expect(screen.getByRole('button', { name: 'Pause' })).toHaveAttribute('data-bs-target', target);
+  expect(screen.getByRole('button', { name: 'Play' })).toHaveAttribute('data-bs-target', target);
   expect(screen.getByRole('button', { name: 'Slide 1' })).toHaveAttribute('data-bs-target', target);
 });
 
@@ -125,7 +125,7 @@ test('renders a play-pause control with labels and target attributes', async () 
   );
 
   const target = `#${screen.getByTestId('carousel').element().getAttribute('id')}`;
-  const button = screen.getByRole('button', { name: 'Pause slideshow' });
+  const button = screen.getByRole('button', { name: 'Play slideshow' });
 
   expect(button).toHaveClass('btn-icon', 'btn-sm', 'carousel-control-play-pause');
   expect(button).toHaveAttribute('type', 'button');

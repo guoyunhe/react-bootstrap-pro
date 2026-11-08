@@ -3,7 +3,6 @@ title: Carousel 轮播
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { DemoContainer } from '../demo-container';
 import { CarouselTopControlsDemo } from './demos/top-controls';
 import { CarouselBottomControlsDemo } from './demos/bottom-controls';
@@ -26,7 +25,7 @@ import { CarouselDarkDemo } from './demos/dark';
 ## 工作原理
 
 `Carousel` 使用 CSS 滚动捕捉，因此滑动、触摸拖动、惯性滚动和键盘滚动都由浏览器处理。
-Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻灯片同步。
+React 管理自动播放、前后控件、指示器和活动幻灯片同步。
 
 由于幻灯片位于真实的滚动容器中，轮播可以同时显示多个幻灯片、露出相邻幻灯片的一部分，
 也可以混合不同宽度的幻灯片。幻灯片可以包含任意内容，但不会自动调整尺寸；请使用工具类
@@ -172,7 +171,8 @@ Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻�
 
 设置 `autoplay` 属性，即可在页面加载时开始循环播放。鼠标悬停或页面隐藏时会暂停；
 用户进行操作后自动播放会停止。建议尽量避免自动播放；若启用，应提供易于发现的暂停和恢复控件。
-仅在悬停或聚焦时暂停并不充分。
+仅在悬停或聚焦时暂停并不充分。挂载后改变 `autoplay` 也会启动或停止播放；手动控件
+可以在不改变该属性的情况下暂停播放。
 
 播放/暂停按钮会切换自动播放状态并更新其无障碍名称。活动指示器还会显示当前幻灯片间隔的进度；
 用户偏好减少动态效果时会禁用该效果。
@@ -187,7 +187,8 @@ Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻�
 
 ### 单项播放间隔
 
-在幻灯片上设置 `interval` 属性，自定义该幻灯片的显示时长（毫秒）。指示器进度会匹配每张幻灯片的间隔。
+在幻灯片上设置 `interval` 属性，自定义该幻灯片的显示时长（毫秒，默认 5000）。
+指示器进度会匹配每张幻灯片的间隔。
 
 <DemoContainer>
   <CarouselIndividualIntervalsDemo />
@@ -203,8 +204,8 @@ Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻�
 
 ### 循环（默认）
 
-单项轮播使用 `loop` 时会在首尾之间无缝滚动。多项显示、相邻项预览、居中及可变宽度布局
-会回退为 `wrap`。
+单项滑动轮播使用 `loop` 时会在首尾之间无缝滚动。淡入淡出、减少动态效果、多项显示、
+相邻项预览、居中及可变宽度布局会回退为 `wrap`。
 
 <DemoContainer>
   <CarouselEndLoopDemo />
@@ -325,7 +326,7 @@ Bootstrap JavaScript 管理自动播放、前后控件、指示器和活动幻�
 | `pauseLabel` | `string` | `'Pause'` | 轮播播放时使用的无障碍名称。 |
 | `playLabel`  | `string` | `'Play'`  | 轮播暂停时使用的无障碍名称。 |
 
-默认渲染为 `button`，包含播放和暂停图标。Bootstrap 轮播插件会根据标签属性切换图标和无障碍名称。
+默认渲染为 `button`，包含播放和暂停图标。React 根据播放状态和标签属性切换图标和无障碍名称。
 控件嵌套在 `Carousel` 中时会自动关联目标轮播。继承的 `component` 属性可更换根元素。
 接受所选元素的原生属性、
 [`IconButton`](../button/README.zh.mdx#iconbutton) 属性及

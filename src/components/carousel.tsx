@@ -1,15 +1,31 @@
 import clsx from 'clsx';
-import { createContext, useContext, useId, type CSSProperties, type ElementType } from 'react';
+import {
+  createContext,
+  useContext,
+  useId,
+  useImperativeHandle,
+  useRef,
+  type ComponentRef,
+  type CSSProperties,
+  type ElementType,
+  type KeyboardEvent,
+  type MouseEvent,
+} from 'react';
 
 import { Box } from './box';
 import type { BoxProps } from './box';
 import { IconButton, type IconButtonProps } from './icon-button';
+import { useCarousel } from './use-carousel';
 
 export type CarouselEffect = 'slide' | 'fade';
 export type CarouselEnds = 'loop' | 'wrap' | 'stop';
 export type CarouselColorMode = 'light' | 'dark';
 
-const CarouselTargetContext = createContext<string | undefined>(undefined);
+type CarouselContextValue = ReturnType<typeof useCarousel> & {
+  target: string;
+  ends: CarouselEnds;
+};
+const CarouselTargetContext = createContext<CarouselContextValue | undefined>(undefined);
 
 function useCarouselTarget() {
   const target = useContext(CarouselTargetContext);
@@ -71,15 +87,32 @@ export function Carousel<C extends ElementType = 'div'>({
   itemsGap,
   itemsPeek,
   overlay,
+  ref: forwardedRef,
+  onKeyDown,
   ...props
 }: CarouselProps<C>) {
   const reactId = useId();
-  const id = externalId || createCarouselId(reactId);
+  const id = typeof externalId === 'string' && externalId ? externalId : createCarouselId(reactId);
+  const rootRef = useRef<ComponentRef<C>>(null);
+  useImperativeHandle(forwardedRef, () => rootRef.current!);
+  const carousel = useCarousel(rootRef, {
+    autoplay,
+    center,
+    auto,
+    items,
+    itemsPeek,
+    effect,
+    ends: ends ?? 'loop',
+  });
+  const customStyle = Reflect.get(props, 'style') as CSSProperties | undefined;
+  const target = /^[a-zA-Z_][\w-]*$/.test(id)
+    ? `#${id}`
+    : `[id="${id.replaceAll('\\', '\\\\').replaceAll('"', '\\"')}"]`;
   const style: CSSProperties | undefined =
     items === undefined && itemsGap === undefined && itemsPeek === undefined
-      ? props.style
+      ? customStyle
       : {
-          ...props.style,
+          ...customStyle,
           ...(items === undefined ? {} : { '--bs-carousel-items': String(items) }),
           ...(itemsGap === undefined
             ? {}
@@ -96,17 +129,37 @@ export function Carousel<C extends ElementType = 'div'>({
         };
 
   return (
-    <CarouselTargetContext.Provider value={`#${id}`}>
+    <CarouselTargetContext.Provider value={{ ...carousel, target, ends: ends ?? 'loop' }}>
       <Box<C>
         {...(props as BoxProps<C>)}
+        ref={rootRef}
         component={component ?? ('div' as C)}
         id={id}
         style={style}
         data-bs-autoplay={autoplay ? 'true' : undefined}
         data-bs-ends={ends}
         data-bs-theme={colorMode}
+        onKeyDown={(event: KeyboardEvent<HTMLElement>) => {
+          if (typeof onKeyDown === 'function') onKeyDown(event);
+          if (
+            event.defaultPrevented ||
+            (event.target instanceof Element &&
+              event.target.closest('.carousel') !== event.currentTarget) ||
+            (event.target instanceof HTMLElement &&
+              (event.target.isContentEditable ||
+                /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName)))
+          )
+            return;
+          if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+            event.preventDefault();
+            const rtl = getComputedStyle(event.currentTarget).direction === 'rtl';
+            const next = (event.key === 'ArrowRight') !== rtl;
+            carousel.navigate((carousel.index ?? 0) + (next ? 1 : -1), true);
+          }
+        }}
         classNameBefore={clsx(
           'carousel',
+          carousel.running && 'carousel-playing',
           auto && 'carousel-auto',
           center && 'carousel-center',
           effect === 'fade' ? 'carousel-fade' : 'slide',
@@ -187,21 +240,27 @@ export function CarouselIndicator<C extends ElementType = 'button'>({
   active,
   index,
   type,
+  onClick,
   ...props
 }: CarouselIndicatorProps<C>) {
-  const target = useCarouselTarget();
+  const carousel = useCarouselTarget();
+  const selected = carousel.index === null ? active : carousel.index === index;
 
   return (
     <Box<C>
       {...(props as BoxProps<C>)}
       component={component ?? ('button' as C)}
-      classNameBefore={clsx(active && 'active', className, props.classNameBefore)}
+      classNameBefore={clsx(selected && 'active', className, props.classNameBefore)}
       className={undefined}
       type={type ?? 'button'}
-      aria-current={active || undefined}
+      aria-current={selected || undefined}
       aria-label={`Slide ${index + 1}`}
       data-bs-slide-to={index}
-      data-bs-target={target}
+      data-bs-target={carousel.target}
+      onClick={(event: MouseEvent<HTMLElement>) => {
+        if (typeof onClick === 'function') onClick(event);
+        if (!event.defaultPrevented) carousel.navigate(index, true);
+      }}
     />
   );
 }
@@ -227,9 +286,11 @@ export function CarouselControl<C extends ElementType = 'button'>({
   size,
   type,
   variant,
+  disabled,
+  onClick,
   ...props
 }: CarouselControlProps<C>) {
-  const target = useCarouselTarget();
+  const carousel = useCarouselTarget();
   const action = direction === 'previous' ? 'prev' : 'next';
   const iconButtonProps = {
     ...props,
@@ -240,7 +301,17 @@ export function CarouselControl<C extends ElementType = 'button'>({
     type: type ?? 'button',
     'aria-label': props['aria-label'] ?? (direction === 'previous' ? 'Previous' : 'Next'),
     'data-bs-slide': action,
-    'data-bs-target': target,
+    'data-bs-target': carousel.target,
+    disabled:
+      disabled ||
+      (carousel.ends === 'stop' &&
+        carousel.index !== null &&
+        (direction === 'previous' ? carousel.index <= 0 : carousel.index >= carousel.lastIndex)),
+    onClick: (event: MouseEvent<HTMLElement>) => {
+      if (typeof onClick === 'function') onClick(event);
+      if (!event.defaultPrevented)
+        carousel.navigate((carousel.index ?? 0) + (direction === 'previous' ? -1 : 1), true);
+    },
   } as IconButtonProps<C>;
 
   return (
@@ -268,18 +339,23 @@ export function CarouselPlayPause<C extends ElementType = 'button'>({
   playLabel = 'Play',
   type,
   'aria-label': ariaLabel,
+  onClick,
   ...props
 }: CarouselPlayPauseProps<C>) {
-  const target = useCarouselTarget();
+  const carousel = useCarouselTarget();
   const iconButtonProps = {
     ...props,
     ...(component ? { component } : {}),
-    className: clsx('carousel-control-play-pause', className),
+    className: clsx('carousel-control-play-pause', !carousel.playing && 'paused', className),
     type: type ?? 'button',
-    'aria-label': ariaLabel ?? pauseLabel,
-    'data-bs-target': target,
+    'aria-label': ariaLabel ?? (carousel.playing ? pauseLabel : playLabel),
+    'data-bs-target': carousel.target,
     'data-bs-pause-label': pauseLabel,
     'data-bs-play-label': playLabel,
+    onClick: (event: MouseEvent<HTMLElement>) => {
+      if (typeof onClick === 'function') onClick(event);
+      if (!event.defaultPrevented) carousel.setPlaying((playing) => !playing);
+    },
   } as IconButtonProps<C>;
 
   return (
