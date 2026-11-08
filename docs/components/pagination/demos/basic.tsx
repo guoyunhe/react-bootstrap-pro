@@ -1,19 +1,19 @@
-import { Pagination, PaginationItem, PageLink } from 'react-bootstrap-pro';
+import { PageLink, Pagination, PaginationItem } from 'react-bootstrap-pro';
 
 export function PaginationBasicDemo() {
   return (
-    <nav aria-label='Search results pages'>
+    <nav aria-label='Page navigation example'>
       <Pagination>
         <PaginationItem>
-          <PageLink href='/page/1'>1</PageLink>
+          <PageLink href='#previous'>Previous</PageLink>
         </PaginationItem>
-        <PaginationItem active>
-          <PageLink href='/page/2' active>
-            2
-          </PageLink>
-        </PaginationItem>
+        {[1, 2, 3].map((page) => (
+          <PaginationItem key={page}>
+            <PageLink href={`#page-${page}`}>{page}</PageLink>
+          </PaginationItem>
+        ))}
         <PaginationItem>
-          <PageLink href='/page/3'>3</PageLink>
+          <PageLink href='#next'>Next</PageLink>
         </PaginationItem>
       </Pagination>
     </nav>

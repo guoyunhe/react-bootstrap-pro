@@ -3,16 +3,24 @@ title: Pagination
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { PageLink, Pagination, PaginationItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { PaginationBasicDemo } from './demos/basic';
+import { PaginationIconsDemo } from './demos/icons';
+import { PaginationActiveDemo } from './demos/active';
+import { PaginationDisabledDemo } from './demos/disabled';
+import { PaginationVariantsDemo } from './demos/variants';
+import { PaginationSizingDemo } from './demos/sizing';
+import { PaginationAlignmentCenterDemo } from './demos/alignment-center';
+import { PaginationAlignmentEndDemo } from './demos/alignment-end';
 
 # Pagination
 
-`Pagination` uses list markup inside a labeled navigation landmark. Mark the
-current page with `active` and provide an accessible name for the navigation.
+`Pagination` composes a list of page links. Wrap it in a `nav` with a
+descriptive label, especially when the page contains more than one navigation
+landmark. The links use native browser navigation; these examples use
+placeholder fragment URLs, which should be replaced with real page URLs.
 
-## Example
+## Overview
 
 <DemoContainer>
   <PaginationBasicDemo />
@@ -22,50 +30,163 @@ current page with `active` and provide an accessible name for the navigation.
 
 ```
 
-## Sizes
+## Working with icons
 
-Use `size='sm'` or `size='lg'` to change the pagination control size.
+When using symbols instead of text, label the link and hide the decorative
+symbol from assistive technology.
 
-## Previous and next links
+<DemoContainer>
+  <PaginationIconsDemo />
+</DemoContainer>
 
-Use descriptive labels when replacing text with symbols or icons.
+```tsx src='./demos/icons.tsx'
+
+```
+
+## Active
+
+Set `active` on `PageLink` to style the current page and add
+`aria-current='page'`. Alternatively, set `active` on `PaginationItem`; it
+styles the child and adds `aria-current` to the list item. Avoid marking both
+elements as current.
+
+<DemoContainer>
+  <PaginationActiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/active.tsx'
+
+```
+
+## Disabled
+
+`PaginationItem disabled` adds a disabled class and `aria-disabled`, but does
+not prevent navigation or remove a nested link from the tab order. Use a
+non-interactive `PageLink component='span'` for unavailable destinations, as
+shown here. If an anchor must remain, remove its `href` or explicitly prevent
+activation, remove it from the tab order, and mark the link itself disabled.
+CSS `pointer-events` alone does not prevent keyboard activation.
+
+<DemoContainer>
+  <PaginationDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## Variants
+
+Use the inherited `theme` prop to apply a semantic color to the pagination.
+
+<DemoContainer>
+  <PaginationVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## Sizing
+
+Use `size='sm'` or `size='lg'`; omit `size` for the default.
+
+<DemoContainer>
+  <PaginationSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizing.tsx'
+
+```
+
+## Alignment
+
+Use the inherited flex utility `justifyContent` to align the list.
+
+### Center
+
+<DemoContainer>
+  <PaginationAlignmentCenterDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment-center.tsx'
+
+```
+
+### End
+
+<DemoContainer>
+  <PaginationAlignmentEndDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment-end.tsx'
+
+```
+
+## CSS
+
+### CSS variables
+
+Override these Bootstrap variables on `Pagination` to customize its appearance.
+Theme colors can override the corresponding link and active colors.
+
+| Variables                                                                                                           | Purpose                         |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| `--bs-pagination-min-height`, `--bs-pagination-padding-x`, `--bs-pagination-padding-y`, `--bs-pagination-font-size` | Link dimensions and typography. |
+| `--bs-pagination-color`, `--bs-pagination-bg`                                                                       | Default link colors.            |
+| `--bs-pagination-border-width`, `--bs-pagination-border-color`, `--bs-pagination-border-radius`                     | Borders and corner radius.      |
+| `--bs-pagination-hover-color`, `--bs-pagination-hover-bg`, `--bs-pagination-hover-border-color`                     | Hover colors.                   |
+| `--bs-pagination-active-color`, `--bs-pagination-active-bg`, `--bs-pagination-active-border-color`                  | Active page colors.             |
+| `--bs-pagination-disabled-color`, `--bs-pagination-disabled-bg`, `--bs-pagination-disabled-border-color`            | Disabled page colors.           |
 
 ## API
 
 ### Pagination
 
-Renders a `ul` by default. Its own prop is `size?: 'sm' | 'lg'`; it inherits
-native props for the selected element and all [`Box`](../box/README.mdx#api)
-props through `BoxProps<C>`.
+Renders a `ul` by default.
 
-| Prop        | Type           | Description                             |
-| ----------- | -------------- | --------------------------------------- |
-| `size`      | `'sm' \| 'lg'` | Selects pagination sizing.              |
-| `component` | `ElementType`  | Changes the list root element.          |
-| `...props`  | `BoxProps<C>`  | Native props and all Box utility props. |
+| Own prop | Type           | Default | Description                      |
+| -------- | -------------- | ------- | -------------------------------- |
+| `size`   | `'sm' \| 'lg'` | —       | Selects the small or large size. |
 
-`PaginationItem` supports `active` and `disabled`; use `PageLink` for the
-interactive link and its optional `active` state.
+Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props, including `component` and `theme`.
 
 ### PaginationItem
 
-Renders an `li` by default. Its own props are `active?: boolean` and
-`disabled?: boolean`; it updates `aria-current`/`aria-disabled` accordingly.
-It inherits native props and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+Renders an `li` by default.
+
+| Own prop   | Type      | Default | Description                                                                 |
+| ---------- | --------- | ------- | --------------------------------------------------------------------------- |
+| `active`   | `boolean` | `false` | Adds the active class and defaults `aria-current` to `'page'`.              |
+| `disabled` | `boolean` | `false` | Adds the disabled class and `aria-disabled`; does not disable a child link. |
+
+Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props. An explicit `aria-current`
+overrides the active default.
 
 ### PageLink
 
-Renders an `a` by default. Its own prop is `active?: boolean`, which defaults
-`aria-current` to `page`; it inherits native anchor props and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders an `a` by default.
+
+| Own prop | Type      | Default | Description                                                    |
+| -------- | --------- | ------- | -------------------------------------------------------------- |
+| `active` | `boolean` | `false` | Adds the active class and defaults `aria-current` to `'page'`. |
+
+Inherits native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props, including `component`. An
+explicit `aria-current` overrides the active default. Anchor destinations
+require an `href`; use `component='span'` for non-interactive content.
 
 ## Accessibility
 
-Give the navigation landmark a descriptive label, mark the current page with
-`aria-current='page'`, and ensure disabled links cannot be activated.
+Give each navigation landmark a distinct, descriptive label and identify the
+current page with `aria-current='page'`. Give symbol-only links accessible names.
+For unavailable pages, prefer non-interactive content; visual disabled styling
+and `aria-disabled` do not themselves block navigation.
 
 ## See
 
 - [Bootstrap 6 Pagination documentation](https://getbootstrap.com/docs/6.0/components/pagination/)
+- [MDN: `aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-current)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/pagination.tsx)

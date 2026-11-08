@@ -3,56 +3,183 @@ title: Pagination 分页
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { PageLink, Pagination, PaginationItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { PaginationBasicDemo } from './demos/basic';
+import { PaginationIconsDemo } from './demos/icons';
+import { PaginationActiveDemo } from './demos/active';
+import { PaginationDisabledDemo } from './demos/disabled';
+import { PaginationVariantsDemo } from './demos/variants';
+import { PaginationSizingDemo } from './demos/sizing';
+import { PaginationAlignmentCenterDemo } from './demos/alignment-center';
+import { PaginationAlignmentEndDemo } from './demos/alignment-end';
 
 # Pagination 分页
 
-`Pagination` 在带有名称的导航区域中使用列表结构。用 `active` 标识当前页，并为
-导航区域提供无障碍名称。
+`Pagination` 用列表组织分页链接。请将其放入带有描述性标签的 `nav` 中，尤其是在页面
+包含多个导航区域时。链接使用浏览器原生导航；这些示例使用占位片段 URL，实际使用时
+应替换为真实页面地址。
+
+## 概览
 
 <DemoContainer>
-  <nav aria-label='搜索结果页'>
-    <Pagination>
-      <PaginationItem>
-        <PageLink href='/page/1'>1</PageLink>
-      </PaginationItem>
-      <PaginationItem active>
-        <PageLink href='/page/2' active>
-          2
-        </PageLink>
-      </PaginationItem>
-      <PaginationItem>
-        <PageLink href='/page/3'>3</PageLink>
-      </PaginationItem>
-    </Pagination>
-  </nav>
+  <PaginationBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 使用图标
+
+使用符号代替文字时，为链接提供无障碍名称，并对辅助技术隐藏装饰性符号。
+
+<DemoContainer>
+  <PaginationIconsDemo />
+</DemoContainer>
+
+```tsx src='./demos/icons.tsx'
+
+```
+
+## 当前页
+
+在 `PageLink` 上设置 `active` 可标记当前页的样式并添加 `aria-current='page'`。
+也可以在 `PaginationItem` 上设置 `active`，它会设置子元素样式并在列表项上添加
+`aria-current`。避免同时将两个元素都标记为当前页。
+
+<DemoContainer>
+  <PaginationActiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/active.tsx'
+
+```
+
+## 禁用
+
+`PaginationItem disabled` 会添加禁用类和 `aria-disabled`，但不会阻止内部链接导航，
+也不会将链接移出 Tab 顺序。对于不可用的目标，建议如示例所示使用非交互的
+`PageLink component='span'`。如果必须保留链接，应移除其 `href` 或明确阻止激活，
+将其移出 Tab 顺序，并在链接本身标记禁用状态。仅靠 CSS `pointer-events` 无法阻止
+键盘激活。
+
+<DemoContainer>
+  <PaginationDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## 主题
+
+使用继承的 `theme` 属性为分页应用语义颜色。
+
+<DemoContainer>
+  <PaginationVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## 尺寸
+
+使用 `size='sm'` 或 `size='lg'`；省略 `size` 时使用默认尺寸。
+
+<DemoContainer>
+  <PaginationSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizing.tsx'
+
+```
+
+## 对齐
+
+使用继承的 flex 工具类属性 `justifyContent` 对齐列表。
+
+### 居中
+
+<DemoContainer>
+  <PaginationAlignmentCenterDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment-center.tsx'
+
+```
+
+### 末端对齐
+
+<DemoContainer>
+  <PaginationAlignmentEndDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment-end.tsx'
+
+```
+
+## CSS
+
+### CSS 变量
+
+可在 `Pagination` 上覆盖以下 Bootstrap 变量以自定义外观。主题颜色可能覆盖相应的
+链接和当前页颜色。
+
+| 变量                                                                                                                | 用途                 |
+| ------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `--bs-pagination-min-height`、`--bs-pagination-padding-x`、`--bs-pagination-padding-y`、`--bs-pagination-font-size` | 链接尺寸和文字样式。 |
+| `--bs-pagination-color`、`--bs-pagination-bg`                                                                       | 默认链接颜色。       |
+| `--bs-pagination-border-width`、`--bs-pagination-border-color`、`--bs-pagination-border-radius`                     | 边框和圆角。         |
+| `--bs-pagination-hover-color`、`--bs-pagination-hover-bg`、`--bs-pagination-hover-border-color`                     | 悬停颜色。           |
+| `--bs-pagination-active-color`、`--bs-pagination-active-bg`、`--bs-pagination-active-border-color`                  | 当前页颜色。         |
+| `--bs-pagination-disabled-color`、`--bs-pagination-disabled-bg`、`--bs-pagination-disabled-border-color`            | 禁用状态颜色。       |
 
 ## API
 
 ### Pagination
 
-默认渲染为 `ul`。自有属性为 `size?: 'sm' | 'lg'`；继承所选元素的原生属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `ul`。
 
-| 属性        | 类型           | 说明                            |
-| ----------- | -------------- | ------------------------------- |
-| `size`      | `'sm' \| 'lg'` | 设置分页尺寸。                  |
-| `component` | `ElementType`  | 更换列表根元素。                |
-| `...props`  | `BoxProps<C>`  | 原生属性及所有 Box 工具类属性。 |
+| 自有属性 | 类型           | 默认值 | 说明                 |
+| -------- | -------------- | ------ | -------------------- |
+| `size`   | `'sm' \| 'lg'` | —      | 选择小尺寸或大尺寸。 |
 
-`PaginationItem` 支持 `active` 和 `disabled`；使用 `PageLink` 渲染交互链接，并可设置
-`active` 状态。
+继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括
+`component` 和 `theme`。
 
 ### PaginationItem
 
-默认渲染为 `li`。自有属性为 `active?: boolean` 和 `disabled?: boolean`；会相应设置
-`aria-current` 和 `aria-disabled`。继承原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `li`。
+
+| 自有属性   | 类型      | 默认值  | 说明                                              |
+| ---------- | --------- | ------- | ------------------------------------------------- |
+| `active`   | `boolean` | `false` | 添加活动类，默认将 `aria-current` 设为 `'page'`。 |
+| `disabled` | `boolean` | `false` | 添加禁用类和 `aria-disabled`，但不会禁用子链接。  |
+
+继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。显式提供的
+`aria-current` 会覆盖活动状态的默认值。
 
 ### PageLink
 
-默认渲染为 `a`。自有属性为 `active?: boolean`；激活时默认设置
-`aria-current="page"`。继承原生链接属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `a`。
+
+| 自有属性 | 类型      | 默认值  | 说明                                              |
+| -------- | --------- | ------- | ------------------------------------------------- |
+| `active` | `boolean` | `false` | 添加活动类，默认将 `aria-current` 设为 `'page'`。 |
+
+继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括
+`component`。显式提供的 `aria-current` 会覆盖活动状态的默认值。链接目标需要 `href`；
+非交互内容可使用 `component='span'`。
+
+## 无障碍访问
+
+为每个导航区域提供不同且具有描述性的标签，并通过 `aria-current='page'` 标记当前页。
+仅含符号的链接应提供无障碍名称。不可用页面优先使用非交互内容；禁用样式和
+`aria-disabled` 本身不会阻止导航。
+
+## 参考
+
+- [Bootstrap 6 Pagination 官方文档](https://getbootstrap.com/docs/6.0/components/pagination/)
+- [MDN：`aria-current`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-current)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/pagination.tsx)
