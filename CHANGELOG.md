@@ -23,6 +23,7 @@
 
 ### Added
 
+- Generate `CarouselIndicators` automatically from the carousel's slides when no children are supplied.
 - Add controlled React behavior to `Dialog` with `show`, `onShowChange`, `backdrop`, and `keyboard`.
 - Add controlled React modal behavior to `Drawer` with `show` and `onShowChange`.
 - Add `backdrop`, `keyboard`, and `scroll` options to controlled `Drawer`.

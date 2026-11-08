@@ -217,15 +217,27 @@ export type CarouselIndicatorsProps<C extends ElementType = 'div'> = BoxProps<C>
 export function CarouselIndicators<C extends ElementType = 'div'>({
   component,
   className,
+  children,
   ...props
 }: CarouselIndicatorsProps<C>) {
+  const carousel = useContext(CarouselTargetContext);
+  if (children === undefined && !carousel) {
+    throw new Error('Carousel indicators must be rendered inside a Carousel.');
+  }
+
   return (
     <Box<C>
       {...(props as BoxProps<C>)}
       component={component ?? ('div' as C)}
       classNameBefore={clsx('carousel-indicators', props.classNameBefore)}
       className={className}
-    />
+    >
+      {children === undefined
+        ? Array.from({ length: carousel?.count ?? 0 }, (_, index) => (
+            <CarouselIndicator key={index} index={index} />
+          ))
+        : children}
+    </Box>
   );
 }
 

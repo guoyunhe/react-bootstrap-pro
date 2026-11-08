@@ -58,11 +58,7 @@ function Example({
       </CarouselInner>
       <CarouselControl direction='previous' />
       <CarouselControl direction='next' />
-      <CarouselIndicators>
-        <CarouselIndicator index={0} active />
-        <CarouselIndicator index={1} />
-        <CarouselIndicator index={2} />
-      </CarouselIndicators>
+      <CarouselIndicators data-testid='indicators' />
       <CarouselPlayPause />
     </Carousel>
   );
@@ -158,10 +154,93 @@ test('loop uses an inert temporary slide and removes it after wrapping', async (
   expect(clone).not.toBeNull();
   expect(clone?.inert).toBe(true);
   expect(clone?.getAttribute('aria-hidden')).toBe('true');
+  expect(screen.getByTestId('indicators').element().querySelectorAll('button')).toHaveLength(3);
   await expect.poll(() => viewport.querySelector('.carousel-item-clone')).toBeNull();
   await expect
     .element(screen.getByRole('button', { name: 'Slide 3' }))
     .toHaveAttribute('aria-current', 'true');
+});
+
+function AutomaticIndicatorsExample() {
+  const [count, setCount] = useState(0);
+  return (
+    <Carousel effect='fade'>
+      <button onClick={() => setCount((value) => value + 1)}>Add slide</button>
+      <button onClick={() => setCount((value) => Math.max(0, value - 1))}>Remove slide</button>
+      <CarouselInner>
+        {Array.from({ length: count }, (_, index) => (
+          <CarouselItem key={index} active={index === 1}>
+            Slide {index + 1} content
+          </CarouselItem>
+        ))}
+      </CarouselInner>
+      <CarouselIndicators data-testid='automatic' />
+    </Carousel>
+  );
+}
+
+test('automatic indicators track slides added and removed, including an empty carousel', async () => {
+  const screen = await render(<AutomaticIndicatorsExample />);
+  const container = screen.getByTestId('automatic').element();
+  const add = screen.getByRole('button', { name: 'Add slide' });
+  const remove = screen.getByRole('button', { name: 'Remove slide' });
+  expect(container.querySelectorAll('button')).toHaveLength(0);
+  await add.click();
+  await expect.poll(() => container.querySelectorAll('button').length).toBe(1);
+  await expect
+    .element(screen.getByRole('button', { name: 'Slide 1' }))
+    .toHaveAttribute('aria-current', 'true');
+  await add.click();
+  await expect.poll(() => container.querySelectorAll('button').length).toBe(2);
+  await screen.getByRole('button', { name: 'Slide 2' }).click();
+  await expect
+    .element(screen.getByRole('button', { name: 'Slide 2' }))
+    .toHaveAttribute('aria-current', 'true');
+  await remove.click();
+  await expect.poll(() => container.querySelectorAll('button').length).toBe(1);
+  await expect
+    .element(screen.getByRole('button', { name: 'Slide 1' }))
+    .toHaveAttribute('aria-current', 'true');
+  await remove.click();
+  await expect.poll(() => container.querySelectorAll('button').length).toBe(0);
+});
+
+test('explicit indicator children and null override automatic generation', async () => {
+  const screen = await render(
+    <Carousel effect='fade'>
+      <CarouselInner>
+        <CarouselItem>One</CarouselItem>
+        <CarouselItem>Two</CarouselItem>
+      </CarouselInner>
+      <CarouselIndicators data-testid='custom'>
+        <CarouselIndicator index={1} />
+      </CarouselIndicators>
+      <CarouselIndicators data-testid='empty'>{null}</CarouselIndicators>
+    </Carousel>,
+  );
+  const custom = screen.getByTestId('custom').element();
+  expect(custom.querySelectorAll('button')).toHaveLength(1);
+  expect(screen.getByTestId('empty').element().querySelectorAll('button')).toHaveLength(0);
+  await screen.getByRole('button', { name: 'Slide 2' }).click();
+  await expect
+    .element(screen.getByRole('button', { name: 'Slide 2' }))
+    .toHaveAttribute('aria-current', 'true');
+});
+
+test('automatic indicators honor an initially active slide', async () => {
+  const screen = await render(
+    <Carousel effect='fade'>
+      <CarouselInner>
+        <CarouselItem>One</CarouselItem>
+        <CarouselItem active>Two</CarouselItem>
+      </CarouselInner>
+      <CarouselIndicators />
+    </Carousel>,
+  );
+  await expect
+    .element(screen.getByRole('button', { name: 'Slide 2' }))
+    .toHaveAttribute('aria-current', 'true');
+  expect(screen.getByRole('button', { name: 'Slide 1' })).not.toHaveAttribute('aria-current');
 });
 
 function DynamicExample() {

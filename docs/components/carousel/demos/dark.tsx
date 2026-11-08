@@ -1,7 +1,6 @@
 import {
   Carousel,
   CarouselControl,
-  CarouselIndicator,
   CarouselIndicators,
   CarouselInner,
   CarouselItem,
@@ -26,11 +25,7 @@ export function CarouselDarkDemo() {
       </CarouselInner>
       <CarouselOverlayControls>
         <CarouselControl direction='previous' size='sm' variant='subtle' theme='secondary' />
-        <CarouselIndicators>
-          <CarouselIndicator index={0} active />
-          <CarouselIndicator index={1} />
-          <CarouselIndicator index={2} />
-        </CarouselIndicators>
+        <CarouselIndicators />
         <CarouselControl direction='next' size='sm' variant='subtle' theme='secondary' />
       </CarouselOverlayControls>
     </Carousel>

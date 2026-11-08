@@ -2,7 +2,6 @@ import {
   Box,
   Carousel,
   CarouselControl,
-  CarouselIndicator,
   CarouselIndicators,
   CarouselInner,
   CarouselItem,
@@ -29,11 +28,7 @@ export function CarouselIndicatorsDemo() {
           <CarouselControl direction='previous' size='sm' />
           <CarouselControl direction='next' size='sm' />
         </div>
-        <CarouselIndicators>
-          <CarouselIndicator index={0} active />
-          <CarouselIndicator index={1} />
-          <CarouselIndicator index={2} />
-        </CarouselIndicators>
+        <CarouselIndicators />
       </Box>
     </Carousel>
   );

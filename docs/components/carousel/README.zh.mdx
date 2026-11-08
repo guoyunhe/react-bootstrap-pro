@@ -62,8 +62,8 @@ React 管理自动播放、前后控件、指示器和活动幻灯片同步。
 
 ### 指示器
 
-可根据布局将指示器放在合适位置。若使用叠加轮播，可将指示器放入
-`CarouselOverlayControls`，使其显示在幻灯片上方。
+`CarouselIndicators` 会自动为每张幻灯片生成指示器并跟踪活动幻灯片。可根据布局将其
+放在合适位置；若使用叠加轮播，可将其放入 `CarouselOverlayControls`。
 
 <DemoContainer>
   <CarouselIndicatorsDemo />
@@ -279,8 +279,11 @@ React 管理自动播放、前后控件、指示器和活动幻灯片同步。
 
 ### CarouselIndicators
 
-默认渲染为用于容纳指示器的 `div`。继承的 `component` 属性可更换根元素。
-接受所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
+默认渲染为用于容纳指示器的 `div`。嵌套在 `Carousel` 中且未提供 `children` 时，
+会在轮播挂载后为每张幻灯片生成指示器，并在幻灯片增减时更新。每个指示器会跟踪活动
+幻灯片，也可点击切换到对应幻灯片。提供 `children` 可改为渲染自定义指示器；即使
+传入 `null` 也会禁用自动生成。继承的 `component` 属性可更换根元素，没有其他自有
+属性；接受所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
 
 ### CarouselIndicator
 

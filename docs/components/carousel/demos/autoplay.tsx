@@ -2,7 +2,6 @@ import {
   Box,
   Carousel,
   CarouselControl,
-  CarouselIndicator,
   CarouselIndicators,
   CarouselInner,
   CarouselItem,
@@ -26,11 +25,7 @@ export function CarouselAutoplayDemo() {
         </CarouselItem>
       </CarouselInner>
       <Box d='flex' justifyContent='between' alignItems='center' mt={3}>
-        <CarouselIndicators>
-          <CarouselIndicator index={0} active />
-          <CarouselIndicator index={1} />
-          <CarouselIndicator index={2} />
-        </CarouselIndicators>
+        <CarouselIndicators />
         <div>
           <CarouselPlayPause size='sm' />
           <CarouselControl direction='previous' size='sm' />

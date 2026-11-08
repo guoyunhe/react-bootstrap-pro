@@ -1,7 +1,6 @@
 import {
   Carousel,
   CarouselControl,
-  CarouselIndicator,
   CarouselIndicators,
   CarouselInner,
   CarouselItem,
@@ -29,11 +28,7 @@ export function CarouselOverlayControlsDemo() {
           <CarouselControl direction='previous' size='sm' variant='subtle' theme='secondary' />
           <CarouselControl direction='next' size='sm' variant='subtle' theme='secondary' />
         </div>
-        <CarouselIndicators>
-          <CarouselIndicator index={0} active />
-          <CarouselIndicator index={1} />
-          <CarouselIndicator index={2} />
-        </CarouselIndicators>
+        <CarouselIndicators />
       </CarouselOverlayControls>
     </Carousel>
   );

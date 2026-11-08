@@ -65,8 +65,9 @@ Place the previous and next controls below the slides.
 
 ### Indicators
 
-Place indicators wherever they fit the layout. With an overlay carousel, put
-them inside `CarouselOverlayControls` to position them over the slides.
+`CarouselIndicators` automatically creates one indicator per slide and tracks
+the active slide. Place it wherever it fits the layout; with an overlay
+carousel, put it inside `CarouselOverlayControls`.
 
 <DemoContainer>
   <CarouselIndicatorsDemo />
@@ -295,9 +296,14 @@ element. Accepts native props for the selected element and
 
 ### CarouselIndicators
 
-Renders a `div` by default to contain indicators. The inherited `component`
-prop can change the root element. Accepts native props for the selected element
-and [`Box`](../box/README.mdx#api) utility props.
+Renders a `div` by default to contain indicators. When nested in a `Carousel`
+without `children`, it generates an indicator for each slide after the carousel
+mounts and updates as slides are added or removed. Each indicator tracks the
+active slide and can navigate to it. Supply `children` to render custom
+indicators instead; even `null` suppresses automatic generation.
+The inherited `component` prop can change the root element. It has no additional
+own props and accepts native props for the selected element and
+[`Box`](../box/README.mdx#api) utility props.
 
 ### CarouselIndicator
 
