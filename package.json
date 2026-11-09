@@ -28,7 +28,11 @@
   },
   "funding": "https://ko-fi.com/guoyunhe",
   "files": [
-    "dist"
+    "dist",
+    "docs",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
   ],
   "type": "module",
   "exports": {
