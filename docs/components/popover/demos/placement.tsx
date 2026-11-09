@@ -1,4 +1,4 @@
-import { Popover, PopoverBody, type PopoverPlacement } from 'react-bootstrap-pro';
+import { Box, Button, Popover, PopoverBody, type PopoverPlacement } from 'react-bootstrap-pro';
 
 const placements: { label: string; placement: PopoverPlacement }[] = [
   { label: 'left', placement: 'start' },
@@ -9,20 +9,20 @@ const placements: { label: string; placement: PopoverPlacement }[] = [
 
 export function PopoverPlacementDemo() {
   return (
-    <div className='d-flex flex-wrap gap-2 py-5'>
+    <Box d='flex' flexWrap='wrap' gap={2} py={5}>
       {placements.map(({ label, placement }) => (
         <Popover
           key={placement}
           placement={placement}
           trigger={
-            <button type='button' className='btn-solid theme-secondary'>
+            <Button variant='solid' theme='secondary'>
               Popover on {label}
-            </button>
+            </Button>
           }
         >
           <PopoverBody>Popover on {label}</PopoverBody>
         </Popover>
       ))}
-    </div>
+    </Box>
   );
 }
