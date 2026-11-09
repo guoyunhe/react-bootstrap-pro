@@ -2,16 +2,26 @@ import { Box, Button, Popover, PopoverBody } from 'react-bootstrap-pro';
 
 export function PopoverResponsivePlacementDemo() {
   return (
-    <Box py={5}>
+    <Box d='flex' flexWrap='wrap' gap={2} py={5}>
       <Popover
-        placement={{ xs: 'bottom', md: 'end' }}
+        placement={{ xs: 'top', md: 'end', lg: 'bottom' }}
         trigger={
           <Button variant='solid' theme='secondary'>
-            Responsive placement
+            Top → md:right → lg:bottom
           </Button>
         }
       >
-        <PopoverBody>Bottom below 768px; end at 768px and above.</PopoverBody>
+        <PopoverBody>This popover changes placement at different breakpoints.</PopoverBody>
+      </Popover>
+      <Popover
+        placement={{ xs: 'start', lg: 'top' }}
+        trigger={
+          <Button variant='solid' theme='secondary'>
+            Left → lg:top
+          </Button>
+        }
+      >
+        <PopoverBody>Responsive popover placement.</PopoverBody>
       </Popover>
     </Box>
   );
