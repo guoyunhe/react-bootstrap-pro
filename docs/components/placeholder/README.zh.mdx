@@ -13,10 +13,12 @@ import { DemoContainer } from '../demo-container';
 
 <DemoContainer>
   <PlaceholderGroup animation='wave'>
-    <Placeholder className='w-50' />
-    <Placeholder className='w-75' />
+    <Placeholder w={50} />
+    <Placeholder w={75} />
   </PlaceholderGroup>
 </DemoContainer>
+
+使用 `w={50}` 或 `w={75}` 设置占位符宽度，以匹配其所替代内容的比例。
 
 ## API
 

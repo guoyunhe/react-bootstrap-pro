@@ -33,7 +33,7 @@ export function ColumnFeaturesDemo() {
           <Col span={{ xs: 6, sm: 3 }}>
             <GridCell>Second</GridCell>
           </Col>
-          <Box className='w-100' d={{ xs: 'none', md: 'block' }} aria-hidden='true' />
+          <Box w={100} d={{ xs: 'none', md: 'block' }} aria-hidden='true' />
           <Col span={{ xs: 6, sm: 3 }} order={{ md: 1 }}>
             <GridCell>Third, reordered</GridCell>
           </Col>

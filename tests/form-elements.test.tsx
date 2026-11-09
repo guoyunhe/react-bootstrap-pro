@@ -10,6 +10,7 @@ test('renders Input and Select with their dedicated native elements', async () =
         id='form-email'
         type='email'
         size='lg'
+        w={100}
         aria-describedby='form-email-help'
         data-testid='control'
       />
@@ -19,7 +20,7 @@ test('renders Input and Select with their dedicated native elements', async () =
     </>,
   );
 
-  expect(screen.getByTestId('control')).toHaveClass('form-control', 'form-control-lg');
+  expect(screen.getByTestId('control')).toHaveClass('form-control', 'form-control-lg', 'w-100');
   expect(screen.getByTestId('control').element()).toHaveAttribute('type', 'email');
   expect(screen.getByTestId('select').element().tagName).toBe('SELECT');
   expect(screen.getByTestId('select')).toHaveClass('form-control');
