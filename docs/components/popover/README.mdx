@@ -14,14 +14,12 @@ import { PopoverResponsivePlacementDemo } from './demos/responsive-placement';
 
 # Popover
 
-`Popover` provides Bootstrap's styled popover surface. It does not initialize
-Bootstrap JavaScript or provide trigger, positioning, dismissal, or arrow
-behavior. The examples below use React state and Floating UI for those
-interactions.
+`Popover` renders Bootstrap's styled popover surface and manages its interaction
+with Floating UI. Pass a trigger element to get positioning, arrow rendering,
+dismissal, and keyboard focus handling in React; Bootstrap's JavaScript plugin
+is not needed.
 
-## Examples
-
-### Live demo
+## Overview
 
 Click the button to toggle the popover. Click outside it or press Escape to
 dismiss it.
@@ -34,10 +32,13 @@ dismiss it.
 
 ```
 
+## Examples
+
 ### Placement
 
-The `placement` prop selects the matching Bootstrap placement class. Floating UI
-positions the surface and can flip or shift it to keep it in the viewport.
+Set `placement` to `top`, `end`, `bottom`, or `start`. Floating UI can flip or
+shift the popover when space is limited. Directions are mirrored when the page
+uses a right-to-left writing mode.
 
 <DemoContainer>
   <PopoverPlacementDemo />
@@ -49,8 +50,8 @@ positions the surface and can flip or shift it to keep it in the viewport.
 
 ### Responsive placement
 
-`Popover` does not accept responsive placement values. Update Floating UI's
-placement in React when the viewport changes.
+Pass responsive placement values. The supported breakpoints match Bootstrap 6:
+`xs`, `sm`, `md`, `lg`, `xl`, and `2xl`.
 
 <DemoContainer>
   <PopoverResponsivePlacementDemo />
@@ -62,8 +63,8 @@ placement in React when the viewport changes.
 
 ### Custom container
 
-Use Floating UI's portal root to render the popover inside a chosen container.
-The container is managed by the example, not by a `Popover` prop.
+Set `container` to attach the portal to a specific element. This is useful
+inside dialogs or containers with styles that interfere with the popover.
 
 <DemoContainer>
   <PopoverCustomContainerDemo />
@@ -85,10 +86,14 @@ Add a custom class and override the local CSS variables to change the surface.
 
 ```
 
+```css src='./demos/custom.css'
+
+```
+
 ### Dismiss on next click
 
-This example opens when its trigger receives focus and closes when focus moves
-outside, another element is clicked, or Escape is pressed.
+Set `triggers={['focus']}` to open when the trigger receives focus. The popover
+closes when focus moves away, another element is clicked, or Escape is pressed.
 
 <DemoContainer>
   <PopoverDismissDemo />
@@ -101,7 +106,7 @@ outside, another element is clicked, or Escape is pressed.
 ### Disabled elements
 
 A disabled button cannot receive focus or pointer events. Make a wrapper the
-focusable, interactive trigger instead.
+trigger and include `hover` and `focus` so the popover remains reachable:
 
 <DemoContainer>
   <PopoverDisabledDemo />
@@ -117,28 +122,42 @@ Popover surfaces expose local CSS variables for their background, border,
 header, body, arrow, and transition styles. The custom example overrides the
 surface and header colors:
 
-```css src='./demos/custom.css'
-
+```css
+.custom-popover {
+  --bs-popover-bg: #f0f7ff;
+  --bs-popover-border-color: #9ec5fe;
+  --bs-popover-header-bg: #cfe2ff;
+  --bs-popover-header-color: #052c65;
+}
 ```
 
 ## API
 
 ### Popover
 
-Renders a `div` by default. Its own props are listed below; it inherits native
-props for the selected element and [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`, including the polymorphic `component` prop.
+Renders a `div` by default. Without `trigger`, it renders only the styled
+surface and `show` adds `.show` for manual positioning. With `trigger`, it
+renders the trigger and a portal-mounted popover whose placement, arrow, and
+dismissal are managed by Floating UI.
 
-| Prop        | Type                                    | Default | Description                                                                    |
-| ----------- | --------------------------------------- | ------- | ------------------------------------------------------------------------------ |
-| `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | `'top'` | Adds the matching Bootstrap placement class; it does not position the popover. |
-| `show`      | `boolean`                               | `false` | Adds `.show` to make the surface visible.                                      |
-| `instant`   | `boolean`                               | `false` | Disables the fade transition.                                                  |
+Its own props are listed below; it inherits native props for the selected
+element and [`Box`](../box/README.mdx#api) props through `BoxProps<C>`,
+including the polymorphic `component` prop.
 
-When `show` is `false`, the element remains mounted and Bootstrap styles make
-it transparent; it is not automatically removed from the accessibility tree or
-made inert. Conditionally render hidden content or manage its accessibility and
-interactivity in your React state.
+| Prop           | Type                                                                | Default     | Description                                                       |
+| -------------- | ------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------- |
+| `trigger`      | `ReactElement`                                                      | —           | Trigger element; enables the interactive Floating UI popover.     |
+| `placement`    | `PopoverPlacement \| Partial<Record<Breakpoint, PopoverPlacement>>` | `'right'`   | Preferred placement or responsive placements.                     |
+| `triggers`     | `PopoverTrigger[]`                                                  | `['click']` | Interactions that open the popover: `click`, `hover`, or `focus`. |
+| `show`         | `boolean`                                                           | —           | Controlled visibility; adds `.show` in static mode.               |
+| `onShowChange` | `(show: boolean) => void`                                           | —           | Called when an interaction requests a visibility change.          |
+| `delay`        | `number \| { open?: number; close?: number }`                       | `0`         | Hover delay in milliseconds.                                      |
+| `container`    | `HTMLElement \| null`                                               | —           | Element that receives the popover portal.                         |
+| `instant`      | `boolean`                                                           | `false`     | Disables the fade transition.                                     |
+
+The interactive popover is associated with its trigger through
+`aria-describedby`. Clicking inside the popover does not dismiss it, so links
+and controls in the content remain usable.
 
 ### PopoverHeader
 
@@ -154,11 +173,14 @@ and [`Box`](../box/README.mdx#api) props through `BoxProps<C>`, including the
 
 ## Accessibility
 
-Keep essential information available outside a transient popover. Use a
-keyboard-operable trigger and connect it to the content with appropriate ARIA
-attributes, such as `aria-expanded` and `aria-labelledby`. Do not rely only on
-hover. `Popover` does not manage focus; for interactive content, provide
-appropriate focus behavior or use a dialog component.
+Use a trigger that is keyboard-focusable and has a clear accessible name. The
+trigger opens the popover on click by default; do not rely on hover alone.
+Popovers use `role='tooltip'` and are connected to the trigger with
+`aria-describedby`, matching Bootstrap.
+
+Popovers do not manage keyboard focus order. When you need interactive content
+such as forms or links, prefer a dialog so focus is trapped and the content is
+reachable. Keep essential information available outside a transient popover.
 
 The fade transition uses CSS. Browsers without `@starting-style` still display
 the popover, but may not animate its initial appearance.

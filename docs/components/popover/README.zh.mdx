@@ -14,12 +14,11 @@ import { PopoverResponsivePlacementDemo } from './demos/responsive-placement';
 
 # Popover 弹出框
 
-`Popover` 提供 Bootstrap 弹出框的表面样式，不会初始化 Bootstrap JavaScript，也不负责
-触发、定位、关闭或绘制箭头。以下示例使用 React state 和 Floating UI 实现这些交互。
+`Popover` 渲染 Bootstrap 弹出框的表面样式，并使用 Floating UI 管理交互。传入触发器
+元素即可在 React 中获得定位、箭头渲染、关闭和键盘焦点处理；无需 Bootstrap JavaScript
+插件。
 
-## 示例
-
-### 实时示例
+## 概览
 
 点击按钮可切换弹出框；点击外部区域或按 Escape 键可关闭。
 
@@ -31,10 +30,12 @@ import { PopoverResponsivePlacementDemo } from './demos/responsive-placement';
 
 ```
 
+## 示例
+
 ### 放置位置
 
-`placement` 属性选择对应的 Bootstrap 放置方向类。Floating UI 负责定位表面，并可在
-空间不足时调整位置，避免弹出框超出视口。
+将 `placement` 设为 `top`、`end`、`bottom` 或 `start`。空间不足时，Floating UI 会
+翻转或移动弹出框。页面使用从右到左书写方向时，方向会自动镜像。
 
 <DemoContainer>
   <PopoverPlacementDemo />
@@ -46,7 +47,8 @@ import { PopoverResponsivePlacementDemo } from './demos/responsive-placement';
 
 ### 响应式放置
 
-`Popover` 不接受响应式放置值。请在 React 中根据视口变化更新 Floating UI 的放置位置。
+`placement` 支持响应式取值，可用的断点与 Bootstrap 6 一致：`xs`、`sm`、`md`、
+`lg`、`xl` 和 `2xl`。
 
 <DemoContainer>
   <PopoverResponsivePlacementDemo />
@@ -58,8 +60,8 @@ import { PopoverResponsivePlacementDemo } from './demos/responsive-placement';
 
 ### 自定义容器
 
-使用 Floating UI 的 portal root 将弹出框渲染到指定容器中。容器由示例管理，并非
-`Popover` 的属性。
+使用 `container` 将 portal 挂载到指定元素。这在对话框或样式会干扰弹出框的容器中
+很有用。
 
 <DemoContainer>
   <PopoverCustomContainerDemo />
@@ -81,9 +83,14 @@ import { PopoverResponsivePlacementDemo } from './demos/responsive-placement';
 
 ```
 
+```css src='./demos/custom.css'
+
+```
+
 ### 点击其他位置关闭
 
-此示例在触发器获得焦点时打开弹出框；焦点移出、点击其他元素或按 Escape 键时关闭。
+设置 `triggers={['focus']}` 可在触发器获得焦点时打开弹出框。焦点移出、点击其他元素
+或按 Escape 键时关闭。
 
 <DemoContainer>
   <PopoverDismissDemo />
@@ -95,7 +102,8 @@ import { PopoverResponsivePlacementDemo } from './demos/responsive-placement';
 
 ### 禁用元素
 
-禁用按钮无法接收焦点或指针事件。请改用可聚焦且可交互的包装元素作为触发器。
+禁用按钮无法接收焦点或指针事件。请使用包装元素作为触发器，并同时包含 `hover` 和
+`focus`，以便用户仍可打开弹出框：
 
 <DemoContainer>
   <PopoverDisabledDemo />
@@ -110,27 +118,39 @@ import { PopoverResponsivePlacementDemo } from './demos/responsive-placement';
 Popover 表面提供局部 CSS 变量，可设置背景、边框、标题、内容、箭头和过渡样式。自定义
 示例覆盖了表面和标题的颜色：
 
-```css src='./demos/custom.css'
-
+```css
+.custom-popover {
+  --bs-popover-bg: #f0f7ff;
+  --bs-popover-border-color: #9ec5fe;
+  --bs-popover-header-bg: #cfe2ff;
+  --bs-popover-header-color: #052c65;
+}
 ```
 
 ## API
 
 ### Popover
 
-默认渲染为 `div`。下表列出自有属性；此外继承所选元素的原生属性及通过
-`BoxProps<C>` 继承的 [`Box`](../box/README.zh.mdx#api) 属性，包括多态 `component`
-属性。
+默认渲染为 `div`。未传入 `trigger` 时，仅渲染表面样式，可通过 `show` 添加 `.show`
+类以便手动定位。传入 `trigger` 时，会渲染触发器以及挂载到 portal 的弹出框，其放置
+位置、箭头和关闭行为由 Floating UI 管理。
 
-| 属性        | 类型                                    | 默认值  | 说明                                                |
-| ----------- | --------------------------------------- | ------- | --------------------------------------------------- |
-| `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | `'top'` | 添加对应的 Bootstrap 放置方向类，不负责定位弹出框。 |
-| `show`      | `boolean`                               | `false` | 添加 `.show` 使表面可见。                           |
-| `instant`   | `boolean`                               | `false` | 禁用淡入淡出过渡。                                  |
+下表列出自有属性；此外继承所选元素的原生属性及通过 `BoxProps<C>` 继承的
+[`Box`](../box/README.zh.mdx#api) 属性，包括多态 `component` 属性。
 
-`show` 为 `false` 时，元素仍保留在 DOM 中，Bootstrap 样式会使其透明；它不会自动从
-无障碍树中移除，也不会设为 inert。请在 React 状态中按需卸载隐藏内容，或管理其无障碍
-属性和交互状态。
+| 属性           | 类型                                                                | 默认值      | 说明                                            |
+| -------------- | ------------------------------------------------------------------- | ----------- | ----------------------------------------------- |
+| `trigger`      | `ReactElement`                                                      | —           | 触发器元素；启用 Floating UI 交互弹出框。       |
+| `placement`    | `PopoverPlacement \| Partial<Record<Breakpoint, PopoverPlacement>>` | `'right'`   | 首选放置位置或响应式放置位置。                  |
+| `triggers`     | `PopoverTrigger[]`                                                  | `['click']` | 打开弹出框的交互：`click`、`hover` 或 `focus`。 |
+| `show`         | `boolean`                                                           | —           | 受控可见状态；静态模式下添加 `.show` 类。       |
+| `onShowChange` | `(show: boolean) => void`                                           | —           | 交互请求更改可见状态时调用。                    |
+| `delay`        | `number \| { open?: number; close?: number }`                       | `0`         | 悬停延迟，单位为毫秒。                          |
+| `container`    | `HTMLElement \| null`                                               | —           | 接收弹出框 portal 的元素。                      |
+| `instant`      | `boolean`                                                           | `false`     | 禁用淡入淡出过渡。                              |
+
+交互式弹出框通过 `aria-describedby` 与触发器关联。点击弹出框内部不会关闭，因此其中
+的链接和控件仍可使用。
 
 ### PopoverHeader
 
@@ -144,10 +164,12 @@ Popover 表面提供局部 CSS 变量，可设置背景、边框、标题、内�
 
 ## 无障碍访问
 
-请确保重要信息在临时弹出框之外也可获取。使用可通过键盘操作的触发器，并通过
-`aria-expanded`、`aria-labelledby` 等合适的 ARIA 属性关联触发器和内容。不要只依赖
-悬停交互。`Popover` 不管理焦点；若内容包含交互控件，请自行提供恰当的焦点行为，或
-改用 Dialog 组件。
+请使用可通过键盘聚焦且具有明确无障碍名称的触发器。默认点击触发器打开弹出框，不要只
+依赖悬停交互。弹出框使用 `role='tooltip'`，并通过 `aria-describedby` 与触发器关联，
+与 Bootstrap 保持一致。
+
+弹出框不管理键盘焦点顺序。若内容包含表单或链接等交互元素，建议改用对话框，以便焦点
+被限制在内容内并可到达。请确保重要信息在临时弹出框之外也可获取。
 
 淡入淡出动画由 CSS 实现。不支持 `@starting-style` 的浏览器仍会显示弹出框，但初次
 出现时可能没有动画。

@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+### Breaking Changes
+
+- Move Popover trigger, placement, dismissal, and arrow behavior into the
+  component using Floating UI. Pass `trigger` instead of implementing those
+  interactions manually. The default `placement` is now `'right'`.
+
+### Added
+
+- Add Popover `trigger`, `triggers`, `onShowChange`, `delay`, and `container`
+  props, responsive `placement` values, and an automatically positioned arrow.
+
 ## [0.4.0] - 2026-11-08
 
 ### Breaking Changes

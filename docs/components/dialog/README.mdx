@@ -92,7 +92,8 @@ clicked. The close button and Escape key still dismiss it unless
 Tooltips, popovers, toasts, and menus can be used inside a dialog. A modal
 dialog is rendered in the browser's top layer, so overlays portalled to
 `document.body` appear behind it. Render floating content inside the dialog,
-as in this example using Floating UI; place toasts and menus inside it too.
+as in this example using Floating UI; `Popover` accepts a `container` for this,
+and place toasts and menus inside it too.
 
 <DemoContainer>
   <DialogOverlaysDemo />
