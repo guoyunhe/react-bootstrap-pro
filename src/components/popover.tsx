@@ -363,9 +363,9 @@ function InteractivePopover<C extends ElementType = 'div'>({
   );
 }
 
-export type PopoverHeaderProps<C extends ElementType = 'h3'> = BoxProps<C>;
+export type PopoverHeaderProps<C extends ElementType = 'header'> = BoxProps<C>;
 
-export function PopoverHeader<C extends ElementType = 'h3'>({
+export function PopoverHeader<C extends ElementType = 'header'>({
   component,
   className,
   ...props
@@ -373,7 +373,7 @@ export function PopoverHeader<C extends ElementType = 'h3'>({
   return (
     <Box<C>
       {...(props as BoxProps<C>)}
-      component={component ?? ('h3' as C)}
+      component={component ?? ('header' as C)}
       classNameBefore={clsx('popover-header', props.classNameBefore)}
       className={className}
     />
