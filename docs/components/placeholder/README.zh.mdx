@@ -3,40 +3,136 @@ title: Placeholder 占位符
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Placeholder, PlaceholderGroup } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { PlaceholderAnimationDemo } from './demos/animation';
+import { PlaceholderBasicDemo } from './demos/basic';
+import { PlaceholderColorDemo } from './demos/color';
+import { PlaceholderHowItWorksDemo } from './demos/how-it-works';
+import { PlaceholderSizingDemo } from './demos/sizing';
+import { PlaceholderTextDemo } from './demos/text';
+import { PlaceholderWidthDemo } from './demos/width';
 
 # Placeholder 占位符
 
-`Placeholder` 渲染加载骨架。将占位符放入 `PlaceholderGroup`，即可应用脉冲、发光
-或波浪动画。
+`Placeholder` 和 `PlaceholderGroup` 用 CSS 渲染 Bootstrap 加载骨架。其外观和动画
+不需要 JavaScript，但加载完成后，应用必须将骨架替换为实际内容。
+
+## 示例
+
+此卡片并列展示实际内容，以及布局相同的加载骨架。
 
 <DemoContainer>
-  <PlaceholderGroup animation='wave'>
-    <Placeholder w={50} />
-    <Placeholder w={75} />
-  </PlaceholderGroup>
+  <PlaceholderBasicDemo />
 </DemoContainer>
 
-使用 `w={50}` 或 `w={75}` 设置占位符宽度，以匹配其所替代内容的比例。
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 工作原理
+
+可以用占位符替代文本，也可以将整个元素设为占位符样式。组件会添加
+`.placeholder` 类，但不会管理加载状态。
+
+<DemoContainer>
+  <PlaceholderHowItWorksDemo />
+</DemoContainer>
+
+```tsx src='./demos/how-it-works.tsx'
+
+```
+
+## 宽度
+
+使用继承的 `w` 属性或行内样式设置宽度。
+
+<DemoContainer>
+  <PlaceholderWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/width.tsx'
+
+```
+
+## 颜色
+
+占位符默认使用当前文本颜色。使用 `bg` 属性可应用背景工具类颜色。
+
+<DemoContainer>
+  <PlaceholderColorDemo />
+</DemoContainer>
+
+```tsx src='./demos/color.tsx'
+
+```
+
+## 尺寸
+
+占位符高度取决于父元素的排版样式。使用 `size` 应用 Bootstrap 尺寸修饰类。
+
+<DemoContainer>
+  <PlaceholderSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizing.tsx'
+
+```
+
+## 动画
+
+`PlaceholderGroup` 会为其子元素应用动画。`glow` 作为 `pulse` 的兼容别名保留支持。
+
+<DemoContainer>
+  <PlaceholderAnimationDemo />
+</DemoContainer>
+
+```tsx src='./demos/animation.tsx'
+
+```
+
+### 文本
+
+使用 `PlaceholderGroup` 为行内文本应用动画。
+
+<DemoContainer>
+  <PlaceholderTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/text.tsx'
+
+```
 
 ## API
 
 ### Placeholder
 
-默认渲染为 `span`。自有属性为 `size?: 'xs' | 'sm' | 'lg'`；继承所选元素的原生属性
-及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `span`。自有属性为 `size`；继承所选元素的原生属性及通过
+`BoxProps<C>` 继承的 [`Box`](../box/README.zh.mdx#api) 属性，包括多态
+`component` 属性。
 
-| 属性        | 类型                          | 说明                            |
-| ----------- | ----------------------------- | ------------------------------- |
-| `size`      | `'xs' \| 'sm' \| 'lg'`        | 调整占位符高度。                |
-| `animation` | `'glow' \| 'pulse' \| 'wave'` | 选择占位符组动画。              |
-| `component` | `ElementType`                 | 更换渲染元素。                  |
-| `...props`  | `BoxProps<C>`                 | 原生属性及所有 Box 工具类属性。 |
-
-占位符只负责展示。请在应用中切换实际内容和骨架的可见状态，并按需设置 `aria-hidden`。
+| 属性   | 类型                   | 说明             |
+| ------ | ---------------------- | ---------------- |
+| `size` | `'xs' \| 'sm' \| 'lg'` | 应用尺寸修饰类。 |
 
 ### PlaceholderGroup
 
-默认渲染为 `span`。自有属性为 `animation?: 'glow' | 'pulse' | 'wave'`；继承所选元素
-的原生属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `span`。自有属性为 `animation`；继承所选元素的原生属性及通过
+`BoxProps<C>` 继承的 [`Box`](../box/README.zh.mdx#api) 属性，包括多态
+`component` 属性。
+
+| 属性        | 类型                          | 说明                   |
+| ----------- | ----------------------------- | ---------------------- |
+| `animation` | `'glow' \| 'pulse' \| 'wave'` | 为子元素应用对应动画。 |
+
+两个组件默认都会设置 `aria-hidden='true'`。只有在需要让辅助技术读取占位符本身时，
+才传入 `aria-hidden={false}`。
+
+## 无障碍访问
+
+占位符只负责视觉呈现，不会播报加载状态或加载完成。请将装饰性骨架从辅助技术中隐藏，
+另行播报加载状态和内容更新，并在实际内容就绪后替换骨架。
+
+## 参考
+
+- [Bootstrap 6 Placeholder 官方文档](https://getbootstrap.com/docs/6.0/components/placeholder/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/placeholder.tsx)

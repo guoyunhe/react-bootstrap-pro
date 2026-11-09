@@ -3,16 +3,24 @@ title: Placeholder
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Placeholder, PlaceholderGroup } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { PlaceholderAnimationDemo } from './demos/animation';
 import { PlaceholderBasicDemo } from './demos/basic';
+import { PlaceholderColorDemo } from './demos/color';
+import { PlaceholderHowItWorksDemo } from './demos/how-it-works';
+import { PlaceholderSizingDemo } from './demos/sizing';
+import { PlaceholderTextDemo } from './demos/text';
+import { PlaceholderWidthDemo } from './demos/width';
 
 # Placeholder
 
-`Placeholder` renders a loading skeleton. Put placeholders inside a
-`PlaceholderGroup` to apply the pulse, glow, or wave animation.
+`Placeholder` and `PlaceholderGroup` render Bootstrap's CSS loading skeletons.
+Their appearance and animation need no JavaScript, but your application must
+replace the skeleton with real content when loading finishes.
 
 ## Example
+
+This card pairs real content with a skeleton of the same layout.
 
 <DemoContainer>
   <PlaceholderBasicDemo />
@@ -22,41 +30,112 @@ import { PlaceholderBasicDemo } from './demos/basic';
 
 ```
 
+## How it works
+
+Use a placeholder in place of text, or style a whole element as a placeholder.
+The component adds the `.placeholder` class; it does not manage loading state.
+
+<DemoContainer>
+  <PlaceholderHowItWorksDemo />
+</DemoContainer>
+
+```tsx src='./demos/how-it-works.tsx'
+
+```
+
+## Width
+
+Set the width with the inherited `w` prop or an inline style.
+
+<DemoContainer>
+  <PlaceholderWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/width.tsx'
+
+```
+
+## Color
+
+Placeholders use the current text color by default. Use `bg` to apply a
+background utility color.
+
+<DemoContainer>
+  <PlaceholderColorDemo />
+</DemoContainer>
+
+```tsx src='./demos/color.tsx'
+
+```
+
 ## Sizing
 
-Set `w={50}` or `w={75}` to match placeholder proportions to the content they
-replace; `size` changes their height.
+Placeholder height follows the parent typography. Use `size` to apply a
+Bootstrap size modifier.
+
+<DemoContainer>
+  <PlaceholderSizingDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizing.tsx'
+
+```
+
+## Animation
+
+`PlaceholderGroup` applies an animation to its children. `glow` is supported as
+a compatibility alias for `pulse`.
+
+<DemoContainer>
+  <PlaceholderAnimationDemo />
+</DemoContainer>
+
+```tsx src='./demos/animation.tsx'
+
+```
+
+### Text
+
+Apply an animation to inline text with `PlaceholderGroup`.
+
+<DemoContainer>
+  <PlaceholderTextDemo />
+</DemoContainer>
+
+```tsx src='./demos/text.tsx'
+
+```
 
 ## API
 
 ### Placeholder
 
-Renders a `span` by default. Its own prop is `size?: 'xs' | 'sm' | 'lg'`; it
-inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders a `span` by default. Its own prop is `size`; it inherits native props
+for the selected element and [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`, including the polymorphic `component` prop.
 
-| Prop        | Type                          | Description                             |
-| ----------- | ----------------------------- | --------------------------------------- |
-| `size`      | `'xs' \| 'sm' \| 'lg'`        | Adjusts the placeholder height.         |
-| `animation` | `'glow' \| 'pulse' \| 'wave'` | Selects a group animation.              |
-| `component` | `ElementType`                 | Changes the rendered element.           |
-| `...props`  | `BoxProps<C>`                 | Native props and all Box utility props. |
-
-Placeholders are presentational. Toggle the real content and skeleton visibility
-in your application, and use `aria-hidden` where appropriate.
+| Prop   | Type                   | Description              |
+| ------ | ---------------------- | ------------------------ |
+| `size` | `'xs' \| 'sm' \| 'lg'` | Applies a size modifier. |
 
 ### PlaceholderGroup
 
-Renders a `span` by default. Its own prop is
-`animation?: 'glow' | 'pulse' | 'wave'`; it inherits native props for the
-selected element and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+Renders a `span` by default. Its own prop is `animation`; it inherits native
+props for the selected element and [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`, including the polymorphic `component` prop.
+
+| Prop        | Type                          | Description                                      |
+| ----------- | ----------------------------- | ------------------------------------------------ |
+| `animation` | `'glow' \| 'pulse' \| 'wave'` | Applies the corresponding animation to children. |
+
+Both components set `aria-hidden='true'` by default. Pass `aria-hidden={false}`
+only when the placeholder itself should be exposed to assistive technology.
 
 ## Accessibility
 
-Hide decorative skeletons from assistive technology and announce loading state
-or updated content separately. Replace the placeholder when real content is
-available.
+Placeholders are visual and do not announce loading or completion. Keep
+decorative skeletons hidden from assistive technology, announce loading state
+and updates separately, and replace the skeleton when real content is ready.
 
 ## See
 
