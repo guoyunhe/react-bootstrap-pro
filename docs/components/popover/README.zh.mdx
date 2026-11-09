@@ -3,46 +3,157 @@ title: Popover 弹出框
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Popover, PopoverBody, PopoverHeader } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { PopoverBasicDemo } from './demos/basic';
+import { PopoverCustomContainerDemo } from './demos/custom-container';
+import { PopoverCustomDemo } from './demos/custom';
+import { PopoverDisabledDemo } from './demos/disabled';
+import { PopoverDismissDemo } from './demos/dismiss';
+import { PopoverPlacementDemo } from './demos/placement';
+import { PopoverResponsivePlacementDemo } from './demos/responsive-placement';
 
 # Popover 弹出框
 
-`Popover` 提供弹出内容的表面样式。触发交互和 Floating UI 定位需要 Bootstrap
-JavaScript bundle。
+`Popover` 提供 Bootstrap 弹出框的表面样式，不会初始化 Bootstrap JavaScript，也不负责
+触发、定位、关闭或绘制箭头。以下示例使用 React state 和 Floating UI 实现这些交互。
+
+## 示例
+
+### 实时示例
+
+点击按钮可切换弹出框；点击外部区域或按 Escape 键可关闭。
 
 <DemoContainer>
-  <Popover show placement='top'>
-    <PopoverHeader>弹出框标题</PopoverHeader>
-    <PopoverBody>弹出框内容</PopoverBody>
-  </Popover>
+  <PopoverBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+### 放置位置
+
+`placement` 属性选择对应的 Bootstrap 放置方向类。Floating UI 负责定位表面，并可在
+空间不足时调整位置，避免弹出框超出视口。
+
+<DemoContainer>
+  <PopoverPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+### 响应式放置
+
+`Popover` 不接受响应式放置值。请在 React 中根据视口变化更新 Floating UI 的放置位置。
+
+<DemoContainer>
+  <PopoverResponsivePlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive-placement.tsx'
+
+```
+
+### 自定义容器
+
+使用 Floating UI 的 portal root 将弹出框渲染到指定容器中。容器由示例管理，并非
+`Popover` 的属性。
+
+<DemoContainer>
+  <PopoverCustomContainerDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-container.tsx'
+
+```
+
+### 自定义弹出框
+
+添加自定义类，并覆盖局部 CSS 变量以更改表面样式。
+
+<DemoContainer>
+  <PopoverCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom.tsx'
+
+```
+
+### 点击其他位置关闭
+
+此示例在触发器获得焦点时打开弹出框；焦点移出、点击其他元素或按 Escape 键时关闭。
+
+<DemoContainer>
+  <PopoverDismissDemo />
+</DemoContainer>
+
+```tsx src='./demos/dismiss.tsx'
+
+```
+
+### 禁用元素
+
+禁用按钮无法接收焦点或指针事件。请改用可聚焦且可交互的包装元素作为触发器。
+
+<DemoContainer>
+  <PopoverDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+## CSS 变量
+
+Popover 表面提供局部 CSS 变量，可设置背景、边框、标题、内容、箭头和过渡样式。自定义
+示例覆盖了表面和标题的颜色：
+
+```css src='./demos/custom.css'
+
+```
 
 ## API
 
-| 属性        | 类型                                    | 说明                            |
-| ----------- | --------------------------------------- | ------------------------------- |
-| `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | 选择放置方向样式。              |
-| `show`      | `boolean`                               | 添加 `.show`；默认关闭。        |
-| `instant`   | `boolean`                               | 禁用淡入淡出动画。              |
-| `component` | `ElementType`                           | 更换根元素。                    |
-| `...props`  | `BoxProps<C>`                           | 原生属性及所有 Box 工具类属性。 |
-
-`PopoverHeader` 和 `PopoverBody` 分别设置标题和内容区域样式。
-
 ### Popover
 
-默认渲染为 `div`。自有属性为 `instant?: boolean`、
-`placement?: 'top' | 'end' | 'bottom' | 'start'`（默认值：`'top'`）和
-`show?: boolean`（默认值：`false`）；继承所选元素的原生属性及通过 `BoxProps<C>`
-继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `div`。下表列出自有属性；此外继承所选元素的原生属性及通过
+`BoxProps<C>` 继承的 [`Box`](../box/README.zh.mdx#api) 属性，包括多态 `component`
+属性。
+
+| 属性        | 类型                                    | 默认值  | 说明                                                |
+| ----------- | --------------------------------------- | ------- | --------------------------------------------------- |
+| `placement` | `'top' \| 'end' \| 'bottom' \| 'start'` | `'top'` | 添加对应的 Bootstrap 放置方向类，不负责定位弹出框。 |
+| `show`      | `boolean`                               | `false` | 添加 `.show` 使表面可见。                           |
+| `instant`   | `boolean`                               | `false` | 禁用淡入淡出过渡。                                  |
+
+`show` 为 `false` 时，元素仍保留在 DOM 中，Bootstrap 样式会使其透明；它不会自动从
+无障碍树中移除，也不会设为 inert。请在 React 状态中按需卸载隐藏内容，或管理其无障碍
+属性和交互状态。
 
 ### PopoverHeader
 
-默认渲染为 `h3`，没有自有属性。继承原生标题属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `h3`，没有自有属性。继承所选标题元素的原生属性及通过 `BoxProps<C>` 继承的
+[`Box`](../box/README.zh.mdx#api) 属性，包括 `component` 属性。
 
 ### PopoverBody
 
 默认渲染为 `div`，没有自有属性。继承原生 `div` 属性及通过 `BoxProps<C>` 继承的
-全部 [`Box`](../box/README.zh.mdx#api) 属性。
+[`Box`](../box/README.zh.mdx#api) 属性，包括 `component` 属性。
+
+## 无障碍访问
+
+请确保重要信息在临时弹出框之外也可获取。使用可通过键盘操作的触发器，并通过
+`aria-expanded`、`aria-labelledby` 等合适的 ARIA 属性关联触发器和内容。不要只依赖
+悬停交互。`Popover` 不管理焦点；若内容包含交互控件，请自行提供恰当的焦点行为，或
+改用 Dialog 组件。
+
+淡入淡出动画由 CSS 实现。不支持 `@starting-style` 的浏览器仍会显示弹出框，但初次
+出现时可能没有动画。
+
+## 参考
+
+- [Bootstrap 6 Popover 文档](https://getbootstrap.com/docs/6.0/components/popover/)
+- [Floating UI React](https://floating-ui.com/docs/react)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/popover.tsx)
