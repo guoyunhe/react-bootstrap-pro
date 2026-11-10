@@ -9,12 +9,27 @@ import { ProseNotProseDemo } from './demos/not-prose';
 
 # Prose
 
-`Prose` applies Bootstrap's `.prose` typography styles to long-form content,
-such as Markdown or content from a WYSIWYG editor. It adjusts font size, line
-height, heading and list spacing, and styles elements such as blockquotes and
-inline code.
+`Prose` applies Bootstrap's `.prose` typography to long-form content, such as
+rendered Markdown or content from a WYSIWYG editor. `NotProse` opts a region back
+out of those styles.
+
+## How it works
+
+`.prose` sets a base `font-size`, a `line-height`, and the local CSS variables
+that the rest of the styles read on its container. It then normalizes the
+spacing of paragraphs, headings, lists, blockquotes, and tables, and underlines
+plain links.
+
+The container is centered and capped at `1000px` wide. Put `Prose` in a narrower
+container when the content should not be constrained by that width.
+
+Heading and link styles target elements without a `class`, so an element that
+carries its own utility class keeps that styling instead of the prose default.
 
 ## Example
+
+The example shows common content types: headings, inline text elements, code,
+nested lists, definition lists, images, tables, and blockquotes.
 
 <DemoContainer>
   <ProseBasicDemo />
@@ -26,9 +41,9 @@ inline code.
 
 ## Opt out of prose styles
 
-Use `NotProse` for a component or region that should keep its own styles, such as
-an embedded widget. A `.prose` region inside `.not-prose` does not re-enable
-prose typography.
+Wrap a component or region in `NotProse` when it should keep its own styles, such
+as an embedded widget. A `.prose` inside `.not-prose` does not re-enable prose
+typography.
 
 <DemoContainer>
   <ProseNotProseDemo />
@@ -42,16 +57,27 @@ prose typography.
 
 ### Prose
 
-Renders a `div` by default and has no own props. It inherits native props for
-the selected element and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
-
-`Prose` and `NotProse` render a `<div>` by default. Both accept the Box props,
-including `component` to use a different element, and pass their children
-through unchanged.
+Renders a `div` by default and has no own props. It inherits native props for the
+selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`, including `component` to render a different element. Children are
+passed through unchanged.
 
 ### NotProse
 
-Renders a `div` by default and has no own props. It inherits native props for
-the selected element and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+Renders a `div` by default and has no own props. It inherits native props for the
+selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`, including `component` to render a different element. Children are
+passed through unchanged.
+
+## Accessibility
+
+`Prose` and `NotProse` only apply typography. They add no roles, landmarks, or
+keyboard behavior, so the semantics come from the elements you write. Keep a
+single `h1` per page and use heading levels in order, because the font sizes are
+visual only and do not convey hierarchy. Prose links keep their underline, so
+they remain distinguishable without relying on color.
+
+## See
+
+- [Bootstrap 6 Prose documentation](https://getbootstrap.com/docs/6.0/content/prose/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/prose.tsx)

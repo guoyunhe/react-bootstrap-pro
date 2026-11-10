@@ -9,10 +9,23 @@ import { ProseNotProseDemo } from './demos/not-prose';
 
 # Prose 长文本排版
 
-`Prose` 为长文本内容（例如 Markdown 或 WYSIWYG 编辑器生成的内容）应用 Bootstrap 的
-`.prose` 排版样式。它会调整字号、行高、标题与列表间距，并为引用、行内代码等元素设置样式。
+`Prose` 为长文本内容（例如渲染后的 Markdown 或 WYSIWYG 编辑器生成的内容）应用 Bootstrap 的
+`.prose` 排版样式。`NotProse` 用于让局部区域退出这些样式。
+
+## 工作原理
+
+`.prose` 在容器上设置基础 `font-size`、`line-height` 以及其余样式读取的局部 CSS
+变量，然后统一段落、标题、列表、引用和表格的间距，并为无样式的链接添加下划线。
+
+容器居中显示，最大宽度限制为 `1000px`。若内容不应受此宽度约束，可将 `Prose`
+放入更窄的容器中。
+
+标题和链接样式仅作用于没有 `class` 的元素，因此自带工具类的元素会保留其自身样式，
+不会应用 Prose 的默认样式。
 
 ## 示例
+
+示例涵盖常见的内容类型：标题、行内文本元素、代码、嵌套列表、定义列表、图片、表格和引用。
 
 <DemoContainer>
   <ProseBasicDemo />
@@ -24,7 +37,7 @@ import { ProseNotProseDemo } from './demos/not-prose';
 
 ## 排除 Prose 样式
 
-对于需要保留自身样式的组件或区域（例如嵌入式控件），可使用 `NotProse`。在
+对于需要保留自身样式的组件或区域（例如嵌入式控件），可使用 `NotProse` 包裹。在
 `.not-prose` 内部添加 `.prose` 无法重新启用 Prose 排版样式。
 
 <DemoContainer>
@@ -40,12 +53,22 @@ import { ProseNotProseDemo } from './demos/not-prose';
 ### Prose
 
 默认渲染为 `div`，没有自有属性。继承所选元素的原生属性及通过 `BoxProps<C>`
-继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
-
-`Prose` 和 `NotProse` 默认渲染 `<div>`。两者都接受 Box 属性，包括用于更换 HTML 标签的
-`component`，并会原样传递子元素。
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性，包括用于更换渲染元素的
+`component`。子元素会原样传递。
 
 ### NotProse
 
-默认渲染为 `div`，没有自有属性。继承所选元素的原生属性及通过 `BoxProps<C>` 继承的
-全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `div`，没有自有属性。继承所选元素的原生属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性，包括用于更换渲染元素的
+`component`。子元素会原样传递。
+
+## 无障碍访问
+
+`Prose` 和 `NotProse` 只应用排版样式，不会添加角色、地标或键盘交互，语义完全来自所书写的
+元素。每页应只保留一个 `h1`，并按顺序使用标题层级，因为字号只是视觉效果，并不传达层级。
+Prose 中的链接保留下划线，因此无需依赖颜色也能区分。
+
+## 参考
+
+- [Bootstrap 6 Prose 官方文档](https://getbootstrap.com/docs/6.0/content/prose/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/prose.tsx)
