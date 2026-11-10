@@ -13,6 +13,7 @@ import { ButtonDisabledDemo } from './demos/disabled-state';
 import { ButtonIconDemo, ButtonIconSizesDemo } from './demos/icon-buttons';
 import { ButtonInputToggleDemo } from './demos/input-toggles';
 import { ButtonLinkDemo } from './demos/link-buttons';
+import { ButtonLoadingDemo } from './demos/loading';
 import { ButtonPlaygroundDemo } from './demos/playground';
 import { ButtonSizesDemo } from './demos/sizes';
 import { ButtonStyledDemo } from './demos/styled-buttons';
@@ -164,6 +165,22 @@ Bootstrap 的 `.disabled` 类、设置 `aria-disabled`、移出键盘焦点顺�
 ```
 
 禁用链接会保留 `href`，但组件会阻止其点击导航。
+
+## 加载中
+
+操作进行中时禁用按钮，并在状态文本旁显示指示器。请保留可见文本，使状态不只依赖动画，
+同时将指示器标记为装饰性，避免重复播报。
+
+<DemoContainer>
+  <ButtonLoadingDemo />
+</DemoContainer>
+
+```tsx src='./demos/loading.tsx'
+
+```
+
+使用 [`Spinner`](../spinner/README.zh.mdx) 组件渲染指示器。原生的 `disabled`
+属性会阻止重复点击，直到操作完成。
 
 ## 块级按钮
 

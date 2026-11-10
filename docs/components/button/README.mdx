@@ -13,6 +13,7 @@ import { ButtonDisabledDemo } from './demos/disabled-state';
 import { ButtonIconDemo, ButtonIconSizesDemo } from './demos/icon-buttons';
 import { ButtonInputToggleDemo } from './demos/input-toggles';
 import { ButtonLinkDemo } from './demos/link-buttons';
+import { ButtonLoadingDemo } from './demos/loading';
 import { ButtonPlaygroundDemo } from './demos/playground';
 import { ButtonSizesDemo } from './demos/sizes';
 import { ButtonStyledDemo } from './demos/styled-buttons';
@@ -176,6 +177,24 @@ link from the tab order, and prevents navigation.
 
 Disabled anchors retain their `href` but cannot be activated through the
 button's click handler.
+
+## Loading
+
+Disable the button while an action is in progress, and show a spinner next to a
+status label. Keep the label visible so the state does not depend on the
+animation, and mark the spinner decorative so the status is announced once.
+
+<DemoContainer>
+  <ButtonLoadingDemo />
+</DemoContainer>
+
+```tsx src='./demos/loading.tsx'
+
+```
+
+Use the [`Spinner`](../spinner/README.mdx) component for the indicator. The
+native `disabled` attribute prevents repeated activation until the action
+finishes.
 
 ## Block buttons
 
