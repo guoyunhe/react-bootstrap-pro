@@ -1,18 +1,14 @@
-import { Box, FormField, Switch, SwitchInput } from 'react-bootstrap-pro';
+import { Box, FormField, Switch } from 'react-bootstrap-pro';
 
 export function SwitchDisabledDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={2}>
       <FormField>
-        <Switch>
-          <SwitchInput id='switch-disabled' disabled />
-        </Switch>
+        <Switch id='switch-disabled' disabled />
         <label htmlFor='switch-disabled'>Disabled switch</label>
       </FormField>
       <FormField>
-        <Switch>
-          <SwitchInput id='switch-checked-disabled' disabled defaultChecked />
-        </Switch>
+        <Switch id='switch-checked-disabled' disabled defaultChecked />
         <label htmlFor='switch-checked-disabled'>Disabled checked switch</label>
       </FormField>
     </Box>

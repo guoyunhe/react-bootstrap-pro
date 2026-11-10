@@ -12,10 +12,10 @@ import { SwitchWidthDemo } from './demos/width';
 
 # Switch 开关
 
-`Switch` 渲染 `.switch` 轨道与指示器，`SwitchInput` 渲染覆盖在其上的不可见
-复选框。输入框保留原生复选框语义；`SwitchInput` 会自动设置
-`type='checkbox'`、`role='switch'` 以及 `switch` 属性（支持的浏览器可用它提供
-触觉反馈）。将两者放入 `FormField`，标签会显示在控件旁边。
+`Switch` 渲染 `.switch` 轨道与指示器，并在其上叠加一个原生复选框输入框。
+输入框保留原生复选框语义，并自动设置 `type='checkbox'`、`role='switch'` 以及
+`switch` 属性（支持的浏览器可用它提供触觉反馈）。将开关放入 `FormField`，并通过
+`htmlFor` 绑定 `<label>`，标签会显示在控件旁边。
 
 ## 基础开关
 
@@ -41,7 +41,7 @@ import { SwitchWidthDemo } from './demos/width';
 
 ## 禁用状态
 
-为 `SwitchInput` 添加 `disabled`，关联的标签会自动变浅以匹配状态。
+为 `Switch` 添加 `disabled`，关联的标签会自动变浅以匹配状态。
 
 <DemoContainer>
   <SwitchDisabledDemo />
@@ -65,8 +65,9 @@ import { SwitchWidthDemo } from './demos/width';
 
 ## 自定义宽度
 
-覆盖轨道上的 `--bs-switch-width` 与 `--bs-switch-indicator-width` 自定义属性，
-即可得到更宽的开关。
+在 `Switch` 上设置 `width` 与 `indicatorWidth`，即可得到更宽的开关。数字会按像素处理，
+字符串则原样使用。这两个属性会写入轨道上的 `--bs-switch-width` 与
+`--bs-switch-indicator-width` 自定义属性。
 
 <DemoContainer>
   <SwitchWidthDemo />
@@ -80,22 +81,36 @@ import { SwitchWidthDemo } from './demos/width';
 
 ### Switch
 
-| 属性        | 类型                 | 说明                             |
-| ----------- | -------------------- | -------------------------------- |
-| `size`      | `'sm' \| 'lg'`       | 调整轨道及其标签的尺寸。         |
-| `theme`     | Bootstrap 主题字面量 | 通过 `.theme-*` 设置选中态颜色。 |
-| `component` | `ElementType`        | 默认渲染 `div`。                 |
-| `...props`  | `BoxProps<C>`        | 原生属性及所有 Box 工具类属性。  |
+默认渲染一个 `div` 轨道，内部包含 `<input type='checkbox'>`，输入框始终带有
+`role='switch'` 和 `switch` 属性。
 
-### SwitchInput
+| 组件属性         | 类型                     | 说明                         |
+| ---------------- | ------------------------ | ---------------------------- |
+| `size`           | `'sm' \| 'lg'`           | 调整轨道及其标签的尺寸。     |
+| `validation`     | `'valid' \| 'invalid'`   | 为内部输入框添加校验状态类。 |
+| `width`          | `CSSProperties['width']` | 设置轨道宽度。               |
+| `indicatorWidth` | `CSSProperties['width']` | 设置指示器宽度。             |
+| `inputRef`       | `Ref<HTMLInputElement>`  | 指向内部复选框的 ref。       |
 
-| 属性        | 类型          | 说明                               |
-| ----------- | ------------- | ---------------------------------- |
-| `component` | `ElementType` | 默认渲染 `input type='checkbox'`。 |
-| `...props`  | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。    |
+自有属性为 `size`、`validation`、`width`、`indicatorWidth` 和 `inputRef`。原生
+复选框属性会透传给内部输入框，包括 `id`、`name`、`value`、`checked`、
+`defaultChecked`、`disabled`、`required`、`readOnly`、`autoComplete`、`form`、
+`onChange`、`onInput`、`onBlur`、`onFocus`，以及 `aria-label`、`aria-describedby`
+和 `aria-labelledby` 属性。其余原生属性及所有
+[`Box`](../box/README.zh.mdx#api) 工具类属性作用于轨道；`theme`、`style` 和
+`component` 同样作用于轨道。
 
-## 无障碍
+## 无障碍访问
 
-`SwitchInput` 始终渲染 `role='switch'`，辅助技术会把控件朗读为开关而非复选框。
-通过 `htmlFor` 绑定 `<label for>` 提供可访问名称，并将标签与轨道一起放在
-`FormField` 中。
+内部输入框始终渲染 `role='switch'`，辅助技术会将控件朗读为开关而非复选框，并提供
+原生选中状态。通过 `htmlFor` 绑定 `<label>` 或使用 `aria-label` 提供可访问名称。
+键盘交互保持原生行为：输入框获得焦点时，按 Space 切换开关。
+
+如示例所示，将标签与轨道一起放入 `FormField`，网格布局会把二者并排显示，标签也会
+跟随禁用状态的样式。颜色只是视觉提示，请保留可见标签，不要仅依靠选中态颜色传达状态。
+
+## 参考
+
+- [Bootstrap 6 Switch 官方文档](https://getbootstrap.com/docs/6.0/forms/switch/)
+- [Form 表单组件](../form/README.zh.mdx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/switch.tsx)

@@ -1,4 +1,4 @@
-import { Box, FormField, Switch, SwitchInput } from 'react-bootstrap-pro';
+import { Box, FormField, Switch } from 'react-bootstrap-pro';
 
 const themes = [
   'primary',
@@ -16,9 +16,7 @@ export function SwitchThemesDemo() {
     <Box d='flex' flexWrap='wrap' gap={4}>
       {themes.map((theme) => (
         <FormField key={theme}>
-          <Switch theme={theme}>
-            <SwitchInput id={`switch-theme-${theme}`} defaultChecked />
-          </Switch>
+          <Switch id={`switch-theme-${theme}`} theme={theme} defaultChecked />
           <label htmlFor={`switch-theme-${theme}`}>Example {theme} switch</label>
         </FormField>
       ))}

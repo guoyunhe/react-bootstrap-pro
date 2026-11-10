@@ -17,7 +17,6 @@ import {
   Range,
   Select,
   Switch,
-  SwitchInput,
   Textarea,
 } from 'react-bootstrap-pro';
 
@@ -81,13 +80,11 @@ export function ValidationSupportedDemo() {
       <Box>
         <FormLabel>Switch</FormLabel>
         <FormField>
-          <Switch>
-            <SwitchInput
-              id='validation-supported-switch'
-              validation='invalid'
-              aria-describedby='validation-supported-switch-feedback'
-            />
-          </Switch>
+          <Switch
+            id='validation-supported-switch'
+            validation='invalid'
+            aria-describedby='validation-supported-switch-feedback'
+          />
           <FormFieldContent>
             <label htmlFor='validation-supported-switch'>Toggle this switch</label>
             <FormFeedback id='validation-supported-switch-feedback'>

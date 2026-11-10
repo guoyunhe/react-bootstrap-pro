@@ -12,11 +12,11 @@ import { SwitchWidthDemo } from './demos/width';
 
 # Switch
 
-`Switch` renders the `.switch` track and indicator, while `SwitchInput` renders
-the invisible checkbox layered over it. The input keeps the native checkbox
-semantics; `SwitchInput` sets `type='checkbox'`, `role='switch'`, and the
-`switch` attribute, which browsers that support it can use for haptic feedback.
-Wrap the pair in a `FormField` to place the label next to the control.
+`Switch` renders the `.switch` track and indicator with a native checkbox input
+layered over it. The input keeps native checkbox semantics and sets
+`type='checkbox'`, `role='switch'`, and the `switch` attribute, which browsers
+that support it can use for haptic feedback. Wrap the switch in a `FormField` and
+bind a `<label>` through `htmlFor` to place the label next to the control.
 
 ## Basic switch
 
@@ -42,7 +42,7 @@ Set `theme` on `Switch` to color the checked track through `.theme-{color}`.
 
 ## Disabled
 
-Add `disabled` to `SwitchInput`; the associated label is styled to match.
+Add `disabled` to `Switch`; the associated label is styled to match.
 
 <DemoContainer>
   <SwitchDisabledDemo />
@@ -66,8 +66,10 @@ Use `size='sm'` or `size='lg'` on `Switch` for `.switch-sm` and `.switch-lg`.
 
 ## Custom width
 
-Override the `--bs-switch-width` and `--bs-switch-indicator-width` custom
-properties on the track to build a wider switch.
+Set `width` and `indicatorWidth` on `Switch` to build a wider switch. Numbers are
+treated as pixels; strings pass through. The props write the
+`--bs-switch-width` and `--bs-switch-indicator-width` custom properties on the
+track.
 
 <DemoContainer>
   <SwitchWidthDemo />
@@ -81,23 +83,40 @@ properties on the track to build a wider switch.
 
 ### Switch
 
-| Prop        | Type                    | Description                             |
-| ----------- | ----------------------- | --------------------------------------- |
-| `size`      | `'sm' \| 'lg'`          | Scales the track and its label.         |
-| `theme`     | Bootstrap theme literal | Sets the checked color via `.theme-*`.  |
-| `component` | `ElementType`           | Renders a `div` by default.             |
-| `...props`  | `BoxProps<C>`           | Native props and all Box utility props. |
+Renders a `div` track by default with an inner `<input type='checkbox'>` that
+always has `role='switch'` and the `switch` attribute.
 
-### SwitchInput
+| Prop             | Type                     | Description                                   |
+| ---------------- | ------------------------ | --------------------------------------------- |
+| `size`           | `'sm' \| 'lg'`           | Scales the track and its label.               |
+| `validation`     | `'valid' \| 'invalid'`   | Adds the validation class to the inner input. |
+| `width`          | `CSSProperties['width']` | Sets the track width.                         |
+| `indicatorWidth` | `CSSProperties['width']` | Sets the indicator width.                     |
+| `inputRef`       | `Ref<HTMLInputElement>`  | Ref to the inner checkbox.                    |
 
-| Prop        | Type          | Description                                    |
-| ----------- | ------------- | ---------------------------------------------- |
-| `component` | `ElementType` | Renders an `input type='checkbox'` by default. |
-| `...props`  | `BoxProps<C>` | Native props and all Box utility props.        |
+Its own props are `size`, `validation`, `width`, `indicatorWidth`, and
+`inputRef`. Native checkbox props are forwarded to the inner input, including
+`id`, `name`, `value`, `checked`, `defaultChecked`, `disabled`, `required`,
+`readOnly`, `autoComplete`, `form`, `onChange`, `onInput`, `onBlur`, `onFocus`,
+and the `aria-label`, `aria-describedby`, and `aria-labelledby` attributes. The
+remaining native props and all [`Box`](../box/README.mdx#api) utility props apply
+to the track; `theme`, `style`, and `component` target the track as well.
 
 ## Accessibility
 
-`SwitchInput` always renders `role='switch'` so assistive technologies announce
-the control as a switch instead of a checkbox. Give it an accessible name with a
-`<label for>` bound through `htmlFor`, and group the label with the track in a
-`FormField`.
+The inner input always renders `role='switch'`, so assistive technologies
+announce the control as a switch instead of a checkbox and expose its native
+checked state. Give it an accessible name with a `<label>` bound through
+`htmlFor`, or with `aria-label`. Keyboard interaction stays native: Space
+toggles the switch when the input has focus.
+
+Group the label with the track in a `FormField`, as in the examples, so the grid
+layout places them side by side and the label follows the disabled styling. Color
+is only a visual cue; keep a visible label and do not rely on the checked color
+alone to communicate state.
+
+## See
+
+- [Bootstrap 6 Switch documentation](https://getbootstrap.com/docs/6.0/forms/switch/)
+- [Form component](../form/README.mdx)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/switch.tsx)

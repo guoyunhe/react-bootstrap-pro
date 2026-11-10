@@ -16,7 +16,6 @@ import {
   Row,
   Select,
   Switch,
-  SwitchInput,
 } from 'react-bootstrap-pro';
 
 export function ValidationCustomDemo() {
@@ -150,9 +149,7 @@ export function ValidationCustomDemo() {
         </FormField>
       </Box>
       <FormField mb={3}>
-        <Switch>
-          <SwitchInput id='validation-custom-switch' />
-        </Switch>
+        <Switch id='validation-custom-switch' />
         <label htmlFor='validation-custom-switch'>Subscribe to newsletter</label>
       </FormField>
       <Button type='submit' variant='solid' theme='primary'>

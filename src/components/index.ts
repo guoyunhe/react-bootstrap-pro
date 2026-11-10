@@ -59,7 +59,6 @@ export * from './spinner';
 export * from './stack';
 export * from './stepper';
 export * from './switch';
-export * from './switch-input';
 export * from './tab';
 export * from './table';
 export * from './table-body';

@@ -7,6 +7,9 @@
 - Move Popover trigger, placement, dismissal, and arrow behavior into the
   component using Floating UI. Pass `trigger` instead of implementing those
   interactions manually. The default `placement` is now `'right'`.
+- Merge `SwitchInput` into `Switch`. `Switch` now renders the hidden checkbox
+  input itself and forwards native checkbox props to it; `SwitchInput` is no
+  longer exported.
 - Merge `ProgressBar` into `Progress`. `Progress` now renders the inner
   `.progress-bar` itself, its children become the bar label, and `ProgressBar`
   is no longer exported. Pass bar styling through `striped`, `animated`, and
@@ -21,6 +24,7 @@
   `ProgressStacked` component for stacked bars.
 - Add `Select` `htmlSize` for the native number of visible options while `size`
   keeps selecting Bootstrap's small or large style.
+- Add `Switch` `width` and `indicatorWidth` for the track and indicator widths.
 
 ## [0.4.0] - 2026-11-08
 

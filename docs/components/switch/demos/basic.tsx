@@ -1,11 +1,9 @@
-import { FormField, Switch, SwitchInput } from 'react-bootstrap-pro';
+import { FormField, Switch } from 'react-bootstrap-pro';
 
 export function SwitchBasicDemo() {
   return (
     <FormField>
-      <Switch>
-        <SwitchInput id='switch-basic' defaultChecked />
-      </Switch>
+      <Switch id='switch-basic' defaultChecked />
       <label htmlFor='switch-basic'>Default switch</label>
     </FormField>
   );
