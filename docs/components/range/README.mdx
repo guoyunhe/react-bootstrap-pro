@@ -8,6 +8,7 @@ import { RangeBasicDemo } from './demos/basic';
 import { RangeBubbleDemo } from './demos/bubble';
 import { RangeDisabledDemo } from './demos/disabled';
 import { RangeFieldDemo } from './demos/field';
+import { RangeMinMaxDemo } from './demos/min-max';
 import { RangeStepsDemo } from './demos/steps';
 import { RangeThemesDemo } from './demos/themes';
 import { RangeTicksDemo } from './demos/ticks';
@@ -15,7 +16,7 @@ import { RangeTicksDemo } from './demos/ticks';
 # Range
 
 Native range inputs cannot show a filled track consistently, because CSS cannot
-read an input's value. `Range` renders the `.form-range` track with an inner
+read an input's value. `Range` renders the `.form-range` wrapper with an inner
 `.form-range-input` and keeps the `--bs-range-fill` custom property in sync, so
 the fill, value bubble, and tick marks render in every browser. Bootstrap uses a
 JavaScript plugin for this; the component implements the same behavior in React,
@@ -31,13 +32,14 @@ so no plugin is required.
 
 ```
 
-`Range` forwards the native range attributes to the input and applies Box
-utility props to the track wrapper. Like native inputs, `min` defaults to `0` and
-`max` to `100`.
+`Range` forwards native range attributes to the inner input and applies Box
+utility props to the wrapper. Like native inputs, `min` defaults to `0` and `max`
+to `100`.
 
 ## Theme colors
 
-Set `theme` to color the track fill and thumb through `.theme-{color}`.
+Set `theme` on the wrapper to color the track fill and thumb through
+`.theme-{color}`.
 
 <DemoContainer>
   <RangeThemesDemo />
@@ -49,7 +51,8 @@ Set `theme` to color the track fill and thumb through `.theme-{color}`.
 
 ## Disabled
 
-Add `disabled` to gray out the range and prevent interaction.
+Add `disabled` to gray out the range, remove pointer events, and prevent
+focusing.
 
 <DemoContainer>
   <RangeDisabledDemo />
@@ -59,10 +62,24 @@ Add `disabled` to gray out the range and prevent interaction.
 
 ```
 
-## Min, max and steps
+## Min and max
 
-Use `min` and `max` to change the value range and `step` to change the snapping
-behavior.
+Range inputs have implicit `min` and `max` values of `0` and `100`. Pass `min`
+and `max` to change the range.
+
+<DemoContainer>
+  <RangeMinMaxDemo />
+</DemoContainer>
+
+```tsx src='./demos/min-max.tsx'
+
+```
+
+## Steps
+
+By default, the range snaps to integer values. Set `step` to change the
+increment; the example below uses `0.5` to double the number of steps. Pass
+`step='any'` to allow any value.
 
 <DemoContainer>
   <RangeStepsDemo />
@@ -74,8 +91,8 @@ behavior.
 
 ## Value bubble
 
-Set `bubble` to show a value bubble above the thumb. Pass `format` to customize
-its label.
+Set `bubble` on the wrapper to show a value bubble that follows the thumb. The
+bubble reuses Bootstrap's tooltip styles. Pass `format` to customize its label.
 
 <DemoContainer>
   <RangeBubbleDemo />
@@ -87,8 +104,9 @@ its label.
 
 ## Tick marks
 
-Pass `ticks` to render a tick for each point, positioned by value and labelled
-from `label`. This is the React equivalent of the datalist markup Bootstrap's
+Pass `ticks` to render a tick for each point, positioned by value even when the
+values are unevenly spaced, and labelled from `label`. This is the React
+equivalent of linking a datalist to the input with `list`, which Bootstrap's
 plugin turns into tick marks.
 
 <DemoContainer>
@@ -111,36 +129,80 @@ Wrap the range in a `FormField` to pair it with a label and description.
 
 ```
 
+## CSS
+
+### Variables
+
+The component writes `--bs-range-fill` (`0`–`1`) on the wrapper from the input's
+current value. The remaining variables are defined on `.form-range`, so the
+input and decorations inherit them; override any of them on the wrapper.
+
+| Variable                               | Purpose                                            |
+| -------------------------------------- | -------------------------------------------------- |
+| `--bs-range-fill`                      | Filled portion of the track, set by the component. |
+| `--bs-range-track-width`               | Track width.                                       |
+| `--bs-range-track-height`              | Track height.                                      |
+| `--bs-range-track-cursor`              | Cursor over the track.                             |
+| `--bs-range-track-bg`                  | Unfilled track background.                         |
+| `--bs-range-track-border-radius`       | Track corner radius.                               |
+| `--bs-range-track-fill-bg`             | Filled track color.                                |
+| `--bs-range-track-disabled-bg`         | Track background when disabled.                    |
+| `--bs-range-thumb-width`               | Thumb width.                                       |
+| `--bs-range-thumb-height`              | Thumb height; defaults to the thumb width.         |
+| `--bs-range-thumb-bg`                  | Thumb background.                                  |
+| `--bs-range-thumb-border`              | Thumb border shorthand.                            |
+| `--bs-range-thumb-border-radius`       | Thumb corner radius.                               |
+| `--bs-range-thumb-box-shadow`          | Thumb shadow.                                      |
+| `--bs-range-thumb-active-bg`           | Thumb background while dragging.                   |
+| `--bs-range-thumb-disabled-bg`         | Thumb background when disabled.                    |
+| `--bs-range-thumb-transition-property` | Thumb transition property.                         |
+| `--bs-range-thumb-transition-duration` | Thumb transition duration.                         |
+| `--bs-range-thumb-transition-timing`   | Thumb transition timing function.                  |
+| `--bs-range-tick-width`                | Tick mark width.                                   |
+| `--bs-range-tick-height`               | Tick mark height.                                  |
+| `--bs-range-tick-bg`                   | Tick mark color.                                   |
+
 ## API
 
 ### Range
 
-Renders a `div` by default. Its own props are `min`, `max`, `step`, `value`,
-`defaultValue`, `disabled`, `id`, `name`, `list`, `required`, `bubble`,
-`format`, `ticks`, `validation`, `onChange`, `onInput`, `aria-label`,
-`aria-describedby`, and `aria-labelledby`. It inherits native props for the
-selected element and [`Box`](../box/README.mdx#api) utility props, except
-`children`.
+Renders a `div` wrapper by default with a native `<input type='range'>` inside.
+Box props apply to the wrapper; the input receives the native range attributes.
 
-| Prop           | Type                           | Description                                     |
-| -------------- | ------------------------------ | ----------------------------------------------- |
-| `min`          | `number`                       | Minimum value; defaults to `0`.                 |
-| `max`          | `number`                       | Maximum value; defaults to `100`.               |
-| `step`         | `number \| 'any'`              | Snapping increment.                             |
-| `value`        | `number`                       | Controlled value.                               |
-| `defaultValue` | `number`                       | Initial value for uncontrolled usage.           |
-| `disabled`     | `boolean`                      | Disables the input.                             |
-| `bubble`       | `boolean`                      | Shows the value bubble above the thumb.         |
-| `format`       | `(value: number) => string`    | Formats the bubble label.                       |
-| `ticks`        | `readonly { value, label? }[]` | Renders tick marks positioned by value.         |
-| `component`    | `ElementType`                  | Changes the track element; defaults to a `div`. |
-| `...props`     | `BoxProps<C>`                  | Box utility props and remaining native props.   |
+| Prop           | Type                        | Description                                     |
+| -------------- | --------------------------- | ----------------------------------------------- |
+| `min`          | `number`                    | Minimum value; defaults to `0`.                 |
+| `max`          | `number`                    | Maximum value; defaults to `100`.               |
+| `step`         | `number \| 'any'`           | Snapping increment; `'any'` disables snapping.  |
+| `value`        | `number`                    | Controlled value.                               |
+| `defaultValue` | `number`                    | Initial value for uncontrolled usage.           |
+| `disabled`     | `boolean`                   | Disables the input.                             |
+| `bubble`       | `boolean`                   | Shows the value bubble above the thumb.         |
+| `format`       | `(value: number) => string` | Formats the bubble label.                       |
+| `ticks`        | `readonly RangeTick[]`      | Renders tick marks positioned by value.         |
+| `validation`   | `'valid' \| 'invalid'`      | Adds `.is-valid` or `.is-invalid` to the input. |
+| `component`    | `ElementType`               | Changes the wrapper element; defaults to `div`. |
+| `...props`     | `BoxProps<C>`               | Box utility props and remaining wrapper props.  |
 
-Native input attributes such as `id`, `name`, `list`, `required`, `onChange`,
-`onInput`, and `aria-*` are forwarded to the inner input.
+`RangeTick` is `{ value: number; label?: string }`.
+
+The `id`, `name`, `list`, `required`, `onChange`, `onInput`, and `aria-*` props
+are forwarded to the inner input rather than the wrapper, so a label or a
+datalist can be associated with it.
 
 ## Accessibility
 
 Every range needs an accessible name. Use a visible `FormLabel` bound with
-`htmlFor`, or `aria-label` when no visible label fits. The value bubble is
-decorative (`aria-hidden`), so screen readers announce the input's own value.
+`htmlFor`, or `aria-label` when no visible label fits. The value bubble and tick
+marks are decorative (`aria-hidden`), so assistive technology reads the input's
+own value.
+
+Range inputs keep native keyboard behavior: Arrow keys change the value by
+`step`, Page Up and Page Down move in larger increments, and Home and End jump
+to the minimum and maximum.
+
+## See
+
+- [Bootstrap 6 range documentation](https://getbootstrap.com/docs/6.0/forms/range/)
+- [Form component](../form/README.mdx)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/range.tsx)

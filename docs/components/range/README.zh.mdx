@@ -8,6 +8,7 @@ import { RangeBasicDemo } from './demos/basic';
 import { RangeBubbleDemo } from './demos/bubble';
 import { RangeDisabledDemo } from './demos/disabled';
 import { RangeFieldDemo } from './demos/field';
+import { RangeMinMaxDemo } from './demos/min-max';
 import { RangeStepsDemo } from './demos/steps';
 import { RangeThemesDemo } from './demos/themes';
 import { RangeTicksDemo } from './demos/ticks';
@@ -15,11 +16,11 @@ import { RangeTicksDemo } from './demos/ticks';
 # Range 滑块
 
 原生滑块无法在各浏览器中一致地显示已填充轨道，因为 CSS 无法读取输入值。`Range`
-渲染 `.form-range` 轨道与内部的 `.form-range-input`，并同步 `--bs-range-fill`
+渲染 `.form-range` 容器与内部的 `.form-range-input`，并同步 `--bs-range-fill`
 自定义属性，因此填充轨道、数值气泡与刻度都能在各浏览器中正常显示。Bootstrap 用
 JavaScript 插件实现该效果，本组件用 React 复刻了相同行为，无需加载插件。
 
-## 基础示例
+## 概述
 
 <DemoContainer>
   <RangeBasicDemo />
@@ -29,12 +30,12 @@ JavaScript 插件实现该效果，本组件用 React 复刻了相同行为，�
 
 ```
 
-`Range` 会把原生滑块属性透传给输入框，Box 工具类属性作用于轨道容器。与原生输入
+`Range` 会把原生滑块属性透传给内部输入框，Box 工具类属性作用于容器。与原生输入
 一致，`min` 默认为 `0`，`max` 默认为 `100`。
 
 ## 主题颜色
 
-通过 `theme` 生成 `.theme-{color}`，设置填充轨道与滑块颜色。
+在容器上设置 `theme`，通过 `.theme-{color}` 设置填充轨道与滑块颜色。
 
 <DemoContainer>
   <RangeThemesDemo />
@@ -46,7 +47,7 @@ JavaScript 插件实现该效果，本组件用 React 复刻了相同行为，�
 
 ## 禁用状态
 
-添加 `disabled` 使滑块变灰并禁止交互。
+添加 `disabled` 使滑块变灰、移除指针交互，并禁止聚焦。
 
 <DemoContainer>
   <RangeDisabledDemo />
@@ -56,9 +57,22 @@ JavaScript 插件实现该效果，本组件用 React 复刻了相同行为，�
 
 ```
 
-## 最小、最大值与步长
+## 最小值与最大值
 
-用 `min`、`max` 调整取值范围，用 `step` 调整吸附步长。
+滑块输入默认的 `min` 和 `max` 分别为 `0` 和 `100`。传入 `min` 和 `max` 可更改取值范围。
+
+<DemoContainer>
+  <RangeMinMaxDemo />
+</DemoContainer>
+
+```tsx src='./demos/min-max.tsx'
+
+```
+
+## 步长
+
+默认情况下，滑块按整数吸附。设置 `step` 可更改增量，下面的示例使用 `0.5` 将步数翻倍；
+传入 `step='any'` 则允许任意值。
 
 <DemoContainer>
   <RangeStepsDemo />
@@ -70,7 +84,8 @@ JavaScript 插件实现该效果，本组件用 React 复刻了相同行为，�
 
 ## 数值气泡
 
-设置 `bubble` 在滑块上方显示数值气泡；通过 `format` 自定义显示文本。
+在容器上设置 `bubble`，在滑块上方显示跟随滑块的数值气泡；气泡复用 Bootstrap 的
+tooltip 样式。通过 `format` 自定义显示文本。
 
 <DemoContainer>
   <RangeBubbleDemo />
@@ -82,8 +97,9 @@ JavaScript 插件实现该效果，本组件用 React 复刻了相同行为，�
 
 ## 刻度
 
-传入 `ticks` 会按数值定位渲染每个刻度，并显示 `label`。这相当于 Bootstrap 插件
-把 datalist 转换为刻度的 React 版本。
+传入 `ticks` 会按数值定位渲染每个刻度，即使数值分布不均匀也能正确定位，并显示
+`label` 文本。这相当于用 `list` 把 datalist 关联到输入框、再由 Bootstrap 插件转换为
+刻度的 React 版本。
 
 <DemoContainer>
   <RangeTicksDemo />
@@ -105,35 +121,76 @@ JavaScript 插件实现该效果，本组件用 React 复刻了相同行为，�
 
 ```
 
+## CSS
+
+### 自定义属性
+
+组件会根据输入框的当前值在容器上写入 `--bs-range-fill`（`0`–`1`）。其余变量定义在
+`.form-range` 上，输入框与装饰元素都会继承，可在容器上覆盖任意变量。
+
+| 属性                                   | 用途                         |
+| -------------------------------------- | ---------------------------- |
+| `--bs-range-fill`                      | 已填充轨道比例，由组件写入。 |
+| `--bs-range-track-width`               | 轨道宽度。                   |
+| `--bs-range-track-height`              | 轨道高度。                   |
+| `--bs-range-track-cursor`              | 轨道上的鼠标指针样式。       |
+| `--bs-range-track-bg`                  | 未填充部分的轨道背景。       |
+| `--bs-range-track-border-radius`       | 轨道圆角。                   |
+| `--bs-range-track-fill-bg`             | 已填充轨道的颜色。           |
+| `--bs-range-track-disabled-bg`         | 禁用状态的轨道背景。         |
+| `--bs-range-thumb-width`               | 滑块宽度。                   |
+| `--bs-range-thumb-height`              | 滑块高度，默认等于宽度。     |
+| `--bs-range-thumb-bg`                  | 滑块背景。                   |
+| `--bs-range-thumb-border`              | 滑块边框简写。               |
+| `--bs-range-thumb-border-radius`       | 滑块圆角。                   |
+| `--bs-range-thumb-box-shadow`          | 滑块阴影。                   |
+| `--bs-range-thumb-active-bg`           | 拖动中的滑块背景。           |
+| `--bs-range-thumb-disabled-bg`         | 禁用状态的滑块背景。         |
+| `--bs-range-thumb-transition-property` | 滑块过渡属性。               |
+| `--bs-range-thumb-transition-duration` | 滑块过渡时长。               |
+| `--bs-range-thumb-transition-timing`   | 滑块过渡缓动函数。           |
+| `--bs-range-tick-width`                | 刻度线宽度。                 |
+| `--bs-range-tick-height`               | 刻度线高度。                 |
+| `--bs-range-tick-bg`                   | 刻度线颜色。                 |
+
 ## API
 
 ### Range
 
-默认渲染为 `div`。自有属性包括 `min`、`max`、`step`、`value`、`defaultValue`、
-`disabled`、`id`、`name`、`list`、`required`、`bubble`、`format`、`ticks`、
-`validation`、`onChange`、`onInput`、`aria-label`、`aria-describedby` 和
-`aria-labelledby`。组件继承所选元素的原生属性及
-[`Box`](../box/README.zh.mdx#api) 工具类属性，但不包括 `children`。
+默认渲染 `div` 容器，内部包含原生 `<input type='range'>`。Box 属性作用于容器，
+原生滑块属性由内部输入框接收。
 
-| 属性           | 类型                           | 说明                           |
-| -------------- | ------------------------------ | ------------------------------ |
-| `min`          | `number`                       | 最小值，默认 `0`。             |
-| `max`          | `number`                       | 最大值，默认 `100`。           |
-| `step`         | `number \| 'any'`              | 吸附步长。                     |
-| `value`        | `number`                       | 受控值。                       |
-| `defaultValue` | `number`                       | 非受控初始值。                 |
-| `disabled`     | `boolean`                      | 禁用输入框。                   |
-| `bubble`       | `boolean`                      | 在滑块上方显示数值气泡。       |
-| `format`       | `(value: number) => string`    | 格式化气泡文本。               |
-| `ticks`        | `readonly { value, label? }[]` | 按数值渲染刻度。               |
-| `component`    | `ElementType`                  | 更换轨道元素，默认 `div`。     |
-| `...props`     | `BoxProps<C>`                  | Box 工具类属性及其余原生属性。 |
+| 属性           | 类型                        | 说明                                        |
+| -------------- | --------------------------- | ------------------------------------------- |
+| `min`          | `number`                    | 最小值，默认 `0`。                          |
+| `max`          | `number`                    | 最大值，默认 `100`。                        |
+| `step`         | `number \| 'any'`           | 吸附步长；`'any'` 表示不吸附。              |
+| `value`        | `number`                    | 受控值。                                    |
+| `defaultValue` | `number`                    | 非受控初始值。                              |
+| `disabled`     | `boolean`                   | 禁用输入框。                                |
+| `bubble`       | `boolean`                   | 在滑块上方显示数值气泡。                    |
+| `format`       | `(value: number) => string` | 格式化气泡文本。                            |
+| `ticks`        | `readonly RangeTick[]`      | 按数值渲染刻度。                            |
+| `validation`   | `'valid' \| 'invalid'`      | 为输入框添加 `.is-valid` 或 `.is-invalid`。 |
+| `component`    | `ElementType`               | 更换容器元素，默认 `div`。                  |
+| `...props`     | `BoxProps<C>`               | Box 工具类属性及其余容器属性。              |
 
-原生输入属性（`id`、`name`、`list`、`required`、`onChange`、`onInput`、`aria-*`
-等）会透传给内部输入框。
+`RangeTick` 为 `{ value: number; label?: string }`。
+
+`id`、`name`、`list`、`required`、`onChange`、`onInput` 和 `aria-*` 等属性会透传给
+内部输入框而非容器，因此可以用它们为输入框关联标签或 datalist。
 
 ## 无障碍
 
 每个滑块都需要可访问名称：使用 `htmlFor` 绑定的可见 `FormLabel`，没有可见标签时
-使用 `aria-label`。数值气泡是装饰性的（`aria-hidden`），屏幕阅读器朗读的是输入
-框自身的值。
+使用 `aria-label`。数值气泡和刻度都是装饰性的（`aria-hidden`），屏幕阅读器朗读的是
+输入框自身的值。
+
+滑块保留原生键盘行为：方向键按 `step` 调整数值，Page Up 和 Page Down 以更大步长移动，
+Home 和 End 分别跳到最小值与最大值。
+
+## 参考
+
+- [Bootstrap 6 Range 官方文档](https://getbootstrap.com/docs/6.0/forms/range/)
+- [Form 表单组件](../form/README.zh.mdx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/range.tsx)
