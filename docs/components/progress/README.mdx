@@ -3,14 +3,26 @@ title: Progress
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Progress, ProgressBar } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ProgressAnimatedStripesDemo } from './demos/animated-stripes';
+import { ProgressBackgroundsDemo } from './demos/backgrounds';
+import { ProgressBackgroundsLabelsDemo } from './demos/backgrounds-labels';
 import { ProgressBasicDemo } from './demos/basic';
+import { ProgressHeightDemo } from './demos/height';
+import { ProgressLabelDemo } from './demos/label';
+import { ProgressLongLabelDemo } from './demos/long-label';
+import { ProgressMultipleBarsDemo } from './demos/multiple-bars';
+import { ProgressStripedDemo } from './demos/striped';
+import { ProgressWidthDemo } from './demos/width';
 
 # Progress
 
-`Progress` provides the accessible progressbar wrapper. Supply an accessible
-`label`; `ProgressBar` maps its value to a percentage width.
+`Progress` renders Bootstrap's `.progress` track together with the inner
+`.progress-bar`, and `ProgressStacked` renders a `.progress-stacked` group of
+segments. The components do not use the native `<progress>` element, so bars can
+be stacked, animated, and labeled. The track exposes the value through
+`role='progressbar'` and the `aria-value*` attributes, while the inner bar shows
+the percentage of `value` within `max`.
 
 ## Example
 
@@ -22,39 +34,220 @@ import { ProgressBasicDemo } from './demos/basic';
 
 ```
 
-## Striped and animated
+`value` sets both `aria-valuenow` and the bar width; `min` defaults to `0` and
+`max` to `100`. Children of `Progress` render inside the bar.
+
+## Bar sizing
+
+Width utilities size the bar, while `height` on `Progress` sets the track
+thickness.
+
+### Width
+
+Pass a width utility through `barProps`. A width utility replaces the width
+derived from `value`.
+
+<DemoContainer>
+  <ProgressWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/width.tsx'
+
+```
+
+### Height
+
+Set `height` on `Progress`; the inner bar resizes automatically.
+
+<DemoContainer>
+  <ProgressHeightDemo />
+</DemoContainer>
+
+```tsx src='./demos/height.tsx'
+
+```
+
+## Labels
+
+Place text inside `Progress` to label the bar. The bar centers the text over its
+filled area.
+
+<DemoContainer>
+  <ProgressLabelDemo />
+</DemoContainer>
+
+```tsx src='./demos/label.tsx'
+
+```
+
+### Long labels
+
+The bar clips overflowing content, so a label wider than the bar is cut off. Set
+`overflow='visible'` on `barProps` to let the label extend outside the bar.
+
+<DemoContainer>
+  <ProgressLongLabelDemo />
+</DemoContainer>
+
+```tsx src='./demos/long-label.tsx'
+
+```
+
+The label then overlaps the track, and its text color must contrast with both
+the bar and the track. When the label can overlap the bar, prefer displaying it
+outside the progress bar.
+
+## Backgrounds
+
+Pass a background utility through `barProps` to color the bar.
+
+<DemoContainer>
+  <ProgressBackgroundsDemo />
+</DemoContainer>
+
+```tsx src='./demos/backgrounds.tsx'
+
+```
+
+Set `theme` on `Progress` to apply a semantic theme instead; the bar inherits
+the theme background and a contrasting text color.
+
+<DemoContainer>
+  <ProgressBackgroundsLabelsDemo />
+</DemoContainer>
+
+```tsx src='./demos/backgrounds-labels.tsx'
+
+```
+
+Color is only a visual cue, so the meaning must also be available from the
+content or from text hidden for assistive technology.
+
+## Multiple bars
+
+Wrap segments in `ProgressStacked` to render a `.progress-stacked` group. Each
+nested `Progress` becomes one segment: its `value` sets the segment width and its
+accessible value, while `ProgressStacked` names the group with `label`.
+
+<DemoContainer>
+  <ProgressMultipleBarsDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple-bars.tsx'
+
+```
+
+Segments keep their own `min`, `max`, `theme`, `striped`, `animated`, and
+`barProps`. An explicit `style.width` on a segment overrides the width derived
+from `value`.
+
+## Striped
+
+Set `striped` to overlay a CSS gradient stripe on the bar background.
+
+<DemoContainer>
+  <ProgressStripedDemo />
+</DemoContainer>
+
+```tsx src='./demos/striped.tsx'
+
+```
+
+## Animated stripes
+
+Set both `striped` and `animated` to scroll the stripes.
+
+<DemoContainer>
+  <ProgressAnimatedStripesDemo />
+</DemoContainer>
+
+```tsx src='./demos/animated-stripes.tsx'
+
+```
+
+## CSS
+
+### Variables
+
+Bootstrap defines these variables on `.progress` and `.progress-stacked`; the
+bars inherit them. Override any of them on `Progress`.
+
+| Variable                       | Purpose                    |
+| ------------------------------ | -------------------------- |
+| `--bs-progress-height`         | Track height.              |
+| `--bs-progress-font-size`      | Label font size.           |
+| `--bs-progress-bg`             | Unfilled track background. |
+| `--bs-progress-border-radius`  | Track corner radius.       |
+| `--bs-progress-box-shadow`     | Track shadow.              |
+| `--bs-progress-bar-color`      | Bar text color.            |
+| `--bs-progress-bar-bg`         | Bar background color.      |
+| `--bs-progress-bar-transition` | Width transition.          |
+| `--bs-progress-bar-animation`  | Stripe animation.          |
+
+### Keyframes
+
+`progress-bar-stripes` shifts the striped gradient; `animated` enables it on
+`Progress`.
 
 ## API
 
 ### Progress
 
-Renders a `div` by default. Its own props are required `label: string`,
-`max?: number` (default: `100`), `min?: number` (default: `0`), and
-`value?: number`; it inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders a `div` track with `role='progressbar'` and an inner `div` bar. The
+track receives `aria-valuemin`, `aria-valuemax`, and `aria-valuenow` from
+`min`, `max`, and `value`, and `aria-label` from `label`.
 
-| Component prop                     | Type          | Description                               |
-| ---------------------------------- | ------------- | ----------------------------------------- |
-| `Progress.label`                   | `string`      | Accessible name for the progressbar.      |
-| `Progress.value`                   | `number`      | Current value exposed as `aria-valuenow`. |
-| `Progress.min` / `max`             | `number`      | Accessible value range.                   |
-| `ProgressBar.value` / `max`        | `number`      | Sets the bar width as a percentage.       |
-| `ProgressBar.striped` / `animated` | `boolean`     | Enables stripes or animation.             |
-| `...props`                         | `BoxProps<C>` | Native props and all Box utility props.   |
+| Prop       | Type               | Description                                            |
+| ---------- | ------------------ | ------------------------------------------------------ |
+| `label`    | `string`           | Accessible name, applied as `aria-label`.              |
+| `value`    | `number`           | Current value; sets `aria-valuenow` and the bar width. |
+| `min`      | `number`           | Minimum value; defaults to `0`.                        |
+| `max`      | `number`           | Maximum value; defaults to `100`.                      |
+| `striped`  | `boolean`          | Adds the striped background gradient.                  |
+| `animated` | `boolean`          | Animates the stripes.                                  |
+| `barProps` | `ProgressBarProps` | Native and Box utility props for the inner bar.        |
+| `children` | `ReactNode`        | Bar label.                                             |
 
-### ProgressBar
+Its own props are `label` (required), `min`, `max`, `value`, `striped`,
+`animated`, and `barProps`; it inherits native props for the selected element
+and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`. `barProps`
+accepts the same native and [`Box`](../box/README.mdx#api) props for the inner
+bar, except `children`.
 
-Renders a `div` by default. Its own props are `animated?: boolean`,
-`max?: number` (default: `100`), `striped?: boolean`, and `value?: number`; it
-inherits native props and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
+The bar width is the percentage of `value` within `max`. A width utility or
+`style.width` passed through `barProps` takes precedence.
+
+### ProgressStacked
+
+Renders a `div` with the `.progress-stacked` class and `role='group'`. Nested
+`Progress` elements render as segments: the percentage width moves to each
+segment's track, and each bar fills its track.
+
+| Prop    | Type     | Description                                            |
+| ------- | -------- | ------------------------------------------------------ |
+| `label` | `string` | Accessible name of the group, applied as `aria-label`. |
+
+Its own prop is `label`; it inherits native props for the selected element and
+all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`. `role` defaults
+to `group` and can be overridden.
 
 ## Accessibility
 
-Keep the wrapper's accessible name and value range accurate as progress
-changes. Do not rely on animation or color alone to communicate completion.
+- Every track needs an accessible name. `Progress` requires `label`, which
+  becomes `aria-label`; use a meaningful description instead of repeating the
+  value.
+- `ProgressStacked` names its group with `label`; every nested segment still
+  needs its own meaningful `label` for its `progressbar` role.
+- Keep `value`, `min`, and `max` in sync so `aria-valuenow` announces the
+  correct progress. Omitting `value` omits `aria-valuenow`, so assistive
+  technology treats the progress as indeterminate.
+- Do not rely on the bar color, stripe, or animation alone. Include the meaning
+  in visible text or in text hidden for assistive technology.
+- Bootstrap disables the width transition and the stripe animation when the user
+  prefers reduced motion, so the value remains readable without animation.
 
 ## See
 
 - [Bootstrap 6 Progress documentation](https://getbootstrap.com/docs/6.0/components/progress/)
+- [Box component](../box/README.mdx)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/progress.tsx)

@@ -7,11 +7,18 @@
 - Move Popover trigger, placement, dismissal, and arrow behavior into the
   component using Floating UI. Pass `trigger` instead of implementing those
   interactions manually. The default `placement` is now `'right'`.
+- Merge `ProgressBar` into `Progress`. `Progress` now renders the inner
+  `.progress-bar` itself, its children become the bar label, and `ProgressBar`
+  is no longer exported. Pass bar styling through `striped`, `animated`, and
+  `barProps`, and use `ProgressStacked` with nested `Progress` segments for
+  stacked bars.
 
 ### Added
 
 - Add Popover `trigger`, `triggers`, `onShowChange`, `delay`, and `container`
   props, responsive `placement` values, and an automatically positioned arrow.
+- Add `striped`, `animated`, and `barProps` to `Progress`, and add the
+  `ProgressStacked` component for stacked bars.
 
 ## [0.4.0] - 2026-11-08
 

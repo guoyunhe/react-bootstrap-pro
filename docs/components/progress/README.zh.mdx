@@ -3,45 +3,238 @@ title: Progress 进度条
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Progress, ProgressBar } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { ProgressAnimatedStripesDemo } from './demos/animated-stripes';
+import { ProgressBackgroundsDemo } from './demos/backgrounds';
+import { ProgressBackgroundsLabelsDemo } from './demos/backgrounds-labels';
+import { ProgressBasicDemo } from './demos/basic';
+import { ProgressHeightDemo } from './demos/height';
+import { ProgressLabelDemo } from './demos/label';
+import { ProgressLongLabelDemo } from './demos/long-label';
+import { ProgressMultipleBarsDemo } from './demos/multiple-bars';
+import { ProgressStripedDemo } from './demos/striped';
+import { ProgressWidthDemo } from './demos/width';
 
 # Progress 进度条
 
-`Progress` 提供无障碍进度条容器，必须提供可访问的 `label`；
-`ProgressBar` 会将当前值换算为百分比宽度。
+`Progress` 同时渲染 Bootstrap 的 `.progress` 轨道与内部的 `.progress-bar`，
+`ProgressStacked` 则渲染由多个分段组成的 `.progress-stacked` 分组。组件不使用
+原生 `<progress>` 元素，因此进度条可以堆叠、播放动画并显示标签。轨道通过
+`role='progressbar'` 和 `aria-value*` 属性提供数值，内部进度条则显示 `value`
+在 `max` 中所占的百分比。
+
+## 示例
 
 <DemoContainer>
-  <Progress label='上传' value={65}>
-    <ProgressBar value={65}>65%</ProgressBar>
-  </Progress>
+  <ProgressBasicDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
-<Progress label='上传' value={current} max={total}>
-  <ProgressBar value={current} max={total} striped animated />
-</Progress>
+
 ```
+
+`value` 同时设置 `aria-valuenow` 和进度条宽度；`min` 默认为 `0`，`max` 默认为 `100`。
+`Progress` 的子元素会渲染在进度条内部。
+
+## 尺寸
+
+宽度工具类用于设置进度条宽度，`Progress` 上的 `height` 则决定轨道厚度。
+
+### 宽度
+
+通过 `barProps` 传入宽度工具类。宽度工具类会替代由 `value` 计算出的宽度。
+
+<DemoContainer>
+  <ProgressWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/width.tsx'
+
+```
+
+### 高度
+
+在 `Progress` 上设置 `height`，内部进度条会自动调整高度。
+
+<DemoContainer>
+  <ProgressHeightDemo />
+</DemoContainer>
+
+```tsx src='./demos/height.tsx'
+
+```
+
+## 标签
+
+在 `Progress` 中放置文本即可显示标签，文本会在已填充区域中居中。
+
+<DemoContainer>
+  <ProgressLabelDemo />
+</DemoContainer>
+
+```tsx src='./demos/label.tsx'
+
+```
+
+### 长标签
+
+进度条会裁剪溢出内容，因此比进度条更宽的标签会被截断。在 `barProps` 上设置
+`overflow='visible'`，可以允许标签延伸到进度条之外。
+
+<DemoContainer>
+  <ProgressLongLabelDemo />
+</DemoContainer>
+
+```tsx src='./demos/long-label.tsx'
+
+```
+
+此时标签会与轨道重叠，文字颜色必须同时与进度条和轨道的背景保持足够对比度。
+当标签可能覆盖进度条时，建议将标签显示在进度条外部。
+
+## 背景色
+
+通过 `barProps` 传入背景工具类，即可为进度条设置背景色。
+
+<DemoContainer>
+  <ProgressBackgroundsDemo />
+</DemoContainer>
+
+```tsx src='./demos/backgrounds.tsx'
+
+```
+
+在 `Progress` 上设置 `theme` 可以使用语义主题；进度条会继承主题背景色与对比文字颜色。
+
+<DemoContainer>
+  <ProgressBackgroundsLabelsDemo />
+</DemoContainer>
+
+```tsx src='./demos/backgrounds-labels.tsx'
+
+```
+
+颜色只是一种视觉提示，含义还必须能从内容本身或仅供辅助技术读取的文本中获得。
+
+## 多个进度条
+
+将各分段放入 `ProgressStacked`，即可渲染 `.progress-stacked` 分组。每个嵌套的
+`Progress` 成为一个分段：它的 `value` 同时决定分段宽度和无障碍数值，
+`ProgressStacked` 则通过 `label` 为分组命名。
+
+<DemoContainer>
+  <ProgressMultipleBarsDemo />
+</DemoContainer>
+
+```tsx src='./demos/multiple-bars.tsx'
+
+```
+
+各分段可以分别设置 `min`、`max`、`theme`、`striped`、`animated` 和 `barProps`。
+分段上显式的 `style.width` 会替代由 `value` 计算出的宽度。
+
+## 条纹
+
+设置 `striped`，即可在进度条背景上叠加 CSS 渐变条纹。
+
+<DemoContainer>
+  <ProgressStripedDemo />
+</DemoContainer>
+
+```tsx src='./demos/striped.tsx'
+
+```
+
+## 条纹动画
+
+同时设置 `striped` 和 `animated`，条纹就会滚动起来。
+
+<DemoContainer>
+  <ProgressAnimatedStripesDemo />
+</DemoContainer>
+
+```tsx src='./demos/animated-stripes.tsx'
+
+```
+
+## CSS
+
+### 自定义属性
+
+Bootstrap 在 `.progress` 和 `.progress-stacked` 上定义以下变量，内部进度条会继承它们。
+可以在 `Progress` 上覆盖任意变量。
+
+| 属性                           | 用途                   |
+| ------------------------------ | ---------------------- |
+| `--bs-progress-height`         | 轨道高度。             |
+| `--bs-progress-font-size`      | 标签字号。             |
+| `--bs-progress-bg`             | 未填充部分的轨道背景。 |
+| `--bs-progress-border-radius`  | 轨道圆角。             |
+| `--bs-progress-box-shadow`     | 轨道阴影。             |
+| `--bs-progress-bar-color`      | 进度条文字颜色。       |
+| `--bs-progress-bar-bg`         | 进度条背景颜色。       |
+| `--bs-progress-bar-transition` | 宽度过渡。             |
+| `--bs-progress-bar-animation`  | 条纹动画。             |
+
+### 关键帧
+
+`progress-bar-stripes` 用于移动条纹渐变，由 `Progress` 的 `animated` 属性启用。
 
 ## API
 
 ### Progress
 
-默认渲染为 `div`。自有属性为必需的 `label: string`、`max?: number`（默认值：`100`）、
-`min?: number`（默认值：`0`）和 `value?: number`；继承所选元素的原生属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染一个带 `role='progressbar'` 的 `div` 轨道，以及内部的 `div` 进度条。
+轨道根据 `min`、`max`、`value` 设置 `aria-valuemin`、`aria-valuemax` 和
+`aria-valuenow`，并根据 `label` 设置 `aria-label`。
 
-| 组件属性                           | 类型          | 说明                             |
-| ---------------------------------- | ------------- | -------------------------------- |
-| `Progress.label`                   | `string`      | 进度条的无障碍名称。             |
-| `Progress.value`                   | `number`      | 当前值，映射到 `aria-valuenow`。 |
-| `Progress.min` / `max`             | `number`      | 无障碍数值范围。                 |
-| `ProgressBar.value` / `max`        | `number`      | 将进度条宽度设置为百分比。       |
-| `ProgressBar.striped` / `animated` | `boolean`     | 启用条纹或动画。                 |
-| `...props`                         | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。  |
+| 组件属性   | 类型               | 说明                                        |
+| ---------- | ------------------ | ------------------------------------------- |
+| `label`    | `string`           | 无障碍名称，写入 `aria-label`。             |
+| `value`    | `number`           | 当前值，决定 `aria-valuenow` 和进度条宽度。 |
+| `min`      | `number`           | 最小值，默认值为 `0`。                      |
+| `max`      | `number`           | 最大值，默认值为 `100`。                    |
+| `striped`  | `boolean`          | 添加背景条纹渐变。                          |
+| `animated` | `boolean`          | 播放条纹动画。                              |
+| `barProps` | `ProgressBarProps` | 内部进度条的原生属性及 Box 工具类属性。     |
+| `children` | `ReactNode`        | 进度条标签。                                |
+| `...props` | `BoxProps<C>`      | 轨道的原生属性及所有 Box 工具类属性。       |
 
-### ProgressBar
+自有属性为必需的 `label` 以及 `min`、`max`、`value`、`striped`、`animated` 和
+`barProps`；继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。`barProps` 接受相同的原生属性与
+[`Box`](../box/README.zh.mdx#api) 属性（`children` 除外），作用于内部进度条。
 
-默认渲染为 `div`。自有属性为 `animated?: boolean`、`max?: number`（默认值：`100`）、
-`striped?: boolean` 和 `value?: number`；继承原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+进度条宽度为 `value` 在 `max` 中所占的百分比。通过 `barProps` 传入的宽度工具类或
+`style.width` 优先。
+
+### ProgressStacked
+
+默认渲染一个带 `.progress-stacked` 类与 `role='group'` 的 `div`。嵌套的
+`Progress` 会渲染为分段：百分比宽度移动到各分段的轨道上，进度条则填满该轨道。
+
+| 组件属性   | 类型          | 说明                                |
+| ---------- | ------------- | ----------------------------------- |
+| `label`    | `string`      | 分组无障碍名称，写入 `aria-label`。 |
+| `...props` | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。     |
+
+自有属性为 `label`；继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。`role` 默认为 `group`，可以覆盖。
+
+## 无障碍访问
+
+- 每个轨道都需要可访问名称。`Progress` 要求提供 `label`，它会写入 `aria-label`；
+  请使用有意义的描述，而不是重复当前数值。
+- `ProgressStacked` 通过 `label` 为分组命名；每个嵌套分段仍需要自己的 `label`，
+  用于其 `progressbar` 角色。
+- 保持 `value`、`min` 和 `max` 一致，使 `aria-valuenow` 朗读出正确的进度。省略
+  `value` 会同时省略 `aria-valuenow`，辅助技术会将进度视为不确定状态。
+- 不要仅依靠进度条颜色、条纹或动画传达含义，应通过可见文本或仅供辅助技术读取的
+  文本表达含义。
+- 当用户偏好减少动态效果时，Bootstrap 会停用宽度过渡和条纹动画，数值本身仍可读取。
+
+## 参考
+
+- [Bootstrap 6 Progress 官方文档](https://getbootstrap.com/docs/6.0/components/progress/)
+- [Box 组件](../box/README.zh.mdx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/progress.tsx)
