@@ -14,14 +14,18 @@ import { TabWithButtonsDemo } from './demos/with-buttons';
 
 `TabContent` and `TabPane` render Bootstrap's tab panels, while the tab list
 reuses `Nav`, `NavItem`, and `NavLink`. Set `variant='tabs'` (or `'pills'`) and
-`role='tablist'` on `Nav`, `role='presentation'` on each `NavItem`, and `tab` on
-each `NavLink` so it renders a button with `role='tab'`. `NavLink` and `TabPane`
-are controlled through `active`: keep the selected tab in React state and update
-it from the trigger handlers, as in the examples. The components do not load
+`role='tablist'` on `Nav`, and `role='presentation'` on each `NavItem`. When
+`Nav` has both `variant` and `value`, its `NavLink` children render as buttons
+with `role='tab'`; without a `value`, they stay navigation links.
+
+Control the selected tab with `value` and `onChange` on `Nav`, give each
+`NavLink` a matching `value`, and pass that value to `TabContent`, whose
+nested `TabPane` elements also use `value`. The `active` prop remains available
+on `NavLink` and `TabPane` when no value is provided. The components do not load
 Bootstrap JavaScript.
 
 They still emit Bootstrap's `data-bs-toggle` and `data-bs-target` attributes
-for markup parity, but the selected tab is controlled by the `active` props.
+for markup parity.
 
 ## Example
 
@@ -96,37 +100,46 @@ sections below cover the tab-specific behavior and the panel components.
 
 ### NavLink
 
-Set `tab` on `NavLink` to render a tab control. It defaults to a `button` with
-`type='button'` and `role='tab'`, sets `aria-selected` from `active`, and maps
-`targetId` to both `aria-controls` and `data-bs-target`. In tab mode
-`data-bs-toggle` defaults to `tab`.
+`NavLink` renders a tab control when the surrounding `Nav` has a `variant` and a
+`value`. In that mode it defaults to a `button` with `type='button'` and
+`role='tab'`, sets `aria-selected` from the active state, and maps `targetId` to
+both `aria-controls` and `data-bs-target`. `data-bs-toggle` defaults to `tab`.
 
-| Prop       | Type      | Description                                                       |
-| ---------- | --------- | ----------------------------------------------------------------- |
-| `tab`      | `boolean` | Renders a button with tab semantics instead of a navigation link. |
-| `active`   | `boolean` | Applies `.active` and sets `aria-selected`.                       |
-| `targetId` | `string`  | ID of the controlled pane.                                        |
+| Prop       | Type       | Description                                                    |
+| ---------- | ---------- | -------------------------------------------------------------- |
+| `value`    | `NavValue` | Value compared with `Nav value` to determine the active state. |
+| `active`   | `boolean`  | Fallback active state when `Nav` has no `value`.               |
+| `targetId` | `string`   | ID of the controlled pane.                                     |
 
-`NavLink` keeps its navigation props: `active`, `disabled`, and the inherited
-native and [`Box`](../box/README.mdx#api) props. In tab mode, `disabled` uses the
-native button attribute. See the [Nav API](../nav/README.mdx#api) for the
-non-tab mode.
+Clicking an enabled tab calls `Nav`'s `onChange` with its `value`. `NavLink` keeps
+its navigation props: `active`, `disabled`, and the inherited native and
+[`Box`](../box/README.mdx#api) props. In tab mode, `disabled` uses the native
+button attribute. See the [Nav API](../nav/README.mdx#api) for the non-tab mode.
 
 ### TabContent
 
-Renders a `div` by default with `.tab-content`. It has no own props and inherits
-native props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders a `div` by default with `.tab-content`. Its own prop is `value`: nested
+panes with the matching `value` become active. Without it, each pane uses its
+`active` prop.
+
+| Prop    | Type       | Description                                     |
+| ------- | ---------- | ----------------------------------------------- |
+| `value` | `NavValue` | Activates nested panes with the matching value. |
+
+It also inherits native props and all [`Box`](../box/README.mdx#api) props
+through `BoxProps<C>`.
 
 ### TabPane
 
 Renders a `div` by default with `.tab-pane`, `role='tabpanel'`, and `.active`
-when `active` is set. Inactive panes also receive `hidden`.
+when the pane is selected. Inactive panes also receive `hidden`.
 
-| Prop     | Type      | Description                        |
-| -------- | --------- | ---------------------------------- |
-| `active` | `boolean` | Shows the pane and adds `.active`. |
+| Prop     | Type       | Description                                             |
+| -------- | ---------- | ------------------------------------------------------- |
+| `value`  | `NavValue` | Value compared with the surrounding `TabContent` value. |
+| `active` | `boolean`  | Fallback when `TabContent` has no `value`.              |
 
-Its own prop is `active`; it inherits native props and all
+Its own props are `value` and `active`; it inherits native props and all
 [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
@@ -136,8 +149,8 @@ Tabs use `role='tablist'` on the `Nav`, `role='presentation'` on each
 Give every trigger a `targetId` matching its pane `id`, and set
 `aria-labelledby` on the pane to the trigger `id`, as in the examples.
 
-`NavLink` with `tab` renders a native button, so Enter and Space activate the
-focused trigger.
+`NavLink` inside a controlled `Nav` renders a native button, so Enter and Space
+activate the focused trigger.
 The components do not implement roving `tabindex` or arrow-key navigation; all
 tabs stay in the tab order. Add a keyboard handler to the tab list if you need
 the full ARIA tabs pattern.

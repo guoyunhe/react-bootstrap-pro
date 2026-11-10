@@ -1,54 +1,48 @@
 import { useState } from 'react';
+import type { NavValue } from 'react-bootstrap-pro';
 import { Box, Nav, NavItem, NavLink, TabContent, TabPane } from 'react-bootstrap-pro';
 
 export function TabBasicDemo() {
-  const [active, setActive] = useState('home');
+  const [value, setValue] = useState<NavValue>('home');
 
   return (
     <Box d='flex' flexDirection='column' gap={3}>
-      <Nav variant='tabs' role='tablist' aria-label='Example tabs'>
+      <Nav
+        variant='tabs'
+        role='tablist'
+        aria-label='Example tabs'
+        value={value}
+        onChange={(_, next) => setValue(next)}
+      >
         <NavItem role='presentation'>
-          <NavLink
-            tab
-            id='example-home-tab'
-            active={active === 'home'}
-            targetId='example-home-pane'
-            onClick={() => setActive('home')}
-          >
+          <NavLink value='home' id='example-home-tab' targetId='example-home-pane'>
             Home
           </NavLink>
         </NavItem>
         <NavItem role='presentation'>
-          <NavLink
-            tab
-            id='example-profile-tab'
-            active={active === 'profile'}
-            targetId='example-profile-pane'
-            onClick={() => setActive('profile')}
-          >
+          <NavLink value='profile' id='example-profile-tab' targetId='example-profile-pane'>
             Profile
           </NavLink>
         </NavItem>
         <NavItem role='presentation'>
-          <NavLink
-            tab
-            id='example-contact-tab'
-            active={active === 'contact'}
-            targetId='example-contact-pane'
-            onClick={() => setActive('contact')}
-          >
+          <NavLink value='contact' id='example-contact-tab' targetId='example-contact-pane'>
             Contact
           </NavLink>
         </NavItem>
         <NavItem role='presentation'>
-          <NavLink tab id='example-disabled-tab' targetId='example-disabled-pane' disabled>
+          <NavLink
+            value='disabled'
+            id='example-disabled-tab'
+            targetId='example-disabled-pane'
+            disabled
+          >
             Disabled
           </NavLink>
         </NavItem>
       </Nav>
-      <TabContent>
+      <TabContent value={value}>
         <TabPane
-          active={active === 'home'}
+          value='home'
           id='example-home-pane'
           aria-labelledby='example-home-tab'
           tabIndex={0}
@@ -58,7 +52,7 @@ export function TabBasicDemo() {
           </p>
         </TabPane>
         <TabPane
-          active={active === 'profile'}
+          value='profile'
           id='example-profile-pane'
           aria-labelledby='example-profile-tab'
           tabIndex={0}
@@ -68,7 +62,7 @@ export function TabBasicDemo() {
           </p>
         </TabPane>
         <TabPane
-          active={active === 'contact'}
+          value='contact'
           id='example-contact-pane'
           aria-labelledby='example-contact-tab'
           tabIndex={0}
@@ -77,7 +71,12 @@ export function TabBasicDemo() {
             This is some placeholder content the <strong>Contact tab’s</strong> associated content.
           </p>
         </TabPane>
-        <TabPane id='example-disabled-pane' aria-labelledby='example-disabled-tab' tabIndex={0}>
+        <TabPane
+          value='disabled'
+          id='example-disabled-pane'
+          aria-labelledby='example-disabled-tab'
+          tabIndex={0}
+        >
           <p>
             This is some placeholder content the <strong>Disabled tab’s</strong> associated content.
           </p>

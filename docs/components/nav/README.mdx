@@ -68,10 +68,11 @@ Buttons can also trigger a React [Menu](../menu/README.mdx).
 
 ## Tab behavior
 
-For interactive tab panels, combine `Nav`, `NavItem`, and `NavLink tab` with
+For interactive tab panels, combine `Nav`, `NavItem`, and `NavLink` with
 [TabContent and TabPane](../tab/README.mdx). Set `role='tablist'` on `Nav` and
-`role='presentation'` on every `NavItem`. Navigation links styled as tabs are
-not tab controls.
+`role='presentation'` on every `NavItem`, then control the selected tab with
+`value` and `onChange` on `Nav`. Navigation links styled as tabs are not tab
+controls.
 
 ## Available styles
 
@@ -367,6 +368,8 @@ Renders `ul` by default. Its own props are:
 | `orientation` | `'horizontal' \| 'vertical'`       | `vertical` adds the vertical modifier only for pills. |
 | `fill`        | `boolean`                          | Distributes space proportionally.                     |
 | `justified`   | `boolean`                          | Gives items equal width.                              |
+| `value`       | `NavValue`                         | Selected tab value in controlled tab mode.            |
+| `onChange`    | `(event, value) => void`           | Called with the clicked tab's value.                  |
 
 ### NavItem
 
@@ -374,18 +377,20 @@ Renders `li` by default and has no own props.
 
 ### NavLink
 
-Renders `a` by default, or `button` when `tab` is set. Its own props are:
+Renders `a` by default, or `button` inside a `Nav` that has both `variant` and
+`value`. Its own props are:
 
-| Prop       | Type      | Description                                                                  |
-| ---------- | --------- | ---------------------------------------------------------------------------- |
-| `active`   | `boolean` | Applies `.active` and `aria-current='page'`, or `aria-selected` in tab mode. |
-| `disabled` | `boolean` | Applies `.disabled` and disables the control.                                |
-| `tab`      | `boolean` | Renders a button tab control with `role='tab'`.                              |
-| `targetId` | `string`  | Tab mode: pane ID, mapped to `aria-controls` and `data-bs-target`.           |
+| Prop       | Type       | Description                                                                  |
+| ---------- | ---------- | ---------------------------------------------------------------------------- |
+| `active`   | `boolean`  | Applies `.active` and `aria-current='page'`, or `aria-selected` in tab mode. |
+| `disabled` | `boolean`  | Applies `.disabled` and disables the control.                                |
+| `value`    | `NavValue` | Tab value compared with the surrounding `Nav` value.                         |
+| `targetId` | `string`   | Tab mode: pane ID, mapped to `aria-controls` and `data-bs-target`.           |
 
 Anchors receive `aria-disabled` and `tabIndex={-1}` when disabled; native
-buttons use the native `disabled` attribute. In tab mode, `NavLink` also sets
-`data-bs-toggle='tab'` from `targetId`.
+buttons use the native `disabled` attribute. In tab mode, `NavLink` reads
+`value` and `onChange` from `Nav`, sets `data-bs-toggle='tab'`, and maps
+`targetId` to `aria-controls` and `data-bs-target`.
 
 ### NavOverflow
 

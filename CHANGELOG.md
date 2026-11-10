@@ -7,10 +7,11 @@
 - Move Popover trigger, placement, dismissal, and arrow behavior into the
   component using Floating UI. Pass `trigger` instead of implementing those
   interactions manually. The default `placement` is now `'right'`.
-- Remove `TabList`, `TabItem`, and `Tab`. Build tab lists with `Nav`,
-  `NavItem`, and `NavLink tab`: set `variant`, `role='tablist'` on `Nav`,
-  `role='presentation'` on each `NavItem`, and `targetId` on each `NavLink`.
-  `TabContent` and `TabPane` remain.
+- Remove `TabList`, `TabItem`, and `Tab`. Build tab lists with `Nav`, `NavItem`,
+  and `NavLink`: set `variant` and `role='tablist'` on `Nav`, `role='presentation'`
+  on each `NavItem`, and `value`/`targetId` on each `NavLink`. `NavLink` renders
+  a tab control when `Nav` has both `variant` and `value`. `TabContent` and
+  `TabPane` remain.
 - Merge `SwitchInput` into `Switch`. `Switch` now renders the hidden checkbox
   input itself and forwards native checkbox props to it; `SwitchInput` is no
   longer exported.
@@ -29,7 +30,9 @@
 - Add `Select` `htmlSize` for the native number of visible options while `size`
   keeps selecting Bootstrap's small or large style.
 - Add `Switch` `width` and `indicatorWidth` for the track and indicator widths.
-- Add `NavLink` `tab` and `targetId` for button-based tab controls.
+- Add `NavLink` `targetId` and automatic tab mode inside a controlled `Nav`.
+- Add controlled tab state with `Nav` `value`/`onChange`, `NavLink` `value`, and
+  `TabContent`/`TabPane` `value`.
 
 ## [0.4.0] - 2026-11-08
 

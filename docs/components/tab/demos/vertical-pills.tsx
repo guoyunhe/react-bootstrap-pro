@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import type { NavValue } from 'react-bootstrap-pro';
 import { Box, Nav, NavLink, TabContent, TabPane } from 'react-bootstrap-pro';
 
 export function TabVerticalPillsDemo() {
-  const [active, setActive] = useState('home');
+  const [value, setValue] = useState<NavValue>('home');
 
   return (
     <Box d='flex' alignItems='start' gap={4}>
@@ -13,50 +14,33 @@ export function TabVerticalPillsDemo() {
         role='tablist'
         aria-orientation='vertical'
         aria-label='Vertical pills tabs'
+        value={value}
+        onChange={(_, next) => setValue(next)}
       >
-        <NavLink
-          tab
-          id='v-pills-home-tab'
-          active={active === 'home'}
-          targetId='v-pills-home-pane'
-          onClick={() => setActive('home')}
-        >
+        <NavLink value='home' id='v-pills-home-tab' targetId='v-pills-home-pane'>
           Home
         </NavLink>
-        <NavLink
-          tab
-          id='v-pills-profile-tab'
-          active={active === 'profile'}
-          targetId='v-pills-profile-pane'
-          onClick={() => setActive('profile')}
-        >
+        <NavLink value='profile' id='v-pills-profile-tab' targetId='v-pills-profile-pane'>
           Profile
         </NavLink>
-        <NavLink tab id='v-pills-disabled-tab' targetId='v-pills-disabled-pane' disabled>
+        <NavLink
+          value='disabled'
+          id='v-pills-disabled-tab'
+          targetId='v-pills-disabled-pane'
+          disabled
+        >
           Disabled
         </NavLink>
-        <NavLink
-          tab
-          id='v-pills-messages-tab'
-          active={active === 'messages'}
-          targetId='v-pills-messages-pane'
-          onClick={() => setActive('messages')}
-        >
+        <NavLink value='messages' id='v-pills-messages-tab' targetId='v-pills-messages-pane'>
           Messages
         </NavLink>
-        <NavLink
-          tab
-          id='v-pills-settings-tab'
-          active={active === 'settings'}
-          targetId='v-pills-settings-pane'
-          onClick={() => setActive('settings')}
-        >
+        <NavLink value='settings' id='v-pills-settings-tab' targetId='v-pills-settings-pane'>
           Settings
         </NavLink>
       </Nav>
-      <TabContent flexGrow={1}>
+      <TabContent value={value} flexGrow={1}>
         <TabPane
-          active={active === 'home'}
+          value='home'
           id='v-pills-home-pane'
           aria-labelledby='v-pills-home-tab'
           tabIndex={0}
@@ -66,7 +50,7 @@ export function TabVerticalPillsDemo() {
           </p>
         </TabPane>
         <TabPane
-          active={active === 'profile'}
+          value='profile'
           id='v-pills-profile-pane'
           aria-labelledby='v-pills-profile-tab'
           tabIndex={0}
@@ -75,13 +59,18 @@ export function TabVerticalPillsDemo() {
             This is some placeholder content the <strong>Profile tab’s</strong> associated content.
           </p>
         </TabPane>
-        <TabPane id='v-pills-disabled-pane' aria-labelledby='v-pills-disabled-tab' tabIndex={0}>
+        <TabPane
+          value='disabled'
+          id='v-pills-disabled-pane'
+          aria-labelledby='v-pills-disabled-tab'
+          tabIndex={0}
+        >
           <p>
             This is some placeholder content the <strong>Disabled tab’s</strong> associated content.
           </p>
         </TabPane>
         <TabPane
-          active={active === 'messages'}
+          value='messages'
           id='v-pills-messages-pane'
           aria-labelledby='v-pills-messages-tab'
           tabIndex={0}
@@ -91,7 +80,7 @@ export function TabVerticalPillsDemo() {
           </p>
         </TabPane>
         <TabPane
-          active={active === 'settings'}
+          value='settings'
           id='v-pills-settings-pane'
           aria-labelledby='v-pills-settings-tab'
           tabIndex={0}

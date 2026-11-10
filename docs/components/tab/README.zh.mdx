@@ -14,13 +14,17 @@ import { TabWithButtonsDemo } from './demos/with-buttons';
 
 `TabContent` 和 `TabPane` 渲染 Bootstrap 标签页面板，标签列表则复用 `Nav`、
 `NavItem` 与 `NavLink`。在 `Nav` 上设置 `variant='tabs'`（或 `'pills'`）和
-`role='tablist'`，为每个 `NavItem` 设置 `role='presentation'`，并在每个 `NavLink`
-上设置 `tab`，使其渲染为带 `role='tab'` 的按钮。`NavLink` 与 `TabPane` 通过
-`active` 受控：将当前标签保存在 React 状态中，并在触发器的事件处理函数中更新，
-如示例所示。组件不会加载 Bootstrap JavaScript。
+`role='tablist'`，并为每个 `NavItem` 设置 `role='presentation'`。当 `Nav` 同时具有
+`variant` 与 `value` 时，其 `NavLink` 子元素渲染为带 `role='tab'` 的按钮；没有
+`value` 时仍作为导航链接。
+
+通过 `Nav` 的 `value` 与 `onChange` 控制当前标签：为每个 `NavLink` 设置对应的
+`value`，并把同一个值传给 `TabContent`，其内部的 `TabPane` 同样使用 `value`。
+未提供值时，`NavLink` 与 `TabPane` 仍可使用 `active` 属性。组件不会加载
+Bootstrap JavaScript。
 
 组件仍会输出 Bootstrap 的 `data-bs-toggle` 与 `data-bs-target` 属性以保持标记
-一致，但当前标签由 `active` 属性受控。
+一致。
 
 ## 示例
 
@@ -92,36 +96,45 @@ API 与其余属性记录在 Nav 组件文档中；以下小节介绍标签页�
 
 ### NavLink
 
-在 `NavLink` 上设置 `tab` 即可渲染标签控件。它默认渲染带 `type='button'` 和
-`role='tab'` 的 `button`，根据 `active` 设置 `aria-selected`，并将 `targetId`
-映射到 `aria-controls` 与 `data-bs-target`。标签模式下 `data-bs-toggle` 默认为
-`tab`。
+当所在 `Nav` 同时具有 `variant` 与 `value` 时，`NavLink` 渲染为标签控件。此时它
+默认渲染带 `type='button'` 和 `role='tab'` 的 `button`，根据激活状态设置
+`aria-selected`，并将 `targetId` 映射到 `aria-controls` 与 `data-bs-target`。
+标签模式下 `data-bs-toggle` 默认为 `tab`。
 
-| 组件属性   | 类型      | 说明                                    |
-| ---------- | --------- | --------------------------------------- |
-| `tab`      | `boolean` | 渲染带标签语义的按钮，而不是导航链接。  |
-| `active`   | `boolean` | 应用 `.active` 并设置 `aria-selected`。 |
-| `targetId` | `string`  | 所控制面板的 ID。                       |
+| 组件属性   | 类型       | 说明                                      |
+| ---------- | ---------- | ----------------------------------------- |
+| `value`    | `NavValue` | 与 `Nav value` 比较以确定激活状态。       |
+| `active`   | `boolean`  | 未提供 `Nav value` 时使用的后备激活状态。 |
+| `targetId` | `string`   | 所控制面板的 ID。                         |
 
-`NavLink` 仍保留导航属性：`active`、`disabled` 以及继承的原生与
+点击可用标签时，会以该标签的 `value` 调用 `Nav` 的 `onChange`。`NavLink` 仍保留
+导航属性：`active`、`disabled` 以及继承的原生与
 [`Box`](../box/README.zh.mdx#api) 属性。标签模式下 `disabled` 使用原生按钮属性。
 非标签模式请参阅 [Nav API](../nav/README.zh.mdx#api)。
 
 ### TabContent
 
-默认渲染为带有 `.tab-content` 的 `div`，没有自有属性。继承原生属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为带有 `.tab-content` 的 `div`。自有属性为 `value`：`value` 匹配的内部
+面板会变为激活状态；未提供时各面板使用自身的 `active` 属性。
+
+| 组件属性 | 类型       | 说明                   |
+| -------- | ---------- | ---------------------- |
+| `value`  | `NavValue` | 激活值匹配的内部面板。 |
+
+同时继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
 
 ### TabPane
 
-默认渲染为带有 `.tab-pane`、`role='tabpanel'` 的 `div`；设置 `active` 时同时添加
+默认渲染为带有 `.tab-pane`、`role='tabpanel'` 的 `div`；被选中时添加
 `.active`。未激活的面板还会带有 `hidden`。
 
-| 组件属性 | 类型      | 说明                       |
-| -------- | --------- | -------------------------- |
-| `active` | `boolean` | 显示面板并添加 `.active`。 |
+| 组件属性 | 类型       | 说明                                     |
+| -------- | ---------- | ---------------------------------------- |
+| `value`  | `NavValue` | 与所在 `TabContent` 的 `value` 比较。    |
+| `active` | `boolean`  | `TabContent` 未提供 `value` 时的后备值。 |
 
-自有属性为 `active`；继承原生属性及通过 `BoxProps<C>` 继承的全部
+自有属性为 `value` 与 `active`；继承原生属性及通过 `BoxProps<C>` 继承的全部
 [`Box`](../box/README.zh.mdx#api) 属性。
 
 ## 无障碍访问

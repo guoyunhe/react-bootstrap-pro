@@ -63,17 +63,12 @@ export function TabWithListGroupDemo() {
         </ListGroup>
       </Box>
       <Box w={75}>
-        <TabContent>
-          <TabPane
-            active={active === 'home'}
-            id='list-home-pane'
-            aria-labelledby='list-home-tab'
-            tabIndex={0}
-          >
+        <TabContent value={active}>
+          <TabPane value='home' id='list-home-pane' aria-labelledby='list-home-tab' tabIndex={0}>
             <p>Some placeholder content in a paragraph relating to “Home”.</p>
           </TabPane>
           <TabPane
-            active={active === 'profile'}
+            value='profile'
             id='list-profile-pane'
             aria-labelledby='list-profile-tab'
             tabIndex={0}
@@ -81,7 +76,7 @@ export function TabWithListGroupDemo() {
             <p>Some placeholder content in a paragraph relating to “Profile”.</p>
           </TabPane>
           <TabPane
-            active={active === 'messages'}
+            value='messages'
             id='list-messages-pane'
             aria-labelledby='list-messages-tab'
             tabIndex={0}
@@ -89,7 +84,7 @@ export function TabWithListGroupDemo() {
             <p>Some placeholder content in a paragraph relating to “Messages”.</p>
           </TabPane>
           <TabPane
-            active={active === 'settings'}
+            value='settings'
             id='list-settings-pane'
             aria-labelledby='list-settings-tab'
             tabIndex={0}

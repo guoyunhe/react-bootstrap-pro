@@ -346,6 +346,8 @@ export type {
   MenuTextProps,
   NavItemProps,
   NavLinkProps,
+  NavValue,
+  NavVariant,
   NavOverflowIconProps,
   NavOverflowItemProps,
   NavOverflowProps,

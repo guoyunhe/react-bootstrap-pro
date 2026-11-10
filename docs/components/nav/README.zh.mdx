@@ -68,10 +68,10 @@ import { NavOverflowCollapseDemo } from './demos/overflow-collapse';
 
 ## 标签页行为
 
-要实现可切换的标签面板，请将 `Nav`、`NavItem` 和 `NavLink tab` 与
+要实现可切换的标签面板，请将 `Nav`、`NavItem` 和 `NavLink` 与
 [TabContent、TabPane](../tab/README.zh.mdx) 组合使用。在 `Nav` 上设置
-`role='tablist'`，并为每个 `NavItem` 设置 `role='presentation'`。仅使用标签样式的
-导航链接并不是标签页控件。
+`role='tablist'`，为每个 `NavItem` 设置 `role='presentation'`，并通过 `Nav` 的
+`value` 与 `onChange` 控制当前标签。仅使用标签样式的导航链接并不是标签页控件。
 
 ## 可用样式
 
@@ -355,6 +355,8 @@ Bootstrap 的 `nav-overflow-keep` 类可防止条目被折叠。
 | `orientation` | `'horizontal' \| 'vertical'`       | `vertical` 仅为胶囊导航添加纵向修饰类。 |
 | `fill`        | `boolean`                          | 按比例分配空间。                        |
 | `justified`   | `boolean`                          | 使各项等宽。                            |
+| `value`       | `NavValue`                         | 受控标签模式下的当前标签值。            |
+| `onChange`    | `(event, value) => void`           | 点击标签时以该标签值调用。              |
 
 ### NavItem
 
@@ -362,18 +364,20 @@ Bootstrap 的 `nav-overflow-keep` 类可防止条目被折叠。
 
 ### NavLink
 
-默认渲染为 `a`，设置 `tab` 时渲染为 `button`。自有属性如下：
+默认渲染为 `a`；在同时具有 `variant` 与 `value` 的 `Nav` 中渲染为 `button`。
+自有属性如下：
 
-| 属性       | 类型      | 说明                                                                               |
-| ---------- | --------- | ---------------------------------------------------------------------------------- |
-| `active`   | `boolean` | 应用 `.active`；导航模式设置 `aria-current='page'`，标签模式设置 `aria-selected`。 |
-| `disabled` | `boolean` | 应用 `.disabled` 并禁用控件。                                                      |
-| `tab`      | `boolean` | 渲染带 `role='tab'` 的按钮式标签控件。                                             |
-| `targetId` | `string`  | 标签模式：面板 ID，映射到 `aria-controls` 与 `data-bs-target`。                    |
+| 属性       | 类型       | 说明                                                                               |
+| ---------- | ---------- | ---------------------------------------------------------------------------------- |
+| `active`   | `boolean`  | 应用 `.active`；导航模式设置 `aria-current='page'`，标签模式设置 `aria-selected`。 |
+| `disabled` | `boolean`  | 应用 `.disabled` 并禁用控件。                                                      |
+| `value`    | `NavValue` | 与所在 `Nav` 的 `value` 比较的标签值。                                             |
+| `targetId` | `string`   | 标签模式：面板 ID，映射到 `aria-controls` 与 `data-bs-target`。                    |
 
 禁用时链接会获得 `aria-disabled` 和 `tabIndex={-1}`；原生 `button` 使用原生
-`disabled` 属性。标签模式下，`NavLink` 还会根据 `targetId` 设置
-`data-bs-toggle='tab'`。
+`disabled` 属性。标签模式下，`NavLink` 会读取 `Nav` 的 `value` 与 `onChange`，
+设置 `data-bs-toggle='tab'`，并将 `targetId` 映射到 `aria-controls` 与
+`data-bs-target`。
 
 ### NavOverflow
 

@@ -1,58 +1,43 @@
 import { useState } from 'react';
+import type { NavValue } from 'react-bootstrap-pro';
 import { Box, Nav, NavLink, TabContent, TabPane } from 'react-bootstrap-pro';
 
 export function TabWithButtonsDemo() {
-  const [active, setActive] = useState('home');
+  const [value, setValue] = useState<NavValue>('home');
 
   return (
     <Box d='flex' flexDirection='column' gap={3}>
       <Box component='nav'>
-        <Nav component='div' variant='tabs' role='tablist' aria-label='Nav buttons tabs'>
-          <NavLink
-            tab
-            id='nav-home-tab'
-            active={active === 'home'}
-            targetId='nav-home-pane'
-            onClick={() => setActive('home')}
-          >
+        <Nav
+          component='div'
+          variant='tabs'
+          role='tablist'
+          aria-label='Nav buttons tabs'
+          value={value}
+          onChange={(_, next) => setValue(next)}
+        >
+          <NavLink value='home' id='nav-home-tab' targetId='nav-home-pane'>
             Home
           </NavLink>
-          <NavLink
-            tab
-            id='nav-profile-tab'
-            active={active === 'profile'}
-            targetId='nav-profile-pane'
-            onClick={() => setActive('profile')}
-          >
+          <NavLink value='profile' id='nav-profile-tab' targetId='nav-profile-pane'>
             Profile
           </NavLink>
-          <NavLink
-            tab
-            id='nav-contact-tab'
-            active={active === 'contact'}
-            targetId='nav-contact-pane'
-            onClick={() => setActive('contact')}
-          >
+          <NavLink value='contact' id='nav-contact-tab' targetId='nav-contact-pane'>
             Contact
           </NavLink>
-          <NavLink tab id='nav-disabled-tab' targetId='nav-disabled-pane' disabled>
+          <NavLink value='disabled' id='nav-disabled-tab' targetId='nav-disabled-pane' disabled>
             Disabled
           </NavLink>
         </Nav>
       </Box>
-      <TabContent>
-        <TabPane
-          active={active === 'home'}
-          id='nav-home-pane'
-          aria-labelledby='nav-home-tab'
-          tabIndex={0}
-        >
+      <TabContent value={value}>
+        <TabPane value='home' id='nav-home-pane' aria-labelledby='nav-home-tab' tabIndex={0}>
           <p>
             This is some placeholder content the <strong>Home tab’s</strong> associated content.
           </p>
         </TabPane>
         <TabPane
-          active={active === 'profile'}
+          value='profile'
           id='nav-profile-pane'
           aria-labelledby='nav-profile-tab'
           tabIndex={0}
@@ -62,7 +47,7 @@ export function TabWithButtonsDemo() {
           </p>
         </TabPane>
         <TabPane
-          active={active === 'contact'}
+          value='contact'
           id='nav-contact-pane'
           aria-labelledby='nav-contact-tab'
           tabIndex={0}
@@ -71,7 +56,12 @@ export function TabWithButtonsDemo() {
             This is some placeholder content the <strong>Contact tab’s</strong> associated content.
           </p>
         </TabPane>
-        <TabPane id='nav-disabled-pane' aria-labelledby='nav-disabled-tab' tabIndex={0}>
+        <TabPane
+          value='disabled'
+          id='nav-disabled-pane'
+          aria-labelledby='nav-disabled-tab'
+          tabIndex={0}
+        >
           <p>
             This is some placeholder content the <strong>Disabled tab’s</strong> associated content.
           </p>
