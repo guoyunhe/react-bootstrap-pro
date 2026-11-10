@@ -1,48 +1,51 @@
 import { useState } from 'react';
-import { Box, Tab, TabContent, TabItem, TabList, TabPane } from 'react-bootstrap-pro';
+import { Box, Nav, NavItem, NavLink, TabContent, TabPane } from 'react-bootstrap-pro';
 
 export function TabBasicDemo() {
   const [active, setActive] = useState('home');
 
   return (
     <Box d='flex' flexDirection='column' gap={3}>
-      <TabList aria-label='Example tabs'>
-        <TabItem>
-          <Tab
+      <Nav variant='tabs' role='tablist' aria-label='Example tabs'>
+        <NavItem role='presentation'>
+          <NavLink
+            tab
             id='example-home-tab'
             active={active === 'home'}
             targetId='example-home-pane'
             onClick={() => setActive('home')}
           >
             Home
-          </Tab>
-        </TabItem>
-        <TabItem>
-          <Tab
+          </NavLink>
+        </NavItem>
+        <NavItem role='presentation'>
+          <NavLink
+            tab
             id='example-profile-tab'
             active={active === 'profile'}
             targetId='example-profile-pane'
             onClick={() => setActive('profile')}
           >
             Profile
-          </Tab>
-        </TabItem>
-        <TabItem>
-          <Tab
+          </NavLink>
+        </NavItem>
+        <NavItem role='presentation'>
+          <NavLink
+            tab
             id='example-contact-tab'
             active={active === 'contact'}
             targetId='example-contact-pane'
             onClick={() => setActive('contact')}
           >
             Contact
-          </Tab>
-        </TabItem>
-        <TabItem>
-          <Tab id='example-disabled-tab' targetId='example-disabled-pane' disabled>
+          </NavLink>
+        </NavItem>
+        <NavItem role='presentation'>
+          <NavLink tab id='example-disabled-tab' targetId='example-disabled-pane' disabled>
             Disabled
-          </Tab>
-        </TabItem>
-      </TabList>
+          </NavLink>
+        </NavItem>
+      </Nav>
       <TabContent>
         <TabPane
           active={active === 'home'}

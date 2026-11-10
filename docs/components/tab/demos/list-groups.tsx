@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, ListGroup, ListGroupItem, TabContent, TabPane } from 'react-bootstrap-pro';
 
-export function TabListGroupsDemo() {
+export function TabWithListGroupDemo() {
   const [active, setActive] = useState('home');
 
   return (

@@ -1,54 +1,59 @@
 import { useState } from 'react';
-import { Box, Tab, TabContent, TabPane } from 'react-bootstrap-pro';
+import { Box, Nav, NavLink, TabContent, TabPane } from 'react-bootstrap-pro';
 
 export function TabVerticalPillsDemo() {
   const [active, setActive] = useState('home');
 
   return (
     <Box d='flex' alignItems='start' gap={4}>
-      <Box
+      <Nav
         component='div'
-        className='nav nav-pills nav-pills-vertical'
+        variant='pills'
+        orientation='vertical'
         role='tablist'
         aria-orientation='vertical'
         aria-label='Vertical pills tabs'
       >
-        <Tab
+        <NavLink
+          tab
           id='v-pills-home-tab'
           active={active === 'home'}
           targetId='v-pills-home-pane'
           onClick={() => setActive('home')}
         >
           Home
-        </Tab>
-        <Tab
+        </NavLink>
+        <NavLink
+          tab
           id='v-pills-profile-tab'
           active={active === 'profile'}
           targetId='v-pills-profile-pane'
           onClick={() => setActive('profile')}
         >
           Profile
-        </Tab>
-        <Tab id='v-pills-disabled-tab' targetId='v-pills-disabled-pane' disabled>
+        </NavLink>
+        <NavLink tab id='v-pills-disabled-tab' targetId='v-pills-disabled-pane' disabled>
           Disabled
-        </Tab>
-        <Tab
+        </NavLink>
+        <NavLink
+          tab
           id='v-pills-messages-tab'
           active={active === 'messages'}
           targetId='v-pills-messages-pane'
           onClick={() => setActive('messages')}
         >
           Messages
-        </Tab>
-        <Tab
+        </NavLink>
+        <NavLink
+          tab
           id='v-pills-settings-tab'
           active={active === 'settings'}
           targetId='v-pills-settings-pane'
           onClick={() => setActive('settings')}
         >
           Settings
-        </Tab>
-      </Box>
+        </NavLink>
+      </Nav>
       <TabContent flexGrow={1}>
         <TabPane
           active={active === 'home'}

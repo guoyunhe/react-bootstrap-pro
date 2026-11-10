@@ -5,17 +5,20 @@ title: Tab
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { TabBasicDemo } from './demos/basic';
-import { TabListGroupsDemo } from './demos/list-groups';
+import { TabWithListGroupDemo } from './demos/list-groups';
 import { TabPillsDemo } from './demos/pills';
 import { TabVerticalPillsDemo } from './demos/vertical-pills';
 import { TabWithButtonsDemo } from './demos/with-buttons';
 
 # Tab
 
-`TabList`, `TabItem`, `Tab`, `TabContent`, and `TabPane` render Bootstrap's tab
-markup and its ARIA relationships. `Tab` and `TabPane` are controlled through
-`active`: keep the selected tab in React state and update it from the trigger
-handlers, as in the examples. The components do not load Bootstrap JavaScript.
+`TabContent` and `TabPane` render Bootstrap's tab panels, while the tab list
+reuses `Nav`, `NavItem`, and `NavLink`. Set `variant='tabs'` (or `'pills'`) and
+`role='tablist'` on `Nav`, `role='presentation'` on each `NavItem`, and `tab` on
+each `NavLink` so it renders a button with `role='tab'`. `NavLink` and `TabPane`
+are controlled through `active`: keep the selected tab in React state and update
+it from the trigger handlers, as in the examples. The components do not load
+Bootstrap JavaScript.
 
 They still emit Bootstrap's `data-bs-toggle` and `data-bs-target` attributes
 for markup parity, but the selected tab is controlled by the `active` props.
@@ -32,10 +35,10 @@ for markup parity, but the selected tab is controlled by the `active` props.
 
 ## With buttons
 
-`TabList` renders a `ul` with `.nav .nav-tabs`. To keep a navigation landmark,
-wrap it in a `<nav>` and render the list as a `div` with `component='div'`. Do
-not put `role='tablist'` on the `<nav>` itself, because that would override its
-native navigation role.
+`Nav` renders a `ul` by default. To keep a navigation landmark, wrap it in a
+`<nav>` and render the list as a `div` with `component='div'`. Do not put
+`role='tablist'` on the `<nav>` itself, because that would override its native
+navigation role.
 
 <DemoContainer>
   <TabWithButtonsDemo />
@@ -47,8 +50,8 @@ native navigation role.
 
 ## Pills
 
-`TabList` always applies `.nav-tabs`. For other nav styles, render the list with
-`Box` and compose `TabItem` and `Tab` inside it.
+Set `variant='pills'` on `Nav`. Keep `role='tablist'` on `Nav` and
+`role='presentation'` on each `NavItem`.
 
 <DemoContainer>
   <TabPillsDemo />
@@ -60,8 +63,8 @@ native navigation role.
 
 ### Vertical pills
 
-Add `.nav-pills-vertical` and `aria-orientation='vertical'` to the tab list, then
-lay the list and its content side by side.
+Combine `variant='pills'` with `orientation='vertical'` on `Nav`, add
+`aria-orientation='vertical'`, then lay the list and its content side by side.
 
 <DemoContainer>
   <TabVerticalPillsDemo />
@@ -78,7 +81,7 @@ component='button'`, add the tab roles and ARIA connections, and pair the list
 with `TabPane` elements.
 
 <DemoContainer>
-  <TabListGroupsDemo />
+  <TabWithListGroupDemo />
 </DemoContainer>
 
 ```tsx src='./demos/list-groups.tsx'
@@ -87,31 +90,27 @@ with `TabPane` elements.
 
 ## API
 
-### TabList
+Tab lists use [`Nav`](../nav/README.mdx), `NavItem`, and `NavLink`. Their
+navigation APIs and remaining props are documented with the Nav component; the
+sections below cover the tab-specific behavior and the panel components.
 
-Renders a `ul` by default with `.nav .nav-tabs` and `role='tablist'`. It has no
-own props and inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+### NavLink
 
-### TabItem
+Set `tab` on `NavLink` to render a tab control. It defaults to a `button` with
+`type='button'` and `role='tab'`, sets `aria-selected` from `active`, and maps
+`targetId` to both `aria-controls` and `data-bs-target`. In tab mode
+`data-bs-toggle` defaults to `tab`.
 
-Renders an `li` by default with `.nav-item` and `role='presentation'`. It has no
-own props and inherits native props and all [`Box`](../box/README.mdx#api) props
-through `BoxProps<C>`.
+| Prop       | Type      | Description                                                       |
+| ---------- | --------- | ----------------------------------------------------------------- |
+| `tab`      | `boolean` | Renders a button with tab semantics instead of a navigation link. |
+| `active`   | `boolean` | Applies `.active` and sets `aria-selected`.                       |
+| `targetId` | `string`  | ID of the controlled pane.                                        |
 
-### Tab
-
-Renders a `button` by default with `.nav-link`, `type='button'`, and
-`role='tab'`. It sets `aria-selected` from `active` and maps `targetId` to both
-`aria-controls` and `data-bs-target`; `data-bs-toggle` defaults to `tab`.
-
-| Prop       | Type      | Description                                 |
-| ---------- | --------- | ------------------------------------------- |
-| `active`   | `boolean` | Applies `.active` and sets `aria-selected`. |
-| `targetId` | `string`  | ID of the controlled pane.                  |
-
-Its own props are `active` and `targetId`; it inherits native button props and
-all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+`NavLink` keeps its navigation props: `active`, `disabled`, and the inherited
+native and [`Box`](../box/README.mdx#api) props. In tab mode, `disabled` uses the
+native button attribute. See the [Nav API](../nav/README.mdx#api) for the
+non-tab mode.
 
 ### TabContent
 
@@ -132,12 +131,13 @@ Its own prop is `active`; it inherits native props and all
 
 ## Accessibility
 
-Tabs use `role='tablist'` on the list, `role='tab'` on each trigger, and
-`role='tabpanel'` on each pane. Give every trigger a `targetId` matching its
-pane `id`, and set `aria-labelledby` on the pane to the trigger `id`, as in the
-examples.
+Tabs use `role='tablist'` on the `Nav`, `role='presentation'` on each
+`NavItem`, `role='tab'` on each trigger, and `role='tabpanel'` on each pane.
+Give every trigger a `targetId` matching its pane `id`, and set
+`aria-labelledby` on the pane to the trigger `id`, as in the examples.
 
-`Tab` renders a native button, so Enter and Space activate the focused trigger.
+`NavLink` with `tab` renders a native button, so Enter and Space activate the
+focused trigger.
 The components do not implement roving `tabindex` or arrow-key navigation; all
 tabs stay in the tab order. Add a keyboard handler to the tab list if you need
 the full ARIA tabs pattern.

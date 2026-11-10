@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Tab, TabContent, TabList, TabPane } from 'react-bootstrap-pro';
+import { Box, Nav, NavLink, TabContent, TabPane } from 'react-bootstrap-pro';
 
 export function TabWithButtonsDemo() {
   const [active, setActive] = useState('home');
@@ -7,35 +7,38 @@ export function TabWithButtonsDemo() {
   return (
     <Box d='flex' flexDirection='column' gap={3}>
       <Box component='nav'>
-        <TabList component='div' aria-label='Nav buttons tabs'>
-          <Tab
+        <Nav component='div' variant='tabs' role='tablist' aria-label='Nav buttons tabs'>
+          <NavLink
+            tab
             id='nav-home-tab'
             active={active === 'home'}
             targetId='nav-home-pane'
             onClick={() => setActive('home')}
           >
             Home
-          </Tab>
-          <Tab
+          </NavLink>
+          <NavLink
+            tab
             id='nav-profile-tab'
             active={active === 'profile'}
             targetId='nav-profile-pane'
             onClick={() => setActive('profile')}
           >
             Profile
-          </Tab>
-          <Tab
+          </NavLink>
+          <NavLink
+            tab
             id='nav-contact-tab'
             active={active === 'contact'}
             targetId='nav-contact-pane'
             onClick={() => setActive('contact')}
           >
             Contact
-          </Tab>
-          <Tab id='nav-disabled-tab' targetId='nav-disabled-pane' disabled>
+          </NavLink>
+          <NavLink tab id='nav-disabled-tab' targetId='nav-disabled-pane' disabled>
             Disabled
-          </Tab>
-        </TabList>
+          </NavLink>
+        </Nav>
       </Box>
       <TabContent>
         <TabPane

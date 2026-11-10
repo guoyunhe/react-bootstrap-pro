@@ -68,8 +68,10 @@ Buttons can also trigger a React [Menu](../menu/README.mdx).
 
 ## Tab behavior
 
-For interactive tab panels, use [Tab](../tab/README.mdx) rather than navigation
-links styled as tabs.
+For interactive tab panels, combine `Nav`, `NavItem`, and `NavLink tab` with
+[TabContent and TabPane](../tab/README.mdx). Set `role='tablist'` on `Nav` and
+`role='presentation'` on every `NavItem`. Navigation links styled as tabs are
+not tab controls.
 
 ## Available styles
 
@@ -344,12 +346,10 @@ Wrap list navigation in a named `nav` landmark when appropriate; do not put
 not a tab interface: do not add tab roles unless implementing the full tab
 interaction pattern.
 
-`disabled` supplies styling, `aria-disabled`, and `tabIndex={-1}`, but does
-not prevent activation of an anchor with `href` or set the native `disabled`
-attribute on a button. Remove the destination or implement appropriate
-activation prevention. For buttons, use a native button or a custom component
-that sets its native `disabled` attribute: `NavLink` consumes its own
-`disabled` prop rather than forwarding it.
+`disabled` supplies styling and, for anchors, `aria-disabled` and
+`tabIndex={-1}`; it does not prevent activation of an anchor with `href`. Remove
+the destination or implement appropriate activation prevention. A native
+`button` receives the native `disabled` attribute instead.
 
 ## API
 
@@ -374,8 +374,18 @@ Renders `li` by default and has no own props.
 
 ### NavLink
 
-Renders `a` by default. Its own props are `active?: boolean` and
-`disabled?: boolean`; see the accessibility notes for their behavior.
+Renders `a` by default, or `button` when `tab` is set. Its own props are:
+
+| Prop       | Type      | Description                                                                  |
+| ---------- | --------- | ---------------------------------------------------------------------------- |
+| `active`   | `boolean` | Applies `.active` and `aria-current='page'`, or `aria-selected` in tab mode. |
+| `disabled` | `boolean` | Applies `.disabled` and disables the control.                                |
+| `tab`      | `boolean` | Renders a button tab control with `role='tab'`.                              |
+| `targetId` | `string`  | Tab mode: pane ID, mapped to `aria-controls` and `data-bs-target`.           |
+
+Anchors receive `aria-disabled` and `tabIndex={-1}` when disabled; native
+buttons use the native `disabled` attribute. In tab mode, `NavLink` also sets
+`data-bs-toggle='tab'` from `targetId`.
 
 ### NavOverflow
 

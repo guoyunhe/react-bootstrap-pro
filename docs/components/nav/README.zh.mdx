@@ -68,7 +68,10 @@ import { NavOverflowCollapseDemo } from './demos/overflow-collapse';
 
 ## 标签页行为
 
-要实现可切换的标签面板，请使用 [Tab](../tab/README.zh.mdx)，而不是仅使用标签样式的导航链接。
+要实现可切换的标签面板，请将 `Nav`、`NavItem` 和 `NavLink tab` 与
+[TabContent、TabPane](../tab/README.zh.mdx) 组合使用。在 `Nav` 上设置
+`role='tablist'`，并为每个 `NavItem` 设置 `role='presentation'`。仅使用标签样式的
+导航链接并不是标签页控件。
 
 ## 可用样式
 
@@ -333,10 +336,9 @@ Bootstrap 的 `nav-overflow-keep` 类可防止条目被折叠。
 `role='navigation'`。激活链接的 `aria-current` 默认为 `page`，可以覆盖。标签样式的
 导航并不是标签页界面；除非实现完整的标签交互模式，否则不要添加标签角色。
 
-`disabled` 只设置样式、`aria-disabled` 和 `tabIndex={-1}`，不会阻止带 `href` 的链接
-被激活，也不会给按钮设置原生 `disabled` 属性。应移除目标地址或自行阻止激活；
-按钮应使用原生按钮或自行设置原生 `disabled` 的自定义组件：`NavLink` 会消费自身的
-`disabled` 属性，不会将其透传。
+`disabled` 会设置样式；对于链接还会设置 `aria-disabled` 和 `tabIndex={-1}`，
+但不会阻止带 `href` 的链接被激活。应移除目标地址或自行阻止激活。原生 `button`
+则使用原生的 `disabled` 属性。
 
 ## API
 
@@ -360,8 +362,18 @@ Bootstrap 的 `nav-overflow-keep` 类可防止条目被折叠。
 
 ### NavLink
 
-默认渲染为 `a`。自有属性为 `active?: boolean` 和 `disabled?: boolean`；
-其行为详见无障碍说明。
+默认渲染为 `a`，设置 `tab` 时渲染为 `button`。自有属性如下：
+
+| 属性       | 类型      | 说明                                                                               |
+| ---------- | --------- | ---------------------------------------------------------------------------------- |
+| `active`   | `boolean` | 应用 `.active`；导航模式设置 `aria-current='page'`，标签模式设置 `aria-selected`。 |
+| `disabled` | `boolean` | 应用 `.disabled` 并禁用控件。                                                      |
+| `tab`      | `boolean` | 渲染带 `role='tab'` 的按钮式标签控件。                                             |
+| `targetId` | `string`  | 标签模式：面板 ID，映射到 `aria-controls` 与 `data-bs-target`。                    |
+
+禁用时链接会获得 `aria-disabled` 和 `tabIndex={-1}`；原生 `button` 使用原生
+`disabled` 属性。标签模式下，`NavLink` 还会根据 `targetId` 设置
+`data-bs-toggle='tab'`。
 
 ### NavOverflow
 

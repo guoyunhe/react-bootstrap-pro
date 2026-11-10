@@ -5,17 +5,19 @@ title: Tab 标签页
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { TabBasicDemo } from './demos/basic';
-import { TabListGroupsDemo } from './demos/list-groups';
+import { TabWithListGroupDemo } from './demos/list-groups';
 import { TabPillsDemo } from './demos/pills';
 import { TabVerticalPillsDemo } from './demos/vertical-pills';
 import { TabWithButtonsDemo } from './demos/with-buttons';
 
 # Tab 标签页
 
-`TabList`、`TabItem`、`Tab`、`TabContent` 和 `TabPane` 渲染 Bootstrap 标签页结构
-及其 ARIA 关联。`Tab` 与 `TabPane` 通过 `active` 受控：将当前标签保存在 React
-状态中，并在触发器的事件处理函数中更新，如示例所示。组件不会加载
-Bootstrap JavaScript。
+`TabContent` 和 `TabPane` 渲染 Bootstrap 标签页面板，标签列表则复用 `Nav`、
+`NavItem` 与 `NavLink`。在 `Nav` 上设置 `variant='tabs'`（或 `'pills'`）和
+`role='tablist'`，为每个 `NavItem` 设置 `role='presentation'`，并在每个 `NavLink`
+上设置 `tab`，使其渲染为带 `role='tab'` 的按钮。`NavLink` 与 `TabPane` 通过
+`active` 受控：将当前标签保存在 React 状态中，并在触发器的事件处理函数中更新，
+如示例所示。组件不会加载 Bootstrap JavaScript。
 
 组件仍会输出 Bootstrap 的 `data-bs-toggle` 与 `data-bs-target` 属性以保持标记
 一致，但当前标签由 `active` 属性受控。
@@ -32,9 +34,9 @@ Bootstrap JavaScript。
 
 ## 使用按钮
 
-`TabList` 渲染带有 `.nav .nav-tabs` 的 `ul`。若需保留导航地标，请将其包在 `<nav>`
-中，并用 `component='div'` 将列表渲染为 `div`。不要直接在 `<nav>` 上设置
-`role='tablist'`，否则会覆盖其原生导航角色。
+`Nav` 默认渲染为 `ul`。若需保留导航地标，请将其包在 `<nav>` 中，并用
+`component='div'` 将列表渲染为 `div`。不要直接在 `<nav>` 上设置 `role='tablist'`，
+否则会覆盖其原生导航角色。
 
 <DemoContainer>
   <TabWithButtonsDemo />
@@ -46,8 +48,8 @@ Bootstrap JavaScript。
 
 ## 胶囊样式
 
-`TabList` 始终应用 `.nav-tabs`。其他导航样式请使用 `Box` 渲染列表，并在其中组合
-`TabItem` 与 `Tab`。
+在 `Nav` 上设置 `variant='pills'`。`Nav` 仍需设置 `role='tablist'`，每个
+`NavItem` 设置 `role='presentation'`。
 
 <DemoContainer>
   <TabPillsDemo />
@@ -59,8 +61,8 @@ Bootstrap JavaScript。
 
 ### 垂直胶囊
 
-为标签列表添加 `.nav-pills-vertical` 和 `aria-orientation='vertical'`，再把列表与
-内容并排放置。
+在 `Nav` 上同时设置 `variant='pills'` 与 `orientation='vertical'`，添加
+`aria-orientation='vertical'`，再把列表与内容并排放置。
 
 <DemoContainer>
   <TabVerticalPillsDemo />
@@ -76,7 +78,7 @@ Bootstrap JavaScript。
 添加标签页角色与 ARIA 关联，并将列表与 `TabPane` 配对。
 
 <DemoContainer>
-  <TabListGroupsDemo />
+  <TabWithListGroupDemo />
 </DemoContainer>
 
 ```tsx src='./demos/list-groups.tsx'
@@ -85,30 +87,25 @@ Bootstrap JavaScript。
 
 ## API
 
-### TabList
+标签列表使用 [`Nav`](../nav/README.zh.mdx)、`NavItem` 与 `NavLink`。它们的导航
+API 与其余属性记录在 Nav 组件文档中；以下小节介绍标签页专属行为及面板组件。
 
-默认渲染为带有 `.nav .nav-tabs` 和 `role='tablist'` 的 `ul`，没有自有属性。继承所选
-元素的原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+### NavLink
 
-### TabItem
-
-默认渲染为带有 `.nav-item` 和 `role='presentation'` 的 `li`，没有自有属性。继承原生
-属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
-
-### Tab
-
-默认渲染为带有 `.nav-link`、`type='button'` 和 `role='tab'` 的 `button`。它根据
-`active` 设置 `aria-selected`，并将 `targetId` 映射到 `aria-controls` 与
-`data-bs-target`；`data-bs-toggle` 默认为 `tab`。
+在 `NavLink` 上设置 `tab` 即可渲染标签控件。它默认渲染带 `type='button'` 和
+`role='tab'` 的 `button`，根据 `active` 设置 `aria-selected`，并将 `targetId`
+映射到 `aria-controls` 与 `data-bs-target`。标签模式下 `data-bs-toggle` 默认为
+`tab`。
 
 | 组件属性   | 类型      | 说明                                    |
 | ---------- | --------- | --------------------------------------- |
+| `tab`      | `boolean` | 渲染带标签语义的按钮，而不是导航链接。  |
 | `active`   | `boolean` | 应用 `.active` 并设置 `aria-selected`。 |
 | `targetId` | `string`  | 所控制面板的 ID。                       |
 
-自有属性为 `active` 和 `targetId`；继承原生按钮属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+`NavLink` 仍保留导航属性：`active`、`disabled` 以及继承的原生与
+[`Box`](../box/README.zh.mdx#api) 属性。标签模式下 `disabled` 使用原生按钮属性。
+非标签模式请参阅 [Nav API](../nav/README.zh.mdx#api)。
 
 ### TabContent
 
@@ -129,11 +126,13 @@ Bootstrap JavaScript。
 
 ## 无障碍访问
 
-标签页在列表上使用 `role='tablist'`，每个触发器使用 `role='tab'`，每个面板使用
+标签页在 `Nav` 上使用 `role='tablist'`，每个 `NavItem` 使用
+`role='presentation'`，每个触发器使用 `role='tab'`，每个面板使用
 `role='tabpanel'`。为每个触发器设置与面板 `id` 匹配的 `targetId`，并将面板的
 `aria-labelledby` 指向触发器 `id`，如示例所示。
 
-`Tab` 默认渲染原生按钮，因此 Enter 和 Space 可激活当前聚焦的触发器。组件未实现
+`NavLink` 在标签模式下渲染原生按钮，因此 Enter 和 Space 可激活当前聚焦的触发器。
+组件未实现
 roving `tabindex` 或方向键导航；所有标签都保留在 Tab 键顺序中。若需要完整的 ARIA
 标签页键盘模式，请为标签列表添加键盘处理逻辑。
 
