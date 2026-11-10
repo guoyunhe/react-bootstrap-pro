@@ -19,6 +19,8 @@
   props, responsive `placement` values, and an automatically positioned arrow.
 - Add `striped`, `animated`, and `barProps` to `Progress`, and add the
   `ProgressStacked` component for stacked bars.
+- Add `Select` `htmlSize` for the native number of visible options while `size`
+  keeps selecting Bootstrap's small or large style.
 
 ## [0.4.0] - 2026-11-08
 

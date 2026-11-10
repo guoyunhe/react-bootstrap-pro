@@ -38,8 +38,7 @@ import { SelectNativeSizeDemo } from './demos/native-size';
 ## 原生显示行数
 
 原生 `size` 属性设置可见选项的数量。`Select` 的 `size` 属性用于 Bootstrap 的
-`'sm'` 和 `'lg'` 样式；需要数字类型的原生 `size` 时，可使用渲染为 `select` 且带有
-`.form-control` 类的 [`Box`](../box/README.zh.mdx#api)。
+`'sm'` 和 `'lg'` 样式，原生数量请通过 `htmlSize` 传入。
 
 <DemoContainer>
   <SelectNativeSizeDemo />
@@ -55,11 +54,12 @@ import { SelectNativeSizeDemo } from './demos/native-size';
 
 默认渲染为 `select`，不提供多态 `component` 属性。下表列出自有属性；此外还继承其余
 原生 select 属性及 [`Box`](../box/README.zh.mdx#api) 的全部工具类属性。`size` 属性
-用于 Bootstrap 尺寸，不能设置原生可见选项数量。原生 `disabled` 属性会阻止交互，
-并使该下拉框不参与表单提交。
+用于 Bootstrap 尺寸，原生可见选项数量由 `htmlSize` 设置。原生 `disabled` 属性会
+阻止交互，并使该下拉框不参与表单提交。
 
 | 属性         | 类型                   | 说明                                  |
 | ------------ | ---------------------- | ------------------------------------- |
+| `htmlSize`   | `number`               | 设置原生可见选项数量。                |
 | `size`       | `'sm' \| 'lg'`         | 应用小型或大型 Bootstrap 下拉框尺寸。 |
 | `validation` | `'valid' \| 'invalid'` | 应用对应的校验状态类。                |
 

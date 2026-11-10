@@ -22,6 +22,9 @@ test('matches Bootstrap 6 select styles, sizes and validation', async () => {
       <Select data-testid='multiple' multiple aria-label='Multiple select'>
         <option>One</option>
       </Select>
+      <Select data-testid='native-size' htmlSize={4} aria-label='Native size select'>
+        <option>One</option>
+      </Select>
       <select className='form-control' data-testid='reference' aria-label='Reference select'>
         <option>One</option>
       </select>
@@ -32,6 +35,7 @@ test('matches Bootstrap 6 select styles, sizes and validation', async () => {
   const large = screen.getByTestId('large').element();
   const invalid = screen.getByTestId('invalid').element();
   const multiple = screen.getByTestId('multiple').element();
+  const nativeSize = screen.getByTestId('native-size').element();
   const style = getComputedStyle(select);
   const reference = getComputedStyle(screen.getByTestId('reference').element());
 
@@ -45,6 +49,9 @@ test('matches Bootstrap 6 select styles, sizes and validation', async () => {
   expect(style.backgroundImage).toBe(reference.backgroundImage);
   expect(style.backgroundImage).not.toBe('none');
   expect(getComputedStyle(multiple).backgroundImage).toBe('none');
+  expect(nativeSize).toHaveAttribute('size', '4');
+  expect(nativeSize).toHaveClass('form-control');
+  expect(small).not.toHaveAttribute('size');
   expect(parseFloat(getComputedStyle(small).fontSize)).toBeLessThan(parseFloat(style.fontSize));
   expect(parseFloat(getComputedStyle(small).minHeight)).toBeLessThan(parseFloat(style.minHeight));
   expect(parseFloat(getComputedStyle(large).minHeight)).toBeGreaterThan(
