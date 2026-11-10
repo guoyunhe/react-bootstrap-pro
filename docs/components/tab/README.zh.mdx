@@ -3,71 +3,146 @@ title: Tab 标签页
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Tab, TabContent, TabItem, TabList, TabPane } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { TabBasicDemo } from './demos/basic';
+import { TabListGroupsDemo } from './demos/list-groups';
+import { TabPillsDemo } from './demos/pills';
+import { TabVerticalPillsDemo } from './demos/vertical-pills';
+import { TabWithButtonsDemo } from './demos/with-buttons';
 
 # Tab 标签页
 
-`TabList`、`TabItem`、`Tab` 和 `TabPane` 提供 Bootstrap 标签页结构及 ARIA 关联。
-切换标签和更新激活状态需要 Bootstrap JavaScript bundle。
+`TabList`、`TabItem`、`Tab`、`TabContent` 和 `TabPane` 渲染 Bootstrap 标签页结构
+及其 ARIA 关联。`Tab` 与 `TabPane` 通过 `active` 受控：将当前标签保存在 React
+状态中，并在触发器的事件处理函数中更新，如示例所示。组件不会加载
+Bootstrap JavaScript。
+
+组件仍会输出 Bootstrap 的 `data-bs-toggle` 与 `data-bs-target` 属性以保持标记
+一致，但当前标签由 `active` 属性受控。
+
+## 示例
 
 <DemoContainer>
-  <TabList aria-label='示例标签页'>
-    <TabItem>
-      <Tab id='home-tab' active targetId='home-pane'>
-        首页
-      </Tab>
-    </TabItem>
-    <TabItem>
-      <Tab id='profile-tab' targetId='profile-pane'>
-        个人资料
-      </Tab>
-    </TabItem>
-  </TabList>
-  <TabContent>
-    <TabPane active id='home-pane' aria-labelledby='home-tab'>
-      首页内容
-    </TabPane>
-    <TabPane id='profile-pane' aria-labelledby='profile-tab'>
-      个人资料内容
-    </TabPane>
-  </TabContent>
+  <TabBasicDemo />
 </DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 使用按钮
+
+`TabList` 渲染带有 `.nav .nav-tabs` 的 `ul`。若需保留导航地标，请将其包在 `<nav>`
+中，并用 `component='div'` 将列表渲染为 `div`。不要直接在 `<nav>` 上设置
+`role='tablist'`，否则会覆盖其原生导航角色。
+
+<DemoContainer>
+  <TabWithButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-buttons.tsx'
+
+```
+
+## 胶囊样式
+
+`TabList` 始终应用 `.nav-tabs`。其他导航样式请使用 `Box` 渲染列表，并在其中组合
+`TabItem` 与 `Tab`。
+
+<DemoContainer>
+  <TabPillsDemo />
+</DemoContainer>
+
+```tsx src='./demos/pills.tsx'
+
+```
+
+### 垂直胶囊
+
+为标签列表添加 `.nav-pills-vertical` 和 `aria-orientation='vertical'`，再把列表与
+内容并排放置。
+
+<DemoContainer>
+  <TabVerticalPillsDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical-pills.tsx'
+
+```
+
+## 列表组
+
+标签页也可与列表组配合。使用 `ListGroup` 与 `ListGroupItem component='button'`，
+添加标签页角色与 ARIA 关联，并将列表与 `TabPane` 配对。
+
+<DemoContainer>
+  <TabListGroupsDemo />
+</DemoContainer>
+
+```tsx src='./demos/list-groups.tsx'
+
+```
 
 ## API
 
 ### TabList
 
-默认渲染为 `ul`，没有自有属性。继承所选元素的原生属性及通过 `BoxProps<C>`
-继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
-
-| 组件属性         | 类型          | 说明                                     |
-| ---------------- | ------------- | ---------------------------------------- |
-| `TabItem`        | —             | 将每个标签包装在 presentation 列表项中。 |
-| `Tab.active`     | `boolean`     | 应用激活状态和 `aria-selected`。         |
-| `Tab.targetId`   | `string`      | 将触发器关联到面板 ID。                  |
-| `TabPane.active` | `boolean`     | 显示面板并移除隐藏状态。                 |
-| `component`      | `ElementType` | 更换渲染元素。                           |
-| `...props`       | `BoxProps<C>` | 原生属性及所有 Box 工具类属性。          |
+默认渲染为带有 `.nav .nav-tabs` 和 `role='tablist'` 的 `ul`，没有自有属性。继承所选
+元素的原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
 
 ### TabItem
 
-默认渲染为 `li`，没有自有属性；默认设置 `role="presentation"`。继承原生属性及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为带有 `.nav-item` 和 `role='presentation'` 的 `li`，没有自有属性。继承原生
+属性及通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
 
 ### Tab
 
-默认渲染为 `button`。自有属性为 `active?: boolean` 和 `targetId?: string`；默认设置
-`type="button"`、`role="tab"`，并根据 `targetId` 指向对应面板。继承原生按钮属性及
-通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为带有 `.nav-link`、`type='button'` 和 `role='tab'` 的 `button`。它根据
+`active` 设置 `aria-selected`，并将 `targetId` 映射到 `aria-controls` 与
+`data-bs-target`；`data-bs-toggle` 默认为 `tab`。
+
+| 组件属性   | 类型      | 说明                                    |
+| ---------- | --------- | --------------------------------------- |
+| `active`   | `boolean` | 应用 `.active` 并设置 `aria-selected`。 |
+| `targetId` | `string`  | 所控制面板的 ID。                       |
+
+自有属性为 `active` 和 `targetId`；继承原生按钮属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 属性。
 
 ### TabContent
 
-默认渲染为 `div`，没有自有属性。继承原生 `div` 属性及通过 `BoxProps<C>` 继承的
-全部 [`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为带有 `.tab-content` 的 `div`，没有自有属性。继承原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。
 
 ### TabPane
 
-默认渲染为 `div`。自有属性为 `active?: boolean`；默认设置 `role="tabpanel"`，并在未
-激活时隐藏面板。继承原生属性及通过 `BoxProps<C>` 继承的全部
+默认渲染为带有 `.tab-pane`、`role='tabpanel'` 的 `div`；设置 `active` 时同时添加
+`.active`。未激活的面板还会带有 `hidden`。
+
+| 组件属性 | 类型      | 说明                       |
+| -------- | --------- | -------------------------- |
+| `active` | `boolean` | 显示面板并添加 `.active`。 |
+
+自有属性为 `active`；继承原生属性及通过 `BoxProps<C>` 继承的全部
 [`Box`](../box/README.zh.mdx#api) 属性。
+
+## 无障碍访问
+
+标签页在列表上使用 `role='tablist'`，每个触发器使用 `role='tab'`，每个面板使用
+`role='tabpanel'`。为每个触发器设置与面板 `id` 匹配的 `targetId`，并将面板的
+`aria-labelledby` 指向触发器 `id`，如示例所示。
+
+`Tab` 默认渲染原生按钮，因此 Enter 和 Space 可激活当前聚焦的触发器。组件未实现
+roving `tabindex` 或方向键导航；所有标签都保留在 Tab 键顺序中。若需要完整的 ARIA
+标签页键盘模式，请为标签列表添加键盘处理逻辑。
+
+当面板内没有可聚焦内容时，使用 `tabIndex={0}` 让面板可聚焦，以便键盘用户读取文本。
+标签页用于切换页面内面板，而不是导航到其他页面。颜色只是视觉提示：每个触发器都应
+保留可见标签，禁用的触发器应保持不可用。
+
+## 参考
+
+- [Bootstrap 6 Tab 官方文档](https://getbootstrap.com/docs/6.0/components/tab/)
+- [Nav 导航组件](../nav/README.zh.mdx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/tab.tsx)

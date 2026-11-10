@@ -3,15 +3,22 @@ title: Tab
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Tab, TabContent, TabItem, TabList, TabPane } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { TabBasicDemo } from './demos/basic';
+import { TabListGroupsDemo } from './demos/list-groups';
+import { TabPillsDemo } from './demos/pills';
+import { TabVerticalPillsDemo } from './demos/vertical-pills';
+import { TabWithButtonsDemo } from './demos/with-buttons';
 
 # Tab
 
-`TabList`, `TabItem`, `Tab`, and `TabPane` provide Bootstrap tab markup and ARIA
-relationships. Use the Bootstrap JavaScript bundle to switch tabs and update
-their active state.
+`TabList`, `TabItem`, `Tab`, `TabContent`, and `TabPane` render Bootstrap's tab
+markup and its ARIA relationships. `Tab` and `TabPane` are controlled through
+`active`: keep the selected tab in React state and update it from the trigger
+handlers, as in the examples. The components do not load Bootstrap JavaScript.
+
+They still emit Bootstrap's `data-bs-toggle` and `data-bs-target` attributes
+for markup parity, but the selected tab is controlled by the `active` props.
 
 ## Example
 
@@ -23,59 +30,125 @@ their active state.
 
 ```
 
-## Connect triggers and panels
+## With buttons
 
-Each trigger's `targetId` must match its panel `id`; the panel should label
-itself with the corresponding trigger ID.
+`TabList` renders a `ul` with `.nav .nav-tabs`. To keep a navigation landmark,
+wrap it in a `<nav>` and render the list as a `div` with `component='div'`. Do
+not put `role='tablist'` on the `<nav>` itself, because that would override its
+native navigation role.
+
+<DemoContainer>
+  <TabWithButtonsDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-buttons.tsx'
+
+```
+
+## Pills
+
+`TabList` always applies `.nav-tabs`. For other nav styles, render the list with
+`Box` and compose `TabItem` and `Tab` inside it.
+
+<DemoContainer>
+  <TabPillsDemo />
+</DemoContainer>
+
+```tsx src='./demos/pills.tsx'
+
+```
+
+### Vertical pills
+
+Add `.nav-pills-vertical` and `aria-orientation='vertical'` to the tab list, then
+lay the list and its content side by side.
+
+<DemoContainer>
+  <TabVerticalPillsDemo />
+</DemoContainer>
+
+```tsx src='./demos/vertical-pills.tsx'
+
+```
+
+## List groups
+
+Tabs also work with list groups. Use `ListGroup` with `ListGroupItem
+component='button'`, add the tab roles and ARIA connections, and pair the list
+with `TabPane` elements.
+
+<DemoContainer>
+  <TabListGroupsDemo />
+</DemoContainer>
+
+```tsx src='./demos/list-groups.tsx'
+
+```
 
 ## API
 
 ### TabList
 
-Renders a `ul` by default and has no own props. It inherits native props for
-the selected element and all [`Box`](../box/README.mdx#api) props through
-`BoxProps<C>`.
-
-| Component prop   | Type          | Description                                   |
-| ---------------- | ------------- | --------------------------------------------- |
-| `TabItem`        | —             | Wraps each tab in a presentation list item.   |
-| `Tab.active`     | `boolean`     | Applies the active state and `aria-selected`. |
-| `Tab.targetId`   | `string`      | Links the trigger to its panel ID.            |
-| `TabPane.active` | `boolean`     | Shows the panel and removes its hidden state. |
-| `component`      | `ElementType` | Changes the rendered element.                 |
-| `...props`       | `BoxProps<C>` | Native props and all Box utility props.       |
+Renders a `ul` by default with `.nav .nav-tabs` and `role='tablist'`. It has no
+own props and inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ### TabItem
 
-Renders an `li` by default and has no own props. It defaults to
-`role="presentation"` and inherits native props and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders an `li` by default with `.nav-item` and `role='presentation'`. It has no
+own props and inherits native props and all [`Box`](../box/README.mdx#api) props
+through `BoxProps<C>`.
 
 ### Tab
 
-Renders a `button` by default. Its own props are `active?: boolean` and
-`targetId?: string`; it defaults to `type="button"` and `role="tab"` and maps
-`targetId` to the controlled pane. It inherits native button props and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders a `button` by default with `.nav-link`, `type='button'`, and
+`role='tab'`. It sets `aria-selected` from `active` and maps `targetId` to both
+`aria-controls` and `data-bs-target`; `data-bs-toggle` defaults to `tab`.
+
+| Prop       | Type      | Description                                 |
+| ---------- | --------- | ------------------------------------------- |
+| `active`   | `boolean` | Applies `.active` and sets `aria-selected`. |
+| `targetId` | `string`  | ID of the controlled pane.                  |
+
+Its own props are `active` and `targetId`; it inherits native button props and
+all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ### TabContent
 
-Renders a `div` by default and has no own props. It inherits native `div` props
-and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders a `div` by default with `.tab-content`. It has no own props and inherits
+native props and all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ### TabPane
 
-Renders a `div` by default. Its own prop is `active?: boolean`; it defaults to
-`role="tabpanel"` and hides the pane when inactive. It inherits native props and
-all [`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders a `div` by default with `.tab-pane`, `role='tabpanel'`, and `.active`
+when `active` is set. Inactive panes also receive `hidden`.
+
+| Prop     | Type      | Description                        |
+| -------- | --------- | ---------------------------------- |
+| `active` | `boolean` | Shows the pane and adds `.active`. |
+
+Its own prop is `active`; it inherits native props and all
+[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
 
 ## Accessibility
 
-Keep `aria-controls`, `aria-labelledby`, `aria-selected`, and the active panel
-state in sync. Use tabs for switching in-page panels, not for ordinary page
-navigation.
+Tabs use `role='tablist'` on the list, `role='tab'` on each trigger, and
+`role='tabpanel'` on each pane. Give every trigger a `targetId` matching its
+pane `id`, and set `aria-labelledby` on the pane to the trigger `id`, as in the
+examples.
+
+`Tab` renders a native button, so Enter and Space activate the focused trigger.
+The components do not implement roving `tabindex` or arrow-key navigation; all
+tabs stay in the tab order. Add a keyboard handler to the tab list if you need
+the full ARIA tabs pattern.
+
+Make a panel focusable with `tabIndex={0}` when it contains no focusable content,
+so keyboard users can reach its text. Use tabs for switching in-page panels, not
+for navigating to another page. Color is only a visual cue: keep the visible
+label on every trigger, and keep disabled triggers unavailable.
 
 ## See
 
 - [Bootstrap 6 Tab documentation](https://getbootstrap.com/docs/6.0/components/tab/)
+- [Nav component](../nav/README.mdx)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/tab.tsx)
