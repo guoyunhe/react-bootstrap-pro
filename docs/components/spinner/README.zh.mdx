@@ -3,36 +3,152 @@ title: Spinner 加载指示器
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Spinner } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { SpinnerBasicDemo } from './demos/basic';
+import { SpinnerCustomDemo } from './demos/custom';
+import { SpinnerCustomSizeDemo } from './demos/custom-size';
+import { SpinnerGrowDemo } from './demos/grow';
+import { SpinnerSizeDemo } from './demos/size';
+import { SpinnerVariantsDemo } from './demos/variants';
 
 # Spinner 加载指示器
 
-`Spinner` 渲染纯 CSS 加载指示器，默认设置 `role="status"` 和无障碍名称。
+`Spinner` 渲染 Bootstrap 的纯 CSS 加载指示器。内置外观使用 `border` 或 `grow`
+变体，`rotate` 可为自定义内容添加旋转动画。渲染不需要 JavaScript，显示时机仍由应用
+控制。默认设置 `role='status'` 和可访问名称 `Loading`。
+
+CSS 动画不可用时，指示器仍会静态渲染，因此不会阻塞周围界面。
+
+## 示例
+
+轻量加载提示可使用边框指示器。放在徽标或禁用按钮中时，用 `aria-hidden` 隐藏装饰性
+指示器，并只保留一条可见的状态文本。
 
 <DemoContainer>
-  <Spinner label='正在加载结果' />
-  <Spinner variant='grow' size='sm' label='正在保存' />
+  <SpinnerBasicDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
-<Spinner variant='border' size='sm' label='正在加载' />
+
 ```
+
+## 增长指示器
+
+设置 `variant='grow'`，指示器会反复放大而不是旋转。
+
+<DemoContainer>
+  <SpinnerGrowDemo />
+</DemoContainer>
+
+```tsx src='./demos/grow.tsx'
+
+```
+
+## 颜色变体
+
+Spinner 使用 `currentColor`，可通过继承的 `fg` 属性改变颜色。
+
+<DemoContainer>
+  <SpinnerVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## 尺寸
+
+默认大小为 `1em` 见方，会跟随周围字号。
+
+### 小型
+
+设置 `size='sm'`，尺寸变为 `0.75em`，适合嵌入其他组件。
+
+<DemoContainer>
+  <SpinnerSizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/size.tsx'
+
+```
+
+### 自定义尺寸
+
+通过内联样式或工具类设置 `width` 和 `height` 改变尺寸。
+
+<DemoContainer>
+  <SpinnerCustomSizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-size.tsx'
+
+```
+
+## 自定义指示器
+
+设置 `variant='rotate'`，可为自定义内容（例如 `react-bootstrap-icons-pro` 的图标）
+添加边框指示器的旋转动画。该变体只添加动画，不绘制边框，也不设置尺寸。
+
+<DemoContainer>
+  <SpinnerCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom.tsx'
+
+```
+
+## CSS
+
+### 自定义属性
+
+Bootstrap 在 `.spinner-border` 和 `.spinner-grow` 上定义以下变量，可在 `Spinner` 上覆盖。
+
+| 属性                                     | 用途                                                    |
+| ---------------------------------------- | ------------------------------------------------------- |
+| `--bs-spinner-width`                     | 宽度，默认值为 `1em`。                                  |
+| `--bs-spinner-height`                    | 高度，默认值为 `1em`。                                  |
+| `--bs-spinner-border-width`              | 边框变体的边框粗细，默认值为 `0.125em`。                |
+| `--bs-spinner-animation-speed`           | 动画时长，默认值为 `1s`。                               |
+| `--bs-spinner-animation-timing-function` | 边框变体默认为 `linear`，增长变体默认为 `ease-in-out`。 |
+| `--bs-spinner-animation-name`            | 动画使用的关键帧名称。                                  |
+
+`size='sm'` 会把 `--bs-spinner-width` 和 `--bs-spinner-height` 设为 `0.75em`。
+
+### 关键帧
+
+`spinner-border` 让边框变体与 rotate 变体旋转一周，`spinner-grow` 让增长变体缩放并
+淡入淡出。当用户偏好减少动态效果时，Bootstrap 会将边框与增长动画放慢到 `1.5s`。
 
 ## API
 
 ### Spinner
 
-默认渲染为 `span`，默认使用 `border` 变体、`Loading` 标签和 `status` 角色。
-自有属性为 `variant`、`size` 和 `label`；`aria-label` 可覆盖无障碍名称。
-组件继承所选元素的原生属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性。
+默认渲染为 `span`，并设置 `role='status'` 以及来自 `label` 的 `aria-label`，
+除非这些属性被覆盖。
 
-| 属性        | 类型                             | 说明                             |
-| ----------- | -------------------------------- | -------------------------------- |
-| `variant`   | `'border' \| 'grow' \| 'rotate'` | 选择指示器样式。                 |
-| `size`      | `'sm'`                           | 使用紧凑尺寸。                   |
-| `label`     | `string`                         | 无障碍名称，默认为 `'Loading'`。 |
-| `component` | `ElementType`                    | 更换渲染元素。                   |
-| `...props`  | `BoxProps<C>`                    | 原生属性及所有 Box 工具类属性。  |
+| 组件属性   | 类型                             | 说明                               |
+| ---------- | -------------------------------- | ---------------------------------- |
+| `variant`  | `'border' \| 'grow' \| 'rotate'` | 选择外观，默认值为 `'border'`。    |
+| `size`     | `'sm'`                           | 使用 `0.75em` 尺寸。               |
+| `label`    | `string`                         | 无障碍名称，默认值为 `'Loading'`。 |
+| `children` | `ReactNode`                      | 由 `rotate` 变体添加动画的内容。   |
 
-Spinner 使用 `currentColor`；可通过 Box 前景色工具属性设置颜色。
+自有属性为 `variant`、`size` 和 `label`；继承所选元素的原生属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/README.zh.mdx#api) 属性。子元素渲染在指示器内部，仅对
+`rotate` 变体有意义；该变体不添加边框或尺寸，因此 `size` 对它无效。
+
+## 无障碍访问
+
+- 保留 `status` 角色和简洁的可访问名称；`label` 默认为 `Loading`。
+- `status` 是实时区域。请使用稳定的标签，把变化的进度放到其他位置，而不要快速更新标签。
+- 当可见文本已经朗读相同的加载状态时，用 `aria-hidden` 隐藏指示器，避免重复播报，
+  如徽标和按钮示例所示。
+- 动画不足以表达状态，应配合文本或其他可访问状态。
+- 用户偏好减少动态效果时，Bootstrap 会放慢边框与增长动画；rotate 变体仍保持固定的
+  一秒旋转。
+
+## 参考
+
+- [Bootstrap 6 Spinner 官方文档](https://getbootstrap.com/docs/6.0/components/spinner/)
+- [Box 组件](../box/README.zh.mdx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/spinner.tsx)

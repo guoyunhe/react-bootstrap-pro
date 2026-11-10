@@ -3,16 +3,29 @@ title: Spinner
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Spinner } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
 import { SpinnerBasicDemo } from './demos/basic';
+import { SpinnerCustomDemo } from './demos/custom';
+import { SpinnerCustomSizeDemo } from './demos/custom-size';
+import { SpinnerGrowDemo } from './demos/grow';
+import { SpinnerSizeDemo } from './demos/size';
+import { SpinnerVariantsDemo } from './demos/variants';
 
 # Spinner
 
-`Spinner` renders a CSS-only loading indicator and defaults to
-`role="status"` with an accessible label.
+`Spinner` renders Bootstrap's CSS-only loading indicator. Use the `border` or
+`grow` variant for the built-in shapes, or `rotate` to animate custom content.
+Rendering needs no JavaScript; your application still decides when to show the
+spinner. By default it has `role='status'` and the accessible label `Loading`.
+
+The indicator also renders without animation when CSS animations are
+unavailable, so it never blocks the surrounding interface.
 
 ## Example
+
+Use the border spinner for a lightweight indicator. Inside a badge or a disabled
+button, hide the decorative spinner with `aria-hidden` and keep a single visible
+status message.
 
 <DemoContainer>
   <SpinnerBasicDemo />
@@ -22,34 +35,132 @@ import { SpinnerBasicDemo } from './demos/basic';
 
 ```
 
-## Variants and sizes
+## Growing spinner
+
+Set `variant='grow'` for a spinner that repeatedly grows instead of rotating.
+
+<DemoContainer>
+  <SpinnerGrowDemo />
+</DemoContainer>
+
+```tsx src='./demos/grow.tsx'
+
+```
+
+## Variants
+
+Spinners use `currentColor`, so the inherited `fg` prop changes their color.
+
+<DemoContainer>
+  <SpinnerVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## Size
+
+Spinners are `1em` square by default, so they follow the surrounding font size.
+
+### Small
+
+Set `size='sm'` for a `0.75em` spinner that fits inside other components.
+
+<DemoContainer>
+  <SpinnerSizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/size.tsx'
+
+```
+
+### Custom size
+
+Set `width` and `height` with inline styles or utilities to change the dimensions.
+
+<DemoContainer>
+  <SpinnerCustomSizeDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-size.tsx'
+
+```
+
+## Custom spinners
+
+Set `variant='rotate'` to apply the border spinner's rotation to custom content,
+such as an icon from `react-bootstrap-icons-pro`. The variant adds only the
+animation; it does not draw a border or set a size.
+
+<DemoContainer>
+  <SpinnerCustomDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom.tsx'
+
+```
+
+## CSS
+
+### Variables
+
+Bootstrap defines these variables on `.spinner-border` and `.spinner-grow`;
+override them on `Spinner`.
+
+| Variable                                 | Purpose                                                        |
+| ---------------------------------------- | -------------------------------------------------------------- |
+| `--bs-spinner-width`                     | Width; defaults to `1em`.                                      |
+| `--bs-spinner-height`                    | Height; defaults to `1em`.                                     |
+| `--bs-spinner-border-width`              | Border thickness of the border variant; defaults to `0.125em`. |
+| `--bs-spinner-animation-speed`           | Animation duration; defaults to `1s`.                          |
+| `--bs-spinner-animation-timing-function` | Border defaults to `linear`; grow defaults to `ease-in-out`.   |
+| `--bs-spinner-animation-name`            | Keyframes name used by the animation.                          |
+
+`size='sm'` sets `--bs-spinner-width` and `--bs-spinner-height` to `0.75em`.
+
+### Keyframes
+
+`spinner-border` rotates the border and rotate variants a full turn, and
+`spinner-grow` scales and fades the grow variant. When the user prefers reduced
+motion, Bootstrap slows the border and grow animations to `1.5s`.
 
 ## API
 
 ### Spinner
 
-Renders a `span` by default and defaults to the `border` variant, `Loading`
-label, and `status` role. Its own props are `variant`, `size`, and `label`;
-`aria-label` can override the accessible label. It inherits native props for
-the selected element and [`Box`](../box/README.mdx#api) utility props.
+Renders a `span` by default and sets `role='status'` and `aria-label` from
+`label`, unless those props are overridden.
 
-| Prop        | Type                             | Description                                 |
-| ----------- | -------------------------------- | ------------------------------------------- |
-| `variant`   | `'border' \| 'grow' \| 'rotate'` | Selects the spinner appearance.             |
-| `size`      | `'sm'`                           | Uses the compact size.                      |
-| `label`     | `string`                         | Accessible name, defaulting to `'Loading'`. |
-| `component` | `ElementType`                    | Changes the rendered element.               |
-| `...props`  | `BoxProps<C>`                    | Native props and all Box utility props.     |
+| Prop       | Type                             | Description                                     |
+| ---------- | -------------------------------- | ----------------------------------------------- |
+| `variant`  | `'border' \| 'grow' \| 'rotate'` | Selects the appearance; defaults to `'border'`. |
+| `size`     | `'sm'`                           | Uses the `0.75em` size.                         |
+| `label`    | `string`                         | Accessible name; defaults to `'Loading'`.       |
+| `children` | `ReactNode`                      | Content animated by the `rotate` variant.       |
 
-Spinners use `currentColor`; use Box foreground utilities to change their color.
+Its own props are `variant`, `size`, and `label`; it inherits native props for
+the selected element and all [`Box`](../box/README.mdx#api) props through
+`BoxProps<C>`. Children render inside the spinner and are only meaningful with
+the `rotate` variant. That variant adds no border or size, so `size` does not
+affect it.
 
 ## Accessibility
 
-Provide a concise accessible label for the loading status. Hide the visual
-indicator from assistive technology when a separate status message already
-announces the same information.
+- Keep the `status` role and a concise accessible label; `label` defaults to
+  `Loading`.
+- `status` is a live region. Prefer a stable label and expose changing progress
+  elsewhere instead of updating the label rapidly.
+- When visible text already announces the same loading state, hide the spinner
+  with `aria-hidden` so it is not announced twice, as in the badge and button
+  examples.
+- Animation is not a sufficient status indicator. Pair the spinner with text or
+  another accessible status.
+- Bootstrap slows the border and grow animations when the user prefers reduced
+  motion; the rotate variant keeps its fixed one-second rotation.
 
 ## See
 
 - [Bootstrap 6 Spinner documentation](https://getbootstrap.com/docs/6.0/components/spinner/)
+- [Box component](../box/README.mdx)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/spinner.tsx)
