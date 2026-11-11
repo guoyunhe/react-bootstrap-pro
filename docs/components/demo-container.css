@@ -1,0 +1,5 @@
+/* Demos drop document margins so content stays flush with the padded demo box. */
+.demo-container .table,
+.demo-container .table-card {
+  margin-bottom: 0;
+}
