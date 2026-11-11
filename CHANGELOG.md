@@ -34,6 +34,11 @@
 - Add controlled tab state with `Nav` `value`/`onChange`, `NavLink` `value`, and
   `TabContent`/`TabPane` `value`.
 
+### Fixed
+
+- Wrap `Stepper` with `overflow` in a `.stepper-overflow` scroll container, so
+  long horizontal steppers keep their width and scroll instead of collapsing.
+
 ## [0.4.0] - 2026-11-08
 
 ### Breaking Changes

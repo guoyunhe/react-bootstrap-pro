@@ -22,13 +22,12 @@ export function Stepper<C extends ElementType = 'ol'>({
   overflow,
   ...props
 }: StepperProps<C>) {
-  return (
+  const stepper = (
     <Box<C>
       {...(props as BoxProps<C>)}
       component={component ?? ('ol' as C)}
       classNameBefore={clsx(
         'stepper',
-        overflow && 'stepper-overflow',
         horizontal &&
           (horizontal === true ? 'stepper-horizontal' : `${horizontal}:stepper-horizontal`),
         props.classNameBefore,
@@ -36,6 +35,9 @@ export function Stepper<C extends ElementType = 'ol'>({
       className={className}
     />
   );
+
+  // Bootstrap applies `.stepper-overflow` to a scroll container around the list.
+  return overflow ? <div className='stepper-overflow'>{stepper}</div> : stepper;
 }
 
 export type StepperItemProps<C extends ElementType = 'li'> = Omit<
