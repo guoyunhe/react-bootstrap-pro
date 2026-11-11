@@ -1,14 +1,6 @@
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from 'react-bootstrap-pro';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from 'react-bootstrap-pro';
 
-function WideTable() {
+export function TableResponsiveDemo() {
   return (
     <Table responsive>
       <TableHead>
@@ -32,35 +24,5 @@ function WideTable() {
         ))}
       </TableBody>
     </Table>
-  );
-}
-
-export function TableResponsiveDemo() {
-  return (
-    <Box d='flex' flexDirection='column' gap={3}>
-      <WideTable />
-      <Table responsive='md' striped>
-        <TableHead>
-          <TableRow>
-            <TableHeader scope='col'>#</TableHeader>
-            {Array.from({ length: 9 }, (_, index) => (
-              <TableHeader key={index} scope='col'>
-                Heading
-              </TableHeader>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {[1, 2, 3].map((row) => (
-            <TableRow key={row}>
-              <TableHeader scope='row'>{row}</TableHeader>
-              {Array.from({ length: 9 }, (_, index) => (
-                <TableCell key={index}>Cell</TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Box>
   );
 }

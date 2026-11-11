@@ -4,26 +4,33 @@ title: Table 表格
 
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
+import { TableActiveDemo } from './demos/active';
 import { TableAlignmentDemo } from './demos/alignment';
 import { TableBasicDemo } from './demos/basic';
-import { TableBordersDemo } from './demos/borders';
+import { TableBorderedDemo } from './demos/bordered';
+import { TableBorderlessDemo } from './demos/borderless';
 import { TableCaptionDemo } from './demos/caption';
+import { TableCaptionTopDemo } from './demos/caption-top';
 import { TableCardDemo } from './demos/card';
+import { TableCardUtilitiesDemo } from './demos/card-utilities';
 import { TableDividersDemo } from './demos/dividers';
+import { TableFooterDemo } from './demos/footer';
 import { TableHoverDemo } from './demos/hover';
 import { TableNestingDemo } from './demos/nesting';
 import { TableResponsiveDemo } from './demos/responsive';
+import { TableResponsiveBreakpointDemo } from './demos/responsive-breakpoint';
 import { TableSmallDemo } from './demos/small';
 import { TableStackedDemo } from './demos/stacked';
-import { TableStripedDemo } from './demos/striped';
+import { TableStripedColumnsDemo } from './demos/striped-columns';
+import { TableStripedRowsDemo } from './demos/striped-rows';
 import { TableVariantsDemo } from './demos/variants';
 
 # Table 表格
 
-Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类，各个修饰属性覆盖条纹、
-悬停、边框、卡片、堆叠与响应式等变体。`TableHead`、`TableBody`、`TableFoot`、
-`TableRow`、`TableHeader`、`TableCell` 与 `TableCaption` 分别对应语义化标签，因此嵌套
-表格的样式不会从父表格继承。
+Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类，各个属性覆盖条纹、悬停、
+边框、紧凑、卡片、堆叠与响应式等变体。`TableHead`、`TableBody`、`TableFoot`、
+`TableRow`、`TableHeader`、`TableCell` 与 `TableCaption` 分别渲染对应的语义化元素，
+因此嵌套表格的样式不会从父表格继承。
 
 ## 示例
 
@@ -35,10 +42,10 @@ Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类�
 
 ```
 
-`Table` 渲染带 `.table` 的 `<table>`。表头单元格使用 `TableHeader`，列表头设置
-`scope='col'`，行表头设置 `scope='row'`。
+`Table` 渲染带 `.table` 的 `<table>`。表头单元格使用 `TableHeader`，数据单元格使用
+`TableCell`；列表头设置 `scope='col'`，行表头设置 `scope='row'`。
 
-## 颜色变体
+## 主题变体
 
 将任意主题色传给 `theme`，即可为整个表格、`TableRow` 行或单个 `TableHeader` /
 `TableCell` 单元格着色，并自动适配明暗模式。
@@ -54,25 +61,37 @@ Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类�
 仅用颜色表达含义只能提供视觉提示。请让内容本身表达含义，或通过 `.visually-hidden`
 隐藏文本来补充说明。
 
-## 强调样式
+## 强调表格
 
-### 行条纹与列条纹
+条纹、悬停与激活高亮都会叠加在主题变体之上，因此可以自由组合。
 
-设置 `striped` 可为 `<tbody>` 中的行添加斑马纹，`stripedColumns` 则为列添加条纹；两者
-都可与主题变体组合使用。
+### 行条纹
+
+设置 `striped` 可为 `<tbody>` 中的行添加斑马纹。
 
 <DemoContainer>
-  <TableStripedDemo />
+  <TableStripedRowsDemo />
 </DemoContainer>
 
-```tsx src='./demos/striped.tsx'
+```tsx src='./demos/striped-rows.tsx'
+
+```
+
+### 列条纹
+
+设置 `stripedColumns` 可为列添加斑马纹；与 `striped` 一样，它也可以与主题变体组合使用。
+
+<DemoContainer>
+  <TableStripedColumnsDemo />
+</DemoContainer>
+
+```tsx src='./demos/striped-columns.tsx'
 
 ```
 
 ### 悬停行
 
-设置 `hover` 可启用 `<tbody>` 行的悬停效果；为 `TableRow` 或单元格设置 `active` 即可
-高亮该行或该单元格。
+设置 `hover` 可启用 `<tbody>` 行的悬停效果，并可与 `striped` 一起使用。
 
 <DemoContainer>
   <TableHoverDemo />
@@ -82,26 +101,63 @@ Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类�
 
 ```
 
+### 激活表格
+
+在 `TableRow` 上设置 `active` 可高亮整行；在 `TableHeader` 或 `TableCell` 上设置
+`active` 则只高亮该单元格。
+
+<DemoContainer>
+  <TableActiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/active.tsx'
+
+```
+
 ## 表格边框
 
-### 带边框的表格
+### 带边框表格
 
 设置 `bordered` 可为表格与单元格添加四周边框，使用 `borderColor='primary'` 等边框颜色
 工具属性可改变颜色。
+
+<DemoContainer>
+  <TableBorderedDemo />
+</DemoContainer>
+
+```tsx src='./demos/bordered.tsx'
+
+```
 
 ### 无边框表格
 
 设置 `borderless` 可移除表格边框。
 
 <DemoContainer>
-  <TableBordersDemo />
+  <TableBorderlessDemo />
 </DemoContainer>
 
-```tsx src='./demos/borders.tsx'
+```tsx src='./demos/borderless.tsx'
 
 ```
 
 ## 卡片式表格
+
+卡片式表格具有边框、圆角并裁剪单元格背景，无需嵌套在 `Card` 中。
+
+### 使用工具类
+
+在 `Box` 上组合边框、圆角与溢出工具类，并用 `mb={0}` 去掉表格的下外边距。
+
+<DemoContainer>
+  <TableCardUtilitiesDemo />
+</DemoContainer>
+
+```tsx src='./demos/card-utilities.tsx'
+
+```
+
+### 使用 `.table-card`
 
 设置 `card` 会将表格包裹在 `.table-card` 中，实现圆角、裁剪单元格背景并去掉最后一行的
 下边框。表格可能溢出时，可与 `responsive` 组合使用。
@@ -141,8 +197,8 @@ Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类�
 
 ## 垂直对齐
 
-`<thead>` 中的单元格始终底部对齐，而 `<tbody>` 单元格继承表格的对齐方式。可在
-`Table`、`TableRow` 或单元格上使用 Box 的 `verticalAlign` 属性重新对齐。
+`<thead>` 中的单元格始终底部对齐；`<tbody>` 中的单元格继承表格的对齐方式，默认顶部对齐。
+在 `Table`、`TableRow` 或单元格上使用 `verticalAlign` 工具属性即可重新对齐。
 
 <DemoContainer>
   <TableAlignmentDemo />
@@ -154,8 +210,8 @@ Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类�
 
 ## 嵌套表格
 
-边框、激活状态与表格变体不会被子表格继承，因此嵌套的 `Table` 可以独立设置样式。可用
-`mb={0}` 去掉它的下外边距。
+边框样式、激活样式与表格变体不会被嵌套表格继承，因此嵌套的 `Table` 可以独立设置样式。
+用 `mb={0}` 去掉它的下外边距。
 
 <DemoContainer>
   <TableNestingDemo />
@@ -165,10 +221,21 @@ Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类�
 
 ```
 
+## 表尾
+
+在 `TableBody` 之后渲染 `TableFoot`，即可为表格添加汇总行。
+
+<DemoContainer>
+  <TableFooterDemo />
+</DemoContainer>
+
+```tsx src='./demos/footer.tsx'
+
+```
+
 ## 标题
 
-`TableCaption` 渲染 `<caption>`，作用类似表格的标题。在 `Table` 上设置 `captionTop`
-可将标题放到表格上方。
+`TableCaption` 渲染 `<caption>`，作用类似表格的标题，并为辅助技术提供表格名称。
 
 <DemoContainer>
   <TableCaptionDemo />
@@ -178,13 +245,24 @@ Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类�
 
 ```
 
+在 `Table` 上设置 `captionTop`，可将标题显示在表格上方。标题仍需作为表格的第一个子元素，
+以保持阅读顺序不变。
+
+<DemoContainer>
+  <TableCaptionTopDemo />
+</DemoContainer>
+
+```tsx src='./demos/caption-top.tsx'
+
+```
+
 ## 堆叠表格
 
-设置 `stacked` 可在空间受限时将每行转换为堆叠块：第一列作为标题，其余单元格以「标签—
-值」形式展示，标签来自每个 `TableCell` 的 `cell` 属性。
+设置 `stacked` 可在空间受限时将行转换为堆叠块。每行成为一个纵向区块，第一个单元格作为
+标题，其余单元格显示为标签与值的组合；标签来自每个 `TableCell` 的 `cell` 属性。
 
-堆叠表格基于容器查询，因此组件始终会渲染响应式包裹层。传入断点可仅在该断点以下堆叠，
-例如 `stacked='md'`。
+堆叠表格基于容器查询，因此始终会渲染响应式包裹层。传入断点可仅在低于该断点时堆叠，例如
+`stacked='md'`。
 
 <DemoContainer>
   <TableStackedDemo />
@@ -196,8 +274,10 @@ Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类�
 
 ## 响应式表格
 
-设置 `responsive` 会用 `.table-responsive` 包裹表格以支持横向滚动；也可传入断点，使其
-仅在该宽度以下滚动，例如 `responsive='md'`。
+响应式表格会在包裹层内横向滚动。设置 `responsive` 可在任意宽度下将表格包裹在
+`.table-responsive` 中；传入断点则仅在低于该宽度时滚动，例如 `responsive='md'`。
+
+### 始终响应式
 
 <DemoContainer>
   <TableResponsiveDemo />
@@ -207,62 +287,134 @@ Bootstrap 的表格需要显式启用：`Table` 会添加基础的 `.table` 类�
 
 ```
 
-响应式表格使用 `overflow-y: hidden`，因此会裁剪超出表格上下边缘的内容，包括菜单与其他
-第三方组件。
+### 指定断点
+
+达到指定断点后，表格恢复正常布局，不再横向滚动。
+
+<DemoContainer>
+  <TableResponsiveBreakpointDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive-breakpoint.tsx'
+
+```
+
+响应式表格使用 `overflow-y: hidden`，会裁剪超出表格上下边缘的内容，包括菜单等第三方组件。
 
 ## API
 
 ### Table
 
-| 属性             | 类型                                               | 说明                                        |
-| ---------------- | -------------------------------------------------- | ------------------------------------------- |
-| `striped`        | `boolean`                                          | 为 `<tbody>` 的行添加斑马纹。               |
-| `stripedColumns` | `boolean`                                          | 为列添加斑马纹。                            |
-| `hover`          | `boolean`                                          | 为 `<tbody>` 的行启用悬停效果。             |
-| `bordered`       | `boolean`                                          | 为表格与单元格添加四周边框。                |
-| `borderless`     | `boolean`                                          | 移除表格与单元格边框。                      |
-| `small`          | `boolean`                                          | 将单元格内边距减半。                        |
-| `card`           | `boolean`                                          | 用 `.table-card` 包裹表格。                 |
-| `captionTop`     | `boolean`                                          | 将标题放到表格上方。                        |
-| `stacked`        | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 行堆叠，可仅在指定断点以下生效。            |
-| `responsive`     | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 包裹表格以支持横向滚动。                    |
-| `component`      | `ElementType`                                      | 默认渲染 `table`。                          |
-| `...props`       | `BoxProps<C>`                                      | 原生属性与全部 Box 工具属性（含 `theme`）。 |
+默认渲染为 `table`，可使用 `component` 更换元素。继承原生表格属性，以及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 工具类属性，因此 `theme`、
+`verticalAlign` 等工具属性会作用于表格。
 
-### TableHead、TableBody、TableFoot
+| 组件属性         | 类型                                               | 说明                                   |
+| ---------------- | -------------------------------------------------- | -------------------------------------- |
+| `striped`        | `boolean`                                          | 为 `<tbody>` 中的行添加斑马纹。        |
+| `stripedColumns` | `boolean`                                          | 为列添加斑马纹。                       |
+| `hover`          | `boolean`                                          | 为 `<tbody>` 中的行启用悬停状态。      |
+| `bordered`       | `boolean`                                          | 为表格与单元格添加四周边框。           |
+| `borderless`     | `boolean`                                          | 移除表格与单元格的边框。               |
+| `small`          | `boolean`                                          | 将单元格内边距减半。                   |
+| `card`           | `boolean`                                          | 将表格包裹在 `.table-card` 中。        |
+| `captionTop`     | `boolean`                                          | 将标题显示在表格上方。                 |
+| `stacked`        | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 将行堆叠为区块，可限定在断点以下生效。 |
+| `responsive`     | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 为横向滚动包裹表格。                   |
 
-| 属性        | 类型          | 说明                                    |
-| ----------- | ------------- | --------------------------------------- |
-| `divider`   | `boolean`     | 在分组上方添加 `.table-group-divider`。 |
-| `component` | `ElementType` | 默认渲染 `thead`、`tbody` 或 `tfoot`。  |
-| `...props`  | `BoxProps<C>` | 原生属性与全部 Box 工具属性。           |
+`responsive`、`card` 与 `stacked` 会渲染带对应类的包裹 `div`。传入断点时，`.table-responsive`
+或 `.table-stacked` 会加上响应式前缀，例如 `md:table-responsive`。未设置 `responsive` 时，
+`stacked` 也会添加 `table-responsive` 包裹层，因为堆叠布局需要它作为容器查询上下文。
+
+### TableHead
+
+默认渲染为 `thead`，可使用 `component` 更换元素。
+
+| 组件属性  | 类型      | 说明                                  |
+| --------- | --------- | ------------------------------------- |
+| `divider` | `boolean` | 为该分组添加 `.table-group-divider`。 |
+
+继承原生属性，以及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### TableBody
+
+默认渲染为 `tbody`，可使用 `component` 更换元素。
+
+| 组件属性  | 类型      | 说明                                  |
+| --------- | --------- | ------------------------------------- |
+| `divider` | `boolean` | 为该分组添加 `.table-group-divider`。 |
+
+继承原生属性，以及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### TableFoot
+
+默认渲染为 `tfoot`，可使用 `component` 更换元素。
+
+| 组件属性  | 类型      | 说明                                  |
+| --------- | --------- | ------------------------------------- |
+| `divider` | `boolean` | 为该分组添加 `.table-group-divider`。 |
+
+继承原生属性，以及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
 
 ### TableRow
 
-| 属性        | 类型          | 说明                          |
-| ----------- | ------------- | ----------------------------- |
-| `active`    | `boolean`     | 用 `.table-active` 高亮该行。 |
-| `component` | `ElementType` | 默认渲染 `tr`。               |
-| `...props`  | `BoxProps<C>` | 原生属性与全部 Box 工具属性。 |
+默认渲染为 `tr`，可使用 `component` 更换元素。
 
-### TableHeader 与 TableCell
+| 组件属性 | 类型      | 说明                          |
+| -------- | --------- | ----------------------------- |
+| `active` | `boolean` | 用 `.table-active` 高亮该行。 |
 
-| 属性        | 类型          | 说明                                        |
-| ----------- | ------------- | ------------------------------------------- |
-| `active`    | `boolean`     | 用 `.table-active` 高亮该单元格。           |
-| `cell`      | `string`      | 表格堆叠时该单元格使用的标签。              |
-| `component` | `ElementType` | 默认渲染 `th` 或 `td`。                     |
-| `...props`  | `BoxProps<C>` | 原生属性与全部 Box 工具属性（含 `theme`）。 |
+继承原生属性，以及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### TableHeader
+
+默认渲染为 `th`，可使用 `component` 更换元素。
+
+| 组件属性 | 类型      | 说明                              |
+| -------- | --------- | --------------------------------- |
+| `active` | `boolean` | 用 `.table-active` 高亮该单元格。 |
+| `cell`   | `string`  | 表格堆叠时该单元格使用的标签。    |
+
+`cell` 会写入 `data-cell` 属性，供堆叠布局读取标签。通过 `scope` 说明表头的作用范围。
+继承原生属性，以及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
+
+### TableCell
+
+默认渲染为 `td`，可使用 `component` 更换元素。
+
+| 组件属性 | 类型      | 说明                              |
+| -------- | --------- | --------------------------------- |
+| `active` | `boolean` | 用 `.table-active` 高亮该单元格。 |
+| `cell`   | `string`  | 表格堆叠时该单元格使用的标签。    |
+
+`cell` 会写入 `data-cell` 属性，供堆叠布局读取标签。继承原生属性，以及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 工具类属性。
 
 ### TableCaption
 
-| 属性        | 类型          | 说明                          |
-| ----------- | ------------- | ----------------------------- |
-| `component` | `ElementType` | 默认渲染 `caption`。          |
-| `...props`  | `BoxProps<C>` | 原生属性与全部 Box 工具属性。 |
+默认渲染为 `caption`，可使用 `component` 更换元素。它没有自有属性，继承原生属性，以及
+通过 `BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 工具类属性。
 
-## 无障碍
+## 无障碍访问
 
-使用语义化标记：表头单元格使用 `TableHeader` 并显式设置 `scope`，用 `TableCaption`
-为表格命名，便于屏幕阅读器定位并描述表格。当每行描述一个实体时，保留第一列作为行表头。
-不要仅依赖颜色，请为主题化的行或单元格补充文本或隐藏说明。
+保持语义结构：使用 `TableHead` 与 `TableBody` 划分分组，为 `TableHeader` 明确设置
+`scope='col'` 或 `scope='row'`，并通过 `TableCaption` 为表格命名，让屏幕阅读器能够定位
+并描述表格。`captionTop` 只改变标题的视觉位置，标题仍是表格的第一个子元素，请保持这一
+顺序。
+
+仅用颜色无法向辅助技术传达含义。主题行或单元格应配合文字，或使用 `.visually-hidden`
+隐藏标签补充说明。单元格中的链接、按钮等交互内容会保留原生键盘行为。
+
+表格切换为堆叠布局后，`cell` 标签会替代列标题，请将其写为简短的字段名。响应式表格在包裹
+层内滚动，视觉顺序与阅读顺序一致，请确保表格内容的顺序合乎逻辑。
+
+## 参考
+
+- [Bootstrap 6 Tables 官方文档](https://getbootstrap.com/docs/6.0/content/tables/)
+- [Box 组件](../box/README.zh.mdx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/table.tsx)
