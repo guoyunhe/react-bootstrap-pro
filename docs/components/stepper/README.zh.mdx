@@ -9,6 +9,7 @@ import { StepperAlignmentCenterDemo } from './demos/alignment-center';
 import { StepperAlignmentEndDemo } from './demos/alignment-end';
 import { StepperBasicDemo } from './demos/basic';
 import { StepperComplexDemo } from './demos/complex';
+import { StepperControlledDemo } from './demos/controlled';
 import { StepperComplexBadgesDemo } from './demos/complex-badges';
 import { StepperFullWidthDemo } from './demos/full-width';
 import { StepperGapDemo } from './demos/gap';
@@ -30,6 +31,21 @@ import { StepperWithAnchorsDemo } from './demos/with-anchors';
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
+
+```
+
+## 受控步骤
+
+在 `Stepper` 上设置 `value`，并为每个 `StepperItem` 设置对应的 `value`，即可用 React
+状态管理当前步骤。与 `value` 匹配的步骤为当前步骤，其之前的步骤为已完成步骤，两者都会
+渲染为激活状态。点击步骤时会调用 `onChange` 并传入该步骤的 `value`；未设置 `value`
+时仍可使用 `active` 属性。
+
+<DemoContainer>
+  <StepperControlledDemo />
+</DemoContainer>
+
+```tsx src='./demos/controlled.tsx'
 
 ```
 
@@ -169,36 +185,47 @@ import { StepperWithAnchorsDemo } from './demos/with-anchors';
 
 ### Stepper
 
-默认渲染为 `ol`，可使用 `component` 更换元素。自有属性为 `horizontal` 和
-`overflow`；继承所选元素的原生属性，以及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 工具类属性。
+默认渲染为 `ol`，可使用 `component` 更换元素。自有属性为 `horizontal`、
+`overflow`、`value` 和 `onChange`；继承所选元素的原生属性，以及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 工具类属性。
 
 | 组件属性     | 类型                                               | 说明                                           |
 | ------------ | -------------------------------------------------- | ---------------------------------------------- |
 | `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 使用横向布局；设置断点时改为基于容器查询生效。 |
 | `overflow`   | `boolean`                                          | 为较长的横向步骤序列启用行内滚动。             |
+| `value`      | `StepperValue`                                     | 当前步骤，同时激活其之前的步骤。               |
+| `onChange`   | `(event: MouseEvent, value: StepperValue) => void` | 点击步骤时以该步骤的 `value` 调用。            |
 
 `horizontal` 添加 `.stepper-horizontal`。设置断点时则改为添加对应的
 `{breakpoint}:stepper-horizontal` 类，在该容器断点及以上生效。`overflow` 会在列表外
 包裹一层 `.stepper-overflow` 容器，使其沿行内轴滚动，并作为行内尺寸查询容器，让断点值
 能够响应可用宽度。
 
+`value` 会与每个直接子元素 `StepperItem` 的 `value` 比较，`StepperValue` 为 `string`
+或 `number`。设置 `value` 时，推导出的状态会覆盖 `active` 属性；没有匹配到 `value`
+的步骤保持未激活。
+
 ### StepperItem
 
-默认渲染为 `li`，可使用 `component` 更换元素。自有属性为 `active?: boolean`，会添加
-`.active` 并将 `aria-current` 默认设为 `step`。继承所选元素的原生属性，以及通过
-`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 工具类属性，因此可用
-`component='a'` 或 `component='button'` 生成可交互的步骤。
+默认渲染为 `li`，可使用 `component` 更换元素。自有属性为 `active` 和 `value`；继承
+所选元素的原生属性，以及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 工具类属性，因此可用 `component='a'` 或
+`component='button'` 生成链接或按钮步骤。
 
-| 组件属性 | 类型      | 说明                           |
-| -------- | --------- | ------------------------------ |
-| `active` | `boolean` | 将步骤标记为已完成或当前步骤。 |
+| 组件属性 | 类型           | 说明                                        |
+| -------- | -------------- | ------------------------------------------- |
+| `active` | `boolean`      | 未设置 `value` 时，标记步骤为已完成或当前。 |
+| `value`  | `StepperValue` | 步骤标识，与 `Stepper` 的 `value` 比较。    |
+
+`active` 会添加 `.active` 并将 `aria-current` 默认设为 `step`。在受控步骤条中，只有
+当前步骤会获得 `aria-current='step'`。设置 `onChange` 后，带有 `value` 的步骤会成为
+按钮目标：添加 `role='button'`、可获得焦点，并响应点击、Enter 和 Space 键。
 
 ## 无障碍访问
 
-有序列表本身已表达步骤顺序，因此请保持有意义的源码顺序。已完成的步骤同样需要设置
-`active`，但只应在当前步骤上保留 `aria-current='step'`：为其他激活步骤传入
-`aria-current='false'`，让辅助技术只识别出一个当前步骤。
+有序列表本身已表达步骤顺序，因此请保持有意义的源码顺序。在受控步骤条中，只有当前步骤
+会设置 `aria-current='step'`，已完成步骤保持激活但不带当前标记。未设置 `value` 时，
+请为其他激活步骤传入 `aria-current='false'`，让辅助技术只识别出一个当前步骤。
 
 步骤默认是静态文本；若渲染为链接或按钮，则保持其原生键盘行为。当链接步骤条的用途不够
 明确时，请通过 `aria-label` 等属性提供可访问名称，并让步骤标签简短且彼此不同。

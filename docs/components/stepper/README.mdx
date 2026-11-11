@@ -9,6 +9,7 @@ import { StepperAlignmentCenterDemo } from './demos/alignment-center';
 import { StepperAlignmentEndDemo } from './demos/alignment-end';
 import { StepperBasicDemo } from './demos/basic';
 import { StepperComplexDemo } from './demos/complex';
+import { StepperControlledDemo } from './demos/controlled';
 import { StepperComplexBadgesDemo } from './demos/complex-badges';
 import { StepperFullWidthDemo } from './demos/full-width';
 import { StepperGapDemo } from './demos/gap';
@@ -31,6 +32,22 @@ items. Set `active` on completed and current steps, and add the responsive
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
+
+```
+
+## Controlled steps
+
+Set `value` on `Stepper` and a matching `value` on each `StepperItem` to keep
+the current step in React state. The matching step is current and the steps
+before it are completed; both render as active. Clicking a step calls `onChange`
+with that step's value, and the `active` prop remains available when `value` is
+omitted.
+
+<DemoContainer>
+  <StepperControlledDemo />
+</DemoContainer>
+
+```tsx src='./demos/controlled.tsx'
 
 ```
 
@@ -180,14 +197,16 @@ container to a `div`, then render each `StepperItem` as an `a`. Use
 ### Stepper
 
 Renders an `ol` by default; use `component` to change the element. Its own
-props are `horizontal` and `overflow`. It inherits native props for the selected
-element and all [`Box`](../box/README.mdx#api) utility props through
-`BoxProps<C>`.
+props are `horizontal`, `overflow`, `value`, and `onChange`. It inherits native
+props for the selected element and all [`Box`](../box/README.mdx#api) utility
+props through `BoxProps<C>`.
 
 | Prop         | Type                                               | Description                                                                 |
 | ------------ | -------------------------------------------------- | --------------------------------------------------------------------------- |
 | `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Uses the horizontal layout; a breakpoint restricts it to container queries. |
 | `overflow`   | `boolean`                                          | Enables inline scrolling for long horizontal step sequences.                |
+| `value`      | `StepperValue`                                     | Current step; also activates the steps before it.                           |
+| `onChange`   | `(event: MouseEvent, value: StepperValue) => void` | Called with the value of the clicked step.                                  |
 
 `horizontal` adds `.stepper-horizontal`. A breakpoint value adds the matching
 `{breakpoint}:stepper-horizontal` class instead, which applies from that
@@ -195,24 +214,35 @@ container breakpoint up. `overflow` wraps the list in a `.stepper-overflow`
 container that scrolls along the inline axis and acts as an inline-size query
 container, so a breakpoint value can respond to the available width.
 
+`value` is compared with the `value` of each direct `StepperItem` child, and
+`StepperValue` is a `string` or a `number`. While `value` is set, the derived
+state overrides the `active` prop. Steps whose `value` has no match stay
+inactive.
+
 ### StepperItem
 
-Renders an `li` by default; use `component` to change the element. Its own prop
-is `active?: boolean`, which adds `.active` and defaults `aria-current` to
-`step`. It inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) utility props through `BoxProps<C>`, so
-`component='a'` or `component='button'` produce interactive steps.
+Renders an `li` by default; use `component` to change the element. Its own props
+are `active` and `value`. It inherits native props for the selected element and
+all [`Box`](../box/README.mdx#api) utility props through `BoxProps<C>`, so
+`component='a'` or `component='button'` produce link or button steps.
 
-| Prop     | Type      | Description                             |
-| -------- | --------- | --------------------------------------- |
-| `active` | `boolean` | Marks the step as completed or current. |
+| Prop     | Type           | Description                                                     |
+| -------- | -------------- | --------------------------------------------------------------- |
+| `active` | `boolean`      | Marks the step as completed or current when `value` is not set. |
+| `value`  | `StepperValue` | Step identifier compared with the `Stepper` value.              |
+
+`active` adds `.active` and defaults `aria-current` to `step`. In a controlled
+stepper, only the current step receives `aria-current='step'`. When `onChange`
+is set, a step with a `value` becomes a `button` target: it gets
+`role='button'`, is focusable, and responds to click, Enter, and Space.
 
 ## Accessibility
 
-The ordered list conveys the sequence, so keep the source order meaningful. Mark
-completed steps with `active` too, but keep `aria-current='step'` on the current
-step only: pass `aria-current='false'` to the other active steps so assistive
-technology exposes a single current step.
+The ordered list conveys the sequence, so keep the source order meaningful. In a
+controlled stepper, `aria-current='step'` is set on the current step only, while
+completed steps stay active without a current marker. Without `value`, pass
+`aria-current='false'` to the other active steps so assistive technology exposes
+a single current step.
 
 Steps are static text unless they render as links or buttons, which keep their
 native keyboard behavior. Give a link stepper an accessible name, such as
