@@ -5,14 +5,25 @@ title: Textarea
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { TextareaBasicDemo } from './demos/basic';
-import { TextareaStatesDemo } from './demos/states';
+import { TextareaDisabledDemo } from './demos/disabled';
+import { TextareaFloatingDemo } from './demos/floating';
+import { TextareaFloatingHeightDemo } from './demos/floating-height';
+import { TextareaHelpTextDemo } from './demos/help-text';
+import { TextareaPlaintextDemo } from './demos/plaintext';
+import { TextareaReadonlyDemo } from './demos/readonly';
+import { TextareaSizesDemo } from './demos/sizes';
 
 # Textarea
 
 `Textarea` renders a native `<textarea>` with Bootstrap's `.form-control`
-styling. Use the native `rows` attribute to choose its visible line count.
+styling. Textareas share the control styles of inputs; change their height with
+the native `rows` attribute or with custom CSS.
 
 ## Example
+
+Use `FormField` and `FormLabel` to group a label with the textarea. The native
+`rows` attribute sets the visible line count; without it, the browser's default
+height applies.
 
 <DemoContainer>
   <TextareaBasicDemo />
@@ -22,41 +33,140 @@ styling. Use the native `rows` attribute to choose its visible line count.
 
 ```
 
-## Sizes and plaintext
+## Form text
 
-Use `size='sm'` or `size='lg'` for Bootstrap sizing. Set `plaintext` to display
-read-only text with `.form-control-plaintext`.
+Associate help text with the textarea through `aria-describedby`, and style it
+with `FormText`, so assistive technologies announce it when the textarea is
+focused.
 
 <DemoContainer>
-  <TextareaStatesDemo />
+  <TextareaHelpTextDemo />
 </DemoContainer>
 
-```tsx src='./demos/states.tsx'
+```tsx src='./demos/help-text.tsx'
 
 ```
+
+## Sizes
+
+Use `size='sm'` or `size='lg'` for Bootstrap sizing. The size adjusts height,
+padding, font size, line height, and border radius.
+
+<DemoContainer>
+  <TextareaSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## States
+
+### Disabled
+
+Add the native `disabled` attribute to gray out the control, remove pointer
+events, prevent focusing, and exclude the value from form submission.
+
+<DemoContainer>
+  <TextareaDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+### Readonly
+
+Add the native `readOnly` attribute to prevent modification while keeping the
+value focusable, selectable, and part of the form submission.
+
+<DemoContainer>
+  <TextareaReadonlyDemo />
+</DemoContainer>
+
+```tsx src='./demos/readonly.tsx'
+
+```
+
+### Readonly plain text
+
+Set `plaintext` to replace `.form-control` with `.form-control-plaintext`, which
+removes the field styling while keeping the control's margin and padding.
+`plaintext` only changes styling; combine it with `readOnly` to prevent editing.
+
+<DemoContainer>
+  <TextareaPlaintextDemo />
+</DemoContainer>
+
+```tsx src='./demos/plaintext.tsx'
+
+```
+
+## Floating labels
+
+Wrap the label and textarea in `FormFloating` to build a floating label. Put the
+label first and bind it to the textarea with `htmlFor`. A non-empty
+`placeholder` is required: the CSS-only implementation uses `:placeholder-shown`
+to detect an empty field. Textareas match the height of inputs by default.
+
+<DemoContainer>
+  <TextareaFloatingDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating.tsx'
+
+```
+
+Do not set a custom height with `rows` inside a floating label. Override the
+`--bs-form-floating-height` custom property on the `FormFloating` wrapper
+instead, so the label floats correctly at any height.
+
+<DemoContainer>
+  <TextareaFloatingHeightDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-height.tsx'
+
+```
+
+See [floating labels](../form/README.mdx#floating-labels) in the Form
+documentation for the other control types.
 
 ## API
 
 ### Textarea
 
-Renders a `textarea` by default and does not expose a polymorphic `component`
-prop. Its own props are listed below; it inherits the remaining native textarea
-props and all [`Box`](../box/README.mdx#api) utility props.
+Renders a `textarea` and does not expose a polymorphic `component` prop. Its own
+props are `size`, `plaintext`, and `validation`; it inherits the remaining native
+textarea attributes, including `rows`, `disabled`, `readOnly`, `placeholder`,
+`maxLength`, `required`, and all [`Box`](../box/README.mdx#api) utility props
+through `BoxProps<'textarea'>`.
 
-| Prop         | Type                   | Description                                                         |
-| ------------ | ---------------------- | ------------------------------------------------------------------- |
-| `size`       | `'sm' \| 'lg'`         | Applies the small or large Bootstrap textarea size.                 |
-| `plaintext`  | `boolean`              | Applies `.form-control-plaintext` styling.                          |
-| `validation` | `'valid' \| 'invalid'` | Applies the corresponding validation class.                         |
-| `...props`   | `BoxProps<'textarea'>` | Native textarea props, including `rows`, and all Box utility props. |
+| Prop         | Type                   | Description                                                   |
+| ------------ | ---------------------- | ------------------------------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | Applies `.form-control-sm` or `.form-control-lg`.             |
+| `plaintext`  | `boolean`              | Applies `.form-control-plaintext` instead of `.form-control`. |
+| `validation` | `'valid' \| 'invalid'` | Applies `.is-valid` or `.is-invalid`.                         |
+
+`validation` adds a CSS class; set `aria-invalid` and associate feedback when
+appropriate. See [`Form`](../form/README.mdx) for validation handling.
 
 ## Accessibility
 
 Give each textarea an accessible name with a visible `<label>` bound through
-`htmlFor`, or with `aria-label` when a visible label is not possible. The
-browser preserves native text editing, selection, and form submission behavior.
+`htmlFor`, or with `aria-label` when a visible label is not possible.
+Placeholders do not replace labels, and `rows` affects the initial height only:
+the browser lets users scroll long content inside the control.
+
+Disabled textareas are skipped by keyboard navigation and form submission, while
+readonly textareas stay focusable and are still submitted. Keep `readOnly` when
+using `plaintext`, because the prop only changes styling. With floating labels,
+keep the label first so screen readers announce it before the value, and provide
+the required non-empty placeholder.
 
 ## See
 
-- [Bootstrap 6 textarea documentation](https://getbootstrap.com/docs/6.0/forms/floating-labels/#textareas)
+- [Bootstrap 6 form control documentation: Textarea](https://getbootstrap.com/docs/6.0/forms/form-control/#textarea)
+- [Bootstrap 6 floating labels documentation: Textareas](https://getbootstrap.com/docs/6.0/forms/floating-labels/#textareas)
+- [Form component](../form/README.mdx)
 - [Textarea source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/textarea.tsx)

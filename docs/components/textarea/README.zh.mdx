@@ -5,14 +5,23 @@ title: Textarea 文本域
 import 'bootstrap/dist/css/bootstrap.css';
 import { DemoContainer } from '../demo-container';
 import { TextareaBasicDemo } from './demos/basic';
-import { TextareaStatesDemo } from './demos/states';
+import { TextareaDisabledDemo } from './demos/disabled';
+import { TextareaFloatingDemo } from './demos/floating';
+import { TextareaFloatingHeightDemo } from './demos/floating-height';
+import { TextareaHelpTextDemo } from './demos/help-text';
+import { TextareaPlaintextDemo } from './demos/plaintext';
+import { TextareaReadonlyDemo } from './demos/readonly';
+import { TextareaSizesDemo } from './demos/sizes';
 
 # Textarea 文本域
 
-`Textarea` 使用 Bootstrap 的 `.form-control` 样式渲染原生 `<textarea>`。使用原生
-`rows` 属性设置可见行数。
+`Textarea` 使用 Bootstrap 的 `.form-control` 样式渲染原生 `<textarea>`。文本域与输入框
+共用控件样式；可通过原生 `rows` 属性或自定义 CSS 调整高度。
 
 ## 示例
+
+使用 `FormField` 与 `FormLabel` 将标签与文本域组合在一起。原生 `rows` 属性设置可见行数；
+未设置时使用浏览器默认高度。
 
 <DemoContainer>
   <TextareaBasicDemo />
@@ -22,39 +31,129 @@ import { TextareaStatesDemo } from './demos/states';
 
 ```
 
-## 尺寸与纯文本
+## 表单说明文字
 
-使用 `size='sm'` 或 `size='lg'` 设置 Bootstrap 尺寸。设置 `plaintext` 可应用
-`.form-control-plaintext` 样式，以只读文本形式展示内容。
+通过 `aria-describedby` 将说明文字与文本域关联，并使用 `FormText` 设置样式，辅助技术在
+文本域获得焦点时会朗读该说明。
 
 <DemoContainer>
-  <TextareaStatesDemo />
+  <TextareaHelpTextDemo />
 </DemoContainer>
 
-```tsx src='./demos/states.tsx'
+```tsx src='./demos/help-text.tsx'
 
 ```
+
+## 尺寸
+
+使用 `size='sm'` 或 `size='lg'` 设置 Bootstrap 尺寸。尺寸会同时调整高度、内边距、字号、
+行高与圆角。
+
+<DemoContainer>
+  <TextareaSizesDemo />
+</DemoContainer>
+
+```tsx src='./demos/sizes.tsx'
+
+```
+
+## 状态
+
+### 禁用
+
+添加原生 `disabled` 属性可让控件变浅、移除指针交互、无法聚焦，并且不会随表单提交。
+
+<DemoContainer>
+  <TextareaDisabledDemo />
+</DemoContainer>
+
+```tsx src='./demos/disabled.tsx'
+
+```
+
+### 只读
+
+添加原生 `readOnly` 属性可禁止修改，同时保留聚焦、选中以及随表单提交的能力。
+
+<DemoContainer>
+  <TextareaReadonlyDemo />
+</DemoContainer>
+
+```tsx src='./demos/readonly.tsx'
+
+```
+
+### 只读纯文本
+
+设置 `plaintext` 会用 `.form-control-plaintext` 替代 `.form-control`，移除控件样式，同时
+保留外边距与内边距。`plaintext` 只改变样式；请与 `readOnly` 一起使用以避免编辑。
+
+<DemoContainer>
+  <TextareaPlaintextDemo />
+</DemoContainer>
+
+```tsx src='./demos/plaintext.tsx'
+
+```
+
+## 浮动标签
+
+将标签与文本域包裹在 `FormFloating` 中即可生成浮动标签。标签需放在前面，并通过
+`htmlFor` 与文本域关联。必须提供非空的 `placeholder`：该实现完全依赖 CSS 的
+`:placeholder-shown` 判断是否为空。文本域默认与输入框等高。
+
+<DemoContainer>
+  <TextareaFloatingDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating.tsx'
+
+```
+
+浮动标签中不要用 `rows` 设置自定义高度，而应在 `FormFloating` 包裹层上覆盖
+`--bs-form-floating-height` 自定义属性，使标签在任意高度下都能正确浮动。
+
+<DemoContainer>
+  <TextareaFloatingHeightDemo />
+</DemoContainer>
+
+```tsx src='./demos/floating-height.tsx'
+
+```
+
+其他控件类型的浮动标签用法见 [Form 表单的浮动标签](../form/#浮动标签)。
 
 ## API
 
 ### Textarea
 
-默认渲染为 `textarea`，不提供多态 `component` 属性。下表列出自有属性；此外还继承
-其余原生 textarea 属性及 [`Box`](../box/README.zh.mdx#api) 的全部工具类属性。
+渲染为 `textarea`，不提供多态 `component` 属性。自有属性为 `size`、`plaintext` 与
+`validation`；其余原生 textarea 属性均会透传，包括 `rows`、`disabled`、`readOnly`、
+`placeholder`、`maxLength`、`required`，以及通过 `BoxProps<'textarea'>` 继承的全部
+[`Box`](../box/#api) 工具类属性。
 
-| 属性         | 类型                   | 说明                                                     |
-| ------------ | ---------------------- | -------------------------------------------------------- |
-| `size`       | `'sm' \| 'lg'`         | 应用小型或大型 Bootstrap 文本域尺寸。                    |
-| `plaintext`  | `boolean`              | 应用 `.form-control-plaintext` 样式。                    |
-| `validation` | `'valid' \| 'invalid'` | 应用对应的校验状态类。                                   |
-| `...props`   | `BoxProps<'textarea'>` | 原生 textarea 属性（包括 `rows`）及全部 Box 工具类属性。 |
+| 组件属性     | 类型                   | 说明                                                |
+| ------------ | ---------------------- | --------------------------------------------------- |
+| `size`       | `'sm' \| 'lg'`         | 应用 `.form-control-sm` 或 `.form-control-lg`。     |
+| `plaintext`  | `boolean`              | 用 `.form-control-plaintext` 替代 `.form-control`。 |
+| `validation` | `'valid' \| 'invalid'` | 应用 `.is-valid` 或 `.is-invalid`。                 |
+
+`validation` 只添加 CSS 类；请按需设置 `aria-invalid` 并关联反馈信息。表单校验处理见
+[`Form`](../form/)。
 
 ## 无障碍
 
 使用通过 `htmlFor` 绑定的可见 `<label>` 为文本域提供可访问名称；无法显示可见标签时，
-可使用 `aria-label`。浏览器保留原生文本编辑、选中与表单提交行为。
+可使用 `aria-label`。占位符不能替代标签；`rows` 只影响初始高度，内容超出时由浏览器在
+控件内滚动。
+
+禁用的文本域会被键盘导航和表单提交跳过，只读的文本域仍可聚焦并参与提交。若要使用
+`plaintext`，请同时保留 `readOnly`，因为该属性只改变样式。使用浮动标签时，标签需放在
+最前面，以便屏幕阅读器先朗读标签再朗读值，并提供非空的 `placeholder`。
 
 ## 参考
 
-- [Bootstrap 6 文本域文档](https://getbootstrap.com/docs/6.0/forms/floating-labels/#textareas)
+- [Bootstrap 6 表单控件文档：Textarea](https://getbootstrap.com/docs/6.0/forms/form-control/#textarea)
+- [Bootstrap 6 浮动标签文档：Textareas](https://getbootstrap.com/docs/6.0/forms/floating-labels/#textareas)
+- [Form 表单组件](../form/)
 - [Textarea 源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/textarea.tsx)
