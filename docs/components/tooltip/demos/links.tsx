@@ -1,8 +1,8 @@
-import { Tooltip } from 'react-bootstrap-pro';
+import { Box, Tooltip } from 'react-bootstrap-pro';
 
 export function TooltipLinksDemo() {
   return (
-    <p className='fg-3'>
+    <Box component='p' fg='3'>
       Placeholder text to demonstrate some{' '}
       <Tooltip trigger={<a href='#inline-links'>inline links</a>}>Default tooltip</Tooltip> with
       tooltips. This is filler text to show how{' '}
@@ -12,6 +12,6 @@ export function TooltipLinksDemo() {
         Another one here too
       </Tooltip>{' '}
       and <Tooltip trigger={<a href='#your-own'>your own</a>}>The last tip!</Tooltip> links.
-    </p>
+    </Box>
   );
 }

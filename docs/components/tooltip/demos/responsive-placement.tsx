@@ -1,4 +1,4 @@
-import { Box, Tooltip } from 'react-bootstrap-pro';
+import { Box, Button, Tooltip } from 'react-bootstrap-pro';
 
 export function TooltipResponsivePlacementDemo() {
   return (
@@ -6,9 +6,9 @@ export function TooltipResponsivePlacementDemo() {
       <Tooltip
         placement={{ xs: 'top', md: 'right', lg: 'bottom' }}
         trigger={
-          <button type='button' className='btn-solid theme-secondary'>
+          <Button theme='secondary' variant='solid'>
             Top → md: right → lg: bottom
-          </button>
+          </Button>
         }
       >
         Responsive tooltip
@@ -16,9 +16,9 @@ export function TooltipResponsivePlacementDemo() {
       <Tooltip
         placement={{ xs: 'left', lg: 'top' }}
         trigger={
-          <button type='button' className='btn-solid theme-secondary'>
+          <Button theme='secondary' variant='solid'>
             Left → lg: top
-          </button>
+          </Button>
         }
       >
         Responsive tooltip

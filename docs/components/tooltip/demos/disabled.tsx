@@ -1,14 +1,14 @@
 /* oxlint-disable jsx-a11y/no-noninteractive-tabindex -- The disabled-control wrapper must be keyboard focusable. */
-import { Tooltip } from 'react-bootstrap-pro';
+import { Button, Tooltip } from 'react-bootstrap-pro';
 
 export function TooltipDisabledDemo() {
   return (
     <Tooltip
       trigger={
         <span className='d-inline-block' tabIndex={0}>
-          <button type='button' className='btn-solid theme-primary' disabled>
+          <Button theme='primary' variant='solid' disabled style={{ pointerEvents: 'none' }}>
             Disabled button
-          </button>
+          </Button>
         </span>
       }
     >

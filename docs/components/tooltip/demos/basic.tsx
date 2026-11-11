@@ -1,15 +1,15 @@
-import { Tooltip } from 'react-bootstrap-pro';
+import { Button, Tooltip } from 'react-bootstrap-pro';
 
 export function TooltipBasicDemo() {
   return (
     <Tooltip
       trigger={
-        <button type='button' className='btn-solid theme-primary'>
-          Hover or focus me
-        </button>
+        <Button theme='primary' variant='solid'>
+          Example tooltip
+        </Button>
       }
     >
-      Helpful context
+      Tooltip on top
     </Tooltip>
   );
 }

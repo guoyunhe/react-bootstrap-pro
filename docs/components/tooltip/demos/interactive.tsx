@@ -1,12 +1,12 @@
-import { Tooltip } from 'react-bootstrap-pro';
+import { Button, Tooltip } from 'react-bootstrap-pro';
 
 export function TooltipInteractiveDemo() {
   return (
     <Tooltip
       trigger={
-        <button type='button' className='btn-solid theme-primary'>
+        <Button theme='primary' variant='solid'>
           Hover, then move onto the tip
-        </button>
+        </Button>
       }
     >
       Read the <a href='https://getbootstrap.com/'>full docs</a> for more.

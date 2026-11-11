@@ -18,11 +18,11 @@ import { TooltipDisabledDemo } from './demos/disabled';
 
 `Tooltip` 使用 `@floating-ui/react` 处理定位和交互。它不会初始化 Bootstrap
 JavaScript 插件，也不会读取 `data-bs-toggle` 属性。通过 `trigger` 传入单个触发元素，
-子节点作为提示内容渲染。
+其子节点作为提示内容；不传 `trigger` 时，组件渲染静态的提示表面。
 
 ## 概览
 
-悬停或聚焦按钮，即可在触发元素上方查看提示。
+悬停或聚焦按钮即可查看提示，默认显示在触发元素上方。
 
 <DemoContainer>
   <TooltipBasicDemo />
@@ -34,11 +34,13 @@ JavaScript 插件，也不会读取 `data-bs-toggle` 属性。通过 `trigger` �
 
 使用此组件时请注意：
 
-- Tooltip 使用 Floating UI 定位，并通过 portal 渲染到 `document.body`。
-- 空内容不会显示。
-- 隐藏的触发元素无法可靠定位。
-- 禁用控件无法接收焦点或鼠标事件；请使用可聚焦的包装元素作为触发元素。
-- 重要信息应同时在 Tooltip 之外提供。
+- 提示由 Floating UI 定位，并通过 portal 渲染到 `document.body`，因此不会被滚动容器裁剪。
+- 内容为空时不会显示；提示打开后若内容变为空，会自动关闭。
+- 隐藏的触发元素无法测量位置，因此请保持触发元素处于渲染状态。
+- 禁用控件无法获得焦点或接收鼠标事件，请使用可聚焦的包装元素作为触发元素。
+- 当链接折行时，提示会以整个元素盒居中；可添加 `white-space: nowrap` 让提示对齐可见文字。
+- 按下 Escape 可关闭提示。
+- 重要信息应同时存在于 Tooltip 之外。
 
 ## 示例
 
@@ -56,7 +58,7 @@ JavaScript 插件，也不会读取 `data-bs-toggle` 属性。通过 `trigger` �
 
 ### 自定义 Tooltip
 
-使用 `className` 指定作用域，并覆盖 Bootstrap Tooltip CSS 变量：
+使用 `className` 为 Bootstrap Tooltip 变量指定作用域，实现自定义外观：
 
 <DemoContainer>
   <TooltipCustomDemo />
@@ -73,7 +75,7 @@ JavaScript 插件，也不会读取 `data-bs-toggle` 属性。通过 `trigger` �
 ### 放置位置
 
 将 `placement` 设为 `left`、`top`、`bottom` 或 `right`。空间不足时，Floating UI
-会自动翻转或移动提示位置。
+会自动翻转或移动最终位置。
 
 <DemoContainer>
   <TooltipPlacementDemo />
@@ -85,8 +87,8 @@ JavaScript 插件，也不会读取 `data-bs-toggle` 属性。通过 `trigger` �
 
 ### 响应式放置位置
 
-传入响应式 placement 对象。支持的断点与 Bootstrap 6 一致：`xs`、`sm`、`md`、`lg`、
-`xl` 和 `2xl`。
+传入按断点组织的 placement 对象，即可随视口宽度改变方向。支持的断点与 Bootstrap 6
+一致：`xs`、`sm`、`md`、`lg`、`xl` 和 `2xl`。
 
 <DemoContainer>
   <TooltipResponsivePlacementDemo />
@@ -111,7 +113,7 @@ Tooltip 内容支持 React 节点。与 Bootstrap 的 `data-bs-html` 不同，HT
 
 ```
 
-触发元素也可以包含 SVG：
+SVG 元素同样可以作为触发元素：
 
 <DemoContainer>
   <TooltipSvgTriggerDemo />
@@ -123,8 +125,8 @@ Tooltip 内容支持 React 节点。与 Bootstrap 的 `data-bs-html` 不同，HT
 
 ### 可交互 Tooltip
 
-鼠标从触发元素移至提示内容时，提示会保持显示。鼠标离开两者、焦点离开或按下
-Escape 后，提示会关闭。
+鼠标从触发元素移至提示内容时，提示会保持显示。鼠标离开两者、焦点离开或按下 Escape 后，
+提示会关闭。
 
 <DemoContainer>
   <TooltipInteractiveDemo />
@@ -136,7 +138,7 @@ Escape 后，提示会关闭。
 
 ### 禁用元素
 
-使用可聚焦元素包装禁用控件，并将包装元素作为触发元素：
+禁用控件无法获得焦点，因此请用可聚焦元素包装它，并将包装元素作为触发元素：
 
 <DemoContainer>
   <TooltipDisabledDemo />
@@ -148,54 +150,67 @@ Escape 后，提示会关闭。
 
 ## CSS 变量
 
-可在自定义类上覆盖 Bootstrap Tooltip 变量：
+提示表面在 `.tooltip` 与 `.tooltip-inner` 上暴露 Bootstrap 的 CSS 变量。可通过
+`className` 传入的类（如自定义 Tooltip 示例）覆盖，或将其限定在某个包裹元素上。
 
-```css
-.custom-tooltip {
-  --bs-tooltip-bg: #563d7c;
-  --bs-tooltip-color: #fff;
-}
-```
+| 变量                               | 默认值                          | 说明                     |
+| ---------------------------------- | ------------------------------- | ------------------------ |
+| `--bs-tooltip-zindex`              | `var(--bs-z-tooltip)`           | 提示的层叠顺序。         |
+| `--bs-tooltip-max-width`           | `200px`                         | 提示表面的最大宽度。     |
+| `--bs-tooltip-padding-x`           | `var(--bs-spacer-3)`            | 内部内容的水平内边距。   |
+| `--bs-tooltip-padding-y`           | `calc(var(--bs-spacer) * .375)` | 内部内容的垂直内边距。   |
+| `--bs-tooltip-font-size`           | `var(--bs-font-size-sm)`        | 内部内容的字号。         |
+| `--bs-tooltip-color`               | `var(--bs-bg-body)`             | 内部内容的文字颜色。     |
+| `--bs-tooltip-bg`                  | `var(--bs-fg-body)`             | 提示表面的背景颜色。     |
+| `--bs-tooltip-border-radius`       | `var(--bs-radius-5)`            | 提示表面的圆角。         |
+| `--bs-tooltip-opacity`             | `0.95`                          | 显示时的不透明度。       |
+| `--bs-tooltip-arrow-width`         | `0.8rem`                        | 箭头宽度。               |
+| `--bs-tooltip-arrow-height`        | `0.4rem`                        | 箭头高度。               |
+| `--bs-tooltip-transition-property` | `opacity`                       | 淡入淡出动画的属性。     |
+| `--bs-tooltip-transition-duration` | `0.15s`                         | 淡入淡出动画的时长。     |
+| `--bs-tooltip-transition-timing`   | `linear`                        | 淡入淡出动画的缓动函数。 |
 
 ## API
 
 ### Tooltip
 
-默认渲染为 `div`。自有属性为
-`delay?: number | { close?: number; open?: number }`、`instant?: boolean`、
-`onShowChange?: (show: boolean) => void`、`placement?: Responsive<TooltipPlacement>`、
-`show?: boolean`、`trigger?: ReactElement` 和 `triggers?: TooltipTrigger[]`；继承所选
-元素的原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+渲染带 `.tooltip` 的 `div`，其中包含 `.tooltip-arrow` 与 `TooltipInner`。传入
+`trigger` 时，还会渲染触发元素，并通过 portal 渲染提示；未传入时，提示表面为静态元素，
+由 `show` 控制其显示。
 
-| 属性           | 类型                                                                | 说明                                             |
+| 组件属性       | 类型                                                                | 说明                                             |
 | -------------- | ------------------------------------------------------------------- | ------------------------------------------------ |
-| `trigger`      | `ReactElement`                                                      | 触发元素；传入后启用交互模式。                   |
-| `placement`    | `TooltipPlacement \| Partial<Record<Breakpoint, TooltipPlacement>>` | 首选放置位置或响应式放置位置，默认为 `top`。     |
+| `trigger`      | `ReactElement`                                                      | 触发元素；传入后启用交互式提示。                 |
+| `placement`    | `TooltipPlacement \| Partial<Record<Breakpoint, TooltipPlacement>>` | 首选方向或按断点设置的方向，默认为 `top`。       |
 | `triggers`     | `('hover' \| 'focus' \| 'click')[]`                                 | 触发方式，默认为 `['hover', 'focus']`。          |
-| `delay`        | `number \| { open?: number; close?: number }`                       | 鼠标悬停显示/隐藏的毫秒延迟。                    |
-| `show`         | `boolean`                                                           | 交互模式下控制显示；静态模式下用于添加显示样式。 |
+| `delay`        | `number \| { open?: number; close?: number }`                       | 显示或隐藏前的毫秒延迟。                         |
+| `show`         | `boolean`                                                           | 交互模式下控制显示；静态模式下用于显示提示表面。 |
 | `onShowChange` | `(show: boolean) => void`                                           | 交互请求改变显示状态时调用。                     |
-| `instant`      | `boolean`                                                           | 禁用淡入淡出动画。                               |
-| `component`    | `ElementType`                                                       | 更换提示表面的元素。                             |
-| `...props`     | `BoxProps<C>`                                                       | 提示表面的原生属性及所有 Box 工具类属性。        |
+| `instant`      | `boolean`                                                           | 添加 `.tooltip-instant`，禁用淡入淡出动画。      |
 
-`TooltipInner` 设置内部文本样式。可使用 `className`、Box 工具类属性或 Bootstrap Tooltip
-CSS 变量自定义外观。
+`TooltipPlacement` 可取 `'top'`、`'right'`、`'bottom'`、`'left'`、`'start'` 或
+`'end'`；`start` 与 `end` 随书写方向变化。传入 placement 对象时，会按当前视口宽度解析，
+依次回退到更小的断点，最终回退到 `top`。组件继承所选元素的原生属性，以及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/#api) 工具类属性。
 
 ### TooltipInner
 
-默认渲染为 `div`，没有自有属性。继承原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+渲染带 `.tooltip-inner` 的 `div` 用于文本内容。它没有自有属性，继承原生属性及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/#api) 工具类属性。
 
 ## 无障碍访问
 
-提示通过 `aria-describedby` 与触发元素关联。建议使用可键盘聚焦的交互元素作为触发元素，
-并提供清晰的无障碍名称。重要说明不应只存在于 Tooltip 中。若提示中包含链接或其他控件，
-请同时检查键盘和触屏操作。
+Tooltip 属于补充信息。请将触发元素的可访问名称与关键信息保留在页面本身，因为提示内容只在
+提示打开时才会被朗读。优先使用可聚焦、带清晰标签的交互元素作为触发元素。
 
-## 参阅
+默认的 `['hover', 'focus']` 触发方式同时照顾鼠标与键盘用户，且按下 Escape 可关闭提示。
+触屏设备无法悬停，必要时可通过 `triggers` 加入 `'click'`，或将信息直接显示在页面文本中。
+除非提示为可交互形式、能在指针移入后保持显示，否则不要在提示中放置链接或按钮。对于禁用
+控件，请从可聚焦的包装元素触发提示，以便键盘用户可以访问。
+
+## 参考
 
 - [Bootstrap 6 Tooltip 文档](https://getbootstrap.com/docs/6.0/components/tooltip/)
+- [Popover 弹出框组件](../popover/)
 - [Floating UI React 文档](https://floating-ui.com/docs/react)
 - [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/tooltip.tsx)

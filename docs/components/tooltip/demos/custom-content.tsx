@@ -1,12 +1,12 @@
-import { Tooltip } from 'react-bootstrap-pro';
+import { Button, Tooltip } from 'react-bootstrap-pro';
 
 export function TooltipCustomContentDemo() {
   return (
     <Tooltip
       trigger={
-        <button type='button' className='btn-solid theme-secondary'>
+        <Button theme='secondary' variant='solid'>
           Tooltip with React content
-        </button>
+        </Button>
       }
     >
       <em>Tooltip</em> <u>with</u> <b>React elements</b>
