@@ -3,51 +3,208 @@ title: Stepper 步骤条
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Stepper, StepperItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { StepperAlignmentDemo } from './demos/alignment';
+import { StepperAlignmentCenterDemo } from './demos/alignment-center';
+import { StepperAlignmentEndDemo } from './demos/alignment-end';
+import { StepperBasicDemo } from './demos/basic';
+import { StepperComplexDemo } from './demos/complex';
+import { StepperComplexBadgesDemo } from './demos/complex-badges';
+import { StepperFullWidthDemo } from './demos/full-width';
+import { StepperGapDemo } from './demos/gap';
+import { StepperOverflowDemo } from './demos/overflow';
+import { StepperResponsiveDemo } from './demos/responsive';
+import { StepperVariantsDemo } from './demos/variants';
+import { StepperWithAnchorsDemo } from './demos/with-anchors';
 
 # Stepper 步骤条
 
-`Stepper` 使用有序列表渲染步骤。已完成和当前步骤设置 `active`；空间足够时可使用
-响应式 `horizontal` 属性。
+`Stepper` 使用 CSS Grid 渲染有序的步骤列表。步骤序号来自 CSS 计数器，并通过连接线
+相连，因此序号始终与实际渲染的条目一致。为已完成和当前步骤设置 `active`；横向空间
+足够时，可使用响应式的 `horizontal` 选项。
+
+## 示例
 
 <DemoContainer>
-  <Stepper>
-    <StepperItem active>创建账户</StepperItem>
-    <StepperItem active aria-current='step'>
-      确认邮箱
-    </StepperItem>
-    <StepperItem>完成</StepperItem>
-  </Stepper>
+  <StepperBasicDemo />
 </DemoContainer>
 
 ```tsx src='./demos/basic.tsx'
-<Stepper horizontal='md'>
-  <StepperItem active>第一步</StepperItem>
-  <StepperItem>第二步</StepperItem>
-</Stepper>
+
+```
+
+## 响应式
+
+将 `horizontal` 设为断点（如 `'sm'`），即可仅在查询容器足够宽时切换为横向布局。这些
+断点基于容器查询，因此需要把步骤条放入容器查询容器中，例如设置
+`containerQuery='inline'` 的 `Box`。
+
+<DemoContainer>
+  <StepperResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
+```
+
+## 间距
+
+在 `Stepper` 上覆盖 `--bs-stepper-gap`，即可调整步骤之间的间距以及连接线的长度。
+
+<DemoContainer>
+  <StepperGapDemo />
+</DemoContainer>
+
+```tsx src='./demos/gap.tsx'
+
+```
+
+## 主题变体
+
+为激活的步骤设置 `theme`，通过 `.theme-{color}` 改变序号和连接线的颜色。
+
+<DemoContainer>
+  <StepperVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## 溢出滚动
+
+添加 `overflow`，让较长的横向步骤条沿行内轴滚动，而不是压缩各个步骤。
+
+<DemoContainer>
+  <StepperOverflowDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow.tsx'
+
+```
+
+## 复杂内容
+
+除了标签，还可以添加更多内容为每个步骤提供上下文，例如说明文字。在条目上设置
+`alignItems='start'`，让序号与内容首行对齐。
+
+<DemoContainer>
+  <StepperComplexDemo />
+</DemoContainer>
+
+```tsx src='./demos/complex.tsx'
+
+```
+
+也可以将步骤与徽章、主题工具类等组件组合，用来展示每个步骤的状态。
+
+<DemoContainer>
+  <StepperComplexBadgesDemo />
+</DemoContainer>
+
+```tsx src='./demos/complex-badges.tsx'
+
+```
+
+## 对齐
+
+横向步骤条渲染为 inline grid，因此在父元素上设置文本对齐即可调整整条步骤条的位置，同时
+各步骤保持等宽。默认步骤条从行内起始位置开始。
+
+<DemoContainer>
+  <StepperAlignmentDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment.tsx'
+
+```
+
+将步骤条包裹在文本居中的元素中（例如设置 `textAlign='center'` 的 `Box`），即可让整条
+步骤条居中。
+
+<DemoContainer>
+  <StepperAlignmentCenterDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment-center.tsx'
+
+```
+
+在父元素上使用 `textAlign='end'`，让步骤条对齐到行内结束位置。
+
+<DemoContainer>
+  <StepperAlignmentEndDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment-end.tsx'
+
+```
+
+添加 `w={100}`，让步骤条占满父元素的整个宽度。此时各步骤平分可用空间，对齐设置也不再
+影响步骤条。
+
+<DemoContainer>
+  <StepperFullWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/full-width.tsx'
+
+```
+
+## 使用锚点
+
+当步骤条用于跨页面导航时，可将步骤渲染为链接：把容器改为 `div`，再将每个
+`StepperItem` 渲染为 `a`。若链接在同一文档内跳转，请添加 `role='button'`，或直接
+渲染 `button` 元素。
+
+<DemoContainer>
+  <StepperWithAnchorsDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-anchors.tsx'
+
 ```
 
 ## API
 
 ### Stepper
 
-默认渲染为 `ol`。自有属性为
-`horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'` 和 `overflow?: boolean`；
-继承所选元素的原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `ol`，可使用 `component` 更换元素。自有属性为 `horizontal` 和
+`overflow`；继承所选元素的原生属性，以及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/README.zh.mdx#api) 工具类属性。
 
-| 属性         | 类型                                               | 说明                            |
-| ------------ | -------------------------------------------------- | ------------------------------- |
-| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 切换为横向布局。                |
-| `overflow`   | `boolean`                                          | 为较长步骤序列启用横向滚动。    |
-| `component`  | `ElementType`                                      | 更换有序列表元素。              |
-| `...props`   | `BoxProps<C>`                                      | 原生属性及所有 Box 工具类属性。 |
+| 组件属性     | 类型                                               | 说明                                           |
+| ------------ | -------------------------------------------------- | ---------------------------------------------- |
+| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | 使用横向布局；设置断点时改为基于容器查询生效。 |
+| `overflow`   | `boolean`                                          | 为较长的横向步骤序列启用行内滚动。             |
 
-`StepperItem` 渲染带序号的步骤，并支持 `active` 属性。
+`horizontal` 添加 `.stepper-horizontal`。设置断点时则改为添加对应的
+`{breakpoint}:stepper-horizontal` 类，在该容器断点及以上生效。`overflow` 会在列表外
+包裹一层 `.stepper-overflow` 容器，使其沿行内轴滚动，并作为行内尺寸查询容器，让断点值
+能够响应可用宽度。
 
 ### StepperItem
 
-默认渲染为 `li`。自有属性为 `active?: boolean`；激活时默认设置
-`aria-current="step"`。继承原生属性及通过 `BoxProps<C>` 继承的全部
-[`Box`](../box/README.zh.mdx#api) 属性。
+默认渲染为 `li`，可使用 `component` 更换元素。自有属性为 `active?: boolean`，会添加
+`.active` 并将 `aria-current` 默认设为 `step`。继承所选元素的原生属性，以及通过
+`BoxProps<C>` 继承的全部 [`Box`](../box/README.zh.mdx#api) 工具类属性，因此可用
+`component='a'` 或 `component='button'` 生成可交互的步骤。
+
+| 组件属性 | 类型      | 说明                           |
+| -------- | --------- | ------------------------------ |
+| `active` | `boolean` | 将步骤标记为已完成或当前步骤。 |
+
+## 无障碍访问
+
+有序列表本身已表达步骤顺序，因此请保持有意义的源码顺序。已完成的步骤同样需要设置
+`active`，但只应在当前步骤上保留 `aria-current='step'`：为其他激活步骤传入
+`aria-current='false'`，让辅助技术只识别出一个当前步骤。
+
+步骤默认是静态文本；若渲染为链接或按钮，则保持其原生键盘行为。当链接步骤条的用途不够
+明确时，请通过 `aria-label` 等属性提供可访问名称，并让步骤标签简短且彼此不同。
+
+## 参考
+
+- [Bootstrap 6 Stepper 官方文档](https://getbootstrap.com/docs/6.0/components/stepper/)
+- [Box 组件](../box/README.zh.mdx)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/stepper.tsx)

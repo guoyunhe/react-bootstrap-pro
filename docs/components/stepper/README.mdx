@@ -3,14 +3,26 @@ title: Stepper
 ---
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { Stepper, StepperItem } from 'react-bootstrap-pro';
 import { DemoContainer } from '../demo-container';
+import { StepperAlignmentDemo } from './demos/alignment';
+import { StepperAlignmentCenterDemo } from './demos/alignment-center';
+import { StepperAlignmentEndDemo } from './demos/alignment-end';
 import { StepperBasicDemo } from './demos/basic';
+import { StepperComplexDemo } from './demos/complex';
+import { StepperComplexBadgesDemo } from './demos/complex-badges';
+import { StepperFullWidthDemo } from './demos/full-width';
+import { StepperGapDemo } from './demos/gap';
+import { StepperOverflowDemo } from './demos/overflow';
+import { StepperResponsiveDemo } from './demos/responsive';
+import { StepperVariantsDemo } from './demos/variants';
+import { StepperWithAnchorsDemo } from './demos/with-anchors';
 
 # Stepper
 
-`Stepper` renders an ordered list of steps. Set `active` on completed and
-current steps, and use the responsive `horizontal` option when space allows.
+`Stepper` renders an ordered list of steps with CSS Grid. Steps are numbered by a
+CSS counter and joined by tracks, so the counter always matches the rendered
+items. Set `active` on completed and current steps, and add the responsive
+`horizontal` option when there is enough inline space.
 
 ## Example
 
@@ -22,38 +34,193 @@ current steps, and use the responsive `horizontal` option when space allows.
 
 ```
 
-## Responsive layout
+## Responsive
+
+Set `horizontal` to a breakpoint such as `'sm'` to switch to the horizontal
+layout only when the query container is wide enough. These breakpoints use
+container queries, so wrap the stepper in a container query container, for
+example a `Box` with `containerQuery='inline'`.
+
+<DemoContainer>
+  <StepperResponsiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/responsive.tsx'
+
+```
+
+## Gap
+
+Override `--bs-stepper-gap` on `Stepper` to change the space between steps and
+the length of the connecting tracks.
+
+<DemoContainer>
+  <StepperGapDemo />
+</DemoContainer>
+
+```tsx src='./demos/gap.tsx'
+
+```
+
+## Variants
+
+Set `theme` on active steps to color their counter and track through
+`.theme-{color}`.
+
+<DemoContainer>
+  <StepperVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## Overflow
+
+Add `overflow` to let a long horizontal stepper scroll along the inline axis
+instead of squeezing its steps.
+
+<DemoContainer>
+  <StepperOverflowDemo />
+</DemoContainer>
+
+```tsx src='./demos/overflow.tsx'
+
+```
+
+## Complex
+
+Add more content than a label to give each step context, such as a description.
+Set `alignItems='start'` on the item so its counter stays aligned with the first
+line of the content.
+
+<DemoContainer>
+  <StepperComplexDemo />
+</DemoContainer>
+
+```tsx src='./demos/complex.tsx'
+
+```
+
+Combine steps with other components, such as badges and theme helpers, to show
+the status of every step.
+
+<DemoContainer>
+  <StepperComplexBadgesDemo />
+</DemoContainer>
+
+```tsx src='./demos/complex-badges.tsx'
+
+```
+
+## Alignment
+
+A horizontal stepper renders as an inline grid, so text alignment on its parent
+positions the whole stepper while its steps keep equal width. This default
+stepper starts at the inline start.
+
+<DemoContainer>
+  <StepperAlignmentDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment.tsx'
+
+```
+
+Wrap the stepper in an element with centered text, such as `Box` with
+`textAlign='center'`, to center it.
+
+<DemoContainer>
+  <StepperAlignmentCenterDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment-center.tsx'
+
+```
+
+Use `textAlign='end'` on the parent to align the stepper to the inline end.
+
+<DemoContainer>
+  <StepperAlignmentEndDemo />
+</DemoContainer>
+
+```tsx src='./demos/alignment-end.tsx'
+
+```
+
+Add `w={100}` to stretch the stepper across the full width of its parent. The
+steps then share the available space, and alignment no longer affects the
+stepper.
+
+<DemoContainer>
+  <StepperFullWidthDemo />
+</DemoContainer>
+
+```tsx src='./demos/full-width.tsx'
+
+```
+
+## With anchors
+
+Render the steps as links when the stepper navigates across pages. Change the
+container to a `div`, then render each `StepperItem` as an `a`. Use
+`role='button'` when the links navigate within the same document, or render
+`button` elements instead.
+
+<DemoContainer>
+  <StepperWithAnchorsDemo />
+</DemoContainer>
+
+```tsx src='./demos/with-anchors.tsx'
+
+```
 
 ## API
 
 ### Stepper
 
-Renders an `ol` by default. Its own props are
-`horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl' | '2xl'` and
-`overflow?: boolean`; it inherits native props for the selected element and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders an `ol` by default; use `component` to change the element. Its own
+props are `horizontal` and `overflow`. It inherits native props for the selected
+element and all [`Box`](../box/README.mdx#api) utility props through
+`BoxProps<C>`.
 
-| Prop         | Type                                               | Description                                           |
-| ------------ | -------------------------------------------------- | ----------------------------------------------------- |
-| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Switches to horizontal layout.                        |
-| `overflow`   | `boolean`                                          | Enables horizontal scrolling for long step sequences. |
-| `component`  | `ElementType`                                      | Changes the ordered-list element.                     |
-| `...props`   | `BoxProps<C>`                                      | Native props and all Box utility props.               |
+| Prop         | Type                                               | Description                                                                 |
+| ------------ | -------------------------------------------------- | --------------------------------------------------------------------------- |
+| `horizontal` | `boolean \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | Uses the horizontal layout; a breakpoint restricts it to container queries. |
+| `overflow`   | `boolean`                                          | Enables inline scrolling for long horizontal step sequences.                |
 
-`StepperItem` renders a numbered step and supports `active`.
+`horizontal` adds `.stepper-horizontal`. A breakpoint value adds the matching
+`{breakpoint}:stepper-horizontal` class instead, which applies from that
+container breakpoint up. `overflow` wraps the list in a `.stepper-overflow`
+container that scrolls along the inline axis and acts as an inline-size query
+container, so a breakpoint value can respond to the available width.
 
 ### StepperItem
 
-Renders an `li` by default. Its own prop is `active?: boolean`; active items
-default `aria-current` to `step`. It inherits native props and all
-[`Box`](../box/README.mdx#api) props through `BoxProps<C>`.
+Renders an `li` by default; use `component` to change the element. Its own prop
+is `active?: boolean`, which adds `.active` and defaults `aria-current` to
+`step`. It inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) utility props through `BoxProps<C>`, so
+`component='a'` or `component='button'` produce interactive steps.
+
+| Prop     | Type      | Description                             |
+| -------- | --------- | --------------------------------------- |
+| `active` | `boolean` | Marks the step as completed or current. |
 
 ## Accessibility
 
-Mark the current step with `aria-current='step'`. Keep the source order
-meaningful because the ordered list also conveys the sequence.
+The ordered list conveys the sequence, so keep the source order meaningful. Mark
+completed steps with `active` too, but keep `aria-current='step'` on the current
+step only: pass `aria-current='false'` to the other active steps so assistive
+technology exposes a single current step.
+
+Steps are static text unless they render as links or buttons, which keep their
+native keyboard behavior. Give a link stepper an accessible name, such as
+`aria-label`, when its purpose is not clear from context, and keep step labels
+short and unique.
 
 ## See
 
 - [Bootstrap 6 Stepper documentation](https://getbootstrap.com/docs/6.0/components/stepper/)
+- [Box component](../box/README.mdx)
 - [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/stepper.tsx)
