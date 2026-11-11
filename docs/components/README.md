@@ -50,6 +50,5 @@ order: 1
 - [Tab](./tab/)
 - [Table](./table/)
 - [Toast](./toast/)
-- [Toggler](./toggler/)
 - [Tooltip](./tooltip/)
 - [Typography](./typography/)

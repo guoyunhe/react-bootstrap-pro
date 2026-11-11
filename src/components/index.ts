@@ -70,5 +70,4 @@ export * from './table-header';
 export * from './table-row';
 export * from './toast';
 export * from './typography';
-export * from './toggler';
 export * from './tooltip';

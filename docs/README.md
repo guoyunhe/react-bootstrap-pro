@@ -78,6 +78,5 @@ export function Example() {
 - [Tab](./components/tab/)
 - [Table](./components/table/)
 - [Toast](./components/toast/)
-- [Toggler](./components/toggler/)
 - [Tooltip](./components/tooltip/)
 - [Typography](./components/typography/)

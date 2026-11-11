@@ -20,6 +20,9 @@
   is no longer exported. Pass bar styling through `striped`, `animated`, and
   `barProps`, and use `ProgressStacked` with nested `Progress` segments for
   stacked bars.
+- Remove `Toggler`. It only emitted Bootstrap toggler plugin data attributes,
+  which never run because the library does not load Bootstrap JavaScript; toggle
+  state from React instead.
 
 ### Added
 

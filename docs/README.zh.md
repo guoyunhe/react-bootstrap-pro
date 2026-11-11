@@ -78,6 +78,5 @@ export function Example() {
 - [Tab 标签页](./components/tab/)
 - [Table 表格](./components/table/)
 - [Toast 轻提示](./components/toast/)
-- [Toggler 切换器](./components/toggler/)
 - [Tooltip 工具提示](./components/tooltip/)
 - [Typography 排版](./components/typography/)

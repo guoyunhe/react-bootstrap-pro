@@ -230,7 +230,6 @@ export {
   ToastHeader,
   Tooltip,
   TooltipInner,
-  Toggler,
   UnstyledList,
 } from './components/index';
 export type {
@@ -418,7 +417,6 @@ export type {
   TooltipPlacement,
   TooltipProps,
   TooltipTrigger,
-  TogglerProps,
   UnstyledListProps,
   ValidationState,
 } from './components/index';
