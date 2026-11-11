@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-11
+
 ### Breaking Changes
 
 - Move Popover trigger, placement, dismissal, and arrow behavior into the
