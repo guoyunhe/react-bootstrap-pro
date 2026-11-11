@@ -1,0 +1,236 @@
+---
+title: Toast 轻提示
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { ToastBasicDemo } from './demos/basic';
+import { ToastCustomActionsDemo } from './demos/custom-actions';
+import { ToastCustomContentDemo } from './demos/custom-content';
+import { ToastDarkDemo } from './demos/dark';
+import { ToastInstantDemo } from './demos/instant';
+import { ToastLiveDemo } from './demos/live';
+import { ToastPlacementDemo } from './demos/placement';
+import { ToastPlacementContainerDemo } from './demos/placement-container';
+import { ToastPlacementFlexDemo } from './demos/placement-flex';
+import { ToastStackingDemo } from './demos/stacking';
+import { ToastTranslucentDemo } from './demos/translucent';
+import { ToastTranslucentEnhancedDemo } from './demos/translucent-enhanced';
+import { ToastVariantsDemo } from './demos/variants';
+
+# Toast 轻提示
+
+`Toast` 使用 `.toast` 渲染轻量级通知，并配合 `ToastContainer`、`ToastHeader` 与
+`ToastBody` 组成整体布局。未设置 `show` 时轻提示保持隐藏，因此其显示由 React 控制；
+这些组件不会加载 Bootstrap JavaScript。轻提示默认作为实时区域，带有
+`role='alert'`、`aria-live='assertive'` 与 `aria-atomic='true'`。
+
+## 示例
+
+建议同时使用标题与内容：标题采用 flex 布局，`me='auto'` 可将时间戳和关闭按钮推到末尾。
+组件本身不会自动关闭，请将关闭按钮与状态关联。
+
+<DemoContainer>
+  <ToastBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## 实时示例
+
+点击按钮显示默认隐藏的轻提示，用工具属性定位，并通过自己的定时器将其隐藏。轻提示隐藏时
+请保持 `ToastContainer` 挂载：只有当实时区域在内容变化之前已存在于标记中，辅助技术才会
+朗读更新。
+
+<DemoContainer>
+  <ToastLiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/live.tsx'
+
+```
+
+## 半透明
+
+轻提示会与下方内容相互融合。
+
+<DemoContainer>
+  <ToastTranslucentDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent.tsx'
+
+```
+
+设置 `translucent` 可添加 `.toast-translucent`，应用背景模糊与饱和度滤镜。
+
+<DemoContainer>
+  <ToastTranslucentEnhancedDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent-enhanced.tsx'
+
+```
+
+## 堆叠
+
+`ToastContainer` 会为其中的轻提示添加垂直间距。`position='static'` 让容器保留在文档流
+中，而不是覆盖在页面上。
+
+<DemoContainer>
+  <ToastStackingDemo />
+</DemoContainer>
+
+```tsx src='./demos/stacking.tsx'
+
+```
+
+## 深色轻提示
+
+在 `Toast` 上设置 `data-bs-theme='dark'`，即可让该子树使用 Bootstrap 的深色模式。
+
+<DemoContainer>
+  <ToastDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+## 主题变体
+
+将主题色传给 `theme`，可为整个轻提示着色，也可只作用于其内部元素。
+
+<DemoContainer>
+  <ToastVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## 自定义内容
+
+可以移除或重新排列子组件，并用工具属性构建自己的布局。下面的轻提示去掉了标题，并把关闭
+按钮放在内容旁边。
+
+<DemoContainer>
+  <ToastCustomContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-content.tsx'
+
+```
+
+轻提示中也可以加入额外内容与控件，例如分隔线和操作按钮。
+
+<DemoContainer>
+  <ToastCustomActionsDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-actions.tsx'
+
+```
+
+## 即时
+
+轻提示默认带淡入淡出动画。设置 `instant` 可添加 `.toast-instant` 并移除过渡动画。
+
+<DemoContainer>
+  <ToastInstantDemo />
+</DemoContainer>
+
+```tsx src='./demos/instant.tsx'
+
+```
+
+## 定位
+
+使用工具属性为轻提示定位。若一次只显示一个轻提示，可直接定位它；在定位父元素内使用
+`position='absolute'`，可将轻提示限制在该区域内。
+
+<DemoContainer>
+  <ToastPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+对于会产生多条通知的系统，应改为在定位父元素中放置 `ToastContainer`，让轻提示自动
+堆叠。若希望容器固定在视口而非父元素中，可添加 `position='fixed'`。
+
+<DemoContainer>
+  <ToastPlacementContainerDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement-container.tsx'
+
+```
+
+Flexbox 工具属性可以在容器中水平、垂直对齐轻提示。
+
+<DemoContainer>
+  <ToastPlacementFlexDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement-flex.tsx'
+
+```
+
+## API
+
+### Toast
+
+默认渲染带 `.toast` 的 `div`。自有属性为 `show`、`instant` 与 `translucent`；继承所选
+元素的原生属性，以及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/#api) 工具类属性。未设置 `show` 时轻提示保持隐藏。
+
+| 组件属性      | 类型      | 说明                                                  |
+| ------------- | --------- | ----------------------------------------------------- |
+| `show`        | `boolean` | 添加 `.show` 以显示轻提示。                           |
+| `instant`     | `boolean` | 添加 `.toast-instant` 并移除淡入淡出过渡。            |
+| `translucent` | `boolean` | 添加 `.toast-translucent`，应用模糊与饱和度背景效果。 |
+
+轻提示默认设置 `role='alert'`、`aria-live='assertive'` 与 `aria-atomic='true'`；
+传入同名属性可覆盖这些默认值。
+
+### ToastContainer
+
+默认渲染带 `.toast-container` 的 `div`，为堆叠的轻提示添加垂直间距。它没有自有属性，
+默认设置 `role='region'` 与 `aria-live='polite'`。可通过 `position`、`top`、`end`、
+`p` 等属性定位，并继承原生属性及通过 `BoxProps<C>` 继承的全部
+[`Box`](../box/#api) 工具类属性。
+
+### ToastHeader
+
+默认渲染带 `.toast-header` 的 `div`，采用 flex 布局。它没有自有属性，继承原生属性及
+通过 `BoxProps<C>` 继承的全部 [`Box`](../box/#api) 工具类属性。
+
+### ToastBody
+
+默认渲染带 `.toast-body` 的 `div`。它没有自有属性，继承原生属性及通过 `BoxProps<C>`
+继承的全部 [`Box`](../box/#api) 工具类属性。
+
+## 无障碍访问
+
+将轻提示放入实时区域，使屏幕阅读器无需移动焦点即可朗读。`ToastContainer` 默认提供
+`role='region'` 与 `aria-live='polite'`，`Toast` 则设置 `aria-atomic='true'`，确保整条
+消息作为整体朗读。
+
+请根据消息内容选择角色与礼貌级别：重要更新保留 `role='alert'` 与
+`aria-live='assertive'`，常规信息使用 `role='status'` 与 `aria-live='polite'`。当信息
+对任务至关重要（例如表单错误列表）时，请改用 [`Alert`](../alert/)。
+
+在轻提示出现之前就应让实时区域存在于页面上；若同时创建区域与内容，通常不会被朗读。若
+使用定时器自动隐藏，请留出足够的阅读时间。若不自动隐藏，必须提供关闭按钮；同时避免在
+自动隐藏的轻提示中放置可聚焦控件，因为轻提示不会获得焦点。
+
+## 参考
+
+- [Bootstrap 6 Toasts 官方文档](https://getbootstrap.com/docs/6.0/components/toasts/)
+- [Alert 提示组件](../alert/)
+- [CloseButton 关闭按钮组件](../close-button/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/toast.tsx)

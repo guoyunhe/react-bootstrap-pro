@@ -1,0 +1,255 @@
+---
+title: Toast
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { ToastBasicDemo } from './demos/basic';
+import { ToastCustomActionsDemo } from './demos/custom-actions';
+import { ToastCustomContentDemo } from './demos/custom-content';
+import { ToastDarkDemo } from './demos/dark';
+import { ToastInstantDemo } from './demos/instant';
+import { ToastLiveDemo } from './demos/live';
+import { ToastPlacementDemo } from './demos/placement';
+import { ToastPlacementContainerDemo } from './demos/placement-container';
+import { ToastPlacementFlexDemo } from './demos/placement-flex';
+import { ToastStackingDemo } from './demos/stacking';
+import { ToastTranslucentDemo } from './demos/translucent';
+import { ToastTranslucentEnhancedDemo } from './demos/translucent-enhanced';
+import { ToastVariantsDemo } from './demos/variants';
+
+# Toast
+
+`Toast` renders a lightweight notification with `.toast`, together with
+`ToastContainer`, `ToastHeader`, and `ToastBody` for the surrounding layout.
+Toasts are hidden until `show` is set, so React controls their visibility; the
+components do not load Bootstrap JavaScript. A toast defaults to a live region
+with `role='alert'`, `aria-live='assertive'`, and `aria-atomic='true'`.
+
+## Example
+
+A header and a body are recommended: the header uses flex layout, so `me='auto'`
+pushes the timestamp and the close button to the end. Wire the close button to
+state, since the components do not dismiss themselves.
+
+<DemoContainer>
+  <ToastBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+## Live example
+
+Show a hidden toast from a button, position it with utilities, and hide it with
+your own timer. Keep the `ToastContainer` mounted while the toast is hidden: a
+live region is only announced when it already exists in the markup before its
+content changes.
+
+<DemoContainer>
+  <ToastLiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/live.tsx'
+
+```
+
+## Translucent
+
+Toasts blend in with the content below them.
+
+<DemoContainer>
+  <ToastTranslucentDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent.tsx'
+
+```
+
+Set `translucent` to add `.toast-translucent`, which applies a backdrop blur and
+saturation filter.
+
+<DemoContainer>
+  <ToastTranslucentEnhancedDemo />
+</DemoContainer>
+
+```tsx src='./demos/translucent-enhanced.tsx'
+
+```
+
+## Stacking
+
+A `ToastContainer` adds vertical spacing between its toasts. `position='static'`
+keeps the container in the document flow instead of overlaying the page.
+
+<DemoContainer>
+  <ToastStackingDemo />
+</DemoContainer>
+
+```tsx src='./demos/stacking.tsx'
+
+```
+
+## Dark toasts
+
+Set `data-bs-theme='dark'` on the `Toast` to use Bootstrap's dark color mode for
+that subtree.
+
+<DemoContainer>
+  <ToastDarkDemo />
+</DemoContainer>
+
+```tsx src='./demos/dark.tsx'
+
+```
+
+## Variants
+
+Pass a theme color as `theme` to color the whole toast, or apply it to individual
+elements inside the toast.
+
+<DemoContainer>
+  <ToastVariantsDemo />
+</DemoContainer>
+
+```tsx src='./demos/variants.tsx'
+
+```
+
+## Custom content
+
+Remove or rearrange the subcomponents and use utilities to build your own
+layout. This toast drops the header and places the close button beside the body.
+
+<DemoContainer>
+  <ToastCustomContentDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-content.tsx'
+
+```
+
+Toasts can also contain additional content and controls, such as a divider and
+action buttons.
+
+<DemoContainer>
+  <ToastCustomActionsDemo />
+</DemoContainer>
+
+```tsx src='./demos/custom-actions.tsx'
+
+```
+
+## Instant
+
+Toasts fade in and out by default. Set `instant` to add `.toast-instant` and
+remove the transition.
+
+<DemoContainer>
+  <ToastInstantDemo />
+</DemoContainer>
+
+```tsx src='./demos/instant.tsx'
+
+```
+
+## Placement
+
+Position toasts with utilities. When you show one toast at a time, position it
+directly; use `position='absolute'` inside a positioned parent to keep it inside
+a region.
+
+<DemoContainer>
+  <ToastPlacementDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement.tsx'
+
+```
+
+For systems that generate several notifications, position a `ToastContainer`
+inside a positioned parent instead, so the toasts stack. Add `position='fixed'`
+to pin the container to the viewport instead of the parent.
+
+<DemoContainer>
+  <ToastPlacementContainerDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement-container.tsx'
+
+```
+
+Flexbox utilities align a toast inside its container horizontally and
+vertically.
+
+<DemoContainer>
+  <ToastPlacementFlexDemo />
+</DemoContainer>
+
+```tsx src='./demos/placement-flex.tsx'
+
+```
+
+## API
+
+### Toast
+
+Renders a `div` with `.toast`. Its own props are `show`, `instant`, and
+`translucent`; it inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) utility props through `BoxProps<C>`. Without
+`show`, the toast stays hidden.
+
+| Prop          | Type      | Description                                                   |
+| ------------- | --------- | ------------------------------------------------------------- |
+| `show`        | `boolean` | Adds `.show` to reveal the toast.                             |
+| `instant`     | `boolean` | Adds `.toast-instant` and removes the fade transition.        |
+| `translucent` | `boolean` | Adds `.toast-translucent` with a blurred, saturated backdrop. |
+
+The toast defaults to `role='alert'`, `aria-live='assertive'`, and
+`aria-atomic='true'`; pass these props to choose different values.
+
+### ToastContainer
+
+Renders a `div` with `.toast-container`, which spaces stacked toasts vertically.
+It has no own props and defaults to `role='region'` and `aria-live='polite'`.
+Position it with props such as `position`, `top`, `end`, and `p`, and it inherits
+native props and all [`Box`](../box/README.mdx#api) utility props through
+`BoxProps<C>`.
+
+### ToastHeader
+
+Renders a `div` with `.toast-header`, a flex row. It has no own props and
+inherits native props and all
+[`Box`](../box/README.mdx#api) utility props through `BoxProps<C>`.
+
+### ToastBody
+
+Renders a `div` with `.toast-body`. It has no own props and inherits native props
+and all [`Box`](../box/README.mdx#api) utility props through `BoxProps<C>`.
+
+## Accessibility
+
+Wrap toasts in a live region so screen readers announce them without moving
+focus. `ToastContainer` provides `role='region'` and `aria-live='polite'` by
+default, and `Toast` sets `aria-atomic='true'` so the whole message is announced
+as one unit.
+
+Choose the role and politeness to match the message: keep `role='alert'` with
+`aria-live='assertive'` for important updates, and use `role='status'` with
+`aria-live='polite'` for routine ones. Use an [`Alert`](../alert/README.mdx)
+instead when the information is essential to the task, such as a list of form
+errors.
+
+Keep the live region mounted before the toast appears; creating the region and
+its content at the same time is often not announced. If you hide toasts with a
+timer, leave enough time to read the message. Without a timer, always provide a
+close button, and avoid focusable controls inside auto-hiding toasts because
+toasts do not receive focus.
+
+## See
+
+- [Bootstrap 6 Toasts documentation](https://getbootstrap.com/docs/6.0/components/toasts/)
+- [Alert component](../alert/README.mdx)
+- [CloseButton component](../close-button/README.mdx)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/toast.tsx)
