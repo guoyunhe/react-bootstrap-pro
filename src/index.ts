@@ -395,6 +395,7 @@ export type {
   StackContainerProps,
   StepperItemProps,
   StepperProps,
+  StepperValue,
   SwitchProps,
   SwitchSize,
   TabContentProps,

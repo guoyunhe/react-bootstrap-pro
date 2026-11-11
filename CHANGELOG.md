@@ -33,6 +33,8 @@
 - Add `NavLink` `targetId` and automatic tab mode inside a controlled `Nav`.
 - Add controlled tab state with `Nav` `value`/`onChange`, `NavLink` `value`, and
   `TabContent`/`TabPane` `value`.
+- Add `Stepper` `value`/`onChange` and `StepperItem` `value` for controlled
+  steps, where the current step and the steps before it are active.
 
 ### Fixed
 
