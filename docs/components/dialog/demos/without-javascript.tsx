@@ -1,4 +1,12 @@
-import { CloseButton, Dialog, DialogBody, DialogHeader, DialogTitle } from 'react-bootstrap-pro';
+import {
+  Button,
+  CloseButton,
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from 'react-bootstrap-pro';
 
 const openCommand = { commandfor: 'dialog-invoker', command: 'show-modal' };
 const closeCommand = { commandfor: 'dialog-invoker', command: 'close' };
@@ -6,9 +14,9 @@ const closeCommand = { commandfor: 'dialog-invoker', command: 'close' };
 export function DialogWithoutJavaScriptDemo() {
   return (
     <>
-      <button {...openCommand} type='button' className='btn-solid theme-primary'>
+      <Button {...openCommand} variant='solid' theme='primary'>
         Open dialog
-      </button>
+      </Button>
       <Dialog id='dialog-invoker' aria-labelledby='dialog-invoker-title'>
         <DialogHeader>
           <DialogTitle id='dialog-invoker-title'>Invoker Commands</DialogTitle>
@@ -20,11 +28,11 @@ export function DialogWithoutJavaScriptDemo() {
             <code>command=&apos;close&apos;</code>. No Bootstrap JavaScript is involved.
           </p>
         </DialogBody>
-        <div className='dialog-footer'>
-          <button {...closeCommand} type='button' className='btn-solid theme-secondary'>
+        <DialogFooter>
+          <Button {...closeCommand} variant='solid' theme='secondary'>
             Close
-          </button>
-        </div>
+          </Button>
+        </DialogFooter>
       </Dialog>
     </>
   );
