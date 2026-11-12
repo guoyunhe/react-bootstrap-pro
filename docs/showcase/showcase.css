@@ -1,0 +1,87 @@
+.showcase-window {
+  overflow: hidden;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-radius-9);
+  background-color: var(--bs-bg-body);
+  container-type: inline-size;
+}
+
+.showcase-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding: 0.75rem 1rem;
+  border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+  background-color: var(--bs-bg-2);
+}
+
+.showcase-toolbar-end {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-inline-start: auto;
+}
+
+.showcase-search {
+  width: 12rem;
+}
+
+/* Two dense columns keep the components grouped without large empty tiles at
+   both the docs content width and wider screenshot sizes. */
+.showcase-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 1.25rem;
+}
+
+.showcase-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+/* Pairs short components so wide columns stay filled. */
+.showcase-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* The showcase controls spacing between components. */
+.showcase-window .table {
+  margin-block-end: 0;
+}
+
+.showcase-window .toast {
+  --bs-toast-max-width: 100%;
+}
+
+@container (width >= 720px) {
+  .showcase-body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .showcase-column + .showcase-column {
+    padding-inline-start: 1.5rem;
+    border-inline-start: var(--bs-border-width) solid var(--bs-border-color);
+  }
+}
+
+@container (width < 960px) {
+  .showcase-window .otp {
+    --bs-otp-size: 2.25rem;
+    --bs-otp-gap: 0.375rem;
+  }
+}
+
+@container (width < 480px) {
+  .showcase-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

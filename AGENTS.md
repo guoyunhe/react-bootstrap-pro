@@ -9,6 +9,7 @@
 - Use `docs/components/accordion/` as the structural template for component documentation.
 - Use icons from `react-bootstrap-icons-pro` for icon glyphs instead of hand-written inline SVG.
 - When adding a component or changing a component interface, update `CHANGELOG.md` in the same change.
+- After changing the home page showcase, run `pnpm run docs:screenshot` to regenerate `docs/assets/showcase.png`, which the README embeds.
 
 ### Language parity
 

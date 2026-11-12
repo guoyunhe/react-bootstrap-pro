@@ -2,6 +2,8 @@
 
 Bootstrap 6 components for React 18+, with TypeScript support.
 
+[![Showcase](./docs/assets/showcase.png)](https://guoyunhe.github.io/react-bootstrap-pro/)
+
 ## Installation
 
 ```sh
