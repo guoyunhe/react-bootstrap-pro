@@ -1,4 +1,4 @@
-import { Placeholder } from 'react-bootstrap-pro';
+import { Box, Placeholder } from 'react-bootstrap-pro';
 
 const colors = [
   'primary',
@@ -13,11 +13,11 @@ const colors = [
 
 export function PlaceholderColorDemo() {
   return (
-    <div className='d-grid gap-2' style={{ maxWidth: 320 }}>
+    <Box d='grid' gap={2} style={{ maxWidth: 320 }}>
       <Placeholder w={75} />
       {colors.map((color) => (
         <Placeholder key={color} bg={color} w={75} />
       ))}
-    </div>
+    </Box>
   );
 }

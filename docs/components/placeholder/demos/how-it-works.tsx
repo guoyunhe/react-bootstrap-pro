@@ -1,18 +1,19 @@
-import { Placeholder } from 'react-bootstrap-pro';
+import { Box, Button, Placeholder } from 'react-bootstrap-pro';
 
 export function PlaceholderHowItWorksDemo() {
   return (
-    <div className='d-grid gap-2' style={{ maxWidth: 320 }}>
-      <p>
+    <Box d='grid' gap={2} style={{ maxWidth: 320 }}>
+      <Box component='p'>
         <Placeholder w={50} />
-      </p>
-      <Placeholder
-        component='button'
-        className='btn btn-primary disabled'
-        type='button'
+      </Box>
+      <Button
+        variant='solid'
+        theme='primary'
         disabled
+        className='placeholder'
         w={50}
+        aria-hidden='true'
       />
-    </div>
+    </Box>
   );
 }
