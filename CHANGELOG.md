@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-13
+
 ### Breaking Changes
 
 - `useColorScheme` now returns `[colorScheme, setColorScheme]`. `setColorScheme`
