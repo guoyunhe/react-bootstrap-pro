@@ -5,6 +5,8 @@
 ### Added
 
 - Add the Box `colorScheme` prop for setting `data-bs-theme` on the element and its descendants.
+- Add the `useColorScheme` hook for reading the light or dark color scheme that
+  Bootstrap currently resolves from `data-bs-theme` and the browser preference.
 
 ## [0.5.0] - 2026-11-11
 

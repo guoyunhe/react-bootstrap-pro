@@ -1,0 +1,47 @@
+---
+title: useColorScheme
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../../components/demo-container';
+import { UseColorSchemeDemo } from './demos/use-color-scheme';
+
+# useColorScheme
+
+`useColorScheme` returns the light or dark color scheme that Bootstrap currently
+resolves for the page. It reads `data-bs-theme` from the `<html>` element and
+falls back to the `prefers-color-scheme` browser setting when the attribute is
+absent or set to `auto`, matching how Bootstrap resolves its color tokens.
+
+## Example
+
+<DemoContainer>
+  <UseColorSchemeDemo />
+</DemoContainer>
+
+```tsx src='./demos/use-color-scheme.tsx'
+
+```
+
+The button group writes `data-bs-theme` on the document element, which is how a
+site-wide theme switcher works. The hook re-renders when the attribute changes
+or when the browser color scheme preference changes, so the displayed value
+always matches the rendered page.
+
+## API
+
+The hook takes no parameters and returns `'light'` or `'dark'`, typed as
+`ResolvedColorScheme`:
+
+| Type                | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| `'light' \| 'dark'` | The color scheme Bootstrap resolves for the document. |
+
+## Behavior
+
+- `data-bs-theme='light'` and `data-bs-theme='dark'` on `<html>` take precedence
+  over the browser preference.
+- Without the attribute, or with `data-bs-theme='auto'`, the value follows
+  `prefers-color-scheme`.
+- The hook is client-only. During server rendering it returns `'light'`; the
+  first client render reads the actual value.

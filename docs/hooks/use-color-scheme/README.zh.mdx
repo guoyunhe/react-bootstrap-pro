@@ -1,0 +1,41 @@
+---
+title: useColorScheme 色彩方案
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../../components/demo-container';
+import { UseColorSchemeDemo } from './demos/use-color-scheme';
+
+# useColorScheme 色彩方案
+
+`useColorScheme` 返回 Bootstrap 当前为页面解析出的亮色或暗色色彩方案。它读取
+`<html>` 元素上的 `data-bs-theme`；当该属性缺失或为 `auto` 时，回退到浏览器的
+`prefers-color-scheme` 设置，与 Bootstrap 解析颜色变量的方式一致。
+
+## 示例
+
+<DemoContainer>
+  <UseColorSchemeDemo />
+</DemoContainer>
+
+```tsx src='./demos/use-color-scheme.tsx'
+
+```
+
+示例中的按钮组会在文档元素上写入 `data-bs-theme`，这正是整站主题切换器的做法。
+当该属性或浏览器色彩方案偏好发生变化时，钩子会重新渲染，因此展示的数值始终与
+页面实际渲染结果一致。
+
+## API
+
+该钩子不接受参数，返回 `'light'` 或 `'dark'`，类型为 `ResolvedColorScheme`：
+
+| 类型                | 说明                               |
+| ------------------- | ---------------------------------- |
+| `'light' \| 'dark'` | Bootstrap 为文档解析出的色彩方案。 |
+
+## 行为
+
+- `<html>` 上的 `data-bs-theme='light'` 与 `data-bs-theme='dark'` 优先于浏览器偏好。
+- 未设置该属性，或设置为 `data-bs-theme='auto'` 时，取值跟随 `prefers-color-scheme`。
+- 该钩子仅在客户端使用。服务端渲染时返回 `'light'`，首次客户端渲染会读取实际数值。
