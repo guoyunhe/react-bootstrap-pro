@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Add the Box `colorScheme` prop for setting `data-bs-theme` on the element and its descendants.
+
 ## [0.5.0] - 2026-11-11
 
 ### Breaking Changes

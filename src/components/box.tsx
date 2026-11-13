@@ -611,6 +611,7 @@ export function Box<C extends ElementType = 'div'>({
   return (
     <Component
       {...props}
+      {...(colorScheme === undefined ? {} : { 'data-bs-theme': colorScheme })}
       style={typeof z === 'number' ? { ...style, zIndex: z } : style}
       className={classes || undefined}
     />

@@ -193,12 +193,19 @@ test('applies color scheme utilities', async () => {
       <Box data-testid='light' colorScheme='light' />
       <Box data-testid='dark' colorScheme='dark' />
       <Box data-testid='auto' colorScheme='auto' />
+      <Box data-testid='explicit-theme' data-bs-theme='dark' />
+      <Box data-testid='overridden-theme' data-bs-theme='dark' colorScheme='light' />
     </>,
   );
 
   expect(screen.getByTestId('light')).toHaveClass('color-scheme-light');
+  expect(screen.getByTestId('light')).toHaveAttribute('data-bs-theme', 'light');
   expect(screen.getByTestId('dark')).toHaveClass('color-scheme-dark');
+  expect(screen.getByTestId('dark')).toHaveAttribute('data-bs-theme', 'dark');
   expect(screen.getByTestId('auto')).toHaveClass('color-scheme-auto');
+  expect(screen.getByTestId('auto')).toHaveAttribute('data-bs-theme', 'auto');
+  expect(screen.getByTestId('explicit-theme')).toHaveAttribute('data-bs-theme', 'dark');
+  expect(screen.getByTestId('overridden-theme')).toHaveAttribute('data-bs-theme', 'light');
 });
 
 test('applies aspect ratio, container query, and display utilities', async () => {

@@ -89,9 +89,9 @@ and `gradient` adds `.bg-gradient`. See
 
 ## Color scheme
 
-`colorScheme` sets `.color-scheme-{light|dark|auto}`. Bootstrap resolves its
-color tokens with `light-dark()`, so a single element can use a different scheme
-than the rest of the page, including the browser's own native controls.
+`colorScheme` sets `data-bs-theme` on the `Box`, applying Bootstrap's color mode
+to the element and its descendants. It also adds `.color-scheme-{light|dark|auto}`
+so native browser controls follow the selected color scheme.
 
 <DemoContainer>
   <BoxColorSchemeDemo />
@@ -101,8 +101,9 @@ than the rest of the page, including the browser's own native controls.
 
 ```
 
-Use `data-bs-theme` for whole subtrees: it also switches `--shadow-strength`,
-while `colorScheme` leaves the shadow strength of the parent untouched.
+Use `'light'` or `'dark'` to set the Bootstrap color mode for a whole subtree.
+`'auto'` leaves Bootstrap's color tokens inherited and lets native controls
+follow the system color scheme.
 
 ## Theme
 
@@ -250,7 +251,7 @@ Bootstrap utility props link to their corresponding Bootstrap 6 docs. Unlinked p
 | `bottom`                  | `number`                                                                                                                                                                                 | —       | Applies `.bottom-{value}`. See [Bootstrap position utilities](https://getbootstrap.com/docs/6.0/utilities/position/).                                                                          |
 | `className`               | `string`                                                                                                                                                                                 | —       | Additional class names appended after the generated classes.                                                                                                                                   |
 | `classNameBefore`         | `string`                                                                                                                                                                                 | —       | Additional class names prepended before the generated classes.                                                                                                                                 |
-| `colorScheme`             | `'light' \| 'dark' \| 'auto'`                                                                                                                                                            | —       | Applies `.color-scheme-{value}`. See [Bootstrap color-scheme utilities](https://getbootstrap.com/docs/6.0/utilities/color-scheme/).                                                            |
+| `colorScheme`             | `'light' \| 'dark' \| 'auto'`                                                                                                                                                            | —       | Sets `data-bs-theme` and applies `.color-scheme-{value}` for native controls. See [Bootstrap color modes](https://getbootstrap.com/docs/6.0/customize/color-modes/).                           |
 | `columnGap`               | `number`                                                                                                                                                                                 | —       | Applies responsive `.column-gap-*` classes. See [Bootstrap gap utilities](https://getbootstrap.com/docs/6.0/utilities/gap/).                                                                   |
 | `component`               | Inferred from `component`                                                                                                                                                                | `'div'` | Native element or React component to render.                                                                                                                                                   |
 | `containerQuery`          | `'inline' \| 'size'`                                                                                                                                                                     | —       | Applies `.contains-{value}`.                                                                                                                                                                   |

@@ -15,7 +15,7 @@ export function BoxColorSchemeDemo() {
           className='rounded'
           p={3}
         >
-          <strong>{`color-scheme-${scheme}`}</strong>
+          <strong>{`data-bs-theme="${scheme}"`}</strong>
           <Box mt={2}>
             <input type='date' className='form-control' aria-label={`${scheme} date picker`} />
           </Box>
