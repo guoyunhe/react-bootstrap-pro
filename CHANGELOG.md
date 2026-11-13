@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+
+- Add the `Toc` component, with `collectTocHeadings` and `useActiveHeading`, for
+  rendering a table of contents from nested heading trees and tracking the
+  heading above the reader while the page scrolls.
+
 ## [0.7.0] - 2026-11-13
 
 ### Breaking Changes

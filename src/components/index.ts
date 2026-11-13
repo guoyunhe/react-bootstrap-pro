@@ -69,5 +69,6 @@ export * from './table-head';
 export * from './table-header';
 export * from './table-row';
 export * from './toast';
+export * from './toc';
 export * from './typography';
 export * from './tooltip';

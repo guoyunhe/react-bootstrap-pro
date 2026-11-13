@@ -1,0 +1,135 @@
+---
+title: Toc 目录
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { TocActiveDemo } from './demos/active';
+import { TocBasicDemo } from './demos/basic';
+import { TocDrawerDemo } from './demos/drawer';
+
+# Toc 目录
+
+`Toc` 以导航地标的形式渲染目录，内部使用 Bootstrap 的嵌套 nav 链接。链接均为普通的
+hash 锚点，因此浏览器无需任何 JavaScript 就会滚动到对应标题。`collectTocHeadings`
+从已渲染的内容中构建标题树，`useActiveHeading` 则跟随读者的滚动位置。
+
+## 示例
+
+<DemoContainer>
+  <TocBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+`Toc` 默认渲染一个无障碍名称为 “Table of contents” 的 `nav`。每个标题都会变成带有
+`#id` href 的 `nav-link`，嵌套标题渲染为嵌套的 nav 列表，`activeId` 选中的标题会加上
+`active` 类与 `aria-current="location"`。
+
+## 当前标题
+
+从渲染内容中收集大纲，并让 `useActiveHeading` 跟踪阅读位置上方的标题。
+
+<DemoContainer>
+  <TocActiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/active.tsx'
+
+```
+
+在内容挂载时收集标题。内容变化时（例如加载文档或切换页面后）应重新收集。示例通过
+`selector` 收集示例内容中的 `h5` 和 `h6` 标题，这样这些标题也不会进入页面大纲。
+
+## 小屏幕
+
+Bootstrap 官方文档在窄视口中将同一份大纲放入底部抽屉。将 `Toc` 渲染在
+[`Drawer`](../drawer/README.zh.mdx) 内，为抽屉添加标题，并在选中链接后通过 `onNavigate`
+关闭抽屉。
+
+<DemoContainer>
+  <TocDrawerDemo />
+</DemoContainer>
+
+```tsx src='./demos/drawer.tsx'
+
+```
+
+## Hooks 与工具函数
+
+### collectTocHeadings
+
+`collectTocHeadings(container, options?)` 返回容器下方的标题树。标题按文档顺序读取，并按照
+标题层级嵌套，因此紧跟在二级标题下的四级标题会成为其子项。没有 `id` 的标题会被跳过，因为它们
+无法作为链接目标。标签取自标题文本，连续的空白会合并为一个空格。
+
+| 选项             | 类型     | 说明                                                                     |
+| ---------------- | -------- | ------------------------------------------------------------------------ |
+| `selector`       | `string` | 要收集的标题的 CSS 选择器，默认为 `h2[id], h3[id], h4[id]`。             |
+| `ignoreSelector` | `string` | 从标签中移除的后代元素选择器，例如锚点链接，默认为 `[data-toc-ignore]`。 |
+
+在标题的装饰部分（例如锚点图标）上添加 `data-toc-ignore`，使其不出现在目录中。
+
+### useActiveHeading
+
+`useActiveHeading(headings, options?)` 返回当前标题的 `id`，并在读者滚动或调整窗口大小时重新
+渲染。它通过 `document.getElementById` 查找标题，因此钩子运行时目标标题必须已经渲染。钩子监听
+window；若由其他元素滚动，请自行跟踪，并通过 `Toc` 的 `activeId` 属性传入。
+
+| 选项     | 类型     | 说明                                              |
+| -------- | -------- | ------------------------------------------------- |
+| `offset` | `number` | 标题开始激活时距离视口顶部的像素值，默认为 `96`。 |
+
+在某个标题越过偏移量之前，第一个标题保持激活。页面滚动到底部时最后一个标题保持激活，因此大纲末尾
+不会丢失。
+
+## API
+
+### Toc
+
+默认渲染一个 `nav`，字号为小号。自有属性：
+
+| 属性         | 类型                            | 说明                               |
+| ------------ | ------------------------------- | ---------------------------------- |
+| `headings`   | `TocHeading[]`                  | 要渲染的标题树。                   |
+| `activeId`   | `string`                        | 要高亮的标题 `id`。                |
+| `label`      | `string`                        | 导航地标的无障碍名称。             |
+| `onNavigate` | `(heading: TocHeading) => void` | 选中链接时调用，例如用于关闭抽屉。 |
+| `component`  | `ElementType`                   | 将默认的 `nav` 更换为其他元素。    |
+
+它继承所选元素的原生属性及全部 [`Box`](../box/README.zh.mdx#api) 属性，包括可用于覆盖默认字号的
+`fontSize`。
+
+`headings` 中的每一项都是 `TocHeading`：
+
+| 字段       | 类型           | 说明                                            |
+| ---------- | -------------- | ----------------------------------------------- |
+| `id`       | `string`       | 目标标题的 `id`。                               |
+| `text`     | `ReactNode`    | 链接标签。`collectTocHeadings` 会填入标题文本。 |
+| `level`    | `number`       | 1 到 6 的标题层级。                             |
+| `children` | `TocHeading[]` | 嵌套标题。                                      |
+
+## 行为
+
+- 链接是 hash 锚点，因此 `#heading-id` 会写入 URL，滚动与前进后退行为由浏览器处理。
+- 组件始终与 `activeId` 保持同步，但不会自行选择当前标题。请使用 `useActiveHeading`
+  或自行提供该值。
+- `Toc` 不会隐藏或折叠嵌套项。若目录需在较小屏幕上展开，可与
+  [`Drawer`](../drawer/README.zh.mdx) 或 [`Collapse`](../collapse/README.zh.mdx) 组合使用。
+
+## 无障碍访问
+
+`Toc` 渲染 `nav` 地标，并通过 `label` 为其命名。请保持标签具有描述性；当目录出现在抽屉或侧栏中时，
+在周围面板内添加可见标题。所有链接都可通过键盘访问，当前链接通过
+`aria-current="location"` 暴露，而不仅依赖颜色。
+
+为每个目标标题提供唯一的 `id`，并保持标题层级有序，因为大纲会镜像文档结构。当固定页头遮挡页面顶部时，
+为标题设置相同的 `scroll-margin-top`，并将相同的距离传给 `useActiveHeading` 的 `offset` 选项。
+
+## 参考
+
+- [Bootstrap 6 Nav 官方文档](https://getbootstrap.com/docs/6.0/components/nav/)
+- [Bootstrap 安装页面中的目录](https://getbootstrap.com/docs/6.0/getting-started/install/)
+- [React 组件源代码](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/toc.tsx)

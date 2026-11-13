@@ -50,5 +50,6 @@ order: 1
 - [Tab](./tab/)
 - [Table](./table/)
 - [Toast](./toast/)
+- [Toc](./toc/)
 - [Tooltip](./tooltip/)
 - [Typography](./typography/)

@@ -1,0 +1,153 @@
+---
+title: Toc
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { TocActiveDemo } from './demos/active';
+import { TocBasicDemo } from './demos/basic';
+import { TocDrawerDemo } from './demos/drawer';
+
+# Toc
+
+`Toc` renders a table of contents as a navigation landmark with nested Bootstrap
+nav links. Its links are regular hash anchors, so the browser scrolls to the
+matching heading without any JavaScript. `collectTocHeadings` builds the heading
+tree from rendered content, and `useActiveHeading` follows the reader's scroll
+position.
+
+## Example
+
+<DemoContainer>
+  <TocBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+`Toc` renders a `nav` with the accessible name "Table of contents". Every
+heading becomes a `nav-link` with a `#id` href, nested headings render a nested
+nav list, and the heading selected by `activeId` gets the `active` class and
+`aria-current="location"`.
+
+## Active heading
+
+Collect the outline from the rendered content and let `useActiveHeading` track
+the heading above the reading position.
+
+<DemoContainer>
+  <TocActiveDemo />
+</DemoContainer>
+
+```tsx src='./demos/active.tsx'
+
+```
+
+Collect the headings when the content mounts. Recollect them when the content
+changes, for example after loading a document or navigating to another page. The
+example passes a `selector` because its sample content uses `h5` and `h6`
+headings, which also keeps those headings out of the page outline.
+
+## Small screens
+
+Bootstrap's own documentation moves the same outline into a bottom drawer on
+narrow viewports. Render `Toc` inside a
+[`Drawer`](../drawer/README.mdx), give the drawer a title, and close it from
+`onNavigate` after a link is selected.
+
+<DemoContainer>
+  <TocDrawerDemo />
+</DemoContainer>
+
+```tsx src='./demos/drawer.tsx'
+
+```
+
+## Hooks and utilities
+
+### collectTocHeadings
+
+`collectTocHeadings(container, options?)` returns the heading tree below a
+container. Headings are read in document order and nested by their heading
+level, so a level 4 heading directly below a level 2 heading becomes its child.
+Headings without an `id` are skipped because they cannot be linked to. The label
+comes from the heading text with runs of whitespace collapsed.
+
+| Option           | Type     | Description                                                                                             |
+| ---------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `selector`       | `string` | CSS selector for the headings to collect. Defaults to `h2[id], h3[id], h4[id]`.                         |
+| `ignoreSelector` | `string` | Selector for descendants removed from the label, such as anchor links. Defaults to `[data-toc-ignore]`. |
+
+Add `data-toc-ignore` to decorative parts of a heading, such as an anchor icon,
+so they do not appear in the table of contents.
+
+### useActiveHeading
+
+`useActiveHeading(headings, options?)` returns the `id` of the active heading
+and re-renders when the reader scrolls or resizes the window. It resolves each
+heading with `document.getElementById`, so the target headings must be rendered
+when the hook runs. The hook listens to the window; when another element scrolls,
+pass your own tracking result to the `activeId` prop of `Toc` instead.
+
+| Option   | Type     | Description                                                                                     |
+| -------- | -------- | ----------------------------------------------------------------------------------------------- |
+| `offset` | `number` | Distance in pixels from the top of the viewport at which a heading activates. Defaults to `96`. |
+
+The first heading is active until a heading passes the offset. The last heading
+stays active at the bottom of the page, so the end of the outline is never lost.
+
+## API
+
+### Toc
+
+Renders a `nav` by default with a small font size. Its own props are:
+
+| Prop         | Type                            | Description                                                    |
+| ------------ | ------------------------------- | -------------------------------------------------------------- |
+| `headings`   | `TocHeading[]`                  | The heading tree to render.                                    |
+| `activeId`   | `string`                        | The `id` of the heading to highlight.                          |
+| `label`      | `string`                        | Accessible name of the navigation landmark.                    |
+| `onNavigate` | `(heading: TocHeading) => void` | Called when a link is selected, for example to close a drawer. |
+| `component`  | `ElementType`                   | Changes the rendered element from the default `nav`.           |
+
+It inherits native props for the selected element and all
+[`Box`](../box/README.mdx#api) props, including `fontSize` to override the
+default size.
+
+Each item of `headings` is a `TocHeading`:
+
+| Field      | Type           | Description                                                          |
+| ---------- | -------------- | -------------------------------------------------------------------- |
+| `id`       | `string`       | The `id` of the target heading.                                      |
+| `text`     | `ReactNode`    | The link label. `collectTocHeadings` fills it with the heading text. |
+| `level`    | `number`       | The heading level from 1 to 6.                                       |
+| `children` | `TocHeading[]` | Nested headings.                                                     |
+
+## Behavior
+
+- Links are hash anchors, so `#heading-id` is added to the URL and the browser
+  performs the scroll and updates the history.
+- The component stays in sync with `activeId`; it does not select the active
+  heading itself. Use `useActiveHeading` or provide your own value.
+- `Toc` does not hide or collapse nested items. Compose it with a
+  [`Drawer`](../drawer/README.mdx) or [`Collapse`](../collapse/README.mdx) when
+  the outline should open on smaller screens.
+
+## Accessibility
+
+`Toc` renders a `nav` landmark and names it with `label`. Keep the label
+descriptive, and add a visible heading inside the surrounding panel when the
+outline appears in a drawer or sidebar. Each link is keyboard accessible, and the
+active link is exposed with `aria-current="location"` instead of color alone.
+
+Give every target heading a unique `id` and keep the heading levels in order,
+because the outline mirrors the document hierarchy. When a fixed header covers
+the top of the page, give the headings a matching `scroll-margin-top` and pass
+the same distance as the `offset` option of `useActiveHeading`.
+
+## See
+
+- [Bootstrap 6 Nav documentation](https://getbootstrap.com/docs/6.0/components/nav/)
+- [Table of contents on the Bootstrap Install page](https://getbootstrap.com/docs/6.0/getting-started/install/)
+- [React component source code](https://github.com/guoyunhe/react-bootstrap-pro/blob/main/src/components/toc.tsx)

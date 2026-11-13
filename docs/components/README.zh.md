@@ -42,5 +42,6 @@ order: 1
 - [Tab 标签页](./tab/)
 - [Table 表格](./table/)
 - [Toast 轻提示](./toast/)
+- [Toc 目录](./toc/)
 - [Tooltip 工具提示](./tooltip/)
 - [Typography 排版](./typography/)

@@ -228,10 +228,12 @@ export {
   ToastBody,
   ToastContainer,
   ToastHeader,
+  Toc,
   Tooltip,
   TooltipInner,
   UnstyledList,
 } from './components/index';
+export { collectTocHeadings, useActiveHeading } from './components/index';
 export type {
   AbbrProps,
   AccordionBodyProps,
@@ -282,6 +284,7 @@ export type {
   ChipInputProps,
   ChipProps,
   CloseButtonProps,
+  CollectTocHeadingsOptions,
   CollapseProps,
   ComboboxGroup,
   ComboboxOption,
@@ -413,11 +416,14 @@ export type {
   ToastContainerProps,
   ToastHeaderProps,
   ToastProps,
+  TocHeading,
+  TocProps,
   TooltipInnerProps,
   TooltipPlacement,
   TooltipProps,
   TooltipTrigger,
   UnstyledListProps,
+  UseActiveHeadingOptions,
   ValidationState,
 } from './components/index';
 
