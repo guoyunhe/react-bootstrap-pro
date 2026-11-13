@@ -60,6 +60,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.20",
+    "@guoyunhe/react-storage": "^2.0.3",
     "clsx": "^2.1.1",
     "vanilla-calendar-pro": "^3.4.0"
   },

@@ -8,9 +8,15 @@ import { UseColorSchemeDemo } from './demos/use-color-scheme';
 
 # useColorScheme 色彩方案
 
-`useColorScheme` 返回 Bootstrap 当前为页面解析出的亮色或暗色色彩方案。它读取
-`<html>` 元素上的 `data-bs-theme`；当该属性缺失或为 `auto` 时，回退到浏览器的
-`prefers-color-scheme` 设置，与 Bootstrap 解析颜色变量的方式一致。
+`useColorScheme` 返回 Bootstrap 当前为页面解析出的亮色或暗色色彩方案，以及一个
+用于应用并持久化选择结果的设置函数。它读取 `<html>` 元素上的 `data-bs-theme`；
+当该属性缺失或为 `auto` 时，回退到浏览器的 `prefers-color-scheme` 设置，与
+Bootstrap 解析颜色变量的方式一致。
+
+选中的 `light`、`dark` 或 `auto` 模式会通过
+[`@guoyunhe/react-storage`](https://github.com/guoyunhe/react-storage) 保存在
+`localStorage` 的 `colorScheme` 键中，因此刷新页面后仍然有效，并会在多个浏览器
+标签页之间保持同步。该键通过 `colorSchemeStorageKey` 导出。
 
 ## 示例
 
@@ -22,20 +28,31 @@ import { UseColorSchemeDemo } from './demos/use-color-scheme';
 
 ```
 
-示例中的按钮组会在文档元素上写入 `data-bs-theme`，这正是整站主题切换器的做法。
-当该属性或浏览器色彩方案偏好发生变化时，钩子会重新渲染，因此展示的数值始终与
-页面实际渲染结果一致。
+示例中的按钮组调用 `setColorScheme`，该函数会在文档元素上写入 `data-bs-theme`
+并保存选择结果。示例还会读取保存的值，以高亮当前选中的按钮。当该属性变化、其他
+标签页更新了保存的偏好，或浏览器色彩方案偏好
+发生变化时，钩子会重新渲染，因此展示的数值始终与页面实际渲染结果一致。
 
 ## API
 
-该钩子不接受参数，返回 `'light'` 或 `'dark'`，类型为 `ResolvedColorScheme`：
+该钩子不接受参数，返回一个元组：
 
-| 类型                | 说明                               |
-| ------------------- | ---------------------------------- |
-| `'light' \| 'dark'` | Bootstrap 为文档解析出的色彩方案。 |
+| 位置 | 类型                  | 说明                                                  |
+| ---- | --------------------- | ----------------------------------------------------- |
+| 0    | `ResolvedColorScheme` | Bootstrap 为页面解析出的 `'light'` 或 `'dark'` 方案。 |
+| 1    | `SetColorScheme`      | 将方案应用到文档并持久化。                            |
+
+`setColorScheme` 接受 `'light'`、`'dark'` 或 `'auto'`。设置为 `'light'` 或
+`'dark'` 时会在 `<html>` 上写入 `data-bs-theme`；设置为 `'auto'` 时会移除该属性，
+让 Bootstrap 重新跟随浏览器偏好。
 
 ## 行为
 
 - `<html>` 上的 `data-bs-theme='light'` 与 `data-bs-theme='dark'` 优先于浏览器偏好。
 - 未设置该属性，或设置为 `data-bs-theme='auto'` 时，取值跟随 `prefers-color-scheme`。
+- 挂载时会恢复保存的 `'light'` 或 `'dark'` 选择。如果页面已经设置了
+  `data-bs-theme`（例如通过内联脚本），则保留该值并优先使用它。
+- 其他标签页修改 `colorScheme` 键后，当前标签页会同步应用新的方案。
+- 如果 `localStorage` 不可用，`setColorScheme` 仍会更新当前页面的文档，但不会
+  持久化选择。
 - 该钩子仅在客户端使用。服务端渲染时返回 `'light'`，首次客户端渲染会读取实际数值。

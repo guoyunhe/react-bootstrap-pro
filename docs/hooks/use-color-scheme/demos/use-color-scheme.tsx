@@ -1,33 +1,18 @@
-import { useEffect, useState } from 'react';
-import { Box, Button, ButtonGroup, useColorScheme } from 'react-bootstrap-pro';
+import { useLocalStorage } from '@guoyunhe/react-storage';
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  colorSchemeStorageKey,
+  useColorScheme,
+} from 'react-bootstrap-pro';
 import type { ColorScheme } from 'react-bootstrap-pro';
 
 const modes: ColorScheme[] = ['light', 'dark', 'auto'];
 
 export function UseColorSchemeDemo() {
-  const colorScheme = useColorScheme();
-  const [mode, setMode] = useState<ColorScheme>('auto');
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (mode === 'auto') {
-      delete root.dataset.bsTheme;
-    } else {
-      root.dataset.bsTheme = mode;
-    }
-  }, [mode]);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    const initialTheme = root.dataset.bsTheme;
-    return () => {
-      if (initialTheme === undefined) {
-        delete root.dataset.bsTheme;
-      } else {
-        root.dataset.bsTheme = initialTheme;
-      }
-    };
-  }, []);
+  const [colorScheme, setColorScheme] = useColorScheme();
+  const [selectedColorScheme] = useLocalStorage<ColorScheme>(colorSchemeStorageKey, 'auto');
 
   return (
     <Box d='grid' gap={3}>
@@ -37,8 +22,8 @@ export function UseColorSchemeDemo() {
             key={item}
             variant='outline'
             theme='secondary'
-            active={mode === item}
-            onClick={() => setMode(item)}
+            active={selectedColorScheme === item}
+            onClick={() => setColorScheme(item)}
           >
             {item}
           </Button>

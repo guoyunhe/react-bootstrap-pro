@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+### Breaking Changes
+
+- `useColorScheme` now returns `[colorScheme, setColorScheme]`. `setColorScheme`
+  writes `data-bs-theme` on `<html>` and persists the selection in
+  `localStorage` under the exported `colorSchemeStorageKey` key using
+  `@guoyunhe/react-storage`.
+
 ## [0.6.0] - 2026-11-13
 
 ### Added

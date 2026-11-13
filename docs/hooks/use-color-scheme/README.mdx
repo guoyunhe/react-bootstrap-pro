@@ -9,9 +9,16 @@ import { UseColorSchemeDemo } from './demos/use-color-scheme';
 # useColorScheme
 
 `useColorScheme` returns the light or dark color scheme that Bootstrap currently
-resolves for the page. It reads `data-bs-theme` from the `<html>` element and
-falls back to the `prefers-color-scheme` browser setting when the attribute is
-absent or set to `auto`, matching how Bootstrap resolves its color tokens.
+resolves for the page, together with a setter that applies and persists the
+selection. It reads `data-bs-theme` from the `<html>` element and falls back to
+the `prefers-color-scheme` browser setting when the attribute is absent or set
+to `auto`, matching how Bootstrap resolves its color tokens.
+
+The selected `light`, `dark`, or `auto` mode is saved in `localStorage` under the
+`colorScheme` key with
+[`@guoyunhe/react-storage`](https://github.com/guoyunhe/react-storage), so the
+choice survives reloads and stays in sync across browser tabs. The key is exported
+as `colorSchemeStorageKey`.
 
 ## Example
 
@@ -23,19 +30,25 @@ absent or set to `auto`, matching how Bootstrap resolves its color tokens.
 
 ```
 
-The button group writes `data-bs-theme` on the document element, which is how a
-site-wide theme switcher works. The hook re-renders when the attribute changes
-or when the browser color scheme preference changes, so the displayed value
-always matches the rendered page.
+The button group calls `setColorScheme`, which writes `data-bs-theme` on the
+document element and stores the selection. The demo also reads the stored value to
+highlight the selected button. The hook re-renders when the attribute
+changes, when another tab updates the stored preference, or when the browser
+color scheme preference changes, so the displayed value always matches the
+rendered page.
 
 ## API
 
-The hook takes no parameters and returns `'light'` or `'dark'`, typed as
-`ResolvedColorScheme`:
+The hook takes no parameters and returns a tuple:
 
-| Type                | Description                                           |
-| ------------------- | ----------------------------------------------------- |
-| `'light' \| 'dark'` | The color scheme Bootstrap resolves for the document. |
+| Position | Type                  | Description                                                       |
+| -------- | --------------------- | ----------------------------------------------------------------- |
+| 0        | `ResolvedColorScheme` | The `'light'` or `'dark'` scheme Bootstrap resolves for the page. |
+| 1        | `SetColorScheme`      | Applies a scheme to the document and persists it.                 |
+
+`setColorScheme` accepts `'light'`, `'dark'`, or `'auto'`. Setting `'light'` or
+`'dark'` writes `data-bs-theme` on `<html>`; setting `'auto'` removes the
+attribute so Bootstrap follows the browser preference again.
 
 ## Behavior
 
@@ -43,5 +56,12 @@ The hook takes no parameters and returns `'light'` or `'dark'`, typed as
   over the browser preference.
 - Without the attribute, or with `data-bs-theme='auto'`, the value follows
   `prefers-color-scheme`.
+- A stored `'light'` or `'dark'` selection is restored on mount. If the page has
+  already set `data-bs-theme` (for example, with an inline script), that value is
+  left untouched and takes precedence.
+- Changes to the `colorScheme` key from another tab are applied to the current
+  tab.
+- If `localStorage` is unavailable, `setColorScheme` still updates the document
+  for the current page without persisting the choice.
 - The hook is client-only. During server rendering it returns `'light'`; the
   first client render reads the actual value.
