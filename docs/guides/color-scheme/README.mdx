@@ -1,0 +1,112 @@
+---
+title: Color scheme
+---
+
+# Color scheme
+
+Bootstrap 6 resolves its colors from the `data-bs-theme` attribute on the
+document element and from the `prefers-color-scheme` media query. When the
+selected color scheme is persisted in `localStorage`, the browser still paints
+the page with its default white canvas while the stylesheet and JavaScript
+bundle load. Users who selected the dark scheme therefore see a white flash
+before the page turns dark.
+
+Apply the stored scheme from a short inline `<script>` and set a matching
+background from an inline `<style>` in `<head>`. Both run before any external
+stylesheet or script, so the first paint already uses the right background.
+
+## Inline setup
+
+Place this snippet in the `<head>` of your HTML document, before the stylesheet
+links:
+
+```html
+<script>
+  try {
+    var stored = localStorage.getItem('colorScheme');
+    var scheme = stored ? JSON.parse(stored) : null;
+    if (scheme === 'light' || scheme === 'dark') {
+      document.documentElement.setAttribute('data-bs-theme', scheme);
+    }
+  } catch (error) {
+    // Storage can be unavailable or contain an unrelated value.
+  }
+</script>
+<style>
+  html {
+    color-scheme: light;
+    /* Match your theme's light body background */
+    background-color: #fff;
+  }
+  html[data-bs-theme='dark'] {
+    color-scheme: dark;
+    /* Match your theme's dark body background */
+    background-color: #080a0c;
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not([data-bs-theme='light']) {
+      color-scheme: dark;
+      /* Match your theme's dark body background */
+      background-color: #080a0c;
+    }
+  }
+</style>
+```
+
+The colors above match the default Bootstrap 6 body background. Replace them
+with your own theme colors if you customized the palette.
+
+## How it works
+
+`useColorScheme` and `@guoyunhe/react-storage` store the selected mode as JSON
+with the default serializer, so `localStorage.getItem('colorScheme')` returns a
+quoted string such as `'"dark"'`. `JSON.parse` turns it back into `'dark'`.
+
+- A stored `'light'` or `'dark'` selection sets `data-bs-theme` on `<html>`
+  before Bootstrap loads, so Bootstrap resolves its light or dark tokens on the
+  first paint.
+- A stored `'auto'` selection, no stored value, or unreadable storage leaves
+  `data-bs-theme` unset. The media query then follows the operating system
+  preference, so `'auto'` users do not get a white flash either.
+- `color-scheme` makes the browser match scrollbars, form controls, and the
+  canvas color to the selected mode while the page loads.
+
+## Switching schemes
+
+Call `setColorScheme` from `useColorScheme` to switch modes. It writes
+`data-bs-theme` on `<html>` and persists the choice in `localStorage`, so the
+inline script picks it up on the next load.
+
+```tsx
+import { useColorScheme } from 'react-bootstrap-pro';
+
+export function ColorSchemeToggle() {
+  const [colorScheme, setColorScheme] = useColorScheme();
+
+  return (
+    <button type='button' onClick={() => setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')}>
+      {colorScheme === 'dark' ? 'Use light scheme' : 'Use dark scheme'}
+    </button>
+  );
+}
+```
+
+See [useColorScheme](../../hooks/use-color-scheme/README.mdx) for the full API
+and a live example.
+
+## Notes
+
+- The inline script sets the initial attribute, and `useColorScheme` keeps it on
+  hydration. The hook only restores the stored value when the page has not set
+  `data-bs-theme` already.
+- In a server-rendered application, put the script in the document head so it
+  runs before hydration. When the server does not know the stored preference,
+  render no `data-bs-theme` attribute and let the script set it.
+- A strict Content Security Policy blocks inline scripts and styles. Add their
+  hashes to the policy, or generate `data-bs-theme` on the server from a cookie
+  and ship the background rules in an external stylesheet.
+- If `localStorage` is blocked, the script does nothing and the media query
+  fallback still prevents a white flash for dark mode users.
+- If you wrap the app in `StorageProvider` with a `prefix`, read the prefixed
+  key in the inline script as well, for example
+  `localStorage.getItem(prefix + 'colorScheme')`.

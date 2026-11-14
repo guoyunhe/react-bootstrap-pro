@@ -1,0 +1,104 @@
+---
+title: Color scheme 色彩方案
+---
+
+# Color scheme 色彩方案
+
+Bootstrap 6 根据文档元素上的 `data-bs-theme` 属性以及 `prefers-color-scheme`
+媒体查询解析颜色。当选中的色彩方案保存在 `localStorage` 中时，浏览器在样式表和
+JavaScript 包加载期间仍会用默认的白色画布绘制页面。因此，选择了暗色方案的
+用户在页面变暗之前会看到白色闪烁。
+
+在 `<head>` 中用一个简短的内联 `<script>` 应用保存的方案，并用内联
+`<style>` 设置匹配的背景色。两者都会在任何外部样式表或脚本之前执行，所以首次
+绘制就会使用正确的背景色。
+
+## 内联设置
+
+将以下代码放在 HTML 文档 `<head>` 中，并置于样式表链接之前：
+
+```html
+<script>
+  try {
+    var stored = localStorage.getItem('colorScheme');
+    var scheme = stored ? JSON.parse(stored) : null;
+    if (scheme === 'light' || scheme === 'dark') {
+      document.documentElement.setAttribute('data-bs-theme', scheme);
+    }
+  } catch (error) {
+    // 存储可能不可用，或包含与色彩方案无关的值。
+  }
+</script>
+<style>
+  html {
+    color-scheme: light;
+    /* 与你的主题亮色背景色保持一致 */
+    background-color: #fff;
+  }
+  html[data-bs-theme='dark'] {
+    color-scheme: dark;
+    /* 与你的主题暗色背景色保持一致 */
+    background-color: #080a0c;
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not([data-bs-theme='light']) {
+      color-scheme: dark;
+      /* 与你的主题暗色背景色保持一致 */
+      background-color: #080a0c;
+    }
+  }
+</style>
+```
+
+上面的颜色与默认的 Bootstrap 6 页面背景一致。如果你自定义了配色，请替换为你
+自己的主题颜色。
+
+## 工作原理
+
+`useColorScheme` 和 `@guoyunhe/react-storage` 默认会将选中的模式保存为 JSON，
+因此 `localStorage.getItem('colorScheme')` 返回的是带引号的字符串，例如
+`'"dark"'`。`JSON.parse` 会将它还原为 `'dark'`。
+
+- 保存的 `'light'` 或 `'dark'` 选择会在 Bootstrap 加载前设置 `<html>` 上的
+  `data-bs-theme`，因此 Bootstrap 在首次绘制时就解析出对应的亮色或暗色变量。
+- 保存的 `'auto'` 选择、未保存的值或不可读取的存储都不会设置
+  `data-bs-theme`。此时媒体查询会跟随操作系统偏好，所以 `'auto'` 用户也不会
+  看到白色闪烁。
+- `color-scheme` 会让浏览器在页面加载期间将滚动条、表单控件和画布颜色调整为
+  选中模式。
+
+## 切换方案
+
+调用 `useColorScheme` 返回的 `setColorScheme` 来切换模式。它会在 `<html>`
+上写入 `data-bs-theme`，并将选择持久化到 `localStorage`，因此内联脚本会在
+下次加载时读取到该选择。
+
+```tsx
+import { useColorScheme } from 'react-bootstrap-pro';
+
+export function ColorSchemeToggle() {
+  const [colorScheme, setColorScheme] = useColorScheme();
+
+  return (
+    <button type='button' onClick={() => setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')}>
+      {colorScheme === 'dark' ? 'Use light scheme' : 'Use dark scheme'}
+    </button>
+  );
+}
+```
+
+完整的 API 和实时示例请参阅
+[useColorScheme 色彩方案](../../hooks/use-color-scheme/README.zh.mdx)。
+
+## 注意事项
+
+- 内联脚本设置初始属性，`useColorScheme` 会在水合时保留它。只有当页面尚未设置
+  `data-bs-theme` 时，钩子才会恢复保存的值。
+- 在服务端渲染的应用中，将脚本放在文档 head 中，使其在水合之前执行。如果服务端
+  不知道保存的偏好，不要渲染 `data-bs-theme` 属性，让脚本自行设置。
+- 严格的内容安全策略（CSP）会阻止内联脚本和样式。请将其哈希添加到策略中，或在
+  服务端根据 Cookie 生成 `data-bs-theme`，并将背景规则放入外部样式表。
+- 如果 `localStorage` 被阻止，脚本不会执行任何操作，媒体查询回退仍可避免暗色
+  模式用户看到白色闪烁。
+- 如果使用 `StorageProvider` 设置了 `prefix`，内联脚本也要读取带前缀的键，例如
+  `localStorage.getItem(prefix + 'colorScheme')`。
