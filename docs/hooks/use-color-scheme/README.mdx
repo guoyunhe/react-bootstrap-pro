@@ -8,17 +8,41 @@ import { UseColorSchemeDemo } from './demos/use-color-scheme';
 
 # useColorScheme
 
-`useColorScheme` returns the light or dark color scheme that Bootstrap currently
-resolves for the page, together with a setter that applies and persists the
-selection. It reads `data-bs-theme` from the `<html>` element and falls back to
-the `prefers-color-scheme` browser setting when the attribute is absent or set
-to `auto`, matching how Bootstrap resolves its color tokens.
+`ColorSchemeProvider` applies the stored color scheme to the document and
+provides it to `useColorScheme`. The hook returns the selected `light`, `dark`,
+or `auto` mode, the light or dark scheme that Bootstrap currently resolves for
+the page, and a setter that applies and persists the selection. It reads
+`data-bs-theme` from the `<html>` element and falls back to the
+`prefers-color-scheme` browser setting when the attribute is absent or set to
+`auto`, matching how Bootstrap resolves its color tokens.
 
 The selected `light`, `dark`, or `auto` mode is saved in `localStorage` under the
 `colorScheme` key with
 [`@guoyunhe/react-storage`](https://github.com/guoyunhe/react-storage), so the
 choice survives reloads and stays in sync across browser tabs. The key is exported
 as `colorSchemeStorageKey`.
+
+Render the provider once near the root of the application. Because the provider
+owns the effect that applies the stored scheme, the preference takes effect as
+soon as the provider mounts, even when no component calls `useColorScheme` or
+renders a color scheme toggle.
+
+## Provider
+
+```tsx
+import { ColorSchemeProvider } from 'react-bootstrap-pro';
+
+export function App() {
+  return (
+    <ColorSchemeProvider>
+      <Routes />
+    </ColorSchemeProvider>
+  );
+}
+```
+
+`useColorScheme` must be called inside `ColorSchemeProvider`; otherwise it throws
+an error.
 
 ## Example
 
@@ -31,37 +55,56 @@ as `colorSchemeStorageKey`.
 ```
 
 The button group calls `setColorScheme`, which writes `data-bs-theme` on the
-document element and stores the selection. The demo also reads the stored value to
-highlight the selected button. The hook re-renders when the attribute
-changes, when another tab updates the stored preference, or when the browser
-color scheme preference changes, so the displayed value always matches the
-rendered page.
+document element and stores the selection. The demo highlights the selected mode
+from `colorScheme` and displays the effective scheme from `computedColorScheme`.
+The hook re-renders when the attribute changes, when another tab updates the
+stored preference, or when the browser color scheme preference changes, so the
+displayed values always match the rendered page.
 
 ## API
 
-The hook takes no parameters and returns a tuple:
+### ColorSchemeProvider
 
-| Position | Type                  | Description                                                       |
-| -------- | --------------------- | ----------------------------------------------------------------- |
-| 0        | `ResolvedColorScheme` | The `'light'` or `'dark'` scheme Bootstrap resolves for the page. |
-| 1        | `SetColorScheme`      | Applies a scheme to the document and persists it.                 |
+| Prop       | Type        | Description                                                   |
+| ---------- | ----------- | ------------------------------------------------------------- |
+| `children` | `ReactNode` | The application tree. The provider adds no markup of its own. |
+
+The provider reads the stored scheme, applies it to the document element, and
+tracks changes to `data-bs-theme`, `prefers-color-scheme`, and the stored value.
+
+### useColorScheme
+
+The hook takes no parameters and returns a `ColorSchemeState` object:
+
+| Property              | Type                  | Description                                                       |
+| --------------------- | --------------------- | ----------------------------------------------------------------- |
+| `colorScheme`         | `ColorScheme`         | The selected `'light'`, `'dark'`, or `'auto'` mode.               |
+| `computedColorScheme` | `ResolvedColorScheme` | The `'light'` or `'dark'` scheme Bootstrap resolves for the page. |
+| `setColorScheme`      | `SetColorScheme`      | Applies a scheme to the document and persists it.                 |
 
 `setColorScheme` accepts `'light'`, `'dark'`, or `'auto'`. Setting `'light'` or
 `'dark'` writes `data-bs-theme` on `<html>`; setting `'auto'` removes the
 attribute so Bootstrap follows the browser preference again.
 
+`colorScheme` reflects the stored selection and can be `'auto'`.
+`computedColorScheme` is never `'auto'`: it reflects the actual `data-bs-theme`
+attribute, or the browser preference when the attribute is absent.
+
 ## Behavior
 
 - `data-bs-theme='light'` and `data-bs-theme='dark'` on `<html>` take precedence
   over the browser preference.
-- Without the attribute, or with `data-bs-theme='auto'`, the value follows
-  `prefers-color-scheme`.
-- A stored `'light'` or `'dark'` selection is restored on mount. If the page has
-  already set `data-bs-theme` (for example, with an inline script), that value is
-  left untouched and takes precedence.
+- Without the attribute, or with `data-bs-theme='auto'`, `computedColorScheme`
+  follows `prefers-color-scheme` while `colorScheme` stays `'auto'` unless a
+  different mode is stored.
+- A stored `'light'` or `'dark'` selection is restored when the provider mounts,
+  whether or not any component calls `useColorScheme`. If the page has already
+  set `data-bs-theme` (for example, with an inline script), that value is left
+  untouched and takes precedence.
 - Changes to the `colorScheme` key from another tab are applied to the current
   tab.
 - If `localStorage` is unavailable, `setColorScheme` still updates the document
   for the current page without persisting the choice.
-- The hook is client-only. During server rendering it returns `'light'`; the
-  first client render reads the actual value.
+- The provider reads storage on the client. During server rendering
+  `computedColorScheme` is `'light'`; the first client render reads the actual
+  value.

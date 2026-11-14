@@ -1,18 +1,18 @@
-import { useLocalStorage } from '@guoyunhe/react-storage';
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  colorSchemeStorageKey,
-  useColorScheme,
-} from 'react-bootstrap-pro';
+import { Box, Button, ButtonGroup, ColorSchemeProvider, useColorScheme } from 'react-bootstrap-pro';
 import type { ColorScheme } from 'react-bootstrap-pro';
 
 const modes: ColorScheme[] = ['light', 'dark', 'auto'];
 
 export function UseColorSchemeDemo() {
-  const [colorScheme, setColorScheme] = useColorScheme();
-  const [selectedColorScheme] = useLocalStorage<ColorScheme>(colorSchemeStorageKey, 'auto');
+  return (
+    <ColorSchemeProvider>
+      <ColorSchemeControls />
+    </ColorSchemeProvider>
+  );
+}
+
+function ColorSchemeControls() {
+  const { colorScheme, computedColorScheme, setColorScheme } = useColorScheme();
 
   return (
     <Box d='grid' gap={3}>
@@ -22,7 +22,7 @@ export function UseColorSchemeDemo() {
             key={item}
             variant='outline'
             theme='secondary'
-            active={selectedColorScheme === item}
+            active={colorScheme === item}
             onClick={() => setColorScheme(item)}
           >
             {item}
@@ -30,7 +30,10 @@ export function UseColorSchemeDemo() {
         ))}
       </ButtonGroup>
       <Box fg='2'>
-        Effective color scheme: <strong>{colorScheme}</strong>
+        Selected color scheme: <strong>{colorScheme}</strong>
+      </Box>
+      <Box fg='2'>
+        Effective color scheme: <strong>{computedColorScheme}</strong>
       </Box>
     </Box>
   );

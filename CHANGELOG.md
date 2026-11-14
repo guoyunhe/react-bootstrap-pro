@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+### Breaking Changes
+
+- `useColorScheme` now requires an ancestor `ColorSchemeProvider` and returns a
+  `ColorSchemeState` object instead of a tuple. The object contains the selected
+  `colorScheme`, the resolved `computedColorScheme`, and `setColorScheme`. The
+  provider applies the stored color scheme on mount even when no component calls
+  the hook, such as when a color scheme toggle is not rendered.
+
 ### Added
 
 - Add the `Toc` component, with `collectTocHeadings` and `useActiveHeading`, for

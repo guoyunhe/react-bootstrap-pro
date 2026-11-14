@@ -67,6 +67,24 @@ JavaScript 包加载期间仍会用默认的白色画布绘制页面。因此，
 - `color-scheme` 会让浏览器在页面加载期间将滚动条、表单控件和画布颜色调整为
   选中模式。
 
+## Provider
+
+`useColorScheme` 从 `ColorSchemeProvider` 读取状态，Provider 还会在挂载时应用
+保存的方案。请靠近应用根部渲染一次 Provider，这样即使没有渲染切换按钮，保存的
+偏好也仍然生效：
+
+```tsx
+import { ColorSchemeProvider } from 'react-bootstrap-pro';
+
+export function App() {
+  return (
+    <ColorSchemeProvider>
+      <Routes />
+    </ColorSchemeProvider>
+  );
+}
+```
+
 ## 切换方案
 
 调用 `useColorScheme` 返回的 `setColorScheme` 来切换模式。它会在 `<html>`
@@ -77,23 +95,30 @@ JavaScript 包加载期间仍会用默认的白色画布绘制页面。因此，
 import { useColorScheme } from 'react-bootstrap-pro';
 
 export function ColorSchemeToggle() {
-  const [colorScheme, setColorScheme] = useColorScheme();
+  const { computedColorScheme, setColorScheme } = useColorScheme();
 
   return (
-    <button type='button' onClick={() => setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')}>
-      {colorScheme === 'dark' ? 'Use light scheme' : 'Use dark scheme'}
+    <button
+      type='button'
+      onClick={() => setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark')}
+    >
+      {computedColorScheme === 'dark' ? 'Use light scheme' : 'Use dark scheme'}
     </button>
   );
 }
 ```
+
+`colorScheme` 是选中的模式，可能为 `'auto'`；`computedColorScheme` 是实际生效的
+`'light'` 或 `'dark'` 方案。当界面需要真正渲染的方案时，请使用
+`computedColorScheme`。
 
 完整的 API 和实时示例请参阅
 [useColorScheme 色彩方案](../../hooks/use-color-scheme/README.zh.mdx)。
 
 ## 注意事项
 
-- 内联脚本设置初始属性，`useColorScheme` 会在水合时保留它。只有当页面尚未设置
-  `data-bs-theme` 时，钩子才会恢复保存的值。
+- 内联脚本设置初始属性，`ColorSchemeProvider` 会在水合时保留它。只有当页面
+  尚未设置 `data-bs-theme` 时，Provider 才会恢复保存的值。
 - 在服务端渲染的应用中，将脚本放在文档 head 中，使其在水合之前执行。如果服务端
   不知道保存的偏好，不要渲染 `data-bs-theme` 属性，让脚本自行设置。
 - 严格的内容安全策略（CSP）会阻止内联脚本和样式。请将其哈希添加到策略中，或在

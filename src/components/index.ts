@@ -14,6 +14,7 @@ export * from './chip';
 export * from './chip-input';
 export * from './close-button';
 export * from './collapse';
+export * from './color-scheme-provider';
 export * from './combobox';
 export * from './container';
 export * from './css-grid';

@@ -71,6 +71,24 @@ quoted string such as `'"dark"'`. `JSON.parse` turns it back into `'dark'`.
 - `color-scheme` makes the browser match scrollbars, form controls, and the
   canvas color to the selected mode while the page loads.
 
+## Provider
+
+`useColorScheme` reads its state from `ColorSchemeProvider`, which also applies
+the stored scheme when it mounts. Render the provider once near the root of the
+application so the saved preference still applies when no toggle is rendered:
+
+```tsx
+import { ColorSchemeProvider } from 'react-bootstrap-pro';
+
+export function App() {
+  return (
+    <ColorSchemeProvider>
+      <Routes />
+    </ColorSchemeProvider>
+  );
+}
+```
+
 ## Switching schemes
 
 Call `setColorScheme` from `useColorScheme` to switch modes. It writes
@@ -81,24 +99,31 @@ inline script picks it up on the next load.
 import { useColorScheme } from 'react-bootstrap-pro';
 
 export function ColorSchemeToggle() {
-  const [colorScheme, setColorScheme] = useColorScheme();
+  const { computedColorScheme, setColorScheme } = useColorScheme();
 
   return (
-    <button type='button' onClick={() => setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')}>
-      {colorScheme === 'dark' ? 'Use light scheme' : 'Use dark scheme'}
+    <button
+      type='button'
+      onClick={() => setColorScheme(computedColorScheme === 'dark' ? 'light' : 'dark')}
+    >
+      {computedColorScheme === 'dark' ? 'Use light scheme' : 'Use dark scheme'}
     </button>
   );
 }
 ```
+
+`colorScheme` is the selected mode and may be `'auto'`, while
+`computedColorScheme` is the effective `'light'` or `'dark'` scheme. Use
+`computedColorScheme` when the UI needs the scheme that is actually rendered.
 
 See [useColorScheme](../../hooks/use-color-scheme/README.mdx) for the full API
 and a live example.
 
 ## Notes
 
-- The inline script sets the initial attribute, and `useColorScheme` keeps it on
-  hydration. The hook only restores the stored value when the page has not set
-  `data-bs-theme` already.
+- The inline script sets the initial attribute, and `ColorSchemeProvider` keeps
+  it on hydration. The provider only restores the stored value when the page has
+  not set `data-bs-theme` already.
 - In a server-rendered application, put the script in the document head so it
   runs before hydration. When the server does not know the stored preference,
   render no `data-bs-theme` attribute and let the script set it.
