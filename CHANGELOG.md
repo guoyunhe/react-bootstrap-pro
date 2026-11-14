@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-11-14
+
 ### Breaking Changes
 
 - `useColorScheme` now requires an ancestor `ColorSchemeProvider` and returns a
