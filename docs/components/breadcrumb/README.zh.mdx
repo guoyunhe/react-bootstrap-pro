@@ -9,6 +9,8 @@ import { BreadcrumbDefaultDividerDemo } from './demos/divider-default';
 import { BreadcrumbSvgDividerDemo } from './demos/divider-svg';
 import { BreadcrumbTextDividerDemo } from './demos/divider-text';
 import { BreadcrumbEllipsisDemo } from './demos/ellipsis';
+import { BreadcrumbProviderNestedDemo } from './demos/provider-nested';
+import { BreadcrumbProviderRootDemo } from './demos/provider-root';
 import { DemoContainer } from '../demo-container';
 
 # Breadcrumb 面包屑
@@ -90,6 +92,35 @@ chevron，也可以在其中放入自定义内容。
 
 ```
 
+## 嵌套 Provider 堆叠路径
+
+`BreadcrumbProvider` 收集面包屑路径的条目。每个 Provider 会把自身的 `items` 追加到从祖先
+Provider 继承的条目之后，因此路由组件可以随着嵌套贡献自己的前缀。`useBreadcrumb`
+返回按最外层 Provider 优先排序的完整条目列表，用于渲染 `Breadcrumb`。
+
+<DemoContainer>
+  <BreadcrumbProviderNestedDemo />
+</DemoContainer>
+
+```tsx src='./demos/provider-nested.tsx'
+
+```
+
+设置 `root` 可以开始一条新路径并忽略继承的条目。位于 root 之下的 Provider 会继续堆叠到这条
+新路径上。
+
+<DemoContainer>
+  <BreadcrumbProviderRootDemo />
+</DemoContainer>
+
+```tsx src='./demos/provider-root.tsx'
+
+```
+
+Provider 自身不渲染任何标记。条目是纯数据：`label` 可以是任意 React 节点，可选的 `href`
+是链接目标。将最后一个条目标记为 `active`，即可设置 `aria-current='page'`。如果调用组件之上
+没有 Provider，`useBreadcrumb` 会返回空数组。
+
 ## API
 
 ### Breadcrumb
@@ -112,6 +143,24 @@ chevron，也可以在其中放入自定义内容。
 | `active` | `boolean` | 添加当前页样式并设置 `aria-current='page'`。 |
 
 继承原生链接属性及 [`Box`](../box/README.zh.mdx#api) 工具类属性，包括 `component`。
+
+### BreadcrumbProvider
+
+不渲染任何标记，仅向其后代提供面包屑条目。
+
+| 属性       | 类型                         | 说明                                         |
+| ---------- | ---------------------------- | -------------------------------------------- |
+| `items`    | `readonly BreadcrumbEntry[]` | 追加在从祖先 Provider 继承的条目之后的条目。 |
+| `root`     | `boolean`                    | 开始新路径并忽略继承的条目。默认为 `false`。 |
+| `children` | `ReactNode`                  | 可通过 `useBreadcrumb` 读取条目的后代内容。  |
+
+`BreadcrumbEntry` 包含必需的 `label`（`ReactNode`）和可选的 `href`（`string`）。同一路径上的
+Provider 按嵌套顺序堆叠条目，因此最外层的 Provider 提供第一个条目。
+
+### useBreadcrumb
+
+该钩子不接受参数，返回当前 Provider 及其祖先组合而成的 `BreadcrumbEntry` 列表，按最外层
+Provider 优先排序。在没有 Provider 的环境中调用时返回空数组，不会抛出错误。
 
 ### BreadcrumbDivider
 

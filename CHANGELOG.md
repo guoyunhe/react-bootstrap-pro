@@ -4,6 +4,10 @@
 
 ### Added
 
+- Add `BreadcrumbProvider` and `useBreadcrumb` for assembling a breadcrumb
+  trail from nested route components. Each provider appends its `items` after
+  the entries inherited from its ancestors, and `root` starts a new trail
+  without inheriting them.
 - Add the `Spotlight` command palette, a searchable action list rendered in a
   modal `Dialog` with combobox keyboard navigation, result highlighting,
   custom filtering, an optional `Ctrl+K`/`⌘K` shortcut, and the

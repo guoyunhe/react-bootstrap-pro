@@ -1,6 +1,9 @@
 import clsx from 'clsx';
-import type { ElementType } from 'react';
+import { useContext, useMemo } from 'react';
+import type { ElementType, ReactNode } from 'react';
 
+import { BreadcrumbContext } from '../contexts/breadcrumb';
+import type { BreadcrumbEntry } from '../contexts/breadcrumb';
 import { Box } from './box';
 import type { BoxProps } from './box';
 
@@ -76,4 +79,28 @@ export function BreadcrumbDivider<C extends ElementType = 'li'>({
       aria-hidden={props['aria-hidden'] ?? true}
     />
   );
+}
+
+export type BreadcrumbProviderProps = {
+  children?: ReactNode | undefined;
+  /** Entries appended after the entries inherited from ancestor providers. */
+  items?: readonly BreadcrumbEntry[] | undefined;
+  /** Ignores inherited entries and starts a new trail. */
+  root?: boolean | undefined;
+};
+
+/**
+ * Adds entries to the breadcrumb trail of its descendants, so nested route components can stack
+ * their own prefixes. Set `root` to start a new trail without inheriting ancestor entries.
+ *
+ * The provider renders no markup. Read the assembled entries with `useBreadcrumb`.
+ */
+export function BreadcrumbProvider({ children, items, root = false }: BreadcrumbProviderProps) {
+  const inheritedEntries = useContext(BreadcrumbContext);
+  const entries = useMemo(
+    () => [...(root ? [] : inheritedEntries), ...(items ?? [])],
+    [inheritedEntries, items, root],
+  );
+
+  return <BreadcrumbContext.Provider value={entries}>{children}</BreadcrumbContext.Provider>;
 }

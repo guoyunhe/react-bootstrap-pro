@@ -9,6 +9,8 @@ import { BreadcrumbDefaultDividerDemo } from './demos/divider-default';
 import { BreadcrumbSvgDividerDemo } from './demos/divider-svg';
 import { BreadcrumbTextDividerDemo } from './demos/divider-text';
 import { BreadcrumbEllipsisDemo } from './demos/ellipsis';
+import { BreadcrumbProviderNestedDemo } from './demos/provider-nested';
+import { BreadcrumbProviderRootDemo } from './demos/provider-root';
 import { DemoContainer } from '../demo-container';
 
 # Breadcrumb
@@ -96,6 +98,37 @@ Use any custom content, such as a themed chevron.
 
 ```
 
+## Trail from nested providers
+
+`BreadcrumbProvider` collects entries for a breadcrumb trail. Each provider appends its `items`
+after the entries inherited from its ancestors, so route components can contribute their own
+prefix as they nest. `useBreadcrumb` returns the assembled entries, ordered from the outermost
+provider, for rendering `Breadcrumb`.
+
+<DemoContainer>
+  <BreadcrumbProviderNestedDemo />
+</DemoContainer>
+
+```tsx src='./demos/provider-nested.tsx'
+
+```
+
+Set `root` to start a new trail that ignores inherited entries. Providers below the root stack
+onto the new trail.
+
+<DemoContainer>
+  <BreadcrumbProviderRootDemo />
+</DemoContainer>
+
+```tsx src='./demos/provider-root.tsx'
+
+```
+
+A provider renders no markup of its own. Entries are plain data: `label` is any React node and
+the optional `href` is the link target. Mark the last entry as `active` so it sets
+`aria-current='page'`. `useBreadcrumb` returns an empty array when no provider is rendered above
+the calling component.
+
 ## API
 
 ### Breadcrumb
@@ -122,6 +155,26 @@ Renders the `.breadcrumb-link` class on an `a` element by default.
 
 Inherits native anchor props and [`Box`](../box/README.mdx#api) utility props,
 including `component`.
+
+### BreadcrumbProvider
+
+Renders no markup. It provides breadcrumb entries to its descendants.
+
+| Prop       | Type                         | Description                                                             |
+| ---------- | ---------------------------- | ----------------------------------------------------------------------- |
+| `items`    | `readonly BreadcrumbEntry[]` | Entries appended after the entries inherited from ancestor providers.   |
+| `root`     | `boolean`                    | Starts a new trail that ignores inherited entries. Defaults to `false`. |
+| `children` | `ReactNode`                  | Descendants that can read the entries with `useBreadcrumb`.             |
+
+A `BreadcrumbEntry` has a required `label` (`ReactNode`) and an optional
+`href` (`string`). Providers on the same trail stack their entries in nesting
+order, so the outermost provider contributes the first entry.
+
+### useBreadcrumb
+
+The hook takes no parameters and returns the assembled `BreadcrumbEntry` list
+of the enclosing provider and its ancestors, ordered from the outermost
+provider. Outside a provider it returns an empty array instead of throwing.
 
 ### BreadcrumbDivider
 
