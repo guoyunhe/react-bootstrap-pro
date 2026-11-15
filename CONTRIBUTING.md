@@ -19,7 +19,9 @@ pnpm install
 - Run the documentation site with `pnpm docs:dev`.
 - Run the playground with `pnpm play`.
 - Run the test suite with `pnpm exec vitest run`.
-- Build the documentation site with `pnpm docs:build`.
+- Build the documentation site with `pnpm docs:build`. The build writes
+  `docs_dist/sitemap.xml` because `docs.siteURL` is set in `vited.config.ts`;
+  when it is unset, the `SITE_URL` environment variable is used instead.
 
 ## Adding or changing components
 

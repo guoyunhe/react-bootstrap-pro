@@ -11,6 +11,7 @@ export default defineConfig({
   },
   docs: {
     title: 'React Bootstrap Pro',
+    siteURL: 'https://guoyunhe.github.io/react-bootstrap-pro/',
     theme: '@vited/theme-bootstrap',
   },
   server: {
