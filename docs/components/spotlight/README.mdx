@@ -1,0 +1,170 @@
+---
+title: Spotlight
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { SpotlightBasicDemo } from './demos/basic';
+import { SpotlightShortcutDemo } from './demos/shortcut';
+import { SpotlightIconsDemo } from './demos/icons';
+import { SpotlightFilterDemo } from './demos/filter';
+import { SpotlightEmptyDemo } from './demos/empty';
+import { SpotlightFooterDemo } from './demos/footer';
+
+# Spotlight
+
+## How it works
+
+`Spotlight` opens a command palette: a modal [`Dialog`](../dialog/README.mdx) with
+a search field in its header and a filterable list of actions below it. It does
+not render a trigger, so open it from React state, a keyboard shortcut, or any
+button.
+
+Each action renders as a link when it has `href`, otherwise as a button, inside a
+flush list group. Selecting an action calls `onSelect` and then the action's
+`onClick`.
+
+The search field is the ARIA combobox that controls the result listbox. Focus
+stays in the field and `aria-activedescendant` tracks the highlighted action, so
+screen readers announce the highlighted result. Arrow keys move the highlight and
+skip disabled actions, `Enter` runs the highlighted action, and Escape closes the
+dialog. The browser restores focus to the element that opened the dialog.
+Filtering and keyboard handling are implemented in React; the component does not
+use Bootstrap JavaScript.
+
+## Example
+
+Control the spotlight with React state and open it from a button.
+
+<DemoContainer>
+  <SpotlightBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+With an empty query the first `limit` actions are listed. Typing filters the
+actions by their `label`, `description`, and `keywords`, and matched text is
+wrapped in `mark`. Selecting an action closes the spotlight unless
+`closeOnSelect={false}`.
+
+## Keyboard shortcut
+
+Set `shortcut` to open and close the spotlight with `Ctrl+K` on Windows and Linux
+or `⌘K` on Apple platforms, from anywhere in the document. `getSpotlightShortcut`
+returns the label for the current platform, so a trigger can show the same keys.
+
+<DemoContainer>
+  <SpotlightShortcutDemo />
+</DemoContainer>
+
+```tsx src='./demos/shortcut.tsx'
+
+```
+
+Listeners are only registered while `shortcut` is enabled, so set it on one
+spotlight per document. Without `show`, the spotlight keeps its visibility in its
+own state and the shortcut still works.
+
+## Icons and descriptions
+
+Pass an icon through `icon` and secondary text through `description`. Icons are
+decorative and are rendered with `aria-hidden='true'`.
+
+<DemoContainer>
+  <SpotlightIconsDemo />
+</DemoContainer>
+
+```tsx src='./demos/icons.tsx'
+
+```
+
+## Filtering
+
+The default filter matches the trimmed, lower-cased query anywhere in the
+`label`, `description`, or `keywords`. Pass `filter` to replace it; it receives
+each action and the query and runs on every keystroke.
+
+<DemoContainer>
+  <SpotlightFilterDemo />
+</DemoContainer>
+
+```tsx src='./demos/filter.tsx'
+
+```
+
+This example only keeps actions whose label starts with the query, so `b` finds
+`Badge` and `Breadcrumb` but not `Accordion`.
+
+## Empty state
+
+`emptyMessage` replaces the default "No results found" text when no action
+matches.
+
+<DemoContainer>
+  <SpotlightEmptyDemo />
+</DemoContainer>
+
+```tsx src='./demos/empty.tsx'
+
+```
+
+## Footer
+
+`footer` renders a dialog footer below the results, for keyboard hints or extra
+information.
+
+<DemoContainer>
+  <SpotlightFooterDemo />
+</DemoContainer>
+
+```tsx src='./demos/footer.tsx'
+
+```
+
+## API
+
+### Spotlight
+
+Renders a modal `dialog` element through [`Dialog`](../dialog/README.mdx). It
+accepts native props and [`Box`](../box/README.mdx#api) props for that element,
+including `className` and `id`; `aria-label` defaults to `label`. `size` and
+`scrollable` configure the dialog. Its own props are:
+
+| Prop            | Type                         | Description                                                                       |
+| --------------- | ---------------------------- | --------------------------------------------------------------------------------- |
+| `actions`       | `readonly SpotlightAction[]` | Actions to list and filter.                                                       |
+| `show`          | `boolean`                    | Controls visibility. Without it the spotlight stores visibility in its own state. |
+| `onShowChange`  | `(show: boolean) => void`    | Receives requested visibility changes.                                            |
+| `label`         | `string`                     | Accessible name of the dialog and the result list; defaults to `Search`.          |
+| `placeholder`   | `string`                     | Placeholder of the search field; defaults to `Search…`.                           |
+| `emptyMessage`  | `ReactNode`                  | Shown when no action matches; defaults to `No results found`.                     |
+| `limit`         | `number`                     | Maximum number of results; defaults to `8`.                                       |
+| `filter`        | `SpotlightFilter`            | Replaces the default `label`, `description`, and `keywords` match.                |
+| `shortcut`      | `boolean`                    | Opens and closes with `Ctrl+K` or `⌘K`; defaults to `false`.                      |
+| `closeOnSelect` | `boolean`                    | Closes after an action runs; defaults to `true`.                                  |
+| `footer`        | `ReactNode`                  | Renders a dialog footer below the results.                                        |
+| `onSelect`      | `(action) => void`           | Called with the selected action before its `onClick`.                             |
+| `onQueryChange` | `(query: string) => void`    | Receives every search query change.                                               |
+| `size`          | `'sm' \| 'lg' \| 'xl'`       | Dialog width variant.                                                             |
+| `scrollable`    | `boolean`                    | Constrains the dialog height and scrolls the results; defaults to `true`.         |
+
+Each item of `actions` is a `SpotlightAction`:
+
+| Field         | Type                          | Description                                                                   |
+| ------------- | ----------------------------- | ----------------------------------------------------------------------------- |
+| `id`          | `string`                      | Stable key; defaults to the position in `actions`.                            |
+| `label`       | `string`                      | Primary text. Required, and searchable by default.                            |
+| `description` | `string`                      | Secondary text. Searchable and highlighted by default.                        |
+| `keywords`    | `string \| readonly string[]` | Extra searchable text that is not displayed.                                  |
+| `icon`        | `ReactNode`                   | Decorative icon, rendered with `aria-hidden='true'`.                          |
+| `href`        | `string`                      | Renders the action as a link instead of a button.                             |
+| `target`      | `string`                      | Link target; `_blank` also adds `rel='noreferrer'`.                           |
+| `disabled`    | `boolean`                     | Keeps the action listed but prevents selection and skips it while navigating. |
+| `onClick`     | `() => void`                  | Runs when the action is selected.                                             |
+
+### getSpotlightShortcut
+
+`getSpotlightShortcut()` returns `⌘K` on Apple platforms and `Ctrl+K` elsewhere.
+Use it to label the trigger button or a hint that matches the `shortcut` prop.

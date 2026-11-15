@@ -37,6 +37,7 @@ order: 1
 - [Progress 进度条](./progress/)
 - [Scrollspy 滚动监听](./scrollspy/)
 - [Spinner 加载指示器](./spinner/)
+- [Spotlight 聚焦搜索](./spotlight/)
 - [Stack 堆叠布局](./stack/)
 - [Stepper 步骤条](./stepper/)
 - [Tab 标签页](./tab/)

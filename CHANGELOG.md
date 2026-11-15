@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+### Added
+
+- Add the `Spotlight` command palette, a searchable action list rendered in a
+  modal `Dialog` with combobox keyboard navigation, result highlighting,
+  custom filtering, an optional `Ctrl+K`/`⌘K` shortcut, and the
+  `getSpotlightShortcut` helper.
+
 ## [0.8.0] - 2026-11-14
 
 ### Breaking Changes

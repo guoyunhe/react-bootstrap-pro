@@ -1,0 +1,159 @@
+---
+title: Spotlight 聚焦搜索
+---
+
+import 'bootstrap/dist/css/bootstrap.css';
+import { DemoContainer } from '../demo-container';
+import { SpotlightBasicDemo } from './demos/basic';
+import { SpotlightShortcutDemo } from './demos/shortcut';
+import { SpotlightIconsDemo } from './demos/icons';
+import { SpotlightFilterDemo } from './demos/filter';
+import { SpotlightEmptyDemo } from './demos/empty';
+import { SpotlightFooterDemo } from './demos/footer';
+
+# Spotlight 聚焦搜索
+
+## 工作方式
+
+`Spotlight` 会打开一个命令面板：它是一个模态
+[`Dialog`](../dialog/README.zh.mdx)，头部包含搜索框，下方是可过滤的操作列表。它不渲染
+触发器，因此可以从 React 状态、键盘快捷键或任意按钮打开。
+
+操作带有 `href` 时渲染为链接，否则渲染为按钮，二者都放在无边框的列表组中。选择操作时会先
+调用 `onSelect`，再调用该操作的 `onClick`。
+
+搜索框是控制结果列表的 ARIA combobox。焦点始终留在搜索框中，并通过
+`aria-activedescendant` 跟踪高亮的操作，屏幕阅读器会朗读当前高亮的结果。方向键移动高亮并
+跳过禁用的操作，`Enter` 执行高亮的操作，Escape 关闭对话框。对话框关闭后浏览器会把焦点还给
+打开它的元素。过滤和键盘行为都由 React 实现，组件不使用 Bootstrap JavaScript。
+
+## 示例
+
+使用 React 状态控制 Spotlight，并通过按钮打开。
+
+<DemoContainer>
+  <SpotlightBasicDemo />
+</DemoContainer>
+
+```tsx src='./demos/basic.tsx'
+
+```
+
+查询为空时列出前 `limit` 个操作。输入内容后，会按 `label`、`description` 和 `keywords`
+过滤操作，并用 `mark` 标记匹配文本。选择操作后会关闭 Spotlight，除非设置
+`closeOnSelect={false}`。
+
+## 键盘快捷键
+
+设置 `shortcut` 后，可以在文档任意位置用 Windows 和 Linux 上的 `Ctrl+K` 或 Apple 平台上的
+`⌘K` 打开和关闭 Spotlight。`getSpotlightShortcut` 返回当前平台对应的标签，触发器按钮可以
+显示相同的按键。
+
+<DemoContainer>
+  <SpotlightShortcutDemo />
+</DemoContainer>
+
+```tsx src='./demos/shortcut.tsx'
+
+```
+
+只有在启用 `shortcut` 时才会注册监听器，因此每个文档只应在一个 Spotlight 上设置它。不提供
+`show` 时，Spotlight 自己保存可见状态，快捷键同样可用。
+
+## 图标与描述
+
+通过 `icon` 传入图标，通过 `description` 传入次要文本。图标是装饰性的，会以
+`aria-hidden='true'` 渲染。
+
+<DemoContainer>
+  <SpotlightIconsDemo />
+</DemoContainer>
+
+```tsx src='./demos/icons.tsx'
+
+```
+
+## 过滤
+
+默认过滤器会在 `label`、`description` 或 `keywords` 中匹配去掉首尾空格并转为小写的查询。
+传入 `filter` 可以替换默认行为；它在每次输入时接收每个操作和当前查询。
+
+<DemoContainer>
+  <SpotlightFilterDemo />
+</DemoContainer>
+
+```tsx src='./demos/filter.tsx'
+
+```
+
+这个示例只保留标签以查询开头的操作，因此输入 `b` 会找到 `Badge` 和 `Breadcrumb`，但不会
+找到 `Accordion`。
+
+## 空状态
+
+没有匹配的操作时，`emptyMessage` 会替换默认的“No results found”文本。
+
+<DemoContainer>
+  <SpotlightEmptyDemo />
+</DemoContainer>
+
+```tsx src='./demos/empty.tsx'
+
+```
+
+## 页脚
+
+`footer` 会在结果下方渲染对话框页脚，可用于键盘提示或补充信息。
+
+<DemoContainer>
+  <SpotlightFooterDemo />
+</DemoContainer>
+
+```tsx src='./demos/footer.tsx'
+
+```
+
+## API
+
+### Spotlight
+
+通过 [`Dialog`](../dialog/README.zh.mdx) 渲染模态 `dialog` 元素。它接受该元素的原生属性和
+[`Box`](../box/README.zh.mdx#api) 属性，包括 `className` 和 `id`；`aria-label` 默认取
+`label`。`size` 和 `scrollable` 用于配置对话框。它自身的属性如下：
+
+| 属性            | 类型                         | 说明                                                   |
+| --------------- | ---------------------------- | ------------------------------------------------------ |
+| `actions`       | `readonly SpotlightAction[]` | 要列出和过滤的操作。                                   |
+| `show`          | `boolean`                    | 控制可见性。不提供时由 Spotlight 自己保存可见状态。    |
+| `onShowChange`  | `(show: boolean) => void`    | 接收可见性变更请求。                                   |
+| `label`         | `string`                     | 对话框和结果列表的无障碍名称，默认为 `Search`。        |
+| `placeholder`   | `string`                     | 搜索框的占位文本，默认为 `Search…`。                   |
+| `emptyMessage`  | `ReactNode`                  | 没有匹配操作时显示，默认为 `No results found`。        |
+| `limit`         | `number`                     | 结果数量上限，默认为 `8`。                             |
+| `filter`        | `SpotlightFilter`            | 替换默认的 `label`、`description` 和 `keywords` 匹配。 |
+| `shortcut`      | `boolean`                    | 使用 `Ctrl+K` 或 `⌘K` 打开和关闭，默认为 `false`。     |
+| `closeOnSelect` | `boolean`                    | 执行操作后关闭，默认为 `true`。                        |
+| `footer`        | `ReactNode`                  | 在结果下方渲染对话框页脚。                             |
+| `onSelect`      | `(action) => void`           | 在操作的 `onClick` 之前以选中的操作调用。              |
+| `onQueryChange` | `(query: string) => void`    | 接收每次搜索查询变更。                                 |
+| `size`          | `'sm' \| 'lg' \| 'xl'`       | 对话框宽度变体。                                       |
+| `scrollable`    | `boolean`                    | 限制对话框高度并滚动结果，默认为 `true`。              |
+
+`actions` 的每一项都是 `SpotlightAction`：
+
+| 字段          | 类型                          | 说明                                             |
+| ------------- | ----------------------------- | ------------------------------------------------ |
+| `id`          | `string`                      | 稳定的键，默认为在 `actions` 中的位置。          |
+| `label`       | `string`                      | 主要文本。必填，默认参与搜索。                   |
+| `description` | `string`                      | 次要文本。默认参与搜索并高亮。                   |
+| `keywords`    | `string \| readonly string[]` | 不显示但可以搜索的额外文本。                     |
+| `icon`        | `ReactNode`                   | 装饰性图标，以 `aria-hidden='true'` 渲染。       |
+| `href`        | `string`                      | 让操作渲染为链接而不是按钮。                     |
+| `target`      | `string`                      | 链接目标；`_blank` 同时添加 `rel='noreferrer'`。 |
+| `disabled`    | `boolean`                     | 保留在列表中但禁止选择，并在导航时跳过。         |
+| `onClick`     | `() => void`                  | 选择该操作时执行。                               |
+
+### getSpotlightShortcut
+
+`getSpotlightShortcut()` 在 Apple 平台返回 `⌘K`，在其他平台返回 `Ctrl+K`。可以用它标注触发器
+按钮，或显示与 `shortcut` 属性一致的提示。

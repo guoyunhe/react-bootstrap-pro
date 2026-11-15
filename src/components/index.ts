@@ -57,6 +57,7 @@ export * from './radio';
 export * from './range';
 export * from './scrollspy';
 export * from './spinner';
+export * from './spotlight';
 export * from './stack';
 export * from './stepper';
 export * from './switch';

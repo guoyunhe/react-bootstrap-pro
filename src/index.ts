@@ -209,6 +209,7 @@ export {
   Scrollspy,
   Select,
   Spinner,
+  Spotlight,
   Stack,
   StackContainer,
   Stepper,
@@ -234,7 +235,7 @@ export {
   TooltipInner,
   UnstyledList,
 } from './components/index';
-export { collectTocHeadings, useActiveHeading } from './components/index';
+export { collectTocHeadings, getSpotlightShortcut, useActiveHeading } from './components/index';
 export type {
   AbbrProps,
   AccordionBodyProps,
@@ -394,6 +395,9 @@ export type {
   SelectProps,
   ScrollspyProps,
   SpinnerProps,
+  SpotlightAction,
+  SpotlightFilter,
+  SpotlightProps,
   StackDirection,
   StackProps,
   StackContainerProps,
