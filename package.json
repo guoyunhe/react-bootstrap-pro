@@ -72,9 +72,9 @@
     "@types/react-dom": "^19.3.0",
     "@vited/cli": "^0.1.6",
     "@vited/core": "^0.6.0",
-    "@vited/theme-bootstrap": "^0.2.0",
+    "@vited/theme-bootstrap": "^0.3.3",
     "@vitejs/plugin-react": "^6.3.0",
-    "@vitest/browser-playwright": "^5.1.0",
+    "@vitest/browser-playwright": "^5.1.1",
     "bootstrap": "6.0.0-alpha.1",
     "bumpp": "^12.3.0",
     "husky": "^9.1.7",
@@ -91,7 +91,7 @@
     "tsdown": "^0.23.7",
     "typescript": "^7.0.2",
     "vite": "^8.3.8",
-    "vitest": "^5.1.0",
+    "vitest": "^5.1.1",
     "vitest-browser-react": "^2.3.0"
   },
   "peerDependencies": {
